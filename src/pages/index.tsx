@@ -21,7 +21,7 @@ export default function Home() {
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
           <div>
-            <h1>MVPLAB</h1>
+            <h1>MVPLAB </h1>
           </div>
         </div>
 
