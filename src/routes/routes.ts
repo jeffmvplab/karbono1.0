@@ -4,4 +4,5 @@ export const mainRoutes = {
     auth: '/auth',
     login: 'auth/login',
     register: 'auth/register',
+    form: '/form'
 }

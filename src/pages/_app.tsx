@@ -1,5 +1,5 @@
-import { theme } from '@/constants/theme'
 import '@/styles/globals.css'
+import { lightThemes } from '@/themes'
 import { ThemeProvider } from '@emotion/react'
 import { CssBaseline } from '@mui/material'
 import { NextPage } from 'next'
@@ -22,7 +22,7 @@ type AppPropsWithLayout = AppProps & {
 return <>
   {
   getLayout(
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={lightThemes}>
       <CssBaseline />
       <Component {...pageProps} />
     </ThemeProvider>
