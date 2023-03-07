@@ -1,3 +1,4 @@
+import { GlobalProvider } from '@/context/GlobalProvider'
 import '@/styles/globals.css'
 import { darkthemes, lightThemes } from '@/themes'
 import { CssBaseline, ThemeProvider } from '@mui/material'
@@ -14,34 +15,36 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
 
-  export default function MyApp({ Component, pageProps, }: AppPropsWithLayout) {
+export default function MyApp({ Component, pageProps, }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page) => page);
 
-  
-return <>
-  {
-  getLayout(
-    <ThemeProvider theme={lightThemes}>
-      <CssBaseline />
-      <Component {...pageProps} />
-    </ThemeProvider>
-  )
-}
-</>
+
+  return <>
+    {
+      getLayout(
+        <ThemeProvider theme={lightThemes}>
+          <CssBaseline />
+          <GlobalProvider>
+            <Component {...pageProps} />
+          </GlobalProvider>
+        </ThemeProvider>
+      )
+    }
+  </>
 
 
-// return (
-// <Provider store={store}>
+  // return (
+  // <Provider store={store}>
 
-// {
-//   getLayout(
-//     <ThemeProvider theme={theme}>
-//       <CssBaseline />
-//       <Component {...pageProps} />
-//     </ThemeProvider>
-//   )
-// }
-// </Provider>)
+  // {
+  //   getLayout(
+  //     <ThemeProvider theme={theme}>
+  //       <CssBaseline />
+  //       <Component {...pageProps} />
+  //     </ThemeProvider>
+  //   )
+  // }
+  // </Provider>)
 
 }
 

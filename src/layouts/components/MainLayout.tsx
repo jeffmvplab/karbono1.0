@@ -13,7 +13,6 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
   return (
 
     <>
-      <div>
         <Head>
           <title>Karbono</title>
           <meta name="description" content="Infostore" />
@@ -30,12 +29,7 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
         <Box sx={{padding: '10px 20px'}}> 
         { children }
         </Box>
-
-
-      </div>
-
     </>
-
   );
 };
 
