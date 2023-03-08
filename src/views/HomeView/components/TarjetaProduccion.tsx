@@ -37,9 +37,6 @@ const TarjetaProduccion  = () => {
         </Grid>
         </Hidden>
 
-        
-
-
     </Grid>
     
     </>
