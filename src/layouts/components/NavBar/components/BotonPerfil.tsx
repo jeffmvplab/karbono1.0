@@ -3,13 +3,21 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
+import { GlobalContext } from '@/context/GlobalContext';
 
 export default function FadeMenu() {
+
+  const {logout} = React.useContext(GlobalContext)
+  
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
   const open = Boolean(anchorEl);
+  
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -38,7 +46,7 @@ export default function FadeMenu() {
       >
         <MenuItem onClick={handleClose} >Perfil</MenuItem>
         <MenuItem onClick={handleClose}>Mi cuenta</MenuItem>
-        <MenuItem onClick={handleClose}>cerrar sesión</MenuItem>
+        <MenuItem onClick={()=>{logout(); handleClose}}>cerrar sesión</MenuItem>
       </Menu>
     </div>
   );
