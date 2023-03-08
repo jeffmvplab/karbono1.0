@@ -4,6 +4,8 @@ import { createContext } from "react";
 interface ContextProps {
     
     login:()=>void;
+    logout:()=>void;
+    isAuth:boolean;
     
     loadingAuth:boolean,
     email:string,

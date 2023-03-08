@@ -22,12 +22,10 @@ export default function MyApp({ Component, pageProps, }: AppPropsWithLayout) {
   return <>
     {
       getLayout(
-        <ThemeProvider theme={lightThemes}>
-          <CssBaseline />
-          <GlobalProvider>
+          <ThemeProvider theme={lightThemes}>
+            <CssBaseline />
             <Component {...pageProps} />
-          </GlobalProvider>
-        </ThemeProvider>
+          </ThemeProvider>
       )
     }
   </>

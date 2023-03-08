@@ -1,9 +1,10 @@
 
-import { MainLayout } from '@/layouts/components'
+import { MainLayout } from '@/layouts/MainLayout'
 import { ReactElement } from 'react'
 import { HomeView } from '@/views/HomeView'
 import { NextPageWithLayout } from '@/pages/_app'
-import { RegisterView } from '@/views/RegisterView'
+import { AuthLayout } from '@/layouts/AuthLayout'
+import { RegisterView } from '@/views/auth/RegisterView'
 
 
 const RegisterPage: NextPageWithLayout = () => {
@@ -16,7 +17,9 @@ RegisterPage.getLayout = function getLayout(page: ReactElement) {
 
   return (
     <MainLayout>
-      {page}
+      <AuthLayout>
+        {page}
+      </AuthLayout>
     </MainLayout>
   )
 }

@@ -1,5 +1,5 @@
 
-import { MainLayout } from '@/layouts/components'
+import { MainLayout } from '@/layouts/MainLayout'
 import { ReactElement } from 'react'
 import { NextPageWithLayout } from './_app'
 import { HomeView } from '@/views/HomeView'

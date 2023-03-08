@@ -1,8 +1,10 @@
 
 import { UserUseCases } from "@/domain/usecases";
 import { LocalStorageProtocol } from "@/protocols/cache/local_cache";
+import { mainRoutes } from "@/routes/routes";
 import { StorageKeysEnum } from "@/utilities/enums";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import { FC } from "react";
 import { GlobalContext } from "./GlobalContext";
 
@@ -12,7 +14,8 @@ type Props = {
 
 
 export const GlobalProvider: FC<Props> = ({ children }) => {
-     
+    
+	const router=useRouter();
 	const localStorageProtocol = new LocalStorageProtocol();
 
 	/////////////////////////////////Manejo Email//////////////////////////////////////////
@@ -62,26 +65,55 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			setMessageErrorPassword('Su contraseña debe contener mínimo 8 caracteres')
 		}
 	};
-	///////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////MÉTODOS//////////////////////////////////////////////////////////////////
+	/////////////////////////////////AUTH STATUS//////////////////////////////////////////
+   
+	const [isAuth, setIsAuth] = React.useState(false);
+
+	const authStatus = () => {
+		if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
+				setIsAuth(true) 
+				router.push(mainRoutes.home);
+				console.log('IsAuth:',isAuth)
+			}else { 
+				setIsAuth(false);
+				router.push(mainRoutes.login);
+				console.log('IsAuth:',isAuth) 
+				}
+	}
+
+	/////////////////////////////LOGIN//////////////////////////////////////////////
 	const useruseCase = new UserUseCases();
 	const [loadingAuth, setLoadingAuth] = React.useState(false);
 
 	const login = async () => {
-
 		setLoadingAuth(true);
 		console.log('Loading...')
-		const resp= await useruseCase.login(email, password)
+		const resp = await useruseCase.login(email, password)
 		console.log('RespAuth:', resp)
 
-		localStorageProtocol.set(StorageKeysEnum.user,resp);
-	
-		setLoadingAuth(false);
-	}
+		localStorageProtocol.set(StorageKeysEnum.user, resp);
 
+		setLoadingAuth(false);
+		authStatus();
+	}
+	/////////////////////////////LOGOUT//////////////////////////////////////////////
+	const logout = async () => {
+		localStorageProtocol.delete(StorageKeysEnum.user);
+		authStatus();
+	}
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+	useEffect(() => {
+		
+	}, [])
+	
 	return (
 		<GlobalContext.Provider value={{
-
+            
+			isAuth,
 			login,
+			logout,
 			loadingAuth,
 
 			email,
