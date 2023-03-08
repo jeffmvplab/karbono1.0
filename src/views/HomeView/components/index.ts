@@ -1,1 +1,2 @@
-export * from './tarjetas'
+export * from './TarjetaConfiguracion';
+export * from './TarjetaProduccion';
