@@ -38,6 +38,14 @@ export const lightThemes = createTheme({
                     
                 }
             }
+        },
+        MuiButton:{
+            defaultProps:{},
+            styleOverrides:{
+                root:{
+                    ':hover' : '#2FC5C6'
+                }
+            }
         }
         
         
