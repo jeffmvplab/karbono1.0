@@ -1,7 +1,7 @@
 import React from 'react';
-import TarjetaAyudas from './components/TarjetaAyudas';
-import TarjetaPareinf from './components/TarjetaPareinf';
 import TarjetaProycon from './components/TarjetaProycon';
+import TarjetaPareinf from './components/TarjetaPareinf';
+import TarjetaAyudas from './components/TarjetaAyudas';
 export interface HomeViewProps {}
 
 const HomeView : React.FC<HomeViewProps> = () => {
