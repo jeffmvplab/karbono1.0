@@ -1,9 +1,10 @@
 
-import { MainLayout } from '@/layouts/components'
+import { MainLayout } from '@/layouts/MainLayout'
 import { ReactElement } from 'react'
 import { HomeView } from '@/views/HomeView'
 import { NextPageWithLayout } from '@/pages/_app'
-import { LoginView } from '@/views/LoginView'
+import { LoginView } from '@/views/auth/LoginView'
+import { AuthLayout } from '@/layouts/AuthLayout'
 
 
 const LoginPage: NextPageWithLayout = () => {
@@ -15,8 +16,11 @@ const LoginPage: NextPageWithLayout = () => {
 LoginPage.getLayout = function getLayout(page: ReactElement) {
 
   return (
+    
     <MainLayout>
-      {page}
+      <AuthLayout>
+        {page}
+      </AuthLayout>
     </MainLayout>
   )
 }
