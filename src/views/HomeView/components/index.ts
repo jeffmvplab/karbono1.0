@@ -1,2 +1,2 @@
 export * from './TarjetaConfiguracion';
-export * from './TarjetaProduccion';
+export * from './TarjetaProycon';
