@@ -12,13 +12,13 @@ export interface TarjetaProyconProps {}
 
 const TarjetaProycon : React.FC<TarjetaProyconProps> = () => {
 
-  // const {ruta, cambiarRuta} = useContext(GlobalContext)
+  const {ruta, cambiarRuta} = useContext(GlobalContext)
 
-  // useEffect(() => {
-    // cambiarRuta();
-  // }, []);
+  useEffect(() => {
+    cambiarRuta();
+  }, []);
 
-	// const router = useRouter();
+	const router = useRouter();
 
 
 
@@ -38,7 +38,7 @@ const TarjetaProycon : React.FC<TarjetaProyconProps> = () => {
           <Typography variant='body1' sx={{paddingBottom:'30px'}}>Este módulo te permite crear, editar y consultar datos de prescripciones  médicas de manera fácil y rápida.</Typography>
         
           <Button
-          // onClick={()=>router.push(mainRoutes.prescripcion) }
+          onClick={()=>router.push(mainRoutes.prescripcion) }
           sx={{backgroundColor:'#2FC5C6',  color:'#fff', padding:'10px 40px', borderRadius:'10px', ':hover':{backgroundColor:'#2fc5c1', color:'#e8e8e2'}}}>
            Ingresar
           </Button>

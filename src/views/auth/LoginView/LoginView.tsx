@@ -22,10 +22,10 @@ const LoginView: React.FC<LoginViewProps> = () => {
 		<>
 			<Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
 
-				<Typography variant="h4">Inicio de Sesión</Typography>
+				<Typography variant="h4" fontWeight={600}>Inicio de Sesión</Typography>
 
 				<Stack direction="row" spacing={0.5}>
-					<Typography variant="body2">Nuevo usuario?</Typography>
+					<Typography variant="body2"  fontWeight={700}>Nuevo usuario?</Typography>
 
 					<Link component={NextLink} href={mainRoutes.register} variant="subtitle2">
 						Crear cuenta
@@ -48,8 +48,6 @@ const LoginView: React.FC<LoginViewProps> = () => {
 			}
 
 			<AuthLoginForm />
-
-
 
 		</>
 	)
