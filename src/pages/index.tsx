@@ -11,10 +11,11 @@ const HomeMain: NextPageWithLayout = () => {
   return < HomeView />
 }
 
+
 HomeMain.getLayout = function getLayout(page: ReactElement) {
 
   return (
-    <MainLayout>
+    <MainLayout >
       {page}
     </MainLayout>
   )

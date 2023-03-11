@@ -166,7 +166,6 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	const [authOK, setAuthOk] = React.useState(true);
 
 	const login = async () => {
-
 		setLoadingAuth(true);
 		console.log('Loading...')
 		const resp = await useruseCase.login(email, password)
@@ -212,6 +211,9 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 	}, [])
 
+
+
+	
 	return (
 		<GlobalContext.Provider value={{
 
@@ -243,6 +245,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			errorPassword,
 			messageErrorPassword,
 			handlePassword,
+
 
 			passwordConfirm,
 			errorPasswordConfirm,
