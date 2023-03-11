@@ -10,9 +10,10 @@ const TarjetaAyudas  = () => {
 
 
     <>
-    <Grid container display='flex' xs={10} sm={11} md={5.50}  sx={{ maxHeight:'260', maxWidth:'100%',  borderRadius:'20px', backgroundColor:'#fff', marginTop:'50px', marginLeft:'30px', marginRight:'30px', marginBottom:'40px'}} className='box-shadow'>
+    <Grid container width='50%'>
+    <Grid container display='flex'  sx={{ maxHeight:'260', maxWidth:'100%',  borderRadius:'20px', backgroundColor:'#fff', marginTop:'50px', marginLeft:'30px', marginRight:'30px', marginBottom:'40px'}} className='box-shadow'>
        
-       <Grid item  xs={12} sm={10}
+       <Grid item  xs={10} sm={10}
         sx={{
          padding:'30px',
         }}
@@ -41,6 +42,8 @@ const TarjetaAyudas  = () => {
 
 
     </Grid>
+    </Grid>
+
     
     </>
   )

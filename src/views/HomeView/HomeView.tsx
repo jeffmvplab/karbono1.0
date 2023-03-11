@@ -4,12 +4,15 @@ import TarjetaPareinf from './components/TarjetaPareinf';
 import TarjetaAyudas from './components/TarjetaAyudas';
 export interface HomeViewProps {}
 
+
+
+
 const HomeView : React.FC<HomeViewProps> = () => {
 	return (
 		<>
-		  <TarjetaProycon />
-		  <TarjetaPareinf />
-		  <TarjetaAyudas />
+		  <TarjetaProycon  />
+		  <TarjetaPareinf  />
+		  <TarjetaAyudas  />
 		
 		</>
 	)

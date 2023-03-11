@@ -1,16 +1,33 @@
-import React from 'react';
 
 import Image from 'next/image'
+import { GlobalContext } from '@/context/GlobalContext';
+import React, {useContext, useEffect} from 'react'
+import { useRouter } from 'next/router';
 
-import { Box, Breadcrumbs, Grid, Button, Hidden, Typography } from '@mui/material'
+import { Box, Breadcrumbs, Grid, Button, Hidden, Typography, useStepContext } from '@mui/material'
+import { mainRoutes } from '@/routes/routes';
 
 
-const TarjetaProycon  = () => {
+export interface TarjetaProyconProps {}
+
+const TarjetaProycon : React.FC<TarjetaProyconProps> = () => {
+
+  const {ruta, cambiarRuta} = useContext(GlobalContext)
+
+  useEffect(() => {
+    cambiarRuta();
+  }, []);
+
+	const router = useRouter();
+
+
+
   return (
 
 
-  <Grid container width='100%'>
-    <Grid container display='flex' xs={12} md={5.50} flexDirection='row' sx={{ maxHeight:'260',  borderRadius:'20px', backgroundColor:'#fff', marginTop:'50px', marginLeft:'30px', marginRight:'30px'}} className='box-shadow'>
+  <Box display='flex' >
+
+    <Grid container display='flex'   flexDirection='row' sx={{ maxHeight:'260',  borderRadius:'20px', backgroundColor:'#fff', marginTop:'50px', marginLeft:'30px', marginRight:'30px'}} className='box-shadow'>
        
        <Grid item  xs={12} sm={10}
         sx={{
@@ -20,7 +37,9 @@ const TarjetaProycon  = () => {
           <Typography variant='h5' sx={{ color:'#2FC5C6',paddingBottom:'20px'}}>Prescripción</Typography>
           <Typography variant='body1' sx={{paddingBottom:'30px'}}>Este módulo te permite crear, editar y consultar datos de prescripciones  médicas de manera fácil y rápida.</Typography>
         
-          <Button sx={{backgroundColor:'#2FC5C6',  color:'#fff', padding:'10px 40px', borderRadius:'10px', ':hover':{backgroundColor:'#2fc5c1', color:'#e8e8e2'}}}>
+          <Button
+          onClick={()=>router.push(mainRoutes.prescripcion) }
+          sx={{backgroundColor:'#2FC5C6',  color:'#fff', padding:'10px 40px', borderRadius:'10px', ':hover':{backgroundColor:'#2fc5c1', color:'#e8e8e2'}}}>
            Ingresar
           </Button>
        </Grid>
@@ -37,7 +56,7 @@ const TarjetaProycon  = () => {
         </Grid>
         </Hidden>
     </Grid>
-    <Grid container display='flex' xs={12}  md={5.50} sx={{ maxHeight:'260',  borderRadius:'20px', backgroundColor:'#fff', marginTop:'50px', marginLeft:'30px', marginRight:'30px'}} className='box-shadow'>
+    <Grid container display='flex'   sx={{ maxHeight:'260',  borderRadius:'20px', backgroundColor:'#fff', marginTop:'50px', marginLeft:'30px', marginRight:'30px'}} className='box-shadow'>
        
        <Grid item  xs={12} sm={10}
         sx={{
@@ -66,7 +85,7 @@ const TarjetaProycon  = () => {
       </Grid>
 
  
-  </Grid>
+  </Box>
   
   )
 }

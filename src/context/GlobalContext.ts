@@ -18,6 +18,9 @@ interface ContextProps {
     messageErrorPassword:string,
     handlePassword:(event: React.ChangeEvent<HTMLInputElement>)=>void,
 
+    ruta:string;
+    cambiarRuta:()=>void
+
 }
 
 export const GlobalContext = createContext({} as ContextProps)

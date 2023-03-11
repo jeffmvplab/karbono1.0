@@ -9,8 +9,8 @@ const TarjetaPareinf = () => {
   return (
 
 
-    <Grid container width='100%'>
-    <Grid container display='flex' xs={10} sm={12}  lg={5.50} sx={{ maxHeight:'260', maxWidth:'100%',  borderRadius:'20px', backgroundColor:'#fff', marginTop:'50px', marginLeft:'30px', marginRight:'30px'}} className='box-shadow'>
+    <Box display='flex'>
+    <Grid container display='flex'   sx={{ maxHeight:'260', maxWidth:'100%',  borderRadius:'20px', backgroundColor:'#fff', marginTop:'50px', marginLeft:'30px', marginRight:'30px'}} className='box-shadow'>
        
        <Grid item  xs={12} sm={10}
         sx={{
@@ -37,7 +37,7 @@ const TarjetaPareinf = () => {
         </Grid>
         </Hidden>
     </Grid>
-    <Grid container display='flex' xs={10} sm={12}  lg={5.50} sx={{ maxHeight:'260', maxWidth:'100%',  borderRadius:'20px', backgroundColor:'#fff', marginTop:'50px', marginLeft:'30px', marginRight:'30px'}} className='box-shadow'>
+    <Grid container display='flex'  sx={{ maxHeight:'260', maxWidth:'100%',  borderRadius:'20px', backgroundColor:'#fff', marginTop:'50px', marginLeft:'30px', marginRight:'30px'}} className='box-shadow'>
        
        <Grid item  xs={12} sm={10}
         sx={{
@@ -65,7 +65,7 @@ const TarjetaPareinf = () => {
         </Hidden>
     </Grid>
     
-  </Grid>
+  </Box>
   )
 }
 

@@ -49,13 +49,13 @@ export const NavBar = () => {
               {
                 (isAuth)
                   ? <>
-                    <Link href='' style={{ textDecoration: 'none' }}><Typography
+                {/*    <Link href='' style={{ textDecoration: 'none' }}><Typography
                       marginLeft='30px'
                       marginRight='15px'
                       color='#000'
                       alignItems='center'
                     >
-                      Produción
+                      Prescripción
                     </Typography></Link>
 
                     <Link href='' style={{ textDecoration: 'none' }}><Typography
@@ -85,7 +85,7 @@ export const NavBar = () => {
                     >
                       Ayudas
                     </Typography>
-                    </Link>
+                    </Link>*/}
                   </>
                   : null
               }

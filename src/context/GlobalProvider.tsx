@@ -4,7 +4,7 @@ import { LocalStorageProtocol } from "@/protocols/cache/local_cache";
 import { mainRoutes } from "@/routes/routes";
 import { StorageKeysEnum } from "@/utilities/enums";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FC } from "react";
 import { GlobalContext } from "./GlobalContext";
 
@@ -107,6 +107,22 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	useEffect(() => {
 		
 	}, [])
+
+	///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+
+      
+
+	const [ruta, setRuta ] =  useState(' ');
+
+
+
+	const cambiarRuta = () => {
+		setRuta (mainRoutes.prescripcion);		
+	}
+
+
+
 	
 	return (
 		<GlobalContext.Provider value={{
@@ -124,7 +140,10 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			password,
 			errorPassword,
 			messageErrorPassword,
-			handlePassword
+			handlePassword,
+
+			ruta,
+			cambiarRuta
 
 		}}>{children}
 		</GlobalContext.Provider>

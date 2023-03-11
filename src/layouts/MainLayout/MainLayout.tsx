@@ -4,6 +4,7 @@ import { Box, Grid } from "@mui/material";
 import Head from "next/head";
 import { GlobalProvider } from "@/context/GlobalProvider";
 import { NavBar } from "../components/NavBar";
+import { Sidebar } from "../components/SideBar/Sidebar";
 
 export interface MainLayoutInterface {
   children: ReactNode;
