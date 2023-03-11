@@ -4,7 +4,11 @@ import { LocalStorageProtocol } from "@/protocols/cache/local_cache";
 import { mainRoutes } from "@/routes/routes";
 import { StorageKeysEnum } from "@/utilities/enums";
 import { useRouter } from "next/router";
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
+=======
+import React, { useEffect } from "react";
+>>>>>>> adafd1ffa4939af5ba98c4620f5a6e99b8c752f5
 import { FC } from "react";
 import { GlobalContext } from "./GlobalContext";
 
@@ -14,8 +18,13 @@ type Props = {
 
 
 export const GlobalProvider: FC<Props> = ({ children }) => {
+<<<<<<< HEAD
     
 	const router=useRouter();
+=======
+
+	const router = useRouter();
+>>>>>>> adafd1ffa4939af5ba98c4620f5a6e99b8c752f5
 	const localStorageProtocol = new LocalStorageProtocol();
 
 	/////////////////////////////////Manejo Email//////////////////////////////////////////
@@ -65,13 +74,20 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			setMessageErrorPassword('Su contraseña debe contener mínimo 8 caracteres')
 		}
 	};
+<<<<<<< HEAD
 ////////////////////////////////////////MÉTODOS//////////////////////////////////////////////////////////////////
 	/////////////////////////////////AUTH STATUS//////////////////////////////////////////
    
+=======
+	//////////////////////////////////MÉTODOS//////////////////////////////////////////////////////////////////
+	/////////////////////////////////AUTH STATUS//////////////////////////////////////////
+
+>>>>>>> adafd1ffa4939af5ba98c4620f5a6e99b8c752f5
 	const [isAuth, setIsAuth] = React.useState(false);
 
 	const authStatus = () => {
 		if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
+<<<<<<< HEAD
 				setIsAuth(true) 
 				router.push(mainRoutes.home);
 				console.log('IsAuth:',isAuth)
@@ -80,11 +96,22 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 				router.push(mainRoutes.login);
 				console.log('IsAuth:',isAuth) 
 				}
+=======
+			setIsAuth(true)
+			router.push(mainRoutes.home);
+			console.log('IsAuth:', isAuth)
+		} else {
+			setIsAuth(false);
+			router.push(mainRoutes.login);
+			console.log('IsAuth:', isAuth)
+		}
+>>>>>>> adafd1ffa4939af5ba98c4620f5a6e99b8c752f5
 	}
 
 	/////////////////////////////LOGIN//////////////////////////////////////////////
 	const useruseCase = new UserUseCases();
 	const [loadingAuth, setLoadingAuth] = React.useState(false);
+    const [authOK, setAuthOk] = React.useState(true);
 
 	const login = async () => {
 		setLoadingAuth(true);
@@ -95,6 +122,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		localStorageProtocol.set(StorageKeysEnum.user, resp);
 
 		setLoadingAuth(false);
+<<<<<<< HEAD
 		authStatus();
 	}
 	/////////////////////////////LOGOUT//////////////////////////////////////////////
@@ -119,14 +147,38 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 	const cambiarRuta = () => {
 		setRuta (mainRoutes.prescripcion);		
+=======
+		if(resp!==401){
+			authStatus();
+			setAuthOk(true);
+		}else{
+			setAuthOk(false)
+		}
+>>>>>>> adafd1ffa4939af5ba98c4620f5a6e99b8c752f5
 	}
+	/////////////////////////////LOGOUT//////////////////////////////////////////////
+	const logout = async () => {
+		localStorageProtocol.delete(StorageKeysEnum.user);
+		authStatus();
+	}
+	///////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
+	useEffect(() => {
+
+	}, [])
 
 
 
 	
 	return (
 		<GlobalContext.Provider value={{
+<<<<<<< HEAD
             
+=======
+
+			authOK,
+
+>>>>>>> adafd1ffa4939af5ba98c4620f5a6e99b8c752f5
 			isAuth,
 			login,
 			logout,

@@ -49,13 +49,21 @@ export const NavBar = () => {
               {
                 (isAuth)
                   ? <>
+<<<<<<< HEAD
                 {/*    <Link href='' style={{ textDecoration: 'none' }}><Typography
+=======
+                    <Link href='' style={{ textDecoration: 'none' }}><Typography
+>>>>>>> adafd1ffa4939af5ba98c4620f5a6e99b8c752f5
                       marginLeft='30px'
                       marginRight='15px'
                       color='#000'
                       alignItems='center'
                     >
+<<<<<<< HEAD
                       Prescripción
+=======
+                      Produción
+>>>>>>> adafd1ffa4939af5ba98c4620f5a6e99b8c752f5
                     </Typography></Link>
 
                     <Link href='' style={{ textDecoration: 'none' }}><Typography
@@ -85,7 +93,11 @@ export const NavBar = () => {
                     >
                       Ayudas
                     </Typography>
+<<<<<<< HEAD
                     </Link>*/}
+=======
+                    </Link>
+>>>>>>> adafd1ffa4939af5ba98c4620f5a6e99b8c752f5
                   </>
                   : null
               }
