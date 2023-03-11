@@ -6,13 +6,14 @@ import NextLink from 'next/link';
 import { mainRoutes } from '@/routes/routes';
 import { AuthLoginForm } from '../components/AuthLoginForm';
 import { GlobalContext } from '@/context/GlobalContext';
+import { colorsKarbono } from '@/themes/colors';
 
 export interface LoginViewProps { }
 
 
 const LoginView: React.FC<LoginViewProps> = () => {
 
-	const { errorEmail, messageErrorEmail,
+	const { errorEmail, messageErrorEmail,authOK,
 		errorPassword, messageErrorPassword,
 	} = React.useContext(GlobalContext);
 
@@ -33,14 +34,17 @@ const LoginView: React.FC<LoginViewProps> = () => {
 
 			</Stack>
 
-			{
-				(errorEmail || errorPassword)
+			{(authOK)
+				?(errorEmail || errorPassword)
 					? <Alert severity="warning" sx={{ mb: 3 }}>
 						{messageErrorEmail || messageErrorPassword}
 					</Alert>
 					: <Alert severity="success" sx={{ mb: 3 }}>
 						{'Sus datos tienen el formato correcto'}
 					</Alert>
+					:<Alert severity="error" sx={{ mb: 3,bgcolor:'rgba(221,50,50,60%)'}}>
+					{'Credenciales Inválidas'}
+				</Alert>
 			}
 
 			<AuthLoginForm />

@@ -14,8 +14,8 @@ type Props = {
 
 
 export const GlobalProvider: FC<Props> = ({ children }) => {
-    
-	const router=useRouter();
+
+	const router = useRouter();
 	const localStorageProtocol = new LocalStorageProtocol();
 
 	/////////////////////////////////Manejo Email//////////////////////////////////////////
@@ -65,28 +65,30 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			setMessageErrorPassword('Su contraseña debe contener mínimo 8 caracteres')
 		}
 	};
-////////////////////////////////////////MÉTODOS//////////////////////////////////////////////////////////////////
+	//////////////////////////////////MÉTODOS//////////////////////////////////////////////////////////////////
 	/////////////////////////////////AUTH STATUS//////////////////////////////////////////
-   
+
 	const [isAuth, setIsAuth] = React.useState(false);
 
 	const authStatus = () => {
 		if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
-				setIsAuth(true) 
-				router.push(mainRoutes.home);
-				console.log('IsAuth:',isAuth)
-			}else { 
-				setIsAuth(false);
-				router.push(mainRoutes.login);
-				console.log('IsAuth:',isAuth) 
-				}
+			setIsAuth(true)
+			router.push(mainRoutes.home);
+			console.log('IsAuth:', isAuth)
+		} else {
+			setIsAuth(false);
+			router.push(mainRoutes.login);
+			console.log('IsAuth:', isAuth)
+		}
 	}
 
 	/////////////////////////////LOGIN//////////////////////////////////////////////
 	const useruseCase = new UserUseCases();
 	const [loadingAuth, setLoadingAuth] = React.useState(false);
+    const [authOK, setAuthOk] = React.useState(true);
 
 	const login = async () => {
+
 		setLoadingAuth(true);
 		console.log('Loading...')
 		const resp = await useruseCase.login(email, password)
@@ -95,22 +97,29 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		localStorageProtocol.set(StorageKeysEnum.user, resp);
 
 		setLoadingAuth(false);
-		authStatus();
+		if(resp!==401){
+			authStatus();
+			setAuthOk(true);
+		}else{
+			setAuthOk(false)
+		}
 	}
 	/////////////////////////////LOGOUT//////////////////////////////////////////////
 	const logout = async () => {
 		localStorageProtocol.delete(StorageKeysEnum.user);
 		authStatus();
 	}
-///////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
 	useEffect(() => {
-		
+
 	}, [])
-	
+
 	return (
 		<GlobalContext.Provider value={{
-            
+
+			authOK,
+
 			isAuth,
 			login,
 			logout,

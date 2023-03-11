@@ -3,6 +3,8 @@ import { createContext } from "react";
 
 interface ContextProps {
     
+    authOK:boolean;
+
     login:()=>void;
     logout:()=>void;
     isAuth:boolean;
