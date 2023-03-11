@@ -7,12 +7,16 @@ import NextLink from 'next/link';
 import { AuthRegisterForm } from '../components/AuthRegisterForm';
 
 
-export interface RegisterViewProps {}
+export interface RegisterViewProps { }
 
-const RegisterView : React.FC<RegisterViewProps> = () => {
+const RegisterView: React.FC<RegisterViewProps> = () => {
 
-	const { errorEmail, messageErrorEmail,
+	const {
+		errorEmail, messageErrorEmail,
+		errorPhone,messageErrorPhone,
 		errorPassword, messageErrorPassword,
+		errorPasswordConfirm,messageErrorPasswordConfirm
+
 	} = React.useContext(GlobalContext);
 
 
@@ -20,10 +24,13 @@ const RegisterView : React.FC<RegisterViewProps> = () => {
 		<>
 			<Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
 
-				<Typography variant="h4">Registro</Typography>
+				<Typography variant="h4" fontWeight={600}>
+					Empieza tu prueba
+					gratuita ahora
+				</Typography>
 
 				<Stack direction="row" spacing={0.5}>
-					<Typography variant="body2">Ya tiene cuenta?</Typography>
+					<Typography variant="body2" fontWeight={700}>¿Ya estás registrado?</Typography>
 
 					<Link component={NextLink} href={mainRoutes.register} variant="subtitle2">
 						Iniciar sesión
@@ -33,9 +40,9 @@ const RegisterView : React.FC<RegisterViewProps> = () => {
 			</Stack>
 
 			{
-				(errorEmail || errorPassword)
+				(errorEmail || errorPassword||errorPasswordConfirm||errorPhone)
 					? <Alert severity="warning" sx={{ mb: 3 }}>
-						{messageErrorEmail || messageErrorPassword}
+						{messageErrorEmail || messageErrorPassword||messageErrorPasswordConfirm||messageErrorPhone}
 					</Alert>
 					: <Alert severity="success" sx={{ mb: 3 }}>
 						{'Sus datos tienen el formato correcto'}

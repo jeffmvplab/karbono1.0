@@ -13,9 +13,12 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 
 
 	const {
-		login, loadingAuth,
+		login,register,loadingAuth,
 		email, errorEmail, handleEmail,
-		password, errorPassword, handlePassword
+		name,handleName,
+		phone,errorPhone,handlePhone,
+		password, errorPassword, handlePassword,
+		passwordConfirm,errorPasswordConfirm,handlePasswordConfirm
 	} = React.useContext(GlobalContext)
 
 	return (
@@ -26,33 +29,36 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 				justifyContent='center'
 				alignItems='center'
 			>
-				<Stack paddingBottom={2} direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+				
+				<Grid item xs={12} paddingBottom={2}>
+					<TextField
+						onChange={handleName}
+						value={name}
+						label="Nombre"
+						type="name"
+						placeholder='Nombre'
+						fullWidth
+					/>
+				</Grid>
 
-					<TextField
-						onChange={()=>{}}
-						value={''}
-						label="Nombre Completo"
-						type="text"
-						placeholder='Nombre Completo'
-						fullWidth
-					/>
-					<TextField
-						onChange={()=>{}}
-						value={''}
-						label="Registro Médico"
-						type="text"
-						placeholder='xxxxxxx'
-						fullWidth
-					/>
-				</Stack>
 
 				<Grid item xs={12} paddingBottom={2}>
 					<TextField
 						onChange={handleEmail}
 						value={email}
-						label="Correo electrónico"
+						label="Email"
 						type="email"
-						placeholder='Correo@google.com'
+						placeholder='Email'
+						fullWidth
+					/>
+				</Grid>
+				<Grid item xs={12} paddingBottom={2}>
+					<TextField
+						onChange={handlePhone}
+						value={phone}
+						label="Teléfono"
+						type="number"
+						placeholder='Teléfono'
 						fullWidth
 					/>
 				</Grid>
@@ -68,12 +74,23 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 					/>
 				</Grid>
 
+				<Grid item xs={12} paddingBottom={2}>
+					<TextField
+						onChange={handlePasswordConfirm}
+						value={passwordConfirm}
+						label="Confirmar Contraseña"
+						type="password"
+						placeholder='Confirmar Contraseña'
+						fullWidth
+					/>
+				</Grid>
+
 				<Grid container padding='10px'>
 					<Grid item xs={12} display='flex' justifyContent='center'>
 
 						<CustomButton
 							fontSize={'20px'}
-							onClick={() => { login() }}
+							onClick={() => { register() }}
 							disabled={(!errorEmail && !errorPassword) ? false : true}
 							textColorHover={(!errorEmail && !errorPassword) ? 'white' : null}
 							textColor={'white'}

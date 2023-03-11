@@ -65,6 +65,84 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			setMessageErrorPassword('Su contraseña debe contener mínimo 8 caracteres')
 		}
 	};
+	/////////////////////////////////Manejo Confirmar Password //////////////////////////////////////////
+	// const isPass= /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,10}$/;
+
+	const [passwordConfirm, setPasswordConfirm] = React.useState('');
+	const [errorPasswordConfirm, setErrorPasswordConfirm] = React.useState(false);
+	const [messageErrorPasswordConfirm, setMessageErrorPasswordConfirm] = React.useState('');
+
+	const handlePasswordConfirm = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setPasswordConfirm(event.target.value || '');
+
+		const passwordConfirm = event.target.value;
+
+		console.log('PasswordConfirm:', passwordConfirm);
+
+		// if (isPass.test( passwordConfirm)) {
+		if (passwordConfirm.length > 7) {
+			setErrorPasswordConfirm(false);
+			setMessageErrorPasswordConfirm('')
+			if (passwordConfirm === password) {
+				setErrorPasswordConfirm(false)
+				setMessageErrorPasswordConfirm('')
+			}
+			else {
+				setErrorPasswordConfirm(true);
+				setMessageErrorPasswordConfirm('La contraseñas no coincide')
+			}
+		} else {
+			setErrorPasswordConfirm(true);
+			// setMessageErrorPasswordConfirm('Su contraseña debe contener mínimo 8 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial')
+			setMessageErrorPasswordConfirm('Su contraseña debe contener mínimo 8 caracteres')
+		}
+	};
+	/////////////////////////////////Manejo Password//////////////////////////////////////////
+	// const isPass= /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,10}$/;
+
+	const [name, setName] = React.useState('');
+	const [errorName, setErrorName] = React.useState(false);
+	const [messageErrorName, setMessageErrorName] = React.useState('');
+
+	const handleName = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setName(event.target.value || '');
+
+		const name = event.target.value;
+
+		console.log('name:', name);
+
+		// if (isPass.test( name)) {
+		// if (name.length > 7) {
+		// 	setErrorName(false);
+		// 	setMessageErrorName('')
+		// } else {
+		// 	setErrorName(true);
+		// 	// setMessageErrorName('Su contraseña debe contener mínimo 8 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial')
+		// 	setMessageErrorName('')
+		// }
+	};
+
+	const [phone, setPhone] = React.useState('');
+	const [errorPhone, setErrorPhone] = React.useState(false);
+	const [messageErrorPhone, setMessageErrorPhone] = React.useState('');
+
+	const handlePhone = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setPhone(event.target.value || '');
+
+		const phone = event.target.value;
+
+		console.log('phone:', phone);
+
+		// if (isPass.test( phone)) {
+		if (phone.length > 7 && !isNaN(parseInt(phone))) {
+			setErrorPhone(false);
+			setMessageErrorPhone('')
+		} else {
+			setErrorPhone(true);
+			// setMessageErrorPhone('Su contraseña debe contener mínimo 8 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial')
+			setMessageErrorPhone('Introduzca un número de telefono válido')
+		}
+	};
 	//////////////////////////////////MÉTODOS//////////////////////////////////////////////////////////////////
 	/////////////////////////////////AUTH STATUS//////////////////////////////////////////
 
@@ -85,7 +163,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	/////////////////////////////LOGIN//////////////////////////////////////////////
 	const useruseCase = new UserUseCases();
 	const [loadingAuth, setLoadingAuth] = React.useState(false);
-    const [authOK, setAuthOk] = React.useState(true);
+	const [authOK, setAuthOk] = React.useState(true);
 
 	const login = async () => {
 		setLoadingAuth(true);
@@ -96,10 +174,29 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		localStorageProtocol.set(StorageKeysEnum.user, resp);
 
 		setLoadingAuth(false);
-		if(resp!==401){
+		if (resp !== 401&&resp!==400&&resp!==500){
 			authStatus();
 			setAuthOk(true);
-		}else{
+		} else {
+			setAuthOk(false)
+		}
+	}
+
+	/////////////////////////////LOGIN//////////////////////////////////////////////
+	const register = async () => {
+
+		setLoadingAuth(true);
+		console.log('Register...')
+		const resp = await useruseCase.register(name,phone,email, password)
+		console.log('RespRegister:', resp)
+
+		localStorageProtocol.set(StorageKeysEnum.user, resp);
+
+		setLoadingAuth(false);
+		if (resp !== 401&&resp!==400&&resp!==500) {
+			authStatus();
+			setAuthOk(true);
+		} else {
 			setAuthOk(false)
 		}
 	}
@@ -110,22 +207,28 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	}
 	///////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////
-	useEffect(() => {
-
-	}, [])
-
-
-
-	
 	return (
+
 		<GlobalContext.Provider value={{
 
 			authOK,
-
 			isAuth,
+
 			login,
+			register,
+
 			logout,
 			loadingAuth,
+
+			name,
+			errorName,
+			messageErrorName,
+			handleName,
+
+			phone,
+			errorPhone,
+			messageErrorPhone,
+			handlePhone,
 
 			email,
 			errorEmail,
@@ -137,8 +240,10 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			messageErrorPassword,
 			handlePassword,
 
-			// ruta,
-			// cambiarRuta
+			passwordConfirm,
+			errorPasswordConfirm,
+			messageErrorPasswordConfirm,
+			handlePasswordConfirm
 
 		}}>{children}
 		</GlobalContext.Provider>
