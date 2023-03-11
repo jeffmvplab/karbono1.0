@@ -5,7 +5,7 @@ export const colorsKarbono = {
     // grey: '#E6E6E6',
     background: '#FFFFFF',
     // leftMenu: '#333333',
-    // error: 'red',
-    // warning: 'red',
+    error: 'rgba(221,60,60,60%)',
+    warning: '#C78125',
     //  gradientLayout: 'linear-gradient(90deg,#333333 0%,#797373 35%, #333333 100%)'
   }
