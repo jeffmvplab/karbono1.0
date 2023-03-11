@@ -38,28 +38,16 @@ const AuthLayout: React.FC<AuthLayoutInterface> = ({ children }) => {
               {/* {'Pure Life'} */}
             </Typography>
            
-<<<<<<< HEAD
-            {/* <Box maxWidth={600} maxHeight={600}> */}
-            <Image
-              layout="responsive"
-              width={600}
-              height={500}
-=======
             <Box maxWidth={600} maxHeight={600}>
             <Image
               layout="responsive"
               width={600}
               height={550}
->>>>>>> adafd1ffa4939af5ba98c4620f5a6e99b8c752f5
               // layout="fill"
               alt="auth"
               src={'/illustrations/illustration_dashboard2.jpg'}
             />
-<<<<<<< HEAD
-          {/* </Box> */}
-=======
           </Box>
->>>>>>> adafd1ffa4939af5ba98c4620f5a6e99b8c752f5
 
             {/* <Image
               disabledEffect
