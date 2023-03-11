@@ -5,9 +5,9 @@ interface ContextProps {
 
     authOK: boolean;
 
-    login: () => void;
+    login:()=> void;
     register:()=>void;
-    logout: () => void;
+    logout:()=> void;
     isAuth: boolean;
 
     loadingAuth: boolean,
@@ -36,9 +36,6 @@ interface ContextProps {
     errorPasswordConfirm: boolean,
     messageErrorPasswordConfirm: string,
     handlePasswordConfirm: (event: React.ChangeEvent<HTMLInputElement>) => void,
-
-    ruta:string;
-    cambiarRuta:()=>void
 
 }
 

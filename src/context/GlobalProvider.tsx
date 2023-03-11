@@ -207,21 +207,16 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	}
 	///////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////
-	useEffect(() => {
-
-	}, [])
-
-
-
-	
 	return (
+
 		<GlobalContext.Provider value={{
 
 			authOK,
-
 			isAuth,
+
 			login,
 			register,
+
 			logout,
 			loadingAuth,
 
@@ -235,7 +230,6 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			messageErrorPhone,
 			handlePhone,
 
-
 			email,
 			errorEmail,
 			messageErrorEmail,
@@ -245,7 +239,6 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			errorPassword,
 			messageErrorPassword,
 			handlePassword,
-
 
 			passwordConfirm,
 			errorPasswordConfirm,
