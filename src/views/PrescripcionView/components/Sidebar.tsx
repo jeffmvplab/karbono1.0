@@ -35,6 +35,7 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
             </Box>
 
             <Divider sx={{ marginTop: '30px', width: '100%' }} />
+
             <Box marginTop='30px' width='200px' display='flex' flexDirection='row'>
               <Image
                 src='/assets/pastillas-landing.png'
@@ -62,6 +63,29 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
                 height={25}
                 alt=''
                 style={{ alignItems: 'center', marginLeft:'10px', paddingTop:'5px', paddingLeft:'5px' }}
+
+              />
+            </Box>
+            <Box display='flex' flexDirection='row' paddingTop='25px'>
+            <Link href='' style={{ textDecoration: 'none' }}>
+                <Typography
+                  
+                  sx={{
+                    
+                    marginLeft: '3px',
+                    color:'#372FC6', 
+                    fontSize:'17px',
+                    
+                  }}
+                >
+                 Agregar Nueva
+                </Typography></Link>
+                <Image
+                src='/assets/añadir-icono-landing.png'
+                width={20}
+                height={20}
+                alt=''
+                style={{ alignItems: 'center', marginLeft:'40px', paddingTop:'5px', paddingLeft:'5px' }}
 
               />
             </Box>

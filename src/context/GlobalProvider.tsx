@@ -207,26 +207,6 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	}
 	///////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
-	useEffect(() => {
-
-	}, [])
-
-	///////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////
-
-
-	const [ruta, setRuta ] =  useState(' ');
-
-
-
-	const cambiarRuta = () => {
-		setRuta (mainRoutes.prescripcion);
-	}
-
-	
-=======
->>>>>>> 216c9e1163c97ca9fc8b7faa5221c9c76bf9f1d7
 	return (
 
 		<GlobalContext.Provider value={{
@@ -260,15 +240,10 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			messageErrorPassword,
 			handlePassword,
 
-<<<<<<< HEAD
-			ruta,
-			cambiarRuta
-=======
 			passwordConfirm,
 			errorPasswordConfirm,
 			messageErrorPasswordConfirm,
 			handlePasswordConfirm
->>>>>>> 216c9e1163c97ca9fc8b7faa5221c9c76bf9f1d7
 
 		}}>{children}
 		</GlobalContext.Provider>
