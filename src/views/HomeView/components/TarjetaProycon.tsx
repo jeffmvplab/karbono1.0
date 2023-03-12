@@ -12,12 +12,6 @@ export interface TarjetaProyconProps {}
 
 const TarjetaProycon : React.FC<TarjetaProyconProps> = () => {
 
-  const {ruta, cambiarRuta} = useContext(GlobalContext)
-
-  useEffect(() => {
-    cambiarRuta();
-  }, []);
-
 	const router = useRouter();
 
 

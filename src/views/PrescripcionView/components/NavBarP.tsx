@@ -19,12 +19,14 @@ const NavbarP = ({drawerWidth = 240}) => {
     <AppBar
       position='fixed'
       sx={{
+        height:'0',
         width: {sm:`calc(100% - ${drawerWidth}px)`},
         ml: {sm: `${drawerWidth}px`}
       }}
     >
       <Toolbar sx={{
-        backgroundColor:'#fff'
+        backgroundColor:'#fff',
+        height:'82px',
       }}>
         <IconButton
          sx={{display:{sm:'none'}}}

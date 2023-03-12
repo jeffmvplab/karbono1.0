@@ -28,7 +28,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 	const cambiarRuta = () => {
 
-		setRuta (mainRoutes.login);
+		setRuta (mainRoutes.prescripcion);
 
 
 	}
