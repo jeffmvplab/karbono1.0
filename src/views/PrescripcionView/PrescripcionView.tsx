@@ -12,12 +12,12 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 
 	return (
 		<>
-			<Grid container sx={{ marginTop: '100px', paddingRight: '25px', paddingLeft: '25px' }}>
+			<Grid container sx={{ marginTop: '100px', paddingRight: '25px', paddingLeft: '25px', marginBottom: '30px' }}>
 				<Grid item display='flex' justifyContent='space-between' width='100%'>
 
 					<Typography variant='h5' sx={{ fontWeight: 700 }}>Solicitud de órdenes</Typography>
-					<Link href='' style={{textDecoration:'none'}}>
-						<Box border='solid 1px' display='flex' borderColor='#372FC6' sx={{ paddingTop: '6px', paddingLeft: '25px', paddingRight: '25px', borderRadius: '10px', paddingBottom:'5px' }}>
+					<Link href='' style={{ textDecoration: 'none' }}>
+						<Box border='solid 1px' display='flex' borderColor='#372FC6' sx={{ paddingTop: '6px', paddingLeft: '25px', paddingRight: '25px', borderRadius: '10px', paddingBottom: '5px' }}>
 							<Typography sx={{ color: '#372FC6' }}>
 								Agregar nueva
 							</Typography>
@@ -37,7 +37,7 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 
 
 			</Grid>
-			<Grid container>
+			<Grid container >
 				<Tabla />
 			</Grid>
 		</>
