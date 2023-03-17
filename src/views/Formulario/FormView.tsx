@@ -18,7 +18,7 @@ const FormView: React.FC<FormViewProps> = () => {
 					component='form'
 					display='flex'
 					sx={{
-						width: '80%',
+						width: '70%',
 						marginTop: '20px',
 					}}
 				>
@@ -65,7 +65,7 @@ const FormView: React.FC<FormViewProps> = () => {
 					component='form'
 					display='block'
 					sx={{
-						width: '80%',
+						width: '70%',
 						marginTop: '20px',
 					}}
 				>
