@@ -1,6 +1,7 @@
-import { Typography, TextField, Grid, Box, MenuItem } from '@mui/material'
+import { Typography, TextField, Grid, Box, MenuItem, FormHelperText } from '@mui/material'
 import React from 'react'
 import DiscreteSliderSteps from './SliderForm'
+import TextFieldInput from './TextField'
 
 
 
@@ -15,23 +16,46 @@ const currencies = [
         label: 'No',
     }]
 
+const tiposPacientes = [
+    {
+        value: 'Adulto',
+        label: 'Adulto'
+    },
+    {
+        value: 'Pediatrico',
+        label: 'Pediatrico'
+    },
+    {
+        value: 'Neonato',
+        label: 'Neotato'
+    }]
+
+const viaAdministracion = [
+    {
+        value: 'Central',
+        label: 'Central'
+    },
+    {
+        value: 'Periférica',
+        label: 'Periférica'
+    }
+]
+
 const InformacionPaciente = () => {
+
+    const paciente = { nombre: '' }
+
+    const Información = {
+        id: '',
+        label: '',
+        type: '',
+    }
+
+
     return (
         <>
-            <Grid container direction='column'>
-                <Typography variant='h5' style={{ fontWeight: 700, color: '#372FC6', marginBottom: '20px' }} >Información del paciente:</Typography>
-                <TextField
-                    id='ips'
-                    label='Ips'
-                    type='text'
-                    variant='outlined'
-                    color='secondary'
-                    fullWidth
-                    inputProps={{ style: { textAlign: 'center', height: '17PX' } }}
-                    sx={{
-
-                    }}
-                />
+            <Grid container direction='column' >
+                <Typography variant='h5' style={{ fontWeight: 700, color: '#372FC6', marginBottom: '10px' }} >Información del paciente:</Typography>
                 <Box
                     display='flex'
                     sx={{
@@ -40,40 +64,15 @@ const InformacionPaciente = () => {
                     }}
                 >
                     <TextField
-                        id='no-identificación'
-                        label='No. Identificación*'
+                        id='ips'
+                        label='Ips'
                         type='text'
                         variant='outlined'
                         color='secondary'
                         fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
+                        inputProps={{ style: { textAlign: 'center', height: '17PX', marginRight: '10px' } }}
                         sx={{
-
-                        }}
-                    />
-
-                    <TextField
-                        id='nombre-del-paciente'
-                        label='Nombre del Paciente'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            margin: ' 0 20px'
-                        }}
-                    />
-                    <TextField
-                        id='servicio'
-                        label='Servicio'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-
+                            marginRight:'10px'
                         }}
                     />
                 </Box>
@@ -85,43 +84,9 @@ const InformacionPaciente = () => {
                         marginTop: '20px',
                     }}
                 >
-                    <TextField
-                        id='ubicacion'
-                        label='Ubicación'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-
-                        }}
-                    />
-
-                    <TextField
-                        id='cama'
-                        label='Cama'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            margin: ' 0 20px'
-                        }}
-                    />
-                    <TextField
-                        id='peso-kg'
-                        label='Peso (kg)*'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-
-                        }}
-                    />
+                    <TextFieldInput id='no-identificación' type='text' label='No Identificacion' />
+                    <TextFieldInput id='nombre-del-paciente' type='text' label='Nombre del Paciente*' />
+                    <TextFieldInput id='servicio' type='text' label='Servicio*' />
                 </Box>
 
                 <Box
@@ -131,43 +96,21 @@ const InformacionPaciente = () => {
                         marginTop: '20px',
                     }}
                 >
-                    <TextField
-                        id='edad'
-                        label='Edad'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
+                    <TextFieldInput id='ubicacion' type='text' label='Ubicación' />
+                    <TextFieldInput id='cama' type='text' label='Cama' />
+                    <TextFieldInput id='peso-kg' type='text' label='Peso (kg)*' />
+                </Box>
 
-                        }}
-                    />
-
-                    <TextField
-                        id='Tipo-edad'
-                        label='Tipo Edad'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            margin: ' 0 20px'
-                        }}
-                    />
-                    <TextField
-                        id='volumen'
-                        label='Volumen *'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-
-                        }}
-                    />
+                <Box
+                    display='flex'
+                    sx={{
+                        width: '100%',
+                        marginTop: '20px',
+                    }}
+                >
+                    <TextFieldInput id='edad' type='text' label='Edad' />
+                    <TextFieldInput id='tipo-edad' type='text' label='Tipo Edad' />
+                    <TextFieldInput id='volumen' type='text' label='Volumen*' />
                 </Box>
 
                 <Box
@@ -185,11 +128,11 @@ const InformacionPaciente = () => {
                         color='secondary'
                         inputProps={{ style: { height: '17PX' } }}
                         sx={{
-                            width: '32.25%'
+                            width: '33.55%',
                         }}
                     />
-                    <DiscreteSliderSteps />
-                    <DiscreteSliderSteps />
+                    <DiscreteSliderSteps nombre='Tiempo de infusión (h) *' />
+                    <DiscreteSliderSteps nombre='Overfill *' />
                 </Box>
 
                 <Box
@@ -201,12 +144,14 @@ const InformacionPaciente = () => {
                 >
                     <TextField
                         id='filtro'
-                        label='Filtro'
+                        label='Filtro*'
                         variant='outlined'
                         color='secondary'
                         fullWidth
                         select
+                        // helperText='Obligatorio'
                         inputProps={{ style: { height: '10PX' } }}
+                        sx={{   width: '32.25%', marginRight:'10px' }}
                     >
                         {currencies.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
@@ -222,10 +167,10 @@ const InformacionPaciente = () => {
                         color='secondary'
                         fullWidth
                         select
+                        // helperText='Obligatorio'
                         inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            margin: ' 0 20px'
-                        }}
+                        sx={{ width: '32.25%', marginRight:'10px' }}
+
                     >
                         {currencies.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
@@ -240,11 +185,17 @@ const InformacionPaciente = () => {
                         variant='outlined'
                         color='secondary'
                         fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-
-                        }}
-                    />
+                        select
+                        // helperText='Obligatorio'
+                        inputProps={{ style: { height: '5PX' } }}
+                        sx={{  width: '32.25%',  }}
+                    >
+                        {tiposPacientes.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
                 </Box>
 
                 <Box
@@ -260,21 +211,29 @@ const InformacionPaciente = () => {
                         type='text'
                         variant='outlined'
                         color='secondary'
+                        select
+                        // helperText='Obligatorio'
                         inputProps={{ style: { height: '17PX' } }}
                         sx={{
-                            width: '32.25%'
+                            width: '32.25%',
                         }}
-                    />
+                    >
+                        {viaAdministracion.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>                    
                     <TextField
                         id='diagnostico'
                         label='Diagnóstico(s)'
                         type='text'
                         variant='outlined'
                         color='secondary'
-                        inputProps={{ style: { height: '17PX' } }}
+                        inputProps={{ style: { height: '22PX' } }}
                         sx={{
                             width: '32.25%',
-                            margin: ' 0 20px'
+                            margin: ' 0 10px'
                         }}
                     />
                 </Box>

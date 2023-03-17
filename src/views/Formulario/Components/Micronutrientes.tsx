@@ -1,5 +1,30 @@
-import { Box, Grid, TextField, Typography } from '@mui/material'
+import { Box, Grid, MenuItem, TextField, Typography } from '@mui/material'
 import React from 'react'
+import TextFieldInput from './TextField'
+
+
+
+const fosfato = [
+    {
+        value: 'Fosfato de sodio',
+        label: 'Fosfato de sodio'
+    },
+    {
+        value: 'Fosfato de potasio',
+        label: 'Fosfato de potasio'
+    }
+]
+
+const elemento = [
+    {
+        value: 'Adultos',
+        label: 'Adultos'
+    },
+    {
+        value: 'Pediátricos',
+        label: 'Pediátricos'
+    }
+]
 
 const Micronutrientes = () => {
     return (
@@ -13,30 +38,8 @@ const Micronutrientes = () => {
                         width: '100%',
                     }}
                 >
-                    <TextField
-                        id='sodio-total'
-                        label='Sodio total'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            marginRight: '10px'
-                        }}
-                    />
-                    <TextField
-                        id='potasio-total'
-                        label='Potasio total'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            marginLeft: '10px'
-                        }}
-                    />
+                    <TextFieldInput id='Sodio-total' type='text' label='Sodio total' />
+                    <TextFieldInput id='potasio-total' type='text' label='Potasio total' />
                 </Box>
 
                 <Box
@@ -53,23 +56,19 @@ const Micronutrientes = () => {
                         variant='outlined'
                         color='secondary'
                         fullWidth
+                        select
                         inputProps={{ style: { height: '17PX' } }}
                         sx={{
                             marginRight: '10px'
                         }}
-                    />
-                    <TextField
-                        id='requerimiento-fosfato'
-                        label='Requerimiento fosfato'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            marginLeft: '10px'
-                        }}
-                    />
+                    >
+                        {fosfato.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                    <TextFieldInput id='requerimiento-fosfato' type='text' label='Requerimiento fosfato' />
                 </Box>
 
                 <Box
@@ -79,18 +78,8 @@ const Micronutrientes = () => {
                         marginTop: '20px'
                     }}
                 >
-                    <TextField
-                        id='calcio'
-                        label='Calcio'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            marginRight: '10px'
-                        }}
-                    />
+                    <TextFieldInput id='calcio' type='text' label='Calcio' />
+
                     <TextField
                         id='unidades '
                         label='Unidades '
@@ -98,10 +87,9 @@ const Micronutrientes = () => {
                         variant='outlined'
                         color='secondary'
                         fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
+                        inputProps={{ style: { height: '22PX' } }}
                         sx={{
-                            marginLeft: '10px',
-                            marginRight:'10px',
+                            marginRight: '10px',
                             width: '32.25%',
                         }}
                     />
@@ -112,9 +100,9 @@ const Micronutrientes = () => {
                         variant='outlined'
                         color='secondary'
                         fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
+                        inputProps={{ style: { height: '22PX' } }}
                         sx={{
-                            marginLeft: '10px',
+                            marginRight: '10px',
                             width: '32.25%'
                         }}
                     />
@@ -127,33 +115,10 @@ const Micronutrientes = () => {
                         marginTop: '20px'
                     }}
                 >
-                    <TextField
-                        id='sulfato-de-magnesio'
-                        label='Sulfato de magnesio'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            marginRight: '10px'
-                        }}
-                    />
-                    <TextField
-                        id='requerimiento-sulfato-de-magnesio'
-                        label='Requerimiento sulfato de magnesio'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            marginLeft: '10px'
-                        }}
-                    />
+                    <TextFieldInput id='sulfato-de-magnesio' type='text' label='Sulfato de magnesio' />
+                    <TextFieldInput id='requerimiento-sulfato-de-magnesio' type='text' label='Requerimiento sulfato de magnesio' />
                 </Box>
 
-                
                 <Box
                     display='flex'
                     sx={{
@@ -168,23 +133,19 @@ const Micronutrientes = () => {
                         variant='outlined'
                         color='secondary'
                         fullWidth
+                        select
                         inputProps={{ style: { height: '17PX' } }}
                         sx={{
                             marginRight: '10px'
                         }}
-                    />
-                    <TextField
-                        id='requerimiento-traza'
-                        label='Requerimiento traza'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            marginLeft: '10px'
-                        }}
-                    />
+                    >
+                        {elemento.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                    <TextFieldInput id='requerimiento-traza' type='text' label='Requerimiento traza' />
                 </Box>
 
                 <Box
@@ -201,11 +162,17 @@ const Micronutrientes = () => {
                         variant='outlined'
                         color='secondary'
                         fullWidth
+                        select
                         inputProps={{ style: { height: '17PX' } }}
                         sx={{
-                            marginRight: '10px'
                         }}
-                    />
+                    >
+                        {elemento.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
                     <TextField
                         id='vitaminas-liposolubles'
                         label='Vitaminas liposolubles'
@@ -213,11 +180,19 @@ const Micronutrientes = () => {
                         variant='outlined'
                         color='secondary'
                         fullWidth
+                        select
                         inputProps={{ style: { height: '17PX' } }}
                         sx={{
-                            marginLeft: '10px'
+                            marginLeft: '10px',
+                            marginRight:'10px'
                         }}
-                    />
+                    >
+                        {elemento.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
                 </Box>
 
                 <Box
@@ -225,33 +200,11 @@ const Micronutrientes = () => {
                     sx={{
                         width: '100%',
                         marginTop: '20px',
-                        marginBottom:'50px'
+                        marginBottom: '50px'
                     }}
                 >
-                    <TextField
-                        id='vitamina-c'
-                        label='Vitamina C'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            marginRight: '10px'
-                        }}
-                    />
-                    <TextField
-                        id='acido-folico'
-                        label='Acido fólico'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            marginLeft: '10px'
-                        }}
-                    />
+                    <TextFieldInput id='vitamina-c' type='text' label='Vitamina C' />
+                    <TextFieldInput id='acido-folico' type='text' label='Acido folico' />
                 </Box>
             </Grid>
         </>
