@@ -31,6 +31,7 @@ export const StyledSectionBg = styled('div')(({ theme }) => ({
   }),
   top: 0,
   left: 0,
+  bottom: 0,
   zIndex: -1,
   width: '100%',
   height: '100%',
@@ -42,11 +43,11 @@ export const StyledContent = styled('div')(({ theme }) => ({
   width: 480,
   margin: 'auto',
   display: 'flex',
-  minHeight: '100vh',
+  minHeight: '0vh',
   justifyContent: 'center',
-  padding: theme.spacing(15, 2),
+  padding: theme.spacing(10, 2),
   [theme.breakpoints.up('md')]: {
     flexShrink: 0,
-    padding: theme.spacing(30, 8, 0, 8),
+    padding: theme.spacing(0, 8, 0, 8),
   },
 }));

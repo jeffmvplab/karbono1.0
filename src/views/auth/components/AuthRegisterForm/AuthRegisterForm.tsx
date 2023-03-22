@@ -38,6 +38,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						type="name"
 						placeholder='Nombre'
 						fullWidth
+						inputProps={{style:{ height:'15PX',}}}  
 					/>
 				</Grid>
 
@@ -50,6 +51,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						type="email"
 						placeholder='Email'
 						fullWidth
+						inputProps={{style:{ height:'15PX',}}}  
 					/>
 				</Grid>
 				<Grid item xs={12} paddingBottom={2}>
@@ -60,6 +62,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						type="number"
 						placeholder='Teléfono'
 						fullWidth
+						inputProps={{style:{ height:'15PX',}}}  
 					/>
 				</Grid>
 
@@ -71,6 +74,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						type="password"
 						placeholder='Contraseña'
 						fullWidth
+						inputProps={{style:{ height:'15PX',}}}  
 					/>
 				</Grid>
 
@@ -82,6 +86,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						type="password"
 						placeholder='Confirmar Contraseña'
 						fullWidth
+						inputProps={{style:{ height:'15PX',}}}  
 					/>
 				</Grid>
 
