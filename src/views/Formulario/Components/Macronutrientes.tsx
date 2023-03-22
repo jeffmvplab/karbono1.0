@@ -1,4 +1,4 @@
-import { Box, Grid, MenuItem, TextField, Typography } from '@mui/material'
+import { Box, Grid, MenuItem, Stack, TextField, Typography } from '@mui/material'
 import React from 'react'
 import TextFieldInput from './TextField'
 
@@ -28,94 +28,148 @@ const aminoacidos = [
 
 const Macronutrientes = () => {
     return (
-        <>
-            <Grid container direction='column' marginTop='20px'  width='100%' >
-                <Typography variant='h5' style={{ fontWeight: 700, color: '#372FC6', marginBottom: '20px', }} >Macronutrientes</Typography>
+        <Stack direction={'column'}>
+            <Typography
+                variant='h5'
+                paddingY={2}
+                style={{ fontWeight: 700, color: '#372FC6' }}
+            >Macronutrientes
+            </Typography>
 
-                <Box
-                    display='flex'
-                    sx={{
-                        width: '100%',
-                    }}
-                >
-                    <TextField
-                        id='tipo-prescripción*'
-                        label='Tipo Prescripción*'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        select
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            marginRight: '10px'
-                        }}
-                    >
-                        {tipoPrescripcion.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                    <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' />
+            <Grid container direction='column' >
+
+                <Box display='flex' sx={{ marginTop: '20px' }}>
+                    <Grid container spacing={2}>
+
+                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+                            <TextField
+                                id='tipo-prescripción*'
+                                label='Tipo Prescripción*'
+                                variant='outlined'
+                                color='secondary'
+                                fullWidth
+                                select
+                            >
+                                {tipoPrescripcion.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+
+                        </Grid>
+
+                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                            <TextField
+                                id='flujo-metabolico'
+                                label='Flujo metabólico'
+                                type='text'
+                                variant='outlined'
+                                color='secondary'
+                                fullWidth
+                            />
+                            {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
+                        </Grid>
+
+                    </Grid>
                 </Box>
 
-                <Box
-                    display='flex'
-                    sx={{
-                        width: '100%',
-                        marginTop: '20px',
-                    }}
-                >
-                    <TextField
-                        id='aminoácidos'
-                        label='Aminoácidos*'
-                        type='text'
-                        variant='outlined'
-                        color='secondary'
-                        fullWidth
-                        select
-                        inputProps={{ style: { height: '17PX' } }}
-                        sx={{
-                            marginRight: '10px'
-                        }}
-                    >
-                        {aminoacidos.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                    <TextFieldInput id='requerimiento-aminoacidos' type='text' label='Requerimiento aminoácidos' />
+                <Box display='flex' sx={{ marginTop: '20px' }}>
+                    <Grid container spacing={2}>
+
+                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }} >
+                            <TextField
+                                id='aminoácidos'
+                                label='Aminoácidos*'
+                                type='text'
+                                variant='outlined'
+                                color='secondary'
+                                fullWidth
+                                select
+                            >
+                                {aminoacidos.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        </Grid>
+
+                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }} >
+                            <TextField
+                                id='requerimiento-aminoacidos'
+                                label='Requerimiento aminoácidos'
+                                type='text'
+                                variant='outlined'
+                                color='secondary'
+                                fullWidth
+                            />
+                            {/* <TextFieldInput id='requerimiento-aminoacidos' type='text' label='Requerimiento aminoácidos' /> */}
+                        </Grid>
+                    </Grid>
                 </Box>
 
-                <Box
-                    display='flex'
-                    sx={{
-                        width: '100%',
-                        marginTop: '20px',
-                    }}
-                >
-                    <TextFieldInput id='lipidos' type='text' label='Lípidos' />
-                    <TextFieldInput id='requerimiento-lipidos' type='text' label='Requerimiento Lípidos' />
+                <Box display='flex' sx={{ marginTop: '20px', }}>
+                    <Grid container spacing={2}>
+
+                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }} >
+                            <TextField
+                                id='lipidos'
+                                label='Lípidos'
+                                type='text'
+                                variant='outlined'
+                                color='secondary'
+                                fullWidth
+                            />
+                            {/* <TextFieldInput id='lipidos' type='text' label='Lípidos' /> */}
+                        </Grid>
+                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }} >
+                            <TextField
+                                id='requerimiento-lipidos'
+                                label='Requerimiento Lípidos'
+                                type='text'
+                                variant='outlined'
+                                color='secondary'
+                                fullWidth
+                            />
+                            {/* <TextFieldInput id='requerimiento-lipidos' type='text' label='Requerimiento Lípidos' /> */}
+                        </Grid>
+                    </Grid>
                 </Box>
 
+                <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+                    <Grid container spacing={2}>
 
-                <Box
-                    display='flex'
-                    sx={{
-                        width: '100%',
-                        marginTop: '20px',
-                    }}
-                >
-                    <TextFieldInput id='omegaven' type='text' label='Omegaven' />
-                    <TextFieldInput id='dipeptiven' type='text' label='Dipeptiven' />
+                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }} >
+                            <TextField
+                                id='omegaven'
+                                label='Omegaven'
+                                type='text'
+                                variant='outlined'
+                                color='secondary'
+                                fullWidth
+                            />
+                            {/* <TextFieldInput id='omegaven' type='text' label='Omegaven' /> */}
+                        </Grid>
+                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }} >
+                            <TextField
+                                id='dipeptiven'
+                                label='Dipeptiven'
+                                type='text'
+                                variant='outlined'
+                                color='secondary'
+                                fullWidth
+                            />
+                            {/*  <TextFieldInput id='dipeptiven' type='text' label='Dipeptiven' />*/}
+                        </Grid>
+                    </Grid>
                 </Box>
 
 
             </Grid>
 
-        </>
+        </Stack>
     )
 }
 

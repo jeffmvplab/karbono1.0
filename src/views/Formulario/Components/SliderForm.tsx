@@ -14,7 +14,7 @@ export interface DiscreteSliderStepsProps {
  const DiscreteSliderSteps: React.FC<DiscreteSliderStepsProps>  = ({nombre})  => {
     return (
         <>
-            <Box sx={{ width: '30.25%', margin: '0 25px', justifyContent:'left' }}>
+            <Box sx={{justifyContent:'left' }}>
             <Typography style={{marginLeft:'15px'}}>{nombre}</Typography>
 
                 <Slider
