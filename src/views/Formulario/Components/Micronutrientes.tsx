@@ -69,7 +69,7 @@ const Micronutrientes = () => {
                         <Box display='flex' sx={{ width: '100%', }}>
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
                                     <CustomTextField
                                         id='Sodio-total'
@@ -79,7 +79,7 @@ const Micronutrientes = () => {
 
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         id='potasio-total'
                                         label='Potasio tota'
@@ -97,7 +97,7 @@ const Micronutrientes = () => {
 
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
                                     <CustomTextField
                                         id='fosfato'
@@ -114,7 +114,7 @@ const Micronutrientes = () => {
 
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         id='requerimiento-fosfato'
                                         label='Requerimiento fosfato'
@@ -130,7 +130,7 @@ const Micronutrientes = () => {
 
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
                                     <CustomTextField
                                         id='calcio'
@@ -140,7 +140,7 @@ const Micronutrientes = () => {
 
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={3} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={3} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         id='unidades '
                                         label='Unidades '
@@ -149,7 +149,7 @@ const Micronutrientes = () => {
                                     {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={3} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={3} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         id='requerimiento'
                                         label='Requerimiento'
@@ -163,7 +163,7 @@ const Micronutrientes = () => {
                         <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
                                     <CustomTextField
                                         id='sulfato-de-magnesio'
@@ -172,7 +172,7 @@ const Micronutrientes = () => {
                                     {/* <TextFieldInput id='sulfato-de-magnesio' type='text' label='Sulfato de magnesio' /> */}
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         id='requerimiento-sulfato-de-magnesio'
                                         label='Requerimiento sulfato de magnesio'
@@ -188,7 +188,7 @@ const Micronutrientes = () => {
 
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
                                     <CustomTextField
                                         id='elementos-traza'
@@ -204,7 +204,7 @@ const Micronutrientes = () => {
                                     </CustomTextField>
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         id='requerimiento-traza'
                                         label='Requerimiento traza'
@@ -219,7 +219,7 @@ const Micronutrientes = () => {
 
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
                                     <CustomTextField
                                         id='vitaminas-hidrosolubes'
@@ -235,7 +235,7 @@ const Micronutrientes = () => {
                                     </CustomTextField>
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         id='vitaminas-liposolubles'
                                         label='Vitaminas liposolubles'
@@ -257,7 +257,7 @@ const Micronutrientes = () => {
                         <Box display='flex' sx={{ width: '100%', marginTop: '20px', marginBottom: '50px' }}>
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
                                     <CustomTextField
                                         id='vitamina-c'
@@ -266,7 +266,7 @@ const Micronutrientes = () => {
                                     {/* <TextFieldInput id='vitamina-c' type='text' label='Vitamina C' /> */}
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         id='acido-folico'
                                         label='Acido folico'

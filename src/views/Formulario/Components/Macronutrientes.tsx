@@ -69,7 +69,7 @@ const Macronutrientes = () => {
                         <Box display='flex' sx={{ marginTop: '20px' }}>
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
                                     <CustomTextField
                                         id='tipo-prescripción*'
@@ -85,7 +85,7 @@ const Macronutrientes = () => {
 
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         id='flujo-metabolico'
                                         label='Flujo metabólico'
@@ -100,7 +100,7 @@ const Macronutrientes = () => {
                         <Box display='flex' sx={{ marginTop: '20px' }}>
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         id='aminoácidos'
                                         label='Aminoácidos*'
@@ -115,7 +115,7 @@ const Macronutrientes = () => {
                                     </CustomTextField>
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         id='requerimiento-aminoacidos'
                                         label='Requerimiento aminoácidos'
@@ -129,7 +129,7 @@ const Macronutrientes = () => {
                         <Box display='flex' sx={{ marginTop: '20px', }}>
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         id='lipidos'
                                         label='Lípidos'
@@ -137,7 +137,7 @@ const Macronutrientes = () => {
                                     />
                                     {/* <TextFieldInput id='lipidos' type='text' label='Lípidos' /> */}
                                 </Grid>
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         id='requerimiento-lipidos'
                                         label='Requerimiento Lípidos'
@@ -149,9 +149,9 @@ const Macronutrientes = () => {
                         </Box>
 
                         <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
-                            <Grid container spacing={2}>
+                            <Grid item container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <TextField
                                         id='omegaven'
                                         label='Omegaven'
@@ -162,7 +162,7 @@ const Macronutrientes = () => {
                                     />
                                     {/* <TextFieldInput id='omegaven' type='text' label='Omegaven' /> */}
                                 </Grid>
-                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <TextField
                                         id='dipeptiven'
                                         label='Dipeptiven'

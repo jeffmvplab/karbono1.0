@@ -11,27 +11,14 @@ export interface FormMovilLayoutInterface {
 const FormMovilLayout: React.FC<FormMovilLayoutInterface> = ({ children }) => {
 
   return (
-    // <Stack direction={'row'}>
-
-    //  <Stack width={'100px'} direction={'column'}>
-
-    //   </Stack>
-
-    //   <Stack direction={'column'}>
-    //   {children}
-    //   </Stack>
-
-    // </Stack>
-
-    // sx={{display:{sm:'none'}}}
 
     <Grid container>
 
-      <Grid xs={1.5} sx={{ display: { sm: 'none' } }} marginRight={0.5}>
+      <Grid item xs={2} sx={{ display: { sm: 'none' } }} >
         <SidebarMovil />
       </Grid>
 
-      <Grid xs={10} sm={12} >
+      <Grid item xs={10} sm={12} >
         {children}
       </Grid>
 

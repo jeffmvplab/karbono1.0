@@ -52,7 +52,7 @@ const SidebarMovil: React.FC<SidebarMovilProps> = () => {
 								 }}>
 							Parámetros farmacéuticos
 						</Typography>
-						<ArrowForwardIosIcon sx={{ position: 'absolute',marginTop:8, left:'25px', color: 'white', scale: '0.7' }} />
+						<ArrowForwardIosIcon sx={{ position:'absolute',marginTop:8, left:'25px', color: 'white', scale: '0.7' }} />
 					{/* </Stack> */}
 				</Stack>
 
