@@ -1,8 +1,8 @@
-import { Box, Grid, MenuItem, Stack, TextField, Typography } from '@mui/material'
+import { colorsKarbono } from '@/themes/colors'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, MenuItem, Stack, TextField, Typography } from '@mui/material'
 import React from 'react'
-import TextFieldInput from './TextField'
-
-
+import CustomTextField from './CustomTextField'
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 const fosfato = [
     {
@@ -26,281 +26,261 @@ const elemento = [
     }
 ]
 
+
 const Micronutrientes = () => {
     return (
-        <Stack direction={'column'}>
 
-            <Typography
-                variant='h5'
-                paddingY={2}
-                style={{ fontWeight: 700, color: '#372FC6' }}
-            >Micronutrientes
-            </Typography>
+        <Stack direction={'column'} paddingBottom={{ xs: '80px' }}>
 
-            <Grid container direction='column'>
+            <Accordion defaultExpanded={true} elevation={0}>
+                {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
+                <AccordionSummary
+                    sx={{
+                        display: { sm: 'none' },
+                        '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+                            transform: 'rotate(90deg)',
+                        },
+                    }}
+                    expandIcon={<ArrowRightIcon sx={{ color: `${colorsKarbono.primary}` }} />}
+                    aria-controls="panel1bh-content"
+                    id="panel1bh-header"
+                >
+                    <Typography
+                        fontSize={16}
+                        paddingY={2}
+                        style={{ fontWeight: 700, color: '#372FC6' }}
+                    >Micronutrientes
+                    </Typography >
+                </AccordionSummary>
 
-                <Box display='flex' sx={{ width: '100%', }}>
-                    <Grid container spacing={2}>
+                <Typography
+                    variant='h6'
+                    paddingY={2}
+                    style={{ fontWeight: 700, color: '#372FC6', }}
+                    sx={{ display: { xs: 'none', sm: 'flex' } }}
+                >Micronutrientes:
+                </Typography >
+                {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
+                <AccordionDetails>
 
-                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
-                            <TextField
-                                id='Sodio-total'
-                                label='Sodio total'
-                                type='text'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                            />
+                    <Grid container direction='column'>
 
-                        </Grid>
+                        <Box display='flex' sx={{ width: '100%', }}>
+                            <Grid container spacing={2}>
 
-                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                            <TextField
-                                id='potasio-total'
-                                label='Potasio tota'
-                                type='text'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                            />
-                            {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
-                        </Grid>
+                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
-                    </Grid>
-                    {/* <TextFieldInput id='Sodio-total' type='text' label='Sodio total' />
+                                    <CustomTextField
+                                        id='Sodio-total'
+                                        label='Sodio total'
+                                        type='text'
+                                    />
+
+                                </Grid>
+
+                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                    <CustomTextField
+                                        id='potasio-total'
+                                        label='Potasio tota'
+                                        type='text'
+                                    />
+                                    {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
+                                </Grid>
+
+                            </Grid>
+                            {/* <TextFieldInput id='Sodio-total' type='text' label='Sodio total' />
                     <TextFieldInput id='potasio-total' type='text' label='Potasio total' /> */}
-                </Box>
+                        </Box>
 
-                <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
 
-                    <Grid container spacing={2}>
+                            <Grid container spacing={2}>
 
-                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
-                            <TextField
-                                id='fosfato'
-                                label='Fosfato'
-                                type='text'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                                select
-                                inputProps={{ style: { height: '17PX' } }}
-                                sx={{
-                                    marginRight: '10px'
-                                }}
-                            >
-                                {fosfato.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
+                                    <CustomTextField
+                                        id='fosfato'
+                                        label='Fosfato'
+                                        type='text'
+                                        select
+                                    >
+                                        {fosfato.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
+                                    </CustomTextField>
 
-                        </Grid>
+                                </Grid>
 
-                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                            <TextField
-                                id='requerimiento-fosfato'
-                                label='Requerimiento fosfato'
-                                type='text'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                            />
-                            {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
-                        </Grid>
+                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                    <CustomTextField
+                                        id='requerimiento-fosfato'
+                                        label='Requerimiento fosfato'
+                                        type='text'
+                                    />
+                                    {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
+                                </Grid>
+                            </Grid>
+                            {/* <TextFieldInput id='requerimiento-fosfato' type='text' label='Requerimiento fosfato' /> */}
+                        </Box>
+
+                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+
+                            <Grid container spacing={2}>
+
+                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+                                    <CustomTextField
+                                        id='calcio'
+                                        label='Calcio'
+                                    />
+                                    {/* <TextFieldInput id='calcio' type='text' label='Calcio' /> */}
+
+                                </Grid>
+
+                                <Grid xs={12} sm={6} md={3} style={{ padding: '10px' }}>
+                                    <CustomTextField
+                                        id='unidades '
+                                        label='Unidades '
+                                        type='text'
+                                    />
+                                    {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
+                                </Grid>
+
+                                <Grid xs={12} sm={6} md={3} style={{ padding: '10px' }}>
+                                    <CustomTextField
+                                        id='requerimiento'
+                                        label='Requerimiento'
+                                        type='text'
+                                    />
+                                    {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
+                                </Grid>
+                            </Grid>
+                        </Box>
+
+                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+                            <Grid container spacing={2}>
+
+                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+                                    <CustomTextField
+                                        id='sulfato-de-magnesio'
+                                        label='Sulfato de magnesio'
+                                    />
+                                    {/* <TextFieldInput id='sulfato-de-magnesio' type='text' label='Sulfato de magnesio' /> */}
+                                </Grid>
+
+                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                    <CustomTextField
+                                        id='requerimiento-sulfato-de-magnesio'
+                                        label='Requerimiento sulfato de magnesio'
+                                        type='text'
+                                    />
+                                    {/* <TextFieldInput id='requerimiento-sulfato-de-magnesio' type='text' label='Requerimiento sulfato de magnesio' /> */}
+                                </Grid>
+
+                            </Grid>
+                        </Box>
+
+                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+
+                            <Grid container spacing={2}>
+
+                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+                                    <CustomTextField
+                                        id='elementos-traza'
+                                        label='Elementos traza'
+                                        type='text'
+                                        select
+                                    >
+                                        {elemento.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
+                                    </CustomTextField>
+                                </Grid>
+
+                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                    <CustomTextField
+                                        id='requerimiento-traza'
+                                        label='Requerimiento traza'
+                                        type='text'
+                                    />
+                                    {/* <TextFieldInput id='requerimiento-traza' type='text' label='Requerimiento traza' /> */}
+                                </Grid>
+                            </Grid>
+                        </Box>
+
+                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+
+                            <Grid container spacing={2}>
+
+                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+                                    <CustomTextField
+                                        id='vitaminas-hidrosolubes'
+                                        label='Vitaminas hidrosolubes'
+                                        type='text'
+                                        select
+                                    >
+                                        {elemento.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
+                                    </CustomTextField>
+                                </Grid>
+
+                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                    <CustomTextField
+                                        id='vitaminas-liposolubles'
+                                        label='Vitaminas liposolubles'
+                                        type='text'
+                                        select
+                                    >
+                                        {elemento.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
+                                    </CustomTextField>
+                                </Grid>
+
+                            </Grid>
+
+                        </Box>
+
+                        <Box display='flex' sx={{ width: '100%', marginTop: '20px', marginBottom: '50px' }}>
+                            <Grid container spacing={2}>
+
+                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+                                    <CustomTextField
+                                        id='vitamina-c'
+                                        label='Vitamina C'
+                                    />
+                                    {/* <TextFieldInput id='vitamina-c' type='text' label='Vitamina C' /> */}
+                                </Grid>
+
+                                <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                    <CustomTextField
+                                        id='acido-folico'
+                                        label='Acido folico'
+                                        type='text'
+                                    />
+                                    {/* <TextFieldInput id='acido-folico' type='text' label='Acido folico' /> */}
+                                </Grid>
+
+                            </Grid>
+
+                        </Box>
                     </Grid>
-                    {/* <TextFieldInput id='requerimiento-fosfato' type='text' label='Requerimiento fosfato' /> */}
-                </Box>
-
-                <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
-
-                    <Grid container spacing={2}>
-
-                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-
-                            <TextField
-                                id='calcio'
-                                label='Calcio'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                            />
-                            {/* <TextFieldInput id='calcio' type='text' label='Calcio' /> */}
-
-                        </Grid>
-
-                        <Grid xs={12} sm={6} md={3} style={{ padding: '10px' }}>
-                            <TextField
-                                id='unidades '
-                                label='Unidades '
-                                type='text'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                            />
-                            {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
-                        </Grid>
-
-                        <Grid xs={12} sm={6} md={3} style={{ padding: '10px' }}>
-                            <TextField
-                                id='requerimiento'
-                                label='Requerimiento'
-                                type='text'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                            />
-                            {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
-                        </Grid>
-                    </Grid>
-                </Box>
-
-                <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
-                    <Grid container spacing={2}>
-
-                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-
-                            <TextField
-                                id='sulfato-de-magnesio'
-                                label='Sulfato de magnesio'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                            />
-                            {/* <TextFieldInput id='sulfato-de-magnesio' type='text' label='Sulfato de magnesio' /> */}
-                        </Grid>
-
-                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                            <TextField
-                                id='requerimiento-sulfato-de-magnesio'
-                                label='Requerimiento sulfato de magnesio'
-                                type='text'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                            />
-                            {/* <TextFieldInput id='requerimiento-sulfato-de-magnesio' type='text' label='Requerimiento sulfato de magnesio' /> */}
-                        </Grid>
-
-                    </Grid>
-                </Box>
-
-                <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
-
-                    <Grid container spacing={2}>
-
-                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-
-                            <TextField
-                                id='elementos-traza'
-                                label='Elementos traza'
-                                type='text'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                                select
-                            >
-                                {elemento.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        </Grid>
-
-                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                            <TextField
-                                id='requerimiento-traza'
-                                label='Requerimiento traza'
-                                type='text'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                            />
-                            {/* <TextFieldInput id='requerimiento-traza' type='text' label='Requerimiento traza' /> */}
-                        </Grid>
-                    </Grid>
-                </Box>
-
-                <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
-
-                    <Grid container spacing={2}>
-
-                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-
-                            <TextField
-                                id='vitaminas-hidrosolubes'
-                                label='Vitaminas hidrosolubes'
-                                type='text'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                                select
-                            >
-                                {elemento.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        </Grid>
-
-                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                            <TextField
-                                id='vitaminas-liposolubles'
-                                label='Vitaminas liposolubles'
-                                type='text'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                                select
-                            >
-                                {elemento.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        </Grid>
-
-                    </Grid>
-
-                </Box>
-
-                <Box display='flex' sx={{ width: '100%', marginTop: '20px', marginBottom: '50px' }}>
-                    <Grid container spacing={2}>
-
-                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-
-                            <TextField
-                                id='vitamina-c'
-                                label='Vitamina C'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                            />
-                            {/* <TextFieldInput id='vitamina-c' type='text' label='Vitamina C' /> */}
-                        </Grid>
-
-                        <Grid xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                            <TextField
-                                id='acido-folico'
-                                label='Acido folico'
-                                type='text'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                            />
-                            {/* <TextFieldInput id='acido-folico' type='text' label='Acido folico' /> */}
-                        </Grid>
-
-                    </Grid>
-
-                </Box>
-            </Grid>
+                </AccordionDetails>
+            </Accordion>
         </Stack>
     )
 }

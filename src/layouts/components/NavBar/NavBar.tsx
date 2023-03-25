@@ -8,16 +8,18 @@ import { GlobalContext } from '@/context/GlobalContext';
 import React from 'react';
 import { mainRoutes } from '@/routes/routes';
 import { CustomButton } from '@/components/CustomButton';
+import { useRouter } from 'next/router';
 
 
 export const NavBar = () => {
 
 
-  const { isAuth} = React.useContext(GlobalContext)
+  const { isAuth } = React.useContext(GlobalContext)
 
   console.log('IsAuth:', isAuth)
 
-
+  const router = useRouter();
+  console.log('Router', router.asPath)
 
   return (
     <AppBar color='inherit' position='sticky' elevation={0}>
@@ -26,8 +28,24 @@ export const NavBar = () => {
           <IconButton
             size='large'
             edge='start'
+            onClick={() => router.push(mainRoutes.home)}
           >
-            <MenuOutlinedIcon />
+            <Image
+              src={(router.asPath === mainRoutes.login || router.asPath === mainRoutes.login)
+                ? '/assets/1.png'
+                : '/assets/iconMenu.png'
+              }
+              width={
+                (router.asPath === mainRoutes.login || router.asPath === mainRoutes.login)
+                  ? 80 : 20}
+              height={
+                (router.asPath === mainRoutes.login || router.asPath === mainRoutes.login)
+                  ? 20 : 25
+              }
+              alt=''
+              style={{ marginTop: '5px', alignItems: 'center' }}
+            />
+
           </IconButton>
         </Hidden>
         <Hidden mdDown>
@@ -39,52 +57,55 @@ export const NavBar = () => {
                 height={30}
                 alt=''
                 style={{ marginTop: '5px', alignItems: 'center' }}
+              />
 
-              >
-
-              </Image>
             </Grid>
 
             <Grid item xs={12} sm={12} md={7} display='flex' alignItems='center' justifyContent='space-evenly'>
               {
                 (isAuth)
                   ? <>
-                    <Link href='' style={{ textDecoration: 'none' }}><Typography
-                      marginLeft='30px'
-                      marginRight='15px'
-                      color='#000'
-                      alignItems='center'
-                    >
-                      Produción
-                    </Typography></Link>
+                    <Link href='' style={{ textDecoration: 'none' }}>
+                      <Typography
+                        marginLeft='30px'
+                        marginRight='15px'
+                        color='#000'
+                        alignItems='center'
+                      >
+                        Produción
+                      </Typography></Link>
 
-                    <Link href='' style={{ textDecoration: 'none' }}><Typography
-                      margin='0 15px'
-                      color='#000'
-                    >
-                      Configuración
-                    </Typography></Link>
+                    <Link href='' style={{ textDecoration: 'none' }}>
+                      <Typography
+                        margin='0 15px'
+                        color='#000'
+                      >
+                        Configuración
+                      </Typography></Link>
 
-                    <Link href='' style={{ textDecoration: 'none' }}><Typography
-                      margin='0 15px'
-                      color='#000'
-                    >
-                      Parámetros
-                    </Typography></Link>
+                    <Link href='' style={{ textDecoration: 'none' }}>
+                      <Typography
+                        margin='0 15px'
+                        color='#000'
+                      >
+                        Parámetros
+                      </Typography></Link>
 
-                    <Link href='' style={{ textDecoration: 'none' }}><Typography
-                      margin='0 15px'
-                      color='#000'
-                    >
-                      Informes
-                    </Typography></Link>
+                    <Link href='' style={{ textDecoration: 'none' }}>
+                      <Typography
+                        margin='0 15px'
+                        color='#000'
+                      >
+                        Informes
+                      </Typography></Link>
 
-                    <Link href='' style={{ textDecoration: 'none' }}><Typography
-                      margin='0 15px'
-                      color='#000'
-                    >
-                      Ayudas
-                    </Typography>
+                    <Link href='' style={{ textDecoration: 'none' }}>
+                      <Typography
+                        margin='0 15px'
+                        color='#000'
+                      >
+                        Ayudas
+                      </Typography>
                     </Link>
                   </>
                   : null
@@ -98,7 +119,7 @@ export const NavBar = () => {
                   ? <span style={{ fontSize: '30px' }}>
                     <CallOutlinedIcon />
                   </span>
-                  :null
+                  : null
                 }
 
                 {
@@ -125,8 +146,8 @@ export const NavBar = () => {
               {
                 (isAuth)
                   ? <FadeMenu />
-                  :<Link href={mainRoutes.register} style={{ textDecoration: 'none' }} >
-                      <CustomButton text={'Registrarse'} />
+                  : <Link href={mainRoutes.register} style={{ textDecoration: 'none' }} >
+                    <CustomButton text={'Registrarse'} />
                   </Link>
               }
             </Grid>
