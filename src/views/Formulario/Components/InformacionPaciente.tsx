@@ -102,7 +102,7 @@ const InformacionPaciente = () => {
 
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
 
                                     <CustomTextField
                                         id='no-identificación'
@@ -111,7 +111,7 @@ const InformacionPaciente = () => {
                                     />
 
                                 </Grid>
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         id='nombre-del-paciente'
                                         label='Nombre del Paciente*'
@@ -119,7 +119,7 @@ const InformacionPaciente = () => {
                                     />
 
                                 </Grid>
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         id='servicio'
                                         label='Servicio*'
@@ -138,7 +138,7 @@ const InformacionPaciente = () => {
 
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
 
                                     <CustomTextField
                                         id='ubicacion'
@@ -146,14 +146,14 @@ const InformacionPaciente = () => {
                                         type='text'
                                     />
                                 </Grid>
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         id='cama'
                                         label='Cama'
                                         type='text'
                                     />
                                 </Grid>
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         id='peso-kg'
                                         label='Peso (kg)*'
@@ -172,7 +172,7 @@ const InformacionPaciente = () => {
 
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
 
                                     <CustomTextField
                                         id='edad'
@@ -180,7 +180,7 @@ const InformacionPaciente = () => {
                                         type='text'
                                     />
                                 </Grid>
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
 
                                     <CustomTextField
                                         id='tipo-edad'
@@ -188,7 +188,7 @@ const InformacionPaciente = () => {
                                         type='text'
                                     />
                                 </Grid>
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
 
                                     <CustomTextField
                                         id='volumen'
@@ -206,7 +206,7 @@ const InformacionPaciente = () => {
                         <Box display='flex' sx={{ width: '100%', marginTop: '20px', }} >
 
                             <Grid container spacing={2}>
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }}>
 
                                     <CustomTextField
                                         id='purga'
@@ -215,11 +215,11 @@ const InformacionPaciente = () => {
                                     />
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                     <DiscreteSliderSteps nombre='Tiempo de infusión (h) *' />
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                     <DiscreteSliderSteps nombre='Overfill *' />
                                 </Grid>
                             </Grid>
@@ -231,7 +231,7 @@ const InformacionPaciente = () => {
 
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
 
                                     <CustomTextField
                                         id='filtro'
@@ -246,7 +246,7 @@ const InformacionPaciente = () => {
                                     </CustomTextField>
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
 
 
                                     <CustomTextField
@@ -263,7 +263,7 @@ const InformacionPaciente = () => {
                                     </CustomTextField>
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         id='tipo-de-paciente'
                                         label='Tipo de paciente *'
@@ -284,7 +284,7 @@ const InformacionPaciente = () => {
 
                             <Grid container spacing={2}>
 
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         id='via-de-administracion'
                                         label='Vía de administración'
@@ -299,7 +299,7 @@ const InformacionPaciente = () => {
                                     </CustomTextField>
                                 </Grid>
 
-                                <Grid xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         id='diagnostico'
                                         label='Diagnóstico(s)'
