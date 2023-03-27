@@ -1,18 +1,48 @@
-import {Typography, Button, Box, Grid }from '@mui/material/';
+import Image from 'next/image';
 
-export interface PrescripcionViewProps {}
 
-const PrescripcionView : React.FC<PrescripcionViewProps> = () => {
+import { Typography, Button, Box, Grid } from '@mui/material/';
+import Link from 'next/link';
+import Tabla from './components/Tabla';
+
+export interface PrescripcionViewProps { }
+
+const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 
 
 	return (
 		<>
-		<Grid container sx={{margin:'20px', paddingRight:'40px', paddingLeft:'40px'}}>
-		    <Typography sx={{marginTop:'80px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut tenetur harum tempora. Dolor, in reprehenderit? Unde quam non porro molestias repellendus dolor et. Debitis, iusto. Dolor unde molestiae explicabo nobis.</Typography>
-		</Grid>
+			<Grid container sx={{ marginTop: '100px', paddingRight: '25px', paddingLeft: '25px', marginBottom: '30px' }}>
+				<Grid item display='flex' justifyContent='space-between' width='100%'>
+
+					<Typography variant='h5' sx={{ fontWeight: 700 }}>Solicitud de órdenes</Typography>
+					<Link href='' style={{ textDecoration: 'none' }}>
+						<Box border='solid 1px' display='flex' borderColor='#372FC6' sx={{ paddingTop: '6px', paddingLeft: '25px', paddingRight: '25px', borderRadius: '10px', paddingBottom: '5px' }}>
+							<Typography sx={{ color: '#372FC6' }}>
+								Agregar nueva
+							</Typography>
+							<Image
+								src='/assets/añadir-icono-landing.png'
+								width={20}
+								height={20}
+								alt=''
+								style={{ alignItems: 'center', marginLeft: '10px', paddingTop: '5px', paddingLeft: '5px' }}
+
+							/>
+						</Box>
+
+					</Link>
+
+				</Grid>
+
+
+			</Grid>
+			<Grid container >
+				<Tabla />
+			</Grid>
 		</>
 	)
-	
+
 };
 
 export default PrescripcionView;

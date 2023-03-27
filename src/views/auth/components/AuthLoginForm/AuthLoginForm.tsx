@@ -34,6 +34,7 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 						type="email"
 						placeholder='Correo@google.com'
 						fullWidth
+						inputProps={{style:{ height:'15PX',}}}  
 					/>
 				</Grid>
 
@@ -45,6 +46,7 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 						type="password"
 						placeholder='Contraseña'
 						fullWidth
+						inputProps={{style:{ height:'15PX',}}}  
 					/>
 				</Grid>
 
@@ -66,7 +68,7 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 							colorActive={(!errorEmail && !errorPassword) ? colorsKarbono.primary : ''}
 							sx={{
 								width: '250px',
-								height: '50px',
+								height: '35px',
 								color: colorsKarbono.primary
 							}}
 							variant='contained'

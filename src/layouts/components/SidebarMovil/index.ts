@@ -1,0 +1,1 @@
+export { default as SidebarMovil } from './SidebarMovil';

@@ -1,5 +1,5 @@
 
-import { Alert, Box, Link, Stack, Tooltip, Typography } from '@mui/material';
+import { Alert, Box, Grid, Link, Stack, Tooltip, Typography } from '@mui/material';
 import React from 'react';
 import NextLink from 'next/link';
 
@@ -13,7 +13,7 @@ export interface LoginViewProps { }
 
 const LoginView: React.FC<LoginViewProps> = () => {
 
-	const { errorEmail, messageErrorEmail,authOK,
+	const { errorEmail, messageErrorEmail, authOK,
 		errorPassword, messageErrorPassword,
 	} = React.useContext(GlobalContext);
 
@@ -25,7 +25,7 @@ const LoginView: React.FC<LoginViewProps> = () => {
 				<Typography variant="h4" fontWeight={600}>Inicio de Sesión</Typography>
 
 				<Stack direction="row" spacing={0.5}>
-					<Typography variant="body2"  fontWeight={700}>Nuevo usuario?</Typography>
+					<Typography variant="body2" fontWeight={700}>Nuevo usuario?</Typography>
 
 					<Link component={NextLink} href={mainRoutes.register} variant="subtitle2">
 						Crear cuenta
@@ -35,14 +35,14 @@ const LoginView: React.FC<LoginViewProps> = () => {
 			</Stack>
 
 			{(authOK)
-				?(errorEmail || errorPassword)
+				? (errorEmail || errorPassword)
 					? <Alert severity="warning" sx={{ mb: 3 }}>
 						{messageErrorEmail || messageErrorPassword}
 					</Alert>
 					: <Alert severity="success" sx={{ mb: 3 }}>
 						{'Sus datos tienen el formato correcto'}
 					</Alert>
-					:<Alert severity="error" sx={{ mb: 3,bgcolor:'rgba(221,50,50,60%)'}}>
+				: <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)' }}>
 					{'Credenciales Inválidas'}
 				</Alert>
 			}

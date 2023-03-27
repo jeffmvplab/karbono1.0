@@ -1,0 +1,1 @@
+export { default as FormMovilLayout } from './FormMovilLayout';
