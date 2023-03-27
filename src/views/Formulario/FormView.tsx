@@ -38,9 +38,9 @@ const FormView: React.FC<FormViewProps> = () => {
 
 							<Grid item xs={12} sm={6}  md={4} style={{ padding: '10px' }} >
 
-								<CustomToolTip
+								{/* <CustomToolTip
 									tip={'Escriba el numero de orden'}
-									placeTip={'top'}>
+									placeTip={'top'}> */}
 									<TextField
 										id='Numero-de-orden'
 										label='Número de Orden'
@@ -51,7 +51,7 @@ const FormView: React.FC<FormViewProps> = () => {
 										fullWidth
 									/>
 
-								</CustomToolTip>
+								{/* </CustomToolTip> */}
 							</Grid>
 
 							<Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >

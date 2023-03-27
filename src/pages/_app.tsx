@@ -1,4 +1,4 @@
-import { GlobalProvider } from '@/context/GlobalProvider'
+
 import '@/styles/globals.css'
 import { darkthemes, lightThemes } from '@/themes'
 import { CssBaseline, ThemeProvider } from '@mui/material'
