@@ -1,6 +1,5 @@
 
 import { CustomButton } from '@/components/CustomButton';
-import { CustomToolTip } from '@/components/CustomToolTip';
 import { colorsKarbono } from '@/themes/colors';
 import { Grid } from '@material-ui/core';
 import { Box, Stack, TextField, Typography } from '@mui/material';
