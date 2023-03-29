@@ -2,8 +2,9 @@ import React from 'react'
 import Image from 'next/image';
 
 
-import { Drawer, Box, Typography, List, Grid, Divider, ListItem, ListItemText, ListItemButton, Toolbar } from '@mui/material';
+import { Drawer, Box, Typography, Hidden, List, Grid, Divider, ListItem, ListItemText, ListItemButton, Toolbar } from '@mui/material';
 import Link from 'next/link';
+
 
 export const Sidebar = ({ drawerWidth = 240 }) => {
   return (
@@ -16,26 +17,36 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
         variant='permanent'
         open
         sx={{
-
           display: { xs: 'block' },
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
         }}
       >
         <Toolbar sx={{ width: '240px', justifyContent: 'center', }}>
           <Grid item >
-            <Box sx={{ textAlign: 'center', paddingTop: '10px' }}>
-              <Image
-                src='/assets/1.png'
-                width={120}
-                height={30}
-                alt=''
-                style={{ marginTop: '5px', alignItems: 'center', }}
+            <Hidden smDown>
+              <Box sx={{ textAlign: 'center', paddingTop: '10px' }}>
+                <Image
+                  src='/assets/1.png'
+                  width={120}
+                  height={30}
+                  alt=''
+                  style={{ marginTop: '5px', alignItems: 'center', }}
 
-              />
-            </Box>
-
-            <Divider sx={{ marginTop: '30px', width: '100%' }} />
-
+                />
+              </Box>
+            </Hidden>
+            <Hidden smUp>
+              <Box sx={{ paddingTop: '10px' }}>
+                <Image
+                  src='/assets/logo-mobile.png'
+                  width={20}
+                  height={30}
+                  alt=''
+                  style={{ justifyContent: 'center', marginLeft: '80px' }}
+                />
+              </Box>
+            </Hidden>
+            <Divider sx={{ marginTop: '10px', width: '100%' }} />
             <Box marginTop='30px' width='200px' display='flex' flexDirection='row'>
               <Image
                 src='/assets/pastillas-landing.png'
@@ -57,35 +68,36 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
                 >
                   Prescripción
                 </Typography></Link>
-                <Image
+              <Image
                 src='/assets/arrow-landing.png'
                 width={25}
                 height={25}
                 alt=''
-                style={{ alignItems: 'center', marginLeft:'10px', paddingTop:'5px', paddingLeft:'5px' }}
+                style={{ alignItems: 'center', marginLeft: '10px', paddingTop: '5px', paddingLeft: '5px' }}
 
               />
             </Box>
             <Box display='flex' flexDirection='row' paddingTop='25px'>
-            <Link href='' style={{ textDecoration: 'none' }}>
+              <Link href='' style={{ textDecoration: 'none' }}>
                 <Typography
-                  
+
                   sx={{
-                    
+
                     marginLeft: '3px',
-                    color:'#372FC6', 
-                    fontSize:'17px',
-                    
+                    color: '#372FC6',
+                    fontSize: '17px',
+
                   }}
                 >
-                 Agregar Nueva
+                  Agregar Nueva
                 </Typography></Link>
-                <Image
+
+              <Image
                 src='/assets/añadir-icono-landing.png'
                 width={20}
                 height={20}
                 alt=''
-                style={{ alignItems: 'center', marginLeft:'40px', paddingTop:'5px', paddingLeft:'5px' }}
+                style={{ alignItems: 'center', marginLeft: '40px', paddingTop: '5px', paddingLeft: '5px' }}
 
               />
             </Box>
@@ -94,7 +106,7 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
 
       </Drawer>
 
-    </Box>
+    </Box >
 
   )
 }
