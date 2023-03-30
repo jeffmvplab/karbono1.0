@@ -1,5 +1,6 @@
+import { FormulariosContext } from "@/views/Formulario/context/FormulariosContext";
 import { Box, Grid, Stack } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { ReactNode } from "react";
 import { SidebarMovil } from "../components/SidebarMovil";
 
@@ -10,6 +11,8 @@ export interface FormMovilLayoutInterface {
 
 const FormMovilLayout: React.FC<FormMovilLayoutInterface> = ({ children }) => {
 
+  const {toggleDrawer } = useContext(FormulariosContext)
+
   return (
 
     <Grid container>
@@ -18,7 +21,10 @@ const FormMovilLayout: React.FC<FormMovilLayoutInterface> = ({ children }) => {
         <SidebarMovil />
       </Grid>
 
-      <Grid item xs={10} sm={12} >
+      <Grid
+        onClick={toggleDrawer(false)}
+        onKeyDown={toggleDrawer(false)}
+        item xs={10} sm={12} >
         {children}
       </Grid>
 

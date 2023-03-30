@@ -1,5 +1,5 @@
 import { Button, CircularProgress, styled, SxProps, Theme, Typography } from '@mui/material';
-import { MouseEventHandler, ReactNode } from 'react';
+import { MouseEventHandler, ReactNode, RefObject } from 'react';
 import { fontWeight } from '@mui/system';
 import { colorsKarbono } from '@/themes/colors';
 
@@ -42,6 +42,8 @@ export interface CustomButtonProps {
 	onClick?: MouseEventHandler<HTMLButtonElement> | undefined,
 
 	sx?: SxProps<Theme> | undefined
+	ref?: RefObject<HTMLButtonElement> | ((instance: HTMLButtonElement | null) => void) | null | undefined;
+	id?:string | undefined
 
 }
 const colorsButton=colorsKarbono.primary;
@@ -80,6 +82,8 @@ const CustomButton: React.FC<CustomButtonProps> = (
 		disabled,
 		onClick,
 		sx,
+		ref,
+		id,
 	}) => {
 
 
@@ -117,6 +121,8 @@ const CustomButton: React.FC<CustomButtonProps> = (
 	return (
 
 		<MyButton
+		    id={id}
+		    ref={ref!}
 			disabled={disabled || loading}
 			variant={variant}
 			size={size}

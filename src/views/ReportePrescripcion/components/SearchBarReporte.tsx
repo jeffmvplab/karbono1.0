@@ -10,10 +10,7 @@ const SearchBar = () => {
             <Box> 
                 <Search sx={{color:'#000'}}/>
             </Box>
-
-
-         </Grid>
-    
+         </Grid>    
     </>
 
   )
