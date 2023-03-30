@@ -1,8 +1,9 @@
 import { colorsKarbono } from '@/themes/colors'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, MenuItem, Stack, TextField, Typography } from '@mui/material'
-import React from 'react'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, MenuItem, Stack, TextField, Typography, useMediaQuery } from '@mui/material'
+import React, { useContext, useEffect } from 'react'
 import CustomTextField from './CustomTextField'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import { FormulariosContext } from '../context/FormulariosContext';
 
 const fosfato = [
     {
@@ -28,11 +29,19 @@ const elemento = [
 
 
 const Micronutrientes = () => {
+
+    const{stateAcordion3,setStateAcordion3,matches,handleAcordion3}=useContext(FormulariosContext)
+
+    useEffect(() => {
+        setStateAcordion3(matches);
+    }, [matches])
+    /////////////////////////////////////////////////////////////////////
+
     return (
 
-        <Stack direction={'column'} paddingBottom={{ xs: '80px' }}>
+        <Stack direction={'column'} paddingBottom={{ xs: '80px' }} >
 
-            <Accordion defaultExpanded={true} elevation={0}>
+            <Accordion onClick={()=>handleAcordion3()} expanded={stateAcordion3} elevation={0}>
                 {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
                 <AccordionSummary
                     sx={{
@@ -47,8 +56,8 @@ const Micronutrientes = () => {
                 >
                     <Typography
                         fontSize={16}
-                        paddingY={2}
-                        style={{ fontWeight: 700, color: '#372FC6' }}
+                        // paddingY={2}
+                        style={{ fontWeight: 700, color: colorsKarbono.secundary }}
                     >Micronutrientes
                     </Typography >
                 </AccordionSummary>
@@ -56,15 +65,15 @@ const Micronutrientes = () => {
                 <Typography
                     variant='h6'
                     paddingY={2}
-                    style={{ fontWeight: 700, color: '#372FC6', }}
+                    style={{ fontWeight: 700, color: colorsKarbono.secundary, }}
                     sx={{ display: { xs: 'none', sm: 'flex' } }}
                 >Micronutrientes:
                 </Typography >
                 {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                <AccordionDetails>
+                <AccordionDetails sx={{ maxHeight: '200px' }}>
 
 
-                    <Grid container direction='column'>
+                    <Grid container>
 
                         <Box display='flex' sx={{ width: '100%', }}>
                             <Grid container spacing={2}>
@@ -254,7 +263,7 @@ const Micronutrientes = () => {
 
                         </Box>
 
-                        <Box display='flex' sx={{ width: '100%', marginTop: '20px', marginBottom: '50px' }}>
+                        <Box display='flex' sx={{ width: '100%', marginTop: '20px', marginBottom: { xs: '50px', sm: '0px' } }}>
                             <Grid container spacing={2}>
 
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>

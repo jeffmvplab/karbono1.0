@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Typography, Button, Box, Grid } from '@mui/material/';
 import Link from 'next/link';
 import Tabla from './components/Tabla';
+import { mainRoutes } from '@/routes/routes';
 
 export interface PrescripcionViewProps { }
 
@@ -16,7 +17,7 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 				<Grid item display='flex' justifyContent='space-between' width='100%'>
 
 					<Typography variant='h5' sx={{ fontWeight: 700 }}>Solicitud de órdenes</Typography>
-					<Link href='' style={{ textDecoration: 'none' }}>
+					<Link href={mainRoutes.form} style={{ textDecoration: 'none' }}>
 						<Box border='solid 1px' display='flex' borderColor='#372FC6' sx={{ paddingTop: '6px', paddingLeft: '25px', paddingRight: '25px', borderRadius: '10px', paddingBottom: '5px' }}>
 							<Typography sx={{ color: '#372FC6' }}>
 								Agregar nueva
@@ -27,7 +28,6 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 								height={20}
 								alt=''
 								style={{ alignItems: 'center', marginLeft: '10px', paddingTop: '5px', paddingLeft: '5px' }}
-
 							/>
 						</Box>
 

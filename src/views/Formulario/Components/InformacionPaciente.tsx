@@ -1,65 +1,46 @@
-import { Typography, Grid, Box, MenuItem, Stack, AccordionSummary, AccordionDetails, Accordion, useTheme, useMediaQuery } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { Typography, Grid, Box, MenuItem, Stack, AccordionSummary, AccordionDetails, Accordion, useMediaQuery } from '@mui/material'
+import React, { useContext, useEffect, useState } from 'react'
 import DiscreteSliderSteps from './SliderForm'
 import CustomTextField from './CustomTextField'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { colorsKarbono } from '@/themes/colors';
+import { FormulariosContext } from '../context/FormulariosContext';
 
 const currencies = [
-    {
-        value: 'si',
-        label: 'Si',
-    },
-    {
-        value: 'no',
-        label: 'No',
-    }]
+    { value: 'si', label: 'Si', },
+    { value: 'no', label: 'No', }
+]
 
 const tiposPacientes = [
-    {
-        value: 'Adulto',
-        label: 'Adulto'
-    },
-    {
-        value: 'Pediatrico',
-        label: 'Pediatrico'
-    },
-    {
-        value: 'Neonato',
-        label: 'Neotato'
-    }]
+    { value: 'Adulto', label: 'Adulto' },
+    { value: 'Pediatrico', label: 'Pediatrico' },
+    { value: 'Neonato', label: 'Neotato' }]
 
 const viaAdministracion = [
-    {
-        value: 'Central',
-        label: 'Central'
-    },
-    {
-        value: 'Periférica',
-        label: 'Periférica'
-    }
+    { value: 'Central', label: 'Central' },
+    { value: 'Periférica', label: 'Periférica' }
 ]
+
+
 
 const InformacionPaciente = () => {
 
-    const paciente = { nombre: '' }
+    const{stateAcordion1,setStateAcordion1,matches,handleAcordion1}= useContext(FormulariosContext)
 
-    const Información = {
-        id: '',
-        label: '',
-        type: '',
-    }
-   
+    useEffect(()=>{
+        setStateAcordion1(matches);
+    },[matches])
+/////////////////////////////////////////////////////////////////////
 
     return (
 
         <Stack direction={'column'}>
 
-            <Accordion defaultExpanded={true} elevation={0}>
-{/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
+            <Accordion onClick={() => handleAcordion1()} expanded={stateAcordion1} elevation={0}>
+                {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
                 <AccordionSummary
                     sx={{
-                        display:{sm:'none'},
+                        display: { sm: 'none' },
                         '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
                             transform: 'rotate(90deg)',
                         },
@@ -70,32 +51,30 @@ const InformacionPaciente = () => {
                 >
                     <Typography
                         fontSize={16}
-                        paddingY={2}
-                        style={{ fontWeight: 700, color: '#372FC6' }}
+                        // paddingY={{sm:2}}
+                        style={{ fontWeight: 700, color: colorsKarbono.secundary }}
                     >Información del paciente
                     </Typography >
                 </AccordionSummary>
 
                 <Typography
-                        variant='h6'
-                        paddingY={2}
-                        style={{fontWeight: 700,color:'#372FC6', }}
-                        sx={{display:{xs:'none',sm:'flex' }}}
-                    >Información del paciente:
-                    </Typography >
-{/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
+                    variant='h6'
+                    paddingY={2}
+                    style={{ fontWeight: 700, color: colorsKarbono.secundary, }}
+                    sx={{ display: { xs: 'none', sm: 'flex' } }}
+                >Información del paciente:
+                </Typography >
+                {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
                 <AccordionDetails>
 
                     <Grid container direction='column' >
 
                         <Box display='flex'>
-
                             <CustomTextField
                                 id='ips'
                                 label='Ips'
                                 type='text'
                             />
-
                         </Box>
 
                         <Box display='flex' sx={{ marginTop: '20px', }}>

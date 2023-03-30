@@ -34,8 +34,8 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
         <NavBar />
 
         <Box 
-        sx={{ padding     :{ xs:(router.asPath===mainRoutes.form)?'0px':'10px', sm:'20px'},
-              paddingRight:{ xs:(router.asPath===mainRoutes.form)?'10px':'0px',}
+        sx={{ padding     :{ xs:(router.asPath===mainRoutes.form)?'0px':'10px', sm:'0px'},
+              paddingX    :{ xs:'0px', sm:'20px'},
         }}
           >{children}
         </Box>
