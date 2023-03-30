@@ -3,6 +3,7 @@
 }
 
 .caja {
+
     display: flex;
 }
 
@@ -26,4 +27,6 @@
 
  ::-webkit-scrollbar-thumb:hover {
     background: #2df;
+
+
 }

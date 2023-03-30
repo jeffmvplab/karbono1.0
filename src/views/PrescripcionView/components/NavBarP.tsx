@@ -14,7 +14,7 @@ import SearchBar from './SearchBar'
 
 
 
-const NavbarP = ({drawerWidth = 240}) => {
+const NavbarP = ({drawerWidth = 240, }) => {
   return (
     <AppBar
       position='fixed'
