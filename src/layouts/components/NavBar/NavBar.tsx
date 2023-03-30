@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { AppBar, IconButton, Toolbar, Typography, Hidden, Grid, Box } from '@mui/material';
+import { AppBar, IconButton, Toolbar, Typography, Hidden, Grid, Box, Stack } from '@mui/material';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import FadeMenu from './components/BotonPerfil';
@@ -113,44 +113,46 @@ export const NavBar = () => {
 
             </Grid>
 
-            <Grid item xs={12} sm={12} md={4} display='flex' alignItems='center' justifyContent='space-between' paddingRight='2' paddingLeft='80px' >
-              <Box display='flex' alignItems='center'>
-                {(isAuth)
-                  ? <span style={{ fontSize: '30px' }}>
-                    <CallOutlinedIcon />
-                  </span>
-                  : null
-                }
+            {/* <Grid item xs={12} sm={12} md={4} display='flex' alignItems='center' justifyContent='space-between' paddingRight='2' paddingLeft='80px' > */}
+              <Stack direction={'row'} spacing={2} alignItems={'center'}>
+                <Box display='flex' alignItems='center'>
+                  {(isAuth)
+                    ? <span style={{ fontSize: '30px' }}>
+                      <CallOutlinedIcon />
+                    </span>
+                    : null
+                  }
 
+                  {
+                    (isAuth)
+                      ? <Link href='' style={{ textDecoration: 'none' }} >
+                        <Typography
+                          margin='0 15px'
+                          color='#000'
+                          alignItems='normal'
+                        >Contáctanos
+                        </Typography>
+                      </Link>
+                      : <Link href={mainRoutes.login} style={{ textDecoration: 'none' }} >
+                        <Typography
+                          margin='0 15px'
+                          color='#000'
+                          alignItems='normal'
+                        >Iniciar Sesión
+                        </Typography>
+                      </Link>
+                  }
+
+                </Box>
                 {
                   (isAuth)
-                    ? <Link href='' style={{ textDecoration: 'none' }} >
-                      <Typography
-                        margin='0 15px'
-                        color='#000'
-                        alignItems='normal'
-                      >Contáctanos
-                      </Typography>
-                    </Link>
-                    : <Link href={mainRoutes.login} style={{ textDecoration: 'none' }} >
-                      <Typography
-                        margin='0 15px'
-                        color='#000'
-                        alignItems='normal'
-                      >Iniciar Sesión
-                      </Typography>
+                    ? <FadeMenu />
+                    : <Link href={mainRoutes.register} style={{ textDecoration: 'none' }} >
+                      <CustomButton text={'Registrarse'} />
                     </Link>
                 }
-
-              </Box>
-              {
-                (isAuth)
-                  ? <FadeMenu />
-                  : <Link href={mainRoutes.register} style={{ textDecoration: 'none' }} >
-                    <CustomButton text={'Registrarse'} />
-                  </Link>
-              }
-            </Grid>
+              </Stack>
+            {/* </Grid> */}
 
 
           </Grid>

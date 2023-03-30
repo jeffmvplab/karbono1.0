@@ -1,46 +1,43 @@
 import React from 'react';
 import { ReactNode } from "react";
 
-
 import { Box } from '@mui/material'
-import NavbarP from '../../views/PrescripcionView/components/NavBarP';
-import { Sidebar } from '../../views/PrescripcionView/components/Sidebar';
 import { PrescripcionProvider } from '@/views/PrescripcionView/context/PrescripcionProvider';
 import { GlobalProvider } from '@/context/GlobalProvider';
 import Head from 'next/head';
+import { NavBar } from '../components/NavBar';
+import NabvarReportePrescripcion from '@/views/ReportePrescripcion/components/NavBarReporte';
 
 
 
-export interface PrescripcionLayoutInterface {
+export interface ReportePrescripcionLayoutInterface {
   children: ReactNode;
 }
 
-const draweWidth = 240;
-const drawerWidth1 = 20;
 
 
 
-const PrescripcionLayout: React.FC<PrescripcionLayoutInterface> = ({ children }) => {
+
+const ReportePrescripcionLayout: React.FC<ReportePrescripcionLayoutInterface> = ({ children }) => {
   return (
     <>
 
       <Head>
         <title>Karbono</title>
-        <meta name="description" content="Infostore" />
+        <meta name="description" content="Karbono" />
         <link rel="icon" href="/favicon.ico" />
 
       </Head>
 
       <GlobalProvider>
         <PrescripcionProvider>
-          <Box sx={{ display: 'flex' }}>
+          <Box sx={{ display: 'flex', width:'100' }}>
 
             {/*Navbar draweWidth */}
-            <NavbarP drawerWidth={draweWidth}  />
+            <NabvarReportePrescripcion />
 
 
             {/*Sidebar draweWidth */}
-            <Sidebar />
 
             <Box
               component='main'
@@ -65,5 +62,5 @@ const PrescripcionLayout: React.FC<PrescripcionLayoutInterface> = ({ children })
   )
 }
 
-export default PrescripcionLayout;
+export default ReportePrescripcionLayout;
 

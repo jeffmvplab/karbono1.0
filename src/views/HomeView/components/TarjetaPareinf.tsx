@@ -28,7 +28,7 @@ const TarjetaPareinf = () => {
           <Hidden smDown >
             <Box sx={{ justifyContent: 'center', display: 'flex', paddingRight: '20px', alignItems: 'center', width:'20%' }}>
               <Image
-                src='/assets/icon-parametros.png'
+                src='/assets/icon-parametros.png' 
                 width={80}
                 height={80}
                 alt=''

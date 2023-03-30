@@ -46,8 +46,7 @@ export const lightThemes = createTheme({
                     ':hover' : '#2FC5C6'
                 }
             }
-        }
-        
+        },
         
     }
 })
