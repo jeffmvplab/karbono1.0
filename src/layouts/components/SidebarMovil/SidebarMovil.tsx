@@ -1,13 +1,21 @@
-import { AppBar, Box, Stack, Typography, } from '@mui/material';
-import React from 'react';
+import { AppBar, Box, Button, Fade, Grow, Menu, MenuItem, Stack, Typography, } from '@mui/material';
+import React, { useContext } from 'react';
 import Image from 'next/image';
 import { colorsKarbono } from '@/themes/colors';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { ParametrosFarmaceuticos } from '@/views/Formulario/Components/ParametrosFarmaceuticos';
+import { FormulariosContext } from '@/views/Formulario/context/FormulariosContext';
+import { ParametrosNutricionales } from '@/views/Formulario/Components/ParametrosNutricionales';
 
 export interface SidebarMovilProps { }
 
 const SidebarMovil: React.FC<SidebarMovilProps> = () => {
+
+	const { open1,open2, handleMenu1, handleMenu2 } = useContext(FormulariosContext);
+
+	// return focus to the button when we transitioned from !open -> open
+
 	return (
 		<AppBar
 			color='inherit'
@@ -19,7 +27,7 @@ const SidebarMovil: React.FC<SidebarMovilProps> = () => {
 				paddingTop={1}
 				// bgcolor={'red'}
 				direction={'column'}
-				height={605}
+				height={555}
 				alignItems={'center'}
 			>
 				<Image
@@ -29,59 +37,59 @@ const SidebarMovil: React.FC<SidebarMovilProps> = () => {
 					alt=''
 					style={{ marginTop: '5px', alignItems: 'center' }}
 				/>
+				<Button
+					onClick={() => handleMenu1()}
+					style={{
+						paddingTop: 10,
+						textTransform: 'none',
+						fontSize: 14,
+						color: 'white',
+						borderRadius: 0,
+						transform: 'rotate(270deg)',
+						background: colorsKarbono.secundary,
+						marginTop:150,
+						height: 50,
+						width: 240,
+					}}>
+					<Stack direction={'column'} alignItems='center'>
+						Parámetros farmacéuticos
+						<ArrowForwardIosIcon sx={{ color: 'white', scale: '0.6', transform: 'rotate(90deg)', }} />
+					</Stack>
+				</Button>
 
-				<Stack
-					// direction={'row'}
-					marginTop={'120px'}
-					height={240}
-					width={50}
-					justifyContent={'center'}
-					alignItems={'center'}
-					paddingBottom={8}
-					bgcolor={colorsKarbono.secundary}>
+				<Box
+					display={{ xs: (open1) ? 'flex' : 'none' }}
+					style={{ position:'absolute', top: '93px', left: '50px' }}
+				><ParametrosFarmaceuticos isMovil={true}/>
+					{/* <ParametrosNutricionales /> */}
+				</Box>
 
-					{/* <Stack direction={'row'}> */}
-						<Typography
-							width={'240px'}
-							color='white'
-							style={{ 
-								marginRight:10,
-								fontSize: 14, 
-								fontWeight: 700,
-								 transform: 'rotate(270deg)' 
-								 }}>
-							Parámetros farmacéuticos
-						</Typography>
-						<ArrowForwardIosIcon sx={{ position:'absolute',marginTop:8, left:'25px', color: 'white', scale: '0.7' }} />
-					{/* </Stack> */}
-				</Stack>
+				<Button
+					onClick={() => handleMenu2()}
+					style={{
+						paddingTop: 10,
+						textTransform: 'none',
+						fontSize: 14,
+						color: 'white',
+						borderRadius: 0,
+						transform: 'rotate(270deg)',
+						background: colorsKarbono.primary,
+						marginTop: 190,
+						height: 50,
+						width: 240,
+					}}>
+					<Stack direction={'column'} alignItems='center'>
+						Parámetros Nutricionales
+						<ArrowForwardIosIcon sx={{ color: 'white', scale: '0.6', transform: 'rotate(90deg)', }} />
+					</Stack>
 
-				<Stack
-					// direction={'row'}
-					height={240}
-					width={50}
-					justifyContent={'center'}
-					alignItems={'center'}
-					paddingBottom={8}
-					bgcolor={colorsKarbono.primary}
-				>
-					{/* <Stack direction={'row'} > */}
-						<Typography
-							width={'240px'}
-							color='white'
-							style={{ 
-								marginRight:10,
-								fontSize: 14, 
-								fontWeight: 700,
-								 transform: 'rotate(270deg)' 
-								 }}>
-							Parámetros Nutricionales
-						</Typography>
-						<ArrowForwardIosIcon sx={{ position: 'absolute',marginTop:8, left:'25px', color: 'white', scale: '0.7' }} />
-					{/* </Stack> */}
-				</Stack>
+				</Button>
 
-
+				<Box
+					display={{ xs: (open2) ? 'flex' : 'none' }}
+					style={{ position: 'fixed', top: '333px', left: '50px' }}
+				><ParametrosNutricionales isMovil={true}/>
+				</Box>
 
 			</Stack>
 		</AppBar>

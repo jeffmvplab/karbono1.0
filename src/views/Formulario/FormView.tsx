@@ -3,7 +3,7 @@
 import { CustomButton } from '@/components/CustomButton';
 import { colorsKarbono } from '@/themes/colors';
 import { Grid } from '@material-ui/core';
-import { styled, Box, Stack, TextField, Typography, Card, Divider } from '@mui/material';
+import { styled, Box, Stack, TextField, Typography, Card, Divider, Menu, Fade, MenuItem } from '@mui/material';
 
 import React, { useContext } from 'react';
 import InformacionPaciente from './Components/InformacionPaciente';
@@ -19,26 +19,14 @@ export interface FormViewProps { }
 
 const FormView: React.FC<FormViewProps> = () => {
 
-	const{stateAcordion1,stateAcordion2,stateAcordion3,}= useContext(FormulariosContext)
-
-	const getMovilHeight=()=>{
-
-		if(stateAcordion1&&stateAcordion2&&stateAcordion3){return '3450px'}
-		if(!stateAcordion1&&stateAcordion2&&stateAcordion3){return '2000px'}
-		if(stateAcordion1&&!stateAcordion2&&stateAcordion3){return '2780px'}
-		if(stateAcordion1&&stateAcordion2&&!stateAcordion3){return '2275px'}
-		if(!stateAcordion1&&!stateAcordion2&&!stateAcordion3){return'150px'}
-		if(stateAcordion1&&!stateAcordion2&&!stateAcordion3){return'1600px'}
-		if(!stateAcordion1&&stateAcordion2&&!stateAcordion3){return'820px'}
-		if(!stateAcordion1&&!stateAcordion2&&stateAcordion3){return'1330px'}
-        
-	}
-
+	const { getMovilHeight} = useContext(FormulariosContext)
 
 	return (
 
 		// <Card >
-		<Stack direction={'column'} marginBottom={{xs:25,sm:0}}>
+		<Stack
+		 direction={'column'} 
+		 marginBottom={{ xs: 25, sm: 0 }}>
 
 			<Typography variant='h5' padding={1} style={{ fontWeight: 700, }}>
 				Nueva Orden
@@ -55,7 +43,7 @@ const FormView: React.FC<FormViewProps> = () => {
 								padding: { xs: '1px', sm: 0.2 },
 								borderRadius: '15px',
 								// maxHeight:'80vh',
-								overflow:'clip',
+								overflow: 'clip',
 							}}>
 
 							<Grid container spacing={2} style={{ padding: '10px' }}>
@@ -104,13 +92,14 @@ const FormView: React.FC<FormViewProps> = () => {
 
 							<Box
 								// borderRadius={'10px'}
-								sx={{ 
-									overflow: {sm:'auto'},
+								sx={{
+									overflow: { sm: 'auto' },
 									// overflow:'auto' ,
-									height:{
-										xs:getMovilHeight(),
-										sm:'55vh',md:'60vh',xl:'68vh'}
-								 }}
+									height: {
+										xs: getMovilHeight(),
+										sm: '55vh', md: '60vh', xl: '68vh'
+									}
+								}}
 								paddingX={{ xs: '0px', sm: '20px' }}
 								marginTop={'10px'}
 								bgcolor={'white'}>
@@ -124,51 +113,51 @@ const FormView: React.FC<FormViewProps> = () => {
 				</Grid>
 
 				<Grid item sm={4} md={3}>
-					<Box display={{xs:'none',sm:'block'}}>
+					<Box display={{ xs: 'none', sm: 'block' }}>
 						{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 						<ParametrosFarmaceuticos />
 						<ParametrosNutricionales />
 						{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 					</Box>
 				</Grid>
-                   
-					<Stack 
-					
-					   position={{xs:'fixed',sm:'initial'}}
-					   bottom='120px'
-					   left='5px'
-					   marginY={2} 
-					   paddingX={{xs:2}}
-					   height={'40px'} 
-					   minWidth={'100%'} 
-					   direction={'row'}
-					   justifyContent='space-between'
-					   >
 
-                      <CustomButton 
-					   width={127}
-					  text={'Cancelar'}	
-					  textColor={colorsKarbono.secundary}
-					  color='white'
-					  startIcon={<CloseIcon sx={{color:colorsKarbono.secundary}}/>}		   
-					  />
-					  <CustomButton 
-					  width={127}
-					  text={'Guardar'}	
-					  sx={{borderRadius:'10px'}}
-					  color={colorsKarbono.secundary}
-					  textColor='white'
-					  startIcon={
-						<Image
-						src='/assets/save.png'
-						width={20}
-						height={20}
-						alt=''
-						style={{ marginTop: '5px', alignItems: 'center' }}
-					  />
-					  }		   
-					  />
-					</Stack>
+				<Stack
+					zIndex={100}
+					position={{ xs: 'fixed', sm: 'initial' }}
+					bottom='120px'
+					left='5px'
+					marginY={2}
+					paddingX={{ xs:6 }}
+					height={'40px'}
+					minWidth={'100%'}
+					direction={'row'}
+					justifyContent='space-between'
+				>
+						<CustomButton
+							width={127}
+							text={'Cancelar'}
+							textColor={colorsKarbono.secundary}
+							color='white'
+							startIcon={<CloseIcon sx={{ color: colorsKarbono.secundary }} />}
+						/>
+				
+					<CustomButton
+						width={127}
+						text={'Guardar'}
+						sx={{ borderRadius: '10px' }}
+						color={colorsKarbono.secundary}
+						textColor='white'
+						startIcon={
+							<Image
+								src='/assets/save.png'
+								width={20}
+								height={20}
+								alt=''
+								style={{ marginTop: '5px', alignItems: 'center' }}
+							/>
+						}
+					/>
+				</Stack>
 			</Grid>
 		</Stack >
 	)

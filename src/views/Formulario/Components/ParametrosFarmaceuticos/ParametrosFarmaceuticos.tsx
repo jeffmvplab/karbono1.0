@@ -1,13 +1,28 @@
 import { colorsKarbono } from '@/themes/colors';
 import { Box, Typography, Divider, Stack, Card } from '@mui/material';
 import React from 'react';
-import { param_farmaceuticos } from '../../context/FormulariosProvider';
+import { param_farmaceuticos } from '../../data/data';
 import { TextParams } from '../TextParams';
-export interface ParametrosFarmaceuticosProps { }
 
-const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = () => {
+export interface ParametrosFarmaceuticosProps {
+	isMovil?:boolean;
+ }
+
+const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({isMovil=false}) => {
+	
+	const borderRadius:number=10;
+
 	return (
-		<Card elevation={5} sx={{ borderRadius: 4,marginBottom:'20px' }}>
+		<Card 
+		elevation={5} 
+		sx={{ 
+			borderRadius:isMovil?0:null,
+			 borderTopLeftRadius:(isMovil)?null:borderRadius,
+			 borderTopRightRadius:borderRadius,
+			 borderBottomLeftRadius:(isMovil)?null:borderRadius,
+			 borderBottomRightRadius:borderRadius,
+			marginBottom:'20px'
+			}}>
 			<Box
 				// borderRadius={'10px'}
 				sx={{ overflow: 'auto', height:{xs:'35.5vh', sm:'34vh',md:'35.5vh',xl:'35.5vh'}}}

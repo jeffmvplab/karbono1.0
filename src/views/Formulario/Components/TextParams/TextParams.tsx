@@ -1,6 +1,5 @@
 import { Stack, Typography } from '@mui/material';
 import React from 'react';
-import { param_farmaceuticos } from '../../context/FormulariosProvider';
 
 export interface TextParamsProps {
 	title: string;
