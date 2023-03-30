@@ -1,39 +1,35 @@
 import { colorsKarbono } from '@/themes/colors'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, MenuItem, Stack, TextField, Typography } from '@mui/material'
-import React from 'react'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, MenuItem, Stack, TextField, Typography, useMediaQuery } from '@mui/material'
+import React, { useContext, useEffect } from 'react'
 import CustomTextField from './CustomTextField'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import { FormulariosContext } from '../context/FormulariosContext';
 
 
 const tipoPrescripcion = [
-    {
-        value: 'Por requerimientos ',
-        label: 'Por requerimientos '
-    },
-    {
-        value: 'Por volúmenes',
-        label: 'Por volúmenes'
-    }
+    { value: 'Por requerimientos', label: 'Por requerimientos' },
+    { value: 'Por volúmenes', label: 'Por volúmenes' }
 ]
 
 const aminoacidos = [
-    {
-        value: 'Adultos',
-        label: 'Adultos'
-    },
-    {
-        value: 'Pediátricos',
-        label: 'Pediátricos'
-    }
+    { value: 'Adultos', label: 'Adultos' },
+    { value: 'Pediátricos', label: 'Pediátricos' }
 ]
 
 
 const Macronutrientes = () => {
+
+    const{stateAcordion2,setStateAcordion2,matches,handleAcordion2}=useContext(FormulariosContext)
+
+    useEffect(() => {
+        setStateAcordion2(matches);
+    }, [matches])
+
     return (
 
         <Stack direction={'column'}>
 
-            <Accordion defaultExpanded={true} elevation={0}>
+            <Accordion onClick={() =>handleAcordion2()} expanded={stateAcordion2} elevation={0}>
                 {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
                 <AccordionSummary
                     sx={{
@@ -48,8 +44,8 @@ const Macronutrientes = () => {
                 >
                     <Typography
                         fontSize={16}
-                        paddingY={2}
-                        style={{ fontWeight: 700, color: '#372FC6' }}
+                        // paddingY={2}
+                        style={{ fontWeight: 700, color: colorsKarbono.secundary }}
                     >Macronutrientes
                     </Typography >
                 </AccordionSummary>
@@ -57,7 +53,7 @@ const Macronutrientes = () => {
                 <Typography
                     variant='h6'
                     paddingY={2}
-                    style={{ fontWeight: 700, color: '#372FC6', }}
+                    style={{ fontWeight: 700, color: colorsKarbono.secundary, }}
                     sx={{ display: { xs: 'none', sm: 'flex' } }}
                 >Macronutrientes:
                 </Typography >
