@@ -35,8 +35,8 @@ const Tabla = () => {
             <TableRow style={{ backgroundColor: '#372FC6', borderRadius: '10 0 10 0' }}>
               <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Paciente</TableCell>
               <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Identificación</TableCell>
-              <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Ips</TableCell>
               <Hidden smDown>
+              <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Ips</TableCell>
                 <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Tipo Prescripción</TableCell>
                 <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Creación</TableCell>
                 <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Usuario</TableCell>
@@ -46,16 +46,16 @@ const Tabla = () => {
           </TableHead>
 
           <TableBody >
-            {data.map(celda => (
+            {data.map(casilla => (
               // eslint-disable-next-line react/jsx-key
-              <TableRow>
-                <TableCell>{celda.paciente}</TableCell>
-                <TableCell>{celda.identificación}</TableCell>
-                <TableCell>{celda.ips}</TableCell>
+              <TableRow >
+                <TableCell>{casilla.paciente}</TableCell>
+                <TableCell>{casilla.identificación}</TableCell>
                 <Hidden smDown>
-                  <TableCell>{celda.tipo}</TableCell>
-                  <TableCell>{celda.creación}</TableCell>
-                  <TableCell>{celda.usuario}</TableCell>
+                <TableCell>{casilla.ips}</TableCell>
+                  <TableCell>{casilla.tipo}</TableCell>
+                  <TableCell>{casilla.creación}</TableCell>
+                  <TableCell>{casilla.usuario}</TableCell>
                   <TableCell><PictureAsPdfOutlinedIcon sx={{ marginRight: '10px' }} /><ModeEditOutlineOutlinedIcon /></TableCell>
                 </Hidden>
               </TableRow>

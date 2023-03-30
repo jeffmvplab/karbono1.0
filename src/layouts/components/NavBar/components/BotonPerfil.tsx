@@ -19,13 +19,13 @@ export default function FadeMenu() {
 
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchorEl(null); 
   };
 
   return (
     <div>
       <Button
-        style={{color:'#fff', backgroundColor:'#2fc5c6', padding:'0.20em 2.70em'}}
+        style={{color:'#fff', backgroundColor:'#2fc5c6', padding:'0.20em 2.70em', borderRadius:'10px'}}
         id="fade-button"
         aria-controls={open ? 'fade-menu' : undefined}
         aria-haspopup="true"

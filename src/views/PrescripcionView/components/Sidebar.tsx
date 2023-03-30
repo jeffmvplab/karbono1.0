@@ -17,7 +17,7 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
         variant='permanent'
         open
         sx={{
-          display: { xs: 'none', sm:'block' },
+          display: { xs: 'none', sm: 'block' },
           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
         }}
       >
@@ -31,21 +31,10 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
                   height={30}
                   alt=''
                   style={{ marginTop: '5px', alignItems: 'center', }}
+                />
+              </Box>
+            </Hidden>
 
-                />
-              </Box>
-            </Hidden>
-            <Hidden smUp>
-              <Box sx={{ paddingTop: '10px' }}>
-                <Image
-                  src='/assets/logo-mobile.png'
-                  width={20}
-                  height={30}
-                  alt=''
-                  style={{ justifyContent: 'center', marginLeft: '80px' }}
-                />
-              </Box>
-            </Hidden>
             <Divider sx={{ marginTop: '10px', width: '100%' }} />
             <Box marginTop='30px' width='200px' display='flex' flexDirection='row'>
               <Image
@@ -56,7 +45,7 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
                 style={{ alignItems: 'center', paddingRight: '5px' }}
 
               />
-              <Link href='' style={{ textDecoration: 'none' }}>
+              <Link href='/prescripcion' style={{ textDecoration: 'none' }}>
                 <Typography
                   variant='h6'
                   sx={{
@@ -78,7 +67,7 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
               />
             </Box>
             <Box display='flex' flexDirection='row' paddingTop='25px'>
-              <Link href='' style={{ textDecoration: 'none' }}>
+              <Link href='/formulario' style={{ textDecoration: 'none' }}>
                 <Typography
 
                   sx={{
