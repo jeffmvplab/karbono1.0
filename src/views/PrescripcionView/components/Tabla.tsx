@@ -30,16 +30,18 @@ const Tabla = () => {
   return (
     <>
       <TableContainer style={{ margin: '0 20px' }}>
-        <Table style={{margin:'0'}}>
+        <Table style={{ margin: '0' }}>
           <TableHead style={{}}>
             <TableRow style={{ backgroundColor: '#372FC6', borderRadius: '10 0 10 0' }}>
               <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Paciente</TableCell>
               <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Identificación</TableCell>
-                <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Ips</TableCell>
+              <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Ips</TableCell>
+              <Hidden smDown>
                 <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Tipo Prescripción</TableCell>
                 <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Creación</TableCell>
                 <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Usuario</TableCell>
                 <TableCell style={{ color: '#fff', justifyContent: 'center' }}>Acciones</TableCell>
+              </Hidden>
             </TableRow>
           </TableHead>
 
@@ -49,12 +51,13 @@ const Tabla = () => {
               <TableRow>
                 <TableCell>{celda.paciente}</TableCell>
                 <TableCell>{celda.identificación}</TableCell>
-                  <TableCell>{celda.ips}</TableCell>
+                <TableCell>{celda.ips}</TableCell>
+                <Hidden smDown>
                   <TableCell>{celda.tipo}</TableCell>
                   <TableCell>{celda.creación}</TableCell>
                   <TableCell>{celda.usuario}</TableCell>
                   <TableCell><PictureAsPdfOutlinedIcon sx={{ marginRight: '10px' }} /><ModeEditOutlineOutlinedIcon /></TableCell>
-
+                </Hidden>
               </TableRow>
             ))}
           </TableBody>
