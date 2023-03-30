@@ -1,16 +1,10 @@
 import React, { ReactNode } from 'react'
-import Link from 'next/link'
-
-import FadeMenu from '@/layouts/components/NavBar/components/BotonPerfil'
-
-
-
-
-
-import { AppBar, Toolbar, IconButton, Hidden, Grid, Typography, Box } from '@mui/material'
-import { MenuOutlined, CallOutlined, } from '@mui/icons-material'
+import Link from 'next/link';
+import FadeMenu from '@/layouts/components/NavBar/components/BotonPerfil';
+import { AppBar, Toolbar, IconButton, Hidden, Grid, Typography, Box } from '@mui/material';
+import { MenuOutlined, CallOutlined, } from '@mui/icons-material';
 import SearchBar from './SearchBar'
-
+import Image from 'next/image'
 
 
 
@@ -28,20 +22,30 @@ const NavbarP = ({ drawerWidth = 240, }) => {
         backgroundColor: '#fff',
         height: '82px',
       }}>
-          <IconButton  sx={{display:{sm:'none'}}}>
-            <MenuOutlined />
-          </IconButton>
-
-
+        <Hidden smUp>
+          <Box sx={{ paddingTop: '10px' }}>
+            <Link href='/prescripcion'>
+              <Image
+                src='/assets/logo-mobile.png'
+                width={20}
+                height={30}
+                alt=''
+                style={{ justifyContent: 'center', marginLeft: '10px' }}
+              />
+            </Link>
+          </Box>
+        </Hidden>
+        {/* <IconButton sx={{ display: { sm: 'none' } }}> */}
+        {/* <MenuOutlined /> */}
+        {/* </IconButton> */}
         <Grid container direction='row' justifyContent='space-between'>
-          <Grid item>
-            <Hidden smDown>
-              <SearchBar />
-            </Hidden>
+          <Grid item sx={{ marginTop: { xs: '15px' }, marginLeft: { xs: '30px', sm: '0px' } }}>
+            {/* <Hidden smDown> */}
+            <SearchBar />
+            {/* </Hidden> */}
           </Grid>
-
-          <Grid item display='flex' >
-            <Box alignItems='center' marginRight='20px'>
+          <Box display='flex' sx={{ marginTop: '10px' }} >
+            <Grid item alignItems='center' marginRight='20px' >
               <Link href='' style={{ textDecoration: 'none' }} >
                 <Typography
                   margin='0 15px'
@@ -49,20 +53,15 @@ const NavbarP = ({ drawerWidth = 240, }) => {
                   alignItems='center'
                   sx={{ justifyContent: 'center', alignItems: 'center' }}
                 >
-                  <CallOutlined />
+                  <CallOutlined sx={{ display: { xs: 'none', sm: 'block' } }} />
                 </Typography>
               </Link>
-
-            </Box>
-            <Box>
+            </Grid>
+            <Grid item >
               <FadeMenu />
-            </Box>
-
-          </Grid>
-
+            </Grid>
+          </Box>
         </Grid>
-
-
       </Toolbar>
     </AppBar>
   )
