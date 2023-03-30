@@ -10,7 +10,7 @@ const Footer: React.FC<FooterProps> = () => {
 		<AppBar
 			position="fixed"
 			sx={{
-				height: {xs:'120px',sm:'82px',md:'42px'},
+				height: {xs:'12.5vh',sm:'82px',md:'42px'},
 				top: 'auto',
 				bottom: 0,
 				bgcolor: `${colorsKarbono.footer}`
@@ -37,10 +37,10 @@ const Footer: React.FC<FooterProps> = () => {
 					</IconButton>
 
 					<Typography
-						padding={{sm:1}}
-						paddingLeft={{xs:1}}
+						padding={{xs:0,sm:1}}
+						// paddingLeft={{xs:0}}
 						color={colorsKarbono.footerText}
-						fontSize={14}
+						fontSize={{sm:14}}
 					>
 						© 2023. Todos los derechos reservados
 					</Typography>
@@ -50,9 +50,9 @@ const Footer: React.FC<FooterProps> = () => {
 
 
 				<Typography
-					padding={1}
+					padding={{xs:0,sm:1}}
 					color={colorsKarbono.footerText}
-					fontSize={14}
+					fontSize={{sm:14}}
 				>
 				Políticas de privacidad  |  Términos y condiciones
 				</Typography>

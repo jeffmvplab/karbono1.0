@@ -23,7 +23,7 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
         <Head>
           <title>Karbono</title>
           <meta name="description" content="Infostore" />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/assets/icono.ico" />
 
         </Head>
 
