@@ -30,6 +30,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
                 color='secondary'
                 fullWidth
                 select={select}
+                sx={{borderRadius:'20px'}}
                  >
                  {children}
                  </TextField>

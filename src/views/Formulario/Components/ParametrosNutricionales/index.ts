@@ -1,0 +1,1 @@
+export { default as ParametrosNutricionales } from './ParametrosNutricionales';
