@@ -174,7 +174,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		localStorageProtocol.set(StorageKeysEnum.user, resp);
 
 		setLoadingAuth(false);
-		if (resp !== 401&&resp!==400&&resp!==500){
+		if (resp !== 401 && resp !== 400 && resp !== 500) {
 			authStatus();
 			setAuthOk(true);
 		} else {
@@ -187,13 +187,13 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 		setLoadingAuth(true);
 		console.log('Register...')
-		const resp = await useruseCase.register(name,phone,email, password)
+		const resp = await useruseCase.register(name, phone, email, password)
 		console.log('RespRegister:', resp)
 
 		localStorageProtocol.set(StorageKeysEnum.user, resp);
 
 		setLoadingAuth(false);
-		if (resp !== 401&&resp!==400&&resp!==500) {
+		if (resp !== 401 && resp !== 400 && resp !== 500) {
 			authStatus();
 			setAuthOk(true);
 		} else {

@@ -8,7 +8,7 @@ export interface CustomTextFieldProps {
     value?:any
     select?:boolean
     children?:any
-
+    onChange?:React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> | undefined
 }
 
 const CustomTextField: React.FC<CustomTextFieldProps> = ({ 
@@ -17,11 +17,13 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
     type,
     value,
     select=false, 
-    children
+    children,
+    onChange
 }) => {
     return (
         <>
             <TextField
+                onChange={onChange}
                 id={id}
                 label={label}
                 type={type}

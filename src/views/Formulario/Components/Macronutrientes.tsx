@@ -6,20 +6,49 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { FormulariosContext } from '../context/FormulariosContext';
 
 
-const tipoPrescripcion = [
+const tipoPrescripciones = [
     { value: 'Por requerimientos', label: 'Por requerimientos' },
     { value: 'Por volúmenes', label: 'Por volúmenes' }
 ]
 
-const aminoacidos = [
-    { value: 'Adultos', label: 'Adultos' },
-    { value: 'Pediátricos', label: 'Pediátricos' }
+const aminoAdultos = [
+    { value: 'Aminoven', label: 'Aminoven 15%' },
+    { value: 'TravasolPlus', label: 'TravasolPlus 15%' },
+    { value: 'Aminoplasmal', label: 'Aminoplasmal 15%' },
+    { value: 'Aminosteril', label: 'Aminosteril N-Hepa 8%' },
+]
+
+const aminoPediatrico = [
+    { value: 'Aminoven', label: 'Aminoven 10%' },
+    { value: 'Aminoplasmal', label: 'Aminoplasmal 10%' },
+    { value: 'Trophamine', label: 'Trophamine' },
+]
+
+const tiposLipidos = [
+    { value: 'Smoflipid', label: 'Smoflipid' },
+    { value: 'Clinoleic', label: 'Clinoleic' },
+    { value: 'Lipovenoes', label: 'Lipovenoes' },
+    { value: 'LipovenoesMCT', label: 'LipovenoesMCT' },
+    { value: 'Fresomega', label: 'Fresomega' },
 ]
 
 
 const Macronutrientes = () => {
 
-    const{stateAcordion2,setStateAcordion2,matches,handleAcordion2}=useContext(FormulariosContext)
+    const {
+        tipoPaciente,
+
+        stateAcordion2, setStateAcordion2, matches, handleAcordion2,
+        tipoPrescripcion, errorTipoPrescripcion, messageErrorTipoPrescripcion, handleTipoPrescripcion,
+        flujoMetabolico, errorFlujoMetabolico, messageErrorFlujoMetabolico, handleFlujoMetabolico,
+        aminoacidos, errorAminoacidos, messageErrorAminoacidos, handleAminoacidos,
+        requerimientoAminoacidos, errorRequerimientoAminoacidos, messageErrorRequerimientoAminoacidos, handleRequerimientoAminoacidos,
+        lipidos, errorLipidos, messageErrorLipidos, handleLipidos,
+        requerimientoLipidos, errorRequerimientoLipidos, messageErrorRequerimientoLipidos, handleRequerimientoLipidos,
+        omegaven, errorOmegaven, messageErrorOmegaven, handleOmegaven,
+        dipectiven, errorDipectiven, messageErrorDipectiven, handleDipectiven,
+
+    } = useContext(FormulariosContext)
 
     useEffect(() => {
         setStateAcordion2(matches);
@@ -29,7 +58,7 @@ const Macronutrientes = () => {
 
         <Stack direction={'column'}>
 
-            <Accordion onClick={() =>handleAcordion2()} expanded={stateAcordion2} elevation={0}>
+            <Accordion onClick={() => !matches && handleAcordion2()} expanded={stateAcordion2} elevation={0}>
                 {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
                 <AccordionSummary
                     sx={{
@@ -68,11 +97,13 @@ const Macronutrientes = () => {
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
                                     <CustomTextField
+                                        onChange={handleTipoPrescripcion}
+                                        value={tipoPrescripcion}
                                         id='tipo-prescripción*'
                                         label='Tipo Prescripción*'
-                                        select
+                                        select={true}
                                     >
-                                        {tipoPrescripcion.map((option) => (
+                                        {tipoPrescripciones.map((option) => (
                                             <MenuItem key={option.value} value={option.value}>
                                                 {option.label}
                                             </MenuItem>
@@ -83,8 +114,12 @@ const Macronutrientes = () => {
 
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
+                                        onChange={handleFlujoMetabolico}
+                                        value={flujoMetabolico}
                                         id='flujo-metabolico'
-                                        label='Flujo metabólico'
+                                        label={(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'Flujo metabólico (mg/kg/min)'
+                                            : 'Flujo metabólico (ml)'}
                                         type='text'
                                     />
                                     {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
@@ -98,23 +133,37 @@ const Macronutrientes = () => {
 
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <CustomTextField
+                                        onChange={handleAminoacidos}
+                                        value={aminoacidos}
                                         id='aminoácidos'
                                         label='Aminoácidos*'
                                         type='text'
-                                        select
+                                        select={true}
                                     >
-                                        {aminoacidos.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
+                                        {
+                                            (tipoPaciente === 'Adulto')
+                                                ? aminoAdultos.map((option) => (
+                                                    <MenuItem key={option.value} value={option.value}>
+                                                        {option.label}
+                                                    </MenuItem>
+                                                ))
+                                                : aminoPediatrico.map((option) => (
+                                                    <MenuItem key={option.value} value={option.value}>
+                                                        {option.label}
+                                                    </MenuItem>
+                                                ))
+                                        }
                                     </CustomTextField>
                                 </Grid>
 
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <CustomTextField
+                                        onChange={handleRequerimientoAminoacidos}
+                                        value={requerimientoAminoacidos}
                                         id='requerimiento-aminoacidos'
-                                        label='Requerimiento aminoácidos'
+                                        label={(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'Requerimiento Lípidos (g/kg/día)'
+                                            : 'Requerimiento aminoácidos (ml)'}
                                         type='text'
                                     />
                                     {/* <TextFieldInput id='requerimiento-aminoacidos' type='text' label='Requerimiento aminoácidos' /> */}
@@ -127,16 +176,29 @@ const Macronutrientes = () => {
 
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <CustomTextField
+                                        onChange={handleLipidos}
+                                        value={lipidos}
                                         id='lipidos'
                                         label='Lípidos'
                                         type='text'
-                                    />
+                                        select={true}
+                                    >
+                                        {tiposLipidos.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
+                                    </CustomTextField>
                                     {/* <TextFieldInput id='lipidos' type='text' label='Lípidos' /> */}
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <CustomTextField
+                                        onChange={handleRequerimientoLipidos}
+                                        value={requerimientoLipidos}
                                         id='requerimiento-lipidos'
-                                        label='Requerimiento Lípidos'
+                                        label={(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'Requerimiento Lípidos (g/kg/día)'
+                                            : 'Requerimiento Lípidos (ml)'}
                                         type='text'
                                     />
                                     {/* <TextFieldInput id='requerimiento-lipidos' type='text' label='Requerimiento Lípidos' /> */}
@@ -149,8 +211,12 @@ const Macronutrientes = () => {
 
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <TextField
+                                        onChange={handleOmegaven}
+                                        value={omegaven}
                                         id='omegaven'
-                                        label='Omegaven'
+                                        label={(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'Omegaven (g/kg/día)'
+                                            : 'Omegaven (ml)'}
                                         type='text'
                                         variant='outlined'
                                         color='secondary'
@@ -160,8 +226,12 @@ const Macronutrientes = () => {
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <TextField
+                                        onChange={handleDipectiven}
+                                        value={dipectiven}
                                         id='dipeptiven'
-                                        label='Dipeptiven'
+                                        label={(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'Dipeptiven (g/kg/día)'
+                                            : 'Dipeptiven (ml)'}
                                         type='text'
                                         variant='outlined'
                                         color='secondary'
