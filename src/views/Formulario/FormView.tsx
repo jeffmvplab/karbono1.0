@@ -19,7 +19,11 @@ export interface FormViewProps { }
 
 const FormView: React.FC<FormViewProps> = () => {
 
-	const { getMovilHeight} = useContext(FormulariosContext)
+	const { getMovilHeight,
+		numOrder,errorNumOrder,messageErrorNumOrder,handleNumOrder,
+		prescripcion,errorPrescripcion,messageErrorPrescripcion,handlePrescripcion,
+		fechaCreacion,errorFechaCreacion,messageErrorFechaCreacion,handleFechaCreacion,
+	} = useContext(FormulariosContext)
 
 	return (
 
@@ -53,9 +57,11 @@ const FormView: React.FC<FormViewProps> = () => {
 									tip={'Escriba el numero de orden'}
 									placeTip={'top'}> */}
 									<TextField
+									    onChange={handleNumOrder}
 										id='Numero-de-orden'
 										label='Número de Orden'
 										type='text'
+										value={numOrder}
 										variant='outlined'
 										color='secondary'
 										sx={{ bgcolor: 'transparent' }}
@@ -67,9 +73,11 @@ const FormView: React.FC<FormViewProps> = () => {
 
 								<Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
 									<TextField
+									    onChange={handlePrescripcion}
 										id='Tipo-de-prescripción'
 										label='Tipo de prescripción'
 										type='text'
+										value={prescripcion}
 										variant='outlined'
 										color='secondary'
 										sx={{ bgcolor: 'transparent' }}
@@ -78,9 +86,11 @@ const FormView: React.FC<FormViewProps> = () => {
 								</Grid>
 								<Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
 									<TextField
+									    onChange={handleFechaCreacion}
 										id='Fecha-de-creación'
 										label='Fecha de creación'
 										type='text'
+										value={fechaCreacion}
 										variant='outlined'
 										color='secondary'
 										sx={{ bgcolor: 'transparent' }}
