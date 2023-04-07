@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { FC } from "react";
 import { FormulariosContext } from "./FormulariosContext";
+import { PrescriptionsUseCases } from "@/domain/usecases/prescriptions.usecases";
+import { IPrescriptions } from "@/domain/models/prescriptions.model";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
@@ -385,13 +387,13 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		const omegaven = event.target.value;
 	};
 
-	const [dipectiven, setDipectiven] = React.useState('');
-	const [errorDipectiven, setErrorDipectiven] = React.useState(false);
-	const [messageErrorDipectiven, setMessageErrorDipectiven] = React.useState('');
+	const [dipeptiven, setDipeptiven] = React.useState('');
+	const [errorDipeptiven, setErrorDipeptiven] = React.useState(false);
+	const [messageErrorDipeptiven, setMessageErrorDipeptiven] = React.useState('');
 
-	const handleDipectiven = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setDipectiven(event.target.value || '');
-		const dipectiven = event.target.value;
+	const handleDipeptiven = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setDipeptiven(event.target.value || '');
+		const dipeptiven = event.target.value;
 	};
 
 	////////////////////MICRONURIENTES////////////////////////////////////
@@ -448,34 +450,34 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const handleUnidades = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setUnidades(event.target.value || '');
 		const unidades = event.target.value;
-		console.log('Unidad:',unidades)
+		console.log('Unidad:', unidades)
 	};
 
-	const [requerimiento, setRequerimiento] = React.useState('');
-	const [errorRequerimiento, setErrorRequerimiento] = React.useState(false);
-	const [messageErrorRequerimiento, setMessageErrorRequerimiento] = React.useState('');
+	const [reqCalcio, setReqCalcio] = React.useState('');
+	const [errorReqCalcio, setErrorReqCalcio] = React.useState(false);
+	const [messageErrorReqCalcio, setMessageErrorReqCalcio] = React.useState('');
 
-	const handleRequerimiento = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setRequerimiento(event.target.value || '');
-		const requerimiento = event.target.value;
+	const handleReqCalcio = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setReqCalcio(event.target.value || '');
+		const reqCalcio = event.target.value;
 	};
 
-	const [sulfatoDeMagnesio, setSulfatoDeMagnesio] = React.useState('');
-	const [errorSulfatoDeMagnesio, setErrorSulfatoDeMagnesio] = React.useState(false);
-	const [messageErrorSulfatoDeMagnesio, setMessageErrorSulfatoDeMagnesio] = React.useState('');
+	const [magnesio, setMagnesio] = React.useState('');
+	const [errorMagnesio, setErrorMagnesio] = React.useState(false);
+	const [messageErrorMagnesio, setMessageErrorMagnesio] = React.useState('');
 
-	const handleSulfatoDeMagnesio = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setSulfatoDeMagnesio(event.target.value || '');
-		const sulfatoDeMagnesio = event.target.value;
+	const handleMagnesio = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setMagnesio(event.target.value || '');
+		const magnesio = event.target.value;
 	};
 
-	const [reqSulfatoDeMagnesio, setReqSulfatoDeMagnesio] = React.useState('');
-	const [errorReqSulfatoDeMagnesio, setErrorReqSulfatoDeMagnesio] = React.useState(false);
-	const [messageErrorReqSulfatoDeMagnesio, setMessageErrorReqSulfatoDeMagnesio] = React.useState('');
+	const [reqMagnesio, setReqMagnesio] = React.useState('');
+	const [errorReqMagnesio, setErrorReqMagnesio] = React.useState(false);
+	const [messageErrorReqMagnesio, setMessageErrorReqMagnesio] = React.useState('');
 
-	const handleReqSulfatoDeMagnesio = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setReqSulfatoDeMagnesio(event.target.value || '');
-		const reqSulfatoDeMagnesio = event.target.value;
+	const handleReqMagnesio = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setReqMagnesio(event.target.value || '');
+		const reqMagnesio = event.target.value;
 	};
 
 	const [elementosTraza, setElementosTraza] = React.useState('');
@@ -532,9 +534,91 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		const acidoFolico = event.target.value;
 	};
 
-	////////////////////////////////////////////////////////////////////
+	//////////////////////Validacion Form/////////////////
+    const [valAllForm, setAllValForm] = React.useState(true);
+
+	 ////////////////////////////////////////////////////////////////////
+	///////////////////////////////INTEGRACION DE APIS//////////////////
+	const prescriptionsUseCase = new PrescriptionsUseCases();
+	const [loadingSave, setLoadingSave] = React.useState(false);
+	const [saveOK, setSaveOk] = React.useState(true);
+	const [messageAPI, setMessageAPI] = React.useState('');
+
+    const setPrescriptions = async () => {
+        
+		const prescriptionsData:IPrescriptions={
+			no_orden:parseInt(numOrder)||0,
+			tipo_prescripcion:tipoPrescripcion,
+			fecha:fechaCreacion,
+			ips:ips,
+			no_identificacion:numIden,
+			nombre_paciente:namePaciente,
+			servicio:servicio,
+			ubicacion:ubicacion,
+			cama:cama,
+			peso:parseInt(pesoKg)||0,
+			tipo_edad:tipoEdad,
+			edad:parseInt(edad)||0,
+			volumen:parseInt(volumen)||0,
+			purga:parseInt(purga)||0,
+			tiempo_infusion:tiempoDeInfucion,
+			overfill:overfill,
+			filtro:(filtro==='Si')?true:false,
+			equipo_fotosensible:(eqFotosencible==='Si')?true:false,
+			tipo_paciente:tipoPaciente,
+			via_administracion:viaAdmin,
+			diagnostico:diagnostico,
+			flujo_metabolico:flujoMetabolico,
+			aminoacidos:aminoacidos,
+			req_aminoacidos:requerimientoAminoacidos,
+			lipidos:lipidos,
+			req_lipidos:requerimientoLipidos,
+			omegaven:omegaven,
+			dipeptiven:dipeptiven,
+			sodio_total:sodioTotal,
+			potasio_total:potacioTotal,
+			fosfato:fosfato,
+			req_fosfato:requerimientoFosfato,
+			calcio:calcio,
+			req_calcio:reqCalcio,
+			magnesio:magnesio,
+			req_magnesio:reqMagnesio,
+			elementos_traza:elementosTraza,
+			req_elementos_traza:reqTraza,
+			vit_hidrosolubles:vitaminasHidrosolubles,
+			req_vit_liposolubles:vitaminasLiposolubles,
+			vit_C:vitaminasC,
+			acido_folico:acidoFolico
+		}
+
+		setLoadingSave(false);
+		console.log('Loading...')
+		const resp = await prescriptionsUseCase.savePrescripcions(prescriptionsData)
+		console.log('Resp:', resp)
+       
+		setLoadingSave(true);
+
+		if (resp.statusCode === 201) {
+			setSaveOk(true);
+		} else if(resp.statusCode === 400){
+           setMessageAPI(resp.body.message)
+			setSaveOk(false)
+		} else if(resp.statusCode === 404){
+			 setSaveOk(false)
+		 }else if(resp.statusCode === 401 && resp.statusCode === 500){
+			setSaveOk(false)
+		}  else{
+			setSaveOk(false)
+		}
+	}
+
+	const [openModalFormSaved, setOpenModalFormSaved] = useState(false);
+    const handleOpenModalFormSaved  = () => {setOpenModalFormSaved(true); setPrescriptions();};
+    const handleCloseModalFormSaved = () => setOpenModalFormSaved(false);
+
 
 	return (
+
 		<FormulariosContext.Provider value={{
 			matches,
 			stateAcordion1,
@@ -555,7 +639,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			handleMenu2,
 
 			toggleDrawer,
-
+			//////MODAL//////
+			openModalFormSaved,
+			handleOpenModalFormSaved,
+			handleCloseModalFormSaved,
 			///////////////////////////ORDEN ///////////////////////////////
 			numOrder, errorNumOrder, messageErrorNumOrder, handleNumOrder,
 			prescripcion, errorPrescripcion, messageErrorPrescripcion, handlePrescripcion,
@@ -588,7 +675,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			lipidos, errorLipidos, messageErrorLipidos, handleLipidos,
 			requerimientoLipidos, errorRequerimientoLipidos, messageErrorRequerimientoLipidos, handleRequerimientoLipidos,
 			omegaven, errorOmegaven, messageErrorOmegaven, handleOmegaven,
-			dipectiven, errorDipectiven, messageErrorDipectiven, handleDipectiven,
+			dipeptiven, errorDipeptiven, messageErrorDipeptiven, handleDipeptiven,
 			////////////////////MACRONUTRIENTES////////////////////////////////////
 			sodioTotal, errorSodioTotal, messageErrorSodioTotal, handleSodioTotal,
 			potacioTotal, errorPotacioTotal, messageErrorPotacioTotal, handlePotacioTotal,
@@ -596,16 +683,21 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			requerimientoFosfato, errorRequerimientoFosfato, messageErrorRequerimientoFosfato, handleRequerimientoFosfato,
 			calcio, errorCalcio, messageErrorCalcio, handleCalcio,
 			unidades, errorUnidades, messageErrorUnidades, handleUnidades,
-			requerimiento, errorRequerimiento, messageErrorRequerimiento, handleRequerimiento,
-			sulfatoDeMagnesio, errorSulfatoDeMagnesio, messageErrorSulfatoDeMagnesio, handleSulfatoDeMagnesio,
-			reqSulfatoDeMagnesio, errorReqSulfatoDeMagnesio, messageErrorReqSulfatoDeMagnesio, handleReqSulfatoDeMagnesio,
+			reqCalcio, errorReqCalcio, messageErrorReqCalcio, handleReqCalcio,
+			magnesio, errorMagnesio, messageErrorMagnesio, handleMagnesio,
+			reqMagnesio, errorReqMagnesio, messageErrorReqMagnesio, handleReqMagnesio,
 			elementosTraza, errorElementosTraza, messageErrorElementosTraza, handleElementosTraza,
 			reqTraza, errorReqTraza, messageErrorReqTraza, handleReqTraza,
 			vitaminasHidrosolubles, errorVitaminasHidrosolubles, messageErrorVitaminasHidrosolubles, handleVitaminasHidrosolubles,
 			vitaminasLiposolubles, errorVitaminasLiposolubles, messageErrorVitaminasLiposolubles, handleVitaminasLiposolubles,
 			vitaminasC, errorVitaminasC, messageErrorVitaminasC, handleVitaminasC,
 			acidoFolico, errorAcidoFolico, messageErrorAcidoFolico, handleAcidoFolico,
-
+           
+			/////////////////////////////////INTEGRACION APIS/////////////////////////////////////////
+			loadingSave,
+			saveOK,
+			valAllForm,
+			messageAPI,
 
 
 
