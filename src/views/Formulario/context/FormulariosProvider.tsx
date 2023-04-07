@@ -130,6 +130,15 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		const prescripcion = event.target.value;
 	};
 
+	const formatoFecha = (fecha: Date) => {
+        const opciones: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'numeric', year: 'numeric' };
+        const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);
+        return fechaFormateada;
+    }
+
+
+
+
 	const [fechaCreacion, setFechaCreacion] = React.useState('');
 	const [errorFechaCreacion, setErrorFechaCreacion] = React.useState(false);
 	const [messageErrorFechaCreacion, setMessageErrorFechaCreacion] = React.useState('');
@@ -138,6 +147,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setFechaCreacion(event.target.value || '');
 		const fechaCreacion = event.target.value;
 	};
+
+	const fechaActual=()=>{
+       const fecha:string=formatoFecha(new Date())
+		setFechaCreacion(fecha);
+		console.log('FECHA CREACION:',fecha)
+	}
 
 	////////////////////INFORMACIÓN DEL PACIENTE////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////
@@ -340,6 +355,15 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const handleFlujoMetabolico = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setFlujoMetabolico(event.target.value || '');
 		const flujoMetabolico = event.target.value;
+	};
+    
+	const [dextrosa, setDextrosa] = React.useState('');
+	const [errorDextrosa, setErrorDextrosa] = React.useState(false);
+	const [messageErrorDextrosa, setMessageErrorDextrosa] = React.useState('');
+
+	const handleDextrosa = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setDextrosa(event.target.value || '');
+		const Dextrosa = event.target.value;
 	};
 
 	const [aminoacidos, setAminoacidos] = React.useState('');
@@ -570,6 +594,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			diagnostico:diagnostico,
 			flujo_metabolico:flujoMetabolico,
 			aminoacidos:aminoacidos,
+			dextrosa:dextrosa,
 			req_aminoacidos:requerimientoAminoacidos,
 			lipidos:lipidos,
 			req_lipidos:requerimientoLipidos,
@@ -646,7 +671,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			///////////////////////////ORDEN ///////////////////////////////
 			numOrder, errorNumOrder, messageErrorNumOrder, handleNumOrder,
 			prescripcion, errorPrescripcion, messageErrorPrescripcion, handlePrescripcion,
-			fechaCreacion, errorFechaCreacion, messageErrorFechaCreacion, handleFechaCreacion,
+			fechaCreacion, errorFechaCreacion, messageErrorFechaCreacion, handleFechaCreacion,fechaActual,
 
 			////////////INFORMACION DEL PACIENTE///////////////////
 			ips, errorIps, messageErrorIps, handleIps,
@@ -671,6 +696,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			tipoPrescripcion, errorTipoPrescripcion, messageErrorTipoPrescripcion, handleTipoPrescripcion,
 			flujoMetabolico, errorFlujoMetabolico, messageErrorFlujoMetabolico, handleFlujoMetabolico,
 			aminoacidos, errorAminoacidos, messageErrorAminoacidos, handleAminoacidos,
+			dextrosa, errorDextrosa, messageErrorDextrosa, handleDextrosa,
 			requerimientoAminoacidos, errorRequerimientoAminoacidos, messageErrorRequerimientoAminoacidos, handleRequerimientoAminoacidos,
 			lipidos, errorLipidos, messageErrorLipidos, handleLipidos,
 			requerimientoLipidos, errorRequerimientoLipidos, messageErrorRequerimientoLipidos, handleRequerimientoLipidos,

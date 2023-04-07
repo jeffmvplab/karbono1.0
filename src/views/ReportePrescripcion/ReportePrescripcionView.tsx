@@ -35,10 +35,10 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 					<Divider orientation='vertical' style={{ height: '60%' }} />
 					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Servicio:</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Nombres:</Typography>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Nombres y Apellidos:</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Apellidos:</Typography>
-					<Divider orientation='vertical' style={{ height: '60%' }} />
+					{/* <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Apellidos:</Typography>
+					<Divider orientation='vertical' style={{ height: '60%' }} /> */}
 					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Peso:</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
 					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Identificación:</Typography>

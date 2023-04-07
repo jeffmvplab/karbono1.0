@@ -90,6 +90,7 @@ const InformacionPaciente = () => {
 
     useEffect(() => {
         setStateAcordion1(matches);
+        
     }, [matches])
     /////////////////////////////////////////////////////////////////////
 

@@ -5,7 +5,7 @@ import { colorsKarbono } from '@/themes/colors';
 import { Grid } from '@material-ui/core';
 import { styled, Box, Stack, TextField, Typography, Card, Divider, Menu, Fade, MenuItem } from '@mui/material';
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import InformacionPaciente from './Components/InformacionPaciente';
 import Macronutrientes from './Components/Macronutrientes';
 import Micronutrientes from './Components/Micronutrientes';
@@ -24,7 +24,12 @@ const FormView: React.FC<FormViewProps> = () => {
 		numOrder,errorNumOrder,messageErrorNumOrder,handleNumOrder,
 		prescripcion,errorPrescripcion,messageErrorPrescripcion,handlePrescripcion,
 		fechaCreacion,errorFechaCreacion,messageErrorFechaCreacion,handleFechaCreacion,
+		fechaActual,
 	} = useContext(FormulariosContext)
+
+	useEffect(()=>{
+       fechaActual();
+	},[])
 
 	return (
 
