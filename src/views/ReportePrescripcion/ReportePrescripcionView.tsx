@@ -4,8 +4,8 @@ import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import { Typography, Button, Box, Grid, TableContainer, Table, TableHead, TableRow, TableCell } from '@mui/material/';
 import Link from 'next/link';
 import { Divider } from '@material-ui/core';
-import ReportesMacronutrientes from './components/ReportesMacronutrientes';
-import ReportesMicronutrientes from './components/ReportesMicronutrientes';
+import ReportesMacronutrientes from './components/ReportesMicronutrientes';
+import ReportesMicronutrientes from './components/ReportesMacronutrientes';
 import ReportesParametros from './components/ReportesParametros';
 import BannerOrdenar from './components/BannerOrdenar';
 

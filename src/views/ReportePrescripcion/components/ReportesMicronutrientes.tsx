@@ -4,13 +4,17 @@ import React, { useState } from 'react'
 const ReportesMicronutrientes = () => {
 
     const [Micronutrientes, setMicronutrientes] = useState([
-        'Flujo Metabólico:',
-        'Dextrosa (g/kg/dia):',
-        'Aminoácidos (req./ml):',
-        'Lípidos (req./ml):',
-        'Omegaven (req./ml):',
-        'Dipeptiven (req./ml):',
-        'Agua (ml):'
+        'Sodio (req./ml):',
+        'Potasio (req./ml):',
+        'Calcio (req./ml):',
+        'Fosfato de sodio(req./ml)',
+        'Fosfato de potasio(req./ml)',
+        'Magnesio (req./ml):',
+        'Oligoelementos (ml):',
+        'Vitaminas hidro. (ml):',
+        'Vitaminas lipo. (ml):',
+        'Vit. C (mg):',
+        'Acido fólico (mg):'
     ]);
 
 
@@ -21,8 +25,8 @@ const ReportesMicronutrientes = () => {
                     <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '30px', textAlign: 'left' }}>Micronutrientes</Typography>
                     <Box sx={{justifyContent:'start'}} >
                         <ul style={{  }}>
-                            {Micronutrientes.map(lista1 => {
-                                return <li style={{  listStyleType:'none' }} key={lista1}>{lista1}</li>
+                            {Micronutrientes.map(lista => {
+                                return <li style={{  listStyleType:'none' }} key={lista}>{lista}</li>
                             })}
                         </ul>
                     </Box>
@@ -32,7 +36,7 @@ const ReportesMicronutrientes = () => {
                     <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Requerimiento</Typography>
                     <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Volumen</Typography>
                 </Grid>
- 
+
             </Grid>
 
 
