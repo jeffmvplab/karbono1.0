@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 
 const ReportesMicronutrientes = () => {
 
+
     const [Macronutrientes, setMacronutrientes] = useState([
         'Flujo Metabólico:',
         'Dextrosa (g/kg/dia):',
@@ -12,6 +13,7 @@ const ReportesMicronutrientes = () => {
         'Omegaven (req./ml):',
         'Dipeptiven (req./ml):',
         'Agua (ml):'
+
     ]);
 
 
@@ -42,6 +44,7 @@ const ReportesMicronutrientes = () => {
                     </Stack>
                     {/* </Grid> */}
                 </Stack>
+
 
             </Grid>
         </>

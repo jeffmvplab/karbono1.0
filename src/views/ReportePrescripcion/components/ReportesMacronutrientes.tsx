@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 
 const ReportesMacronutrientes = () => {
 
+
     const [Micronutrientes, setMicronutrientes] = useState([
         'Sodio (req./ml):',
         'Potasio (req./ml):',
@@ -14,6 +15,7 @@ const ReportesMacronutrientes = () => {
         'Vitaminas lipo. (ml):',
         'Vit. C (mg):',
         'Acido fólico (mg):'
+
     ]);
 
 
@@ -44,6 +46,7 @@ const ReportesMacronutrientes = () => {
                     </Stack>
                     {/* </Grid> */}
                 </Stack>
+
 
             </Grid>
         </>
