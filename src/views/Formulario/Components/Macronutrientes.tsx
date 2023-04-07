@@ -24,6 +24,12 @@ const aminoPediatrico = [
     { value: 'Trophamine', label: 'Trophamine' },
 ]
 
+const aminoNeonato = [
+    { value: 'Aminoven', label: 'Aminoven 10%' },
+    { value: 'Aminoplasmal', label: 'Aminoplasmal 10%' },
+    { value: 'Trophamine', label: 'Trophamine' },
+]
+
 const tiposLipidos = [
     { value: 'Smoflipid', label: 'Smoflipid' },
     { value: 'Clinoleic', label: 'Clinoleic' },
@@ -46,7 +52,7 @@ const Macronutrientes = () => {
         lipidos, errorLipidos, messageErrorLipidos, handleLipidos,
         requerimientoLipidos, errorRequerimientoLipidos, messageErrorRequerimientoLipidos, handleRequerimientoLipidos,
         omegaven, errorOmegaven, messageErrorOmegaven, handleOmegaven,
-        dipectiven, errorDipectiven, messageErrorDipectiven, handleDipectiven,
+        dipeptiven, errorDipeptiven, messageErrorDipeptiven, handleDipeptiven,
 
     } = useContext(FormulariosContext)
 
@@ -118,8 +124,8 @@ const Macronutrientes = () => {
                                         value={flujoMetabolico}
                                         id='flujo-metabolico'
                                         label={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'Flujo metabólico (mg/kg/min)'
-                                            : 'Flujo metabólico (ml)'}
+                                            ? 'Flujo metabólico* (mg/kg/min)'
+                                            : 'Flujo metabólico* (ml)'}
                                         type='text'
                                     />
                                     {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
@@ -147,11 +153,16 @@ const Macronutrientes = () => {
                                                         {option.label}
                                                     </MenuItem>
                                                 ))
-                                                : aminoPediatrico.map((option) => (
+                                                : (tipoPaciente === 'Pediatrico')
+                                                   ?aminoPediatrico.map((option) => (
                                                     <MenuItem key={option.value} value={option.value}>
                                                         {option.label}
-                                                    </MenuItem>
-                                                ))
+                                                    </MenuItem> ))
+                                                    :aminoPediatrico.map((option) => (
+                                                        <MenuItem key={option.value} value={option.value}>
+                                                            {option.label}
+                                                        </MenuItem>
+                                                         ))            
                                         }
                                     </CustomTextField>
                                 </Grid>
@@ -162,8 +173,8 @@ const Macronutrientes = () => {
                                         value={requerimientoAminoacidos}
                                         id='requerimiento-aminoacidos'
                                         label={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'Requerimiento Lípidos (g/kg/día)'
-                                            : 'Requerimiento aminoácidos (ml)'}
+                                            ? 'Requerimiento minoácidos* (g/kg/día)'
+                                            : 'Requerimiento aminoácidos* (ml)'}
                                         type='text'
                                     />
                                     {/* <TextFieldInput id='requerimiento-aminoacidos' type='text' label='Requerimiento aminoácidos' /> */}
@@ -226,8 +237,8 @@ const Macronutrientes = () => {
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <TextField
-                                        onChange={handleDipectiven}
-                                        value={dipectiven}
+                                        onChange={handleDipeptiven}
+                                        value={dipeptiven}
                                         id='dipeptiven'
                                         label={(tipoPrescripcion === 'Por requerimientos')
                                             ? 'Dipeptiven (g/kg/día)'

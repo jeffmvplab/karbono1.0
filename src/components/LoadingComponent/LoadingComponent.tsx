@@ -35,6 +35,7 @@ const LoadingComponent : React.FC<LoadingComponentInterface> = ({
 				alignItems='center'
 				>
 					<CircularProgress
+					   color='secondary'
 						variant='indeterminate'
 						size={sizeLoading}
 					/>

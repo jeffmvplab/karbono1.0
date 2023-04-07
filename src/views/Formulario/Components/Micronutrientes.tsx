@@ -10,8 +10,16 @@ const tipoFosfato = [
     { value: 'Fosfato de potasio', label: 'Fosfato de potasio' }
 ]
 
-const elemento = [
-    { value: 'Nulanza/Sencitrace', label: 'Nulanza/Sencitrace' },
+const trazaAdulto = [
+    { value: 'Nulanza', label: 'Nulanza' },
+    { value: 'Sencitrace', label: 'Sencitrace' }
+]
+
+const trazaPediatrico = [
+    { value: 'Peditrace', label: 'Peditrace' }
+]
+
+const trazaNeonato = [
     { value: 'Peditrace', label: 'Peditrace' }
 ]
 
@@ -20,6 +28,12 @@ const tipoCalcio = [
     { value: 'Gluconato de Calcio', label: 'Gluconato de Calcio' },
     { value: 'Calcio Elemental', label: 'Calcio Elemental' }
 ]
+
+const tipoMagnesio = [
+    { value: 'Sulfato de Magnesio', label: 'Sulfato de Magnesio' },
+    { value: 'Magnesio Elemental', label: 'Magnesio Elemental' }
+]
+
 const hidrosolublesAdulto = [
     { value: 'Soluvit', label: 'Soluvit' },
     { value: 'Cernevit', label: 'Cernevit' }
@@ -43,9 +57,9 @@ const Micronutrientes = () => {
         requerimientoFosfato, errorRequerimientoFosfato, messageErrorRequerimientoFosfato, handleRequerimientoFosfato,
         calcio, errorCalcio, messageErrorCalcio, handleCalcio,
         unidades, errorUnidades, messageErrorUnidades, handleUnidades,
-        requerimiento, errorRequerimiento, messageErrorRequerimiento, handleRequerimiento,
-        sulfatoDeMagnesio, errorSulfatoDeMagnesio, messageErrorSulfatoDeMagnesio, handleSulfatoDeMagnesio,
-        reqSulfatoDeMagnesio, errorReqSulfatoDeMagnesio, messageErrorReqSulfatoDeMagnesio, handleReqSulfatoDeMagnesio,
+        reqCalcio, errorReqCalcio, messageErrorReqCalcio, handleReqCalcio,
+        magnesio, errorMagnesio, messageErrorMagnesio, handleMagnesio,
+        reqMagnesio, errorReqMagnesio, messageErrorReqMagnesio, handleReqMagnesio,
         elementosTraza, errorElementosTraza, messageErrorElementosTraza, handleElementosTraza,
         reqTraza, errorReqTraza, messageErrorReqTraza, handleReqTraza,
         vitaminasHidrosolubles, errorVitaminasHidrosolubles, messageErrorVitaminasHidrosolubles, handleVitaminasHidrosolubles,
@@ -202,13 +216,14 @@ const Micronutrientes = () => {
                                         value={unidades}
                                         id='unidades '
                                         label={
-                                            (tipoPaciente === 'Adulto')
+                                            (calcio === 'Gluconato de Calcio')
                                                 ? (tipoPrescripcion === 'Por requerimientos')
                                                     ? 'Gluconato de calcio (mg/kg/día)'
                                                     : 'Gluconato de calcio (ml)'
                                                 : (tipoPrescripcion === 'Por requerimientos')
                                                     ? 'Calcio Elemental (mEq/kg/día)'
                                                     : 'Calcio Elemental (ml)'
+                                          
                                         }
                                         type='text'
                                     />
@@ -217,10 +232,10 @@ const Micronutrientes = () => {
 
                                 <Grid item xs={12} sm={6} md={3} style={{ padding: '10px' }}>
                                     <CustomTextField
-                                        onChange={handleRequerimiento}
-                                        value={requerimiento}
-                                        id='requerimiento'
-                                        label='Requerimiento'
+                                        onChange={handleReqCalcio}
+                                        value={reqCalcio}
+                                        id='requerimiento_calcio'
+                                        label='Requerimiento calcio'
                                         type='text'
                                     />
                                     {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
@@ -232,13 +247,21 @@ const Micronutrientes = () => {
                             <Grid container spacing={2}>
 
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-
-                                    <CustomTextField
-                                        onChange={handleSulfatoDeMagnesio}
-                                        value={sulfatoDeMagnesio}
-                                        id='sulfato-de-magnesio'
-                                        label='Sulfato de magnesio'
-                                    />
+                                <CustomTextField
+                                       onChange={handleMagnesio}
+                                       value={magnesio}
+                                       id='magnesio'
+                                       label='Magnesio'
+                                        type='text'
+                                        select
+                                    >
+                                        {tipoMagnesio.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
+                                    </CustomTextField> 
+                                  
                                     {/* <TextFieldInput id='sulfato-de-magnesio' type='text' label='Sulfato de magnesio' /> */}
                                 </Grid>
 
@@ -253,9 +276,13 @@ const Micronutrientes = () => {
                                                 ? (tipoPrescripcion === 'Por requerimientos')
                                                     ? 'Req Sulfato de magnesio (mg/kg/día)'
                                                     : 'Req Sulfato de magnesio (ml)'
-                                                : (tipoPrescripcion === 'Por requerimientos')
+                                                :(tipoPaciente === 'Pediatrico')
+                                                 ? (tipoPrescripcion === 'Por requerimientos')
                                                     ? 'Req Magnesio Elemental (mEq/kg/día)'
                                                     : 'Req Magnesio Elemental (ml)'
+                                                 : (tipoPrescripcion === 'Por requerimientos')
+                                                   ? 'Req Magnesio Elemental (mEq/kg/día)'
+                                                   : 'Req Magnesio Elemental (ml)'
                                         }
                                         type='text'
                                     />
@@ -279,11 +306,22 @@ const Micronutrientes = () => {
                                         type='text'
                                         select
                                     >
-                                        {elemento.map((option) => (
+                                        {
+                                        (tipoPaciente === 'Adulto')
+                                        ?trazaAdulto.map((option) => (
                                             <MenuItem key={option.value} value={option.value}>
                                                 {option.label}
-                                            </MenuItem>
-                                        ))}
+                                            </MenuItem>))
+                                        :(tipoPaciente === 'Pediatrico')
+                                          ?trazaPediatrico.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>))
+                                          :trazaNeonato.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>))
+                                    }
                                     </CustomTextField>
                                 </Grid>
 
@@ -329,7 +367,13 @@ const Micronutrientes = () => {
                                                         {option.label}
                                                     </MenuItem>
                                                 ))
-                                                : hidrosolublesPediatricos.map((option) => (
+                                                :(tipoPaciente === 'Pediatrico')
+                                                 ? hidrosolublesPediatricos.map((option) => (
+                                                    <MenuItem key={option.value} value={option.value}>
+                                                        {option.label}
+                                                    </MenuItem>
+                                                ))
+                                                 :hidrosolublesPediatricos.map((option) => (
                                                     <MenuItem key={option.value} value={option.value}>
                                                         {option.label}
                                                     </MenuItem>
@@ -348,9 +392,13 @@ const Micronutrientes = () => {
                                                 ? (tipoPrescripcion === 'Por requerimientos')
                                                     ? 'Vitalipid adult (ml/día)'
                                                     : 'Vitalipid adult (ml)'
-                                                : (tipoPrescripcion === 'Por requerimientos')
+                                                :(tipoPaciente === 'Pediatrico')
+                                                 ? (tipoPrescripcion === 'Por requerimientos')
                                                     ? 'Vitalipid infant (ml/día)'
                                                     : 'Vitalipid infant (ml)'
+                                                 :(tipoPrescripcion === 'Por requerimientos')
+                                                 ? 'Vitalipid infant (ml/día)'
+                                                 : 'Vitalipid infant (ml)'
 
                                         }
                                         type='text'
