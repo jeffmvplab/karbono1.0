@@ -14,12 +14,13 @@ import { ParametrosNutricionales } from './Components/ParametrosNutricionales';
 import CloseIcon from '@mui/icons-material/Close';
 import Image from 'next/image';
 import { FormulariosContext } from './context/FormulariosContext';
+import { FormSavedModal } from './Components/FormSavedModal';
 
 export interface FormViewProps { }
 
 const FormView: React.FC<FormViewProps> = () => {
 
-	const { getMovilHeight,
+	const { getMovilHeight,handleOpenModalFormSaved,
 		numOrder,errorNumOrder,messageErrorNumOrder,handleNumOrder,
 		prescripcion,errorPrescripcion,messageErrorPrescripcion,handlePrescripcion,
 		fechaCreacion,errorFechaCreacion,messageErrorFechaCreacion,handleFechaCreacion,
@@ -31,6 +32,8 @@ const FormView: React.FC<FormViewProps> = () => {
 		<Stack
 		 direction={'column'} 
 		 marginBottom={{ xs: 25, sm: 0 }}>
+
+			<FormSavedModal/>
 
 			<Typography variant='h5' padding={1} style={{ fontWeight: 700, }}>
 				Nueva Orden
@@ -134,9 +137,9 @@ const FormView: React.FC<FormViewProps> = () => {
 				<Stack
 					zIndex={100}
 					position={{ xs: 'fixed', sm: 'initial' }}
-					bottom='120px'
+					bottom='160px'
 					left='5px'
-					marginY={2}
+					marginY={0}
 					paddingX={{ xs:6 }}
 					height={'40px'}
 					minWidth={'100%'}
@@ -152,6 +155,7 @@ const FormView: React.FC<FormViewProps> = () => {
 						/>
 				
 					<CustomButton
+					    onClick={handleOpenModalFormSaved}
 						width={127}
 						text={'Guardar'}
 						sx={{ borderRadius: '10px' }}

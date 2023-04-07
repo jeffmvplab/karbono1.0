@@ -53,17 +53,17 @@ interface ContextProps {
     lipidos: string, errorLipidos: boolean, messageErrorLipidos: string, handleLipidos: (event: React.ChangeEvent<HTMLInputElement>) => void,
     requerimientoLipidos: string, errorRequerimientoLipidos: boolean, messageErrorRequerimientoLipidos: string, handleRequerimientoLipidos: (event: React.ChangeEvent<HTMLInputElement>) => void,
     omegaven: string, errorOmegaven: boolean, messageErrorOmegaven: string, handleOmegaven: (event: React.ChangeEvent<HTMLInputElement>) => void,
-    dipectiven: string, errorDipectiven: boolean, messageErrorDipectiven: string, handleDipectiven: (event: React.ChangeEvent<HTMLInputElement>) => void,
-       ////////////////////MACRONUTRIENTES////////////////////////////////////
+    dipeptiven: string, errorDipeptiven: boolean, messageErrorDipeptiven: string, handleDipeptiven: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    ////////////////////MACRONUTRIENTES////////////////////////////////////
     sodioTotal: string, errorSodioTotal: boolean, messageErrorSodioTotal: string, handleSodioTotal: (event: React.ChangeEvent<HTMLInputElement>) => void,
     potacioTotal: string, errorPotacioTotal: boolean, messageErrorPotacioTotal: string, handlePotacioTotal: (event: React.ChangeEvent<HTMLInputElement>) => void,
     fosfato: string, errorFosfato: boolean, messageErrorFosfato: string, handleFosfato: (event: React.ChangeEvent<HTMLInputElement>) => void,
     requerimientoFosfato: string, errorRequerimientoFosfato: boolean, messageErrorRequerimientoFosfato: string, handleRequerimientoFosfato: (event: React.ChangeEvent<HTMLInputElement>) => void,
     calcio: string, errorCalcio: boolean, messageErrorCalcio: string, handleCalcio: (event: React.ChangeEvent<HTMLInputElement>) => void,
     unidades: string, errorUnidades: boolean, messageErrorUnidades: string, handleUnidades: (event: React.ChangeEvent<HTMLInputElement>) => void,
-    requerimiento: string, errorRequerimiento: boolean, messageErrorRequerimiento: string, handleRequerimiento: (event: React.ChangeEvent<HTMLInputElement>) => void,
-    sulfatoDeMagnesio: string, errorSulfatoDeMagnesio: boolean, messageErrorSulfatoDeMagnesio: string, handleSulfatoDeMagnesio: (event: React.ChangeEvent<HTMLInputElement>) => void,
-    reqSulfatoDeMagnesio: string, errorReqSulfatoDeMagnesio: boolean, messageErrorReqSulfatoDeMagnesio: string, handleReqSulfatoDeMagnesio: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    reqCalcio: string, errorReqCalcio: boolean, messageErrorReqCalcio: string, handleReqCalcio: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    magnesio: string, errorMagnesio: boolean, messageErrorMagnesio: string, handleMagnesio: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    reqMagnesio: string, errorReqMagnesio: boolean, messageErrorReqMagnesio: string, handleReqMagnesio: (event: React.ChangeEvent<HTMLInputElement>) => void,
     elementosTraza: string, errorElementosTraza: boolean, messageErrorElementosTraza: string, handleElementosTraza: (event: React.ChangeEvent<HTMLInputElement>) => void,
     reqTraza: string, errorReqTraza: boolean, messageErrorReqTraza: string, handleReqTraza: (event: React.ChangeEvent<HTMLInputElement>) => void,
     vitaminasHidrosolubles: string, errorVitaminasHidrosolubles: boolean, messageErrorVitaminasHidrosolubles: string, handleVitaminasHidrosolubles: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -71,6 +71,15 @@ interface ContextProps {
     vitaminasC: string, errorVitaminasC: boolean, messageErrorVitaminasC: string, handleVitaminasC: (event: React.ChangeEvent<HTMLInputElement>) => void,
     acidoFolico: string, errorAcidoFolico: boolean, messageErrorAcidoFolico: string, handleAcidoFolico: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
+    loadingSave: boolean,
+    saveOK: boolean,
+    valAllForm: boolean,
+    messageAPI:string,
+
+    //////MODAL//////
+    openModalFormSaved: boolean,
+    handleOpenModalFormSaved:()=>void,
+    handleCloseModalFormSaved:()=>void
 
 
 }

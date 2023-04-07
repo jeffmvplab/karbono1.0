@@ -14,7 +14,7 @@ const currencies = [
 const tiposPacientes = [
     { value: 'Adulto', label: 'Adulto' },
     { value: 'Pediatrico', label: 'Pediatrico' },
-    // { value: 'Neonato', label: 'Neotato' }
+    { value: 'Neonato', label: 'Neotato' }
 ]
 
 const viaAdministracion = [
@@ -149,7 +149,7 @@ const InformacionPaciente = () => {
                                     <CustomTextField
                                         onChange={handleNumIden}
                                         id='no-identificación'
-                                        label='No Identificacion'
+                                        label='No Identificacion*'
                                         type='text'
                                         value={numIden}
                                     />
@@ -393,7 +393,7 @@ const InformacionPaciente = () => {
                                         onChange={handleViaAdmin}
                                         value={viaAdmin}
                                         id='via-de-administracion'
-                                        label='Vía de administración'
+                                        label='Vía de administración*'
                                         type='text'
                                         select={true}
                                     >
