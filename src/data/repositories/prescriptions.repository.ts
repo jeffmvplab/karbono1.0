@@ -48,7 +48,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
                 "diagnostico": prescriptions.diagnostico,
                 "flujo_metabolico": prescriptions.flujo_metabolico,
                 "aminoacidos": prescriptions.aminoacidos,
-                // "dextrosa": prescriptions.dextrosa,
+                "dextrosa": prescriptions.dextrosa,
                 "req_aminoacidos": prescriptions.req_aminoacidos,
                 "lipidos": prescriptions.lipidos,
                 "req_lipidos": prescriptions.req_lipidos,
