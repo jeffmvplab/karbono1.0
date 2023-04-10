@@ -4,8 +4,8 @@ import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import { Typography, Button, Box, Grid, TableContainer, Table, TableHead, TableRow, TableCell } from '@mui/material/';
 import Link from 'next/link';
 import { Divider } from '@material-ui/core';
-import ReportesMacronutrientes from './components/ReportesMacronutrientes';
-import ReportesMicronutrientes from './components/ReportesMicronutrientes';
+import ReportesMacronutrientes from './components/ReportesMicronutrientes';
+import ReportesMicronutrientes from './components/ReportesMacronutrientes';
 import ReportesParametros from './components/ReportesParametros';
 import BannerOrdenar from './components/BannerOrdenar';
 
@@ -36,11 +36,13 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 					<Divider orientation='vertical' style={{ height: '60%' }} />
 					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Servicio:</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Nombres:</Typography>
+
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Nombres y Apellidos:</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Apellidos:</Typography>
-					<Divider orientation='vertical' style={{ height: '60%' }} />
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Peso:</Typography>
+					{/* <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Apellidos:</Typography>
+					<Divider orientation='vertical' style={{ height: '60%' }} /> */}
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Peso:</Typography>
+
 					<Divider orientation='vertical' style={{ height: '60%' }} />
 					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Identificación:</Typography>
 				</Grid>

@@ -48,6 +48,7 @@ const Macronutrientes = () => {
         tipoPrescripcion, errorTipoPrescripcion, messageErrorTipoPrescripcion, handleTipoPrescripcion,
         flujoMetabolico, errorFlujoMetabolico, messageErrorFlujoMetabolico, handleFlujoMetabolico,
         aminoacidos, errorAminoacidos, messageErrorAminoacidos, handleAminoacidos,
+        dextrosa, errorDextrosa, messageErrorDextrosa, handleDextrosa,
         requerimientoAminoacidos, errorRequerimientoAminoacidos, messageErrorRequerimientoAminoacidos, handleRequerimientoAminoacidos,
         lipidos, errorLipidos, messageErrorLipidos, handleLipidos,
         requerimientoLipidos, errorRequerimientoLipidos, messageErrorRequerimientoLipidos, handleRequerimientoLipidos,
@@ -96,7 +97,6 @@ const Macronutrientes = () => {
                 <AccordionDetails>
 
                     <Grid container direction='column' >
-
                         <Box display='flex' sx={{ marginTop: '20px' }}>
                             <Grid container spacing={2}>
 
@@ -115,6 +115,30 @@ const Macronutrientes = () => {
                                             </MenuItem>
                                         ))}
                                     </CustomTextField>
+
+                                </Grid>
+
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                  
+                                </Grid>
+
+                            </Grid>
+                        </Box>
+
+                        <Box display='flex' sx={{ marginTop: '20px' }}>
+                            <Grid container spacing={2}>
+
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+                                <CustomTextField
+                                        onChange={handleDextrosa}
+                                        value={dextrosa}
+                                        id='dextrosa'
+                                        label={(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'Dextrosa* (g/kg/dia)'
+                                            : 'Dextrosa* (ml)'}
+                                        type='text'
+                                    />
 
                                 </Grid>
 
@@ -154,15 +178,15 @@ const Macronutrientes = () => {
                                                     </MenuItem>
                                                 ))
                                                 : (tipoPaciente === 'Pediatrico')
-                                                   ?aminoPediatrico.map((option) => (
-                                                    <MenuItem key={option.value} value={option.value}>
-                                                        {option.label}
-                                                    </MenuItem> ))
-                                                    :aminoPediatrico.map((option) => (
+                                                    ? aminoPediatrico.map((option) => (
+                                                        <MenuItem key={option.value} value={option.value}>
+                                                            {option.label}
+                                                        </MenuItem>))
+                                                    : aminoPediatrico.map((option) => (
                                                         <MenuItem key={option.value} value={option.value}>
                                                             {option.label}
                                                         </MenuItem>
-                                                         ))            
+                                                    ))
                                         }
                                     </CustomTextField>
                                 </Grid>

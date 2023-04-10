@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { colorsKarbono } from '@/themes/colors';
 import { CustomButton } from '@/components/CustomButton';
 import { LoadingComponent } from '@/components/LoadingComponent';
+import { useRouter } from 'next/router';
+import { mainRoutes } from '@/routes/routes';
 
 export interface FormSavedModalProps { }
 
@@ -16,6 +18,8 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 		openModalFormSaved,
 		handleCloseModalFormSaved,
 	} = useContext(FormulariosContext)
+
+	const router=useRouter();
 
 	const validacionOK = true;
     
@@ -115,7 +119,10 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 									}
 
 									<CustomButton
-										onClick={handleCloseModalFormSaved}
+										onClick={
+											
+											()=>{(saveOK)&&router.push(mainRoutes.reportePrescripcion);handleCloseModalFormSaved}
+										}
 										height={50}
 										width={137}
 										text={validacionOK ?(saveOK)? 'Ver reporte':'Ok' : 'Ok'}

@@ -25,7 +25,7 @@ interface ContextProps {
     numOrder: string, errorNumOrder: boolean, messageErrorNumOrder: string, handleNumOrder: (event: React.ChangeEvent<HTMLInputElement>) => void,
     prescripcion: string, errorPrescripcion: boolean, messageErrorPrescripcion: string, handlePrescripcion: (event: React.ChangeEvent<HTMLInputElement>) => void,
     fechaCreacion: string, errorFechaCreacion: boolean, messageErrorFechaCreacion: string, handleFechaCreacion: (event: React.ChangeEvent<HTMLInputElement>) => void,
-
+    fechaActual:()=>void;
     ////////////INFORMACION DEL PACIENTE///////////////////
     ips: string, errorIps: boolean, messageErrorIps: string, handleIps: (event: React.ChangeEvent<HTMLInputElement>) => void,
     numIden: string, errorNumIden: boolean, messageErrorNumIden: string, handleNumIden: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -49,6 +49,7 @@ interface ContextProps {
     tipoPrescripcion: string, errorTipoPrescripcion: boolean, messageErrorTipoPrescripcion: string, handleTipoPrescripcion: (event: React.ChangeEvent<HTMLInputElement>) => void,
     flujoMetabolico: string, errorFlujoMetabolico: boolean, messageErrorFlujoMetabolico: string, handleFlujoMetabolico: (event: React.ChangeEvent<HTMLInputElement>) => void,
     aminoacidos: string, errorAminoacidos: boolean, messageErrorAminoacidos: string, handleAminoacidos: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    dextrosa: string, errorDextrosa: boolean, messageErrorDextrosa: string, handleDextrosa: (event: React.ChangeEvent<HTMLInputElement>) => void,
     requerimientoAminoacidos: string, errorRequerimientoAminoacidos: boolean, messageErrorRequerimientoAminoacidos: string, handleRequerimientoAminoacidos: (event: React.ChangeEvent<HTMLInputElement>) => void,
     lipidos: string, errorLipidos: boolean, messageErrorLipidos: string, handleLipidos: (event: React.ChangeEvent<HTMLInputElement>) => void,
     requerimientoLipidos: string, errorRequerimientoLipidos: boolean, messageErrorRequerimientoLipidos: string, handleRequerimientoLipidos: (event: React.ChangeEvent<HTMLInputElement>) => void,

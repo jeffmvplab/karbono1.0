@@ -23,6 +23,7 @@ export interface IPrescriptions {
     diagnostico: string,
     flujo_metabolico: string,
     aminoacidos: string,
+    dextrosa?: string,
     req_aminoacidos: string,
     lipidos: string,
     req_lipidos: string,
