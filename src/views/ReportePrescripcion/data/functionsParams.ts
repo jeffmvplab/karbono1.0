@@ -28,23 +28,23 @@ export const getPotacio = (tp: string, potacio: string, peso: string) => {
 
 }
 
-export const getCalcio = (tp: string, calsio: string, tCalsio: string, peso: string) => {
+export const getCalcio = (tp: string, calcio: string, tCalcio: string, peso: string) => {
 
     if (tp === 'Por requerimientos') {
-        if (tCalsio === 'Gluconato de Calcio') {
-            let calsioReq: number = parseInt(calsio) * parseInt(peso) / 0.01;
-            return calsioReq;
+        if (tCalcio === 'Gluconato de Calcio') {
+            let calcioReq: number = parseInt(calcio) * parseInt(peso) / 0.01;
+            return calcioReq;
         } else {
-            let calsioReq: number = parseInt(calsio) * parseInt(peso) * 2.15;
-            return calsioReq;
+            let calcioReq: number = parseInt(calcio) * parseInt(peso) * 2.15;
+            return calcioReq;
         }
     } else {
-        if (tCalsio === 'Gluconato de Calcio') {
-            let calsioVol: number = parseInt(calsio) * 100 / parseInt(peso);
-            return calsioVol;
+        if (tCalcio === 'Gluconato de Calcio') {
+            let calcioVol: number = parseInt(calcio) * 100 / parseInt(peso);
+            return calcioVol;
         } else {
-            let calsioVol: number = parseInt(calsio) * 0.465 / parseInt(peso);
-            return calsioVol;
+            let calcioVol: number = parseInt(calcio) * 0.465 / parseInt(peso);
+            return calcioVol;
         }
 
     }
@@ -149,13 +149,13 @@ export const getDipeptiven = (tp: string, dipeptiven: string, peso: string, conc
 
 export const getAgua = (volTotalNPT: string, dextrosa: string, lipidos: string, aminoacidos: string,
     dipeptiven: string, omegaven: string, sodio: string, potacio: string, fosforo: string,
-    magnesio: string, calsio: string, oligoelementos: string, vitaminas: string, vit_C: string,
+    magnesio: string, calcio: string, oligoelementos: string, vitaminas: string, vit_C: string,
     acido_folico: string,
 ) => {
     let agua: number = parseInt(volTotalNPT) - (
         parseInt(dextrosa) + parseInt(lipidos) + parseInt(aminoacidos) + parseInt(dipeptiven)
         + parseInt(omegaven) + parseInt(sodio) + parseInt(potacio) + parseInt(fosforo)
-        + parseInt(magnesio) + parseInt(calsio) + parseInt(oligoelementos) + parseInt(vitaminas)
+        + parseInt(magnesio) + parseInt(calcio) + parseInt(oligoelementos) + parseInt(vitaminas)
         + parseInt(vit_C) + parseInt(acido_folico)
     );
     return agua;
@@ -165,13 +165,13 @@ export const getAgua = (volTotalNPT: string, dextrosa: string, lipidos: string, 
 
 export const getVolTotal = (volAgua: number, dextrosa: string, lipidos: string, aminoacidos: string,
     dipeptiven: string, omegaven: string, sodio: string, potacio: string, fosforo: string,
-    magnesio: string, calsio: string, oligoelementos: string, vitaminas: string,
+    magnesio: string, calcio: string, oligoelementos: string, vitaminas: string,
     vit_C: string, acido_folico: string,
 ) => {
     let volTotal: number = volAgua
         + parseInt(dextrosa) + parseInt(lipidos) + parseInt(aminoacidos) + parseInt(dipeptiven)
         + parseInt(omegaven) + parseInt(sodio) + parseInt(potacio) + parseInt(fosforo)
-        + parseInt(magnesio) + parseInt(calsio) + parseInt(oligoelementos) + parseInt(vitaminas)
+        + parseInt(magnesio) + parseInt(calcio) + parseInt(oligoelementos) + parseInt(vitaminas)
         + parseInt(vit_C) + parseInt(acido_folico)
     return volTotal;
 }
@@ -184,14 +184,14 @@ export const getVelinfusion = (volTotal: number, tiempoInfusion: number) => {
 
 export const getOsmolaridad = (dextrosa: string, lipidos: string, aminoacidos: string,
     dipeptiven: string, omegaven: string, sodio: string, potacio: string, fosforo: string,
-    calsio: string, magnesio: string, volOligoNulanza: string, volOligoSensitrace: string,
+    calcio: string, magnesio: string, volOligoNulanza: string, volOligoSensitrace: string,
     cernevit: string, multi12K: string, vitaLipidInfantil: string, vitaLipidAd: string,
     soluvit: string, vit_C: string, acido_folico: string, volAgua: number, volTotalNPT: number, purga: number,
 ) => {
     let osmolaridad: number =
         ((parseInt(dextrosa) * 2780) + (parseInt(lipidos) * 290) + (parseInt(aminoacidos) * 1505) + (parseInt(dipeptiven) * 921)
             + (parseInt(omegaven) * 273) + (parseInt(sodio) * 4001) + (parseInt(potacio) + 4000) + (parseInt(fosforo) * 2570)
-            + (parseInt(magnesio) * 1623) + (parseInt(calsio) * 626) + (parseInt(volOligoNulanza) * 2500) + (parseInt(volOligoSensitrace) * 100)
+            + (parseInt(magnesio) * 1623) + (parseInt(calcio) * 626) + (parseInt(volOligoNulanza) * 2500) + (parseInt(volOligoSensitrace) * 100)
             + (parseInt(cernevit) * 4820) + (parseInt(multi12K) * 298.5) + (parseInt(vitaLipidInfantil) * 260) + (parseInt(vitaLipidAd) * 260)
             + (parseInt(soluvit) * 490) + (parseInt(vit_C) * 1740) + (parseInt(acido_folico) * 227) + (volAgua * 1)) / (volTotalNPT + purga)
     return osmolaridad;
