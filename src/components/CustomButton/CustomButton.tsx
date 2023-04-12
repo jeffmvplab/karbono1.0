@@ -8,7 +8,7 @@ import { colorsKarbono } from '@/themes/colors';
 export interface CustomButtonProps {
 
 	color?: string,
-    borderColor?:string[] | undefined,
+    borderColor?:string[]|string| undefined,
 	colorHover?: string,
 	colorActive?: string,
 	colorBorderHover?: string,
@@ -30,9 +30,9 @@ export interface CustomButtonProps {
 	variant?: "text" | "outlined" | "contained" | undefined,
 
 	size?: "small" | "medium" | "large" | undefined,
-	height?: number,
-	width?: number,
-	padding?: string,
+	height?: number|string,
+	width?:number|string,
+	padding?: number|string,
 
 	startIcon?: ReactNode,
 	endIcon?: ReactNode,

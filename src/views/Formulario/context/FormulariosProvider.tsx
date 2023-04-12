@@ -131,10 +131,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	};
 
 	const formatoFecha = (fecha: Date) => {
-        const opciones: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'numeric', year: 'numeric' };
-        const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);
-        return fechaFormateada;
-    }
+		const opciones: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'numeric', year: 'numeric' };
+		const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);
+		return fechaFormateada;
+	}
 
 
 
@@ -148,10 +148,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		const fechaCreacion = event.target.value;
 	};
 
-	const fechaActual=()=>{
-       const fecha:string=formatoFecha(new Date())
+	const fechaActual = () => {
+		const fecha: string = formatoFecha(new Date())
 		setFechaCreacion(fecha);
-		console.log('FECHA CREACION:',fecha)
+		console.log('FECHA CREACION:', fecha)
 	}
 
 	////////////////////INFORMACIÓN DEL PACIENTE////////////////////////////////////
@@ -356,14 +356,14 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setFlujoMetabolico(event.target.value || '');
 		const flujoMetabolico = event.target.value;
 	};
-    
+
 	const [dextrosa, setDextrosa] = React.useState('');
 	const [errorDextrosa, setErrorDextrosa] = React.useState(false);
 	const [messageErrorDextrosa, setMessageErrorDextrosa] = React.useState('');
 
 	const handleDextrosa = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setDextrosa(event.target.value || '');
-		const Dextrosa = event.target.value;
+		const dextrosa = event.target.value;
 	};
 
 	const [aminoacidos, setAminoacidos] = React.useState('');
@@ -559,88 +559,102 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	};
 
 	//////////////////////Validacion Form/////////////////
-    const [valAllForm, setAllValForm] = React.useState(true);
+	const [valAllForm, setAllValForm] = React.useState(true);
 
-	 ////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////
 	///////////////////////////////INTEGRACION DE APIS//////////////////
 	const prescriptionsUseCase = new PrescriptionsUseCases();
 	const [loadingSave, setLoadingSave] = React.useState(false);
 	const [saveOK, setSaveOk] = React.useState(true);
 	const [messageAPI, setMessageAPI] = React.useState('');
 
-    const setPrescriptions = async () => {
-        
-		const prescriptionsData:IPrescriptions={
-			no_orden:parseInt(numOrder)||0,
-			tipo_prescripcion:tipoPrescripcion,
-			fecha:fechaCreacion,
-			ips:ips,
-			no_identificacion:numIden,
-			nombre_paciente:namePaciente,
-			servicio:servicio,
-			ubicacion:ubicacion,
-			cama:cama,
-			peso:parseInt(pesoKg)||0,
-			tipo_edad:tipoEdad,
-			edad:parseInt(edad)||0,
-			volumen:parseInt(volumen)||0,
-			purga:parseInt(purga)||0,
-			tiempo_infusion:tiempoDeInfucion,
-			overfill:overfill,
-			filtro:(filtro==='Si')?true:false,
-			equipo_fotosensible:(eqFotosencible==='Si')?true:false,
-			tipo_paciente:tipoPaciente,
-			via_administracion:viaAdmin,
-			diagnostico:diagnostico,
-			flujo_metabolico:flujoMetabolico,
-			aminoacidos:aminoacidos,
-			dextrosa:dextrosa,
-			req_aminoacidos:requerimientoAminoacidos,
-			lipidos:lipidos,
-			req_lipidos:requerimientoLipidos,
-			omegaven:omegaven,
-			dipeptiven:dipeptiven,
-			sodio_total:sodioTotal,
-			potasio_total:potacioTotal,
-			fosfato:fosfato,
-			req_fosfato:requerimientoFosfato,
-			calcio:calcio,
-			req_calcio:reqCalcio,
-			magnesio:magnesio,
-			req_magnesio:reqMagnesio,
-			elementos_traza:elementosTraza,
-			req_elementos_traza:reqTraza,
-			vit_hidrosolubles:vitaminasHidrosolubles,
-			req_vit_liposolubles:vitaminasLiposolubles,
-			vit_C:vitaminasC,
-			acido_folico:acidoFolico
+	const setPrescriptions = async () => {
+
+		const prescriptionsData: IPrescriptions = {
+			no_orden: parseInt(numOrder) || 0,
+			tipo_prescripcion: tipoPrescripcion,
+			fecha: fechaCreacion,
+			ips: ips,
+			no_identificacion: numIden,
+			nombre_paciente: namePaciente,
+			servicio: servicio,
+			ubicacion: ubicacion,
+			cama: cama,
+			peso: parseInt(pesoKg) || 0,
+			tipo_edad: tipoEdad,
+			edad: parseInt(edad) || 0,
+			volumen: parseInt(volumen) || 0,
+			purga: parseInt(purga) || 0,
+			tiempo_infusion: tiempoDeInfucion,
+			overfill: overfill,
+			filtro: (filtro === 'Si') ? true : false,
+			equipo_fotosensible: (eqFotosencible === 'Si') ? true : false,
+			tipo_paciente: tipoPaciente,
+			via_administracion: viaAdmin,
+			diagnostico: diagnostico,
+			flujo_metabolico: flujoMetabolico,
+			aminoacidos: aminoacidos,
+			dextrosa: dextrosa,
+			req_aminoacidos: requerimientoAminoacidos,
+			lipidos: lipidos,
+			req_lipidos: requerimientoLipidos,
+			omegaven: omegaven,
+			dipeptiven: dipeptiven,
+			sodio_total: sodioTotal,
+			potasio_total: potacioTotal,
+			fosfato: fosfato,
+			req_fosfato: requerimientoFosfato,
+			calcio: calcio,
+			req_calcio: reqCalcio,
+			magnesio: magnesio,
+			req_magnesio: reqMagnesio,
+			elementos_traza: elementosTraza,
+			req_elementos_traza: reqTraza,
+			vit_hidrosolubles: vitaminasHidrosolubles,
+			req_vit_liposolubles: vitaminasLiposolubles,
+			vit_C: vitaminasC,
+			acido_folico: acidoFolico
 		}
 
 		setLoadingSave(false);
 		console.log('Loading...')
 		const resp = await prescriptionsUseCase.savePrescripcions(prescriptionsData)
 		console.log('Resp:', resp)
-       
+
 		setLoadingSave(true);
 
 		if (resp.statusCode === 201) {
 			setSaveOk(true);
-		} else if(resp.statusCode === 400){
-           setMessageAPI(resp.body.message)
+		} else if (resp.statusCode === 400) {
+			setMessageAPI(resp.body.message)
 			setSaveOk(false)
-		} else if(resp.statusCode === 404){
-			 setSaveOk(false)
-		 }else if(resp.statusCode === 401 && resp.statusCode === 500){
+		} else if (resp.statusCode === 404) {
 			setSaveOk(false)
-		}  else{
+		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
+			setSaveOk(false)
+		} else {
 			setSaveOk(false)
 		}
 	}
 
 	const [openModalFormSaved, setOpenModalFormSaved] = useState(false);
-    const handleOpenModalFormSaved  = () => {setOpenModalFormSaved(true); setPrescriptions();};
-    const handleCloseModalFormSaved = () => setOpenModalFormSaved(false);
+	const handleOpenModalFormSaved = () => { setOpenModalFormSaved(true) };
+	const handleCloseModalFormSaved = () => setOpenModalFormSaved(false);
 
+	const localStorageProtocol = new LocalStorageProtocol();
+
+	const savePrescription = () => {
+		setPrescriptions();
+		handleOpenModalFormSaved();
+
+		const prescripcion = {
+			number: numOrder,
+			name: namePaciente,
+			id: numIden,
+			ips: ips
+		}
+		localStorageProtocol.set(StorageKeysEnum.prescripcionOrden, prescripcion);
+	}
 
 	return (
 
@@ -668,10 +682,11 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			openModalFormSaved,
 			handleOpenModalFormSaved,
 			handleCloseModalFormSaved,
+			savePrescription,
 			///////////////////////////ORDEN ///////////////////////////////
 			numOrder, errorNumOrder, messageErrorNumOrder, handleNumOrder,
 			prescripcion, errorPrescripcion, messageErrorPrescripcion, handlePrescripcion,
-			fechaCreacion, errorFechaCreacion, messageErrorFechaCreacion, handleFechaCreacion,fechaActual,
+			fechaCreacion, errorFechaCreacion, messageErrorFechaCreacion, handleFechaCreacion, fechaActual,
 
 			////////////INFORMACION DEL PACIENTE///////////////////
 			ips, errorIps, messageErrorIps, handleIps,
@@ -718,7 +733,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			vitaminasLiposolubles, errorVitaminasLiposolubles, messageErrorVitaminasLiposolubles, handleVitaminasLiposolubles,
 			vitaminasC, errorVitaminasC, messageErrorVitaminasC, handleVitaminasC,
 			acidoFolico, errorAcidoFolico, messageErrorAcidoFolico, handleAcidoFolico,
-           
+
 			/////////////////////////////////INTEGRACION APIS/////////////////////////////////////////
 			loadingSave,
 			saveOK,

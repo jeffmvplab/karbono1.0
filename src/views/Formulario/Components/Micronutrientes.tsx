@@ -51,21 +51,21 @@ const Micronutrientes = () => {
         tipoPrescripcion, tipoPaciente,
         stateAcordion3, setStateAcordion3, matches, handleAcordion3,
 
-        sodioTotal, errorSodioTotal, messageErrorSodioTotal, handleSodioTotal,
-        potacioTotal, errorPotacioTotal, messageErrorPotacioTotal, handlePotacioTotal,
-        fosfato, errorFosfato, messageErrorFosfato, handleFosfato,
-        requerimientoFosfato, errorRequerimientoFosfato, messageErrorRequerimientoFosfato, handleRequerimientoFosfato,
-        calcio, errorCalcio, messageErrorCalcio, handleCalcio,
-        unidades, errorUnidades, messageErrorUnidades, handleUnidades,
-        reqCalcio, errorReqCalcio, messageErrorReqCalcio, handleReqCalcio,
-        magnesio, errorMagnesio, messageErrorMagnesio, handleMagnesio,
-        reqMagnesio, errorReqMagnesio, messageErrorReqMagnesio, handleReqMagnesio,
-        elementosTraza, errorElementosTraza, messageErrorElementosTraza, handleElementosTraza,
-        reqTraza, errorReqTraza, messageErrorReqTraza, handleReqTraza,
-        vitaminasHidrosolubles, errorVitaminasHidrosolubles, messageErrorVitaminasHidrosolubles, handleVitaminasHidrosolubles,
-        vitaminasLiposolubles, errorVitaminasLiposolubles, messageErrorVitaminasLiposolubles, handleVitaminasLiposolubles,
-        vitaminasC, errorVitaminasC, messageErrorVitaminasC, handleVitaminasC,
-        acidoFolico, errorAcidoFolico, messageErrorAcidoFolico, handleAcidoFolico,
+        sodioTotal, handleSodioTotal,
+        potacioTotal,  handlePotacioTotal,
+        fosfato,  handleFosfato,
+        requerimientoFosfato, handleRequerimientoFosfato,
+        calcio, handleCalcio,
+        unidades, handleUnidades,
+        reqCalcio, handleReqCalcio,
+        magnesio,handleMagnesio,
+        reqMagnesio, handleReqMagnesio,
+        elementosTraza, handleElementosTraza,
+        reqTraza,  handleReqTraza,
+        vitaminasHidrosolubles,  handleVitaminasHidrosolubles,
+        vitaminasLiposolubles, handleVitaminasLiposolubles,
+        vitaminasC, handleVitaminasC,
+        acidoFolico,  handleAcidoFolico,
 
     } = useContext(FormulariosContext)
 
@@ -268,8 +268,8 @@ const Micronutrientes = () => {
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
                                     <CustomTextField
-                                        onChange={handleUnidades}
-                                        value={unidades}
+                                        onChange={handleReqMagnesio}
+                                        value={reqMagnesio}
                                         id='requerimiento-sulfato-de-magnesio'
                                         label={
                                             (tipoPaciente === 'Adulto')
