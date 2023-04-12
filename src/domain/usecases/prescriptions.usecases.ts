@@ -6,6 +6,10 @@ import { IUser } from '../models/user.model';
 
 export interface IPrescriptionsUseCase {
     savePrescripcions(prescriptions: IPrescriptions): Promise<any>;
+    prescripcionsByNumber(number:string): Promise<any>;
+    prescripcionsByName(name:string): Promise<any>;
+    prescripcionsById(id:string): Promise<any>;
+    prescripcionsByIps(ips:string): Promise<any>;
 }
 
 
@@ -19,6 +23,22 @@ export class PrescriptionsUseCases implements IPrescriptionsUseCase {
 
     savePrescripcions(prescriptions: IPrescriptions): Promise<any>{
         return this.prescriptionsRepository.savePrescripcions(prescriptions);
+    }
+
+    prescripcionsByNumber(number:string): Promise<any>{
+        return this.prescriptionsRepository.getPrescripcionsByNumber(number);
+    }
+
+    prescripcionsByName(name:string): Promise<any>{
+        return this.prescriptionsRepository.getPrescripcionsByName(name);
+    }
+
+    prescripcionsById(id:string): Promise<any>{
+        return this.prescriptionsRepository.getPrescripcionsById(id);
+    }
+
+    prescripcionsByIps(ips:string): Promise<any>{
+        return this.prescriptionsRepository.getPrescripcionsByIps(ips);
     }
 
 }

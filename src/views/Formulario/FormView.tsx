@@ -20,10 +20,11 @@ export interface FormViewProps { }
 
 const FormView: React.FC<FormViewProps> = () => {
 
-	const { getMovilHeight,handleOpenModalFormSaved,
-		numOrder,errorNumOrder,messageErrorNumOrder,handleNumOrder,
-		prescripcion,errorPrescripcion,messageErrorPrescripcion,handlePrescripcion,
-		fechaCreacion,errorFechaCreacion,messageErrorFechaCreacion,handleFechaCreacion,
+	const { 
+		getMovilHeight,handleOpenModalFormSaved,savePrescription,
+		numOrder,handleNumOrder,
+		prescripcion,handlePrescripcion,
+		fechaCreacion,handleFechaCreacion,
 		fechaActual,
 	} = useContext(FormulariosContext)
 
@@ -160,7 +161,7 @@ const FormView: React.FC<FormViewProps> = () => {
 						/>
 				
 					<CustomButton
-					    onClick={handleOpenModalFormSaved}
+					    onClick={savePrescription}
 						width={127}
 						text={'Guardar'}
 						sx={{ borderRadius: '10px' }}

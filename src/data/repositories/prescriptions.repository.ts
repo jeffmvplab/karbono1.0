@@ -8,6 +8,11 @@ import { ApiUrlsEnum } from '@/utilities/enums';
 
 export interface IPrescriptionsRepository {
     savePrescripcions(prescriptions: IPrescriptions): Promise<any>;
+    getPrescripcionsByNumber(number:string): Promise<any>;
+    getPrescripcionsByName(name:string): Promise<any>;
+    getPrescripcionsById(id:string): Promise<any>;
+    getPrescripcionsByIps(ips:string): Promise<any>;
+
 }
 
 
@@ -18,7 +23,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
     constructor() {
         this.axiosHttpClient = new AxiosHttpClient();
     }
-    /////////////////////////////////LOGIN////////////////////////////////////////////////
+    /////////////////////////////////Guardar Predscripcion////////////////////////////////////////////////
     async savePrescripcions(prescriptions: IPrescriptions): Promise<any> {
 
         const axiosRequest = await this.axiosHttpClient.request({
@@ -49,6 +54,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
                 "flujo_metabolico": prescriptions.flujo_metabolico,
                 "aminoacidos": prescriptions.aminoacidos,
                 "dextrosa": prescriptions.dextrosa,
+                "req_dextrosa": '',
                 "req_aminoacidos": prescriptions.req_aminoacidos,
                 "lipidos": prescriptions.lipidos,
                 "req_lipidos": prescriptions.req_lipidos,
@@ -90,7 +96,58 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
         // }
 
     }
-    /////////////////////////////////REGISTER///////////////////////////////////////////////////
+   /////////////////////////////////Get Predscripcion By Number////////////////////////////////////////////////
+   async getPrescripcionsByNumber(number:string): Promise<any> {
+
+    const axiosRequest = await this.axiosHttpClient.request({
+        url: `${ApiUrlsEnum.getPrescriptionsByNumber}/${number}`,
+        method: 'get',
+        // body: {},
+    });
+    return axiosRequest;
+}
+
+ /////////////////////////////////Get Predscripcion By Name////////////////////////////////////////////////
+ async getPrescripcionsByName(name:string): Promise<any> {
+
+    const axiosRequest = await this.axiosHttpClient.request({
+        url: ApiUrlsEnum.getPrescriptionsByName,
+        method: 'post',
+        body: {
+            "nombre_paciente": name,
+        },
+    });
+    return axiosRequest;
+}
+
+
+ /////////////////////////////////Get Predscripcion By Id////////////////////////////////////////////////
+ async getPrescripcionsById(id:string): Promise<any> {
+
+    const axiosRequest = await this.axiosHttpClient.request({
+        url: ApiUrlsEnum.getPrescriptionsById,
+        method: 'post',
+        body: {
+            "no_identificacion":id,
+        },
+    });
+    return axiosRequest;
+}
+
+
+ /////////////////////////////////Get Predscripcion By Ips////////////////////////////////////////////////
+ async getPrescripcionsByIps(ips:string): Promise<any> {
+
+    const axiosRequest = await this.axiosHttpClient.request({
+        url: ApiUrlsEnum.getPrescriptionsByIps,
+        method: 'post',
+        body: {
+            "ips":ips,
+        },
+    });
+    return axiosRequest;
+}
+
 
 
 

@@ -80,7 +80,8 @@ interface ContextProps {
     //////MODAL//////
     openModalFormSaved: boolean,
     handleOpenModalFormSaved:()=>void,
-    handleCloseModalFormSaved:()=>void
+    handleCloseModalFormSaved:()=>void,
+    savePrescription:()=>void,
 
 
 }

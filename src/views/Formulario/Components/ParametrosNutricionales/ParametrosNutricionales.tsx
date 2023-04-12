@@ -20,7 +20,7 @@ const ParametrosNutricionales: React.FC<ParametrosNutricionalesProps> = ({ isMov
 				borderRadius: isMovil ? 0 : null,
 				borderTopLeftRadius: (isMovil) ? null : borderRadius,
 				borderTopRightRadius: borderRadius,
-				borderBottomLeftRadius:borderRadius,
+				borderBottomLeftRadius: borderRadius,
 				borderBottomRightRadius: borderRadius,
 				marginBottom: '20px'
 			}}>
@@ -60,23 +60,32 @@ const ParametrosNutricionales: React.FC<ParametrosNutricionalesProps> = ({ isMov
 						value={param_nutricionales.calorias_totales_proteicasKg}
 					/>
 					<TextParams
-						title={'Calorías totales Protéicas/kg:'}
+						title={'Calorías totales Protéicas/kg (kcal/kg):'}
 						value={param_nutricionales.calorias_totales_proteicasKg}
 					/>
 					<TextParams
-						title={'Calorías totales no Protéicas CHO’S:'}
+						title={'Calorías totales No Protéicas CHO’S:'}
 						value={param_nutricionales.calorias_totales_no_proteicasCHOS}
 					/>
 					<TextParams
-						title={'Calorías totales no Protéicas Lípidos:'}
+						title={'Calorías totales No Protéicas Lípidos:'}
 						value={param_nutricionales.calorias_totales_no_proteicas_lipidos}
 					/>
 					<TextParams
-						title={'Relación: Cal No Protéicas Protéicas/g AA:'}
+						title={'Relación: Cal No Protéicas Protéicas/g Nitrogeno:'}
+						value={param_nutricionales.relacion_Cal_No_proteicas_gAA}
+					/>
+					<TextParams
+						title={'Calorías No Protéicas/kg:'}
+						value={param_nutricionales.calorias_totales_no_proteicas_lipidos}
+					/>
+
+					<TextParams
+						title={'Relación: Cal No Protéicas Protéicas/g Aminoacidos:'}
 						value={param_nutricionales.relacion_Cal_No_proteicas_gAA}
 					/>
 
-					<Divider />
+					{/* <Divider />
 
 					<Typography
 						fontSize={'20px'}
@@ -100,7 +109,7 @@ const ParametrosNutricionales: React.FC<ParametrosNutricionalesProps> = ({ isMov
 						title={'Porcentaje de carbohidratos:'}
 						value={param_nutricionales.porcentaje_de_carbohidratos}
 						unidad={'ml'}
-					/>
+					/> */}
 				</Box>
 			</Box>
 		</Card>
