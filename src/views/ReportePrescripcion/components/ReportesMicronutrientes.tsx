@@ -1,6 +1,8 @@
 import Macronutrientes from '@/views/Formulario/Components/Macronutrientes';
 import { Grid, Typography, Box, Stack } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { ReportesContext } from '../context/ReportesContext';
+import { getDextrosa, getPotacio, getSodio } from '../data/functionsParams';
 
 const ReportesMicronutrientes = () => {
 
@@ -16,6 +18,7 @@ const ReportesMicronutrientes = () => {
 
     ]);
 
+    const { reporte } = useContext(ReportesContext)
 
     return (
         <>
@@ -36,7 +39,15 @@ const ReportesMicronutrientes = () => {
                     {/* </Grid>
                 <Grid item display={'flex'} sx={{ marginTop: '30px', marginBottom: '30px', width: '60%' }}> */}
                     <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Requerimiento</Typography>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, paddingBottom: '15px', fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Requerimiento</Typography>
+                        <Stack direction={'column'} alignItems={'center'}>
+
+                            <Typography>
+                                {/* {getSodio(reporte?.tipo_prescripcion!, reporte?.sodio_total!, reporte?.peso!).requerimiento} */}
+                            </Typography>
+                     
+
+                        </Stack>
                     </Stack>
 
                     <Stack direction={'column'}>

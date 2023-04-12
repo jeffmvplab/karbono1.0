@@ -1,18 +1,28 @@
-export const alertVolTotal = (volAgua: number, dextrosa: string, lipidos: string, aminoacidos: string,
-    dipeptiven: string, omegaven: string, sodio: string, potacio: string, fosforo: string,
-    magnesio: string, calcio: string, oligoelementos: string, vitaminas: string,
-    vit_C: string, acido_folico: string,
-) => {
+import { IPrescriptions } from "@/domain/models/prescriptions.model"
+import { getAgua, getOsmolaridad } from "./functionsParams"
+
+
+
+/////////////////////////////ALARMAS PARAMETROS FARMACEUTICOS////////////////////////////////////////////////////
+export const alertVolTotal = (prescription: IPrescriptions) => {
+
+    const volAgua: number = getAgua(prescription)
+    const oligoelementos: number = 0
+    const vitaminas: number = 0
+
     let volTotal: number = volAgua
-        + parseInt(dextrosa) + parseInt(lipidos) + parseInt(aminoacidos) + parseInt(dipeptiven)
-        + parseInt(omegaven) + parseInt(sodio) + parseInt(potacio) + parseInt(fosforo)
-        + parseInt(magnesio) + parseInt(calcio) + parseInt(oligoelementos) + parseInt(vitaminas)
-        + parseInt(vit_C) + parseInt(acido_folico)
+        + parseInt(prescription.dextrosa!) + parseInt(prescription.lipidos) + parseInt(prescription.aminoacidos) + parseInt(prescription.dipeptiven)
+        + parseInt(prescription.omegaven) + parseInt(prescription.sodio_total) + parseInt(prescription.potasio_total) + parseInt(prescription.req_fosfato)
+        + parseInt(prescription.magnesio) + parseInt(prescription.calcio) + oligoelementos + vitaminas
+        + parseInt(prescription.vit_C) + parseInt(prescription.acido_folico)
     return volTotal;
 }
 
 //////////////////////////////FORMULACIONES//////////////
-export const alertViaDeAdmin = (viaAdmin: string, osmolaridad: number) => {
+export const alertViaDeAdmin = (prescription: IPrescriptions) => {
+
+    const viaAdmin: string = prescription.via_administracion;
+    const osmolaridad: number = getOsmolaridad(prescription)
 
     if (viaAdmin === 'Periférica') {
         if (osmolaridad <= 800) {
@@ -30,9 +40,17 @@ export const alertViaDeAdmin = (viaAdmin: string, osmolaridad: number) => {
 
 }
 
-export const alertRelacion_Calcio_Fosfato = (calcio: string, concCalcioMax: number, fosfato: string, concFosfato: number) => {
+export const alertRelacion_Calcio_Fosfato = (prescription: IPrescriptions) => {
 
-    if (parseInt(calcio) <= concCalcioMax || parseInt(fosfato) <= concCalcioMax) {
+    const calcio: number = parseInt(prescription.req_calcio);
+    const tCalcio: string = prescription.calcio;
+    const concCalcioMax: number = parseInt(prescription.req_calcio) * 0.15;
+
+    const fosfato: number = parseInt(prescription.req_fosfato);
+    const tFosforo: string = prescription.fosfato;
+    const concFosfato: number = parseInt(prescription.req_fosfato) * 0.15;;
+
+    if (calcio <= concCalcioMax || fosfato <= concCalcioMax) {
         return 'SEGURA';
     } else {
         return 'INSEGURA'
@@ -40,9 +58,14 @@ export const alertRelacion_Calcio_Fosfato = (calcio: string, concCalcioMax: numb
 
 }
 
-export const alarmFactorDePrecipitacion = (concDeProteinas: number, calcio: string, fosfato_de_potasio: number, volTotalNPT: string) => {
+export const alarmFactorDePrecipitacion = (prescription: IPrescriptions) => {
 
-    let factor: number = (parseInt(calcio) * 0.465 + fosfato_de_potasio * 2.6) * 100 / (parseInt(volTotalNPT) - parseInt(calcio) - fosfato_de_potasio);
+    const concDeProteinas: number = 0;
+    const calcio: number = parseInt(prescription.req_calcio);
+    const fosfato_de_potasio: number = parseInt(prescription.req_fosfato);
+    const volTotalNPT: number = prescription.volumen;
+
+    let factor: number = (calcio * 0.465 + fosfato_de_potasio * 2.6) * 100 / (volTotalNPT - calcio - fosfato_de_potasio);
 
     if (concDeProteinas >= 1.5) {
         if (factor <= 3) {
@@ -62,58 +85,76 @@ export const alarmFactorDePrecipitacion = (concDeProteinas: number, calcio: stri
     }
 }
 
-    export const alarmConcCHOS = (dextrosa: string, volTotalNPT: string,) => {
+export const alarmConcCHOS = (prescription: IPrescriptions) => {
 
-        let concCHOS: number = parseInt(dextrosa) * 0.5 / parseInt(volTotalNPT);
-        if (concCHOS >= 5 || concCHOS <= 35) {
-            return 'SEGURA';
-        } else {
-            return 'REVISAR';
-        }
+    const dextrosa: number = parseInt(prescription.dextrosa!);
+    const volTotalNPT: number = prescription.volumen;
 
+    let concCHOS: number = dextrosa * 0.5 / volTotalNPT;
+
+    if (concCHOS >= 5 || concCHOS <= 35) {
+        return 'SEGURA';
+    } else {
+        return 'REVISAR';
     }
 
-    export const alarmConcDeLipidos = (lipidos: string, omegaven: string, volTotalNPT: string) => {
-        let concDeLipidos: number = (parseInt(lipidos) * 0.2 + parseInt(omegaven) * 0.1) / parseInt(volTotalNPT)
+}
 
-        if (concDeLipidos > 1.5) {
-            return 'SEGURA';
-        } else {
-            return 'REVISAR';
-        }
+export const alarmConcDeLipidos = (prescription: IPrescriptions) => {
+
+    const lipidos: number = parseInt(prescription.req_lipidos);
+    const omegaven: number = parseInt(prescription.omegaven);
+    const volTotalNPT: number = prescription.volumen;
+
+    let concDeLipidos: number = (lipidos * 0.2 + omegaven * 0.1) / volTotalNPT
+
+    if (concDeLipidos > 1.5) {
+        return 'SEGURA';
+    } else {
+        return 'REVISAR';
+    }
+}
+
+export const alarmConcSodio = (prescription: IPrescriptions) => {
+
+    const sodio: number = parseInt(prescription.sodio_total);
+    const fosfato_de_sodio: number = parseInt(prescription.req_fosfato);
+    const volTotalNPT: number = prescription.volumen;
+
+    let sodioVol: number = (sodio + fosfato_de_sodio) * 2 / (volTotalNPT / 1000);
+
+    if (sodioVol < 180) {
+        return 'SEGURA';
+    } else {
+        return 'REVISAR';
     }
 
-    export const alarmConcSodio = ( sodio: string, fosfato_de_sodio: string,volTotalNPT:string) => {
+}
 
+export const alarmConcPotasio = (prescription: IPrescriptions) => {
 
-            let sodioVol: number = (parseInt(sodio)+parseInt(fosfato_de_sodio)) * 2 / (parseInt(volTotalNPT)/1000);
+    const potasio: number = parseInt(prescription.potasio_total);
+    const fosfato_de_potasio: number = parseInt(prescription.req_fosfato);
+    const volTotalNPT: number = prescription.volumen;
 
-            if (sodioVol < 180) {
-                return 'SEGURA';
-            } else {
-                return 'REVISAR';
-            }
+    let potasioVol: number = (potasio * 2 + fosfato_de_potasio) * 3.8 / (volTotalNPT / 1000);
 
+    if (potasioVol < 100) {
+        return 'SEGURA';
+    } else {
+        return 'REVISAR';
     }
-
-    export const alarmConcPotasio = ( potasio: string, fosfato_de_potasio: string,volTotalNPT:string) => {
-
-
-        let potasioVol: number = (parseInt(potasio)*2+parseInt(fosfato_de_potasio)) * 3.8 / (parseInt(volTotalNPT)/1000);
-
-        if (potasioVol < 100) {
-            return 'SEGURA';
-        } else {
-            return 'REVISAR';
-        }
 
 }
 
 
-export const alarmConcMagnesio = ( magnesio: string, fosfato_de_magnesio: string,volTotalNPT:string) => {
+export const alarmConcMagnesio = (prescription: IPrescriptions) => {
 
 
-    let magnesioVol: number = parseInt(magnesio)*1.62/ (parseInt(volTotalNPT)/1000);
+    const magnesio: number = parseInt(prescription.req_magnesio);
+    const volTotalNPT: number = prescription.volumen;
+
+    let magnesioVol: number = magnesio * 1.62 / (volTotalNPT / 1000);
 
     if (magnesioVol < 15) {
         return 'SEGURA';
@@ -122,4 +163,6 @@ export const alarmConcMagnesio = ( magnesio: string, fosfato_de_magnesio: string
     }
 
 }
+/////////////////////////////ALARMAS PARAMETROS NUTRICIONALES////////////////////////////////////////////////////
+
 

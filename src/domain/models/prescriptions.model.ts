@@ -42,6 +42,6 @@ export interface IPrescriptions {
     vit_hidrosolubles: string,
     req_vit_liposolubles: string,
     vit_C: string,
-    acido_folico: {}
+    acido_folico: string
 }
 

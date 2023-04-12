@@ -50,14 +50,14 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({isMovi
 						title={'Via de administración:'}
 						value={param_farmaceuticos.via_de_administración}
 					/>
-					<TextParams
+					{/* <TextParams
 						title={'Relación lípidos/aminoácidos:'}
 						value={param_farmaceuticos.relación_lipidos_aminoacidos}
 					/>
 					<TextParams
 						title={'Volumen acumulado:'}
 						value={param_farmaceuticos.volumen_acumulado}
-					/>
+					/> */}
 					<TextParams
 						title={'Osmolaridad:'}
 						value={param_farmaceuticos.volumen_acumulado}
@@ -71,61 +71,61 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({isMovi
 						value={param_farmaceuticos.factor_de_precipitación}
 					/>
 
-					<Divider />
+					{/* <Divider />
 
 					<Typography
 						fontSize={'20px'}
 						paddingY={2}
 						style={{ fontWeight: 700, color: colorsKarbono.primary }}
 					>Macronutrientes
-					</Typography >
+					</Typography > */}
 
 					<TextParams
-						title={'Volumen dextrosa 50%:'}
+						title={'Velocidad de infusión:'}
 						value={param_farmaceuticos.volumen_dextrosa50}
 						unidad={'ml'}
 					/>
 
 					<TextParams
-						title={'Volumen aminoácidos:'}
+						title={'Concentración de CHO`S(%):'}
 						value={param_farmaceuticos.volumen_aminoácidos}
 						unidad={'ml'}
 					/>
 					<TextParams
-						title={'Volumen lípidos:'}
+						title={'Concentración de Proteína(%):'}
 						value={param_farmaceuticos.volumen_lipidos}
 						unidad={'ml'}
 					/>
 
-					<Typography
+					{/* <Typography
 						fontSize={'20px'}
 						paddingY={2}
 						style={{ fontWeight: 700, color: colorsKarbono.primary }}
 					>Micronutientes
-					</Typography >
+					</Typography > */}
 
 					<TextParams
-						title={'Volumen sodio:'}
+						title={'Concentración de Lípidos(%):'}
 						value={param_farmaceuticos.volumen_sodio}
 						unidad={'ml'}
 					/>
 
 					<TextParams
-						title={'Volumen potasio:'}
+						title={'Concentración de Sodio (mEq/ml):'}
 						value={param_farmaceuticos.volumen_potacio}
 						unidad={'ml'}
 					/>
 					<TextParams
-						title={'Volumen fosfato:'}
+						title={'Concentración de Potasio (mEq/ml)'}
 						value={param_farmaceuticos.volumen_fosfato}
 						unidad={'ml'}
 					/>
 					<TextParams
-						title={'Volumen calcio:'}
+						title={'Concentración de Magnesio (mEq/ml)'}
 						value={param_farmaceuticos.volumen_calsio}
 						unidad={'ml'}
 					/>
-					<TextParams
+					{/* <TextParams
 						title={'Volumen sulfato:'}
 						value={param_farmaceuticos.volumen_sulfato_magnesio}
 						unidad={'ml'}
@@ -154,7 +154,7 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({isMovi
 						title={'Ácido fólico:'}
 						value={param_farmaceuticos.acido_folico}
 						unidad={'ml'}
-					/>
+					/> */}
 
 
 				</Box>

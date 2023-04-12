@@ -121,7 +121,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 									<CustomButton
 										onClick={
 											
-											()=>{(saveOK)&&router.push(mainRoutes.reportePrescripcion);handleCloseModalFormSaved}
+											()=>{(saveOK)?router.push(mainRoutes.reportePrescripcion):handleCloseModalFormSaved}
 										}
 										height={50}
 										width={137}

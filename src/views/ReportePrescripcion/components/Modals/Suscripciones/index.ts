@@ -1,0 +1,1 @@
+export { default as Suscripciones } from './Suscripciones';
