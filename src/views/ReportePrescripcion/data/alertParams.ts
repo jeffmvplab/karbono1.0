@@ -1,5 +1,5 @@
 import { IPrescriptions } from "@/domain/models/prescriptions.model"
-import { getAgua, getOsmolaridad } from "./functionsParams"
+import { getAgua, getConcentracionDeProteinas, getOsmolaridad } from "./functionsParams"
 
 
 
@@ -7,8 +7,8 @@ import { getAgua, getOsmolaridad } from "./functionsParams"
 export const alertVolTotal = (prescription: IPrescriptions) => {
 
     const volAgua: number = getAgua(prescription)
-    const oligoelementos: number = 0
-    const vitaminas: number = 0
+    const oligoelementos: number = parseInt(prescription.req_elementos_traza)
+    const vitaminas: number =  parseInt(prescription.req_vit_hidrosolubles)+parseInt(prescription.req_vit_liposolubles)
 
     let volTotal: number = volAgua
         + parseInt(prescription.dextrosa!) + parseInt(prescription.lipidos) + parseInt(prescription.aminoacidos) + parseInt(prescription.dipeptiven)
@@ -42,15 +42,13 @@ export const alertViaDeAdmin = (prescription: IPrescriptions) => {
 
 export const alertRelacion_Calcio_Fosfato = (prescription: IPrescriptions) => {
 
-    const calcio: number = parseInt(prescription.req_calcio);
-    const tCalcio: string = prescription.calcio;
-    const concCalcioMax: number = parseInt(prescription.req_calcio) * 0.15;
+    const Ca    : number = concCalcioMexcla(prescription);
+    const CCamax: number = concMaxCalcioSegura(prescription)!;
 
-    const fosfato: number = parseInt(prescription.req_fosfato);
-    const tFosforo: string = prescription.fosfato;
-    const concFosfato: number = parseInt(prescription.req_fosfato) * 0.15;;
-
-    if (calcio <= concCalcioMax || fosfato <= concCalcioMax) {
+    const PO4: number = concFosfatoMexcla(prescription);
+    const CPO4: number= concMaxFosfatoSegura(prescription)!;
+   
+    if (Ca <= CCamax || PO4 <= CPO4) {
         return 'SEGURA';
     } else {
         return 'INSEGURA'
@@ -60,7 +58,7 @@ export const alertRelacion_Calcio_Fosfato = (prescription: IPrescriptions) => {
 
 export const alarmFactorDePrecipitacion = (prescription: IPrescriptions) => {
 
-    const concDeProteinas: number = 0;
+    const concDeProteinas: number = getConcentracionDeProteinas(prescription);
     const calcio: number = parseInt(prescription.req_calcio);
     const fosfato_de_potasio: number = parseInt(prescription.req_fosfato);
     const volTotalNPT: number = prescription.volumen;
@@ -163,6 +161,51 @@ export const alarmConcMagnesio = (prescription: IPrescriptions) => {
     }
 
 }
-/////////////////////////////ALARMAS PARAMETROS NUTRICIONALES////////////////////////////////////////////////////
+/////////////////////////////PARAMETROS////////////////////////////////////////////////////
 
+
+export const concCalcioMexcla = (prescription: IPrescriptions) => {
+
+    const calcio: number = parseInt(prescription.req_calcio);
+    const volTotalNPT: number = prescription.volumen;
+
+    return calcio * 0.465 / (volTotalNPT / 1000);
+}
+
+
+export const concMaxCalcioSegura = (prescription: IPrescriptions) => {
+
+    if (getConcentracionDeProteinas(prescription) >= 1 || getConcentracionDeProteinas(prescription) <= 1.25) {
+        return 40
+    }
+    if (getConcentracionDeProteinas(prescription) >= 1.25 || getConcentracionDeProteinas(prescription) <= 2.5) {
+        return 70
+    }
+    if (getConcentracionDeProteinas(prescription) >= 2.5) {
+        return 112
+    }
+
+}
+
+export const concFosfatoMexcla = (prescription: IPrescriptions) => {
+
+    const fosfato: number = parseInt(prescription.req_fosfato);
+    const volTotalNPT: number = prescription.volumen;
+
+    return fosfato / (volTotalNPT / 1000);
+}
+
+
+export const concMaxFosfatoSegura = (prescription: IPrescriptions) => {
+
+    if (getConcentracionDeProteinas(prescription) >= 1 || getConcentracionDeProteinas(prescription) <= 1.25) {
+        return 25
+    }
+    if (getConcentracionDeProteinas(prescription) >= 1.25 || getConcentracionDeProteinas(prescription) <= 2.5) {
+        return 30
+    }
+    if (getConcentracionDeProteinas(prescription) >= 2.5) {
+        return 48
+    }
+}
 

@@ -54,14 +54,14 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const getMovilHeight = () => {
 
-		if (stateAcordion1 && stateAcordion2 && stateAcordion3) { return '3450px' }
-		if (!stateAcordion1 && stateAcordion2 && stateAcordion3) { return '2000px' }
-		if (stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '2780px' }
-		if (stateAcordion1 && stateAcordion2 && !stateAcordion3) { return '2275px' }
+		if (stateAcordion1 && stateAcordion2 && stateAcordion3) { return '3570px' }
+		if (!stateAcordion1 && stateAcordion2 && stateAcordion3) { return '2120px' }
+		if (stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '2800px' }
+		if (stateAcordion1 && stateAcordion2 && !stateAcordion3) { return '2375px' }
 		if (!stateAcordion1 && !stateAcordion2 && !stateAcordion3) { return '150px' }
 		if (stateAcordion1 && !stateAcordion2 && !stateAcordion3) { return '1600px' }
-		if (!stateAcordion1 && stateAcordion2 && !stateAcordion3) { return '820px' }
-		if (!stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '1330px' }
+		if (!stateAcordion1 && stateAcordion2 && !stateAcordion3) { return '920px' }
+		if (!stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '1360px' }
 	}
 	/////////////////////HANDLE MENUS/////////////////
 	const [open1, setOpen1] = React.useState<boolean>();
@@ -531,6 +531,15 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		const vitaminasHidrosolubles = event.target.value;
 	};
 
+	const [reqVitHidrosolubles, setReqVitHidrosolubles] = React.useState('');
+	const [errorReqVitHidrosolubles, setErrorReqVitHidrosolubles] = React.useState(false);
+	const [messageErrorReqVitHidrosolubles, setMessageErrorReqVitHidrosolubles] = React.useState('');
+
+	const handleReqVitHidrosolubles = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setReqVitHidrosolubles(event.target.value || '');
+		const reqVitaminasHidrosolubles = event.target.value;
+	};
+
 	const [vitaminasLiposolubles, setVitaminasLiposolubles] = React.useState('');
 	const [errorVitaminasLiposolubles, setErrorVitaminasLiposolubles] = React.useState(false);
 	const [messageErrorVitaminasLiposolubles, setMessageErrorVitaminasLiposolubles] = React.useState('');
@@ -610,7 +619,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			req_magnesio: reqMagnesio,
 			elementos_traza: elementosTraza,
 			req_elementos_traza: reqTraza,
-			vit_hidrosolubles: vitaminasHidrosolubles,
+			vit_hidrosolubles:vitaminasHidrosolubles,
+			req_vit_hidrosolubles:reqVitHidrosolubles,
 			req_vit_liposolubles: vitaminasLiposolubles,
 			vit_C: vitaminasC,
 			acido_folico: acidoFolico
@@ -730,6 +740,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			elementosTraza, errorElementosTraza, messageErrorElementosTraza, handleElementosTraza,
 			reqTraza, errorReqTraza, messageErrorReqTraza, handleReqTraza,
 			vitaminasHidrosolubles, errorVitaminasHidrosolubles, messageErrorVitaminasHidrosolubles, handleVitaminasHidrosolubles,
+			reqVitHidrosolubles, errorReqVitHidrosolubles, messageErrorReqVitHidrosolubles, handleReqVitHidrosolubles,
 			vitaminasLiposolubles, errorVitaminasLiposolubles, messageErrorVitaminasLiposolubles, handleVitaminasLiposolubles,
 			vitaminasC, errorVitaminasC, messageErrorVitaminasC, handleVitaminasC,
 			acidoFolico, errorAcidoFolico, messageErrorAcidoFolico, handleAcidoFolico,

@@ -13,7 +13,7 @@ interface ContextProps {
     setStateAcordion3: Dispatch<SetStateAction<boolean>>,
     handleAcordion3: () => void,
 
-    getMovilHeight: () => "3450px" | "2000px" | "2780px" | "2275px" | "150px" | "1600px" | "820px" | "1330px" | undefined
+    getMovilHeight: () => string| undefined
 
     open1: boolean | undefined,
     handleMenu1: () => void,
@@ -68,11 +68,12 @@ interface ContextProps {
     elementosTraza: string, errorElementosTraza: boolean, messageErrorElementosTraza: string, handleElementosTraza: (event: React.ChangeEvent<HTMLInputElement>) => void,
     reqTraza: string, errorReqTraza: boolean, messageErrorReqTraza: string, handleReqTraza: (event: React.ChangeEvent<HTMLInputElement>) => void,
     vitaminasHidrosolubles: string, errorVitaminasHidrosolubles: boolean, messageErrorVitaminasHidrosolubles: string, handleVitaminasHidrosolubles: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    reqVitHidrosolubles: string, errorReqVitHidrosolubles: boolean, messageErrorReqVitHidrosolubles: string, handleReqVitHidrosolubles: (event: React.ChangeEvent<HTMLInputElement>) => void,
     vitaminasLiposolubles: string, errorVitaminasLiposolubles: boolean, messageErrorVitaminasLiposolubles: string, handleVitaminasLiposolubles: (event: React.ChangeEvent<HTMLInputElement>) => void,
     vitaminasC: string, errorVitaminasC: boolean, messageErrorVitaminasC: string, handleVitaminasC: (event: React.ChangeEvent<HTMLInputElement>) => void,
     acidoFolico: string, errorAcidoFolico: boolean, messageErrorAcidoFolico: string, handleAcidoFolico: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
-    loadingSave: boolean,
+    loadingSave: boolean
     saveOK: boolean,
     valAllForm: boolean,
     messageAPI:string,

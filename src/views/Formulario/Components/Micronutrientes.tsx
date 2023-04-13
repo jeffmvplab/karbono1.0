@@ -52,20 +52,21 @@ const Micronutrientes = () => {
         stateAcordion3, setStateAcordion3, matches, handleAcordion3,
 
         sodioTotal, handleSodioTotal,
-        potacioTotal,  handlePotacioTotal,
-        fosfato,  handleFosfato,
+        potacioTotal, handlePotacioTotal,
+        fosfato, handleFosfato,
         requerimientoFosfato, handleRequerimientoFosfato,
         calcio, handleCalcio,
         unidades, handleUnidades,
         reqCalcio, handleReqCalcio,
-        magnesio,handleMagnesio,
+        magnesio, handleMagnesio,
         reqMagnesio, handleReqMagnesio,
         elementosTraza, handleElementosTraza,
-        reqTraza,  handleReqTraza,
-        vitaminasHidrosolubles,  handleVitaminasHidrosolubles,
+        reqTraza, handleReqTraza,
+        vitaminasHidrosolubles, handleVitaminasHidrosolubles,
+        reqVitHidrosolubles, handleReqVitHidrosolubles,
         vitaminasLiposolubles, handleVitaminasLiposolubles,
         vitaminasC, handleVitaminasC,
-        acidoFolico,  handleAcidoFolico,
+        acidoFolico, handleAcidoFolico,
 
     } = useContext(FormulariosContext)
 
@@ -210,11 +211,11 @@ const Micronutrientes = () => {
 
                                 </Grid>
 
-                                <Grid item xs={12} sm={6} md={3} style={{ padding: '10px' }}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
-                                        onChange={handleUnidades}
-                                        value={unidades}
-                                        id='unidades '
+                                        onChange={handleReqCalcio}
+                                        value={reqCalcio}
+                                        id='requerimiento_calcio'
                                         label={
                                             (calcio === 'Gluconato de Calcio')
                                                 ? (tipoPrescripcion === 'Por requerimientos')
@@ -223,19 +224,8 @@ const Micronutrientes = () => {
                                                 : (tipoPrescripcion === 'Por requerimientos')
                                                     ? 'Calcio Elemental (mEq/kg/día)'
                                                     : 'Calcio Elemental (ml)'
-                                          
-                                        }
-                                        type='text'
-                                    />
-                                    {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
-                                </Grid>
 
-                                <Grid item xs={12} sm={6} md={3} style={{ padding: '10px' }}>
-                                    <CustomTextField
-                                        onChange={handleReqCalcio}
-                                        value={reqCalcio}
-                                        id='requerimiento_calcio'
-                                        label='Requerimiento calcio'
+                                        }
                                         type='text'
                                     />
                                     {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
@@ -247,11 +237,11 @@ const Micronutrientes = () => {
                             <Grid container spacing={2}>
 
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                                <CustomTextField
-                                       onChange={handleMagnesio}
-                                       value={magnesio}
-                                       id='magnesio'
-                                       label='Magnesio'
+                                    <CustomTextField
+                                        onChange={handleMagnesio}
+                                        value={magnesio}
+                                        id='magnesio'
+                                        label='Magnesio'
                                         type='text'
                                         select
                                     >
@@ -260,8 +250,8 @@ const Micronutrientes = () => {
                                                 {option.label}
                                             </MenuItem>
                                         ))}
-                                    </CustomTextField> 
-                                  
+                                    </CustomTextField>
+
                                     {/* <TextFieldInput id='sulfato-de-magnesio' type='text' label='Sulfato de magnesio' /> */}
                                 </Grid>
 
@@ -274,15 +264,15 @@ const Micronutrientes = () => {
                                         label={
                                             (tipoPaciente === 'Adulto')
                                                 ? (tipoPrescripcion === 'Por requerimientos')
-                                                    ? 'Req Sulfato de magnesio (mg/kg/día)'
-                                                    : 'Req Sulfato de magnesio (ml)'
-                                                :(tipoPaciente === 'Pediatrico')
-                                                 ? (tipoPrescripcion === 'Por requerimientos')
-                                                    ? 'Req Magnesio Elemental (mEq/kg/día)'
-                                                    : 'Req Magnesio Elemental (ml)'
-                                                 : (tipoPrescripcion === 'Por requerimientos')
-                                                   ? 'Req Magnesio Elemental (mEq/kg/día)'
-                                                   : 'Req Magnesio Elemental (ml)'
+                                                    ? 'Sulfato de magnesio (mg/kg/día)'
+                                                    : 'Sulfato de magnesio (ml)'
+                                                : (tipoPaciente === 'Pediatrico')
+                                                    ? (tipoPrescripcion === 'Por requerimientos')
+                                                        ? 'Magnesio Elemental (mEq/kg/día)'
+                                                        : 'Magnesio Elemental (ml)'
+                                                    : (tipoPrescripcion === 'Por requerimientos')
+                                                        ? 'Magnesio Elemental (mEq/kg/día)'
+                                                        : 'Magnesio Elemental (ml)'
                                         }
                                         type='text'
                                     />
@@ -307,21 +297,21 @@ const Micronutrientes = () => {
                                         select
                                     >
                                         {
-                                        (tipoPaciente === 'Adulto')
-                                        ?trazaAdulto.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>))
-                                        :(tipoPaciente === 'Pediatrico')
-                                          ?trazaPediatrico.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>))
-                                          :trazaNeonato.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>))
-                                    }
+                                            (tipoPaciente === 'Adulto')
+                                                ? trazaAdulto.map((option) => (
+                                                    <MenuItem key={option.value} value={option.value}>
+                                                        {option.label}
+                                                    </MenuItem>))
+                                                : (tipoPaciente === 'Pediatrico')
+                                                    ? trazaPediatrico.map((option) => (
+                                                        <MenuItem key={option.value} value={option.value}>
+                                                            {option.label}
+                                                        </MenuItem>))
+                                                    : trazaNeonato.map((option) => (
+                                                        <MenuItem key={option.value} value={option.value}>
+                                                            {option.label}
+                                                        </MenuItem>))
+                                        }
                                     </CustomTextField>
                                 </Grid>
 
@@ -367,19 +357,44 @@ const Micronutrientes = () => {
                                                         {option.label}
                                                     </MenuItem>
                                                 ))
-                                                :(tipoPaciente === 'Pediatrico')
-                                                 ? hidrosolublesPediatricos.map((option) => (
-                                                    <MenuItem key={option.value} value={option.value}>
-                                                        {option.label}
-                                                    </MenuItem>
-                                                ))
-                                                 :hidrosolublesPediatricos.map((option) => (
-                                                    <MenuItem key={option.value} value={option.value}>
-                                                        {option.label}
-                                                    </MenuItem>
-                                                ))
+                                                : (tipoPaciente === 'Pediatrico')
+                                                    ? hidrosolublesPediatricos.map((option) => (
+                                                        <MenuItem key={option.value} value={option.value}>
+                                                            {option.label}
+                                                        </MenuItem>
+                                                    ))
+                                                    : hidrosolublesPediatricos.map((option) => (
+                                                        <MenuItem key={option.value} value={option.value}>
+                                                            {option.label}
+                                                        </MenuItem>
+                                                    ))
                                         }
                                     </CustomTextField>
+                                </Grid>
+
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                    <CustomTextField
+                                        onChange={handleReqVitHidrosolubles}
+                                        value={reqVitHidrosolubles}
+                                        id='req-vitaminas-hidrosolubles'
+                                        label={  (tipoPrescripcion === 'Por requerimientos')
+                                        ? 'Requerimientos Vitaminas hidrosolubes (ml/día)'
+                                        : 'Requerimientos Vitaminas hidrosolubes (ml)'}
+                                        type='text'
+                                    />
+                                </Grid>
+
+                            </Grid>
+
+                        </Box>
+
+                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+
+                            <Grid container spacing={2}>
+
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+
                                 </Grid>
 
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
@@ -392,13 +407,13 @@ const Micronutrientes = () => {
                                                 ? (tipoPrescripcion === 'Por requerimientos')
                                                     ? 'Vitalipid adult (ml/día)'
                                                     : 'Vitalipid adult (ml)'
-                                                :(tipoPaciente === 'Pediatrico')
-                                                 ? (tipoPrescripcion === 'Por requerimientos')
-                                                    ? 'Vitalipid infant (ml/día)'
-                                                    : 'Vitalipid infant (ml)'
-                                                 :(tipoPrescripcion === 'Por requerimientos')
-                                                 ? 'Vitalipid infant (ml/día)'
-                                                 : 'Vitalipid infant (ml)'
+                                                : (tipoPaciente === 'Pediatrico')
+                                                    ? (tipoPrescripcion === 'Por requerimientos')
+                                                        ? 'Vitalipid infant (ml/día)'
+                                                        : 'Vitalipid infant (ml)'
+                                                    : (tipoPrescripcion === 'Por requerimientos')
+                                                        ? 'Vitalipid infant (ml/día)'
+                                                        : 'Vitalipid infant (ml)'
 
                                         }
                                         type='text'

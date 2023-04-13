@@ -12,6 +12,7 @@ export interface IPrescriptionsRepository {
     getPrescripcionsByName(name:string): Promise<any>;
     getPrescripcionsById(id:string): Promise<any>;
     getPrescripcionsByIps(ips:string): Promise<any>;
+    getPrescripcionsAll(): Promise<any>;
 
 }
 
@@ -71,6 +72,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
                 "elementos_traza": prescriptions.req_elementos_traza,
                 "req_elementos_traza": prescriptions.req_elementos_traza,
                 "vit_hidrosolubles": prescriptions.vit_hidrosolubles,
+                "req_vit_hidrosolubles": prescriptions.req_vit_hidrosolubles,
                 "req_vit_liposolubles": prescriptions.req_vit_liposolubles,
                 "vit_C": prescriptions.vit_C,
                 "acido_folico": prescriptions.acido_folico
@@ -103,6 +105,19 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
         url: `${ApiUrlsEnum.getPrescriptionsByNumber}/${number}`,
         method: 'get',
         // body: {},
+    });
+    return axiosRequest;
+}
+
+ /////////////////////////////////Get Predscripcion By Name////////////////////////////////////////////////
+ async getPrescripcionsAll(): Promise<any> {
+
+    const axiosRequest = await this.axiosHttpClient.request({
+        url: ApiUrlsEnum.getAllPrescriptions,
+        method: 'get',
+        // body: {
+        //     "nombre_paciente": name,
+        // },
     });
     return axiosRequest;
 }
