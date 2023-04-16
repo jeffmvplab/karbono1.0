@@ -13,8 +13,7 @@ const currencies = [
 
 const tiposPacientes = [
     { value: 'Adulto', label: 'Adulto' },
-    { value: 'Pediatrico', label: 'Pediatrico' },
-    { value: 'Neonato', label: 'Neotato' }
+    { value: 'Pediatrico', label: 'Pediatrico-Neonato' },
 ]
 
 const viaAdministracion = [
@@ -252,7 +251,7 @@ const InformacionPaciente = () => {
                                     <CustomTextField
                                         onChange={handleVolumen}
                                         id='volumen'
-                                        label='Volumen*'
+                                        label='Volumen total NPT*'
                                         type='text'
                                         value={volumen}
                                     />

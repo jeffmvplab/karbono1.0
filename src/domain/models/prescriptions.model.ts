@@ -40,6 +40,7 @@ export interface IPrescriptions {
     elementos_traza: string,
     req_elementos_traza: string,
     vit_hidrosolubles: string,
+    req_vit_hidrosolubles: string,
     req_vit_liposolubles: string,
     vit_C: string,
     acido_folico: string

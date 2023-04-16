@@ -1,8 +1,10 @@
 import { colorsKarbono } from '@/themes/colors';
 import { Box, Card, Divider, Typography } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
 import { param_nutricionales } from '../../data/data';
-import { TextParams } from '../TextParams';
+import { TextParamsNumb } from '../TextParamsNumb';
+import { FormulariosContext } from '../../context/FormulariosContext';
+import { getCalTotales, getCalTotalesKgDia, getCaloriasNoProteicasCHOS, getCaloriasNoProteicasKg, getCaloriasNoProteicasLIPIDOS, getCaloriasTotalesProteicas, getCaloriasTotalesProteicasKg, getGramosTotalesNitro, getRelacionCalNoProteicasAminoacidos, getRelacionCalNoProteicasN } from '@/views/ReportePrescripcion/data/functionsParams';
 
 export interface ParametrosNutricionalesProps {
 	isMovil?: boolean;
@@ -11,7 +13,8 @@ export interface ParametrosNutricionalesProps {
 const ParametrosNutricionales: React.FC<ParametrosNutricionalesProps> = ({ isMovil = false }) => {
 
 	const borderRadius: number = 10;
-
+	const { prescriptionSave, loadingSave } = useContext(FormulariosContext)
+	
 	return (
 
 		<Card
@@ -41,48 +44,46 @@ const ParametrosNutricionales: React.FC<ParametrosNutricionalesProps> = ({ isMov
 
 				<Divider />
 				<Box padding={1}>
-					<TextParams
+					<TextParamsNumb
 						title={'Calorías totales:'}
-						value={param_nutricionales.calorias}
-						unidad={'ml'}
-						seguridad={'Seguro'}
+						value={getCalTotales(prescriptionSave!).toFixed(2)}
 					/>
-					<TextParams
+					<TextParamsNumb
 						title={'Calorías totales/kg/día:'}
-						value={param_nutricionales.calorias_totalesKgDia}
+						value={getCalTotalesKgDia(prescriptionSave!).toFixed(2)}
 					/>
-					<TextParams
+					<TextParamsNumb
 						title={'Gramos totales de Nitrógeno:'}
-						value={param_nutricionales.gramos_totales_de_nitrogeno}
+						value={getGramosTotalesNitro(prescriptionSave!).toFixed(2)}
 					/>
-					<TextParams
+					<TextParamsNumb
 						title={'Calorías totales Protéicas:'}
-						value={param_nutricionales.calorias_totales_proteicasKg}
+						value={getCaloriasTotalesProteicas(prescriptionSave!).toFixed(2)}
 					/>
-					<TextParams
+					<TextParamsNumb
 						title={'Calorías totales Protéicas/kg (kcal/kg):'}
-						value={param_nutricionales.calorias_totales_proteicasKg}
+						value={getCaloriasTotalesProteicasKg(prescriptionSave!).toFixed(2)}
 					/>
-					<TextParams
+					<TextParamsNumb
 						title={'Calorías totales No Protéicas CHO’S:'}
-						value={param_nutricionales.calorias_totales_no_proteicasCHOS}
+						value={getCaloriasNoProteicasCHOS(prescriptionSave!).toFixed(2)}
 					/>
-					<TextParams
+					<TextParamsNumb
 						title={'Calorías totales No Protéicas Lípidos:'}
-						value={param_nutricionales.calorias_totales_no_proteicas_lipidos}
+						value={getCaloriasNoProteicasLIPIDOS(prescriptionSave!).toFixed(2)}
 					/>
-					<TextParams
+					<TextParamsNumb
 						title={'Relación: Cal No Protéicas Protéicas/g Nitrogeno:'}
-						value={param_nutricionales.relacion_Cal_No_proteicas_gAA}
+						value={getRelacionCalNoProteicasN(prescriptionSave!).toFixed(2)}
 					/>
-					<TextParams
+					<TextParamsNumb
 						title={'Calorías No Protéicas/kg:'}
-						value={param_nutricionales.calorias_totales_no_proteicas_lipidos}
+						value={getCaloriasNoProteicasKg(prescriptionSave!).toFixed(2)}
 					/>
 
-					<TextParams
+					<TextParamsNumb
 						title={'Relación: Cal No Protéicas Protéicas/g Aminoacidos:'}
-						value={param_nutricionales.relacion_Cal_No_proteicas_gAA}
+						value={getRelacionCalNoProteicasAminoacidos(prescriptionSave!).toFixed(2)}
 					/>
 
 					{/* <Divider />
@@ -94,18 +95,18 @@ const ParametrosNutricionales: React.FC<ParametrosNutricionalesProps> = ({ isMov
 					>Distribución Porcentual
 					</Typography >
 
-					<TextParams
+					<TextParamsNumb
 						title={'Porcentaje de proteína:'}
 						value={param_nutricionales.porcentaje_de_proteina}
 						unidad={'ml'}
 					/>
 
-					<TextParams
+					<TextParamsNumb
 						title={'Porcentaje de lípidos:'}
 						value={param_nutricionales.porcentaje_de_lipidos}
 						unidad={'ml'}
 					/>
-					<TextParams
+					<TextParamsNumb
 						title={'Porcentaje de carbohidratos:'}
 						value={param_nutricionales.porcentaje_de_carbohidratos}
 						unidad={'ml'}

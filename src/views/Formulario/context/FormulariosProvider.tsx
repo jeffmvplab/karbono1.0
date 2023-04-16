@@ -54,14 +54,14 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const getMovilHeight = () => {
 
-		if (stateAcordion1 && stateAcordion2 && stateAcordion3) { return '3450px' }
-		if (!stateAcordion1 && stateAcordion2 && stateAcordion3) { return '2000px' }
-		if (stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '2780px' }
-		if (stateAcordion1 && stateAcordion2 && !stateAcordion3) { return '2275px' }
+		if (stateAcordion1 && stateAcordion2 && stateAcordion3) { return '3570px' }
+		if (!stateAcordion1 && stateAcordion2 && stateAcordion3) { return '2120px' }
+		if (stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '2800px' }
+		if (stateAcordion1 && stateAcordion2 && !stateAcordion3) { return '2375px' }
 		if (!stateAcordion1 && !stateAcordion2 && !stateAcordion3) { return '150px' }
 		if (stateAcordion1 && !stateAcordion2 && !stateAcordion3) { return '1600px' }
-		if (!stateAcordion1 && stateAcordion2 && !stateAcordion3) { return '820px' }
-		if (!stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '1330px' }
+		if (!stateAcordion1 && stateAcordion2 && !stateAcordion3) { return '920px' }
+		if (!stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '1360px' }
 	}
 	/////////////////////HANDLE MENUS/////////////////
 	const [open1, setOpen1] = React.useState<boolean>();
@@ -110,15 +110,15 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorNumOrder, setMessageErrorNumOrder] = React.useState('');
 
 	const handleNumOrder = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setNumOrder(event.target.value || '');
-		const numOrder = event.target.value;
-		if (numOrder.length > 7 && !isNaN(parseInt(numOrder))) {
-			setErrorNumOrder(false);
-			setMessageErrorNumOrder('')
-		} else {
-			setErrorNumOrder(true);
-			setMessageErrorNumOrder('Introduzca un número de orden válido')
-		}
+		setNumOrder(event.target.value);
+		// const numOrder = event.target.value;
+		// if (numOrder.length > 7 && !isNaN(parseInt(numOrder))) {
+		// 	setErrorNumOrder(false);
+		// 	setMessageErrorNumOrder('')
+		// } else {
+		// 	setErrorNumOrder(true);
+		// 	setMessageErrorNumOrder('Introduzca un número de orden válido')
+		// }
 	};
 
 	const [prescripcion, setPrescripcion] = React.useState('');
@@ -126,8 +126,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorPrescripcion, setMessageErrorPrescripcion] = React.useState('');
 
 	const handlePrescripcion = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setPrescripcion(event.target.value || '');
-		const prescripcion = event.target.value;
+		setPrescripcion(event.target.value);
+		// const prescripcion = event.target.value;
 	};
 
 	const formatoFecha = (fecha: Date) => {
@@ -144,8 +144,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorFechaCreacion, setMessageErrorFechaCreacion] = React.useState('');
 
 	const handleFechaCreacion = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setFechaCreacion(event.target.value || '');
-		const fechaCreacion = event.target.value;
+		setFechaCreacion(event.target.value );
 	};
 
 	const fechaActual = () => {
@@ -161,9 +160,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorIps, setMessageErrorIps] = React.useState('');
 
 	const handleIps = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setIps(event.target.value || '');
-		const ips = event.target.value;
-		console.log(' ips:', ips)
+		setIps(event.target.value);
+		// const ips = event.target.value;
+		// console.log(' ips:', ips)
 	};
 
 	const [numIden, setNumIden] = React.useState('');
@@ -171,15 +170,15 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorNumIden, setMessageErrorNumIden] = React.useState('');
 
 	const handleNumIden = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setNumIden(event.target.value || '');
-		const numIden = event.target.value;
-		if (!isNaN(parseInt(numIden))) {
-			setErrorNumIden(false);
-			setMessageErrorNumIden('')
-		} else {
-			setErrorNumIden(true);
-			setMessageErrorNumIden('Introduzca un número de identificación')
-		}
+		setNumIden(event.target.value);
+		// const numIden = event.target.value;
+		// if (!isNaN(parseInt(numIden))) {
+		// 	setErrorNumIden(false);
+		// 	setMessageErrorNumIden('')
+		// } else {
+		// 	setErrorNumIden(true);
+		// 	setMessageErrorNumIden('Introduzca un número de identificación')
+		// }
 	};
 
 	const [namePaciente, setNamePaciente] = React.useState('');
@@ -187,8 +186,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorNamePaciente, setMessageErrorNamePaciente] = React.useState('');
 
 	const handleNamePaciente = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setNamePaciente(event.target.value || '');
-		const namePaciente = event.target.value;
+		setNamePaciente(event.target.value);
+		// const namePaciente = event.target.value;
 	};
 
 	const [servicio, setServicio] = React.useState('');
@@ -196,8 +195,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorServicio, setMessageErrorServicio] = React.useState('');
 
 	const handleServicio = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setServicio(event.target.value || '');
-		const servicio = event.target.value;
+		setServicio(event.target.value);
+		// const servicio = event.target.value;
 	};
 
 	const [ubicacion, setUbicacion] = React.useState('');
@@ -205,8 +204,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorUbicacion, setMessageErrorUbicacion] = React.useState('');
 
 	const handleUbicacion = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setUbicacion(event.target.value || '');
-		const ubicacion = event.target.value;
+		setUbicacion(event.target.value);
+		// const ubicacion = event.target.value;
 	};
 
 	const [cama, setCama] = React.useState('');
@@ -214,8 +213,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorCama, setMessageErrorCama] = React.useState('');
 
 	const handleCama = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setCama(event.target.value || '');
-		const cama = event.target.value;
+		setCama(event.target.value);
+		// const cama = event.target.value;
 	};
 
 	const [pesoKg, setPesoKg] = React.useState('');
@@ -223,8 +222,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorPesoKg, setMessageErrorPesoKg] = React.useState('');
 
 	const handlePesoKg = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setPesoKg(event.target.value || '');
-		const pesoKg = event.target.value;
+		setPesoKg(event.target.value);
+		getPrescriptions();
 	};
 
 	const [edad, setEdad] = React.useState('');
@@ -232,15 +231,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorEdad, setMessageErrorEdad] = React.useState('');
 
 	const handleEdad = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setEdad(event.target.value || '');
-		const edad = event.target.value;
-		if (!isNaN(parseInt(edad))) {
-			setErrorEdad(false);
-			setMessageErrorEdad('')
-		} else {
-			setErrorEdad(true);
-			setMessageErrorEdad('Introduzca un número de identificación')
-		}
+		setEdad(event.target.value);
+		
 	};
 
 	const [tipoEdad, setTipoEdad] = React.useState('');
@@ -248,8 +240,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorTipoEdad, setMessageErrorTipoEdad] = React.useState('');
 
 	const handleTipoEdad = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTipoEdad(event.target.value || '');
-		const tipoEdad = event.target.value;
+		setTipoEdad(event.target.value);
+		// const tipoEdad = event.target.value;
 	};
 
 	const [volumen, setVolumen] = React.useState('');
@@ -257,8 +249,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorVolumen, setMessageErrorVolumen] = React.useState('');
 
 	const handleVolumen = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setVolumen(event.target.value || '');
-		const volumen = event.target.value;
+		setVolumen(event.target.value);
+		getPrescriptions();
 	};
 
 	const [purga, setPurga] = React.useState('');
@@ -266,8 +258,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorPurga, setMessageErrorPurga] = React.useState('');
 
 	const handlePurga = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setPurga(event.target.value || '');
-		const purga = event.target.value;
+		setPurga(event.target.value);
+		getPrescriptions();
 	};
 
 	const [tiempoDeInfucion, setTiempoDeInfucion] = React.useState<number>(0);
@@ -276,8 +268,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleTiempoDeInfucion = (event: Event, newValue: number | number[]) => {
 		setTiempoDeInfucion(newValue as number);
-		const tiempoDeInfucion = newValue as number;
-		// console.log('TIEMPO:',tiempoDeInfucion)
+		getPrescriptions();
 	};
 
 	const [overfill, setOverfill] = React.useState<number>(0);
@@ -286,7 +277,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleOverfill = (event: Event, newValue: number | number[]) => {
 		setOverfill(newValue as number);
-		const overfill = newValue as number;
+		getPrescriptions();
 	};
 
 	const [filtro, setFiltro] = React.useState('');
@@ -294,9 +285,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorFiltro, setMessageErrorFiltro] = React.useState('');
 
 	const handleFiltro = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setFiltro(event.target.value || '');
-		const filtro = event.target.value;
-		console.log('filtro:', filtro)
+		setFiltro(event.target.value);
+		getPrescriptions();
 	};
 
 	const [eqFotosencible, setEqFotosencible] = React.useState('');
@@ -304,8 +294,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorEqFotosencible, setMessageErrorEqFotosencible] = React.useState('');
 
 	const handleEqFotosencible = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setEqFotosencible(event.target.value || '');
-		const eqFotosencible = event.target.value;
+		setEqFotosencible(event.target.value);
+		getPrescriptions();
 	};
 
 	const [tipoPaciente, setTipoPaciente] = React.useState('');
@@ -313,9 +303,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorTipoPaciente, setMessageErrorTipoPaciente] = React.useState('');
 
 	const handleTipoPaciente = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTipoPaciente(event.target.value || '');
-		const tipoPaciente = event.target.value;
-		console.log('tipoPaciente:', tipoPaciente)
+		setTipoPaciente(event.target.value);
+		getPrescriptions();
 	};
 
 	const [viaAdmin, setViaAdmin] = React.useState('');
@@ -323,8 +312,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorViaAdmin, setMessageErrorViaAdmin] = React.useState('');
 
 	const handleViaAdmin = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setViaAdmin(event.target.value || '');
-		const viaAdmin = event.target.value;
+		setViaAdmin(event.target.value);
+		getPrescriptions();
 	};
 
 	const [diagnostico, setDiagnostico] = React.useState('');
@@ -332,8 +321,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorDiagnostico, setMessageErrorDiagnostico] = React.useState('');
 
 	const handleDiagnostico = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setDiagnostico(event.target.value || '');
-		const diagnostico = event.target.value;
+		setDiagnostico(event.target.value);
+		// const diagnostico = event.target.value;
 	};
 
 	////////////////////MACRONUTRIENTES////////////////////////////////////
@@ -344,8 +333,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorTipoPrescripcion, setMessageErrorTipoPrescripcion] = React.useState('');
 
 	const handleTipoPrescripcion = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTipoPrescripcion(event.target.value || '');
-		const tipoPrescripcion = event.target.value;
+		setTipoPrescripcion(event.target.value);
+		getPrescriptions();
 	};
 
 	const [flujoMetabolico, setFlujoMetabolico] = React.useState('');
@@ -353,8 +342,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorFlujoMetabolico, setMessageErrorFlujoMetabolico] = React.useState('');
 
 	const handleFlujoMetabolico = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setFlujoMetabolico(event.target.value || '');
-		const flujoMetabolico = event.target.value;
+		setFlujoMetabolico(event.target.value);
+		getPrescriptions();
 	};
 
 	const [dextrosa, setDextrosa] = React.useState('');
@@ -362,8 +351,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorDextrosa, setMessageErrorDextrosa] = React.useState('');
 
 	const handleDextrosa = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setDextrosa(event.target.value || '');
-		const dextrosa = event.target.value;
+		setDextrosa(event.target.value);
+		getPrescriptions();
 	};
 
 	const [aminoacidos, setAminoacidos] = React.useState('');
@@ -371,8 +360,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorAminoacidos, setMessageErrorAminoacidos] = React.useState('');
 
 	const handleAminoacidos = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setAminoacidos(event.target.value || '');
-		const aminoacidos = event.target.value;
+		setAminoacidos(event.target.value);
+		getPrescriptions();
 	};
 
 	const [requerimientoAminoacidos, setRequerimientoAminoacidos] = React.useState('');
@@ -380,8 +369,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorRequerimientoAminoacidos, setMessageErrorRequerimientoAminoacidos] = React.useState('');
 
 	const handleRequerimientoAminoacidos = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setRequerimientoAminoacidos(event.target.value || '');
-		const requerimientoAminoacidos = event.target.value;
+		setRequerimientoAminoacidos(event.target.value);
+		getPrescriptions();
 	};
 
 	const [lipidos, setLipidos] = React.useState('');
@@ -389,8 +378,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorLipidos, setMessageErrorLipidos] = React.useState('');
 
 	const handleLipidos = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setLipidos(event.target.value || '');
-		const lipidos = event.target.value;
+		setLipidos(event.target.value);
+		getPrescriptions();
 	};
 
 	const [requerimientoLipidos, setRequerimientoLipidos] = React.useState('');
@@ -398,8 +387,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorRequerimientoLipidos, setMessageErrorRequerimientoLipidos] = React.useState('');
 
 	const handleRequerimientoLipidos = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setRequerimientoLipidos(event.target.value || '');
-		const requerimientoLipidos = event.target.value;
+		setRequerimientoLipidos(event.target.value);
+		getPrescriptions();
 	};
 
 	const [omegaven, setOmegaven] = React.useState('');
@@ -407,8 +396,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorOmegaven, setMessageErrorOmegaven] = React.useState('');
 
 	const handleOmegaven = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setOmegaven(event.target.value || '');
-		const omegaven = event.target.value;
+		setOmegaven(event.target.value);
+		getPrescriptions();
 	};
 
 	const [dipeptiven, setDipeptiven] = React.useState('');
@@ -416,8 +405,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorDipeptiven, setMessageErrorDipeptiven] = React.useState('');
 
 	const handleDipeptiven = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setDipeptiven(event.target.value || '');
-		const dipeptiven = event.target.value;
+		setDipeptiven(event.target.value);
+		getPrescriptions();
 	};
 
 	////////////////////MICRONURIENTES////////////////////////////////////
@@ -427,8 +416,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorSodioTotal, setMessageErrorSodioTotal] = React.useState('');
 
 	const handleSodioTotal = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setSodioTotal(event.target.value || '');
-		const sodioTotal = event.target.value;
+		setSodioTotal(event.target.value);
+		getPrescriptions();
 	};
 
 	const [potacioTotal, setPotacioTotal] = React.useState('');
@@ -436,8 +425,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorPotacioTotal, setMessageErrorPotacioTotal] = React.useState('');
 
 	const handlePotacioTotal = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setPotacioTotal(event.target.value || '');
-		const potacioTotal = event.target.value;
+		setPotacioTotal(event.target.value);
+		getPrescriptions();
 	};
 
 	const [fosfato, setFosfato] = React.useState('');
@@ -445,8 +434,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorFosfato, setMessageErrorFosfato] = React.useState('');
 
 	const handleFosfato = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setFosfato(event.target.value || '');
-		const fosfato = event.target.value;
+		setFosfato(event.target.value);
+		getPrescriptions();
 	};
 
 	const [requerimientoFosfato, setRequerimientoFosfato] = React.useState('');
@@ -454,8 +443,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorRequerimientoFosfato, setMessageErrorRequerimientoFosfato] = React.useState('');
 
 	const handleRequerimientoFosfato = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setRequerimientoFosfato(event.target.value || '');
-		const requerimientoFosfato = event.target.value;
+		setRequerimientoFosfato(event.target.value);
+		getPrescriptions();
 	};
 
 	const [calcio, setCalcio] = React.useState('');
@@ -463,8 +452,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorCalcio, setMessageErrorCalcio] = React.useState('');
 
 	const handleCalcio = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setCalcio(event.target.value || '');
-		const calcio = event.target.value;
+		setCalcio(event.target.value);
+		getPrescriptions();
 	};
 
 	const [unidades, setUnidades] = React.useState('');
@@ -472,9 +461,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorUnidades, setMessageErrorUnidades] = React.useState('');
 
 	const handleUnidades = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setUnidades(event.target.value || '');
-		const unidades = event.target.value;
-		console.log('Unidad:', unidades)
+		setUnidades(event.target.value);
+		getPrescriptions();
 	};
 
 	const [reqCalcio, setReqCalcio] = React.useState('');
@@ -482,8 +470,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorReqCalcio, setMessageErrorReqCalcio] = React.useState('');
 
 	const handleReqCalcio = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setReqCalcio(event.target.value || '');
-		const reqCalcio = event.target.value;
+		setReqCalcio(event.target.value);
+		getPrescriptions();
 	};
 
 	const [magnesio, setMagnesio] = React.useState('');
@@ -491,8 +479,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorMagnesio, setMessageErrorMagnesio] = React.useState('');
 
 	const handleMagnesio = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setMagnesio(event.target.value || '');
-		const magnesio = event.target.value;
+		setMagnesio(event.target.value);
+		getPrescriptions();
 	};
 
 	const [reqMagnesio, setReqMagnesio] = React.useState('');
@@ -500,8 +488,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorReqMagnesio, setMessageErrorReqMagnesio] = React.useState('');
 
 	const handleReqMagnesio = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setReqMagnesio(event.target.value || '');
-		const reqMagnesio = event.target.value;
+		setReqMagnesio(event.target.value);
+		getPrescriptions();
 	};
 
 	const [elementosTraza, setElementosTraza] = React.useState('');
@@ -509,8 +497,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorElementosTraza, setMessageErrorElementosTraza] = React.useState('');
 
 	const handleElementosTraza = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setElementosTraza(event.target.value || '');
-		const elementosTraza = event.target.value;
+		setElementosTraza(event.target.value);
+		getPrescriptions();
 	};
 
 	const [reqTraza, setReqTraza] = React.useState('');
@@ -518,8 +506,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorReqTraza, setMessageErrorReqTraza] = React.useState('');
 
 	const handleReqTraza = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setReqTraza(event.target.value || '');
-		const reqTraza = event.target.value;
+		setReqTraza(event.target.value);
+		getPrescriptions();
 	};
 
 	const [vitaminasHidrosolubles, setVitaminasHidrosolubles] = React.useState('');
@@ -527,8 +515,17 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorVitaminasHidrosolubles, setMessageErrorVitaminasHidrosolubles] = React.useState('');
 
 	const handleVitaminasHidrosolubles = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setVitaminasHidrosolubles(event.target.value || '');
-		const vitaminasHidrosolubles = event.target.value;
+		setVitaminasHidrosolubles(event.target.value);
+		getPrescriptions();
+	};
+
+	const [reqVitHidrosolubles, setReqVitHidrosolubles] = React.useState('');
+	const [errorReqVitHidrosolubles, setErrorReqVitHidrosolubles] = React.useState(false);
+	const [messageErrorReqVitHidrosolubles, setMessageErrorReqVitHidrosolubles] = React.useState('');
+
+	const handleReqVitHidrosolubles = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setReqVitHidrosolubles(event.target.value);
+		getPrescriptions();
 	};
 
 	const [vitaminasLiposolubles, setVitaminasLiposolubles] = React.useState('');
@@ -536,8 +533,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorVitaminasLiposolubles, setMessageErrorVitaminasLiposolubles] = React.useState('');
 
 	const handleVitaminasLiposolubles = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setVitaminasLiposolubles(event.target.value || '');
-		const vitaminasLiposolubles = event.target.value;
+		setVitaminasLiposolubles(event.target.value);
+		getPrescriptions();
 	};
 
 	const [vitaminasC, setVitaminasC] = React.useState('');
@@ -545,8 +542,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorVitaminasC, setMessageErrorVitaminasC] = React.useState('');
 
 	const handleVitaminasC = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setVitaminasC(event.target.value || '');
-		const vitaminasC = event.target.value;
+		setVitaminasC(event.target.value);
+		getPrescriptions();
 	};
 
 	const [acidoFolico, setAcidoFolico] = React.useState('');
@@ -554,8 +551,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorAcidoFolico, setMessageErrorAcidoFolico] = React.useState('');
 
 	const handleAcidoFolico = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setAcidoFolico(event.target.value || '');
-		const acidoFolico = event.target.value;
+		setAcidoFolico(event.target.value);
+		getPrescriptions();
 	};
 
 	//////////////////////Validacion Form/////////////////
@@ -567,55 +564,65 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [loadingSave, setLoadingSave] = React.useState(false);
 	const [saveOK, setSaveOk] = React.useState(true);
 	const [messageAPI, setMessageAPI] = React.useState('');
+     
+	const prescriptionsData: IPrescriptions = {
+		no_orden: parseInt(numOrder) || 0,
+		tipo_prescripcion: tipoPrescripcion ||' 0',
+		fecha: fechaCreacion||' 0',
+		ips: ips||' 0',
+		no_identificacion: numIden||' 0',
+		nombre_paciente: namePaciente,
+		servicio: servicio,
+		ubicacion: ubicacion,
+		cama: cama||' 0',
+		peso: parseInt(pesoKg) || 0,
+		tipo_edad: tipoEdad,
+		edad: parseInt(edad) || 0,
+		volumen: parseInt(volumen) || 0,
+		purga: parseInt(purga) || 0,
+		tiempo_infusion: tiempoDeInfucion,
+		overfill: overfill,
+		filtro: (filtro === 'Si') ? true : false,
+		equipo_fotosensible: (eqFotosencible === 'Si') ? true : false,
+		tipo_paciente: tipoPaciente,
+		via_administracion: viaAdmin,
+		diagnostico: diagnostico,
+		flujo_metabolico: flujoMetabolico||' 0',
+		aminoacidos: aminoacidos||' 0',
+		dextrosa: dextrosa||' 0',
+		req_aminoacidos: requerimientoAminoacidos||' 0',
+		lipidos: lipidos||' 0',
+		req_lipidos: requerimientoLipidos||' 0',
+		omegaven: omegaven||' 0',
+		dipeptiven: dipeptiven||' 0',
+		sodio_total: sodioTotal||' 0',
+		potasio_total: potacioTotal||' 0',
+		fosfato: fosfato,
+		req_fosfato: requerimientoFosfato||' 0',
+		calcio: calcio,
+		req_calcio: reqCalcio||' 0',
+		magnesio: magnesio,
+		req_magnesio: reqMagnesio||' 0',
+		elementos_traza: elementosTraza,
+		req_elementos_traza: reqTraza||' 0',
+		vit_hidrosolubles:vitaminasHidrosolubles,
+		req_vit_hidrosolubles:reqVitHidrosolubles||' 0',
+		req_vit_liposolubles: vitaminasLiposolubles||' 0',
+		vit_C: vitaminasC||' 0',
+		acido_folico: acidoFolico||' 0'
+	}
+
+	const [prescriptionSave, setPrescriptionSave] = React.useState<IPrescriptions|undefined>();
+    
+	const getPrescriptions=()=>{
+		setPrescriptionSave(prescriptionsData)
+	}
+    
+	
 
 	const setPrescriptions = async () => {
 
-		const prescriptionsData: IPrescriptions = {
-			no_orden: parseInt(numOrder) || 0,
-			tipo_prescripcion: tipoPrescripcion,
-			fecha: fechaCreacion,
-			ips: ips,
-			no_identificacion: numIden,
-			nombre_paciente: namePaciente,
-			servicio: servicio,
-			ubicacion: ubicacion,
-			cama: cama,
-			peso: parseInt(pesoKg) || 0,
-			tipo_edad: tipoEdad,
-			edad: parseInt(edad) || 0,
-			volumen: parseInt(volumen) || 0,
-			purga: parseInt(purga) || 0,
-			tiempo_infusion: tiempoDeInfucion,
-			overfill: overfill,
-			filtro: (filtro === 'Si') ? true : false,
-			equipo_fotosensible: (eqFotosencible === 'Si') ? true : false,
-			tipo_paciente: tipoPaciente,
-			via_administracion: viaAdmin,
-			diagnostico: diagnostico,
-			flujo_metabolico: flujoMetabolico,
-			aminoacidos: aminoacidos,
-			dextrosa: dextrosa,
-			req_aminoacidos: requerimientoAminoacidos,
-			lipidos: lipidos,
-			req_lipidos: requerimientoLipidos,
-			omegaven: omegaven,
-			dipeptiven: dipeptiven,
-			sodio_total: sodioTotal,
-			potasio_total: potacioTotal,
-			fosfato: fosfato,
-			req_fosfato: requerimientoFosfato,
-			calcio: calcio,
-			req_calcio: reqCalcio,
-			magnesio: magnesio,
-			req_magnesio: reqMagnesio,
-			elementos_traza: elementosTraza,
-			req_elementos_traza: reqTraza,
-			vit_hidrosolubles: vitaminasHidrosolubles,
-			req_vit_liposolubles: vitaminasLiposolubles,
-			vit_C: vitaminasC,
-			acido_folico: acidoFolico
-		}
-
+	
 		setLoadingSave(false);
 		console.log('Loading...')
 		const resp = await prescriptionsUseCase.savePrescripcions(prescriptionsData)
@@ -683,6 +690,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			handleOpenModalFormSaved,
 			handleCloseModalFormSaved,
 			savePrescription,
+			prescriptionSave,
 			///////////////////////////ORDEN ///////////////////////////////
 			numOrder, errorNumOrder, messageErrorNumOrder, handleNumOrder,
 			prescripcion, errorPrescripcion, messageErrorPrescripcion, handlePrescripcion,
@@ -730,6 +738,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			elementosTraza, errorElementosTraza, messageErrorElementosTraza, handleElementosTraza,
 			reqTraza, errorReqTraza, messageErrorReqTraza, handleReqTraza,
 			vitaminasHidrosolubles, errorVitaminasHidrosolubles, messageErrorVitaminasHidrosolubles, handleVitaminasHidrosolubles,
+			reqVitHidrosolubles, errorReqVitHidrosolubles, messageErrorReqVitHidrosolubles, handleReqVitHidrosolubles,
 			vitaminasLiposolubles, errorVitaminasLiposolubles, messageErrorVitaminasLiposolubles, handleVitaminasLiposolubles,
 			vitaminasC, errorVitaminasC, messageErrorVitaminasC, handleVitaminasC,
 			acidoFolico, errorAcidoFolico, messageErrorAcidoFolico, handleAcidoFolico,
