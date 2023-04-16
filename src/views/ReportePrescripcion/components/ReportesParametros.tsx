@@ -1,6 +1,8 @@
 import Macronutrientes from '@/views/Formulario/Components/Macronutrientes';
-import { Grid, Typography, Box, Stack } from '@mui/material'
-import React, { useState } from 'react'
+import { Grid, Typography, Box, Stack, Skeleton } from '@mui/material'
+import React, { useContext, useState } from 'react'
+import { ReportesContext } from '../context/ReportesContext';
+import { getDextrosa, getAminoacidos, getLipidos, getOmegaven, getDipeptiven, getVolTotal, getVelinfusion, getOsmolaridad, getCalTotales, getCalTotalesKgDia, getGramosTotalesNitro, getCaloriasTotalesProteicas, getCaloriasTotalesProteicasKg, getCaloriasNoProteicasCHOS, getCaloriasNoProteicasLIPIDOS, getCaloriasNoProteicasKg, getRelacionCalNoProteicasN, getRelacionCalNoProteicasAminoacidos, getConcentracionDeCHOS, getConcentracionDeProteinas, getConcentracionDeLipidos } from '../data/functionsParams';
 
 const ReportesParametros = () => {
 
@@ -24,10 +26,11 @@ const ReportesParametros = () => {
         'Concentración de Lípidos (%):'
     ]);
 
+    const { reporte, loadingSave } = useContext(ReportesContext)
 
     return (
         <>
-            <Grid container display={'flex'} width={'80%'} >
+            <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} >
                 {/* <Grid item display='block' sx={{ marginTop: '30px', marginBottom: '15px', width: '40%', paddingLeft:'0' }}> */}
                 <Stack width='50%' direction={'row'} justifyContent={'space-between'}>
 
@@ -44,12 +47,121 @@ const ReportesParametros = () => {
                     {/* </Grid>
                 <Grid item display={'flex'} sx={{ marginTop: '30px', marginBottom: '30px', width: '60%' }}> */}
                     <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Requerimiento</Typography>
-                    </Stack>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Valores</Typography>
+                        <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
 
-                    <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Volumen</Typography>
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getVolTotal(reporte!)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getVelinfusion(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getOsmolaridad(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {reporte!.via_administracion}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getCalTotales(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getCalTotalesKgDia(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getGramosTotalesNitro(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getCaloriasTotalesProteicas(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getCaloriasTotalesProteicasKg(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getCaloriasNoProteicasCHOS(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getCaloriasNoProteicasLIPIDOS(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getCaloriasNoProteicasKg(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getRelacionCalNoProteicasN(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getRelacionCalNoProteicasAminoacidos(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getConcentracionDeCHOS(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getConcentracionDeProteinas(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getConcentracionDeLipidos(reporte!).toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+
+                        </Stack>
                     </Stack>
+                    {/* <Stack direction={'column'}>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Requerimiento</Typography>
+                    </Stack> */}
+
+                    {/* <Stack direction={'column'}>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Volumen</Typography>
+                    </Stack> */}
                     {/* </Grid> */}
                 </Stack>
 

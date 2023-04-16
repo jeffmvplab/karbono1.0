@@ -1,3 +1,4 @@
+import { IPrescriptions } from "@/domain/models/prescriptions.model";
 import { createContext, Dispatch, SetStateAction } from "react";
 
 
@@ -26,6 +27,7 @@ interface ContextProps {
     prescripcion: string, errorPrescripcion: boolean, messageErrorPrescripcion: string, handlePrescripcion: (event: React.ChangeEvent<HTMLInputElement>) => void,
     fechaCreacion: string, errorFechaCreacion: boolean, messageErrorFechaCreacion: string, handleFechaCreacion: (event: React.ChangeEvent<HTMLInputElement>) => void,
     fechaActual:()=>void;
+    prescriptionSave:IPrescriptions|undefined;
     ////////////INFORMACION DEL PACIENTE///////////////////
     ips: string, errorIps: boolean, messageErrorIps: string, handleIps: (event: React.ChangeEvent<HTMLInputElement>) => void,
     numIden: string, errorNumIden: boolean, messageErrorNumIden: string, handleNumIden: (event: React.ChangeEvent<HTMLInputElement>) => void,

@@ -1,31 +1,37 @@
 import { colorsKarbono } from '@/themes/colors';
 import { Box, Typography, Divider, Stack, Card } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
 import { param_farmaceuticos } from '../../data/data';
-import { TextParams } from '../TextParams';
+import { TextParamsNumb } from '../TextParamsNumb';
+import { FormulariosContext } from '../../context/FormulariosContext';
+import { alarmConcCHOS, alarmConcDeLipidos, alarmConcMagnesio, alarmConcPotasio, alarmConcSodio, alertFactorDePrecipitacion, alertRelacion_Calcio_Fosfato, alertVelInfucion, alertViaDeAdmin, alertVolTotal } from '@/views/ReportePrescripcion/data/alertParams';
+import { TextParamsString } from '../TextParamsString';
+import { getOsmolaridad } from '@/views/ReportePrescripcion/data/functionsParams';
 
 export interface ParametrosFarmaceuticosProps {
-	isMovil?:boolean;
- }
+	isMovil?: boolean;
+}
 
-const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({isMovil=false}) => {
-	
-	const borderRadius:number=10;
+const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMovil = false }) => {
+
+	const borderRadius: number = 10;
+
+	const { prescriptionSave, loadingSave } = useContext(FormulariosContext)
 
 	return (
-		<Card 
-		elevation={5} 
-		sx={{ 
-			borderRadius:isMovil?0:null,
-			 borderTopLeftRadius:(isMovil)?null:borderRadius,
-			 borderTopRightRadius:borderRadius,
-			 borderBottomLeftRadius:(isMovil)?null:borderRadius,
-			 borderBottomRightRadius:borderRadius,
-			marginBottom:'20px'
+		<Card
+			elevation={5}
+			sx={{
+				borderRadius: isMovil ? 0 : null,
+				borderTopLeftRadius: (isMovil) ? null : borderRadius,
+				borderTopRightRadius: borderRadius,
+				borderBottomLeftRadius: (isMovil) ? null : borderRadius,
+				borderBottomRightRadius: borderRadius,
+				marginBottom: '20px'
 			}}>
 			<Box
 				// borderRadius={'10px'}
-				sx={{ overflow: 'auto', height:{xs:'35.5vh', sm:'34vh',md:'35.5vh',xl:'35.5vh'}}}
+				sx={{ overflow: 'auto', height: { xs: '35.5vh', sm: '34vh', md: '35.5vh', xl: '35.5vh' } }}
 				paddingX={{ xs: '0px', sm: '20px' }}
 				margin='5px'
 				marginTop={'20px'}
@@ -40,36 +46,53 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({isMovi
 
 				<Divider />
 				<Box padding={1}>
-					<TextParams
+					<TextParamsNumb
 						title={'Volumen:'}
-						value={param_farmaceuticos.volumen}
+						value={alertVolTotal(prescriptionSave!)}
 						unidad={'ml'}
 						seguridad={'Seguro'}
 					/>
-					<TextParams
+					<TextParamsString
 						title={'Via de administración:'}
-						value={param_farmaceuticos.via_de_administración}
+						value={alertViaDeAdmin(prescriptionSave!)}
+						seguridad={
+							(alertViaDeAdmin(prescriptionSave!) === 'ADECUADA')
+								? 'Seguro'
+								: ''
+						}
 					/>
-					{/* <TextParams
+					{/* <TextParamsNumb
 						title={'Relación lípidos/aminoácidos:'}
 						value={param_farmaceuticos.relación_lipidos_aminoacidos}
 					/>
-					<TextParams
+					<TextParamsNumb
 						title={'Volumen acumulado:'}
 						value={param_farmaceuticos.volumen_acumulado}
 					/> */}
-					<TextParams
+					<TextParamsNumb
 						title={'Osmolaridad:'}
-						value={param_farmaceuticos.volumen_acumulado}
+						value={getOsmolaridad(prescriptionSave!).toFixed(2)}
 					/>
-					<TextParams
+					<TextParamsString
 						title={'Relación calcio/fosfato:'}
-						value={param_farmaceuticos.relacion_calcio_fosfato}
+						value={alertRelacion_Calcio_Fosfato(prescriptionSave!)}
+						seguridad={
+							(alertRelacion_Calcio_Fosfato(prescriptionSave!) === 'SEGURA')
+								? 'Seguro'
+								: ''
+						}
 					/>
-					<TextParams
+
+					<TextParamsString
 						title={'Factor de precipitación:'}
-						value={param_farmaceuticos.factor_de_precipitación}
+						value={alertFactorDePrecipitacion(prescriptionSave!)}
+						seguridad={
+							(alertFactorDePrecipitacion(prescriptionSave!) === 'SEGURA')
+								? 'Seguro'
+								: ''
+						}
 					/>
+
 
 					{/* <Divider />
 
@@ -80,83 +103,69 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({isMovi
 					>Macronutrientes
 					</Typography > */}
 
-					<TextParams
+					<TextParamsNumb
 						title={'Velocidad de infusión:'}
-						value={param_farmaceuticos.volumen_dextrosa50}
-						unidad={'ml'}
+						value={alertVelInfucion(prescriptionSave!).toFixed(2)}
+					// unidad={'ml'}
 					/>
-
-					<TextParams
+					<TextParamsString
 						title={'Concentración de CHO`S(%):'}
-						value={param_farmaceuticos.volumen_aminoácidos}
-						unidad={'ml'}
-					/>
-					<TextParams
+						value={alarmConcCHOS(prescriptionSave!)}
+						seguridad={
+							(alarmConcCHOS(prescriptionSave!) === 'SEGURA')
+								? 'Seguro'
+								: ''
+						} />
+
+					<TextParamsString
 						title={'Concentración de Proteína(%):'}
-						value={param_farmaceuticos.volumen_lipidos}
-						unidad={'ml'}
+						value={alarmConcDeLipidos(prescriptionSave!)}
+						seguridad={
+							(alarmConcDeLipidos(prescriptionSave!) === 'SEGURA')
+								? 'Seguro'
+								: ''
+						}
 					/>
 
-					{/* <Typography
-						fontSize={'20px'}
-						paddingY={2}
-						style={{ fontWeight: 700, color: colorsKarbono.primary }}
-					>Micronutientes
-					</Typography > */}
-
-					<TextParams
+					<TextParamsString
 						title={'Concentración de Lípidos(%):'}
-						value={param_farmaceuticos.volumen_sodio}
-						unidad={'ml'}
+						value={alarmConcSodio(prescriptionSave!)}
+						seguridad={
+							(alarmConcSodio(prescriptionSave!) === 'SEGURA')
+								? 'Seguro'
+								: ''
+						}
 					/>
 
-					<TextParams
+					<TextParamsString
 						title={'Concentración de Sodio (mEq/ml):'}
-						value={param_farmaceuticos.volumen_potacio}
-						unidad={'ml'}
+						value={alarmConcPotasio(prescriptionSave!)}
+						seguridad={
+							(alarmConcPotasio(prescriptionSave!) === 'SEGURA')
+								? 'Seguro'
+								: ''
+						}
 					/>
-					<TextParams
+
+					<TextParamsString
 						title={'Concentración de Potasio (mEq/ml)'}
-						value={param_farmaceuticos.volumen_fosfato}
-						unidad={'ml'}
+						value={alarmConcPotasio(prescriptionSave!)}
+						seguridad={
+							(alarmConcPotasio(prescriptionSave!) === 'SEGURA')
+								? 'Seguro'
+								: ''
+						}
 					/>
-					<TextParams
+
+					<TextParamsString
 						title={'Concentración de Magnesio (mEq/ml)'}
-						value={param_farmaceuticos.volumen_calsio}
-						unidad={'ml'}
+						value={alarmConcMagnesio(prescriptionSave!)}
+						seguridad={
+							(alarmConcMagnesio(prescriptionSave!) === 'SEGURA')
+								? 'Seguro'
+								: ''
+						}
 					/>
-					{/* <TextParams
-						title={'Volumen sulfato:'}
-						value={param_farmaceuticos.volumen_sulfato_magnesio}
-						unidad={'ml'}
-					/>
-					<TextParams
-						title={'Volumen traza:'}
-						value={param_farmaceuticos.volumen_traza}
-						unidad={'ml'}
-					/>
-					<TextParams
-						title={'Volumen vitaminas:'}
-						value={param_farmaceuticos.volumen_vitaminas}
-						unidad={'ml'}
-					/>
-					<TextParams
-						title={'Volumen vitaminas Comp:'}
-						value={param_farmaceuticos.volumen_vitamina_C}
-						unidad={'ml'}
-					/>
-					<TextParams
-						title={'Volumen vitaminas C:'}
-						value={param_farmaceuticos.volumen_vitamina_C}
-						unidad={'ml'}
-					/>
-					<TextParams
-						title={'Ácido fólico:'}
-						value={param_farmaceuticos.acido_folico}
-						unidad={'ml'}
-					/> */}
-
-
 				</Box>
 			</Box>
 		</Card>

@@ -1,0 +1,1 @@
+export { default as TextParamsNumb } from './TextParamsNumb';
