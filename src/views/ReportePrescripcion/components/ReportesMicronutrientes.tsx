@@ -1,36 +1,37 @@
-import Macronutrientes from '@/views/Formulario/Components/Macronutrientes';
-import { Grid, Typography, Box, Stack } from '@mui/material'
+import { Grid, Typography, Box, Stack, Skeleton } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import { ReportesContext } from '../context/ReportesContext';
-import { getDextrosa, getPotacio, getSodio } from '../data/functionsParams';
+import { IParamNumeric, getAgua, getAminoacidos, getCalcio, getDextrosa, getDipeptiven, getFosforo, getLipidos, getMagnesio, getOmegaven, getPotacio, getSodio } from '../data/functionsParams';
 
 const ReportesMicronutrientes = () => {
 
 
-    const [Macronutrientes, setMacronutrientes] = useState([
-        'Flujo Metabólico:',
-        'Dextrosa (g/kg/dia):',
-        'Aminoácidos (req./ml):',
-        'Lípidos (req./ml):',
-        'Omegaven (req./ml):',
-        'Dipeptiven (req./ml):',
-        'Agua (ml):'
+    const [Micronutrientes, setMicronutrientes] = useState([
+        'Sodio (req./ml):',
+        'Potasio (req./ml):',
+        'Calcio (req./ml):',
+        'Fósforo (req./ml)',
+        'Magnesio (req./ml):',
+        'Oligoelementos (ml):',
+        'Vitaminas hidro. (ml):',
+        'Vitaminas lipo. (ml):',
+        'Vit. C (mg):',
+        'Acido fólico (mg):'
 
     ]);
-
-    const { reporte } = useContext(ReportesContext)
-
+    const { reporte, loadingSave } = useContext(ReportesContext)
+    
     return (
         <>
-            <Grid container display={'flex'} width={'80%'} paddingTop={'20px'} >
+            <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} >
                 {/* <Grid item display='block' sx={{ marginTop: '30px', marginBottom: '15px', width: '40%', paddingLeft:'0' }}> */}
                 <Stack width='50%' direction={'row'} justifyContent={'space-between'}>
 
                     <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '30px', textAlign: 'left' }}>Macronutrientes</Typography>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '30px', textAlign: 'left' }}>Micronutrientes</Typography>
                         <Box sx={{ justifyContent: 'start' }} >
                             <ul style={{}}>
-                                {Macronutrientes.map(lista => {
+                                {Micronutrientes.map(lista => {
                                     return <li style={{ listStyleType: 'none' }} key={lista}>{lista}</li>
                                 })}
                             </ul>
@@ -39,19 +40,138 @@ const ReportesMicronutrientes = () => {
                     {/* </Grid>
                 <Grid item display={'flex'} sx={{ marginTop: '30px', marginBottom: '30px', width: '60%' }}> */}
                     <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, paddingBottom: '15px', fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Requerimiento</Typography>
-                        <Stack direction={'column'} alignItems={'center'}>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Requerimiento</Typography>
+                        <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
 
-                            <Typography>
-                                {/* {getSodio(reporte?.tipo_prescripcion!, reporte?.sodio_total!, reporte?.peso!).requerimiento} */}
-                            </Typography>
-                     
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getSodio(reporte!).requerimiento}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
 
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getPotacio(reporte!).requerimiento}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getCalcio(reporte!).requerimiento}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getFosforo(reporte!).requerimiento}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getMagnesio(reporte!).requerimiento}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {reporte!.vit_C}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {reporte!.acido_folico}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
                         </Stack>
+
                     </Stack>
 
                     <Stack direction={'column'}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Volumen</Typography>
+                        <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getSodio(reporte!).volumen}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getPotacio(reporte!).volumen}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getCalcio(reporte!).volumen}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getFosforo(reporte!).volumen.toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getMagnesio(reporte!).volumen}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {reporte!.req_elementos_traza}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                     {reporte!.req_vit_hidrosolubles}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {reporte!.req_vit_liposolubles}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                   -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                  -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+                        </Stack>
                     </Stack>
                     {/* </Grid> */}
                 </Stack>
@@ -63,3 +183,4 @@ const ReportesMicronutrientes = () => {
 }
 
 export default ReportesMicronutrientes
+

@@ -30,7 +30,7 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 	const [saveOK, setSaveOk] = React.useState(true);
 	const [messageAPI, setMessageAPI] = React.useState('');
 
-	const [reporte, setReporte] = React.useState<IPrescriptions>();
+	const [reporte, setReporte] = React.useState<IPrescriptions|undefined>();
 
 	const getPrescriptionsByNumber = async () => {
 
@@ -41,7 +41,7 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 		setLoadingSave(false);
 		console.log('Loading...')
 		// const resp = await prescriptionsUseCase.prescripcionsByNumber(storagePredsc.number);
-		const resp = await prescriptionsUseCase.prescripcionsByNumber('21');
+		const resp = await prescriptionsUseCase.prescripcionsByNumber('33');
 
 		setLoadingSave(true);
 

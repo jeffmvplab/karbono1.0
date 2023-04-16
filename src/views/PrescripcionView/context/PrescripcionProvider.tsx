@@ -14,54 +14,9 @@ type Props = {
 
 
 export const PrescripcionProvider: FC<Props> = ({ children }) => {
-
-	const router = useRouter();
-
-	const [ruta, setRuta ] =  useState(' ');
-
-	const mostrarRuta = () => {
-
-		setRuta (router.asPath);
-
-
-	}
-
-	const cambiarRuta = () => {
-
-		setRuta (mainRoutes.prescripcion);
-
-
-	}
-
-	const [ancho, setAncho] = useState(false)
-
-	
-	const cambiarAncho = () => {
-
-
-		if(ancho){
-			setAncho(false)
-
-		}else{
-			setAncho(true)
-		}
-
-
-	}
-
-
-    
-
 	
 	return (
-		<PrescripcionContext.Provider value={{
-
-			ruta,
-			mostrarRuta,
-			cambiarRuta,
-			ancho,
-			cambiarAncho,
-            
+		<PrescripcionContext.Provider value={{			
 
 		}}>{children}
 		</PrescripcionContext.Provider>

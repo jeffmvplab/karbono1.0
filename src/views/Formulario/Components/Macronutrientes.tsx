@@ -24,11 +24,7 @@ const aminoPediatrico = [
     { value: 'Trophamine', label: 'Trophamine' },
 ]
 
-const aminoNeonato = [
-    { value: 'Aminoven', label: 'Aminoven 10%' },
-    { value: 'Aminoplasmal', label: 'Aminoplasmal 10%' },
-    { value: 'Trophamine', label: 'Trophamine' },
-]
+
 
 const tiposLipidos = [
     { value: 'Smoflipid', label: 'Smoflipid' },
@@ -197,7 +193,7 @@ const Macronutrientes = () => {
                                         value={requerimientoAminoacidos}
                                         id='requerimiento-aminoacidos'
                                         label={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'Requerimiento minoácidos* (g/kg/día)'
+                                            ? 'Requerimiento aminoácidos* (g/kg/día)'
                                             : 'Requerimiento aminoácidos* (ml)'}
                                         type='text'
                                     />

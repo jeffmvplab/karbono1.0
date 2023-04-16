@@ -1,21 +1,27 @@
 import { Stack, Typography } from '@mui/material';
 import React from 'react';
 
-export interface TextParamsProps {
+export interface TextParamsNumbProps {
 	title: string;
-	value: string;
+	value: any;
 	unidad?: string;
 	seguridad?: string
 }
 
-const TextParams: React.FC<TextParamsProps> = ({ title, value, unidad = '', seguridad }) => {
+const TextParamsNumb: React.FC<TextParamsNumbProps> = ({ 
+	title, 
+	value, 
+	unidad = '', 
+	seguridad 
+}) => {
+	console.log('NaN:',title,value)
 	return (
 		<Stack direction={'row'} paddingY={0.5}>
 			<Typography fontSize={'14px'} style={{ fontWeight: 600, }}>
 				{title}
 			</Typography>
 			<Typography fontSize={'14px'} style={{ fontWeight: 500, }}>
-				{value}
+				{(isNaN(value))?'-':value}
 			</Typography>
 			<Typography fontSize={'14px'} style={{ fontWeight: 500, }}>
 				{
@@ -41,4 +47,4 @@ const TextParams: React.FC<TextParamsProps> = ({ title, value, unidad = '', segu
 	)
 };
 
-export default TextParams;
+export default TextParamsNumb;
