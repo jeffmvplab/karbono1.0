@@ -14,7 +14,7 @@ const TextParamsString: React.FC<TextParamsStringProps> = ({
 	unidad = '', 
 	seguridad 
 }) => {
-	console.log('NaN:',title,value)
+	// console.log('NaN:',title,value)
 	return (
 		<Stack direction={'row'} paddingY={0.5}>
 			<Typography fontSize={'14px'} style={{ fontWeight: 600, }}>

@@ -86,6 +86,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 									<Typography
 										paddingY={2}
 										fontSize={16}
+										textAlign={'center'}
 										//  paddingX={{sm:2}}
 										style={{ 
 											fontWeight: 700, 
@@ -97,7 +98,9 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 									>{validacionOK
 												? (saveOK)
 													? '¡Se ha guardado con éxito!'
-													: messageAPI
+													:(messageAPI)
+													  ?'El número de orden que esta tratando de guardar ya existe. Por favor escriba otro número de orden'
+													  :messageAPI
 												: 'Error en la prescripción'}
 									</Typography >
 
@@ -121,7 +124,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 									<CustomButton
 										onClick={
 											
-											()=>{(saveOK)?router.push(mainRoutes.reportePrescripcion):handleCloseModalFormSaved}
+											()=>{(saveOK)?router.push(mainRoutes.reportePrescripcion):handleCloseModalFormSaved()}
 										}
 										height={50}
 										width={137}

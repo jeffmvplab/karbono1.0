@@ -626,7 +626,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setLoadingSave(false);
 		console.log('Loading...')
 		const resp = await prescriptionsUseCase.savePrescripcions(prescriptionsData)
-		console.log('Resp:', resp)
+		console.log('Resp:', resp.body.message)
 
 		setLoadingSave(true);
 
