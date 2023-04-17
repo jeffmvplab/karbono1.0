@@ -4,6 +4,9 @@ import { Typography, Button, Box, Grid } from '@mui/material/';
 import Link from 'next/link';
 import Tabla from './components/Tabla';
 import { mainRoutes } from '@/routes/routes';
+import { TableReportes } from './components/TableReportes';
+
+
 
 export interface PrescripcionViewProps { }
 
@@ -34,7 +37,8 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 				</Grid>
 			</Grid>
 			<Grid container >
-				<Tabla />
+				{/* <Tabla /> */}
+				<TableReportes/>
 			</Grid>
 		</>
 	)
