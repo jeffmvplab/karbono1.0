@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import { FC } from "react";
 import { PrescripcionContext } from "./PrescripcionContext";
 import { PrescriptionsUseCases } from "@/domain/usecases/prescriptions.usecases";
+import { IPrescriptions } from "@/domain/models/prescriptions.model";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
@@ -21,16 +22,20 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 	const [getOK, setGetOk] = React.useState(true);
 	const [messageAPI, setMessageAPI] = React.useState('');
 
-	const getAll = async () => {
+	const [reportes, setReportes] = React.useState<IPrescriptions[]>([]);
+
+	const [limit, setLimit] = React.useState(10);
+
+	const getAll = async (limit?: number) => {
 
 		setLoadingGet(false);
 		console.log('Loading...')
-		const resp = await prescriptionsUseCase.prescripcionsAll()
-		console.log('Resp:', resp)
+		const resp = await prescriptionsUseCase.prescripcionsAll(limit!)
+		// console.log('Resp:', resp)
 
-		setLoadingGet(true);
 
-		if (resp.statusCode === 201) {
+		if (resp.statusCode === 200) {
+		    setReportes(resp.body);
 			setGetOk(true);
 		} else if (resp.statusCode === 400) {
 			setMessageAPI(resp.body.message)
@@ -42,16 +47,19 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		} else {
 			setGetOk(false)
 		}
+		 setLoadingGet(true);
+		//  return resp.body;
 	}
 
 
 	return (
 		<PrescripcionContext.Provider value={{
-			
+
 			loadingGet,
 			getOK,
 			messageAPI,
-            getAll,
+			getAll,
+			reportes,
 
 		}}>{children}
 		</PrescripcionContext.Provider>

@@ -12,7 +12,7 @@ export interface IPrescriptionsRepository {
     getPrescripcionsByName(name:string): Promise<any>;
     getPrescripcionsById(id:string): Promise<any>;
     getPrescripcionsByIps(ips:string): Promise<any>;
-    getPrescripcionsAll(): Promise<any>;
+    getPrescripcionsAll(limit:number): Promise<any>;
 
 }
 
@@ -110,10 +110,10 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
 }
 
  /////////////////////////////////Get Predscripcion By Name////////////////////////////////////////////////
- async getPrescripcionsAll(): Promise<any> {
+ async getPrescripcionsAll(limit:number): Promise<any> {
 
     const axiosRequest = await this.axiosHttpClient.request({
-        url: ApiUrlsEnum.getAllPrescriptions,
+        url: `${ApiUrlsEnum.getAllPrescriptions}?limit=${limit}`,
         method: 'get',
         // body: {
         //     "nombre_paciente": name,
