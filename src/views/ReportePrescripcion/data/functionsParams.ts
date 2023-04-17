@@ -308,8 +308,8 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
         ((parseInt(prescription?.dextrosa!) * 2780) + (parseInt(prescription?.req_lipidos!) * 290) + (parseInt(prescription?.req_aminoacidos!) * 1505) + (parseInt(prescription?.dipeptiven!) * 921)
             + (parseInt(prescription?.omegaven!) * 273) + (parseInt(prescription?.sodio_total!) * 4001) + (parseInt(prescription?.potasio_total!) + 4000) + (parseInt(prescription?.req_fosfato!) * 2570)
             + (parseInt(prescription?.req_magnesio!) * 1623) + (parseInt(prescription?.req_calcio!) * 626) + (volOligoNulanza * 2500) + (volOligoSensitrace * 100)
-            + (cernevit * 4820) + (multi12K) * 298.5) + (vitaLipidInfantil * 260) + (vitaLipidAd * 260)
-        + ((soluvit * 490) + (parseInt(prescription?.vit_C!) * 1740) + (parseInt(prescription?.acido_folico!) * 227) + (volAgua * 1)) / (volTotalNPT + prescription?.purga)
+            + (cernevit * 4820) + (multi12K * 298.5) + (vitaLipidInfantil * 260) + (vitaLipidAd * 260)
+        + (soluvit * 490) + (parseInt(prescription?.vit_C!) * 1740) + (parseInt(prescription?.acido_folico!) * 227) + (volAgua * 1)) / (volTotalNPT + prescription?.purga)
     return osmolaridad;
 }
 
