@@ -31,11 +31,11 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		setLoadingGet(false);
 		console.log('Loading...')
 		const resp = await prescriptionsUseCase.prescripcionsAll(limit!)
-		// console.log('Resp:', resp)
+		console.log('Resp:', resp.body.message)
 
 
 		if (resp.statusCode === 200) {
-		    setReportes(resp.body);
+			setReportes(resp.body);
 			setGetOk(true);
 		} else if (resp.statusCode === 400) {
 			setMessageAPI(resp.body.message)
@@ -47,7 +47,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		} else {
 			setGetOk(false)
 		}
-		 setLoadingGet(true);
+		setLoadingGet(true);
 		//  return resp.body;
 	}
 

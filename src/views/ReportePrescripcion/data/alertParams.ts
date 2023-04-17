@@ -80,7 +80,7 @@ export const alertFactorDePrecipitacion = (prescription: IPrescriptions) => {
         }
     }
 
-    console.log('factor:',factor)
+    // console.log('factor:',factor)
 }
 
 
