@@ -1,10 +1,14 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Typography, Button, Box, Grid } from '@mui/material/';
-import Link from 'next/link';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Tabla from './components/Tabla';
 import { mainRoutes } from '@/routes/routes';
 import { TableReportes } from './components/TableReportes';
+import { CustomButton } from '@/components/CustomButton';
+import { colorsKarbono } from '@/themes/colors';
+import { useContext } from 'react';
+import { PrescripcionContext } from './context/PrescripcionContext';
 
 
 
@@ -12,7 +16,7 @@ export interface PrescripcionViewProps { }
 
 const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 
-	const router = useRouter();
+	const {goAddNew}=useContext(PrescripcionContext)
 
 	return (
 		<>
@@ -20,20 +24,19 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 				<Grid item display='flex' justifyContent='space-between' width='100%'>
 
 					<Typography variant='h5' sx={{ fontWeight: 700, fontSize: { xs: '2vh', sm: '3vh' }, marginTop: { xs: '5px' } }}>Solicitud de órdenes</Typography>
-					<Link href='/formulario' style={{ textDecoration: 'none' }}>
-						<Box border='solid 1px' display='flex' borderColor='#372FC6' sx={{ paddingTop: '6px', paddingLeft: { xs: '15px', sm: '25px' }, paddingRight: '25px', borderRadius: '10px', paddingBottom: '5px' }}>
-							<Typography sx={{ color: '#372FC6', fontSize: { xs: '12px', md: '18px' } }}>
-								Agregar nueva
-							</Typography>
-							<Image
-								src='/assets/añadir-icono-landing.png'
-								width={20}
-								height={20}
-								alt=''
-								style={{ alignItems: 'center', marginLeft: '10px', paddingTop: '2px', paddingBottom: '2px', paddingLeft: '5px' }}
-							/>
-						</Box>
-					</Link>
+					<CustomButton text={'Agregar Nueva'}	
+					onClick={()=>{goAddNew(mainRoutes.form)}}
+					 width='200px'
+					 height='44px'
+					 variant='outlined'
+					 color='secundary'
+					fontSize={'16px'}
+					 textColor={colorsKarbono.secundary}
+					 borderColor={colorsKarbono.secundary}
+					 endIcon={<AddCircleOutlineIcon style={{ color: '#372fc6', paddingLeft: '5px',scale:'1.5' }} />}
+					 sx={{borderRadius:'10px'}}
+					/>
+
 				</Grid>
 			</Grid>
 			<Grid container >

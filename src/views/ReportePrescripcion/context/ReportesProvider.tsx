@@ -6,6 +6,7 @@ import { PrescriptionsUseCases } from "@/domain/usecases/prescriptions.usecases"
 import { LocalStorageProtocol } from "@/protocols/cache/local_cache";
 import { StorageKeysEnum } from "@/utilities/enums/storage_keys.enum";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
+import { useRouter } from "next/router";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
@@ -68,6 +69,15 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 		}
 	}
 
+    const router=useRouter();
+	
+	// const goEdit=(route:string)=>{
+	
+	// 	const prescripcion = {number:orden,}
+	// 	localStorageProtocol.get(StorageKeysEnum.prescripcionOrden );
+	//     router.push(route)
+	// }
+
 	return (
 
 		<ReportesContext.Provider value={{
@@ -85,6 +95,7 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 			openModalOrdenar,
 			handleOpenModalOrdenar,
 			handleCloseModalOrdenar,
+			// goEdit,
 
 		}}>{children}
 		</ReportesContext.Provider>

@@ -6,6 +6,7 @@ export interface CustomTextFieldProps {
     label: string
     type?: string
     value?:any
+    defaulValue?:any
     select?:boolean
     children?:any
     onChange?:React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> | undefined
@@ -16,6 +17,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
     label, 
     type,
     value,
+    defaulValue,
     select=false, 
     children,
     onChange
@@ -28,6 +30,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
                 label={label}
                 type={type}
                 value={value!}
+                defaultValue={defaulValue}
                 variant='outlined'
                 color='secondary'
                 fullWidth

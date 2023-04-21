@@ -15,7 +15,7 @@ interface ContextProps {
     openModalOrdenar:boolean,
     handleOpenModalOrdenar: () => void,
     handleCloseModalOrdenar: () => void,
-
+    // goEdit:(route:string)=>void,
     reporte:IPrescriptions|undefined,
 }
 

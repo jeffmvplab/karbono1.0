@@ -323,8 +323,6 @@ const InformacionPaciente = () => {
                             </Grid>
                         </Box>
 
-
-
                         <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
 
                             <Grid container spacing={2}>
@@ -334,12 +332,15 @@ const InformacionPaciente = () => {
                                     <CustomTextField
                                         onChange={handleFiltro}
                                         value={filtro}
+                                        defaulValue={filtro}
                                         id='filtro'
                                         label='Filtro*'
-                                        select={true}
+                                        select
                                     >
                                         {currencies.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
+                                            <MenuItem 
+                                              key={option.value}
+                                              value={option.value}>
                                                 {option.label}
                                             </MenuItem>
                                         ))}
@@ -352,13 +353,16 @@ const InformacionPaciente = () => {
                                     <CustomTextField
                                         onChange={handleEqFotosencible}
                                         value={eqFotosencible}
+                                        defaulValue={eqFotosencible}
                                         id='equipo-fotosensible'
                                         label='Equipo Fotosensible'
                                         type='text'
                                         select={true}
                                     >
                                         {currencies.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
+                                            <MenuItem 
+                                             key={option.value} 
+                                             value={option.value}>
                                                 {option.label}
                                             </MenuItem>
                                         ))}
@@ -369,6 +373,7 @@ const InformacionPaciente = () => {
                                     <CustomTextField
                                         onChange={handleTipoPaciente}
                                         value={tipoPaciente}
+                                        defaulValue={tipoPaciente}
                                         id='tipo-de-paciente'
                                         label='Tipo de paciente *'
                                         type='text'
@@ -392,6 +397,7 @@ const InformacionPaciente = () => {
                                     <CustomTextField
                                         onChange={handleViaAdmin}
                                         value={viaAdmin}
+                                        defaulValue={viaAdmin}
                                         id='via-de-administracion'
                                         label='Vía de administración*'
                                         type='text'
