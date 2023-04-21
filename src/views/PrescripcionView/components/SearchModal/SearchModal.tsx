@@ -96,7 +96,7 @@ const SearchModal: React.FC<SearchModalProps> = () => {
 								<TextField
 									onChange={handleSearch}
 									id='Numero-de-orden'
-									label='Buscar Predscripción'
+									label='Buscar Prescripción'
 									type='text'
 									value={search}
 									variant='outlined'

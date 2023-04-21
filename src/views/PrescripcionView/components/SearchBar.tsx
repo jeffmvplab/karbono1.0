@@ -40,7 +40,7 @@ const SearchBar = () => {
                 fontSize: { xs: '14px', sm: '16px' },
                 fontWeight: '1px'
               }}
-            >Buscar Predscripción</Typography>
+            >Buscar Prescripción</Typography>
           </Button>
           {/* <Search sx={{ color: '#000' }} /> */}
         </Box>
