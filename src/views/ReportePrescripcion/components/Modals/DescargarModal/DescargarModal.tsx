@@ -38,7 +38,7 @@ const DescargarModal: React.FC<DescargarModalProps> = () => {
 					<Box sx={{ width: '50%', paddingTop: '20px', marginLeft: '10px' }}>
 						<Typography variant='h5' sx={{ fontWeight: 700, color: '#000' }}>Descargar</Typography>
 						<p style={{ color: '#656474', lineHeight: '20px' }}>Hola!, estás intentando acceder a una función que no incluye esta versión<br /> gratuita de PureLife (Plan básico).</p>
-						<p style={{ color: '#656474', lineHeight: '20px' }}>Sin embargo, podrás ordenar y comunicarte directamente con una Central de Mezclas autorizada en el país, adquiriendo nuestro plan estándar o premium.</p>
+						<p style={{ color: '#656474', lineHeight: '20px' }}>Sin embargo, podrás descargar en formato Pdf (ilimitadamente) tus prescripciones con nuestro Plan Premium.</p>
 						<p style={{ color: '#656474', lineHeight: '20px' }}> A continuación te presentamos un comparativo entre las coberturas y funcionalidades de las suscripciones que hemos creado para tí!.</p>
 					</Box>
 					<Box sx={{ width: '50%', justifyContent: 'end', display: 'flex' }}>

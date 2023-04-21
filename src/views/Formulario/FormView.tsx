@@ -15,31 +15,47 @@ import CloseIcon from '@mui/icons-material/Close';
 import Image from 'next/image';
 import { FormulariosContext } from './context/FormulariosContext';
 import { FormSavedModal } from './Components/FormSavedModal';
+import { IPrescriptions } from '@/domain/models/prescriptions.model';
+import { LoadingComponent } from '@/components/LoadingComponent';
+import { LocalStorageProtocol } from '@/protocols/cache/local_cache';
+import { StorageKeysEnum } from '@/utilities/enums';
+import { mainRoutes } from '@/routes/routes';
 
 export interface FormViewProps { }
 
 const FormView: React.FC<FormViewProps> = () => {
 
-	const { 
-		getMovilHeight,handleOpenModalFormSaved,savePrescription,
-		numOrder,handleNumOrder,
-		prescripcion,handlePrescripcion,
-		fechaCreacion,handleFechaCreacion,
+
+	const localStorageProtocol = new LocalStorageProtocol();
+
+	const {
+		getMovilHeight, handleOpenModalFormSaved, savePrescription,
+		numOrder, handleNumOrder,
+		prescripcion, handlePrescripcion,
+		fechaCreacion, handleFechaCreacion,
 		fechaActual,
+		// reporte,
+		getPrescriptionsByNumber,
+		loadingSave,
+		cancelForm
 	} = useContext(FormulariosContext)
 
-	useEffect(()=>{
-       fechaActual();
-	},[])
+	useEffect(() => {
+		fechaActual();
+		getPrescriptionsByNumber()
+
+	}, [])
+
+
 
 	return (
 
 		// <Card >
 		<Stack
-		 direction={'column'} 
-		 marginBottom={{ xs: 25, sm: 0 }}>
+			direction={'column'}
+			marginBottom={{ xs: 25, sm: 0 }}>
 
-			<FormSavedModal/>
+			<FormSavedModal />
 
 			<Typography variant='h5' padding={1} style={{ fontWeight: 700, }}>
 				Nueva Orden
@@ -49,86 +65,88 @@ const FormView: React.FC<FormViewProps> = () => {
 
 				<Grid item xs={12} sm={8} md={9} style={{ paddingRight: '20px' }}>
 
-					<Card elevation={10} sx={{ borderRadius: 4 }}>
-						<Box
-							sx={{
-								bgcolor: '#F0F0F0',
-								padding: { xs: '1px', sm: 0.2 },
-								borderRadius: '15px',
-								// maxHeight:'80vh',
-								overflow: 'clip',
-							}}>
+					{(!loadingSave)
+						? <LoadingComponent />
+						: <Card elevation={10} sx={{ borderRadius: 4 }}>
+							<Box
+								sx={{
+									bgcolor: '#F0F0F0',
+									padding: { xs: '1px', sm: 0.2 },
+									borderRadius: '15px',
+									// maxHeight:'80vh',
+									overflow: 'clip',
+								}}>
 
-							<Grid container spacing={2} style={{ padding: '10px' }}>
+								<Grid container spacing={2} style={{ padding: '10px' }}>
 
-								<Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
-									{/* <CustomToolTip
+									<Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+										{/* <CustomToolTip
 									tip={'Escriba el numero de orden'}
 									placeTip={'top'}> */}
-									<TextField
-									    onChange={handleNumOrder}
-										id='Numero-de-orden'
-										label='Número de Orden'
-										type='text'
-										value={numOrder}
-										variant='outlined'
-										color='secondary'
-										sx={{ bgcolor: 'transparent' }}
-										fullWidth
-									/>
+										<TextField
+											onChange={handleNumOrder}
+											id='Numero-de-orden'
+											label='Número de Orden'
+											type='text'
+											value={numOrder}
+											variant='outlined'
+											color='secondary'
+											sx={{ bgcolor: 'transparent' }}
+											fullWidth
+										/>
 
-									{/* </CustomToolTip> */}
+										{/* </CustomToolTip> */}
+									</Grid>
+
+									<Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+										<TextField
+											onChange={handlePrescripcion}
+											id='Tipo-de-prescripción'
+											label='Tipo de prescripción'
+											type='text'
+											value={prescripcion}
+											variant='outlined'
+											color='secondary'
+											sx={{ bgcolor: 'transparent' }}
+											fullWidth
+										/>
+									</Grid>
+									<Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+										<TextField
+											onChange={handleFechaCreacion}
+											id='Fecha-de-creación'
+											label='Fecha de creación'
+											type='text'
+											value={fechaCreacion}
+											variant='outlined'
+											color='secondary'
+											sx={{ bgcolor: 'transparent' }}
+											fullWidth
+										/>
+									</Grid>
+
 								</Grid>
 
-								<Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
-									<TextField
-									    onChange={handlePrescripcion}
-										id='Tipo-de-prescripción'
-										label='Tipo de prescripción'
-										type='text'
-										value={prescripcion}
-										variant='outlined'
-										color='secondary'
-										sx={{ bgcolor: 'transparent' }}
-										fullWidth
-									/>
-								</Grid>
-								<Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
-									<TextField
-									    onChange={handleFechaCreacion}
-										id='Fecha-de-creación'
-										label='Fecha de creación'
-										type='text'
-										value={fechaCreacion}
-										variant='outlined'
-										color='secondary'
-										sx={{ bgcolor: 'transparent' }}
-										fullWidth
-									/>
-								</Grid>
+								<Box
+									// borderRadius={'10px'}
+									sx={{
+										overflow: { sm: 'auto' },
+										// overflow:'auto' ,
+										height: {
+											xs: getMovilHeight(),
+											sm: '55vh', md: '60vh', xl: '68vh'
+										}
+									}}
+									paddingX={{ xs: '0px', sm: '20px' }}
+									marginTop={'10px'}
+									bgcolor={'white'}>
 
-							</Grid>
-
-							<Box
-								// borderRadius={'10px'}
-								sx={{
-									overflow: { sm: 'auto' },
-									// overflow:'auto' ,
-									height: {
-										xs: getMovilHeight(),
-										sm: '55vh', md: '60vh', xl: '68vh'
-									}
-								}}
-								paddingX={{ xs: '0px', sm: '20px' }}
-								marginTop={'10px'}
-								bgcolor={'white'}>
-
-								<InformacionPaciente />
-								<Macronutrientes />
-								<Micronutrientes />
+									<InformacionPaciente />
+									<Macronutrientes />
+									<Micronutrientes />
+								</Box>
 							</Box>
-						</Box>
-					</Card>
+						</Card>}
 				</Grid>
 
 				<Grid item sm={4} md={3}>
@@ -146,22 +164,23 @@ const FormView: React.FC<FormViewProps> = () => {
 					bottom='160px'
 					left='5px'
 					marginY={0}
-					paddingX={{ xs:6 }}
+					paddingX={{ xs: 6 }}
 					height={'40px'}
 					minWidth={'100%'}
 					direction={'row'}
 					justifyContent='space-between'
 				>
-						<CustomButton
-							width={127}
-							text={'Cancelar'}
-							textColor={colorsKarbono.secundary}
-							color='white'
-							startIcon={<CloseIcon sx={{ color: colorsKarbono.secundary }} />}
-						/>
-				
 					<CustomButton
-					    onClick={savePrescription}
+					    onClick={()=>cancelForm(mainRoutes.prescripcion)}
+						width={127}
+						text={'Cancelar'}
+						textColor={colorsKarbono.secundary}
+						color='white'
+						startIcon={<CloseIcon sx={{ color: colorsKarbono.secundary }} />}
+					/>
+
+					<CustomButton
+						onClick={savePrescription}
 						width={127}
 						text={'Guardar'}
 						sx={{ borderRadius: '10px' }}

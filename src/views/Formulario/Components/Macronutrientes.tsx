@@ -101,6 +101,7 @@ const Macronutrientes = () => {
                                     <CustomTextField
                                         onChange={handleTipoPrescripcion}
                                         value={tipoPrescripcion}
+                                        defaulValue={tipoPrescripcion}
                                         id='tipo-prescripción*'
                                         label='Tipo Prescripción*'
                                         select={true}
@@ -161,6 +162,7 @@ const Macronutrientes = () => {
                                     <CustomTextField
                                         onChange={handleAminoacidos}
                                         value={aminoacidos}
+                                        defaulValue={aminoacidos}
                                         id='aminoácidos'
                                         label='Aminoácidos*'
                                         type='text'
@@ -209,6 +211,7 @@ const Macronutrientes = () => {
                                     <CustomTextField
                                         onChange={handleLipidos}
                                         value={lipidos}
+                                        defaulValue={lipidos}
                                         id='lipidos'
                                         label='Lípidos'
                                         type='text'

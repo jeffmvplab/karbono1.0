@@ -14,7 +14,7 @@ interface ContextProps {
     setStateAcordion3: Dispatch<SetStateAction<boolean>>,
     handleAcordion3: () => void,
 
-    getMovilHeight: () => string| undefined
+    getMovilHeight: () => string | undefined
 
     open1: boolean | undefined,
     handleMenu1: () => void,
@@ -26,8 +26,10 @@ interface ContextProps {
     numOrder: string, errorNumOrder: boolean, messageErrorNumOrder: string, handleNumOrder: (event: React.ChangeEvent<HTMLInputElement>) => void,
     prescripcion: string, errorPrescripcion: boolean, messageErrorPrescripcion: string, handlePrescripcion: (event: React.ChangeEvent<HTMLInputElement>) => void,
     fechaCreacion: string, errorFechaCreacion: boolean, messageErrorFechaCreacion: string, handleFechaCreacion: (event: React.ChangeEvent<HTMLInputElement>) => void,
-    fechaActual:()=>void;
-    prescriptionSave:IPrescriptions|undefined;
+    fechaActual: () => void;
+    prescriptionSave: IPrescriptions | undefined;
+
+    getPrescriptionsByNumber:() => Promise<void>,
     ////////////INFORMACION DEL PACIENTE///////////////////
     ips: string, errorIps: boolean, messageErrorIps: string, handleIps: (event: React.ChangeEvent<HTMLInputElement>) => void,
     numIden: string, errorNumIden: boolean, messageErrorNumIden: string, handleNumIden: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -78,14 +80,14 @@ interface ContextProps {
     loadingSave: boolean
     saveOK: boolean,
     valAllForm: boolean,
-    messageAPI:string,
+    messageAPI: string,
 
     //////MODAL//////
     openModalFormSaved: boolean,
-    handleOpenModalFormSaved:()=>void,
-    handleCloseModalFormSaved:()=>void,
-    savePrescription:()=>void,
-
+    handleOpenModalFormSaved: () => void,
+    handleCloseModalFormSaved: () => void,
+    savePrescription: () => void,
+    cancelForm:(route:string)=>void,
 
 }
 

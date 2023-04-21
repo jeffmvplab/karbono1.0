@@ -157,6 +157,7 @@ const Micronutrientes = () => {
                                     <CustomTextField
                                         onChange={handleFosfato}
                                         value={fosfato}
+                                        defaulValue={fosfato}
                                         id='fosfato'
                                         label='Fosfato'
                                         type='text'
@@ -195,6 +196,7 @@ const Micronutrientes = () => {
                                     <CustomTextField
                                         onChange={handleCalcio}
                                         value={calcio}
+                                        defaulValue={calcio}
                                         id='calcio'
                                         label='Calcio'
                                         type='text'
@@ -240,6 +242,7 @@ const Micronutrientes = () => {
                                     <CustomTextField
                                         onChange={handleMagnesio}
                                         value={magnesio}
+                                        defaulValue={magnesio}
                                         id='magnesio'
                                         label='Magnesio'
                                         type='text'
@@ -291,6 +294,7 @@ const Micronutrientes = () => {
                                     <CustomTextField
                                         onChange={handleElementosTraza}
                                         value={elementosTraza}
+                                        defaulValue={elementosTraza}
                                         id='elementos-traza'
                                         label='Elementos traza'
                                         type='text'
@@ -341,6 +345,7 @@ const Micronutrientes = () => {
                                     <CustomTextField
                                         onChange={handleVitaminasHidrosolubles}
                                         value={vitaminasHidrosolubles}
+                                        defaulValue={vitaminasHidrosolubles}
                                         id='vitaminas-hidrosolubes'
                                         label={
                                             (tipoPrescripcion === 'Por requerimientos')
