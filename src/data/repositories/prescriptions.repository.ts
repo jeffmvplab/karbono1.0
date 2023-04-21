@@ -23,7 +23,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
     constructor() {
         this.axiosHttpClient = new AxiosHttpClient();
     }
-    /////////////////////////////////Guardar Predscripcion////////////////////////////////////////////////
+    /////////////////////////////////Guardar Prescripcion////////////////////////////////////////////////
     async savePrescripcions(prescriptions: IPrescriptions): Promise<any> {
 
         const axiosRequest = await this.axiosHttpClient.request({
@@ -97,7 +97,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
         // }
 
     }
-    /////////////////////////////////Get Predscripcion By Number////////////////////////////////////////////////
+    /////////////////////////////////Get Prescripcion By Number////////////////////////////////////////////////
     async updatePrescripcions(prescriptions: IPrescriptions,number:string): Promise<any>
     {
         const axiosRequest = await this.axiosHttpClient.request({

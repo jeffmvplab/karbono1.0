@@ -96,7 +96,7 @@ const SearchModal: React.FC<SearchModalProps> = () => {
 								<TextField
 									onChange={handleSearch}
 									id='Numero-de-orden'
-									label='Buscar Predscripción'
+									label='Buscar Prescripción'
 									type='text'
 									value={search}
 									variant='outlined'
@@ -156,7 +156,7 @@ const SearchModal: React.FC<SearchModalProps> = () => {
 								? (!errorSearch)
 									? <Alert severity="success" sx={{ mb: 3 }}>
 										<Stack direction={'column'}>
-											{'Busqueda Terminada'}
+											{'Búsqueda Terminada'}
 											<Stack direction={'column'}>
 												<Button variant='text' onClick={()=>handleCloseModalSearch()}>
 													<Typography
