@@ -9,5 +9,6 @@ export const colorsKarbono = {
     footerText:'rgba(255,255,255,40%)',
     error: 'rgba(221,60,60,60%)',
     warning: '#C78125',
-    //  gradientLayout: 'linear-gradient(90deg,#333333 0%,#797373 35%, #333333 100%)'
+    skeleton:'rgba(255,255,255,40%)'
+    // gradientLayout: 'linear-gradient(80deg,#F9F9F9 0%,#2fc5c6 35%,#372fc6 100%)'
   }

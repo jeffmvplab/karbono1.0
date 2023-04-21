@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { GridRenderCellParams, DataGrid, GridColDef } from '@mui/x-data-grid';
 import AddIcon from '@mui/icons-material/Add';
 import { CustomButton } from '@/components/CustomButton';
-import { Box, Button, CircularProgress, Stack } from '@mui/material';
+import { Box, Button, CircularProgress, Skeleton, Stack } from '@mui/material';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import PictureAsPdfOutlinedIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import { colorsKarbono } from '@/themes/colors';
@@ -121,7 +121,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 	
 	return (
 		(!loadingGet)
-		?<CircularProgress variant='indeterminate'size='100px'/>
+		?<Skeleton variant="rectangular" sx={{marginX:'15px',borderRadius:'5px'}} width='100%' height={700} />
 		:<Box
 			sx={{
 				paddingX:'10px',
@@ -147,10 +147,13 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 				}}
 				rows={reportes!}
 				columns={columns}
+				initialState={{
+					pagination: { paginationModel: { pageSize: 5 } },
+				  }}
 				// disableColumnSelector
 				// // cledisableRowSelectionOnClick
 				// autoHeight
-				pageSizeOptions={[10]}
+				pageSizeOptions={[5, 10, 25]}
 				getRowId={(row: any) => row.no_orden}
 			/>
 
