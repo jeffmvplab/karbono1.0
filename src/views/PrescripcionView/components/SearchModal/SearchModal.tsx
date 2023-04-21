@@ -156,7 +156,7 @@ const SearchModal: React.FC<SearchModalProps> = () => {
 								? (!errorSearch)
 									? <Alert severity="success" sx={{ mb: 3 }}>
 										<Stack direction={'column'}>
-											{'Busqueda Terminada'}
+											{'Búsqueda Terminada'}
 											<Stack direction={'column'}>
 												<Button variant='text' onClick={()=>handleCloseModalSearch()}>
 													<Typography
