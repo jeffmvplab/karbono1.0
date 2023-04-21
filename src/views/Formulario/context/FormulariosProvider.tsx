@@ -10,6 +10,7 @@ import { FC } from "react";
 import { FormulariosContext } from "./FormulariosContext";
 import { PrescriptionsUseCases } from "@/domain/usecases/prescriptions.usecases";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
+import { report } from "process";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
@@ -101,9 +102,116 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 				setOpen2(open);
 			};
 	////////////////////////////////////////////////////////////////////////////////////////////
+	const localStorageProtocol = new LocalStorageProtocol();
+	const prescriptionsUseCase = new PrescriptionsUseCases();
+	const [loadingSave, setLoadingSave] = React.useState(false);
+	const [saveOK, setSaveOk] = React.useState(true);
+	const [messageAPI, setMessageAPI] = React.useState('');
+
+	const savePrescription = () => {
+		setPrescriptions();
+		handleOpenModalFormSaved();
+
+		const prescripcion = {
+			number: numOrder,
+			name: namePaciente,
+			id: numIden,
+			ips: ips
+		}
+		localStorageProtocol.set(StorageKeysEnum.prescripcionOrden, prescripcion);
+	}
+
+	// const [reporte, setReporte] =useState<IPrescriptions>();
+
+	const getPrescriptionsByNumber = async () => {
+
+
+		setLoadingSave(false);
+
+		const storagePredsc = localStorageProtocol.get(StorageKeysEnum.prescripcionOrden)
+		// console.log('Preds:', storagePredsc);
+		// const resp = await prescriptionsUseCase.prescripcionsByNumber(storagePredsc.number);
+
+		if (localStorageProtocol.get(StorageKeysEnum.prescripcionOrden)) {
+			const resp = await prescriptionsUseCase.prescripcionsByNumber(storagePredsc.number);
+
+			const repoPresc: IPrescriptions = resp.body
+
+			if (resp.statusCode === 200) {
+				setSaveOk(true);
+				// console.log('Reporte:', repoPresc)
+				// setReporte(repoPresc);
+				// localStorageProtocol.set(StorageKeysEnum.reporte,repoPresc);
+				initState(repoPresc);
+
+			} else if (resp.statusCode === 400) {
+				setMessageAPI(resp.body.message)
+				setSaveOk(false)
+			} else if (resp.statusCode === 404) {
+				setSaveOk(false)
+			} else if (resp.statusCode === 401 && resp.statusCode === 500) {
+				setSaveOk(false)
+			} else {
+				setSaveOk(false)
+			}
+		}
+		setLoadingSave(true);
+	}
+
+	const initState = (repor: IPrescriptions) => {
+
+		setNumOrder(repor?.no_orden.toString());
+		setPrescripcion(repor?.tipo_prescripcion);
+		setIps(repor?.ips);
+		setNamePaciente(repor?.nombre_paciente);
+		setServicio(repor?.servicio);
+		setUbicacion(repor?.ubicacion);
+		setCama(repor?.cama);
+		setPesoKg(repor?.peso.toString());
+		setEdad(repor?.edad.toString());
+		setTipoEdad(repor?.tipo_edad);
+		setVolumen(repor?.volumen.toString());
+		setPurga(repor?.purga.toString());
+		setTiempoDeInfucion(repor?.tiempo_infusion);
+		setOverfill(repor?.overfill);
+		setFiltro((repor?.filtro) ? 'si' : 'no');
+		setEqFotosencible((repor?.equipo_fotosensible) ? 'si' : 'no');
+		setTipoPaciente(repor?.tipo_paciente);
+		setViaAdmin(repor?.via_administracion);
+		setDiagnostico(repor?.diagnostico);
+		setTipoPrescripcion(repor?.tipo_prescripcion);
+		setFlujoMetabolico(repor?.flujo_metabolico);
+		setDextrosa(repor?.dextrosa!);
+		setAminoacidos(repor?.aminoacidos);
+		setRequerimientoAminoacidos(repor?.req_aminoacidos);
+		setLipidos(repor?.lipidos);
+		setRequerimientoLipidos(repor?.req_lipidos);
+		setOmegaven(repor?.omegaven);
+		setDipeptiven(repor?.dipeptiven);
+		setSodioTotal(repor?.sodio_total);
+		setPotacioTotal(repor?.potasio_total);
+		setFosfato(repor?.fosfato);
+		setRequerimientoFosfato(repor?.req_fosfato);
+		setCalcio(repor?.calcio);
+		setReqCalcio(repor?.req_calcio);
+		setMagnesio(repor?.magnesio);
+		setReqMagnesio(repor?.req_magnesio);
+		setElementosTraza(repor?.elementos_traza);
+		setReqTraza(repor?.req_elementos_traza);
+		setVitaminasHidrosolubles(repor?.vit_hidrosolubles);
+		setReqVitHidrosolubles(repor?.req_vit_hidrosolubles);
+		setVitaminasLiposolubles(repor?.req_vit_liposolubles);
+		setVitaminasC(repor?.vit_C);
+		setAcidoFolico(repor?.acido_folico);
+
+	}
+
+	const cancelForm=(route:string)=>{
+		localStorageProtocol.delete(StorageKeysEnum.prescripcionOrden);
+	    router.push(route)
+	}
 	//////////////////////////////////MANEJO DE FORMULARIOS///////////////////////////////////////////////////////////
-
-
+	// const initStateReport = localStorageProtocol.get(StorageKeysEnum.reporte)
 	//////////////////////////////ORDEN////////////////////////////////////
 	const [numOrder, setNumOrder] = React.useState('');
 	const [errorNumOrder, setErrorNumOrder] = React.useState(false);
@@ -111,14 +219,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleNumOrder = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setNumOrder(event.target.value);
-		// const numOrder = event.target.value;
-		// if (numOrder.length > 7 && !isNaN(parseInt(numOrder))) {
-		// 	setErrorNumOrder(false);
-		// 	setMessageErrorNumOrder('')
-		// } else {
-		// 	setErrorNumOrder(true);
-		// 	setMessageErrorNumOrder('Introduzca un número de orden válido')
-		// }
 	};
 
 	const [prescripcion, setPrescripcion] = React.useState('');
@@ -144,7 +244,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorFechaCreacion, setMessageErrorFechaCreacion] = React.useState('');
 
 	const handleFechaCreacion = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setFechaCreacion(event.target.value );
+		setFechaCreacion(event.target.value);
 	};
 
 	const fechaActual = () => {
@@ -232,7 +332,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleEdad = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEdad(event.target.value);
-		
+
 	};
 
 	const [tipoEdad, setTipoEdad] = React.useState('');
@@ -560,21 +660,18 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	////////////////////////////////////////////////////////////////////
 	///////////////////////////////INTEGRACION DE APIS//////////////////
-	const prescriptionsUseCase = new PrescriptionsUseCases();
-	const [loadingSave, setLoadingSave] = React.useState(false);
-	const [saveOK, setSaveOk] = React.useState(true);
-	const [messageAPI, setMessageAPI] = React.useState('');
-     
+
+
 	const prescriptionsData: IPrescriptions = {
 		no_orden: parseInt(numOrder) || 0,
-		tipo_prescripcion: tipoPrescripcion ||' 0',
-		fecha: fechaCreacion||' 0',
-		ips: ips||' 0',
-		no_identificacion: numIden||' 0',
+		tipo_prescripcion: tipoPrescripcion || ' 0',
+		fecha: fechaCreacion || ' 0',
+		ips: ips || ' 0',
+		no_identificacion: numIden || ' 0',
 		nombre_paciente: namePaciente,
 		servicio: servicio,
 		ubicacion: ubicacion,
-		cama: cama||' 0',
+		cama: cama || ' 0',
 		peso: parseInt(pesoKg) || 0,
 		tipo_edad: tipoEdad,
 		edad: parseInt(edad) || 0,
@@ -587,42 +684,39 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		tipo_paciente: tipoPaciente,
 		via_administracion: viaAdmin,
 		diagnostico: diagnostico,
-		flujo_metabolico: flujoMetabolico||' 0',
-		aminoacidos: aminoacidos||' 0',
-		dextrosa: dextrosa||' 0',
-		req_aminoacidos: requerimientoAminoacidos||' 0',
-		lipidos: lipidos||' 0',
-		req_lipidos: requerimientoLipidos||' 0',
-		omegaven: omegaven||' 0',
-		dipeptiven: dipeptiven||' 0',
-		sodio_total: sodioTotal||' 0',
-		potasio_total: potacioTotal||' 0',
+		flujo_metabolico: flujoMetabolico || ' 0',
+		aminoacidos: aminoacidos || ' 0',
+		dextrosa: dextrosa || ' 0',
+		req_aminoacidos: requerimientoAminoacidos || ' 0',
+		lipidos: lipidos || ' 0',
+		req_lipidos: requerimientoLipidos || ' 0',
+		omegaven: omegaven || ' 0',
+		dipeptiven: dipeptiven || ' 0',
+		sodio_total: sodioTotal || ' 0',
+		potasio_total: potacioTotal || ' 0',
 		fosfato: fosfato,
-		req_fosfato: requerimientoFosfato||' 0',
+		req_fosfato: requerimientoFosfato || ' 0',
 		calcio: calcio,
-		req_calcio: reqCalcio||' 0',
+		req_calcio: reqCalcio || ' 0',
 		magnesio: magnesio,
-		req_magnesio: reqMagnesio||' 0',
+		req_magnesio: reqMagnesio || ' 0',
 		elementos_traza: elementosTraza,
-		req_elementos_traza: reqTraza||' 0',
-		vit_hidrosolubles:vitaminasHidrosolubles,
-		req_vit_hidrosolubles:reqVitHidrosolubles||' 0',
-		req_vit_liposolubles: vitaminasLiposolubles||' 0',
-		vit_C: vitaminasC||' 0',
-		acido_folico: acidoFolico||' 0'
+		req_elementos_traza: reqTraza || ' 0',
+		vit_hidrosolubles: vitaminasHidrosolubles,
+		req_vit_hidrosolubles: reqVitHidrosolubles || ' 0',
+		req_vit_liposolubles: vitaminasLiposolubles || ' 0',
+		vit_C: vitaminasC || ' 0',
+		acido_folico: acidoFolico || ' 0'
 	}
 
-	const [prescriptionSave, setPrescriptionSave] = React.useState<IPrescriptions|undefined>();
-    
-	const getPrescriptions=()=>{
+	const [prescriptionSave, setPrescriptionSave] = React.useState<IPrescriptions | undefined>();
+
+	const getPrescriptions = () => {
 		setPrescriptionSave(prescriptionsData)
 	}
-    
-	
 
 	const setPrescriptions = async () => {
 
-	
 		setLoadingSave(false);
 		console.log('Loading...')
 		const resp = await prescriptionsUseCase.savePrescripcions(prescriptionsData)
@@ -648,20 +742,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const handleOpenModalFormSaved = () => { setOpenModalFormSaved(true) };
 	const handleCloseModalFormSaved = () => setOpenModalFormSaved(false);
 
-	const localStorageProtocol = new LocalStorageProtocol();
+	const router = useRouter();
 
-	const savePrescription = () => {
-		setPrescriptions();
-		handleOpenModalFormSaved();
-
-		const prescripcion = {
-			number: numOrder,
-			name: namePaciente,
-			id: numIden,
-			ips: ips
-		}
-		localStorageProtocol.set(StorageKeysEnum.prescripcionOrden, prescripcion);
-	}
+	// useEffect(() => {
+	// 		getPrescriptionsByNumber();
+	// 		console.log('PPPP:',reporte);
+	// }, [])
 
 	return (
 
@@ -691,6 +777,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			handleCloseModalFormSaved,
 			savePrescription,
 			prescriptionSave,
+			getPrescriptionsByNumber,
 			///////////////////////////ORDEN ///////////////////////////////
 			numOrder, errorNumOrder, messageErrorNumOrder, handleNumOrder,
 			prescripcion, errorPrescripcion, messageErrorPrescripcion, handlePrescripcion,
@@ -748,6 +835,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			saveOK,
 			valAllForm,
 			messageAPI,
+			cancelForm,
 
 
 

@@ -51,6 +51,20 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		//  return resp.body;
 	}
 
+	const localStorageProtocol = new LocalStorageProtocol();
+    const router=useRouter();
+
+	const goEdit=(orden:number,route:string)=>{
+	
+		const prescripcion = {number:orden,}
+		localStorageProtocol.set(StorageKeysEnum.prescripcionOrden,prescripcion );
+	    router.push(route)
+	}
+
+	const goAddNew=(route:string)=>{
+		localStorageProtocol.delete(StorageKeysEnum.prescripcionOrden);
+	    router.push(route)
+	}
 
 	return (
 		<PrescripcionContext.Provider value={{
@@ -60,6 +74,8 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			messageAPI,
 			getAll,
 			reportes,
+			goEdit,
+			goAddNew,
 
 		}}>{children}
 		</PrescripcionContext.Provider>

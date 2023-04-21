@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { GridRenderCellParams, DataGrid, GridColDef } from '@mui/x-data-grid';
 import AddIcon from '@mui/icons-material/Add';
 import { CustomButton } from '@/components/CustomButton';
-import { Box, Button, CircularProgress, Stack } from '@mui/material';
+import { Box, Button, CircularProgress, Skeleton, Stack } from '@mui/material';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import PictureAsPdfOutlinedIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import { colorsKarbono } from '@/themes/colors';
@@ -10,6 +10,7 @@ import { IDataTable } from '@/utilities/interfaces/predscripcion_interfaces';
 import { PrescripcionContext } from '../../context/PrescripcionContext';
 import { IPrescriptions } from '@/domain/models/prescriptions.model';
 import { Typography } from '@material-ui/core';
+import { mainRoutes } from '@/routes/routes';
 
 
 // const data = [
@@ -24,99 +25,103 @@ import { Typography } from '@material-ui/core';
 // ];
 
 
-const columns: GridColDef[] = [
 
-	{
-		field: "nombre_paciente",
-		headerName: "Paciente",
-		headerClassName: 'table-color--header',
-		// cellClassName:'style-theme--cell',
-		flex: 1,
-		minWidth: 50,
-		renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
-	},
-
-	{ 
-		
-		field: "no_identificacion",
-		headerName: "Identificación",
-		headerClassName: 'table-color--header',
-		flex: 1,
-		minWidth: 50,
-		renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
-	},
-
-	{
-		field: "ips",
-		headerName: "Ips",
-		headerClassName: 'table-color--header',
-		flex: 1,
-		minWidth: 50,
-		renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
-	},
-
-
-	{
-		field: "tipo_prescripcion",
-		headerName: "Tipo de Prescripción",
-		headerClassName: 'table-color--header',
-		flex: 1,
-		minWidth: 80,
-		renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
-	},
-
-
-	{
-		field: "fecha",
-		headerName: "Creación",
-		headerClassName: 'table-color--header',
-		flex: 1,
-		maxWidth:100,
-		renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
-	},
-
-	{
-		field: "usuario",
-		headerName: "Usuario",
-		headerClassName: 'table-color--header',
-		flex: 1,
-		minWidth: 50,
-		renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
-	},
-
-	{
-		field: "acciones",
-		headerName: "Acciones",
-		headerClassName: 'table-color--header',
-		flex: 1,
-		maxWidth:140,
-		renderCell: (params: GridRenderCellParams) =>
-		(<>
-			<Button>
-				<PictureAsPdfOutlinedIcon sx={{ marginRight: '0px', color: 'black' }} />
-			</Button>
-			<Button>
-				<ModeEditOutlineOutlinedIcon sx={{ marginRight: '10px', color: 'black' }} />
-			</Button>
-		</>)
-	},
-];
 
 export interface TableReportesProps { }
 
 const TableReportes: React.FC<TableReportesProps> = () => {
 
-	const {getAll,reportes,loadingGet} = useContext(PrescripcionContext)
+	const {getAll,reportes,loadingGet,goEdit} = useContext(PrescripcionContext)
   
 	useEffect(() => {
 		getAll(30);
 		console.log('Reportes List:',reportes)
 	},[])
 	
+
+	const columns: GridColDef[] = [
+
+		{
+			field: "nombre_paciente",
+			headerName: "Paciente",
+			headerClassName: 'table-color--header',
+			// cellClassName:'style-theme--cell',
+			flex: 1,
+			minWidth: 50,
+			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+		},
+	
+		{ 
+			
+			field: "no_identificacion",
+			headerName: "Identificación",
+			headerClassName: 'table-color--header',
+			flex: 1,
+			minWidth: 50,
+			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+		},
+	
+		{
+			field: "ips",
+			headerName: "Ips",
+			headerClassName: 'table-color--header',
+			flex: 1,
+			minWidth: 50,
+			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+		},
+	
+	
+		{
+			field: "tipo_prescripcion",
+			headerName: "Tipo de Prescripción",
+			headerClassName: 'table-color--header',
+			flex: 1,
+			minWidth: 80,
+			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+		},
+	
+	
+		{
+			field: "fecha",
+			headerName: "Creación",
+			headerClassName: 'table-color--header',
+			flex: 1,
+			maxWidth:100,
+			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+		},
+	
+		{
+			field: "usuario",
+			headerName: "Usuario",
+			headerClassName: 'table-color--header',
+			flex: 1,
+			minWidth: 50,
+			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+		},
+	
+		{
+			field: "acciones",
+			headerName: "Acciones",
+			headerClassName: 'table-color--header',
+			flex: 1,
+			maxWidth:140,
+			renderCell: (params: GridRenderCellParams) =>
+			(<>
+				<Button>
+					<PictureAsPdfOutlinedIcon sx={{ marginRight: '0px', color: 'black' }} />
+				</Button>
+				<Button
+				onClick={()=>{goEdit(params.row.no_orden,mainRoutes.form)}}
+				>
+					<ModeEditOutlineOutlinedIcon sx={{ marginRight: '10px', color: 'black' }} />
+				</Button>
+			</>)
+		},
+	];
 	
 	return (
 		(!loadingGet)
-		?<CircularProgress variant='indeterminate'size='100px'/>
+		?<Skeleton variant="rectangular" sx={{marginX:'15px',borderRadius:'5px'}} width='100%' height={700} />
 		:<Box
 			sx={{
 				paddingX:'10px',
@@ -142,10 +147,13 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 				}}
 				rows={reportes!}
 				columns={columns}
+				initialState={{
+					pagination: { paginationModel: { pageSize: 5 } },
+				  }}
 				// disableColumnSelector
 				// // cledisableRowSelectionOnClick
 				// autoHeight
-				pageSizeOptions={[10]}
+				pageSizeOptions={[5, 10, 25]}
 				getRowId={(row: any) => row.no_orden}
 			/>
 
