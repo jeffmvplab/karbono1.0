@@ -3,16 +3,10 @@ import Link from 'next/link'
 
 import FadeMenu from '@/layouts/components/NavBar/components/BotonPerfil'
 
-
-
-
 import { AppBar, Toolbar, IconButton, Hidden, Grid, Typography, Box } from '@mui/material'
 import { MenuOutlined, CallOutlined, } from '@mui/icons-material'
 import SearchBar from './SearchBarReporte'
 import Image from 'next/image'
-
-
-
 
 const NabvarReportePrescripcion = ({ }) => {
   return (

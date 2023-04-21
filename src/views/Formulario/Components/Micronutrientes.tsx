@@ -122,9 +122,10 @@ const Micronutrientes = () => {
                                         onChange={handleSodioTotal}
                                         value={sodioTotal}
                                         id='Sodio-total'
-                                        label={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'Sodio total (mEq/kg/día)'
-                                            : 'Sodio total (ml)'}
+                                        label={'Sodio total'}
+                                        endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'mEq/kg/día'
+                                            : 'ml'}
                                         type='text'
                                     />
 
@@ -135,9 +136,10 @@ const Micronutrientes = () => {
                                         onChange={handlePotacioTotal}
                                         value={potacioTotal}
                                         id='potasio-total'
-                                        label={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'Potasio tota (mEq/kg/día)'
-                                            : 'Potasio tota (ml)'}
+                                        label={'Potasio total'}
+                                        endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'mEq/kg/día'
+                                            : 'ml'}
                                         type='text'
                                     />
                                     {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
@@ -177,9 +179,10 @@ const Micronutrientes = () => {
                                         onChange={handleRequerimientoFosfato}
                                         value={requerimientoFosfato}
                                         id='requerimiento-fosfato'
-                                        label={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'Requerimiento fosfato (mmol/kg/día)'
-                                            : 'Requerimiento fosfato (ml)'}
+                                        label={'Requerimiento fosfato'}
+                                        endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'mmol/kg/día'
+                                            : 'ml'}
                                         type='text'
                                     />
                                     {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
@@ -220,12 +223,19 @@ const Micronutrientes = () => {
                                         id='requerimiento_calcio'
                                         label={
                                             (calcio === 'Gluconato de Calcio')
+                                                ? 'Gluconato de calcio'
+                                                : 'Calcio Elemental'
+
+
+                                        }
+                                        endAdornament={
+                                            (calcio === 'Gluconato de Calcio')
                                                 ? (tipoPrescripcion === 'Por requerimientos')
-                                                    ? 'Gluconato de calcio (mg/kg/día)'
-                                                    : 'Gluconato de calcio (ml)'
+                                                    ? 'mg/kg/día'
+                                                    : 'ml'
                                                 : (tipoPrescripcion === 'Por requerimientos')
-                                                    ? 'Calcio Elemental (mEq/kg/día)'
-                                                    : 'Calcio Elemental (ml)'
+                                                    ? 'mEq/kg/día'
+                                                    : 'ml'
 
                                         }
                                         type='text'
@@ -265,17 +275,18 @@ const Micronutrientes = () => {
                                         value={reqMagnesio}
                                         id='requerimiento-sulfato-de-magnesio'
                                         label={
-                                            (tipoPaciente === 'Adulto')
+                                            (magnesio === 'Sulfato de magnesio')
+                                                ? 'Sulfato de magnesio'
+                                                : 'Magnesio Elemental '
+                                        }
+                                        endAdornament={
+                                            (magnesio === 'Sulfato de magnesio')
                                                 ? (tipoPrescripcion === 'Por requerimientos')
-                                                    ? 'Sulfato de magnesio (mg/kg/día)'
-                                                    : 'Sulfato de magnesio (ml)'
-                                                : (tipoPaciente === 'Pediatrico')
-                                                    ? (tipoPrescripcion === 'Por requerimientos')
-                                                        ? 'Magnesio Elemental (mEq/kg/día)'
-                                                        : 'Magnesio Elemental (ml)'
-                                                    : (tipoPrescripcion === 'Por requerimientos')
-                                                        ? 'Magnesio Elemental (mEq/kg/día)'
-                                                        : 'Magnesio Elemental (ml)'
+                                                    ? 'mg/kg/día'
+                                                    : 'ml'
+                                                : (tipoPrescripcion === 'Por requerimientos')
+                                                    ? 'mEq/kg/día'
+                                                    : 'ml'
                                         }
                                         type='text'
                                     />
@@ -324,10 +335,11 @@ const Micronutrientes = () => {
                                         onChange={handleReqTraza}
                                         value={reqTraza}
                                         id='requerimiento-traza'
-                                        label={
+                                        label={'Requerimiento traza'}
+                                        endAdornament={
                                             (tipoPrescripcion === 'Por requerimientos')
-                                                ? 'Requerimiento traza (ml/día)'
-                                                : 'Requerimiento traza (ml)'
+                                                ? 'ml/día'
+                                                : 'ml'
                                         }
                                         type='text'
                                     />
@@ -347,11 +359,7 @@ const Micronutrientes = () => {
                                         value={vitaminasHidrosolubles}
                                         defaulValue={vitaminasHidrosolubles}
                                         id='vitaminas-hidrosolubes'
-                                        label={
-                                            (tipoPrescripcion === 'Por requerimientos')
-                                                ? 'Vitaminas hidrosolubes (ml/día)'
-                                                : 'Vitaminas hidrosolubes (ml)'
-                                        }
+                                        label={'Vitaminas hidrosolubes'}                                     
                                         type='text'
                                         select
                                     >
@@ -382,9 +390,10 @@ const Micronutrientes = () => {
                                         onChange={handleReqVitHidrosolubles}
                                         value={reqVitHidrosolubles}
                                         id='req-vitaminas-hidrosolubles'
-                                        label={  (tipoPrescripcion === 'Por requerimientos')
-                                        ? 'Requerimientos Vitaminas hidrosolubes (ml/día)'
-                                        : 'Requerimientos Vitaminas hidrosolubes (ml)'}
+                                        label={'Requerimientos Vitaminas hidrosolubes'}
+                                        endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'ml/día'
+                                            : 'ml'}
                                         type='text'
                                     />
                                 </Grid>
@@ -409,17 +418,13 @@ const Micronutrientes = () => {
                                         id='vitaminas-liposolubles'
                                         label={
                                             (tipoPaciente === 'Adulto')
-                                                ? (tipoPrescripcion === 'Por requerimientos')
-                                                    ? 'Vitalipid adult (ml/día)'
-                                                    : 'Vitalipid adult (ml)'
-                                                : (tipoPaciente === 'Pediatrico')
-                                                    ? (tipoPrescripcion === 'Por requerimientos')
-                                                        ? 'Vitalipid infant (ml/día)'
-                                                        : 'Vitalipid infant (ml)'
-                                                    : (tipoPrescripcion === 'Por requerimientos')
-                                                        ? 'Vitalipid infant (ml/día)'
-                                                        : 'Vitalipid infant (ml)'
-
+                                                ? 'Vitalipid adult (ml/día)'
+                                                : 'Vitalipid infant (ml/día)'
+                                        }
+                                        endAdornament={
+                                            (tipoPaciente === 'Adulto')
+                                                ? 'ml/día'
+                                                : 'ml'
                                         }
                                         type='text'
                                     />
@@ -438,9 +443,10 @@ const Micronutrientes = () => {
                                         onChange={handleVitaminasC}
                                         value={vitaminasC}
                                         id='vitamina-c'
-                                        label={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'Vitamina C (mg/día)'
-                                            : 'Vitamina C (ml)'
+                                        label={'Vitamina C'}
+                                        endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'mg/día'
+                                            : 'ml'
                                         }
                                     />
                                     {/* <TextFieldInput id='vitamina-c' type='text' label='Vitamina C' /> */}
@@ -451,9 +457,10 @@ const Micronutrientes = () => {
                                         onChange={handleAcidoFolico}
                                         value={acidoFolico}
                                         id='acido-folico'
-                                        label={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'Acido folico (mg/día)'
-                                            : 'Acido folico (ml)'
+                                        label={'Acido folico (mg/día)'}
+                                        endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'mg/día'
+                                            : 'ml'
                                         }
                                         type='text'
                                     />

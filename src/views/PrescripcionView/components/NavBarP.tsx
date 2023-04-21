@@ -39,13 +39,16 @@ const NavbarP = ({ drawerWidth = 240, }) => {
         {/* <MenuOutlined /> */}
         {/* </IconButton> */}
         <Grid container direction='row' justifyContent='space-between'>
-          <Grid item sx={{ marginTop: { xs: '15px' }, marginLeft: { xs: '30px', sm: '0px' } }}>
+          <Grid item sx={{ marginTop: { xs: '15px' }, marginLeft: { xs: '0px', sm: '0px' } }}>
             {/* <Hidden smDown> */}
             <SearchBar />
             {/* </Hidden> */}
           </Grid>
+
           <Box display='flex' sx={{ marginTop: '10px' }} >
-            <Grid item alignItems='center' marginRight='20px' >
+
+            <Grid item alignItems='center' marginRight='20px' sx={{ display: { xs: 'none', sm: 'block' } }}  >
+
               <Link href='' style={{ textDecoration: 'none' }} >
                 <Typography
                   margin='0 15px'
@@ -53,14 +56,16 @@ const NavbarP = ({ drawerWidth = 240, }) => {
                   alignItems='center'
                   sx={{ justifyContent: 'center', alignItems: 'center' }}
                 >
-                  <CallOutlined sx={{ display: { xs: 'none', sm: 'block' } }} />
+                  <CallOutlined />
                 </Typography>
               </Link>
+
             </Grid>
-            <Grid item >
+            <Grid item  paddingTop={0.5}>
               <FadeMenu />
             </Grid>
           </Box>
+
         </Grid>
       </Toolbar>
     </AppBar>

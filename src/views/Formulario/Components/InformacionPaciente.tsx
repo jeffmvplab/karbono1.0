@@ -11,6 +11,12 @@ const currencies = [
     { value: 'no', label: 'No', }
 ]
 
+const tipoEdades = [
+    { value: 'años', label: 'años', },
+    { value: 'meses', label: 'meses', },
+    { value: 'días', label: 'días', }
+]
+
 const tiposPacientes = [
     { value: 'Adulto', label: 'Adulto' },
     { value: 'Pediatrico', label: 'Pediatrico-Neonato' },
@@ -89,7 +95,7 @@ const InformacionPaciente = () => {
 
     useEffect(() => {
         setStateAcordion1(matches);
-        
+
     }, [matches])
     /////////////////////////////////////////////////////////////////////
 
@@ -167,12 +173,21 @@ const InformacionPaciente = () => {
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                     <CustomTextField
-                                        onChange={handleServicio}
-                                        id='servicio'
-                                        label='Servicio*'
+                                        onChange={handleTipoPaciente}
+                                        value={tipoPaciente}
+                                        defaulValue={tipoPaciente}
+                                        id='tipo-de-paciente'
+                                        label='Tipo de paciente *'
                                         type='text'
-                                        value={servicio}
-                                    />
+                                        select={true}
+                                    >
+                                        {tiposPacientes.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
+                                    </CustomTextField>
+
                                 </Grid>
 
                             </Grid>
@@ -187,13 +202,12 @@ const InformacionPaciente = () => {
                             <Grid container spacing={2}>
 
                                 <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
-
                                     <CustomTextField
-                                        onChange={handleUbicacion}
-                                        id='ubicacion'
-                                        label='Ubicación'
+                                        onChange={handleServicio}
+                                        id='servicio'
+                                        label='Servicio*'
                                         type='text'
-                                        value={ubicacion}
+                                        value={servicio}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
@@ -209,7 +223,8 @@ const InformacionPaciente = () => {
                                     <CustomTextField
                                         onChange={handlePesoKg}
                                         id='peso-kg'
-                                        label='Peso (kg)*'
+                                        label='Peso*'
+                                        endAdornament='kg'
                                         type='text'
                                         value={pesoKg}
                                     />
@@ -235,6 +250,7 @@ const InformacionPaciente = () => {
                                         type='text'
                                         value={edad}
                                     />
+
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
 
@@ -244,7 +260,17 @@ const InformacionPaciente = () => {
                                         label='Tipo Edad'
                                         type='text'
                                         value={tipoEdad}
-                                    />
+                                        defaulValue={tipoEdad}
+                                        select
+                                    >
+                                        {tipoEdades.map((option) => (
+                                            <MenuItem
+                                                key={option.value}
+                                                value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
+                                    </CustomTextField>
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
 
@@ -300,101 +326,7 @@ const InformacionPaciente = () => {
                                 </Grid>
 
                                 <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
-                                    <Box sx={{ justifyContent: 'left' }}>
-                                        <Typography style={{ marginLeft: '15px' }}>
-                                            Overfill *
-                                        </Typography>
-
-                                        <Slider
-                                            value={overfill}
-                                            onChange={handleOverfill}
-                                            sx={{ margin: '0 5px', marginTop: '0px' }}
-                                            aria-label="Small steps"
-                                            defaultValue={1}
-                                            // getAriaValueText={valuetext}
-                                            step={1}
-                                            min={0}
-                                            max={30}
-                                            valueLabelDisplay="auto"
-                                            marks={marks2}
-                                        />
-                                    </Box>
-                                </Grid>
-                            </Grid>
-                        </Box>
-
-                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
-
-                            <Grid container spacing={2}>
-
-                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
-
-                                    <CustomTextField
-                                        onChange={handleFiltro}
-                                        value={filtro}
-                                        defaulValue={filtro}
-                                        id='filtro'
-                                        label='Filtro*'
-                                        select
-                                    >
-                                        {currencies.map((option) => (
-                                            <MenuItem 
-                                              key={option.value}
-                                              value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </CustomTextField>
-                                </Grid>
-
-                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
-
-
-                                    <CustomTextField
-                                        onChange={handleEqFotosencible}
-                                        value={eqFotosencible}
-                                        defaulValue={eqFotosencible}
-                                        id='equipo-fotosensible'
-                                        label='Equipo Fotosensible'
-                                        type='text'
-                                        select={true}
-                                    >
-                                        {currencies.map((option) => (
-                                            <MenuItem 
-                                             key={option.value} 
-                                             value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </CustomTextField>
-                                </Grid>
-
-                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
-                                    <CustomTextField
-                                        onChange={handleTipoPaciente}
-                                        value={tipoPaciente}
-                                        defaulValue={tipoPaciente}
-                                        id='tipo-de-paciente'
-                                        label='Tipo de paciente *'
-                                        type='text'
-                                        select={true}
-                                    >
-                                        {tiposPacientes.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </CustomTextField>
-                                </Grid>
-                            </Grid>
-                        </Box>
-
-                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
-
-                            <Grid container spacing={2}>
-
-                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
-                                    <CustomTextField
+                                <CustomTextField
                                         onChange={handleViaAdmin}
                                         value={viaAdmin}
                                         defaulValue={viaAdmin}
@@ -410,8 +342,13 @@ const InformacionPaciente = () => {
                                         ))}
                                     </CustomTextField>
                                 </Grid>
+                            </Grid>
+                        </Box>
 
-                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         onChange={handleDiagnostico}
                                         value={diagnostico}
@@ -420,6 +357,11 @@ const InformacionPaciente = () => {
                                         type='text'
                                     />
                                 </Grid>
+
+                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                   
+                                </Grid>
+
                             </Grid>
                         </Box>
                     </Grid>
