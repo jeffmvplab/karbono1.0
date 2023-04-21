@@ -21,7 +21,7 @@ export interface HttpClient<R = any> {
   uploadFile: (params: UploadFileParams) => Promise<HttpResponse<R>>
 }
 
-export type HttpMethod = 'post' | 'get' | 'put' | 'delete'
+export type HttpMethod = 'post' | 'get' | 'put' | 'delete'|'patch'
 
 export enum HttpStatusCode {
   ok = 200,

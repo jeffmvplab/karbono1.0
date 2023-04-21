@@ -111,7 +111,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 					<PictureAsPdfOutlinedIcon sx={{ marginRight: '0px', color: 'black' }} />
 				</Button>
 				<Button
-				onClick={()=>{goEdit(params.row.no_orden,mainRoutes.form)}}
+				onClick={()=>{goEdit(params.row.no_orden)}}
 				>
 					<ModeEditOutlineOutlinedIcon sx={{ marginRight: '10px', color: 'black' }} />
 				</Button>
@@ -148,12 +148,12 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 				rows={reportes!}
 				columns={columns}
 				initialState={{
-					pagination: { paginationModel: { pageSize: 5 } },
+					pagination: { paginationModel: { pageSize: 10 } },
 				  }}
 				// disableColumnSelector
 				// // cledisableRowSelectionOnClick
-				// autoHeight
-				pageSizeOptions={[5, 10, 25]}
+				 autoHeight
+				pageSizeOptions={[5,10,25]}
 				getRowId={(row: any) => row.no_orden}
 			/>
 

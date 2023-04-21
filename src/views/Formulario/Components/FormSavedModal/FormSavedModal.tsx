@@ -22,8 +22,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 	const router=useRouter();
 
 	const validacionOK = true;
-    
-    console.log()
+
 	return (
 
 		<Modal

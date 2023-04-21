@@ -11,6 +11,7 @@ export interface IPrescriptionsUseCase {
     prescripcionsById(id:string): Promise<any>;
     prescripcionsByIps(ips:string): Promise<any>;
     prescripcionsAll(limit:number): Promise<any>;
+    updatePrescripcions(prescriptions: IPrescriptions,number:string): Promise<any>;
 }
 
 
@@ -32,6 +33,10 @@ export class PrescriptionsUseCases implements IPrescriptionsUseCase {
 
     prescripcionsByNumber(number:string): Promise<any>{
         return this.prescriptionsRepository.getPrescripcionsByNumber(number);
+    }
+    
+   updatePrescripcions(prescriptions: IPrescriptions,number:string): Promise<any>{
+        return this.prescriptionsRepository.updatePrescripcions(prescriptions,number);
     }
 
     prescripcionsByName(name:string): Promise<any>{

@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Image from 'next/image';
 
 
 import { Drawer, Box, Typography, Hidden, List, Grid, Divider, ListItem, ListItemText, ListItemButton, Toolbar } from '@mui/material';
 import Link from 'next/link';
-
+import { CustomButton } from '@/components/CustomButton';
+import { mainRoutes } from '@/routes/routes';
+import { colorsKarbono } from '@/themes/colors';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { PrescripcionContext } from '../context/PrescripcionContext';
 
 export const Sidebar = ({ drawerWidth = 240 }) => {
+
+  const { goAddNew } = useContext(PrescripcionContext)
+
   return (
     <Box
 
@@ -67,28 +74,19 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
               />
             </Box>
             <Box display='flex' flexDirection='row' paddingTop='25px'>
-              <Link href='/formulario' style={{ textDecoration: 'none' }}>
-                <Typography
-
-                  sx={{
-
-                    marginLeft: '3px',
-                    color: '#372FC6',
-                    fontSize: '17px',
-
-                  }}
-                >
-                  Agregar Nueva
-                </Typography></Link>
-
-              <Image
-                src='/assets/añadir-icono-landing.png'
-                width={20}
-                height={20}
-                alt=''
-                style={{ alignItems: 'center', marginLeft: '40px', paddingTop: '5px', paddingLeft: '5px' }}
-
+              <CustomButton text={'Agregar Nueva'}
+                onClick={() => { goAddNew(mainRoutes.form) }}
+                width='200px'
+                height='44px'
+                variant='text'
+                color='secundary'
+                fontSize={'16px'}
+                textColor={colorsKarbono.secundary}
+                borderColor={colorsKarbono.secundary}
+                endIcon={<AddCircleOutlineIcon style={{ color: '#372fc6', paddingLeft: '5px', scale: '1.5' }} />}
+                sx={{ borderRadius: '10px' }}
               />
+
             </Box>
           </Grid>
         </Toolbar>
