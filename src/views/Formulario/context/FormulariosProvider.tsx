@@ -21,6 +21,7 @@ type Props = {
 export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	///////////////////////////HANDLE ACORDIONS///////////////////////////
+	const router = useRouter();
 	let matches: boolean = useMediaQuery('(min-width:768px)')
 
 	const [stateAcordion1, setStateAcordion1] = useState(false);
@@ -55,12 +56,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const getMovilHeight = () => {
 
-		if (stateAcordion1 && stateAcordion2 && stateAcordion3) { return '3570px' }
+		if (stateAcordion1 && stateAcordion2 && stateAcordion3) { return '3270px' }
 		if (!stateAcordion1 && stateAcordion2 && stateAcordion3) { return '2120px' }
-		if (stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '2800px' }
-		if (stateAcordion1 && stateAcordion2 && !stateAcordion3) { return '2375px' }
+		if (stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '2500px' }
+		if (stateAcordion1 && stateAcordion2 && !stateAcordion3) { return '2060px' }
 		if (!stateAcordion1 && !stateAcordion2 && !stateAcordion3) { return '150px' }
-		if (stateAcordion1 && !stateAcordion2 && !stateAcordion3) { return '1600px' }
+		if (stateAcordion1 && !stateAcordion2 && !stateAcordion3) { return '1300px' }
 		if (!stateAcordion1 && stateAcordion2 && !stateAcordion3) { return '920px' }
 		if (!stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '1360px' }
 	}
@@ -124,8 +125,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	// const [reporte, setReporte] =useState<IPrescriptions>();
 
 	const getPrescriptionsByNumber = async () => {
-
-
 		setLoadingSave(false);
 
 		const storagePredsc = localStorageProtocol.get(StorageKeysEnum.prescripcionOrden)
@@ -155,6 +154,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 				setSaveOk(false)
 			}
 		}
+		
 		setLoadingSave(true);
 	}
 
@@ -206,9 +206,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	}
 
-	const cancelForm=(route:string)=>{
+	const cancelForm = (route: string) => {
 		localStorageProtocol.delete(StorageKeysEnum.prescripcionOrden);
-	    router.push(route)
+		router.push(route)
 	}
 	//////////////////////////////////MANEJO DE FORMULARIOS///////////////////////////////////////////////////////////
 	// const initStateReport = localStorageProtocol.get(StorageKeysEnum.reporte)
@@ -660,8 +660,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	////////////////////////////////////////////////////////////////////
 	///////////////////////////////INTEGRACION DE APIS//////////////////
-
-
 	const prescriptionsData: IPrescriptions = {
 		no_orden: parseInt(numOrder) || 0,
 		tipo_prescripcion: tipoPrescripcion || ' 0',
@@ -719,14 +717,26 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 		setLoadingSave(false);
 		console.log('Loading...')
-		const resp = await prescriptionsUseCase.savePrescripcions(prescriptionsData)
+		const numPresc = (localStorageProtocol.get(StorageKeysEnum.prescripcionOrden) )
+		                 ?localStorageProtocol.get(StorageKeysEnum.prescripcionOrden).number
+						 :null
+						 
+		console.log('NUMBER:',numPresc)
+		let resp:any ='';
+		if (numPresc) 
+		     { resp=await prescriptionsUseCase.updatePrescripcions(prescriptionsData, numPresc); console.log('UPDATE') }
+		else { resp=await prescriptionsUseCase.savePrescripcions(prescriptionsData); console.log('SAVE')}
+
 		console.log('Resp:', resp.body.message)
 
 		setLoadingSave(true);
 
 		if (resp.statusCode === 201) {
 			setSaveOk(true);
-		} else if (resp.statusCode === 400) {
+		} else if (resp.statusCode === 200) {
+			setMessageAPI(resp.body.message)
+			setSaveOk(true);
+		}else if (resp.statusCode === 400) {
 			setMessageAPI(resp.body.message)
 			setSaveOk(false)
 		} else if (resp.statusCode === 404) {
@@ -742,7 +752,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const handleOpenModalFormSaved = () => { setOpenModalFormSaved(true) };
 	const handleCloseModalFormSaved = () => setOpenModalFormSaved(false);
 
-	const router = useRouter();
 
 	// useEffect(() => {
 	// 		getPrescriptionsByNumber();

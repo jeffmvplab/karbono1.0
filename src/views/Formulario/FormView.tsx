@@ -3,7 +3,7 @@
 import { CustomButton } from '@/components/CustomButton';
 import { colorsKarbono } from '@/themes/colors';
 import { Grid } from '@material-ui/core';
-import { styled, Box, Stack, TextField, Typography, Card, Divider, Menu, Fade, MenuItem } from '@mui/material';
+import { styled, Box, Stack, TextField, Typography, Card, Divider, Menu, Fade, MenuItem, Skeleton } from '@mui/material';
 
 import React, { useContext, useEffect } from 'react';
 import InformacionPaciente from './Components/InformacionPaciente';
@@ -66,7 +66,10 @@ const FormView: React.FC<FormViewProps> = () => {
 				<Grid item xs={12} sm={8} md={9} style={{ paddingRight: '20px' }}>
 
 					{(!loadingSave)
-						? <LoadingComponent />
+						? <Skeleton 
+						variant="rectangular" 
+						sx={{ marginX: '10px', paddingRight: '20px', borderRadius: '10px'}}
+						width='100%' height={700} />
 						: <Card elevation={10} sx={{ borderRadius: 4 }}>
 							<Box
 								sx={{
@@ -79,7 +82,7 @@ const FormView: React.FC<FormViewProps> = () => {
 
 								<Grid container spacing={2} style={{ padding: '10px' }}>
 
-									<Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+									<Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
 										{/* <CustomToolTip
 									tip={'Escriba el numero de orden'}
 									placeTip={'top'}> */}
@@ -98,7 +101,7 @@ const FormView: React.FC<FormViewProps> = () => {
 										{/* </CustomToolTip> */}
 									</Grid>
 
-									<Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+									{/* <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
 										<TextField
 											onChange={handlePrescripcion}
 											id='Tipo-de-prescripción'
@@ -110,8 +113,8 @@ const FormView: React.FC<FormViewProps> = () => {
 											sx={{ bgcolor: 'transparent' }}
 											fullWidth
 										/>
-									</Grid>
-									<Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+									</Grid> */}
+									<Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
 										<TextField
 											onChange={handleFechaCreacion}
 											id='Fecha-de-creación'
@@ -152,8 +155,28 @@ const FormView: React.FC<FormViewProps> = () => {
 				<Grid item sm={4} md={3}>
 					<Box display={{ xs: 'none', sm: 'block' }}>
 						{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-						<ParametrosFarmaceuticos />
-						<ParametrosNutricionales />
+						{(!loadingSave)
+							? <Skeleton
+								variant="rectangular"
+								sx={{ 
+								
+								overflow: 'auto', 
+								borderRadius:'10px',
+								height: { xs: '35.5vh', sm: '34vh', md: '35.5vh', xl: '35.5vh' },
+							}} />
+							: <ParametrosFarmaceuticos />}
+
+						{(!loadingSave)
+							? <Skeleton 
+							variant="rectangular" 
+							sx={{ 
+							overflow: 'auto', 
+							borderRadius:'10px',
+							height: { xs: '35.5vh', sm: '34vh', md: '35.5vh', xl: '35.5vh' },
+							marginTop:'20px',
+							marginBottom:'20px'
+						 }} />
+							: <ParametrosNutricionales />}
 						{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 					</Box>
 				</Grid>
@@ -171,7 +194,7 @@ const FormView: React.FC<FormViewProps> = () => {
 					justifyContent='space-between'
 				>
 					<CustomButton
-					    onClick={()=>cancelForm(mainRoutes.prescripcion)}
+						onClick={() => cancelForm(mainRoutes.prescripcion)}
 						width={127}
 						text={'Cancelar'}
 						textColor={colorsKarbono.secundary}

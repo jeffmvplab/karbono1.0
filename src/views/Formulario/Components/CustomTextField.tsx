@@ -1,4 +1,4 @@
-import { Box, TextField } from '@mui/material'
+import { Box, InputAdornment, TextField } from '@mui/material'
 import React, { ReactElement } from 'react'
 
 export interface CustomTextFieldProps {
@@ -9,6 +9,8 @@ export interface CustomTextFieldProps {
     defaulValue?:any
     select?:boolean
     children?:any
+    endAdornament?:any,
+    disabled?:boolean,
     onChange?:React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> | undefined
 }
 
@@ -20,12 +22,15 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
     defaulValue,
     select=false, 
     children,
-    onChange
+    endAdornament='',
+    onChange,
+    disabled=false,
 }) => {
     return (
         <>
             <TextField
                 onChange={onChange}
+                disabled={disabled}
                 id={id}
                 label={label}
                 type={type}
@@ -35,6 +40,9 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
                 color='secondary'
                 fullWidth
                 select={select}
+                InputProps={{
+                    endAdornment: <InputAdornment position="start">{endAdornament}</InputAdornment>,
+                }}
                 sx={{borderRadius:'20px'}}
                  >
                  {children}
