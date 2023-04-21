@@ -6,7 +6,7 @@ import { Box, Button, CircularProgress, Skeleton, Stack } from '@mui/material';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import PictureAsPdfOutlinedIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import { colorsKarbono } from '@/themes/colors';
-import { IDataTable } from '@/utilities/interfaces/predscripcion_interfaces';
+import { IDataTable } from '@/utilities/interfaces/prescripcion_interfaces';
 import { PrescripcionContext } from '../../context/PrescripcionContext';
 import { IPrescriptions } from '@/domain/models/prescriptions.model';
 import { Typography } from '@material-ui/core';
