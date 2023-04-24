@@ -142,7 +142,7 @@ const Macronutrientes = () => {
 
                                     <CustomTextField
                                         onChange={handleDextrosa}
-                                        disabled={true}
+                                        // disabled={true}
                                         value={dextrosa}
                                         id='dextrosa'
                                         label={'Dextrosa*'}
