@@ -148,7 +148,7 @@ const ReportesParametros = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getConcentracionDeLipidos(reporte!).toFixed(2)}
+                                    {getConcentracionDeLipidos(reporte!) .toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 

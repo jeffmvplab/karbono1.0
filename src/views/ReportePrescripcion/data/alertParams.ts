@@ -195,7 +195,6 @@ export const concMaxCalcioSegura = (prescription: IPrescriptions) => {
     if (getConcentracionDeProteinas(prescription) >= 2.5) {
         return 112
     }
-
 }
 
 export const concFosfatoMexcla = (prescription: IPrescriptions) => {
@@ -205,7 +204,6 @@ export const concFosfatoMexcla = (prescription: IPrescriptions) => {
 
     return fosfato / (volTotalNPT / 1000);
 }
-
 
 export const concMaxFosfatoSegura = (prescription: IPrescriptions) => {
 
