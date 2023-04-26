@@ -27,7 +27,6 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 	  }, [])
 	 
 
-
 	return (
 		<>
 		<DescargarModal/>

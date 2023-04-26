@@ -31,15 +31,14 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 			}}>
 			<Box
 				// borderRadius={'10px'}
-				sx={{ overflow: 'auto', height: { xs: '35.5vh', sm: '34vh', md: '35.5vh', xl: '35.5vh' } }}
-				paddingX={{ xs: '0px', sm: '20px' }}
+				sx={{ overflow: 'auto', height: { xs: '35.5vh', sm: '30vh', md: '30vh', xl: '30vh' } }}
+				paddingX={{ xs: '0px', sm: '5px' }}
 				margin='5px'
-				marginTop={'20px'}
+				marginTop={'10px'}
 				bgcolor={'white'}>
 
 				<Typography
-					fontSize={'20px'}
-					paddingY={2}
+					fontSize={'15px'}
 					style={{ fontWeight: 700, color: colorsKarbono.secundary }}
 				>Parámetros farmacéuticos
 				</Typography >

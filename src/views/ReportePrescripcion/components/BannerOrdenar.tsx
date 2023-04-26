@@ -15,13 +15,13 @@ const BannerOrdenar = () => {
     const { handleOpenModalOrdenar } = useContext(ReportesContext)
 
     return (
-        <>
+        <Stack direction={'row'} paddingTop={'50px'}>
             <Grid container 
             spacing={{xs:'0px',sm:'30px'}}
             sx={{ 
                 justifyContent: 'center', alignItems: 'center',
                 backgroundColor: '#372FC6', 
-                height: '200px', 
+                height: '150px', 
                 borderRadius: '10px' 
                 }}>
 
@@ -74,7 +74,7 @@ const BannerOrdenar = () => {
 
                 </Grid>
             </Grid>
-        </>
+        </Stack>
     )
 }
 

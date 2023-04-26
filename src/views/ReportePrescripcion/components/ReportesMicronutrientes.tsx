@@ -45,40 +45,34 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getSodio(reporte!).requerimiento}
+                                    {getSodio(reporte!).requerimiento.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getPotacio(reporte!).requerimiento}
+                                    {getPotacio(reporte!).requerimiento.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getCalcio(reporte!).requerimiento}
+                                    {getCalcio(reporte!).requerimiento.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getFosforo(reporte!).requerimiento}
+                                    {getFosforo(reporte!).requerimiento.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getMagnesio(reporte!).requerimiento}
+                                    {getMagnesio(reporte!).requerimiento.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
-
-                            {(loadingSave)
-                                ? <Typography>
-                                    -
-                                </Typography>
-                                : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
@@ -94,7 +88,13 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {reporte!.vit_C}
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {parseInt(reporte!.vit_C)*100}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -113,19 +113,19 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getSodio(reporte!).volumen}
+                                    {getSodio(reporte!).volumen.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getPotacio(reporte!).volumen}
+                                    {getPotacio(reporte!).volumen.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getCalcio(reporte!).volumen}
+                                    {getCalcio(reporte!).volumen.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -137,7 +137,7 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getMagnesio(reporte!).volumen}
+                                    {getMagnesio(reporte!).volumen.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -162,7 +162,7 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                   -
+                                      {parseInt(reporte!.vit_C)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
