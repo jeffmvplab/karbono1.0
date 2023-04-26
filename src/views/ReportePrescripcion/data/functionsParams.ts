@@ -18,13 +18,13 @@ export const getSodio = (prescription: IPrescriptions) => {
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0 };
 
-    if (tp === 'Por requerimientos') {
-        params.requerimiento = sodio * peso / 2;
-        params.volumen = sodio
+    if (tp === 'Por volúmenes') {
+        params.volumen = sodio * peso / 2;
+        params.requerimiento = sodio
 
     } else {
-        params.volumen = sodio * 2 / peso;
-        params.requerimiento = sodio
+        params.requerimiento= sodio * 2 / peso;
+        params.volumen = sodio
     }
 
     return params;
@@ -38,12 +38,12 @@ export const getPotacio = (prescription: IPrescriptions) => {
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0 };
 
-    if (tp === 'Por requerimientos') {
-        params.requerimiento = potacio * peso / 2;
-        params.volumen = potacio
-    } else {
-        params.volumen = potacio * 2 / peso;
+    if (tp === 'Por volúmenes') {
+        params.volumen = potacio * peso / 2;
         params.requerimiento = potacio
+    } else {
+        params.requerimiento = potacio * 2 / peso;
+        params.volumen = potacio
     }
     return params;
 }
@@ -57,23 +57,23 @@ export const getCalcio = (prescription: IPrescriptions) => {
     const tCalcio: string = prescription?.calcio!;
     const peso: number = prescription?.peso!;
 
-    if (tp === 'Por requerimientos') {
+    if (tp === 'Por volúmenes') {
         if (tCalcio === 'Gluconato de Calcio') {
 
-            params.requerimiento = calcio * peso / 0.01;
-            params.volumen = calcio
+            params.volumen = calcio * peso *0.01;
+            params.requerimiento = calcio
         } else {
-            params.requerimiento = calcio * peso * 2.15;
-            params.volumen = calcio
+            params.volumen = calcio * peso * 2.15;
+            params.requerimiento= calcio
         }
     } else {
 
         if (tCalcio === 'Gluconato de Calcio') {
-            params.volumen = calcio * 100 / peso;
-            params.requerimiento = calcio
+            params.requerimiento= calcio * 100 / peso;
+            params.volumen  = calcio
         } else {
-            params.volumen = calcio * 0.465 / peso;
-            params.requerimiento = calcio
+            params.requerimiento= calcio * 0.465 / peso;
+            params.volumen  = calcio
         }
     }
 
@@ -91,20 +91,20 @@ export const getFosforo = (prescription: IPrescriptions) => {
 
     if (tipofosfato === 'Fosfato de sodio') {
 
-        if (tp === 'Por requerimientos') {
-            params.requerimiento = fosforo * 1 / peso;
-            params.volumen = fosforo;
+        if (tp === 'Por volúmenes') {
+            params.volumen= fosforo * 1 * peso;
+            params.requerimiento  = fosforo;
         } else {
-            params.requerimiento = fosforo * 1 * peso;
+            params.requerimiento = fosforo * 1 / peso;
             params.volumen = fosforo
         }
     } else {
-        if (tp === 'Por requerimientos') {
-            params.volumen = fosforo * peso / 2.6;
+        if (tp === 'Por volúmenes') {
+            params.volumen = fosforo *peso/2.6 ;
             params.requerimiento = fosforo
         } else {
-            params.volumen = fosforo * 2.6 / peso;
-            params.requerimiento = fosforo
+            params.requerimiento = fosforo * 2.6/peso;
+            params.volumen = fosforo
         }
     }
 
@@ -119,12 +119,12 @@ export const getMagnesio = (prescription: IPrescriptions) => {
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0 };
 
-    if (tp === 'Por requerimientos') {
-        params.requerimiento = magnesio * peso / 200;
-        params.volumen = magnesio
-    } else {
-        params.volumen = magnesio * 200 / peso;
+    if (tp === 'Por volúmenes') {
+        params.volumen = magnesio * peso / 200;
         params.requerimiento = magnesio
+    } else {
+        params.requerimiento = magnesio * 200 / peso;
+        params.volumen = magnesio
     }
     return params;
 }
@@ -138,12 +138,12 @@ export const getDextrosa = (prescription: IPrescriptions) => {
     const peso: number = prescription?.peso!;
     const tiempoInfusion: number = prescription?.tiempo_infusion!;
 
-    if (tp === 'Por requerimientos') {
-        params.requerimiento = dextrosa * peso * tiempoInfusion * 0.12;
-        params.volumen = dextrosa
+    if (tp === 'Por volúmenes') {
+        params.volumen = dextrosa * peso * tiempoInfusion * 0.12;
+        params.requerimiento= dextrosa
     } else {
-        params.volumen = dextrosa / (peso * tiempoInfusion * 0.12);
-        params.requerimiento = dextrosa
+        params.requerimiento= dextrosa / (peso * tiempoInfusion * 0.12);
+        params.volumen  = dextrosa
     }
     return params;
 }
@@ -165,12 +165,12 @@ export const getAminoacidos = (prescription: IPrescriptions) => {
     if (tipoAminoacidos === 'Aminosteril') { concSinAminoacidos = 0.08 }
     if (tipoAminoacidos === 'Trophamine') { concSinAminoacidos = 1 }
 
-    if (tp === 'Por requerimientos') {
-        params.requerimiento = aminoacidos * peso / concSinAminoacidos;
-        params.volumen = aminoacidos
-    } else {
-        params.volumen = aminoacidos * concSinAminoacidos / peso;
+    if (tp === 'Por volúmenes') {
+        params.volumen = aminoacidos * peso / concSinAminoacidos;
         params.requerimiento = aminoacidos
+    } else {
+        params.requerimiento = aminoacidos * concSinAminoacidos / peso;
+        params.volumen = aminoacidos
     }
     return params;
 }
@@ -185,12 +185,12 @@ export const getLipidos = (prescription: IPrescriptions) => {
     const concSinLipidos: number = 0.2;
     const peso: number = prescription?.peso!;
 
-    if (tp === 'Por requerimientos') {
-        params.requerimiento = lipidos * peso / concSinLipidos
-        params.volumen = lipidos
-    } else {
-        params.volumen = lipidos * concSinLipidos / peso;
+    if (tp === 'Por volúmenes') {
+        params.volumen = lipidos * peso / concSinLipidos
         params.requerimiento = lipidos
+    } else {
+        params.requerimiento = lipidos * concSinLipidos / peso;
+        params.volumen = lipidos
     }
     return params;
 }
@@ -203,12 +203,12 @@ export const getOmegaven = (prescription: IPrescriptions) => {
     const concSinOmegaven: number = 0.1;
     const peso: number = prescription?.peso!;
 
-    if (tp === 'Por requerimientos') {
-        params.requerimiento = omegaven * peso / concSinOmegaven;
-        params.volumen = omegaven
-    } else {
-        params.volumen = omegaven * concSinOmegaven / peso;
+    if (tp === 'Por volúmenes') {
+        params.volumen = omegaven * peso / concSinOmegaven;
         params.requerimiento = omegaven
+    } else {
+        params.requerimiento = omegaven * concSinOmegaven / peso;
+        params.volumen = omegaven
     }
     return params;
 }
@@ -222,12 +222,12 @@ export const getDipeptiven = (prescription: IPrescriptions) => {
     const concSinDipeptiven: number = 0.2;
     const peso: number = prescription?.peso!;
 
-    if (tp === 'Por requerimientos') {
-        params.requerimiento = dipeptiven * peso / concSinDipeptiven;
-        params.volumen = dipeptiven
-    } else {
-        params.volumen = dipeptiven * concSinDipeptiven / peso;
+    if (tp === 'Por volúmenes') {
+        params.volumen = dipeptiven * peso / concSinDipeptiven;
         params.requerimiento = dipeptiven
+    } else {
+        params.requerimiento = dipeptiven * concSinDipeptiven / peso;
+        params.volumen = dipeptiven
     }
     return params;
 }
