@@ -1,5 +1,5 @@
 import { IPrescriptions } from "@/domain/models/prescriptions.model"
-import { getAgua, getConcentracionDeProteinas, getOsmolaridad } from "./functionsParams"
+import { concAminoacidos, getAgua, getConcentracionDeProteinas, getOsmolaridad } from "./functionsParams"
 
 
 
@@ -11,8 +11,9 @@ export const alertVolTotal = (prescription: IPrescriptions) => {
     const vitaminas: number =  parseInt(prescription?.req_vit_hidrosolubles)+parseInt(prescription?.req_vit_liposolubles)
 
     let volTotal: number = volAgua
-        + parseInt(prescription?.dextrosa!) + parseInt(prescription?.req_lipidos) + parseInt(prescription?.req_aminoacidos) + parseInt(prescription?.dipeptiven)
-        + parseInt(prescription?.omegaven) + parseInt(prescription?.sodio_total) + parseInt(prescription?.potasio_total) + parseInt(prescription?.req_fosfato)
+        + parseInt(prescription?.dextrosa!) + parseInt(prescription?.req_lipidos) + parseInt(prescription?.req_aminoacidos) 
+        + parseInt(prescription?.dipeptiven) + parseInt(prescription?.omegaven) + parseInt(prescription?.sodio_total) 
+        + parseInt(prescription?.potasio_total) + parseInt(prescription?.req_fosfato)
         + parseInt(prescription?.req_magnesio) + parseInt(prescription?.req_calcio) + oligoelementos + vitaminas
         + parseInt(prescription?.vit_C) + parseInt(prescription?.acido_folico)
     return volTotal;
@@ -109,13 +110,30 @@ export const alarmConcCHOS = (prescription: IPrescriptions) => {
 
 }
 
+
+export const alarmConcDeProteinas = (prescription: IPrescriptions) => {
+
+    const aminoacidos: number = parseInt(prescription?.req_aminoacidos!);
+    const conAminoacidos= concAminoacidos(prescription);
+    const dipativen= parseInt(prescription?.dipeptiven!);
+    const volTotalNPT: number = prescription?.volumen;
+
+    let concDeProteinas: number = (((aminoacidos*conAminoacidos)+dipativen*0.2) / volTotalNPT)*100
+
+    if (concDeProteinas > 2.5) {
+        return 'SEGURA';
+    } else {
+        return 'REVISAR';
+    }
+}
+
 export const alarmConcDeLipidos = (prescription: IPrescriptions) => {
 
     const lipidos: number = parseInt(prescription?.req_lipidos);
     const omegaven: number = parseInt(prescription?.omegaven);
     const volTotalNPT: number = prescription?.volumen;
 
-    let concDeLipidos: number = (lipidos * 0.2 + omegaven * 0.1) / volTotalNPT
+    let concDeLipidos: number =( (lipidos * 0.2 + omegaven * 0.1) / volTotalNPT)*100
 
     if (concDeLipidos > 1.5) {
         return 'SEGURA';

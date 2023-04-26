@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 import { param_farmaceuticos } from '../../data/data';
 import { TextParamsNumb } from '../TextParamsNumb';
 import { FormulariosContext } from '../../context/FormulariosContext';
-import { alarmConcCHOS, alarmConcDeLipidos, alarmConcMagnesio, alarmConcPotasio, alarmConcSodio, alertFactorDePrecipitacion, alertRelacion_Calcio_Fosfato, alertVelInfucion, alertViaDeAdmin, alertVolTotal } from '@/views/ReportePrescripcion/data/alertParams';
+import { alarmConcCHOS, alarmConcDeLipidos, alarmConcDeProteinas, alarmConcMagnesio, alarmConcPotasio, alarmConcSodio, alertFactorDePrecipitacion, alertRelacion_Calcio_Fosfato, alertVelInfucion, alertViaDeAdmin, alertVolTotal } from '@/views/ReportePrescripcion/data/alertParams';
 import { TextParamsString } from '../TextParamsString';
 import { getOsmolaridad } from '@/views/ReportePrescripcion/data/functionsParams';
 
@@ -118,6 +118,16 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 
 					<TextParamsString
 						title={'Concentración de Proteína(%):'}
+						value={alarmConcDeProteinas(prescriptionSave!)}
+						seguridad={
+							(alarmConcDeProteinas(prescriptionSave!) === 'SEGURA')
+								? 'Seguro'
+								: ''
+						}
+					/>
+
+					<TextParamsString
+						title={'Concentración de Lípidos(%):'}
 						value={alarmConcDeLipidos(prescriptionSave!)}
 						seguridad={
 							(alarmConcDeLipidos(prescriptionSave!) === 'SEGURA')
@@ -127,20 +137,10 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 					/>
 
 					<TextParamsString
-						title={'Concentración de Lípidos(%):'}
+						title={'Concentración de Sodio (mEq/ml):'}
 						value={alarmConcSodio(prescriptionSave!)}
 						seguridad={
 							(alarmConcSodio(prescriptionSave!) === 'SEGURA')
-								? 'Seguro'
-								: ''
-						}
-					/>
-
-					<TextParamsString
-						title={'Concentración de Sodio (mEq/ml):'}
-						value={alarmConcPotasio(prescriptionSave!)}
-						seguridad={
-							(alarmConcPotasio(prescriptionSave!) === 'SEGURA')
 								? 'Seguro'
 								: ''
 						}
