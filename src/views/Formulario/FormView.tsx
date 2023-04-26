@@ -133,11 +133,11 @@ const FormView: React.FC<FormViewProps> = () => {
 								<Box
 									// borderRadius={'10px'}
 									sx={{
-										overflow: { sm: 'auto' },
+										overflow: { sm: 'auto'},
 										// overflow:'auto' ,
 										height: {
 											xs: getMovilHeight(),
-											sm: '55vh', md: '60vh', xl: '68vh'
+											sm: '55vh', md: '58vh', xl: '58vh'
 										}
 									}}
 									paddingX={{ xs: '0px', sm: '20px' }}
@@ -162,7 +162,7 @@ const FormView: React.FC<FormViewProps> = () => {
 								
 								overflow: 'auto', 
 								borderRadius:'10px',
-								height: { xs: '35.5vh', sm: '34vh', md: '35.5vh', xl: '35.5vh' },
+								height: { xs: '35.5vh', sm: '30vh', md: '30vh', xl: '30vh' },
 							}} />
 							: <ParametrosFarmaceuticos />}
 
@@ -172,7 +172,7 @@ const FormView: React.FC<FormViewProps> = () => {
 							sx={{ 
 							overflow: 'auto', 
 							borderRadius:'10px',
-							height: { xs: '35.5vh', sm: '34vh', md: '35.5vh', xl: '35.5vh' },
+							height: { xs: '35.5vh', sm: '30vh', md: '30vh', xl: '30vh' },
 							marginTop:'20px',
 							marginBottom:'20px'
 						 }} />
