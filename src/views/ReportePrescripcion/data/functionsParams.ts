@@ -6,8 +6,8 @@ export interface IParamFunc {
     volumen: any,
 }
 export interface IParamNumeric {
-    requerimiento:number,
-    volumen:number,
+    requerimiento: number,
+    volumen: number,
 }
 //////////////////////////////FORMULACIONES//////////////
 export const getSodio = (prescription: IPrescriptions) => {
@@ -23,7 +23,7 @@ export const getSodio = (prescription: IPrescriptions) => {
         params.requerimiento = sodio
 
     } else {
-        params.requerimiento= sodio * 2 / peso;
+        params.requerimiento = sodio * 2 / peso;
         params.volumen = sodio
     }
 
@@ -60,20 +60,20 @@ export const getCalcio = (prescription: IPrescriptions) => {
     if (tp === 'Por volúmenes') {
         if (tCalcio === 'Gluconato de Calcio') {
 
-            params.volumen = calcio * peso *0.01;
+            params.volumen = calcio * peso * 0.01;
             params.requerimiento = calcio
         } else {
             params.volumen = calcio * peso * 2.15;
-            params.requerimiento= calcio
+            params.requerimiento = calcio
         }
     } else {
 
         if (tCalcio === 'Gluconato de Calcio') {
-            params.requerimiento= calcio * 100 / peso;
-            params.volumen  = calcio
+            params.requerimiento = calcio * 100 / peso;
+            params.volumen = calcio
         } else {
-            params.requerimiento= calcio * 0.465 / peso;
-            params.volumen  = calcio
+            params.requerimiento = calcio * 0.465 / peso;
+            params.volumen = calcio
         }
     }
 
@@ -92,18 +92,18 @@ export const getFosforo = (prescription: IPrescriptions) => {
     if (tipofosfato === 'Fosfato de sodio') {
 
         if (tp === 'Por volúmenes') {
-            params.volumen= fosforo * 1 * peso;
-            params.requerimiento  = fosforo;
+            params.volumen = fosforo * 1 * peso;
+            params.requerimiento = fosforo;
         } else {
             params.requerimiento = fosforo * 1 / peso;
             params.volumen = fosforo
         }
     } else {
         if (tp === 'Por volúmenes') {
-            params.volumen = fosforo *peso/2.6 ;
+            params.volumen = fosforo * peso / 2.6;
             params.requerimiento = fosforo
         } else {
-            params.requerimiento = fosforo * 2.6/peso;
+            params.requerimiento = fosforo * 2.6 / peso;
             params.volumen = fosforo
         }
     }
@@ -140,12 +140,27 @@ export const getDextrosa = (prescription: IPrescriptions) => {
 
     if (tp === 'Por volúmenes') {
         params.volumen = dextrosa * peso * tiempoInfusion * 0.12;
-        params.requerimiento= dextrosa
+        params.requerimiento = dextrosa
     } else {
-        params.requerimiento= dextrosa / (peso * tiempoInfusion * 0.12);
-        params.volumen  = dextrosa
+        params.requerimiento = dextrosa / (peso * tiempoInfusion * 0.12);
+        params.volumen = dextrosa
     }
     return params;
+}
+
+export const concAminoacidos = (prescription: IPrescriptions) => {
+    const tipoAminoacidos: string = prescription?.aminoacidos!;
+    let concSinAminoacidos: number = 0;
+    const tipoPaciente: string = prescription?.tipo_paciente!;
+
+
+    if (tipoAminoacidos === 'Aminoven') { if (tipoPaciente === 'Adulto') { concSinAminoacidos = 0.15 } else { concSinAminoacidos = 0.1 } }
+    if (tipoAminoacidos === 'TravasolPlus') { concSinAminoacidos = 0.15 }
+    if (tipoAminoacidos === 'Aminoplasmal') { if (tipoPaciente === 'Adulto') { concSinAminoacidos = 0.15 } else { concSinAminoacidos = 0.1 } }
+    if (tipoAminoacidos === 'Aminosteril') { concSinAminoacidos = 0.08 }
+    if (tipoAminoacidos === 'Trophamine') { concSinAminoacidos = 1 }
+
+    return concSinAminoacidos;
 }
 
 export const getAminoacidos = (prescription: IPrescriptions) => {
@@ -153,17 +168,9 @@ export const getAminoacidos = (prescription: IPrescriptions) => {
     const params: IParamFunc = { requerimiento: 0, volumen: 0 };
 
     const tp: string = prescription?.tipo_prescripcion!;
-    const tipoPaciente: string = prescription?.tipo_paciente!;
     const aminoacidos: number = parseInt(prescription?.req_aminoacidos!);
     const peso: number = prescription?.peso!;
-    const tipoAminoacidos: string = prescription?.aminoacidos!;
-    let concSinAminoacidos: number = 0;
-
-    if (tipoAminoacidos === 'Aminoven') { if (tipoPaciente === 'Adulto') { concSinAminoacidos = 0.15 } else { concSinAminoacidos = 0.1 } }
-    if (tipoAminoacidos === 'TravasolPlus') { concSinAminoacidos = 0.15 }
-    if (tipoAminoacidos === 'Aminoplasmal') { if (tipoPaciente === 'Adulto') { concSinAminoacidos = 0.15 } else { concSinAminoacidos = 0.1 } }
-    if (tipoAminoacidos === 'Aminosteril') { concSinAminoacidos = 0.08 }
-    if (tipoAminoacidos === 'Trophamine') { concSinAminoacidos = 1 }
+    const concSinAminoacidos = concAminoacidos(prescription);
 
     if (tp === 'Por volúmenes') {
         params.volumen = aminoacidos * peso / concSinAminoacidos;
@@ -241,12 +248,14 @@ export const getAgua = (prescription: IPrescriptions) => {
 
     let agua: number = volTotalNPT - (
         parseInt(prescription?.dextrosa!) + parseInt(prescription?.req_lipidos!)
-         + parseInt(prescription?.req_aminoacidos!) + parseInt(prescription?.dipeptiven!)
-         + parseInt(prescription?.omegaven!) + parseInt(prescription?.sodio_total!) + parseInt(prescription?.potasio_total!) + parseInt(prescription?.req_fosfato!)
-         + parseInt(prescription?.req_magnesio!) + parseInt(prescription?.req_calcio!) + oligoelementos + vitaminas
+        + parseInt(prescription?.req_aminoacidos!) + parseInt(prescription?.dipeptiven!)
+        + parseInt(prescription?.omegaven!) + parseInt(prescription?.sodio_total!)
+        + parseInt(prescription?.potasio_total!) + parseInt(prescription?.req_fosfato!)
+        + parseInt(prescription?.req_magnesio!) + parseInt(prescription?.req_calcio!)
+        + oligoelementos + vitaminas
         + parseInt(prescription?.vit_C!) + parseInt(prescription?.acido_folico!)
     );
-    
+
     return agua;
 }
 
@@ -258,10 +267,14 @@ export const getVolTotal = (prescription: IPrescriptions) => {
     const vitaminas: number = parseInt(prescription?.req_vit_hidrosolubles) + parseInt(prescription?.req_vit_liposolubles)
 
     let volTotal: number = volAgua
-        + parseInt(prescription?.dextrosa!) + parseInt(prescription?.req_lipidos!) + parseInt(prescription?.req_aminoacidos!) + parseInt(prescription?.dipeptiven!)
-        + parseInt(prescription?.omegaven!) + parseInt(prescription?.sodio_total!) + parseInt(prescription?.potasio_total!) + parseInt(prescription?.req_fosfato!)
-        + parseInt(prescription?.req_magnesio!) + parseInt(prescription?.req_calcio!) + oligoelementos + vitaminas
-        + parseInt(prescription?.vit_C!) + parseInt(prescription?.acido_folico!)
+        + parseInt(prescription?.dextrosa!) + parseInt(prescription?.req_lipidos!)
+        + parseInt(prescription?.req_aminoacidos!) + parseInt(prescription?.dipeptiven!)
+        + parseInt(prescription?.omegaven!) + parseInt(prescription?.sodio_total!)
+        + parseInt(prescription?.potasio_total!) + parseInt(prescription?.req_fosfato!)
+        + parseInt(prescription?.req_magnesio!) + parseInt(prescription?.req_calcio!)
+        + oligoelementos + vitaminas
+        + parseInt(prescription?.vit_C!)
+        + parseInt(prescription?.acido_folico!)
 
     return volTotal;
 }
@@ -305,11 +318,15 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
         ? parseInt(prescription?.req_vit_hidrosolubles!) : 0;
 
     let osmolaridad: number =
-        ((parseInt(prescription?.dextrosa!) * 2780) + (parseInt(prescription?.req_lipidos!) * 290) + (parseInt(prescription?.req_aminoacidos!) * 1505) + (parseInt(prescription?.dipeptiven!) * 921)
-            + (parseInt(prescription?.omegaven!) * 273) + (parseInt(prescription?.sodio_total!) * 4001) + (parseInt(prescription?.potasio_total!) + 4000) + (parseInt(prescription?.req_fosfato!) * 2570)
-            + (parseInt(prescription?.req_magnesio!) * 1623) + (parseInt(prescription?.req_calcio!) * 626) + (volOligoNulanza * 2500) + (volOligoSensitrace * 100)
+        ((parseInt(prescription?.dextrosa!) * 2780) + (parseInt(prescription?.req_lipidos!) * 290)
+            + (parseInt(prescription?.req_aminoacidos!) * 1505) + (parseInt(prescription?.dipeptiven!) * 921)
+            + (parseInt(prescription?.omegaven!) * 273) + (parseInt(prescription?.sodio_total!) * 4001)
+            + (parseInt(prescription?.potasio_total!) + 4000) + (parseInt(prescription?.req_fosfato!) * 2570)
+            + (parseInt(prescription?.req_magnesio!) * 1623) + (parseInt(prescription?.req_calcio!) * 626)
+            + (volOligoNulanza * 2500) + (volOligoSensitrace * 100)
             + (cernevit * 4820) + (multi12K * 298.5) + (vitaLipidInfantil * 260) + (vitaLipidAd * 260)
-        + (soluvit * 490) + (parseInt(prescription?.vit_C!) * 1740) + (parseInt(prescription?.acido_folico!) * 227) + (volAgua * 1)) / (volTotalNPT + prescription?.purga)
+            + (soluvit * 490) + (parseInt(prescription?.vit_C!) * 1740) + (parseInt(prescription?.acido_folico!) * 227)
+            + (volAgua * 1)) / (volTotalNPT + prescription?.purga)
     return osmolaridad;
 }
 
@@ -336,10 +353,10 @@ export const getCalTotalesKgDia = (prescription: IPrescriptions) => {
 export const getGramosTotalesNitro = (prescription: IPrescriptions) => {
 
     const aminoacidos: number = parseInt(prescription?.req_aminoacidos!);
-    const concSinAminoacidos: number = parseInt(prescription?.req_aminoacidos!) * 0.15;
     const dipeptiven: number = parseInt(prescription?.dipeptiven!)
+    const concSinAminoacidos = concAminoacidos(prescription);
 
-    let gramosTotalesNitro: number = (aminoacidos + concSinAminoacidos * 0.16) + (dipeptiven * 0.32)
+    let gramosTotalesNitro: number = (aminoacidos * concSinAminoacidos * 0.16) + (dipeptiven * 0.32)
     return gramosTotalesNitro;
 }
 
@@ -348,10 +365,10 @@ export const getGramosTotalesNitro = (prescription: IPrescriptions) => {
 export const getCaloriasTotalesProteicas = (prescription: IPrescriptions) => {
 
     const aminoacidos: number = parseInt(prescription?.req_aminoacidos!);
-    const concSinAminoacidos: number = parseInt(prescription?.req_aminoacidos!) * 0.15;
+    const concSinAminoacidos = concAminoacidos(prescription);
     const dipeptiven: number = parseInt(prescription?.dipeptiven!);
 
-    let caloriasTotalesProteicas: number = (aminoacidos + concSinAminoacidos * 4) + (dipeptiven * 0.8)
+    let caloriasTotalesProteicas: number = (aminoacidos * concSinAminoacidos * 4) + (dipeptiven * 0.8)
     return caloriasTotalesProteicas;
 }
 
@@ -408,7 +425,8 @@ export const getRelacionCalNoProteicasAminoacidos = (prescription: IPrescription
     const calNoProteicasLIPIDOS: number = getCaloriasNoProteicasLIPIDOS(prescription!);
     const gramosTotalesNitro: number = getGramosTotalesNitro(prescription!);
 
-    let relacionCalNoProteicasAminoacidos: number = (calNoProteicasCHO + calNoProteicasLIPIDOS) / gramosTotalesNitro * 6.25
+    let relacionCalNoProteicasAminoacidos: number = (calNoProteicasCHO + calNoProteicasLIPIDOS) / (gramosTotalesNitro * 6.25)
+
     return relacionCalNoProteicasAminoacidos;
 }
 
@@ -419,18 +437,18 @@ export const getConcentracionDeCHOS = (prescription: IPrescriptions) => {
     const volTotalNPT: number = prescription?.volumen!;
 
     let concentracionDeCHOS: number = dextrosa * 0.5 / volTotalNPT
-    return concentracionDeCHOS;
+    return concentracionDeCHOS * 100;
 }
 
 export const getConcentracionDeProteinas = (prescription: IPrescriptions) => {
 
     const aminoacidos: number = parseInt(prescription?.req_aminoacidos!);
-    const concSinAminoacidos: number = parseInt(prescription?.req_aminoacidos!) * 0.15;
+    const concSinAminoacidos = concAminoacidos(prescription);
     const dipeptiven: number = parseInt(prescription?.dipeptiven!);
     const volTotalNPT: number = prescription?.volumen!;
 
     let concentracionDeProteinas: number = (aminoacidos * concSinAminoacidos + dipeptiven * 0.2) / volTotalNPT
-    return concentracionDeProteinas;
+    return concentracionDeProteinas * 100;
 }
 
 export const getConcentracionDeLipidos = (prescription: IPrescriptions) => {
@@ -440,7 +458,7 @@ export const getConcentracionDeLipidos = (prescription: IPrescriptions) => {
     const volTotalNPT: number = prescription?.volumen!;
 
     let concentracionDeLipidos: number = (lipidos * 0.2 + omegaven * 0.1) / volTotalNPT
-    return concentracionDeLipidos;
+    return concentracionDeLipidos * 100;
 }
 
 
