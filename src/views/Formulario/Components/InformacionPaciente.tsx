@@ -1,10 +1,12 @@
-import { Typography, Grid, Box, MenuItem, Stack, AccordionSummary, AccordionDetails, Accordion, useMediaQuery, Slider } from '@mui/material'
+import { Typography, Grid, Box, MenuItem, Stack, AccordionSummary, AccordionDetails, Accordion, useMediaQuery, Slider, Tooltip, TooltipProps, styled, tooltipClasses } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import DiscreteSliderSteps from './SliderForm'
 import CustomTextField from './CustomTextField'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { colorsKarbono } from '@/themes/colors';
 import { FormulariosContext } from '../context/FormulariosContext';
+import { LightTooltip } from '../style/styleToolTips';
+
 
 const currencies = [
     { value: 'si', label: 'Si', },
@@ -65,32 +67,24 @@ const marks2 = [
     { value: 30, label: '30', },
 ];
 
-
-
 const InformacionPaciente = () => {
 
     const { stateAcordion1, setStateAcordion1, matches, handleAcordion1,
 
-        ips, errorIps, messageErrorIps, handleIps,
-        numIden, errorNumIden, messageErrorNumIden, handleNumIden,
-        namePaciente, errorNamePaciente, messageErrorNamePaciente, handleNamePaciente,
-        servicio, errorServicio, messageErrorServicio, handleServicio,
-        ubicacion, errorUbicacion, messageErrorUbicacion, handleUbicacion,
-        cama, errorCama, messageErrorCama, handleCama,
-        pesoKg, errorPesoKg, messageErrorPesoKg, handlePesoKg,
-        edad, errorEdad, messageErrorEdad, handleEdad,
-        tipoEdad, errorTipoEdad, messageErrorTipoEdad, handleTipoEdad,
-        volumen, errorVolumen, messageErrorVolumen, handleVolumen,
-        purga, errorPurga, messageErrorPurga, handlePurga,
-        tiempoDeInfucion, errorTiempoDeInfucion, messageErrorTiempoDeInfucion, handleTiempoDeInfucion,
-        overfill, errorOverfill, messageErrorOverfill, handleOverfill,
-        filtro, errorFiltro, messageErrorFiltro, handleFiltro,
-        eqFotosencible, errorEqFotosencible, messageErrorEqFotosencible, handleEqFotosencible,
-        tipoPaciente, errorTipoPaciente, messageErrorTipoPaciente, handleTipoPaciente,
-        viaAdmin, errorViaAdmin, messageErrorViaAdmin, handleViaAdmin,
-        diagnostico, errorDiagnostico, messageErrorDiagnostico, handleDiagnostico,
-
-
+        ips, handleIps,
+        numIden, handleNumIden,
+        namePaciente, handleNamePaciente,
+        servicio, handleServicio,
+        cama, handleCama,
+        pesoKg, handlePesoKg,
+        edad, handleEdad,
+        tipoEdad, handleTipoEdad,
+        volumen, handleVolumen,
+        purga, handlePurga,
+        tiempoDeInfucion, handleTiempoDeInfucion,
+        tipoPaciente, handleTipoPaciente,
+        viaAdmin, handleViaAdmin,
+        diagnostico, handleDiagnostico,
     } = useContext(FormulariosContext)
 
     useEffect(() => {
@@ -150,46 +144,62 @@ const InformacionPaciente = () => {
 
                             <Grid container spacing={2}>
 
-                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <LightTooltip
+                                    title='Registra el número de identificación sin espacios, puntos ni comas'
+                                    placement="top"
+                                    arrow
+                                >
+                                    <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                        <CustomTextField
+                                            onChange={handleNumIden}
+                                            id='no-identificación'
+                                            label='No Identificacion*'
+                                            type='text'
+                                            value={numIden}
+                                        />
+                                    </Grid>
+                                </LightTooltip>
 
-                                    <CustomTextField
-                                        onChange={handleNumIden}
-                                        id='no-identificación'
-                                        label='No Identificacion*'
-                                        type='text'
-                                        value={numIden}
-                                    />
+                                <LightTooltip
+                                    title='Es importante registrar el nombre completo del paciente'
+                                    placement="top"
+                                    arrow
+                                >
+                                    <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                        <CustomTextField
+                                            onChange={handleNamePaciente}
+                                            id='nombre-del-paciente'
+                                            label='Nombre del Paciente*'
+                                            type='text'
+                                            value={namePaciente}
+                                        />
+                                    </Grid>
+                                </LightTooltip>
 
-                                </Grid>
-                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
-                                    <CustomTextField
-                                        onChange={handleNamePaciente}
-                                        id='nombre-del-paciente'
-                                        label='Nombre del Paciente*'
-                                        type='text'
-                                        value={namePaciente}
-                                    />
+                                <LightTooltip
+                                    title='Determina los aminoácidos, vitaminas y oligoelementos'
+                                    placement="top"
+                                    arrow
+                                >
+                                    <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                        <CustomTextField
+                                            onChange={handleTipoPaciente}
+                                            value={tipoPaciente}
+                                            defaulValue={tipoPaciente}
+                                            id='tipo-de-paciente'
+                                            label='Tipo de paciente *'
+                                            type='text'
+                                            select={true}
+                                        >
+                                            {tiposPacientes.map((option) => (
+                                                <MenuItem key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </MenuItem>
+                                            ))}
+                                        </CustomTextField>
 
-                                </Grid>
-                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
-                                    <CustomTextField
-                                        onChange={handleTipoPaciente}
-                                        value={tipoPaciente}
-                                        defaulValue={tipoPaciente}
-                                        id='tipo-de-paciente'
-                                        label='Tipo de paciente *'
-                                        type='text'
-                                        select={true}
-                                    >
-                                        {tiposPacientes.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </CustomTextField>
-
-                                </Grid>
-
+                                    </Grid>
+                                </LightTooltip>
                             </Grid>
 
                             {/* <TextFieldInput id='no-identificación' type='text' label='No Identificacion' />
@@ -252,36 +262,49 @@ const InformacionPaciente = () => {
                                     />
 
                                 </Grid>
-                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
 
-                                    <CustomTextField
-                                        onChange={handleTipoEdad}
-                                        id='tipo-edad'
-                                        label='Tipo Edad'
-                                        type='text'
-                                        value={tipoEdad}
-                                        defaulValue={tipoEdad}
-                                        select
-                                    >
-                                        {tipoEdades.map((option) => (
-                                            <MenuItem
-                                                key={option.value}
-                                                value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </CustomTextField>
-                                </Grid>
-                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                <LightTooltip
+                                    title='Registra la edad en años, meses o días según el tipo de paciente'
+                                    placement="top"
+                                    arrow
+                                >
+                                    <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                        <CustomTextField
+                                            onChange={handleTipoEdad}
+                                            id='tipo-edad'
+                                            label='Tipo Edad'
+                                            type='text'
+                                            value={tipoEdad}
+                                            defaulValue={tipoEdad}
+                                            select
+                                        >
+                                            {tipoEdades.map((option) => (
+                                                <MenuItem
+                                                    key={option.value}
+                                                    value={option.value}>
+                                                    {option.label}
+                                                </MenuItem>
+                                            ))}
+                                        </CustomTextField>
+                                    </Grid>
+                                </LightTooltip>
 
-                                    <CustomTextField
-                                        onChange={handleVolumen}
-                                        id='volumen'
-                                        label='Volumen total NPT*'
-                                        type='text'
-                                        value={volumen}
-                                    />
-                                </Grid>
+                                <LightTooltip
+                                    title='El volúmen no debe superar los 3000 mL'
+                                    placement="top"
+                                    arrow
+                                >
+                                    <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+
+                                        <CustomTextField
+                                            onChange={handleVolumen}
+                                            id='volumen'
+                                            label='Volumen total NPT*'
+                                            type='text'
+                                            value={volumen}
+                                        />
+                                    </Grid>
+                                </LightTooltip>
 
                             </Grid>
                             {/* <TextFieldInput id='edad' type='text' label='Edad' />
@@ -324,24 +347,29 @@ const InformacionPaciente = () => {
                                         />
                                     </Box>
                                 </Grid>
-
-                                <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
-                                <CustomTextField
-                                        onChange={handleViaAdmin}
-                                        value={viaAdmin}
-                                        defaulValue={viaAdmin}
-                                        id='via-de-administracion'
-                                        label='Vía de administración*'
-                                        type='text'
-                                        select={true}
-                                    >
-                                        {viaAdministracion.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </CustomTextField>
-                                </Grid>
+                                <LightTooltip
+                                    title='Seleccion vía de administración central para una osmolaridad igual o superior a 800 mOsm/L'
+                                    placement="top"
+                                    arrow
+                                >
+                                    <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                                        <CustomTextField
+                                            onChange={handleViaAdmin}
+                                            value={viaAdmin}
+                                            defaulValue={viaAdmin}
+                                            id='via-de-administracion'
+                                            label='Vía de administración*'
+                                            type='text'
+                                            select={true}
+                                        >
+                                            {viaAdministracion.map((option) => (
+                                                <MenuItem key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </MenuItem>
+                                            ))}
+                                        </CustomTextField>
+                                    </Grid>
+                                </LightTooltip>
                             </Grid>
                         </Box>
 
@@ -359,15 +387,15 @@ const InformacionPaciente = () => {
                                 </Grid>
 
                                 <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
-                                   
+
                                 </Grid>
 
                             </Grid>
                         </Box>
                     </Grid>
                 </AccordionDetails>
-            </Accordion>
-        </Stack>
+            </Accordion >
+        </Stack >
 
     )
 }
