@@ -151,12 +151,20 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	const [isAuth, setIsAuth] = React.useState(false);
 
 	const authStatus = () => {
+		
+		const myToken=Cookies.get(CookiesKeysEnum.token)
+		// console.log('MyToken:',myToken)
+		
+	    if(myToken===null||myToken===undefined){
+			localStorageProtocol.delete(StorageKeysEnum.user)
+		}
 		if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
 			setIsAuth(true)
-			router.push(mainRoutes.home);
+			// router.push(mainRoutes.home);
 			console.log('IsAuth:', isAuth)
 		} else {
 			setIsAuth(false);
+			Cookies.remove(CookiesKeysEnum.token)
 			router.push(mainRoutes.login);
 			console.log('IsAuth:', isAuth)
 		}
@@ -207,6 +215,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	/////////////////////////////LOGOUT//////////////////////////////////////////////
 	const logout = async () => {
 		localStorageProtocol.delete(StorageKeysEnum.user);
+		Cookies.remove(CookiesKeysEnum.token)
 		authStatus();
 	}
 	///////////////////////////////////////////////////////////////////////////////////
