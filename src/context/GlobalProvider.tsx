@@ -160,10 +160,11 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		}
 		if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
 			setIsAuth(true)
-			router.push(mainRoutes.home);
+			// router.push(mainRoutes.home);
 			console.log('IsAuth:', isAuth)
 		} else {
 			setIsAuth(false);
+			Cookies.remove(CookiesKeysEnum.token)
 			router.push(mainRoutes.login);
 			console.log('IsAuth:', isAuth)
 		}
@@ -214,6 +215,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	/////////////////////////////LOGOUT//////////////////////////////////////////////
 	const logout = async () => {
 		localStorageProtocol.delete(StorageKeysEnum.user);
+		Cookies.remove(CookiesKeysEnum.token)
 		authStatus();
 	}
 	///////////////////////////////////////////////////////////////////////////////////
