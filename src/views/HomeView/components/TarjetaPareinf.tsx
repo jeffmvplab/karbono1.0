@@ -3,6 +3,9 @@ import React from 'react';
 import Image from 'next/image'
 
 import { Box, Breadcrumbs, Grid, Button, Hidden, Typography } from '@mui/material'
+import { mainRoutes } from '@/routes/routes';
+import { colorsKarbono } from '@/themes/colors';
+import { ButtonCardsHome } from './ButtonCardsHome';
 
 
 const TarjetaPareinf = () => {
@@ -20,10 +23,15 @@ const TarjetaPareinf = () => {
           >
             <Typography variant='h5' sx={{ color: '#372FC6', paddingBottom: '20px' }}>Parámetros</Typography>
             <Typography variant='body1' sx={{ paddingBottom: '30px' }}>Este módulo te permite tener un control total sobre la configuración de la aplicación de prescripciones médicas. </Typography>
-
+{/* 
             <Button sx={{ backgroundColor: '#372FC6', color: '#fff', padding: '10px 40px', borderRadius: '10px', ':hover': { backgroundColor: '#372FC6', color: '#e8e8e2' } }}>
               Ingresar
-            </Button>
+            </Button> */}
+             <ButtonCardsHome
+              route={mainRoutes.prescripcion}
+              text=' Ingresar'
+              color={colorsKarbono.secundary}
+              />
           </Box>
           <Hidden smDown >
             <Box sx={{ justifyContent: 'center', display: 'flex', paddingRight: '20px', alignItems: 'center', width:'20%' }}>
@@ -51,10 +59,15 @@ const TarjetaPareinf = () => {
           >
             <Typography variant='h5' sx={{ color: '#2FC5C6', paddingBottom: '20px' }}>Informes</Typography>
             <Typography variant='body1' sx={{ paddingBottom: '30px' }}>Este módulo te proporciona acceso a una amplia gama de datos y estadísticas sobre el uso de la aplicación. </Typography>
-
+{/* 
             <Button sx={{ backgroundColor: '#2FC5C6', color: '#fff', padding: '10px 40px', borderRadius: '10px', ':hover': { backgroundColor: '#2fc5c1', color: '#e8e8e2' } }}>
               Ingresar
-            </Button>
+            </Button> */}
+             <ButtonCardsHome
+              route={mainRoutes.prescripcion}
+              text=' Ingresar'
+              color={colorsKarbono.primary}
+              />
           </Box>
           <Hidden smDown >
             <Box sx={{ justifyContent: 'center', display: 'flex', paddingRight: '20px', alignItems: 'center', width:'20%' }}>

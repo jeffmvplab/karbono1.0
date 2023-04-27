@@ -2,17 +2,19 @@ import React, { useContext } from 'react'
 import Image from 'next/image';
 
 
-import { Drawer, Box, Typography, Hidden, List, Grid, Divider, ListItem, ListItemText, ListItemButton, Toolbar } from '@mui/material';
+import { Drawer, Box, Typography, Hidden, List, Grid, Divider, ListItem, ListItemText, ListItemButton, Toolbar, Button } from '@mui/material';
 import Link from 'next/link';
 import { CustomButton } from '@/components/CustomButton';
 import { mainRoutes } from '@/routes/routes';
 import { colorsKarbono } from '@/themes/colors';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { PrescripcionContext } from '../context/PrescripcionContext';
+import { useRouter } from 'next/router';
 
 export const Sidebar = ({ drawerWidth = 240 }) => {
 
   const { goAddNew } = useContext(PrescripcionContext)
+  const router = useRouter();
 
   return (
     <Box
@@ -31,15 +33,19 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
         <Toolbar sx={{ width: '240px', justifyContent: 'center', }}>
           <Grid item >
             <Hidden smDown>
-              <Box sx={{ textAlign: 'center', paddingTop: '10px' }}>
-                <Image
-                  src='/assets/1.png'
-                  width={120}
-                  height={30}
-                  alt=''
-                  style={{ marginTop: '5px', alignItems: 'center', }}
-                />
-              </Box>
+              <Button
+              onClick={()=>{router.push(mainRoutes.home)}}
+              >
+                <Box sx={{ textAlign: 'center', paddingTop: '10px' }}>
+                  <Image
+                    src='/assets/1.png'
+                    width={120}
+                    height={30}
+                    alt=''
+                    style={{ marginTop: '5px', alignItems: 'center', }}
+                  />
+                </Box>
+              </Button>
             </Hidden>
 
             <Divider sx={{ marginTop: '10px', width: '100%' }} />

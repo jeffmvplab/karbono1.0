@@ -37,17 +37,20 @@ const FormView: React.FC<FormViewProps> = () => {
 		// reporte,
 		getPrescriptionsByNumber,
 		loadingSave,
-		cancelForm
+		cancelForm,
+		getPrescriptions,
 	} = useContext(FormulariosContext)
 
 	useEffect(() => {
 		fechaActual();
 		getPrescriptionsByNumber()
-
+        
 	}, [])
 
-
-
+	useEffect(() => {
+		getPrescriptions();
+	}, [loadingSave])
+   
 	return (
 
 		// <Card >
@@ -180,7 +183,7 @@ const FormView: React.FC<FormViewProps> = () => {
 						{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 					</Box>
 				</Grid>
-
+\auth\register
 				<Stack
 					zIndex={100}
 					position={{ xs: 'fixed', sm: 'initial' }}

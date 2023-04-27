@@ -1,14 +1,20 @@
 import React, { ReactNode } from 'react'
 import Link from 'next/link';
 import FadeMenu from '@/layouts/components/NavBar/components/BotonPerfil';
-import { AppBar, Toolbar, IconButton, Hidden, Grid, Typography, Box } from '@mui/material';
-import { MenuOutlined, CallOutlined, } from '@mui/icons-material';
+import { AppBar, Toolbar, IconButton, Hidden, Grid, Typography, Box, Stack } from '@mui/material';
 import SearchBar from './SearchBar'
 import Image from 'next/image'
-
+import { GlobalContext } from '@/context/GlobalContext';
+import { useRouter } from 'next/router';
+import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
+import { mainRoutes } from '@/routes/routes';
+import { CustomButton } from '@/components/CustomButton';
 
 
 const NavbarP = ({ drawerWidth = 240, }) => {
+
+  const { isAuth } = React.useContext(GlobalContext)
+
   return (
     <AppBar
       position='fixed'
@@ -45,26 +51,25 @@ const NavbarP = ({ drawerWidth = 240, }) => {
             {/* </Hidden> */}
           </Grid>
 
-          <Box display='flex' sx={{ marginTop: '10px' }} >
-
-            <Grid item alignItems='center' marginRight='20px' sx={{ display: { xs: 'none', sm: 'block' } }}  >
+          <Stack direction={'row'} spacing={2} alignItems={'center'}>
+            <Box display='flex' alignItems='center'>
+              <span style={{ fontSize: '30px' }}>
+                <CallOutlinedIcon sx={{color:'black'}} />
+              </span>
 
               <Link href='' style={{ textDecoration: 'none' }} >
                 <Typography
                   margin='0 15px'
                   color='#000'
-                  alignItems='center'
-                  sx={{ justifyContent: 'center', alignItems: 'center' }}
-                >
-                  <CallOutlined />
+                  alignItems='normal'
+                >Contáctanos
                 </Typography>
               </Link>
 
-            </Grid>
-            <Grid item  paddingTop={0.5}>
+            </Box>
               <FadeMenu />
-            </Grid>
-          </Box>
+
+          </Stack>
 
         </Grid>
       </Toolbar>
