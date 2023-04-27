@@ -4,6 +4,7 @@ import React, { useContext, useEffect } from 'react'
 import CustomTextField from './CustomTextField'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { FormulariosContext } from '../context/FormulariosContext';
+import { LightTooltip } from '../style/styleToolTips';
 
 
 const tipoPrescripciones = [
@@ -125,18 +126,27 @@ const Macronutrientes = () => {
                         <Box display='flex' sx={{ marginTop: '20px' }}>
                             <Grid container spacing={2}>
 
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                                    <CustomTextField
-                                        onChange={handleFlujoMetabolico}
-                                        value={flujoMetabolico}
-                                        id='flujo-metabolico'
-                                        label={'Flujo metabólico*'}
-                                        endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'mg/kg/min'
-                                            : 'ml'}
-                                        type='text'
-                                    />
-                                </Grid>
+                                <LightTooltip
+                                    title='Requerimiento recomendado de carbohidratos en mg/kg/min es:
+                                    Neonatos: 4 - 12  
+                                    Pediátricos: 5 - 10
+                                    Adultos: 1 - 4 '
+                                    placement="top"
+                                    arrow
+                                >
+                                    <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                        <CustomTextField
+                                            onChange={handleFlujoMetabolico}
+                                            value={flujoMetabolico}
+                                            id='flujo-metabolico'
+                                            label={'Flujo metabólico*'}
+                                            endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                                ? 'mg/kg/min'
+                                                : 'ml'}
+                                            type='text'
+                                        />
+                                    </Grid>
+                                </LightTooltip>
 
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
@@ -229,19 +239,29 @@ const Macronutrientes = () => {
                                     </CustomTextField>
                                     {/* <TextFieldInput id='lipidos' type='text' label='Lípidos' /> */}
                                 </Grid>
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
-                                    <CustomTextField
-                                        onChange={handleRequerimientoLipidos}
-                                        value={requerimientoLipidos}
-                                        id='requerimiento-lipidos'
-                                        label={'Requerimiento Lípidos'}
-                                        endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'g/kg/día'
-                                            : 'ml'}
-                                        type='text'
-                                    />
-                                    {/* <TextFieldInput id='requerimiento-lipidos' type='text' label='Requerimiento Lípidos' /> */}
-                                </Grid>
+                                
+                                <LightTooltip
+                                    title='Requerimiento recomendado de lípidos en g/kg/día es:
+                                    Neonatos: 1 - 4 
+                                    Pediátricos: 2 - 3
+                                    Adultos: 1 - 2.5 '
+                                    placement="top"
+                                    arrow
+                                >
+                                    <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
+                                        <CustomTextField
+                                            onChange={handleRequerimientoLipidos}
+                                            value={requerimientoLipidos}
+                                            id='requerimiento-lipidos'
+                                            label={'Requerimiento Lípidos'}
+                                            endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                                ? 'g/kg/día'
+                                                : 'ml'}
+                                            type='text'
+                                        />
+                                        {/* <TextFieldInput id='requerimiento-lipidos' type='text' label='Requerimiento Lípidos' /> */}
+                                    </Grid>
+                                </LightTooltip>
                             </Grid>
                         </Box>
 
@@ -249,7 +269,7 @@ const Macronutrientes = () => {
                             <Grid item container spacing={2}>
 
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
-                                <CustomTextField
+                                    <CustomTextField
                                         onChange={handleOmegaven}
                                         value={omegaven}
                                         id='omegaven'
@@ -262,11 +282,11 @@ const Macronutrientes = () => {
                                     {/* <TextFieldInput id='omegaven' type='text' label='Omegaven' /> */}
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
-                                <CustomTextField
+                                    <CustomTextField
                                         onChange={handleDipeptiven}
                                         value={dipeptiven}
                                         id='dipeptiven'
-                                        label={ 'Dipeptiven'}
+                                        label={'Dipeptiven'}
                                         endAdornament={(tipoPrescripcion === 'Por requerimientos')
                                             ? 'g/kg/día'
                                             : 'ml'}

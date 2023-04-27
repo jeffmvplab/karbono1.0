@@ -4,6 +4,7 @@ import React, { useContext, useEffect } from 'react'
 import CustomTextField from './CustomTextField'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { FormulariosContext } from '../context/FormulariosContext';
+import { LightTooltip } from '../style/styleToolTips';
 
 const tipoFosfato = [
     { value: 'Fosfato de sodio', label: 'Fosfato de sodio' },
@@ -116,35 +117,52 @@ const Micronutrientes = () => {
                         <Box display='flex' sx={{ width: '100%', }}>
                             <Grid container spacing={2}>
 
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <LightTooltip
+                                    title='Requerimiento recomendado de sodio en g/kg/día es:
+                                    Neonatos: 2 - 5
+                                    Pediátricos: 1 - 2
+                                    Adultos: 1 - 2.'
+                                    placement="top"
+                                    arrow
+                                >
+                                    <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
-                                    <CustomTextField
-                                        onChange={handleSodioTotal}
-                                        value={sodioTotal}
-                                        id='Sodio-total'
-                                        label={'Sodio total'}
-                                        endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'mEq/kg/día'
-                                            : 'ml'}
-                                        type='text'
-                                    />
+                                        <CustomTextField
+                                            onChange={handleSodioTotal}
+                                            value={sodioTotal}
+                                            id='Sodio-total'
+                                            label={'Sodio total'}
+                                            endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                                ? 'mEq/kg/día'
+                                                : 'ml'}
+                                            type='text'
+                                        />
 
-                                </Grid>
+                                    </Grid>
+                                </LightTooltip>
 
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                                    <CustomTextField
-                                        onChange={handlePotacioTotal}
-                                        value={potacioTotal}
-                                        id='potasio-total'
-                                        label={'Potasio total'}
-                                        endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'mEq/kg/día'
-                                            : 'ml'}
-                                        type='text'
-                                    />
-                                    {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
-                                </Grid>
-
+                                <LightTooltip
+                                    title='Requerimiento recomendado de potasio en g/kg/día es:
+                                    Neonatos: 2 - 4
+                                    Pediátricos: 1 - 2
+                                    Adultos: 1 - 2.'
+                                    placement="top"
+                                    arrow
+                                >
+                                    <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                        <CustomTextField
+                                            onChange={handlePotacioTotal}
+                                            value={potacioTotal}
+                                            id='potasio-total'
+                                            label={'Potasio total'}
+                                            endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                                ? 'mEq/kg/día'
+                                                : 'ml'}
+                                            type='text'
+                                        />
+                                        {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
+                                    </Grid>
+                                </LightTooltip>
                             </Grid>
                             {/* <TextFieldInput id='Sodio-total' type='text' label='Sodio total' />
                     <TextFieldInput id='potasio-total' type='text' label='Potasio total' /> */}
@@ -153,26 +171,35 @@ const Micronutrientes = () => {
                         <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
 
                             <Grid container spacing={2}>
+                                <LightTooltip
+                                    title='Requerimiento recomendado de fósforo en mmol/kg/día en pacientes neonatales o pediátricos es:
+                                    Neonatos: 1 - 2 
+                                    Pediátricos: 0.3 - 0.6 
+                                    Requerimiento recomendado de fósforo en mmol/día en pacientes adultos es:
+                                    Adultos: 20 - 40'
+                                    placement="top"
+                                    arrow
+                                >
+                                    <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                        <CustomTextField
+                                            onChange={handleFosfato}
+                                            value={fosfato}
+                                            defaulValue={fosfato}
+                                            id='fosfato'
+                                            label='Fosfato'
+                                            type='text'
+                                            select
+                                        >
+                                            {tipoFosfato.map((option) => (
+                                                <MenuItem key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </MenuItem>
+                                            ))}
+                                        </CustomTextField>
 
-                                    <CustomTextField
-                                        onChange={handleFosfato}
-                                        value={fosfato}
-                                        defaulValue={fosfato}
-                                        id='fosfato'
-                                        label='Fosfato'
-                                        type='text'
-                                        select
-                                    >
-                                        {tipoFosfato.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </CustomTextField>
-
-                                </Grid>
+                                    </Grid>
+                                </LightTooltip>
 
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
@@ -359,7 +386,7 @@ const Micronutrientes = () => {
                                         value={vitaminasHidrosolubles}
                                         defaulValue={vitaminasHidrosolubles}
                                         id='vitaminas-hidrosolubes'
-                                        label={'Vitaminas hidrosolubes'}                                     
+                                        label={'Vitaminas hidrosolubes'}
                                         type='text'
                                         select
                                     >
