@@ -4,28 +4,29 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
 import { GlobalContext } from '@/context/GlobalContext';
+import { Box, Stack } from '@mui/material';
 
 export default function FadeMenu() {
 
-  const {logout} = React.useContext(GlobalContext)
-  
+  const { logout } = React.useContext(GlobalContext)
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
-  
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
 
   const handleClose = () => {
-    setAnchorEl(null); 
+    setAnchorEl(null);
   };
 
   return (
-    <div>
+    <Stack >
       <Button
-        style={{color:'#fff', backgroundColor:'#2fc5c6', padding:'0.20em 2.70em', borderRadius:'10px'}}
+        style={{ color: '#fff', backgroundColor: '#2fc5c6', padding: '0.20em 2.70em', borderRadius: '10px' }}
         id="fade-button"
         aria-controls={open ? 'fade-menu' : undefined}
         aria-haspopup="true"
@@ -44,10 +45,16 @@ export default function FadeMenu() {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={handleClose} >Perfil</MenuItem>
-        <MenuItem onClick={handleClose}>Mi cuenta</MenuItem>
-        <MenuItem onClick={()=>{logout(); handleClose}}>cerrar sesión</MenuItem>
+        <Stack
+        padding={'5px'}
+         alignItems={'start'}
+         minWidth={'135px'} 
+         direction={'column'}>
+          <MenuItem onClick={handleClose} >Perfil</MenuItem>
+          <MenuItem onClick={handleClose}>Mi cuenta</MenuItem>
+          <MenuItem onClick={() => { logout(); handleClose }}>Cerrar Sesión</MenuItem>
+        </Stack>
       </Menu>
-    </div>
+    </Stack>
   );
 }

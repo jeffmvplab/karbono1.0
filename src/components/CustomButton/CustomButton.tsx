@@ -138,6 +138,9 @@ const CustomButton: React.FC<CustomButtonProps> = (
 				textTransform: 'none',
 				...sx,
 			}}
+			style={{
+				background:color
+			}}
 			startIcon={startIcon && loading ? cirularProgress : startIcon}
 			endIcon={endIcon && loading ? cirularProgress : endIcon}
 			onClick={onClick}

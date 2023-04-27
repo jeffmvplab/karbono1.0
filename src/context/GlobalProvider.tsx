@@ -2,11 +2,13 @@
 import { UserUseCases } from "@/domain/usecases";
 import { LocalStorageProtocol } from "@/protocols/cache/local_cache";
 import { mainRoutes } from "@/routes/routes";
-import { StorageKeysEnum } from "@/utilities/enums";
+import { CookiesKeysEnum, StorageKeysEnum } from "@/utilities/enums";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { FC } from "react";
 import { GlobalContext } from "./GlobalContext";
+import { useCookies } from "react-cookie";
+import Cookies from "js-cookie";
 
 type Props = {
 	children: JSX.Element,
@@ -172,7 +174,8 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		console.log('RespAuth:', resp)
 
 		localStorageProtocol.set(StorageKeysEnum.user, resp);
-
+		Cookies.set(CookiesKeysEnum.token,resp.token, { sameSite: 'Strict'})
+		
 		setLoadingAuth(false);
 		if (resp !== 401 && resp !== 400 && resp !== 500) {
 			authStatus();
@@ -191,7 +194,8 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		console.log('RespRegister:', resp)
 
 		localStorageProtocol.set(StorageKeysEnum.user, resp);
-
+		Cookies.set(CookiesKeysEnum.token,resp.token, { sameSite: 'Strict'})
+		
 		setLoadingAuth(false);
 		if (resp !== 401 && resp !== 400 && resp !== 500) {
 			authStatus();
@@ -213,6 +217,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 			authOK,
 			isAuth,
+			authStatus,
 
 			login,
 			register,

@@ -102,8 +102,15 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		setLoadingApi(false);
 
 		const resp = await prescriptionsUseCase.prescripcionsByNumber(number);
-		const repoPresc: IPrescriptions[] = resp.body
-        console.log('RESP by Num:',resp)
+		let repoPresc: IPrescriptions[] = []
+		
+		if(resp.body.length){
+			repoPresc= resp.body
+		}else{
+			repoPresc[0]= resp.body
+		}
+        
+		console.log('RESP by Num:',repoPresc.length)
 		if (resp.statusCode === 200) {
 			setReportes(repoPresc);
 			setErrorSearch(false)
@@ -137,8 +144,14 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		setLoadingApi(false);
 
 		const resp = await prescriptionsUseCase.prescripcionsByName(name);
-		const repoPresc: IPrescriptions[] = resp.body
-		console.log('RESP by Name:',resp)
+		let repoPresc: IPrescriptions[] = []
+		
+		if(resp.body.length){
+			repoPresc= resp.body
+		}else{
+			repoPresc[0]= resp.body
+		}
+		console.log('RESP by Name:',resp.body.length)
 		if (resp.statusCode === 201) {
 			setReportes(repoPresc);
 			setErrorSearch(false)
@@ -171,7 +184,13 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 	const getPrescriptionsByIps = async (ips: string) => {
 		setLoadingApi(false);
 		const resp = await prescriptionsUseCase.prescripcionsByIps(ips);
-		const repoPresc: IPrescriptions[] = resp.body
+		let repoPresc: IPrescriptions[] = []
+		
+		if(resp.body.length){
+			repoPresc= resp.body
+		}else{
+			repoPresc[0]= resp.body
+		}
 		console.log('RESP by Ips:',resp)
 
 		if (resp.statusCode === 201) {
@@ -206,7 +225,13 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 	const getPrescriptionsById = async (id: string) => {
 		setLoadingApi(false);
 		const resp = await prescriptionsUseCase.prescripcionsById(id);
-		const repoPresc: IPrescriptions[] = resp.body
+		let repoPresc: IPrescriptions[] = []
+		
+		if(resp.body.length){
+			repoPresc= resp.body
+		}else{
+			repoPresc[0]= resp.body
+		}
 		console.log('RESP by Id:',resp)
 
 		if (resp.statusCode === 201) {
