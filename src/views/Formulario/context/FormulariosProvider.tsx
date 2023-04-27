@@ -156,6 +156,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		}
 		
 		setLoadingSave(true);
+		
 	}
 
 	const initState = (repor: IPrescriptions) => {
@@ -709,7 +710,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const [prescriptionSave, setPrescriptionSave] = React.useState<IPrescriptions | undefined>();
 
-	const getPrescriptions = () => {
+	const getPrescriptions =async () => {
 		setPrescriptionSave(prescriptionsData)
 	}
 
@@ -845,6 +846,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			valAllForm,
 			messageAPI,
 			cancelForm,
+
+			getPrescriptions,
 
 
 

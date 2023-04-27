@@ -88,7 +88,8 @@ interface ContextProps {
     handleCloseModalFormSaved: () => void,
     savePrescription: () => void,
     cancelForm:(route:string)=>void,
-
+   
+    getPrescriptions: () => void,
 }
 
 export const FormulariosContext = createContext({} as ContextProps)

@@ -31,7 +31,7 @@ export interface TableReportesProps { }
 
 const TableReportes: React.FC<TableReportesProps> = () => {
 
-	const {getAll,reportes,loadingGet,goEdit} = useContext(PrescripcionContext)
+	const {getAll,reportes,loadingGet,loadingApi,goEdit,goReporte} = useContext(PrescripcionContext)
   
 	useEffect(() => {
 		getAll(30);
@@ -48,7 +48,11 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			// cellClassName:'style-theme--cell',
 			flex: 1,
 			minWidth: 50,
-			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+			renderCell: (params: GridRenderCellParams) => (
+			<Button
+			onClick={()=>{goReporte(params.row.no_orden)}}
+			>{params.value}.</Button>
+			)
 		},
 	
 		{ 
@@ -103,8 +107,8 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			field: "acciones",
 			headerName: "Acciones",
 			headerClassName: 'table-color--header',
-			flex: 1,
-			maxWidth:140,
+			flex:1,
+			minWidth:130,
 			renderCell: (params: GridRenderCellParams) =>
 			(<>
 				<Button>
@@ -113,14 +117,14 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 				<Button
 				onClick={()=>{goEdit(params.row.no_orden)}}
 				>
-					<ModeEditOutlineOutlinedIcon sx={{ marginRight: '10px', color: 'black' }} />
+					<ModeEditOutlineOutlinedIcon sx={{ marginRight: '0px', color: 'black' }} />
 				</Button>
 			</>)
 		},
 	];
 	
 	return (
-		(!loadingGet)
+		(!loadingGet||!loadingApi)
 		?<Skeleton variant="rectangular" sx={{marginX:'15px',borderRadius:'5px'}} width='100%' height={700} />
 		:<Box
 			sx={{
