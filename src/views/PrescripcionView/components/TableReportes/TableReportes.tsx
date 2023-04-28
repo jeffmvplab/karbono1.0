@@ -1,16 +1,13 @@
 import React, { useContext, useEffect } from 'react';
-import { GridRenderCellParams, DataGrid, GridColDef } from '@mui/x-data-grid';
-import AddIcon from '@mui/icons-material/Add';
-import { CustomButton } from '@/components/CustomButton';
 import { Box, Button, CircularProgress, Skeleton, Stack } from '@mui/material';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import PictureAsPdfOutlinedIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import { colorsKarbono } from '@/themes/colors';
-import { IDataTable } from '@/utilities/interfaces/prescripcion_interfaces';
 import { PrescripcionContext } from '../../context/PrescripcionContext';
 import { IPrescriptions } from '@/domain/models/prescriptions.model';
-import { Typography } from '@material-ui/core';
-import { mainRoutes } from '@/routes/routes';
+import { GridColDef } from '@mui/x-data-grid/models/colDef/gridColDef';
+import { GridRenderCellParams } from '@mui/x-data-grid/models/params/gridCellParams';
+import { DataGrid } from '@mui/x-data-grid/DataGrid';
 
 
 // const data = [
