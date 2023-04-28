@@ -1,10 +1,11 @@
 import { colorsKarbono } from '@/themes/colors'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, MenuItem, Stack, TextField, Typography, useMediaQuery } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, Stack,Typography, useMediaQuery } from '@mui/material'
 import React, { useContext, useEffect } from 'react'
 import CustomTextField from './CustomTextField'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { FormulariosContext } from '../context/FormulariosContext';
 import { LightTooltip } from '../style/styleToolTips';
+import MenuItem from '@material-ui/core/MenuItem';
 
 
 const tipoPrescripciones = [
@@ -64,25 +65,26 @@ const Macronutrientes = () => {
 
             <Accordion onClick={() => !matches && handleAcordion2()} expanded={stateAcordion2} elevation={0}>
                 {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                <AccordionSummary
-                    sx={{
-                        display: { sm: 'none' },
-                        '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-                            transform: 'rotate(90deg)',
-                        },
-                    }}
-                    expandIcon={<ArrowRightIcon sx={{ color: `${colorsKarbono.primary}` }} />}
-                    aria-controls="panel1bh-content"
-                    id="panel1bh-header"
-                >
-                    <Typography
-                        fontSize={16}
-                        // paddingY={2}
-                        style={{ fontWeight: 700, color: colorsKarbono.secundary }}
-                    >Macronutrientes
-                    </Typography >
-                </AccordionSummary>
-
+                <Box sx={{ display: { sm: 'none' }, }}>
+                    <AccordionSummary
+                        sx={{
+                            display: { sm: 'none' },
+                            '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+                                transform: 'rotate(90deg)',
+                            },
+                        }}
+                        expandIcon={<ArrowRightIcon sx={{ color: `${colorsKarbono.primary}` }} />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography
+                            fontSize={16}
+                            // paddingY={2}
+                            style={{ fontWeight: 700, color: colorsKarbono.secundary }}
+                        >Macronutrientes
+                        </Typography >
+                    </AccordionSummary>
+                </Box>
                 <Typography
                     variant='h6'
                     paddingY={2}
@@ -239,7 +241,7 @@ const Macronutrientes = () => {
                                     </CustomTextField>
                                     {/* <TextFieldInput id='lipidos' type='text' label='Lípidos' /> */}
                                 </Grid>
-                                
+
                                 <LightTooltip
                                     title='Requerimiento recomendado de lípidos en g/kg/día es:
                                     Neonatos: 1 - 4 

@@ -79,7 +79,7 @@ interface ContextProps {
 
     loadingSave: boolean
     saveOK: boolean,
-    valAllForm: boolean,
+    valOKAlert: boolean,
     messageAPI: string,
 
     //////MODAL//////
@@ -90,6 +90,7 @@ interface ContextProps {
     cancelForm:(route:string)=>void,
    
     getPrescriptions: () => void,
+    validateAlert: () => void,
 }
 
 export const FormulariosContext = createContext({} as ContextProps)

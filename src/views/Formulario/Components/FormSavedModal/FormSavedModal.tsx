@@ -14,14 +14,14 @@ export interface FormSavedModalProps { }
 const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 
 	const {
-		saveOK, valAllForm, loadingSave,messageAPI,
+		saveOK,loadingSave,messageAPI,
 		openModalFormSaved,
-		handleCloseModalFormSaved,
+		handleCloseModalFormSaved,valOKAlert
 	} = useContext(FormulariosContext)
 
 	const router=useRouter();
 
-	const validacionOK = true;
+	const validacionOK:boolean = valOKAlert;
 
 	return (
 
@@ -39,7 +39,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 				<Avatar
 					sx={{
 						top: '15px',
-						right: { xs: '-250px', sm: validacionOK ? '-400px' : '-450px' },
+						right: { xs: '-250px', sm: validacionOK ? '-400px' : '-400px' },
 						background: 'red',
 						width: '25px',
 						height: '25px'
@@ -112,18 +112,21 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 											textAlign={'center'}
 											// paddingY={{sm:2}}
 											style={{ fontWeight: 400, color: 'black' }}
-										>Revisa nuevamente los valores que
-											has registrado en el formulario, ya
-											que es posible que hayan parámetros
-											que no se encuentren dentro de los límites
-											o valores permitidos.
+										>Parametros Incorrectos.
 										</Typography >
 									}
 
 									<CustomButton
 										onClick={
 											
-											()=>{(saveOK)?router.push(mainRoutes.reportePrescripcion):handleCloseModalFormSaved()}
+											()=>{
+												(valOKAlert)
+												?(saveOK)
+												 ?router.push(mainRoutes.reportePrescripcion)
+												 :handleCloseModalFormSaved()
+												:handleCloseModalFormSaved()
+												}
+	
 										}
 										height={50}
 										width={137}

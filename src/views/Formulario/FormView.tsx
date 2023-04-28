@@ -2,8 +2,7 @@
 
 import { CustomButton } from '@/components/CustomButton';
 import { colorsKarbono } from '@/themes/colors';
-import { Grid } from '@material-ui/core';
-import { styled, Box, Stack, TextField, Typography, Card, Divider, Menu, Fade, MenuItem, Skeleton } from '@mui/material';
+import { Box, Stack, TextField, Typography, Card, MenuItem, Skeleton, Grid } from '@mui/material';
 
 import React, { useContext, useEffect } from 'react';
 import InformacionPaciente from './Components/InformacionPaciente';
@@ -15,42 +14,39 @@ import CloseIcon from '@mui/icons-material/Close';
 import Image from 'next/image';
 import { FormulariosContext } from './context/FormulariosContext';
 import { FormSavedModal } from './Components/FormSavedModal';
-import { IPrescriptions } from '@/domain/models/prescriptions.model';
-import { LoadingComponent } from '@/components/LoadingComponent';
-import { LocalStorageProtocol } from '@/protocols/cache/local_cache';
-import { StorageKeysEnum } from '@/utilities/enums';
 import { mainRoutes } from '@/routes/routes';
+
 
 export interface FormViewProps { }
 
+
 const FormView: React.FC<FormViewProps> = () => {
 
-
-	const localStorageProtocol = new LocalStorageProtocol();
+	// const localStorageProtocol = new LocalStorageProtocol();
 
 	const {
-		getMovilHeight, handleOpenModalFormSaved, savePrescription,
+		getMovilHeight, savePrescription,
 		numOrder, handleNumOrder,
-		prescripcion, handlePrescripcion,
 		fechaCreacion, handleFechaCreacion,
 		fechaActual,
-		// reporte,
 		getPrescriptionsByNumber,
 		loadingSave,
 		cancelForm,
 		getPrescriptions,
+		valOKAlert,
+		handleOpenModalFormSaved
 	} = useContext(FormulariosContext)
 
 	useEffect(() => {
 		fechaActual();
 		getPrescriptionsByNumber()
-        
 	}, [])
 
 	useEffect(() => {
 		getPrescriptions();
+		// validateAlert();
 	}, [loadingSave])
-   
+
 	return (
 
 		// <Card >
@@ -69,10 +65,10 @@ const FormView: React.FC<FormViewProps> = () => {
 				<Grid item xs={12} sm={8} md={9} style={{ paddingRight: '20px' }}>
 
 					{(!loadingSave)
-						? <Skeleton 
-						variant="rectangular" 
-						sx={{ marginX: '10px', paddingRight: '20px', borderRadius: '10px'}}
-						width='100%' height={700} />
+						? <Skeleton
+							variant="rectangular"
+							sx={{ marginX: '10px', paddingRight: '20px', borderRadius: '10px' }}
+							width='100%' height={700} />
 						: <Card elevation={10} sx={{ borderRadius: 4 }}>
 							<Box
 								sx={{
@@ -86,9 +82,7 @@ const FormView: React.FC<FormViewProps> = () => {
 								<Grid container spacing={2} style={{ padding: '10px' }}>
 
 									<Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
-										{/* <CustomToolTip
-									tip={'Escriba el numero de orden'}
-									placeTip={'top'}> */}
+						
 										<TextField
 											onChange={handleNumOrder}
 											id='Numero-de-orden'
@@ -104,19 +98,6 @@ const FormView: React.FC<FormViewProps> = () => {
 										{/* </CustomToolTip> */}
 									</Grid>
 
-									{/* <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
-										<TextField
-											onChange={handlePrescripcion}
-											id='Tipo-de-prescripción'
-											label='Tipo de prescripción'
-											type='text'
-											value={prescripcion}
-											variant='outlined'
-											color='secondary'
-											sx={{ bgcolor: 'transparent' }}
-											fullWidth
-										/>
-									</Grid> */}
 									<Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
 										<TextField
 											onChange={handleFechaCreacion}
@@ -136,14 +117,14 @@ const FormView: React.FC<FormViewProps> = () => {
 								<Box
 									// borderRadius={'10px'}
 									sx={{
-										overflow: { sm: 'auto'},
+										overflow: { sm: 'auto' },
 										// overflow:'auto' ,
 										height: {
 											xs: getMovilHeight(),
 											sm: '55vh', md: '58vh', xl: '58vh'
 										}
 									}}
-									paddingX={{ xs: '0px', sm: '20px' }}
+									paddingX={{ xs: '20px', sm: '20px' }}
 									marginTop={'10px'}
 									bgcolor={'white'}>
 
@@ -161,24 +142,24 @@ const FormView: React.FC<FormViewProps> = () => {
 						{(!loadingSave)
 							? <Skeleton
 								variant="rectangular"
-								sx={{ 
-								
-								overflow: 'auto', 
-								borderRadius:'10px',
-								height: { xs: '35.5vh', sm: '30vh', md: '30vh', xl: '30vh' },
-							}} />
+								sx={{
+
+									overflow: 'auto',
+									borderRadius: '10px',
+									height: { xs: '35.5vh', sm: '30vh', md: '30vh', xl: '30vh' },
+								}} />
 							: <ParametrosFarmaceuticos />}
 
 						{(!loadingSave)
-							? <Skeleton 
-							variant="rectangular" 
-							sx={{ 
-							overflow: 'auto', 
-							borderRadius:'10px',
-							height: { xs: '35.5vh', sm: '30vh', md: '30vh', xl: '30vh' },
-							marginTop:'20px',
-							marginBottom:'20px'
-						 }} />
+							? <Skeleton
+								variant="rectangular"
+								sx={{
+									overflow: 'auto',
+									borderRadius: '10px',
+									height: { xs: '35.5vh', sm: '30vh', md: '30vh', xl: '30vh' },
+									marginTop: '20px',
+									marginBottom: '20px'
+								}} />
 							: <ParametrosNutricionales />}
 						{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 					</Box>
@@ -206,7 +187,12 @@ const FormView: React.FC<FormViewProps> = () => {
 					/>
 
 					<CustomButton
-						onClick={savePrescription}
+						// disabled={!valOKAlert}
+						onClick={
+							valOKAlert
+							?()=>{savePrescription()}
+							:()=>{getPrescriptions(),handleOpenModalFormSaved()}
+						}
 						width={127}
 						text={'Guardar'}
 						sx={{ borderRadius: '10px' }}
