@@ -98,7 +98,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Flujo metabólico:{reporte?.flujo_metabolico}</Typography>
 				</Grid>
-				{/* <ReportesMicronutrientes />
+				<ReportesMicronutrientes />
 				<Divider orientation='horizontal' style={{ width: '50%' }} />
 
 				<ReportesMacronutrientes />
@@ -107,7 +107,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 				<ReportesParametros />
 				<Divider orientation='horizontal' style={{ width: '50%' }} />
 
-				<BannerOrdenar /> */}
+				<BannerOrdenar />
 			</Grid>
 
 		</>
