@@ -105,7 +105,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 				<Divider orientation='horizontal' style={{ width: '50%' }} />
 
 				<ReportesParametros />
-				<Divider orientation='horizontal' style={{ width: '50%', boxShadow: '0px 5px 12px rgba(105, 92, 92, 0.2);' }} />
+				<Divider orientation='horizontal' style={{ width: '50%'}} />
 
 				<BannerOrdenar />
 			</Grid>

@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req,res }) => {
 
   const jwt: string | undefined = req.cookies[CookiesKeysEnum.token];
  
-  // console.log('KK:',jwt)
+   console.log('KK:',jwt)
 
   if (!jwt) {
     return {
