@@ -2,9 +2,12 @@
     box-shadow: 0px 5px 12px rgba(105, 92, 92, 0.2);
 }
 
-.caja {
+.MuiMenu-list {
+    flex-direction: column;
+}
 
-    display: flex;
+.caja {
+    display: block;
 }
 
 ::-webkit-scrollbar {
@@ -27,7 +30,4 @@
 
  ::-webkit-scrollbar-thumb:hover {
     background: #2df;
-
-
 }
-

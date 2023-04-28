@@ -23,7 +23,7 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 		<>
 			<Grid container sx={{ marginTop: '150px', paddingRight: '25px', paddingLeft: '25px', marginBottom: '30px' }}>
 				<Grid item display='flex' justifyContent='space-between' width='100%'>
-                <SearchModal/>
+					<SearchModal />
 					<Typography
 						variant='h5'
 						sx={{ fontWeight: 700, fontSize: { xs: '1.5vh', sm: '2.5vh' }, marginTop: { xs: '5px' } }}>

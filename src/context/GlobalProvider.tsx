@@ -188,6 +188,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		if (resp !== 401 && resp !== 400 && resp !== 500) {
 			authStatus();
 			setAuthOk(true);
+			router.push(mainRoutes.home);
 		} else {
 			setAuthOk(false)
 		}
@@ -208,6 +209,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		if (resp !== 401 && resp !== 400 && resp !== 500) {
 			authStatus();
 			setAuthOk(true);
+			router.push(mainRoutes.home);
 		} else {
 			setAuthOk(false)
 		}
