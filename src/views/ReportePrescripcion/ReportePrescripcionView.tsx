@@ -108,6 +108,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 				<Divider orientation='horizontal' style={{ width: '50%'}} />
 
 				<BannerOrdenar />
+				
 			</Grid>
 
 		</>
