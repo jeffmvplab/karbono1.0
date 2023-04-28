@@ -31,7 +31,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 		<>
 			<DescargarModal />
 			<OrdenarModal />
-			<Grid container sx={{ marginTop: '100px', paddingRight: '25px', paddingLeft: '25px', marginBottom: '30px' }}>
+			<Grid container sx={{ marginTop: '30px', paddingRight: '25px', paddingLeft: '25px', marginBottom: '30px' }}>
 				<Grid item display='flex' justifyContent='space-between' width='100%'>
 
 					<Typography variant='h5' sx={{ fontWeight: 700 }}>Reporte prescripción</Typography>
