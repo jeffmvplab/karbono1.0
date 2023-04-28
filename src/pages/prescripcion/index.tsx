@@ -10,16 +10,17 @@ const PrescripcionPages: NextPageWithLayout = () => {
 
 
   return (
-    
-       <PrescripcionView/>
-  
+    // <PrescripcionProvider>
+      <PrescripcionView />
+    // </PrescripcionProvider>
+
   )
 }
 PrescripcionPages.getLayout = function getLayout(page: ReactElement) {
 
-  return ( 
-    <PrescripcionLayout>   
-        {page}
+  return (
+    <PrescripcionLayout>
+      {page}
     </PrescripcionLayout>
   )
 }
