@@ -33,28 +33,28 @@ ReportePrescripcionPages.getLayout = function getLayout(page: ReactElement) {
 
 //////////////////////////////////////////////////////////
 
-export const getServerSideProps: GetServerSideProps = async ({ req,res }) => {
+// export const getServerSideProps: GetServerSideProps = async ({ req,res }) => {
 
 
-  const jwt: string | undefined = req.cookies[CookiesKeysEnum.token];
+//   const jwt: string | undefined = req.cookies[CookiesKeysEnum.token];
  
-   console.log('KK:',jwt)
+//    console.log('KK:',jwt)
 
-  if (!jwt) {
-    return {
-      props: { user: null },
+//   if (!jwt) {
+//     return {
+//       props: { user: null },
 
-      redirect: {
-        destination: mainRoutes.home,
-      },
-    }
-  }
+//       redirect: {
+//         destination: mainRoutes.home,
+//       },
+//     }
+//   }
 
-  return {
-    props: { user: null }
-  }
+//   return {
+//     props: { user: null }
+//   }
 
 
-}
+// }
 
 export default ReportePrescripcionPages
