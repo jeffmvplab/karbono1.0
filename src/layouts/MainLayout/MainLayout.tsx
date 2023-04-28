@@ -1,11 +1,10 @@
 import React from "react";
 import { ReactNode } from "react";
-import { AppBar, Box, Grid, IconButton, Stack, Toolbar } from "@mui/material";
+import {Box,} from "@mui/material";
 import Head from "next/head";
 import { GlobalProvider } from "@/context/GlobalProvider";
 import { NavBar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
-import { FormMovilLayout } from "../FormMovilLayout";
 import { useRouter } from "next/router";
 import { mainRoutes } from "@/routes/routes";
 
@@ -36,8 +35,8 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
         <Box 
         sx={{ padding     :{ xs:(router.asPath===mainRoutes.form)?'0px':'10px', sm:'0px'},
               paddingX    :{ xs:'0px', sm:'20px'},
-        }}
-          >{children}
+        }}>
+          {children}
         </Box>
 
         <Footer />

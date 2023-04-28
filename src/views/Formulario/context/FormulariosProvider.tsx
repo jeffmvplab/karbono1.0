@@ -11,6 +11,7 @@ import { FormulariosContext } from "./FormulariosContext";
 import { PrescriptionsUseCases } from "@/domain/usecases/prescriptions.usecases";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
 import { report } from "process";
+import { alarmConcCHOS, alarmConcDeLipidos, alarmConcDeProteinas, alarmConcMagnesio, alarmConcPotasio, alarmConcSodio, alertFactorDePrecipitacion, alertRelacion_Calcio_Fosfato, alertVelInfucion, alertViaDeAdmin } from "@/views/ReportePrescripcion/data/alertParams";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
@@ -112,7 +113,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const savePrescription = () => {
 		setPrescriptions();
 		handleOpenModalFormSaved();
-
+     
 		const prescripcion = {
 			number: numOrder,
 			name: namePaciente,
@@ -120,6 +121,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			ips: ips
 		}
 		localStorageProtocol.set(StorageKeysEnum.prescripcionOrden, prescripcion);
+		getPrescriptions();
 	}
 
 	// const [reporte, setReporte] =useState<IPrescriptions>();
@@ -236,9 +238,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);
 		return fechaFormateada;
 	}
-
-
-
 
 	const [fechaCreacion, setFechaCreacion] = React.useState('');
 	const [errorFechaCreacion, setErrorFechaCreacion] = React.useState(false);
@@ -656,9 +655,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		getPrescriptions();
 	};
 
-	//////////////////////Validacion Form/////////////////
-	const [valAllForm, setAllValForm] = React.useState(true);
-
 	////////////////////////////////////////////////////////////////////
 	///////////////////////////////INTEGRACION DE APIS//////////////////
 	const prescriptionsData: IPrescriptions = {
@@ -712,6 +708,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const getPrescriptions =async () => {
 		setPrescriptionSave(prescriptionsData)
+		validateAlert();
 	}
 
 	const setPrescriptions = async () => {
@@ -753,11 +750,32 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const handleOpenModalFormSaved = () => { setOpenModalFormSaved(true) };
 	const handleCloseModalFormSaved = () => setOpenModalFormSaved(false);
 
-
 	// useEffect(() => {
 	// 		getPrescriptionsByNumber();
 	// 		console.log('PPPP:',reporte);
 	// }, [])
+	///////////////////////////ALARMAS///////////////////////////////
+	//////////////////////Validacion Form/////////////////
+	const [valOKAlert, setValOKAlert] = React.useState(true);
+
+	const validateAlert=()=>{
+		if(  alertViaDeAdmin(prescriptionsData!)==='INADECUADA'
+		   ||alertRelacion_Calcio_Fosfato(prescriptionsData!)==='INSEGURA'
+		   ||alertFactorDePrecipitacion(prescriptionsData!)==='REVISAR'
+		   ||alarmConcCHOS(prescriptionsData!)==='REVISAR'
+		   ||alarmConcDeProteinas(prescriptionsData!)==='REVISAR'
+		   ||alarmConcDeLipidos(prescriptionsData!)==='REVISAR'
+		   ||alarmConcSodio(prescriptionsData!)==='REVISAR'
+		   ||alarmConcPotasio(prescriptionsData!)==='REVISAR'
+		   ||alarmConcMagnesio(prescriptionsData!)==='REVISAR'
+		){
+			setValOKAlert(false)
+			console.log('ALERT')
+		}else{
+			setValOKAlert(true)
+			console.log('NO ALERT')
+		}
+	}
 
 	return (
 
@@ -843,11 +861,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			/////////////////////////////////INTEGRACION APIS/////////////////////////////////////////
 			loadingSave,
 			saveOK,
-			valAllForm,
+			valOKAlert,
 			messageAPI,
 			cancelForm,
 
 			getPrescriptions,
+			validateAlert
 
 
 

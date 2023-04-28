@@ -1,10 +1,11 @@
 import { colorsKarbono } from '@/themes/colors'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, MenuItem, Stack, TextField, Typography, useMediaQuery } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Grid,Stack, TextField, Typography, useMediaQuery } from '@mui/material'
 import React, { useContext, useEffect } from 'react'
 import CustomTextField from './CustomTextField'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { FormulariosContext } from '../context/FormulariosContext';
 import { LightTooltip } from '../style/styleToolTips';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const tipoFosfato = [
     { value: 'Fosfato de sodio', label: 'Fosfato de sodio' },
@@ -82,24 +83,26 @@ const Micronutrientes = () => {
 
             <Accordion onClick={() => !matches && handleAcordion3()} expanded={stateAcordion3} elevation={0}>
                 {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                <AccordionSummary
-                    sx={{
-                        display: { sm: 'none' },
-                        '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-                            transform: 'rotate(90deg)',
-                        },
-                    }}
-                    expandIcon={<ArrowRightIcon sx={{ color: `${colorsKarbono.primary}` }} />}
-                    aria-controls="panel1bh-content"
-                    id="panel1bh-header"
-                >
-                    <Typography
-                        fontSize={16}
-                        // paddingY={2}
-                        style={{ fontWeight: 700, color: colorsKarbono.secundary }}
-                    >Micronutrientes
-                    </Typography >
-                </AccordionSummary>
+                <Box sx={{ display: { sm: 'none' }, }}>
+                    <AccordionSummary
+                        sx={{
+                            display: { sm: 'none' },
+                            '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+                                transform: 'rotate(90deg)',
+                            },
+                        }}
+                        expandIcon={<ArrowRightIcon sx={{ color: `${colorsKarbono.primary}` }} />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography
+                            fontSize={16}
+                            // paddingY={2}
+                            style={{ fontWeight: 700, color: colorsKarbono.secundary }}
+                        >Micronutrientes
+                        </Typography >
+                    </AccordionSummary>
+                </Box>
 
                 <Typography
                     variant='h6'

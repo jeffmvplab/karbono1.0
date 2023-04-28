@@ -1,12 +1,12 @@
-import { Typography, Grid, Box, MenuItem, Stack, AccordionSummary, AccordionDetails, Accordion, useMediaQuery, Slider, Tooltip, TooltipProps, styled, tooltipClasses } from '@mui/material'
+
+import { Typography, Grid, Box,Stack, AccordionSummary, AccordionDetails, Accordion, useMediaQuery, Slider, Tooltip, TooltipProps, styled, tooltipClasses } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
-import DiscreteSliderSteps from './SliderForm'
 import CustomTextField from './CustomTextField'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { colorsKarbono } from '@/themes/colors';
 import { FormulariosContext } from '../context/FormulariosContext';
 import { LightTooltip } from '../style/styleToolTips';
-
+import MenuItem from '@material-ui/core/MenuItem';
 
 const currencies = [
     { value: 'si', label: 'Si', },
@@ -99,25 +99,26 @@ const InformacionPaciente = () => {
 
             <Accordion onClick={() => { !matches && handleAcordion1() }} expanded={stateAcordion1} elevation={0}>
                 {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                <AccordionSummary
-                    sx={{
-                        display: { sm: 'none' },
-                        '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-                            transform: 'rotate(90deg)',
-                        },
-                    }}
-                    expandIcon={<ArrowRightIcon sx={{ color: `${colorsKarbono.primary}` }} />}
-                    aria-controls="panel1bh-content"
-                    id="panel1bh-header"
-                >
-                    <Typography
-                        fontSize={16}
-                        // paddingY={{sm:2}}
-                        style={{ fontWeight: 700, color: colorsKarbono.secundary }}
-                    >Información del paciente
-                    </Typography >
-                </AccordionSummary>
-
+                <Box sx={{ display: { sm: 'none' }, }}>
+                    <AccordionSummary
+                        sx={{
+                            display: { sm: 'none' },
+                            '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+                                transform: 'rotate(90deg)',
+                            },
+                        }}
+                        expandIcon={<ArrowRightIcon sx={{ color: `${colorsKarbono.primary}` }} />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography
+                            fontSize={16}
+                            // paddingY={{sm:2}}
+                            style={{ fontWeight: 700, color: colorsKarbono.secundary }}
+                        >Información del paciente
+                        </Typography>
+                    </AccordionSummary>
+                </Box>
                 <Typography
                     variant='h6'
                     paddingY={2}
@@ -189,7 +190,7 @@ const InformacionPaciente = () => {
                                             id='tipo-de-paciente'
                                             label='Tipo de paciente *'
                                             type='text'
-                                            select={true}
+                                            select
                                         >
                                             {tiposPacientes.map((option) => (
                                                 <MenuItem key={option.value} value={option.value}>
@@ -395,6 +396,8 @@ const InformacionPaciente = () => {
                     </Grid>
                 </AccordionDetails>
             </Accordion >
+
+
         </Stack >
 
     )
