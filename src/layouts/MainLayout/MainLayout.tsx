@@ -21,7 +21,7 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
       <>
         <Head>
           <title>Karbono</title>
-          <meta name="description" content="Infostore" />
+          <meta name="description" content="Karbono" />
           <link rel="icon" href="/favicon.ico" />
 
         </Head>

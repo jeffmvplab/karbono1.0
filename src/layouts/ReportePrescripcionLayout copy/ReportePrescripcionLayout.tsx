@@ -29,12 +29,12 @@ const ReportePrescripcionLayout: React.FC<ReportePrescripcionLayoutInterface> = 
 
       </Head>
 
-      <GlobalProvider>
-        <PrescripcionProvider>
+      {/* <GlobalProvider>
+        <PrescripcionProvider> */}
           <Box sx={{ display: 'flex', width:'100' }}>
 
             {/*Navbar draweWidth */}
-            <NabvarReportePrescripcion />
+            {/* <NabvarReportePrescripcion /> */}
 
 
             {/*Sidebar draweWidth */}
@@ -53,9 +53,9 @@ const ReportePrescripcionLayout: React.FC<ReportePrescripcionLayoutInterface> = 
 
 
           </Box>
-        </PrescripcionProvider>
+        {/* </PrescripcionProvider>
 
-      </GlobalProvider>
+      </GlobalProvider> */}
 
     </>
 

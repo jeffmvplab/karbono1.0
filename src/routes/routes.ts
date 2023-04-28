@@ -6,5 +6,5 @@ export const mainRoutes = {
     register: '/auth/register',
     prescripcion: '/prescripcion',
     form:'/formulario',
-    reportePrescripcion: '/reporteprescripcion',
+    reportePrescripcion: '/reporte',
 }
