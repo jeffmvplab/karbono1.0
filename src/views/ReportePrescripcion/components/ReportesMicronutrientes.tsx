@@ -23,12 +23,12 @@ const ReportesMicronutrientes = () => {
     
     return (
         <>
-            <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} >
+            <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} paddingRight={'20px'}>
                 {/* <Grid item display='block' sx={{ marginTop: '30px', marginBottom: '15px', width: '40%', paddingLeft:'0' }}> */}
                 <Stack width='50%' direction={'row'} justifyContent={'space-between'}>
 
                     <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '30px', textAlign: 'left' }}>Micronutrientes</Typography>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left' }}>Micronutrientes</Typography>
                         <Box sx={{ justifyContent: 'start' }} >
                             <ul style={{}}>
                                 {Micronutrientes.map(lista => {
