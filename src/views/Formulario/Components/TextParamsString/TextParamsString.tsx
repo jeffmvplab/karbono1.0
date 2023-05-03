@@ -33,7 +33,7 @@ const TextParamsString: React.FC<TextParamsStringProps> = ({
 			style={{
 				fontSize:'14px',
 				fontWeight: 500,
-				color: (seguridad==='SEGURA') ?'#66D84A':'#FF2525' ,
+				color: (seguridad==='SEGURA'||seguridad==='ADECUADA') ?'#66D84A':'#FF2525' ,
 			}}>
 		   {seguridad}
 			</Typography>
