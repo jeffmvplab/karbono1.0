@@ -28,20 +28,24 @@ export const alertViaDeAdmin = (prescription: IPrescriptions) => {
     const viaAdmin: string = prescription?.via_administracion;
     const osmolaridad: number = getOsmolaridad(prescription)
 
+    const resp:IAlarm={value:0,alert:''};
+    resp.value=0
+
+
     if (viaAdmin === 'Periférica') {
         if (osmolaridad <= 800) {
-            return 'ADECUADA';
+            resp.alert='ADECUADA';
         } else {
-            return 'INADECUADA';
+            resp.alert='INADECUADA';
         }
     } else {
         if (osmolaridad > 800) {
-            return 'ADECUADA';
+            resp.alert='ADECUADA';
         } else {
-            return 'INADECUADA';
+            resp.alert='INADECUADA';
         }
     }
-
+return resp
 }
 
 export const alertRelacion_Calcio_Fosfato = (prescription: IPrescriptions) => {
