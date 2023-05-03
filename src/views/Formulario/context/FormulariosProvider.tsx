@@ -350,7 +350,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleVolumen = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setVolumen(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [purga, setPurga] = React.useState('');
@@ -359,7 +359,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handlePurga = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setPurga(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [tiempoDeInfucion, setTiempoDeInfucion] = React.useState<number>(0);
@@ -368,7 +368,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleTiempoDeInfucion = (event: Event, newValue: number | number[]) => {
 		setTiempoDeInfucion(newValue as number);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [overfill, setOverfill] = React.useState<number>(0);
@@ -377,7 +377,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleOverfill = (event: Event, newValue: number | number[]) => {
 		setOverfill(newValue as number);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [filtro, setFiltro] = React.useState('');
@@ -386,7 +386,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleFiltro = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setFiltro(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [eqFotosencible, setEqFotosencible] = React.useState('');
@@ -395,7 +395,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleEqFotosencible = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEqFotosencible(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [tipoPaciente, setTipoPaciente] = React.useState('');
@@ -404,7 +404,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleTipoPaciente = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTipoPaciente(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [viaAdmin, setViaAdmin] = React.useState('');
@@ -413,7 +413,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleViaAdmin = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setViaAdmin(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [diagnostico, setDiagnostico] = React.useState('');
@@ -434,7 +434,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleTipoPrescripcion = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTipoPrescripcion(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [flujoMetabolico, setFlujoMetabolico] = React.useState('');
@@ -443,7 +443,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleFlujoMetabolico = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setFlujoMetabolico(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [dextrosa, setDextrosa] = React.useState('');
@@ -452,7 +452,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleDextrosa = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setDextrosa(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [aminoacidos, setAminoacidos] = React.useState('');
@@ -461,7 +461,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleAminoacidos = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setAminoacidos(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [requerimientoAminoacidos, setRequerimientoAminoacidos] = React.useState('');
@@ -470,7 +470,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleRequerimientoAminoacidos = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setRequerimientoAminoacidos(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [lipidos, setLipidos] = React.useState('');
@@ -479,7 +479,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleLipidos = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setLipidos(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [requerimientoLipidos, setRequerimientoLipidos] = React.useState('');
@@ -488,7 +488,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleRequerimientoLipidos = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setRequerimientoLipidos(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [omegaven, setOmegaven] = React.useState('');
@@ -497,7 +497,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleOmegaven = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setOmegaven(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [dipeptiven, setDipeptiven] = React.useState('');
@@ -506,7 +506,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleDipeptiven = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setDipeptiven(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	////////////////////MICRONURIENTES////////////////////////////////////
@@ -517,7 +517,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleSodioTotal = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSodioTotal(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [potacioTotal, setPotacioTotal] = React.useState('');
@@ -526,7 +526,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handlePotacioTotal = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setPotacioTotal(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [fosfato, setFosfato] = React.useState('');
@@ -535,7 +535,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleFosfato = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setFosfato(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [requerimientoFosfato, setRequerimientoFosfato] = React.useState('');
@@ -544,7 +544,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleRequerimientoFosfato = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setRequerimientoFosfato(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [calcio, setCalcio] = React.useState('');
@@ -553,7 +553,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleCalcio = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setCalcio(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [unidades, setUnidades] = React.useState('');
@@ -562,7 +562,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleUnidades = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setUnidades(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [reqCalcio, setReqCalcio] = React.useState('');
@@ -571,7 +571,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleReqCalcio = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setReqCalcio(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [magnesio, setMagnesio] = React.useState('');
@@ -581,7 +581,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const handleMagnesio = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setMagnesio(event.target.value);
 		// console.log('Magnesio:',event.target.value)
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [reqMagnesio, setReqMagnesio] = React.useState('');
@@ -590,7 +590,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleReqMagnesio = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setReqMagnesio(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [elementosTraza, setElementosTraza] = React.useState('');
@@ -599,7 +599,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleElementosTraza = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setElementosTraza(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [reqTraza, setReqTraza] = React.useState('');
@@ -608,7 +608,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleReqTraza = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setReqTraza(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [vitaminasHidrosolubles, setVitaminasHidrosolubles] = React.useState('');
@@ -617,7 +617,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleVitaminasHidrosolubles = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setVitaminasHidrosolubles(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [reqVitHidrosolubles, setReqVitHidrosolubles] = React.useState('');
@@ -626,7 +626,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleReqVitHidrosolubles = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setReqVitHidrosolubles(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [vitaminasLiposolubles, setVitaminasLiposolubles] = React.useState('');
@@ -635,7 +635,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleVitaminasLiposolubles = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setVitaminasLiposolubles(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [vitaminasC, setVitaminasC] = React.useState('');
@@ -644,7 +644,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleVitaminasC = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setVitaminasC(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	const [acidoFolico, setAcidoFolico] = React.useState('');
@@ -653,7 +653,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleAcidoFolico = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setAcidoFolico(event.target.value);
-		getPrescriptions();
+		// getPrescriptions();
 	};
 
 	////////////////////////////////////////////////////////////////////
@@ -760,15 +760,15 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [valOKAlert, setValOKAlert] = React.useState(true);
 
 	const validateAlert=()=>{
-		if(  alertViaDeAdmin(prescriptionsData!)==='INADECUADA'
+		if(  alertViaDeAdmin(prescriptionsData!).alert==='INADECUADA'
 		   ||alertRelacion_Calcio_Fosfato(prescriptionsData!)==='INSEGURA'
-		   ||alertFactorDePrecipitacion(prescriptionsData!)==='REVISAR'
-		   ||alarmConcCHOS(prescriptionsData!)==='REVISAR'
-		   ||alarmConcDeProteinas(prescriptionsData!)==='REVISAR'
-		   ||alarmConcDeLipidos(prescriptionsData!)==='REVISAR'
-		   ||alarmConcSodio(prescriptionsData!)==='REVISAR'
-		   ||alarmConcPotasio(prescriptionsData!)==='REVISAR'
-		   ||alarmConcMagnesio(prescriptionsData!)==='REVISAR'
+		   ||alertFactorDePrecipitacion(prescriptionsData!).alert==='REVISAR'
+		   ||alarmConcCHOS(prescriptionsData!).alert==='REVISAR'
+		   ||alarmConcDeProteinas(prescriptionsData!).alert==='REVISAR'
+		   ||alarmConcDeLipidos(prescriptionsData!).alert==='REVISAR'
+		   ||alarmConcSodio(prescriptionsData!).alert==='REVISAR'
+		   ||alarmConcPotasio(prescriptionsData!).alert==='REVISAR'
+		   ||alarmConcMagnesio(prescriptionsData!).alert==='REVISAR'
 		){
 			setValOKAlert(false)
 			console.log('ALERT')
@@ -777,6 +777,20 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			console.log('NO ALERT')
 		}
 	}
+
+	useEffect(()=>{
+		console.log('ACTUALIZAR');
+		 getPrescriptions()
+	},[numOrder,tipoPrescripcion,fechaCreacion,ips,numIden,
+	   namePaciente,servicio,ubicacion,cama,pesoKg,tipoEdad,
+	   edad,volumen,purga,tiempoDeInfucion,overfill,filtro,
+	   eqFotosencible,tipoPaciente,viaAdmin,diagnostico,
+	   flujoMetabolico,aminoacidos,dextrosa,requerimientoAminoacidos,
+	   lipidos,requerimientoLipidos,omegaven,dipeptiven,sodioTotal,
+	   potacioTotal,fosfato,requerimientoFosfato,calcio,reqCalcio,
+	   magnesio,reqMagnesio,elementosTraza,reqTraza,vitaminasHidrosolubles,
+	   reqVitHidrosolubles,vitaminasLiposolubles,vitaminasC,acidoFolico
+	])
 
 	return (
 
