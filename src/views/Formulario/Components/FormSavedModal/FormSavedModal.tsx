@@ -120,12 +120,12 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 									<CustomButton
 										onClick={
 											
-											()=>{
-												(valOKAlert)
-												?(saveOK)
-												 ?router.push(mainRoutes.reportePrescripcion)
-												 :handleCloseModalFormSaved()
-												:handleCloseModalFormSaved()
+											()=>{router.push(mainRoutes.reportePrescripcion)
+												// (valOKAlert)
+												// ?(saveOK)
+												//  ?router.push(mainRoutes.reportePrescripcion)
+												//  :handleCloseModalFormSaved()
+												// :handleCloseModalFormSaved()
 												}
 	
 										}
