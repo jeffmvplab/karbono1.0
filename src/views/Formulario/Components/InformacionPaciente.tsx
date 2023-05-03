@@ -85,6 +85,7 @@ const InformacionPaciente = () => {
         tipoPaciente, handleTipoPaciente,
         viaAdmin, handleViaAdmin,
         diagnostico, handleDiagnostico,
+        getPrescriptions,
     } = useContext(FormulariosContext)
 
     useEffect(() => {
@@ -138,6 +139,7 @@ const InformacionPaciente = () => {
                                 label='Ips'
                                 type='text'
                                 value={ips}
+                                defaulValue={ips}
                             />
                         </Box>
 
@@ -157,6 +159,7 @@ const InformacionPaciente = () => {
                                             label='No Identificacion*'
                                             type='text'
                                             value={numIden}
+                                            defaulValue={numIden!}
                                         />
                                     </Grid>
                                 </LightTooltip>
@@ -173,6 +176,7 @@ const InformacionPaciente = () => {
                                             label='Nombre del Paciente*'
                                             type='text'
                                             value={namePaciente}
+                                            defaulValue={namePaciente}
                                         />
                                     </Grid>
                                 </LightTooltip>
@@ -219,6 +223,7 @@ const InformacionPaciente = () => {
                                         label='Servicio*'
                                         type='text'
                                         value={servicio}
+                                        defaulValue={servicio}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
@@ -228,16 +233,20 @@ const InformacionPaciente = () => {
                                         label='Cama'
                                         type='text'
                                         value={cama}
+                                        defaulValue={cama}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         onChange={handlePesoKg}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         id='peso-kg'
                                         label='Peso*'
                                         endAdornament='kg'
                                         type='text'
                                         value={pesoKg}
+                                        defaulValue={pesoKg}
                                     />
                                 </Grid>
 
@@ -260,6 +269,7 @@ const InformacionPaciente = () => {
                                         label='Edad'
                                         type='text'
                                         value={edad}
+                                        defaulValue={edad}
                                     />
 
                                 </Grid>
@@ -299,10 +309,13 @@ const InformacionPaciente = () => {
 
                                         <CustomTextField
                                             onChange={handleVolumen}
+                                            onClick={getPrescriptions}
+                                            onKeyPress={getPrescriptions}
                                             id='volumen'
                                             label='Volumen total NPT*'
                                             type='text'
                                             value={volumen}
+                                            defaulValue={volumen}
                                         />
                                     </Grid>
                                 </LightTooltip>
@@ -320,10 +333,13 @@ const InformacionPaciente = () => {
 
                                     <CustomTextField
                                         onChange={handlePurga}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         id='purga'
                                         label='Purga*'
                                         type='text'
                                         value={purga}
+                                        defaulValue={purga}
                                     />
                                 </Grid>
 
@@ -356,6 +372,8 @@ const InformacionPaciente = () => {
                                     <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                         <CustomTextField
                                             onChange={handleViaAdmin}
+                                            onClick={getPrescriptions}
+                                            onKeyPress={getPrescriptions}
                                             value={viaAdmin}
                                             defaulValue={viaAdmin}
                                             id='via-de-administracion'
@@ -381,6 +399,7 @@ const InformacionPaciente = () => {
                                     <CustomTextField
                                         onChange={handleDiagnostico}
                                         value={diagnostico}
+                                        defaulValue={diagnostico}
                                         id='diagnostico'
                                         label='Diagnóstico(s)'
                                         type='text'

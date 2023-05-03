@@ -12,7 +12,8 @@ export interface CustomTextFieldProps {
     endAdornament?: any,
     disabled?: boolean,
     onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> | undefined
-
+    onClick?: React.MouseEventHandler<HTMLDivElement> | undefined
+    onKeyPress?:React.KeyboardEventHandler<HTMLDivElement> | undefined
 }
 
 const CustomTextField: React.FC<CustomTextFieldProps> = ({
@@ -25,11 +26,15 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
     children,
     endAdornament = '',
     onChange,
+    onClick,
+    onKeyPress,
     disabled = false,
 }) => {
     return (
 
         <TextField
+            onKeyPress={onKeyPress}
+            onClick={onClick}
             onChange={onChange}
             disabled={disabled}
             id={id}

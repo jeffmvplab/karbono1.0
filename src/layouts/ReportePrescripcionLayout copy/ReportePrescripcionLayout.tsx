@@ -31,7 +31,7 @@ const ReportePrescripcionLayout: React.FC<ReportePrescripcionLayoutInterface> = 
 
       {/* <GlobalProvider>
         <PrescripcionProvider> */}
-          <Box sx={{ display: 'flex', width:'100' }}>
+          <Box sx={{ display: 'flex', width:'100%' }}>
 
             {/*Navbar draweWidth */}
             {/* <NabvarReportePrescripcion /> */}

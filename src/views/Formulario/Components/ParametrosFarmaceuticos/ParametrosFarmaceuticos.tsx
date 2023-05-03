@@ -46,19 +46,14 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 				<Divider />
 				<Box padding={1}>
 					<TextParamsNumb
-						title={'Volumen:'}
+						title={'Volumen: '}
 						value={alertVolTotal(prescriptionSave!)}
 						unidad={'ml'}
-						seguridad={'Seguro'}
+						// seguridad={'Seguro'}
 					/>
 					<TextParamsString
-						title={'Via de administración:'}
-						value={alertViaDeAdmin(prescriptionSave!)}
-						seguridad={
-							(alertViaDeAdmin(prescriptionSave!) === 'ADECUADA')
-								? 'Seguro'
-								: ''
-						}
+						title={'Via de administración: '}
+						seguridad={alertViaDeAdmin(prescriptionSave!).alert}
 					/>
 					{/* <TextParamsNumb
 						title={'Relación lípidos/aminoácidos:'}
@@ -69,27 +64,19 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 						value={param_farmaceuticos.volumen_acumulado}
 					/> */}
 					<TextParamsNumb
-						title={'Osmolaridad:'}
+						title={'Osmolaridad: '}
 						value={getOsmolaridad(prescriptionSave!).toFixed(2)}
 					/>
 					<TextParamsString
-						title={'Relación calcio/fosfato:'}
-						value={alertRelacion_Calcio_Fosfato(prescriptionSave!)}
-						seguridad={
-							(alertRelacion_Calcio_Fosfato(prescriptionSave!) === 'SEGURA')
-								? 'Seguro'
-								: ''
-						}
+						title={'Relación calcio/fosfato: '}
+						// value={alertRelacion_Calcio_Fosfato(prescriptionSave!)}
+						seguridad={alertRelacion_Calcio_Fosfato(prescriptionSave!)}
 					/>
 
 					<TextParamsString
-						title={'Factor de precipitación:'}
-						value={alertFactorDePrecipitacion(prescriptionSave!)}
-						seguridad={
-							(alertFactorDePrecipitacion(prescriptionSave!) === 'SEGURA')
-								? 'Seguro'
-								: ''
-						}
+						title={'Factor de precipitación: '}
+						value={alertFactorDePrecipitacion(prescriptionSave!).value.toFixed(2)}
+						seguridad={alertFactorDePrecipitacion(prescriptionSave!).alert}
 					/>
 
 
@@ -103,67 +90,43 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 					</Typography > */}
 
 					<TextParamsNumb
-						title={'Velocidad de infusión:'}
+						title={'Velocidad de infusión: '}
 						value={alertVelInfucion(prescriptionSave!).toFixed(2)}
 					// unidad={'ml'}
 					/>
 					<TextParamsString
-						title={'Concentración de CHO`S(%):'}
-						value={alarmConcCHOS(prescriptionSave!)}
-						seguridad={
-							(alarmConcCHOS(prescriptionSave!) === 'SEGURA')
-								? 'Seguro'
-								: ''
-						} />
+						title={'Concentración de CHO`S(%): '}
+						value={alarmConcCHOS(prescriptionSave!).value.toFixed(2)}
+						seguridad={alarmConcCHOS(prescriptionSave!).alert} />
 
 					<TextParamsString
-						title={'Concentración de Proteína(%):'}
-						value={alarmConcDeProteinas(prescriptionSave!)}
-						seguridad={
-							(alarmConcDeProteinas(prescriptionSave!) === 'SEGURA')
-								? 'Seguro'
-								: ''
-						}
+						title={'Concentración de Proteína(%): '}
+						value={alarmConcDeProteinas(prescriptionSave!).value.toFixed(2)}
+						seguridad={alarmConcDeProteinas(prescriptionSave!).alert}
 					/>
 
 					<TextParamsString
-						title={'Concentración de Lípidos(%):'}
-						value={alarmConcDeLipidos(prescriptionSave!)}
-						seguridad={
-							(alarmConcDeLipidos(prescriptionSave!) === 'SEGURA')
-								? 'Seguro'
-								: ''
-						}
+						title={'Concentración de Lípidos(%): '}
+						value={alarmConcDeLipidos(prescriptionSave!).value.toFixed(2)}
+						seguridad={alarmConcDeLipidos(prescriptionSave!).alert}
 					/>
 
 					<TextParamsString
-						title={'Concentración de Sodio (mEq/ml):'}
-						value={alarmConcSodio(prescriptionSave!)}
-						seguridad={
-							(alarmConcSodio(prescriptionSave!) === 'SEGURA')
-								? 'Seguro'
-								: ''
-						}
+						title={'Concentración de Sodio (mEq/ml): '}
+						value={alarmConcSodio(prescriptionSave!).value.toFixed(2)}
+						seguridad={alarmConcSodio(prescriptionSave!).alert}
 					/>
 
 					<TextParamsString
-						title={'Concentración de Potasio (mEq/ml)'}
-						value={alarmConcPotasio(prescriptionSave!)}
-						seguridad={
-							(alarmConcPotasio(prescriptionSave!) === 'SEGURA')
-								? 'Seguro'
-								: ''
-						}
+						title={'Concentración de Potasio (mEq/ml): '}
+						value={alarmConcPotasio(prescriptionSave!).value.toFixed(2)}
+						seguridad={alarmConcPotasio(prescriptionSave!).alert}
 					/>
 
 					<TextParamsString
-						title={'Concentración de Magnesio (mEq/ml)'}
-						value={alarmConcMagnesio(prescriptionSave!)}
-						seguridad={
-							(alarmConcMagnesio(prescriptionSave!) === 'SEGURA')
-								? 'Seguro'
-								: ''
-						}
+						title={'Concentración de Magnesio (mEq/ml): '}
+						value={alarmConcMagnesio(prescriptionSave!).value.toFixed(2)}
+						seguridad={alarmConcMagnesio(prescriptionSave!).alert}
 					/>
 				</Box>
 			</Box>

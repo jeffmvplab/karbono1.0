@@ -15,21 +15,22 @@ const BannerOrdenar = () => {
     const { handleOpenModalOrdenar } = useContext(ReportesContext)
 
     return (
-        <Stack direction={'row'} paddingY={'50px'} paddingX={'50px'}>
+        <Stack  direction={'row'} paddingY={'50px'} width={'100%'}>
             <Grid container 
             spacing={{xs:'0px',sm:'30px'}}
+            padding={4}
             sx={{ 
                 justifyContent: 'center', alignItems: 'center',
                 backgroundColor: '#372FC6', 
-                height: '150px', 
+                height: {xs:'300px',sm:'150px'}, 
                 borderRadius: '10px' 
                 }}>
 
                 <Grid item 
-                xs={11} sm={12} md={3} 
+                xs={12} sm={12} md={3} 
                 sx={{ justifyContent: 'center', alignItems: 'center'}}>
 
-                    <Stack direction={'row'} spacing={4}>
+                    <Stack direction={'row'} spacing={4} >
                         <CustomButton text={'Atras'}
                             onClick={()=>{
                             router.push(mainRoutes.form)
@@ -61,11 +62,11 @@ const BannerOrdenar = () => {
                 </Grid>
 
                 <Grid item 
-                xs={11} sm={12} md={6}
+                xs={12} sm={12} md={6}
                 sx={{ justifyContent: 'center', alignItems: 'center' }}>
 
                     <Typography
-                    width={'450px'}
+                    width={{xs:'300px',sm:'450px'}}
                      sx={{ fontSize: '20px', lineHeight: '22px', color: '#fff' }}>
                         Envía y ordena tu prescripción a la Central de Mezclas de tu 
                         preferencia en tan solo segundos, y lleva seguimiento de tu

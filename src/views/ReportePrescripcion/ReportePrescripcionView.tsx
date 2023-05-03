@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
-import { Typography, Button, Box, Grid, TableContainer, Table, TableHead, TableRow, TableCell } from '@mui/material/';
+import { Typography, Button, Box, Grid, TableContainer, Table, TableHead, TableRow, TableCell, Stack } from '@mui/material/';
 import Link from 'next/link';
 import { Divider } from '@material-ui/core';
 import ReportesMacronutrientes from './components/ReportesMacronutrientes';
@@ -31,8 +31,9 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 		<>
 			<DescargarModal />
 			<OrdenarModal />
-			<Grid container sx={{ marginTop: '30px', paddingRight: '25px', paddingLeft: '25px', marginBottom: '30px' }}>
-				<Grid item display='flex' justifyContent='space-between' width='100%'>
+			<Grid container sx={{ marginTop: '30px', paddingRight: '25px', paddingLeft: '15px', marginBottom: '30px' }}>
+
+				<Grid item display='flex' justifyContent='space-between' width='100%' paddingBottom={'30px'}>
 
 					<Typography variant='h5' sx={{ fontWeight: 700 }}>Reporte prescripción</Typography>
 
@@ -61,54 +62,78 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 				</Grid>
 
-				<Grid item display={'flex'} sx={{ width: '100%', marginTop: '30px', marginRight: '5px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '10px 10px 0 0' }}>
 
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>IPS:{reporte?.ips}</Typography>
-					<Divider orientation='vertical' style={{ height: '60%' }} />
 
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Servicio:{reporte?.servicio}</Typography>
+				<Grid item display={'flex'} sx={{ width: '100px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '10px 0 0 0' }}>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>IPS:{reporte?.ips}</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
+				</Grid>
 
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Nombres y Apellidos:{reporte?.nombre_paciente}</Typography>
+				<Grid item display={'flex'} sx={{ width: '200px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0 0 0 0' }}>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Servicio:{reporte?.servicio}</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
-					{/* <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Apellidos:</Typography>
+				</Grid>
+
+				<Grid item display={'flex'} sx={{ width: '400px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0 0' }}>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Nombres y Apellidos:{reporte?.nombre_paciente}</Typography>
+					<Divider orientation='vertical' style={{ height: '60%' }} />
+					{/* <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Apellidos:</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} /> */}
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Peso:{reporte?.peso}</Typography>
-					<Divider orientation='vertical' style={{ height: '60%' }} />
-
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Identificación:{reporte?.no_identificacion}</Typography>
 				</Grid>
 
-				<Grid item display={'flex'} sx={{ width: '100%', marginTop: '0px', marginRight: '5px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 10px 10px', }}>
-
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Infusión continua por (hr):{reporte?.tiempo_infusion}</Typography>
+				<Grid item display={'flex'} sx={{ width: '100px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0 0' }}>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Peso:{reporte?.peso}</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
-
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Volumen de purga:{reporte?.purga}</Typography>
-					<Divider orientation='vertical' style={{ height: '60%' }} />
-
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Vía de administración:{reporte?.via_administracion}</Typography>
-					<Divider orientation='vertical' style={{ height: '60%' }} />
-
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Volumen total NPT + purga:{(reporte?.volumen! + reporte?.purga!)}</Typography>
-					<Divider orientation='vertical' style={{ height: '60%' }} />
-
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Volumen total NPT:{reporte?.volumen}</Typography>
-					<Divider orientation='vertical' style={{ height: '60%' }} />
-
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '20%', textAlign: 'center' }}>Flujo metabólico:{reporte?.flujo_metabolico}</Typography>
 				</Grid>
-				<ReportesMicronutrientes />
-				<Divider orientation='horizontal' style={{ width: '50%' }} />
 
-				<ReportesMacronutrientes />
-				<Divider orientation='horizontal' style={{ width: '50%' }} />
+				<Grid item display={'flex'} sx={{ width: '150px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0 0' }}>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Identificación:{reporte?.no_identificacion}</Typography>
+					<Divider orientation='vertical' style={{ height: '60%' }} />
+				</Grid>
 
-				<ReportesParametros />
-				<Divider orientation='horizontal' style={{ width: '50%' }} />
+				<Grid item display={'flex'} sx={{ width: '150px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0px 0px', }}>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Infusión continua por (hr):{reporte?.tiempo_infusion}</Typography>
+					<Divider orientation='vertical' style={{ height: '60%' }} />
+				</Grid>
 
-				<BannerOrdenar />
-			</Grid>
+				<Grid item display={'flex'} sx={{ width: '150px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0px 0px', }}>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Volumen de purga:{reporte?.purga}</Typography>
+					<Divider orientation='vertical' style={{ height: '60%' }} />
+				</Grid>
+
+				<Grid item display={'flex'} sx={{ width: '150px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0px 0px', }}>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Vía de administración:{reporte?.via_administracion}</Typography>
+					<Divider orientation='vertical' style={{ height: '60%' }} />
+				</Grid>
+
+				<Grid item display={'flex'} sx={{ width: '150px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0px  0px', }}>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Volumen total NPT + purga:{(reporte?.volumen! + reporte?.purga!)}</Typography>
+					<Divider orientation='vertical' style={{ height: '60%' }} />
+				</Grid>
+
+				<Grid item display={'flex'} sx={{ width: '150px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0px 0px', }}>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Volumen total NPT:{reporte?.volumen}</Typography>
+					<Divider orientation='vertical' style={{ height: '60%' }} />
+				</Grid>
+
+				<Grid item display={'flex'} sx={{ width: '150px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 10px 0px', }}>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Flujo metabólico:{reporte?.flujo_metabolico}</Typography>
+
+				</Grid>
+
+				<Stack width={'100%'} paddingBottom={'50px'} >
+					<ReportesMicronutrientes />
+					<Divider orientation='horizontal' style={{ width: '50%' }} />
+
+					<ReportesMacronutrientes />
+					<Divider orientation='horizontal' style={{ width: '50%' }} />
+
+					<ReportesParametros />
+					<Divider orientation='horizontal' style={{ width: '50%' }} />
+					<BannerOrdenar />
+				</Stack>
+
+			</Grid >
 
 		</>
 	)
