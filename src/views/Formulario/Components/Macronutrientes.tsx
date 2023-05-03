@@ -43,16 +43,16 @@ const Macronutrientes = () => {
         tipoPaciente,
 
         stateAcordion2, setStateAcordion2, matches, handleAcordion2,
-        tipoPrescripcion, errorTipoPrescripcion, messageErrorTipoPrescripcion, handleTipoPrescripcion,
-        flujoMetabolico, errorFlujoMetabolico, messageErrorFlujoMetabolico, handleFlujoMetabolico,
-        aminoacidos, errorAminoacidos, messageErrorAminoacidos, handleAminoacidos,
-        dextrosa, errorDextrosa, messageErrorDextrosa, handleDextrosa,
-        requerimientoAminoacidos, errorRequerimientoAminoacidos, messageErrorRequerimientoAminoacidos, handleRequerimientoAminoacidos,
-        lipidos, errorLipidos, messageErrorLipidos, handleLipidos,
-        requerimientoLipidos, errorRequerimientoLipidos, messageErrorRequerimientoLipidos, handleRequerimientoLipidos,
-        omegaven, errorOmegaven, messageErrorOmegaven, handleOmegaven,
-        dipeptiven, errorDipeptiven, messageErrorDipeptiven, handleDipeptiven,
-
+        tipoPrescripcion,handleTipoPrescripcion,
+        flujoMetabolico, handleFlujoMetabolico,
+        aminoacidos, handleAminoacidos,
+        dextrosa, handleDextrosa,
+        requerimientoAminoacidos, handleRequerimientoAminoacidos,
+        lipidos,handleLipidos,
+        requerimientoLipidos, handleRequerimientoLipidos,
+        omegaven, handleOmegaven,
+        dipeptiven, handleDipeptiven,
+        getPrescriptions
     } = useContext(FormulariosContext)
 
     useEffect(() => {
@@ -61,7 +61,7 @@ const Macronutrientes = () => {
 
     return (
 
-        <Stack direction={'column'}>
+        <Stack direction={'column'} >
 
             <Accordion onClick={() => !matches && handleAcordion2()} expanded={stateAcordion2} elevation={0}>
                 {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
@@ -103,6 +103,8 @@ const Macronutrientes = () => {
 
                                     <CustomTextField
                                         onChange={handleTipoPrescripcion}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={tipoPrescripcion}
                                         defaulValue={tipoPrescripcion}
                                         id='tipo-prescripción*'
@@ -139,6 +141,8 @@ const Macronutrientes = () => {
                                     <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                         <CustomTextField
                                             onChange={handleFlujoMetabolico}
+                                            onClick={getPrescriptions}
+                                            onKeyPress={getPrescriptions}
                                             value={flujoMetabolico}
                                             id='flujo-metabolico'
                                             label={'Flujo metabólico*'}
@@ -154,6 +158,8 @@ const Macronutrientes = () => {
 
                                     <CustomTextField
                                         onChange={handleDextrosa}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         // disabled={true}
                                         value={dextrosa}
                                         id='dextrosa'
@@ -176,6 +182,8 @@ const Macronutrientes = () => {
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         onChange={handleAminoacidos}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={aminoacidos}
                                         defaulValue={aminoacidos}
                                         id='aminoácidos'
@@ -207,6 +215,8 @@ const Macronutrientes = () => {
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         onChange={handleRequerimientoAminoacidos}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={requerimientoAminoacidos}
                                         id='requerimiento-aminoacidos'
                                         label={'Requerimiento aminoácidos*'}
@@ -226,6 +236,8 @@ const Macronutrientes = () => {
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         onChange={handleLipidos}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={lipidos}
                                         defaulValue={lipidos}
                                         id='lipidos'
@@ -273,6 +285,8 @@ const Macronutrientes = () => {
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         onChange={handleOmegaven}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={omegaven}
                                         id='omegaven'
                                         label={'Omegaven'}
@@ -286,6 +300,8 @@ const Macronutrientes = () => {
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                     <CustomTextField
                                         onChange={handleDipeptiven}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={dipeptiven}
                                         id='dipeptiven'
                                         label={'Dipeptiven'}

@@ -1,7 +1,7 @@
 import { Grid, Typography, Box, Stack, Skeleton } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import { ReportesContext } from '../context/ReportesContext';
-import { IParamNumeric, getAgua, getAminoacidos, getCalcio, getDextrosa, getDipeptiven, getFosforo, getLipidos, getMagnesio, getOmegaven, getPotacio, getSodio } from '../data/functionsParams';
+import { IParamNumeric, getAgua, getAminoacidos, getCalcio, getDextrosa, getDipeptiven, getFosforo, getLipidos, getMagnesio, getOmegaven, getPotacio, getSodio, getVit_C } from '../data/functionsParams';
 
 const ReportesMicronutrientes = () => {
 
@@ -94,7 +94,7 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {parseInt(reporte!.vit_C)*100}
+                                    {getVit_C(reporte!).requerimiento}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -162,7 +162,7 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                      {parseInt(reporte!.vit_C)}
+                                      { getVit_C(reporte!).volumen}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 

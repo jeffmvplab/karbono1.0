@@ -112,7 +112,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const savePrescription = () => {
 		setPrescriptions();
-		handleOpenModalFormSaved();
+		 handleOpenModalFormSaved();
      
 		const prescripcion = {
 			number: numOrder,
@@ -580,6 +580,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleMagnesio = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setMagnesio(event.target.value);
+		// console.log('Magnesio:',event.target.value)
 		getPrescriptions();
 	};
 

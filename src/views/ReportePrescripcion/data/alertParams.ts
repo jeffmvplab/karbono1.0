@@ -1,7 +1,10 @@
 import { IPrescriptions } from "@/domain/models/prescriptions.model"
 import { concAminoacidos, getAgua, getConcentracionDeProteinas, getOsmolaridad } from "./functionsParams"
 
-
+export interface IAlarm{
+    value:number,
+    alert:string,
+}
 
 /////////////////////////////ALARMAS PARAMETROS FARMACEUTICOS////////////////////////////////////////////////////
 export const alertVolTotal = (prescription: IPrescriptions) => {
@@ -49,11 +52,15 @@ export const alertRelacion_Calcio_Fosfato = (prescription: IPrescriptions) => {
     const PO4: number = concFosfatoMexcla(prescription);
     const CPO4: number= concMaxFosfatoSegura(prescription)!;
    
+if(PO4!==0&&Ca!==0){
     if (Ca <= CCamax || PO4 <= CPO4) {
         return 'SEGURA';
     } else {
         return 'INSEGURA'
     }
+}else{
+    return ''
+}
 
 }
 
@@ -65,22 +72,26 @@ export const alertFactorDePrecipitacion = (prescription: IPrescriptions) => {
     const volTotalNPT: number = prescription?.volumen;
 
     let factor: number = (calcio * 0.465 + fosfato_de_potasio * 2.6) * 100 / (volTotalNPT - calcio - fosfato_de_potasio);
+    
+    const resp:IAlarm={value:0,alert:''};
+    resp.value=factor
 
     if (concDeProteinas >= 1.5) {
         if (factor <= 3) {
-            return 'SEGURA';
+            resp.alert='SEGURA'
         } else {
-            return 'REVISAR';
+            resp.alert='REVISAR';
         }
 
     } else if (concDeProteinas < 1.5) {
         if (factor <= 2) {
-            return 'SEGURA';
+            resp.alert='SEGURA';
         } else {
-            return 'REVISAR';
+            resp.alert='REVISAR';
         }
     }
-
+    
+    return resp;
     // console.log('factor:',factor)
 }
 
@@ -100,14 +111,17 @@ export const alarmConcCHOS = (prescription: IPrescriptions) => {
     const dextrosa: number = parseInt(prescription?.dextrosa!);
     const volTotalNPT: number = prescription?.volumen;
 
-    let concCHOS: number = dextrosa * 0.5 / volTotalNPT;
+    let concCHOS: number = (dextrosa * 0.5 / volTotalNPT)*100;
+    const resp:IAlarm={value:0,alert:''};
+    resp.value=concCHOS
 
-    if (concCHOS >= 5 || concCHOS <= 35) {
-        return 'SEGURA';
+
+    if (concCHOS >= 5 && concCHOS <= 35) {
+         resp.alert='SEGURA';
     } else {
-        return 'REVISAR';
+         resp.alert='REVISAR';
     }
-
+  return resp
 }
 
 
@@ -118,13 +132,17 @@ export const alarmConcDeProteinas = (prescription: IPrescriptions) => {
     const dipativen= parseInt(prescription?.dipeptiven!);
     const volTotalNPT: number = prescription?.volumen;
 
-    let concDeProteinas: number = (((aminoacidos*conAminoacidos)+dipativen*0.2) / volTotalNPT)*100
+    let concDeProteinas: number = (((aminoacidos*conAminoacidos)+(dipativen*0.2)) / volTotalNPT)*100
+    const resp:IAlarm={value:0,alert:''};
+    resp.value=concDeProteinas
 
     if (concDeProteinas > 2.5) {
-        return 'SEGURA';
+       resp.alert='SEGURA';
     } else {
-        return 'REVISAR';
+       resp.alert='REVISAR';
     }
+
+    return resp
 }
 
 export const alarmConcDeLipidos = (prescription: IPrescriptions) => {
@@ -133,13 +151,17 @@ export const alarmConcDeLipidos = (prescription: IPrescriptions) => {
     const omegaven: number = parseInt(prescription?.omegaven);
     const volTotalNPT: number = prescription?.volumen;
 
-    let concDeLipidos: number =( (lipidos * 0.2 + omegaven * 0.1) / volTotalNPT)*100
+    let concDeLipidos: number =(( (lipidos * 0.2) + (omegaven * 0.1)) / volTotalNPT)*100
+    const resp:IAlarm={value:0,alert:''};
+    resp.value=concDeLipidos
 
     if (concDeLipidos > 1.5) {
-        return 'SEGURA';
+        resp.alert='SEGURA';
     } else {
-        return 'REVISAR';
+        resp.alert='REVISAR';
     }
+
+    return resp
 }
 
 export const alarmConcSodio = (prescription: IPrescriptions) => {
@@ -148,14 +170,17 @@ export const alarmConcSodio = (prescription: IPrescriptions) => {
     const fosfato_de_sodio: number = parseInt(prescription?.req_fosfato);
     const volTotalNPT: number = prescription?.volumen;
 
-    let sodioVol: number = (sodio + fosfato_de_sodio) * 2 / (volTotalNPT / 1000);
+    let sodioVol: number = ((sodio + fosfato_de_sodio) * 2) / (volTotalNPT / 1000);
+    const resp:IAlarm={value:0,alert:''};
+    resp.value=sodioVol
 
     if (sodioVol < 180) {
-        return 'SEGURA';
+        resp.alert='SEGURA';
     } else {
-        return 'REVISAR';
+        resp.alert='REVISAR';
     }
-
+   
+    return resp
 }
 
 export const alarmConcPotasio = (prescription: IPrescriptions) => {
@@ -165,13 +190,15 @@ export const alarmConcPotasio = (prescription: IPrescriptions) => {
     const volTotalNPT: number = prescription?.volumen;
 
     let potasioVol: number = (potasio * 2 + fosfato_de_potasio) * 3.8 / (volTotalNPT / 1000);
+    const resp:IAlarm={value:0,alert:''};
+    resp.value=potasioVol
 
     if (potasioVol < 100) {
-        return 'SEGURA';
+         resp.alert='SEGURA';
     } else {
-        return 'REVISAR';
+         resp.alert='REVISAR';
     }
-
+   return resp
 }
 
 
@@ -182,13 +209,15 @@ export const alarmConcMagnesio = (prescription: IPrescriptions) => {
     const volTotalNPT: number = prescription?.volumen;
 
     let magnesioVol: number = magnesio * 1.62 / (volTotalNPT / 1000);
+    const resp:IAlarm={value:0,alert:''};
+    resp.value=magnesioVol
 
     if (magnesioVol < 15) {
-        return 'SEGURA';
+        resp.alert='SEGURA';
     } else {
-        return 'REVISAR';
+        resp.alert='REVISAR';
     }
-
+   return resp
 }
 /////////////////////////////PARAMETROS////////////////////////////////////////////////////
 

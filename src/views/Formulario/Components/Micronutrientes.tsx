@@ -1,5 +1,5 @@
 import { colorsKarbono } from '@/themes/colors'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Grid,Stack, TextField, Typography, useMediaQuery } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, Stack, TextField, Typography, useMediaQuery } from '@mui/material'
 import React, { useContext, useEffect } from 'react'
 import CustomTextField from './CustomTextField'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
@@ -58,7 +58,6 @@ const Micronutrientes = () => {
         fosfato, handleFosfato,
         requerimientoFosfato, handleRequerimientoFosfato,
         calcio, handleCalcio,
-        unidades, handleUnidades,
         reqCalcio, handleReqCalcio,
         magnesio, handleMagnesio,
         reqMagnesio, handleReqMagnesio,
@@ -69,12 +68,14 @@ const Micronutrientes = () => {
         vitaminasLiposolubles, handleVitaminasLiposolubles,
         vitaminasC, handleVitaminasC,
         acidoFolico, handleAcidoFolico,
-
+        getPrescriptions
     } = useContext(FormulariosContext)
 
     useEffect(() => {
         setStateAcordion3(matches);
     }, [matches])
+
+    console.log('Magnesio:', magnesio)
     /////////////////////////////////////////////////////////////////////
 
     return (
@@ -132,6 +133,8 @@ const Micronutrientes = () => {
 
                                         <CustomTextField
                                             onChange={handleSodioTotal}
+                                            onClick={getPrescriptions}
+                                            onKeyPress={getPrescriptions}
                                             value={sodioTotal}
                                             id='Sodio-total'
                                             label={'Sodio total'}
@@ -155,6 +158,8 @@ const Micronutrientes = () => {
                                     <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                         <CustomTextField
                                             onChange={handlePotacioTotal}
+                                            onClick={getPrescriptions}
+                                            onKeyPress={getPrescriptions}
                                             value={potacioTotal}
                                             id='potasio-total'
                                             label={'Potasio total'}
@@ -187,6 +192,8 @@ const Micronutrientes = () => {
 
                                         <CustomTextField
                                             onChange={handleFosfato}
+                                            onClick={getPrescriptions}
+                                            onKeyPress={getPrescriptions}
                                             value={fosfato}
                                             defaulValue={fosfato}
                                             id='fosfato'
@@ -207,6 +214,8 @@ const Micronutrientes = () => {
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         onChange={handleRequerimientoFosfato}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={requerimientoFosfato}
                                         id='requerimiento-fosfato'
                                         label={'Requerimiento fosfato'}
@@ -228,6 +237,8 @@ const Micronutrientes = () => {
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         onChange={handleCalcio}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={calcio}
                                         defaulValue={calcio}
                                         id='calcio'
@@ -249,15 +260,11 @@ const Micronutrientes = () => {
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         onChange={handleReqCalcio}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={reqCalcio}
                                         id='requerimiento_calcio'
-                                        label={
-                                            (calcio === 'Gluconato de Calcio')
-                                                ? 'Gluconato de calcio'
-                                                : 'Calcio Elemental'
-
-
-                                        }
+                                        label={calcio}
                                         endAdornament={
                                             (calcio === 'Gluconato de Calcio')
                                                 ? (tipoPrescripcion === 'Por requerimientos')
@@ -281,6 +288,8 @@ const Micronutrientes = () => {
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         onChange={handleMagnesio}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={magnesio}
                                         defaulValue={magnesio}
                                         id='magnesio'
@@ -302,13 +311,11 @@ const Micronutrientes = () => {
 
                                     <CustomTextField
                                         onChange={handleReqMagnesio}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={reqMagnesio}
                                         id='requerimiento-sulfato-de-magnesio'
-                                        label={
-                                            (magnesio === 'Sulfato de magnesio')
-                                                ? 'Sulfato de magnesio'
-                                                : 'Magnesio Elemental '
-                                        }
+                                        label={magnesio}
                                         endAdornament={
                                             (magnesio === 'Sulfato de magnesio')
                                                 ? (tipoPrescripcion === 'Por requerimientos')
@@ -334,6 +341,8 @@ const Micronutrientes = () => {
 
                                     <CustomTextField
                                         onChange={handleElementosTraza}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={elementosTraza}
                                         defaulValue={elementosTraza}
                                         id='elementos-traza'
@@ -386,6 +395,8 @@ const Micronutrientes = () => {
 
                                     <CustomTextField
                                         onChange={handleVitaminasHidrosolubles}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={vitaminasHidrosolubles}
                                         defaulValue={vitaminasHidrosolubles}
                                         id='vitaminas-hidrosolubes'
@@ -418,6 +429,8 @@ const Micronutrientes = () => {
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         onChange={handleReqVitHidrosolubles}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={reqVitHidrosolubles}
                                         id='req-vitaminas-hidrosolubles'
                                         label={'Requerimientos Vitaminas hidrosolubes'}
@@ -444,6 +457,8 @@ const Micronutrientes = () => {
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         onChange={handleVitaminasLiposolubles}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={vitaminasLiposolubles}
                                         id='vitaminas-liposolubles'
                                         label={
@@ -471,6 +486,8 @@ const Micronutrientes = () => {
 
                                     <CustomTextField
                                         onChange={handleVitaminasC}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={vitaminasC}
                                         id='vitamina-c'
                                         label={'Vitamina C'}
@@ -485,6 +502,8 @@ const Micronutrientes = () => {
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         onChange={handleAcidoFolico}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={acidoFolico}
                                         id='acido-folico'
                                         label={'Acido folico (mg/día)'}
