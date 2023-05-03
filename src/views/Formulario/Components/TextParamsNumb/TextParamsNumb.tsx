@@ -20,7 +20,7 @@ const TextParamsNumb: React.FC<TextParamsNumbProps> = ({
 			<Typography fontSize={'14px'} style={{ fontWeight: 600, }}>
 				{title}
 			</Typography>
-			<Typography fontSize={'14px'} style={{ fontWeight: 500, }}>
+			<Typography fontSize={'14px'} style={{ fontWeight: 600, }}>
 				{(isNaN(value))?'-':value}
 			</Typography>
 			<Typography fontSize={'14px'} style={{ fontWeight: 500, }}>

@@ -659,7 +659,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	////////////////////////////////////////////////////////////////////
 	///////////////////////////////INTEGRACION DE APIS//////////////////
 	const prescriptionsData: IPrescriptions = {
-		no_orden: parseInt(numOrder) || 0,
+		no_orden: parseFloat(numOrder) || 0,
 		tipo_prescripcion: tipoPrescripcion || ' 0',
 		fecha: fechaCreacion || ' 0',
 		ips: ips || ' 0',
@@ -668,11 +668,11 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		servicio: servicio,
 		ubicacion: ubicacion,
 		cama: cama || ' 0',
-		peso: parseInt(pesoKg) || 0,
+		peso: parseFloat(pesoKg) || 0,
 		tipo_edad: tipoEdad,
-		edad: parseInt(edad) || 0,
-		volumen: parseInt(volumen) || 0,
-		purga: parseInt(purga) || 0,
+		edad: parseFloat(edad) || 0,
+		volumen: parseFloat(volumen) || 0,
+		purga: parseFloat(purga) || 0,
 		tiempo_infusion: tiempoDeInfucion,
 		overfill: overfill,
 		filtro: (filtro === 'Si') ? true : false,

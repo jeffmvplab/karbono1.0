@@ -27,7 +27,7 @@ const TextParamsString: React.FC<TextParamsStringProps> = ({
 				fontSize:'14px',
 				fontWeight: 700,
 			}}>
-			{value} 
+			{(isNaN(value))?'-':value} 
 			</Typography>
 			<Typography
 			style={{
