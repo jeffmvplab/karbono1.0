@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { FC } from "react";
 import { GlobalContext } from "./GlobalContext";
-import { useCookies } from "react-cookie";
+
 import Cookies from "js-cookie";
 
 type Props = {

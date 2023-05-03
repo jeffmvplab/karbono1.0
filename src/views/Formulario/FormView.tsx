@@ -188,10 +188,10 @@ const FormView: React.FC<FormViewProps> = () => {
 
 					<CustomButton
 						// disabled={!valOKAlert}
-						onClick={
-							valOKAlert
-							?()=>{savePrescription()}
-							:()=>{getPrescriptions(),handleOpenModalFormSaved()}
+						onClick={()=>{savePrescription()}
+							// valOKAlert
+							// ?()=>{savePrescription()}
+							// :()=>{getPrescriptions(),handleOpenModalFormSaved()}
 						}
 						width={127}
 						text={'Guardar'}

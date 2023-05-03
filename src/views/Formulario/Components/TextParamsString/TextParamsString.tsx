@@ -3,7 +3,7 @@ import React from 'react';
 
 export interface TextParamsStringProps {
 	title: string;
-	value: any;
+	value?: any;
 	unidad?: string;
 	seguridad?: string
 }
@@ -20,13 +20,22 @@ const TextParamsString: React.FC<TextParamsStringProps> = ({
 			<Typography fontSize={'14px'} style={{ fontWeight: 600, }}>
 				{title}
 			</Typography>
+			
+			<Typography
+			paddingRight={1}
+			style={{
+				fontSize:'14px',
+				fontWeight: 700,
+			}}>
+			{value} 
+			</Typography>
 			<Typography
 			style={{
 				fontSize:'14px',
 				fontWeight: 500,
-				color: (seguridad==='Seguro') ?'#66D84A':'#FF2525' ,
+				color: (seguridad==='SEGURA'||seguridad==='ADECUADA') ?'#66D84A':'#FF2525' ,
 			}}>
-				{value}
+		   {seguridad}
 			</Typography>
 			<Typography fontSize={'14px'} style={{ fontWeight: 500, }}>
 				{

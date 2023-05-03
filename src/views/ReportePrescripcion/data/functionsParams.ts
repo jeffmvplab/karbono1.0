@@ -9,6 +9,9 @@ export interface IParamNumeric {
     requerimiento: number,
     volumen: number,
 }
+
+export const tipoPrescripcion:string='Por volúmenes';
+// export const tipoPrescripcion:string='Por requerimientos';
 //////////////////////////////FORMULACIONES//////////////
 export const getSodio = (prescription: IPrescriptions) => {
 
@@ -18,7 +21,7 @@ export const getSodio = (prescription: IPrescriptions) => {
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0 };
 
-    if (tp === 'Por volúmenes') {
+    if (tp === tipoPrescripcion) {
         params.volumen = sodio * peso / 2;
         params.requerimiento = sodio
 
@@ -38,7 +41,7 @@ export const getPotacio = (prescription: IPrescriptions) => {
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0 };
 
-    if (tp === 'Por volúmenes') {
+    if (tp === tipoPrescripcion) {
         params.volumen = potacio * peso / 2;
         params.requerimiento = potacio
     } else {
@@ -57,7 +60,7 @@ export const getCalcio = (prescription: IPrescriptions) => {
     const tCalcio: string = prescription?.calcio!;
     const peso: number = prescription?.peso!;
 
-    if (tp === 'Por volúmenes') {
+    if (tp === tipoPrescripcion) {
         if (tCalcio === 'Gluconato de Calcio') {
 
             params.volumen = calcio * peso * 0.01;
@@ -91,7 +94,7 @@ export const getFosforo = (prescription: IPrescriptions) => {
 
     if (tipofosfato === 'Fosfato de sodio') {
 
-        if (tp === 'Por volúmenes') {
+        if (tp === tipoPrescripcion) {
             params.volumen = fosforo * 1 * peso;
             params.requerimiento = fosforo;
         } else {
@@ -99,7 +102,7 @@ export const getFosforo = (prescription: IPrescriptions) => {
             params.volumen = fosforo
         }
     } else {
-        if (tp === 'Por volúmenes') {
+        if (tp === tipoPrescripcion) {
             params.volumen = fosforo * peso / 2.6;
             params.requerimiento = fosforo
         } else {
@@ -115,16 +118,35 @@ export const getMagnesio = (prescription: IPrescriptions) => {
 
     const tp: string = prescription?.tipo_prescripcion!;
     const magnesio: number = parseInt(prescription?.req_magnesio!);
+    // const magnesio: number = parseInt(prescription?.req_magnesio!);
     const peso: number = prescription?.peso!;
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0 };
 
-    if (tp === 'Por volúmenes') {
+    if (tp === tipoPrescripcion) {
         params.volumen = magnesio * peso / 200;
         params.requerimiento = magnesio
     } else {
         params.requerimiento = magnesio * 200 / peso;
         params.volumen = magnesio
+    }
+    return params;
+}
+
+
+export const getVit_C = (prescription: IPrescriptions) => {
+
+    const vitC: string = prescription?.vit_C!;
+    const tp: string = prescription?.tipo_prescripcion!;
+  
+    const params: IParamFunc = { requerimiento: 0, volumen: 0 };
+
+    if (tp === tipoPrescripcion) {
+        params.volumen =  parseInt(vitC);
+        params.requerimiento =parseInt(vitC)*100 
+    } else {
+        params.requerimiento = parseInt(vitC);
+        params.volumen =parseInt(vitC)/100
     }
     return params;
 }
@@ -138,7 +160,7 @@ export const getDextrosa = (prescription: IPrescriptions) => {
     const peso: number = prescription?.peso!;
     const tiempoInfusion: number = prescription?.tiempo_infusion!;
 
-    if (tp === 'Por volúmenes') {
+    if (tp === tipoPrescripcion) {
         params.volumen = dextrosa * peso * tiempoInfusion * 0.12;
         params.requerimiento = dextrosa
     } else {
@@ -172,7 +194,7 @@ export const getAminoacidos = (prescription: IPrescriptions) => {
     const peso: number = prescription?.peso!;
     const concSinAminoacidos = concAminoacidos(prescription);
 
-    if (tp === 'Por volúmenes') {
+    if (tp === tipoPrescripcion) {
         params.volumen = aminoacidos * peso / concSinAminoacidos;
         params.requerimiento = aminoacidos
     } else {
@@ -192,7 +214,7 @@ export const getLipidos = (prescription: IPrescriptions) => {
     const concSinLipidos: number = 0.2;
     const peso: number = prescription?.peso!;
 
-    if (tp === 'Por volúmenes') {
+    if (tp === tipoPrescripcion) {
         params.volumen = lipidos * peso / concSinLipidos
         params.requerimiento = lipidos
     } else {
@@ -210,7 +232,7 @@ export const getOmegaven = (prescription: IPrescriptions) => {
     const concSinOmegaven: number = 0.1;
     const peso: number = prescription?.peso!;
 
-    if (tp === 'Por volúmenes') {
+    if (tp === tipoPrescripcion) {
         params.volumen = omegaven * peso / concSinOmegaven;
         params.requerimiento = omegaven
     } else {
@@ -229,7 +251,7 @@ export const getDipeptiven = (prescription: IPrescriptions) => {
     const concSinDipeptiven: number = 0.2;
     const peso: number = prescription?.peso!;
 
-    if (tp === 'Por volúmenes') {
+    if (tp === tipoPrescripcion) {
         params.volumen = dipeptiven * peso / concSinDipeptiven;
         params.requerimiento = dipeptiven
     } else {

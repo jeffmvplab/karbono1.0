@@ -1,7 +1,7 @@
 import { Grid, Typography, Box, Stack, Skeleton } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import { ReportesContext } from '../context/ReportesContext';
-import { IParamNumeric, getAgua, getAminoacidos, getCalcio, getDextrosa, getDipeptiven, getFosforo, getLipidos, getMagnesio, getOmegaven, getPotacio, getSodio } from '../data/functionsParams';
+import { IParamNumeric, getAgua, getAminoacidos, getCalcio, getDextrosa, getDipeptiven, getFosforo, getLipidos, getMagnesio, getOmegaven, getPotacio, getSodio, getVit_C } from '../data/functionsParams';
 
 const ReportesMicronutrientes = () => {
 
@@ -23,12 +23,12 @@ const ReportesMicronutrientes = () => {
     
     return (
         <>
-            <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} >
+            <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} paddingRight={'20px'}>
                 {/* <Grid item display='block' sx={{ marginTop: '30px', marginBottom: '15px', width: '40%', paddingLeft:'0' }}> */}
                 <Stack width='50%' direction={'row'} justifyContent={'space-between'}>
 
                     <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '30px', textAlign: 'left' }}>Micronutrientes</Typography>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left' }}>Micronutrientes</Typography>
                         <Box sx={{ justifyContent: 'start' }} >
                             <ul style={{}}>
                                 {Micronutrientes.map(lista => {
@@ -94,7 +94,7 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {parseInt(reporte!.vit_C)*100}
+                                    {getVit_C(reporte!).requerimiento}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -162,7 +162,7 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                      {parseInt(reporte!.vit_C)}
+                                      { getVit_C(reporte!).volumen}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 

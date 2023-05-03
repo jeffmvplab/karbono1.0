@@ -21,8 +21,9 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 
 	const router=useRouter();
 
-	const validacionOK:boolean = valOKAlert;
-
+	// const validacionOK:boolean = valOKAlert;
+	const validacionOK:boolean = true;
+	
 	return (
 
 		<Modal
