@@ -17,7 +17,7 @@ export const alertVolTotal = (prescription: IPrescriptions) => {
 
     let volTotal: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp !== tipoPrescripcion) {
 
         volTotal = volAgua
             + parseFloat(prescription?.dextrosa!) + parseFloat(prescription?.req_lipidos!)
@@ -100,7 +100,7 @@ export const alertFactorDePrecipitacion = (prescription: IPrescriptions) => {
     let calcio: number = 0;
     let fosfato_de_potasio: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp !== tipoPrescripcion) {
         calcio = parseFloat(prescription?.req_calcio);
         fosfato_de_potasio = parseFloat(prescription?.req_fosfato);
     } else {
@@ -152,7 +152,7 @@ export const alarmConcCHOS = (prescription: IPrescriptions) => {
 
     let dextrosa: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp !== tipoPrescripcion) {
         dextrosa = parseFloat(prescription?.dextrosa!);
     } else {
         dextrosa = getDextrosa(prescription!).volumen;
@@ -182,7 +182,7 @@ export const alarmConcDeProteinas = (prescription: IPrescriptions) => {
     let aminoacidos: number = 0;
     let dipeptiven: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp !== tipoPrescripcion) {
         aminoacidos = parseFloat(prescription?.req_aminoacidos!);
         dipeptiven = parseFloat(prescription?.dipeptiven!);
     } else {
@@ -214,7 +214,7 @@ export const alarmConcDeLipidos = (prescription: IPrescriptions) => {
     let lipidos: number = 0;
     let omegaven: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp !== tipoPrescripcion) {
         lipidos = parseFloat(prescription?.req_lipidos);
         omegaven = parseFloat(prescription?.omegaven);
     } else {
@@ -244,7 +244,7 @@ export const alarmConcSodio = (prescription: IPrescriptions) => {
     let sodio: number = 0;
     let fosfato_de_sodio: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp !== tipoPrescripcion) {
         sodio = parseFloat(prescription?.req_calcio);
         fosfato_de_sodio = parseFloat(prescription?.req_fosfato);
     } else {
@@ -277,7 +277,7 @@ export const alarmConcPotasio = (prescription: IPrescriptions) => {
     let potacio: number = 0;
     let fosfato_de_potasio: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp !== tipoPrescripcion) {
         potacio = parseFloat(prescription?.potasio_total);
         fosfato_de_potasio = parseFloat(prescription?.req_fosfato);
     } else {
@@ -309,9 +309,9 @@ export const alarmConcMagnesio = (prescription: IPrescriptions) => {
     let magnesio: number = 0;
 
 
-    if (tp === tipoPrescripcion) {
-        magnesio = getMagnesio(prescription!).requerimiento;
-        // magnesio = parseFloat(prescription?.magnesio!);
+    if (tp !== tipoPrescripcion) {
+        // magnesio = getMagnesio(prescription!).requerimiento;
+        magnesio = parseFloat(prescription?.magnesio!);
     } else {
         magnesio = getMagnesio(prescription!).volumen;
     };
@@ -338,9 +338,9 @@ export const concCalcioMexcla = (prescription: IPrescriptions) => {
 
     let calcio: number = 0;
 
-    if (tp === tipoPrescripcion) {
-    //    calcio = parseFloat(prescription?.magnesio!);
-    calcio = getCalcio(prescription!).requerimiento;
+    if (tp !== tipoPrescripcion) {
+       calcio = parseFloat(prescription?.magnesio!);
+    // calcio = getCalcio(prescription!).requerimiento;
     } else {
        calcio = getCalcio(prescription!).volumen;
     };
@@ -370,9 +370,9 @@ export const concFosfatoMexcla = (prescription: IPrescriptions) => {
     let fosfato: number = 0;
 
 
-    if (tp === tipoPrescripcion) {
-    //    fosfato = parseFloat(prescription?.magnesio!);
-       fosfato = getFosforo(prescription!).requerimiento;
+    if (tp !== tipoPrescripcion) {
+       fosfato = parseFloat(prescription?.magnesio!);
+    //    fosfato = getFosforo(prescription!).requerimiento;
     } else {
        fosfato = getFosforo(prescription!).volumen;
     };
