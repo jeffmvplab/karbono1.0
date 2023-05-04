@@ -47,7 +47,7 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 				<Box padding={1}>
 					<TextParamsNumb
 						title={'Volumen: '}
-						value={alertVolTotal(prescriptionSave!)}
+						value={alertVolTotal(prescriptionSave!).toFixed(2)}
 						unidad={'ml'}
 						// seguridad={'Seguro'}
 					/>
