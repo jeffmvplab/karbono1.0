@@ -17,18 +17,18 @@ export const alertVolTotal = (prescription: IPrescriptions) => {
 
     let volTotal: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    // if (tp === tipoPrescripcion) {
 
-        volTotal = volAgua
-            + parseFloat(prescription?.dextrosa!) + parseFloat(prescription?.req_lipidos!)
-            + parseFloat(prescription?.req_aminoacidos!) + parseFloat(prescription?.dipeptiven!)
-            + parseFloat(prescription?.omegaven!) + parseFloat(prescription?.sodio_total!)
-            + parseFloat(prescription?.potasio_total!) + parseFloat(prescription?.req_fosfato!)
-            + parseFloat(prescription?.req_magnesio!) + parseFloat(prescription?.req_calcio!)
-            + oligoelementos + vitaminas
-            + parseFloat(prescription?.vit_C!)
-            + parseFloat(prescription?.acido_folico!)
-    } else {
+    //     volTotal = volAgua
+    //         + parseFloat(prescription?.dextrosa!) + parseFloat(prescription?.req_lipidos!)
+    //         + parseFloat(prescription?.req_aminoacidos!) + parseFloat(prescription?.dipeptiven!)
+    //         + parseFloat(prescription?.omegaven!) + parseFloat(prescription?.sodio_total!)
+    //         + parseFloat(prescription?.potasio_total!) + parseFloat(prescription?.req_fosfato!)
+    //         + parseFloat(prescription?.req_magnesio!) + parseFloat(prescription?.req_calcio!)
+    //         + oligoelementos + vitaminas
+    //         + parseFloat(prescription?.vit_C!)
+    //         + parseFloat(prescription?.acido_folico!)
+    // } else {
         volTotal = volAgua
             + getDextrosa(prescription!).volumen + getLipidos(prescription!).volumen
             + getAminoacidos(prescription!).volumen + getDipeptiven(prescription!).volumen
@@ -38,7 +38,7 @@ export const alertVolTotal = (prescription: IPrescriptions) => {
             + oligoelementos + vitaminas
             + getVit_C(prescription!).volumen
             + parseFloat(prescription?.acido_folico!)
-    }
+    // }
 
     return volTotal;
 }
@@ -100,14 +100,14 @@ export const alertFactorDePrecipitacion = (prescription: IPrescriptions) => {
     let calcio: number = 0;
     let fosfato_de_potasio: number = 0;
 
-    if (tp !== tipoPrescripcion) {
-        calcio = parseFloat(prescription?.req_calcio);
-        fosfato_de_potasio = parseFloat(prescription?.req_fosfato);
-    } else {
+    // if (tp !== tipoPrescripcion) {
+    //     calcio = parseFloat(prescription?.req_calcio);
+    //     fosfato_de_potasio = parseFloat(prescription?.req_fosfato);
+    // } else {
 
         calcio = getCalcio(prescription!).volumen;
         fosfato_de_potasio = getFosforo(prescription!).volumen;
-    }
+    // }
 
     const volTotalNPT: number = prescription?.volumen;
 
@@ -152,11 +152,11 @@ export const alarmConcCHOS = (prescription: IPrescriptions) => {
 
     let dextrosa: number = 0;
 
-    if (tp === tipoPrescripcion) {
-        dextrosa = parseFloat(prescription?.dextrosa!);
-    } else {
+    // if (tp === tipoPrescripcion) {
+    //     dextrosa = parseFloat(prescription?.dextrosa!);
+    // } else {
         dextrosa = getDextrosa(prescription!).volumen;
-    };
+    // };
 
 
     const volTotalNPT: number = prescription?.volumen;
@@ -182,13 +182,13 @@ export const alarmConcDeProteinas = (prescription: IPrescriptions) => {
     let aminoacidos: number = 0;
     let dipeptiven: number = 0;
 
-    if (tp === tipoPrescripcion) {
-        aminoacidos = parseFloat(prescription?.req_aminoacidos!);
-        dipeptiven = parseFloat(prescription?.dipeptiven!);
-    } else {
+    // if (tp === tipoPrescripcion) {
+    //     aminoacidos = parseFloat(prescription?.req_aminoacidos!);
+    //     dipeptiven = parseFloat(prescription?.dipeptiven!);
+    // } else {
         aminoacidos = getAminoacidos(prescription!).volumen;
         dipeptiven = getDipeptiven(prescription!).volumen
-    };
+    // };
 
     const conAminoacidos = concAminoacidos(prescription);
     const volTotalNPT: number = prescription?.volumen;
@@ -214,13 +214,13 @@ export const alarmConcDeLipidos = (prescription: IPrescriptions) => {
     let lipidos: number = 0;
     let omegaven: number = 0;
 
-    if (tp === tipoPrescripcion) {
-        lipidos = parseFloat(prescription?.req_lipidos);
-        omegaven = parseFloat(prescription?.omegaven);
-    } else {
+    // if (tp === tipoPrescripcion) {
+    //     lipidos = parseFloat(prescription?.req_lipidos);
+    //     omegaven = parseFloat(prescription?.omegaven);
+    // } else {
         lipidos = getLipidos(prescription!).volumen;
         omegaven = getOmegaven(prescription!).volumen
-    }
+    // }
 
     const volTotalNPT: number = prescription?.volumen;
 
@@ -244,14 +244,14 @@ export const alarmConcSodio = (prescription: IPrescriptions) => {
     let sodio: number = 0;
     let fosfato_de_sodio: number = 0;
 
-    if (tp === tipoPrescripcion) {
-        sodio = parseFloat(prescription?.req_calcio);
-        fosfato_de_sodio = parseFloat(prescription?.req_fosfato);
-    } else {
+    // if (tp === tipoPrescripcion) {
+    //     sodio = parseFloat(prescription?.req_calcio);
+    //     fosfato_de_sodio = parseFloat(prescription?.req_fosfato);
+    // } else {
 
         sodio = getSodio(prescription!).volumen;
         fosfato_de_sodio = getFosforo(prescription!).volumen;
-    }
+    // }
     // const sodio: number = parseFloat(prescription?.sodio_total);
     // const fosfato_de_sodio: number = parseFloat(prescription?.req_fosfato);
 
@@ -277,14 +277,13 @@ export const alarmConcPotasio = (prescription: IPrescriptions) => {
     let potacio: number = 0;
     let fosfato_de_potasio: number = 0;
 
-    if (tp === tipoPrescripcion) {
-        potacio = parseFloat(prescription?.potasio_total);
-        fosfato_de_potasio = parseFloat(prescription?.req_fosfato);
-    } else {
+    // if (tp === tipoPrescripcion) {
+    //     potacio = parseFloat(prescription?.potasio_total);
+    //     fosfato_de_potasio = parseFloat(prescription?.req_fosfato);
+    // } else {
         potacio = getPotacio(prescription!).volumen;
         fosfato_de_potasio = getFosforo(prescription!).volumen;
-    }
-
+    // }
 
     const volTotalNPT: number = prescription?.volumen;
 
@@ -308,12 +307,12 @@ export const alarmConcMagnesio = (prescription: IPrescriptions) => {
     let magnesio: number = 0;
 
 
-    if (tp === tipoPrescripcion) {
-        // magnesio = getMagnesio(prescription!).requerimiento;
-        magnesio = parseFloat(prescription?.magnesio!);
-    } else {
+    // if (tp === tipoPrescripcion) {
+    //     // magnesio = getMagnesio(prescription!).requerimiento;
+    //     magnesio = parseFloat(prescription?.magnesio!);
+    // } else {
         magnesio = getMagnesio(prescription!).volumen;
-    };
+    // };
 
     const volTotalNPT: number = prescription?.volumen;
 
@@ -337,12 +336,12 @@ export const concCalcioMexcla = (prescription: IPrescriptions) => {
 
     let calcio: number = 0;
 
-    if (tp === tipoPrescripcion) {
-    //    calcio = parseFloat(prescription?.magnesio!);
-    calcio = getCalcio(prescription!).requerimiento;
-    } else {
+    // if (tp === tipoPrescripcion) {
+    // //    calcio = parseFloat(prescription?.magnesio!);
+    // calcio = getCalcio(prescription!).requerimiento;
+    // } else {
        calcio = getCalcio(prescription!).volumen;
-    };
+    // };
     const volTotalNPT: number = prescription?.volumen;
 
     return calcio * 0.465 / (volTotalNPT / 1000);
@@ -369,12 +368,12 @@ export const concFosfatoMexcla = (prescription: IPrescriptions) => {
     let fosfato: number = 0;
 
 
-    if (tp === tipoPrescripcion) {
-    //    fosfato = parseFloat(prescription?.magnesio!);
-       fosfato = getFosforo(prescription!).requerimiento;
-    } else {
+    // if (tp === tipoPrescripcion) {
+    // //    fosfato = parseFloat(prescription?.magnesio!);
+    //    fosfato = getFosforo(prescription!).requerimiento;
+    // } else {
        fosfato = getFosforo(prescription!).volumen;
-    };
+    // };
  
     const volTotalNPT: number = prescription?.volumen;
 

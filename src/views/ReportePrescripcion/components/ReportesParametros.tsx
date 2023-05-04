@@ -70,7 +70,7 @@ const ReportesParametros = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {reporte!.via_administracion}
+                                    {reporte?.via_administracion}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
