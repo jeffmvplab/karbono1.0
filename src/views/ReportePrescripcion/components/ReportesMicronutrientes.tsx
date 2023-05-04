@@ -100,7 +100,7 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {reporte!.acido_folico}
+                                    {reporte?.acido_folico}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
                         </Stack>
@@ -144,19 +144,19 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {reporte!.req_elementos_traza}
+                                    {reporte?.req_elementos_traza}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                     {reporte!.req_vit_hidrosolubles}
+                                     {reporte?.req_vit_hidrosolubles}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {reporte!.req_vit_liposolubles}
+                                    {reporte?.req_vit_liposolubles}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
