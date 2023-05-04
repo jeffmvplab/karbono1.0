@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactNode } from "react";
-import {Box,} from "@mui/material";
+import { Box, } from "@mui/material";
 import Head from "next/head";
 import { GlobalProvider } from "@/context/GlobalProvider";
 import { NavBar } from "../components/NavBar";
@@ -15,8 +15,8 @@ export interface MainLayoutInterface {
 }
 
 const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
-  
-  const router=useRouter();
+
+  const router = useRouter();
 
   return (
     <GlobalProvider>
@@ -31,13 +31,14 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
         {/* <Box
           sx={{ paddingTop:{xs:"5px",sm:"20px",md:"10px",lg:"10px",xl:"10px",},}}>
         </Box> */}
-       
+
         <NavBar />
 
-        <Box 
-        sx={{ padding     :{ xs:(router.asPath===mainRoutes.form)?'0px':'10px', sm:'0px'},
-              paddingX    :{ xs:'0px', sm:'20px'},
-        }}>
+        <Box
+          sx={{
+            padding: { xs: (router.asPath === mainRoutes.form) ? '0px' : '10px', sm: '0px' },
+            paddingX: { xs: '0px', sm: '20px' },
+          }}>
           {children}
         </Box>
 
