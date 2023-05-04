@@ -158,11 +158,12 @@ export const getDextrosa = (prescription: IPrescriptions) => {
 
     const tp: string = prescription?.tipo_prescripcion!;
     const dextrosa: number = parseFloat(prescription?.dextrosa!);
+    const flujoMetabolico:number=parseFloat(prescription?.flujo_metabolico!);
     const peso: number = prescription?.peso!;
     const tiempoInfusion: number = prescription?.tiempo_infusion!;
 
     if (tp === tipoPrescripcion) {
-        params.volumen = dextrosa * peso * tiempoInfusion * 0.12;
+        params.volumen = flujoMetabolico * peso * tiempoInfusion * 0.12;
         params.requerimiento = dextrosa
     } else {
         params.requerimiento = dextrosa / (peso * tiempoInfusion * 0.12);
@@ -172,10 +173,10 @@ export const getDextrosa = (prescription: IPrescriptions) => {
 }
 
 export const concAminoacidos = (prescription: IPrescriptions) => {
+
     const tipoAminoacidos: string = prescription?.aminoacidos!;
     let concSinAminoacidos: number = 0;
     const tipoPaciente: string = prescription?.tipo_paciente!;
-
 
     if (tipoAminoacidos === 'Aminoven') { if (tipoPaciente === 'Adulto') { concSinAminoacidos = 0.15 } else { concSinAminoacidos = 0.1 } }
     if (tipoAminoacidos === 'TravasolPlus') { concSinAminoacidos = 0.15 }
@@ -212,7 +213,7 @@ export const getLipidos = (prescription: IPrescriptions) => {
     const tp: string = prescription?.tipo_prescripcion!;
     const tipoLipidos: string = prescription?.lipidos!
     const lipidos: number = parseFloat(prescription?.req_lipidos);
-    const concSinLipidos: number = 0.2;
+    const concSinLipidos: number = 0.2033;
     const peso: number = prescription?.peso!;
 
     if (tp === tipoPrescripcion) {
