@@ -346,7 +346,7 @@ const Micronutrientes = () => {
                                         value={elementosTraza}
                                         defaulValue={elementosTraza}
                                         id='elementos-traza'
-                                        label='Elementos traza'
+                                        label={'Elementos traza'}
                                         type='text'
                                         select
                                     >
@@ -356,22 +356,21 @@ const Micronutrientes = () => {
                                                     <MenuItem key={option.value} value={option.value}>
                                                         {option.label}
                                                     </MenuItem>))
-                                                : (tipoPaciente === 'Pediatrico')
-                                                    ? trazaPediatrico.map((option) => (
-                                                        <MenuItem key={option.value} value={option.value}>
-                                                            {option.label}
-                                                        </MenuItem>))
-                                                    : trazaNeonato.map((option) => (
-                                                        <MenuItem key={option.value} value={option.value}>
-                                                            {option.label}
-                                                        </MenuItem>))
+
+                                                : trazaPediatrico.map((option) => (
+                                                    <MenuItem key={option.value} value={option.value}>
+                                                        {option.label}
+                                                    </MenuItem>))
                                         }
                                     </CustomTextField>
+                                    
                                 </Grid>
 
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                     <CustomTextField
                                         onChange={handleReqTraza}
+                                        onClick={getPrescriptions}
+                                        onKeyPress={getPrescriptions}
                                         value={reqTraza}
                                         id='requerimiento-traza'
                                         label={'Requerimiento traza'}
