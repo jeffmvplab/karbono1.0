@@ -143,11 +143,11 @@ export const getVit_C = (prescription: IPrescriptions) => {
     const params: IParamFunc = { requerimiento: 0, volumen: 0 };
 
     if (tp === tipoPrescripcion) {
-        params.volumen = parseFloat(vitC) * 100
+        params.volumen = parseFloat(vitC)/100
         params.requerimiento = parseFloat(vitC);
     } else {
         params.volumen = parseFloat(vitC);
-        params.requerimiento = parseFloat(vitC) / 100
+        params.requerimiento = parseFloat(vitC) *100
     }
     return params;
 }
@@ -272,7 +272,7 @@ export const getAgua = (prescription: IPrescriptions) => {
 
     let agua: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp !== tipoPrescripcion) {
         agua = volTotalNPT - (
             parseFloat(prescription?.dextrosa!) + parseFloat(prescription?.req_lipidos!)
             + parseFloat(prescription?.req_aminoacidos!) + parseFloat(prescription?.dipeptiven!)
@@ -311,7 +311,7 @@ export const getVolTotal = (prescription: IPrescriptions) => {
 
     let volTotal: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp!== tipoPrescripcion) {
 
         volTotal = volAgua
             + parseFloat(prescription?.dextrosa!) + parseFloat(prescription?.req_lipidos!)
@@ -381,7 +381,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
 
     let osmolaridad: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp !== tipoPrescripcion) {
         osmolaridad =
             ((parseFloat(prescription?.dextrosa!) * 2780)
                 + (parseFloat(prescription?.req_aminoacidos!) * 1505)
@@ -460,7 +460,7 @@ export const getGramosTotalesNitro = (prescription: IPrescriptions) => {
     let aminoacidos: number = 0;
     let dipeptiven: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp !== tipoPrescripcion) {
         aminoacidos= parseFloat(prescription?.req_aminoacidos!);
         dipeptiven= parseFloat(prescription?.dipeptiven!);
     } else {
@@ -487,7 +487,7 @@ export const getCaloriasTotalesProteicas = (prescription: IPrescriptions) => {
     let aminoacidos: number = 0;
     let dipeptiven: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp !== tipoPrescripcion) {
         aminoacidos= parseFloat(prescription?.req_aminoacidos!);
         dipeptiven= parseFloat(prescription?.dipeptiven!);
     } else {
@@ -517,7 +517,7 @@ export const getCaloriasNoProteicasCHOS = (prescription: IPrescriptions) => {
     let dextrosa: number = 0;
 
 
-    if (tp === tipoPrescripcion) {
+    if (tp !== tipoPrescripcion) {
         dextrosa= parseFloat(prescription?.dextrosa!);
     } else {
        dextrosa = getDextrosa(prescription!).volumen;
@@ -536,7 +536,7 @@ export const getCaloriasNoProteicasLIPIDOS = (prescription: IPrescriptions) => {
     let lipidos: number = 0;
     let omegaven: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp !== tipoPrescripcion) {
         lipidos = parseFloat(prescription?.req_lipidos);
         omegaven = parseFloat(prescription?.omegaven);
     } else {
@@ -593,7 +593,7 @@ export const getConcentracionDeCHOS = (prescription: IPrescriptions) => {
     let dextrosa: number = 0;
 
 
-    if (tp === tipoPrescripcion) {
+    if (tp!== tipoPrescripcion) {
         dextrosa= parseFloat(prescription?.dextrosa!);
     } else {
        dextrosa = getDextrosa(prescription!).volumen;
@@ -613,7 +613,7 @@ export const getConcentracionDeProteinas = (prescription: IPrescriptions) => {
     let aminoacidos: number = 0;
     let dipeptiven: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp!== tipoPrescripcion) {
         aminoacidos= parseFloat(prescription?.req_aminoacidos!);
         dipeptiven= parseFloat(prescription?.dipeptiven!);
     } else {
@@ -635,7 +635,7 @@ export const getConcentracionDeLipidos = (prescription: IPrescriptions) => {
     let lipidos: number = 0;
     let omegaven: number = 0;
 
-    if (tp === tipoPrescripcion) {
+    if (tp !== tipoPrescripcion) {
         lipidos = parseFloat(prescription?.req_lipidos);
         omegaven = parseFloat(prescription?.omegaven);
     } else {
