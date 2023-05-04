@@ -10,8 +10,8 @@ export interface IParamNumeric {
     volumen: number,
 }
 
-export const tipoPrescripcion:string='Por volúmenes';
-// export const tipoPrescripcion:string='Por requerimientos';
+// export const tipoPrescripcion:string='Por volúmenes';
+export const tipoPrescripcion:string='Por requerimientos';
 //////////////////////////////FORMULACIONES//////////////
 export const getSodio = (prescription: IPrescriptions) => {
 
