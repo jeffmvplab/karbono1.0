@@ -6,10 +6,11 @@ import React from 'react';
 export interface ButtonCardsHomeProps  {
 	route?:string;
 	text?:string;
-	color?:string
+	color?:string;
+	id?:string;
 }
 
-const ButtonCardsHome: React.FC<ButtonCardsHomeProps> = ({route,text,color}) => {
+const ButtonCardsHome: React.FC<ButtonCardsHomeProps> = ({route,text,color,id}) => {
 
 	const MyButton = styled(Button)({
 		'&:hover': {
@@ -23,6 +24,7 @@ const ButtonCardsHome: React.FC<ButtonCardsHomeProps> = ({route,text,color}) => 
 		
 		<MyButton
 		onClick={() => router.push(route!)}
+		id={id}
 		style={{
 		   background:color, 
 		   color: '#fff', 
@@ -31,6 +33,7 @@ const ButtonCardsHome: React.FC<ButtonCardsHomeProps> = ({route,text,color}) => 
 		   
 		   }}>
 		{text}
+		
 	  </MyButton>
 	);
 };
