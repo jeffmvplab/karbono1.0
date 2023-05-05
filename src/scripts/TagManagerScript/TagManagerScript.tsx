@@ -5,7 +5,8 @@ import React, { useState } from 'react';
 const TagManagerScript = () => {
 	const [loading, setLoading] = useState(true);
 	
-	const GTM_TRACKING_ID = 'GTM-PV5TRWW'
+	// const GTM_TRACKING_ID = 'GTM-PV5TRWW'
+	const GTM_TRACKING_ID = 'GTM-5W7K5NK'
 	
 	return <>
 		<Script
