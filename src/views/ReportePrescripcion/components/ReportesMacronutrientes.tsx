@@ -93,7 +93,7 @@ const ReportesMacronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {reporte?.flujo_metabolico}
+                                    -
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 

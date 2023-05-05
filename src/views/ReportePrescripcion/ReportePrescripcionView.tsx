@@ -1,8 +1,6 @@
-import Image from 'next/image';
 
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
-import { Typography, Button, Box, Grid, TableContainer, Table, TableHead, TableRow, TableCell, Stack } from '@mui/material/';
-import Link from 'next/link';
+import { Typography,Grid,  Stack } from '@mui/material/';
 import { Divider } from '@material-ui/core';
 import ReportesMacronutrientes from './components/ReportesMacronutrientes';
 import ReportesMicronutrientes from './components/ReportesMicronutrientes';
