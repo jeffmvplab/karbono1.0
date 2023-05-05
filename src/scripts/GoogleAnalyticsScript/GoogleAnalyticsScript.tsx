@@ -5,7 +5,8 @@ const GoogleAnalyticsScript = () => {
 
 	const [loading, setLoading] = useState(true);
 	
-	const GA_TRACKING_ID = 'G-3YC6MN9379'
+	// const GA_TRACKING_ID = 'G-3YC6MN9379'
+	const GA_TRACKING_ID = 'G-E3P7F70VPT'
 
 	return <>
 		<Script
