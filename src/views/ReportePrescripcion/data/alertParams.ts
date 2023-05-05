@@ -38,8 +38,7 @@ export const alertVolTotal = (prescription: IPrescriptions) => {
             + oligoelementos + vitaminas
             + getVit_C(prescription!).volumen
             + parseFloat(prescription?.acido_folico!)
-    // }
-
+    //}
     return volTotal;
 }
 
