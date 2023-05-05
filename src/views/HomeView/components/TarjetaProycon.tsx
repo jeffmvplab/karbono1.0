@@ -38,6 +38,7 @@ const TarjetaProycon: React.FC<TarjetaProyconProps> = () => {
               route={mainRoutes.prescripcion}
               text=' Ingresar'
               color={colorsKarbono.primary}
+              id='prescripcion'
               />
                 
             </Box>
@@ -74,6 +75,7 @@ const TarjetaProycon: React.FC<TarjetaProyconProps> = () => {
               route={mainRoutes.prescripcion}
               text=' Ingresar'
               color={colorsKarbono.secundary}
+              id='configuracion'
               />
             </Box>
             <Hidden smDown>

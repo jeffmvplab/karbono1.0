@@ -134,12 +134,12 @@ const Suscripciones: React.FC<SuscripcionesProps> = () => {
 							</Button>
 						</Box>
 						<Box sx={{ width: '20%', justifyContent: 'center', display: 'flex' }}>
-							<Button sx={{ backgroundColor: '#372FC6', color: '#fff', padding: '3px 20px', borderRadius: '10px', ':hover': { backgroundColor: '#372FC6', color: '#e8e8e2' } }}>
+							<Button id='estandar' sx={{ backgroundColor: '#372FC6', color: '#fff', padding: '3px 20px', borderRadius: '10px', ':hover': { backgroundColor: '#372FC6', color: '#e8e8e2' } }}>
 								$45.000
 							</Button>
 						</Box>
 						<Box sx={{ width: '20%', justifyContent: 'center', display: 'flex' }}>
-							<Button sx={{ backgroundColor: '#372FC6', color: '#fff', padding: '3px 20px', borderRadius: '10px', ':hover': { backgroundColor: '#372FC6', color: '#e8e8e2' } }}>
+							<Button id='premium' sx={{ backgroundColor: '#372FC6', color: '#fff', padding: '3px 20px', borderRadius: '10px', ':hover': { backgroundColor: '#372FC6', color: '#e8e8e2' } }}>
 								$95.000
 							</Button>
 						</Box>
