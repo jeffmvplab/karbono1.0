@@ -1,3 +1,5 @@
+import { GoogleAnalyticsScript } from '@/scripts/GoogleAnalyticsScript'
+import { TagManagerScript } from '@/scripts/TagManagerScript'
 import { Html, Head, Main, NextScript } from 'next/document'
 import Script from 'next/script'
 
@@ -6,6 +8,8 @@ export const GA_TRACKING_ID = 'G-3YC6MN9379'
 export const GTM_TRACKING_ID = 'GTM-PV5TRWW'
 
 export default function Document() {
+
+
   return (
     <Html lang="en">
       <Head>
@@ -24,16 +28,29 @@ export default function Document() {
             );var f=d.getElementsByTagName(s)[0],
           j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','GTM-PV5TRWW');
-         </script>  */} 
-
+         </script>  */}
+        <MainLayoutScripts />
       </Head>
       <body>
-        {/* <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_TRACKING_ID}`}
-          height="0" width="0" style={{display:'none', visibility:'hidden'}}></iframe>
-        </noscript> */}
+        <noscript>
+          <iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_TRACKING_ID}`}
+            height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}>
+          </iframe>
+        </noscript>
         <Main />
         <NextScript />
       </body>
     </Html>
+  )
+}
+
+const MainLayoutScripts = () => {
+  return (
+    <>
+      {/* <SmartLookScript /> */}
+      {/* <CustomScript name="smartlook"/> */}
+      <TagManagerScript />
+      <GoogleAnalyticsScript />
+    </>
   )
 }

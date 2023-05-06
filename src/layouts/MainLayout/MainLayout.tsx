@@ -27,7 +27,7 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
           <link rel="icon" href="/favicon.ico" />
 
         </Head>
-        <MainLayoutScripts />
+        {/* <MainLayoutScripts /> */}
         {/* <Box
           sx={{ paddingTop:{xs:"5px",sm:"20px",md:"10px",lg:"10px",xl:"10px",},}}>
         </Box> */}
@@ -53,15 +53,15 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
 export default MainLayout;
 
 
-const MainLayoutScripts = () => {
-  return (
-    <>
-      {/* <SmartLookScript /> */}
-      {/* <CustomScript name="smartlook"/> */}
-      <TagManagerScript />
-      <GoogleAnalyticsScript />
-    </>
-  )
-}
+// const MainLayoutScripts = () => {
+//   return (
+//     <>
+//       {/* <SmartLookScript /> */}
+//       {/* <CustomScript name="smartlook"/> */}
+//       <TagManagerScript />
+//       <GoogleAnalyticsScript />
+//     </>
+//   )
+// }
 
 
