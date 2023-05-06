@@ -7,8 +7,6 @@ import { NavBar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
 import { useRouter } from "next/router";
 import { mainRoutes } from "@/routes/routes";
-import { GoogleAnalyticsScript } from "@/scripts/GoogleAnalyticsScript";
-import { TagManagerScript } from "@/scripts/TagManagerScript";
 
 export interface MainLayoutInterface {
   children: ReactNode;
