@@ -64,13 +64,3 @@ export default function Document() {
   )
 }
 
-// const MainLayoutScripts = () => {
-//   return (
-//     <>
-//       {/* <SmartLookScript /> */}
-//       {/* <CustomScript name="smartlook"/> */}
-//       <TagManagerScript />
-//       <GoogleAnalyticsScript />
-//     </>
-//   )
-// }
