@@ -1,5 +1,4 @@
-import { GoogleAnalyticsScript } from '@/scripts/GoogleAnalyticsScript'
-import { TagManagerScript } from '@/scripts/TagManagerScript'
+
 import { Html, Head, Main, NextScript } from 'next/document'
 import Script from 'next/script'
 
@@ -64,13 +63,3 @@ export default function Document() {
   )
 }
 
-// const MainLayoutScripts = () => {
-//   return (
-//     <>
-//       {/* <SmartLookScript /> */}
-//       {/* <CustomScript name="smartlook"/> */}
-//       <TagManagerScript />
-//       <GoogleAnalyticsScript />
-//     </>
-//   )
-// }
