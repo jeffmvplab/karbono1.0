@@ -3,40 +3,63 @@ import { TagManagerScript } from '@/scripts/TagManagerScript'
 import { Html, Head, Main, NextScript } from 'next/document'
 import Script from 'next/script'
 
-export const GA_TRACKING_ID = 'G-3YC6MN9379'
+export const NEXT_PUBLIC_GOOGLE_ANALYTICS_ID= 'G-3YC6MN9379'
 
-export const GTM_TRACKING_ID = 'GTM-PV5TRWW'
+export const NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID = 'GTM-PV5TRWW'
 
 export default function Document() {
 
 
   return (
-    <Html lang="en">
+    <Html>
       <Head>
-        {/* <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}></script>
-        
-        <Script
-        id="GA_GTM"
-        type="text/javascript"
-        src="../scripts/gtm_ga.js"
-        strategy="afterInteractive"
-      // strategy="afterInteractive"
-      />
-         {/* <script>(
-          function(w,d,s,l,i){w[l] = w[l] || [];w[l].push(
-            {'gtm.start':new Date().getTime(),event:'gtm.js'}
-            );var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-PV5TRWW');
-         </script>  */}
-        <MainLayoutScripts />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `<!-- Google Tag Manager -->
+                    <script>
+                      (function(w,d,s,l,i) {
+                        w[l]=w[l]||[];w[l].push({'gtm.start':
+                        new Date().getTime(),event:'gtm.js'});
+                        var f=d.getElementsByTagName(s)[0],
+                        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+                        j.async=true;j.src=
+                        'https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                        f.parentNode.insertBefore(j,f);
+                      })(window,document,'script','dataLayer',process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID);
+                    </script>
+                    <!-- End Google Tag Manager -->
+                    `,
+          }}
+        />
+
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+        />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', { 'optimize_id': '${process.env.NEXT_PUBLIC_OPTIMIZE_ID}' });
+                    `,
+          }}
+        />
       </Head>
       <body>
+        {/* Google Tag Manager (noscript) */}
         <noscript>
-          <iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_TRACKING_ID}`}
-            height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}>
-          </iframe>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID}`}
+            height="0"
+            width="0"
+            style={{display: 'none', visibility: 'hidden'}}
+          ></iframe>
         </noscript>
+        {/* End Google Tag Manager (noscript) */}
+
         <Main />
         <NextScript />
       </body>
@@ -44,13 +67,13 @@ export default function Document() {
   )
 }
 
-const MainLayoutScripts = () => {
-  return (
-    <>
-      {/* <SmartLookScript /> */}
-      {/* <CustomScript name="smartlook"/> */}
-      <TagManagerScript />
-      <GoogleAnalyticsScript />
-    </>
-  )
-}
+// const MainLayoutScripts = () => {
+//   return (
+//     <>
+//       {/* <SmartLookScript /> */}
+//       {/* <CustomScript name="smartlook"/> */}
+//       <TagManagerScript />
+//       <GoogleAnalyticsScript />
+//     </>
+//   )
+// }
