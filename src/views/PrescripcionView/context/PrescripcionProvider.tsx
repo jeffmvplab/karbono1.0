@@ -266,13 +266,24 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 	const handleFilterSearch = async () => {
 		switch (selectedFilter) {
-			case 'a':await getPrescriptionsByName(search)
+			case 'a':(isNaN(parseInt(search)))
+			          ?await getPrescriptionsByName(search)
+					  :await getPrescriptionsByNumber(search)
 				break;
-			case 'b':await getPrescriptionsByIps(search)
+			case 'b':(isNaN(parseInt(search)))
+			         ?await getPrescriptionsByIps(search)
+					 :await getPrescriptionsByNumber(search)
 				break;
-			case 'c':await getPrescriptionsById(search)
+			case 'c':(!isNaN(parseInt(search)))
+			         ?(search.length>7)
+					  ?await getPrescriptionsById(search)
+					  :await getPrescriptionsByNumber(search)
+					 :await getPrescriptionsByName(search)
 				break;
-			case 'd':await getPrescriptionsByNumber(search)
+			case 'd':(!isNaN(parseInt(search)))
+			         ?await getPrescriptionsByNumber(search)
+					 :await getPrescriptionsByName(search)
+			break;
 				break;
 		}
 	}
