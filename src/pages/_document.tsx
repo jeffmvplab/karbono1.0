@@ -33,7 +33,7 @@ export default function Document() {
 
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}/>
 
-        {/* <script
+        <script
           dangerouslySetInnerHTML={{
             __html: `
                     window.dataLayer = window.dataLayer || [];
@@ -41,7 +41,7 @@ export default function Document() {
                     gtag('js', new Date());
                     gtag('config', '${GA_TRACKING_ID}', { 'optimize_id': '${process.env.NEXT_PUBLIC_OPTIMIZE_ID}' });
                     `,
-          }} /> */}
+          }} />
 
       </Head>
       <body>
