@@ -1,6 +1,5 @@
 
 import { Html, Head, Main, NextScript } from 'next/document'
-import Script from 'next/script'
 
 export const GA_TRACKING_ID = 'G-3YC6MN9379'
 
@@ -13,7 +12,7 @@ export default function Document() {
     <Html>
       <Head>
        
-        <script
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `<!-- Google Tag Manager -->
                     <script>
@@ -41,19 +40,19 @@ export default function Document() {
                     gtag('js', new Date());
                     gtag('config', '${GA_TRACKING_ID}', { 'optimize_id': '${process.env.NEXT_PUBLIC_OPTIMIZE_ID}' });
                     `,
-          }} />
+          }} /> */}
 
       </Head>
       <body>
         {/* Google Tag Manager (noscript) */}
-        <noscript>
+        {/* <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${GTM_TRACKING_ID}`}
             height="0"
             width="0"
             style={{display: 'none', visibility: 'hidden'}}
           ></iframe>
-        </noscript>
+        </noscript> */}
         {/* End Google Tag Manager (noscript) */}
 
         <Main />
