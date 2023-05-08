@@ -110,7 +110,7 @@ export const alertFactorDePrecipitacion = (prescription: IPrescriptions) => {
 
     const volTotalNPT: number = prescription?.volumen;
 
-    let factor: number = (calcio * 0.465 + fosfato_de_potasio * 2.6) * 100 / (volTotalNPT - calcio - fosfato_de_potasio);
+    let factor: number =( (calcio * 0.465) + (fosfato_de_potasio * 2.6)) * 100 / (volTotalNPT - calcio - fosfato_de_potasio);
 
     const resp: IAlarm = { value: 0, alert: '' };
     resp.value = factor
@@ -281,12 +281,12 @@ export const alarmConcPotasio = (prescription: IPrescriptions) => {
     //     fosfato_de_potasio = parseFloat(prescription?.req_fosfato);
     // } else {
         potacio = getPotacio(prescription!).volumen;
-        fosfato_de_potasio = getFosforo(prescription!).volumen;
+        fosfato_de_potasio = getFosforo(prescription!).requerimiento;
     // }
 
     const volTotalNPT: number = prescription?.volumen;
 
-    let potacioVol: number = (potacio * 2 + fosfato_de_potasio) * 3.8 / (volTotalNPT / 1000);
+    let potacioVol: number = (potacio * 2 + fosfato_de_potasio * 3.8) / (volTotalNPT / 1000);
     const resp: IAlarm = { value: 0, alert: '' };
     resp.value = potacioVol
 
