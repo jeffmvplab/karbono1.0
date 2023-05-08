@@ -33,7 +33,7 @@ const TarjetaAyudas = () => {
                 route={mainRoutes.prescripcion}
                 text='Ingresar'
                 color={colorsKarbono.primary}
-                id=''
+                id='ayudas'
               />
             </Box>
             <Hidden smDown >
