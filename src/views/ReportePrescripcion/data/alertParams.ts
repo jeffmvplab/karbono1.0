@@ -105,7 +105,7 @@ export const alertFactorDePrecipitacion = (prescription: IPrescriptions) => {
     // } else {
 
         calcio = getCalcio(prescription!).volumen;
-        fosfato_de_potasio = getFosforo(prescription!).volumen;
+        fosfato_de_potasio = getFosforo(prescription!).requerimiento;
     // }
 
     const volTotalNPT: number = prescription?.volumen;
