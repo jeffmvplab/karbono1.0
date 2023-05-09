@@ -130,19 +130,34 @@ const Micronutrientes = () => {
                                     arrow
                                 >
                                     <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-
-                                        <CustomTextField
-                                            onChange={handleSodioTotal}
-                                            onClick={getPrescriptions}
-                                            onKeyPress={getPrescriptions}
-                                            value={sodioTotal}
-                                            id='Sodio-total'
-                                            label={'Sodio total'}
-                                            endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                                ? 'mEq/kg/día'
-                                                : 'ml'}
-                                            type='text'
-                                        />
+                                        <Stack direction={'row'}>
+                                            <Grid item xs={9} sm={9} md={9} style={{ paddingRight: '10px' }}>
+                                                <CustomTextField
+                                                    onChange={handleSodioTotal}
+                                                    onClick={getPrescriptions}
+                                                    onKeyPress={getPrescriptions}
+                                                    value={sodioTotal}
+                                                    id='Cloruro de Sodio 2MEQ/ML'
+                                                    label={'Cloruro de Sodio 2MEQ/ML'}
+                                                    endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                                        ? 'mEq/kg/día'
+                                                        : 'ml'}
+                                                    type='text'
+                                                />
+                                            </Grid>
+                                            <Grid item xs={3} sm={3} md={3}>
+                                                <CustomTextField
+                                                    disabled={true}
+                                                    value={sodioTotal}
+                                                    id='Sodio-total'
+                                                    label={'Sodio total'}
+                                                    endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                                        ? 'mEq/kg/día'
+                                                        : 'ml'}
+                                                    type='text'
+                                                />
+                                            </Grid>
+                                        </Stack>
 
                                     </Grid>
                                 </LightTooltip>
@@ -156,18 +171,34 @@ const Micronutrientes = () => {
                                     arrow
                                 >
                                     <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                                        <CustomTextField
-                                            onChange={handlePotacioTotal}
-                                            onClick={getPrescriptions}
-                                            onKeyPress={getPrescriptions}
-                                            value={potacioTotal}
-                                            id='potasio-total'
-                                            label={'Potasio total'}
-                                            endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                                ? 'mEq/kg/día'
-                                                : 'ml'}
-                                            type='text'
-                                        />
+                                        <Stack direction={'row'}>
+                                            <Grid item xs={9} sm={9} md={9} style={{ paddingRight: '10px' }}>
+                                                <CustomTextField
+                                                    onChange={handlePotacioTotal}
+                                                    onClick={getPrescriptions}
+                                                    onKeyPress={getPrescriptions}
+                                                    value={potacioTotal}
+                                                    id='Cloruro de Potasio 2MEQ/ML'
+                                                    label={'Cloruro de Potasio 2MEQ/ML'}
+                                                    endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                                        ? 'mEq/kg/día'
+                                                        : 'ml'}
+                                                    type='text'
+                                                />
+                                            </Grid>
+                                            <Grid item xs={3} sm={3} md={3}>
+                                                <CustomTextField
+                                                    disabled={true}
+                                                    value={potacioTotal}
+                                                    id='potasio-total'
+                                                    label={'Potasio total'}
+                                                    endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                                        ? 'mEq/kg/día'
+                                                        : 'ml'}
+                                                    type='text'
+                                                />
+                                            </Grid>
+                                        </Stack>
                                         {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
                                     </Grid>
                                 </LightTooltip>
@@ -363,7 +394,7 @@ const Micronutrientes = () => {
                                                     </MenuItem>))
                                         }
                                     </CustomTextField>
-                                    
+
                                 </Grid>
 
                                 <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
