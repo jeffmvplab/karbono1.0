@@ -1,6 +1,6 @@
 
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
-import { Typography,Grid,  Stack } from '@mui/material/';
+import { Typography,Grid,  Stack } from '@mui/material';
 import { Divider } from '@material-ui/core';
 import ReportesMacronutrientes from './components/ReportesMacronutrientes';
 import ReportesMicronutrientes from './components/ReportesMicronutrientes';
