@@ -34,6 +34,16 @@ export const getSodio = (prescription: IPrescriptions) => {
     return params;
 }
 
+export const getSodioTotal = (prescription: IPrescriptions) => {
+    
+    const peso: number = prescription?.peso!;
+
+    const sodioTotal:number=((getFosfatoSodio(prescription).volumen*2)+(getSodio(prescription).volumen*2))/peso
+
+    return sodioTotal;
+}
+
+
 export const getPotacio = (prescription: IPrescriptions) => {
 
     const tp: string = prescription?.tipo_prescripcion!;
@@ -50,6 +60,15 @@ export const getPotacio = (prescription: IPrescriptions) => {
         params.volumen = potacio
     }
     return params;
+}
+
+export const getPotacioTotal = (prescription: IPrescriptions) => {
+    
+    const peso: number = prescription?.peso!;
+
+    const potasioTotal:number=((getFosfatoPotacio(prescription).volumen*3.8)+(getPotacio(prescription).volumen*2))/peso
+
+    return potasioTotal;
 }
 
 export const getCalcio = (prescription: IPrescriptions) => {
@@ -84,7 +103,7 @@ export const getCalcio = (prescription: IPrescriptions) => {
     return params;
 }
 
-export const getFosforo = (prescription: IPrescriptions) => {
+export const getFosfatoSodio = (prescription: IPrescriptions) => {
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0 };
 
@@ -93,8 +112,7 @@ export const getFosforo = (prescription: IPrescriptions) => {
     const tipofosfato: string = prescription?.fosfato!;
     const peso: number = prescription?.peso!;
 
-    if (tipofosfato === 'Fosfato de sodio') {
-
+    if(tipofosfato==='Fosfato de sodio') 
         if (tp === tipoPrescripcion) {
             params.volumen = fosforo * 1 * peso;
             params.requerimiento = fosforo;
@@ -102,7 +120,21 @@ export const getFosforo = (prescription: IPrescriptions) => {
             params.requerimiento = fosforo * 1 / peso;
             params.volumen = fosforo
         }
-    } else {
+
+
+    return params;
+}
+
+export const getFosfatoPotacio = (prescription: IPrescriptions) => {
+
+    const params: IParamFunc = { requerimiento: 0, volumen: 0 };
+
+    const tp: string = prescription?.tipo_prescripcion!;
+    const fosforo: number = parseFloat(prescription?.req_fosfato!);
+    const tipofosfato: string = prescription?.fosfato!;
+    const peso: number = prescription?.peso!;
+  
+    if(tipofosfato==='Fosfato de potacio') 
         if (tp === tipoPrescripcion) {
             params.volumen = fosforo * peso / 2.6;
             params.requerimiento = fosforo
@@ -110,8 +142,16 @@ export const getFosforo = (prescription: IPrescriptions) => {
             params.requerimiento = fosforo * 2.6 / peso;
             params.volumen = fosforo
         }
-    }
+    
 
+    return params;
+}
+
+export const getFosforo = (prescription: IPrescriptions) => {
+
+    const params: IParamFunc = { requerimiento: 0, volumen: 0 };
+            params.volumen =getFosfatoPotacio(prescription).volumen+getFosfatoSodio(prescription).volumen;
+            params.requerimiento =getFosfatoPotacio(prescription).requerimiento+getFosfatoSodio(prescription).requerimiento;
     return params;
 }
 

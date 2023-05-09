@@ -1,5 +1,5 @@
 import { IPrescriptions } from "@/domain/models/prescriptions.model"
-import { concAminoacidos, getAgua, getAminoacidos, getCalcio, getConcentracionDeProteinas, getDextrosa, getDipeptiven, getFosforo, getLipidos, getMagnesio, getOmegaven, getOsmolaridad, getPotacio, getSodio, getVit_C, tipoPrescripcion } from "./functionsParams"
+import { concAminoacidos, getAgua, getAminoacidos, getCalcio, getConcentracionDeProteinas, getDextrosa, getDipeptiven, getFosfatoPotacio, getFosfatoSodio, getFosforo, getLipidos, getMagnesio, getOmegaven, getOsmolaridad, getPotacio, getSodio, getVit_C, tipoPrescripcion } from "./functionsParams"
 
 export interface IAlarm {
     value: number,
@@ -105,12 +105,12 @@ export const alertFactorDePrecipitacion = (prescription: IPrescriptions) => {
     // } else {
 
         calcio = getCalcio(prescription!).volumen;
-        fosfato_de_potasio = getFosforo(prescription!).requerimiento;
+        fosfato_de_potasio = getFosfatoPotacio(prescription!).volumen;
     // }
 
     const volTotalNPT: number = prescription?.volumen;
 
-    let factor: number =( (calcio * 0.465) + (fosfato_de_potasio * 2.6)) * 100 / (volTotalNPT - calcio - fosfato_de_potasio);
+    let factor: number =( (calcio * 0.465) + (fosfato_de_potasio * 2.6)) * 100 / (volTotalNPT - (calcio + fosfato_de_potasio));
 
     const resp: IAlarm = { value: 0, alert: '' };
     resp.value = factor
@@ -249,7 +249,7 @@ export const alarmConcSodio = (prescription: IPrescriptions) => {
     // } else {
 
         sodio = getSodio(prescription!).volumen;
-        fosfato_de_sodio = getFosforo(prescription!).volumen;
+        fosfato_de_sodio = getFosfatoSodio(prescription!).volumen;
     // }
     // const sodio: number = parseFloat(prescription?.sodio_total);
     // const fosfato_de_sodio: number = parseFloat(prescription?.req_fosfato);
@@ -281,7 +281,7 @@ export const alarmConcPotasio = (prescription: IPrescriptions) => {
     //     fosfato_de_potasio = parseFloat(prescription?.req_fosfato);
     // } else {
         potacio = getPotacio(prescription!).volumen;
-        fosfato_de_potasio = getFosforo(prescription!).requerimiento;
+        fosfato_de_potasio = getFosfatoPotacio(prescription!).volumen;
     // }
 
     const volTotalNPT: number = prescription?.volumen;
