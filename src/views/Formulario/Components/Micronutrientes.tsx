@@ -6,6 +6,7 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { FormulariosContext } from '../context/FormulariosContext';
 import { LightTooltip } from '../style/styleToolTips';
 import MenuItem from '@material-ui/core/MenuItem';
+import { getPotacioTotal, getSodioTotal } from '@/views/ReportePrescripcion/data/functionsParams';
 
 const tipoFosfato = [
     { value: 'Fosfato de sodio', label: 'Fosfato de sodio' },
@@ -52,7 +53,7 @@ const Micronutrientes = () => {
     const {
         tipoPrescripcion, tipoPaciente,
         stateAcordion3, setStateAcordion3, matches, handleAcordion3,
-
+         prescriptionSave,
         sodioTotal, handleSodioTotal,
         potacioTotal, handlePotacioTotal,
         fosfato, handleFosfato,
@@ -131,7 +132,7 @@ const Micronutrientes = () => {
                                 >
                                     <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                         <Stack direction={'row'}>
-                                            <Grid item xs={9} sm={9} md={9} style={{ paddingRight: '10px' }}>
+                                            <Grid item xs={8} sm={8} md={8} style={{ paddingRight: '10px' }}>
                                                 <CustomTextField
                                                     onChange={handleSodioTotal}
                                                     onClick={getPrescriptions}
@@ -145,12 +146,12 @@ const Micronutrientes = () => {
                                                     type='text'
                                                 />
                                             </Grid>
-                                            <Grid item xs={3} sm={3} md={3}>
+                                            <Grid item xs={4} sm={4} md={4}>
                                                 <CustomTextField
                                                     disabled={true}
-                                                    value={sodioTotal}
+                                                   value={getSodioTotal(prescriptionSave!).toFixed(2)}
                                                     id='Sodio-total'
-                                                    label={'Sodio total'}
+                                                    label={'Sodio-total'}
                                                     endAdornament={(tipoPrescripcion === 'Por requerimientos')
                                                         ? 'mEq/kg/día'
                                                         : 'ml'}
@@ -172,7 +173,7 @@ const Micronutrientes = () => {
                                 >
                                     <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                                         <Stack direction={'row'}>
-                                            <Grid item xs={9} sm={9} md={9} style={{ paddingRight: '10px' }}>
+                                            <Grid item xs={8} sm={8} md={8} style={{ paddingRight: '10px' }}>
                                                 <CustomTextField
                                                     onChange={handlePotacioTotal}
                                                     onClick={getPrescriptions}
@@ -186,10 +187,10 @@ const Micronutrientes = () => {
                                                     type='text'
                                                 />
                                             </Grid>
-                                            <Grid item xs={3} sm={3} md={3}>
+                                            <Grid item xs={4} sm={4} md={4}>
                                                 <CustomTextField
                                                     disabled={true}
-                                                    value={potacioTotal}
+                                                    value={getPotacioTotal(prescriptionSave!).toFixed(2)}
                                                     id='potasio-total'
                                                     label={'Potasio total'}
                                                     endAdornament={(tipoPrescripcion === 'Por requerimientos')
