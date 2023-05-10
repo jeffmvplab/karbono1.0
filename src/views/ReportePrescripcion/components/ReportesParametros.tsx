@@ -52,7 +52,7 @@ const ReportesParametros = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getVolTotal(reporte!)}
+                                    {getVolTotal(reporte!).toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
