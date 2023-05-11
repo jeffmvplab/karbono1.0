@@ -25,7 +25,7 @@ const ReportesMicronutrientes = () => {
         <>
             <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} paddingRight={'20px'}>
                 {/* <Grid item display='block' sx={{ marginTop: '30px', marginBottom: '15px', width: '40%', paddingLeft:'0' }}> */}
-                <Stack width='50%' direction={'row'} justifyContent={'space-between'}>
+                <Stack width='60%' direction={'row'} justifyContent={'space-between'}>
 
                     <Stack direction={'column'}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left' }}>Micronutrientes</Typography>
@@ -38,7 +38,7 @@ const ReportesMicronutrientes = () => {
                         </Box>
                     </Stack>
                     {/* </Grid>
-                <Grid item display={'flex'} sx={{ marginTop: '30px', marginBottom: '30px', width: '60%' }}> */}
+                 <Grid item display={'flex'} sx={{ marginTop: '30px', marginBottom: '30px', width: '60%' }}> */}
                     <Stack direction={'column'}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Requerimiento</Typography>
                         <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
@@ -163,6 +163,73 @@ const ReportesMicronutrientes = () => {
                             {(loadingSave)
                                 ? <Typography>
                                       { getVit_C(reporte!).volumen}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                  -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+                        </Stack>
+                    </Stack>
+
+                    <Stack direction={'column'}>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '100%' }}>Corrección de Purga (ml) </Typography>
+                        <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getSodio(reporte!).conPurga.toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getPotacio(reporte!).conPurga.toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getCalcio(reporte!).conPurga.toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getFosforo(reporte!).conPurga.toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getMagnesio(reporte!).conPurga.toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {reporte?.req_elementos_traza}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                     {reporte?.req_vit_hidrosolubles}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {reporte?.req_vit_liposolubles}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                      { getVit_C(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 

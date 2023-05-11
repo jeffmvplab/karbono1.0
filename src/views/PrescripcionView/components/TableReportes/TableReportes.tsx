@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Box, Button, CircularProgress, Skeleton, Stack } from '@mui/material';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import PictureAsPdfOutlinedIcon from '@mui/icons-material/PictureAsPdfOutlined';
@@ -8,7 +8,6 @@ import { IPrescriptions } from '@/domain/models/prescriptions.model';
 import { GridColDef } from '@mui/x-data-grid/models/colDef/gridColDef';
 import { GridRenderCellParams } from '@mui/x-data-grid/models/params/gridCellParams';
 import { DataGrid } from '@mui/x-data-grid/DataGrid';
-
 
 // const data = [
 // 	{ id: 0, paciente: 'Santiago Castillo', identificación: 7485926173, ips: 'Clínica Antioquia', tipo: 'Prescripcion por requerimiento', creación: '2021-04-22', usuario: 'Helen Pabon Hpabon' },
@@ -21,21 +20,29 @@ import { DataGrid } from '@mui/x-data-grid/DataGrid';
 // 	{ id: 7, paciente: 'Santiago Castillo', identificación: 7485926173, ips: 'Clínica Antioquia', tipo: 'Prescripcion por requerimiento', creación: '2021-04-22', usuario: 'Helen Pabon Hpabon' },
 // ];
 
-
-
-
 export interface TableReportesProps { }
 
 const TableReportes: React.FC<TableReportesProps> = () => {
 
 	const {getAll,reportes,loadingGet,loadingApi,goEdit,goReporte} = useContext(PrescripcionContext)
-  
-	useEffect(() => {
-		getAll(30);
-		console.log('Reportes List:',reportes)
-	},[])
-	
+   
+	const pag:number=10;
+	const [page,setPage]=useState<number>();
 
+	const handlePageChange=(params:any)=>{
+		setPage(params)
+		console.log('Params:',params)
+	}
+
+	useEffect(() => {
+		getAll(pag*2);
+	},[])
+
+	useEffect(() => {
+		getAll((page!+1)*pag*2);
+		console.log('Reportes List:',reportes)
+	},[page])
+	
 	const columns: GridColDef[] = [
 
 		{
@@ -141,21 +148,20 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			>
 				<DataGrid
 				style={{ width: "100%" }}
-
 				sx={{
 					// '&:hover, &.Mui-hovered': { backgroundColor: 'rgb(0, 0,0,40%)' },
 					// '& .MuiDataGrid-row:hover': { backgroundColor: 'rgb(0,0,0,60%)' },
 				}}
 				rows={reportes!}
 				columns={columns}
-				initialState={{
-					pagination: { paginationModel: { pageSize: 10 } },
-				  }}
+				initialState={{pagination: { paginationModel: { pageSize: 10 } },}}
 				// disableColumnSelector
-				// // cledisableRowSelectionOnClick
-				 autoHeight
-				pageSizeOptions={[5,10,25]}
+			    // cledisableRowSelectionOnClick
+				autoHeight
+				// pageSizeOptions={[10,30,60]}
 				getRowId={(row: any) => row.no_orden}
+				onPaginationModelChange={(e)=>{handlePageChange(e.page)}}
+
 			/>
 
 		</Box>

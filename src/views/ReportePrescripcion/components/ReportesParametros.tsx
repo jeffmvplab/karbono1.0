@@ -64,7 +64,7 @@ const ReportesParametros = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getOsmolaridad(reporte!).toFixed(2)}
+                                    {getOsmolaridad(reporte!).volumen.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -76,79 +76,79 @@ const ReportesParametros = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getCalTotales(reporte!).toFixed(2)}
+                                    {getCalTotales(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getCalTotalesKgDia(reporte!).toFixed(2)}
+                                    {getCalTotalesKgDia(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getGramosTotalesNitro(reporte!).toFixed(2)}
+                                    {getGramosTotalesNitro(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getCaloriasTotalesProteicas(reporte!).toFixed(2)}
+                                    {getCaloriasTotalesProteicas(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getCaloriasTotalesProteicasKg(reporte!).toFixed(2)}
+                                    {getCaloriasTotalesProteicasKg(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getCaloriasNoProteicasCHOS(reporte!).toFixed(2)}
+                                    {getCaloriasNoProteicasCHOS(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getCaloriasNoProteicasLIPIDOS(reporte!).toFixed(2)}
+                                    {getCaloriasNoProteicasLIPIDOS(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getCaloriasNoProteicasKg(reporte!).toFixed(2)}
+                                    {getCaloriasNoProteicasKg(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getRelacionCalNoProteicasN(reporte!).toFixed(2)}
+                                    {getRelacionCalNoProteicasN(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getRelacionCalNoProteicasAminoacidos(reporte!).toFixed(2)}
+                                    {getRelacionCalNoProteicasAminoacidos(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getConcentracionDeCHOS(reporte!).toFixed(2)}
+                                    {getConcentracionDeCHOS(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getConcentracionDeProteinas(reporte!).toFixed(2)}
+                                    {getConcentracionDeProteinas(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getConcentracionDeLipidos(reporte!) .toFixed(2)}
+                                    {getConcentracionDeLipidos(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 

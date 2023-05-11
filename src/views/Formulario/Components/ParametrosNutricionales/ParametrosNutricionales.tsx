@@ -45,71 +45,45 @@ const ParametrosNutricionales: React.FC<ParametrosNutricionalesProps> = ({ isMov
 				<Box padding={1}>
 					<TextParamsNumb
 						title={'Calorías totales:'}
-						value={getCalTotales(prescriptionSave!).toFixed(2)}
+						value={getCalTotales(prescriptionSave!).conPurga.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Calorías totales/kg/día:'}
-						value={getCalTotalesKgDia(prescriptionSave!).toFixed(2)}
+						value={getCalTotalesKgDia(prescriptionSave!).conPurga.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Gramos totales de Nitrógeno:'}
-						value={getGramosTotalesNitro(prescriptionSave!).toFixed(2)}
+						value={getGramosTotalesNitro(prescriptionSave!).conPurga.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Calorías totales Protéicas:'}
-						value={getCaloriasTotalesProteicas(prescriptionSave!).toFixed(2)}
+						value={getCaloriasTotalesProteicas(prescriptionSave!).conPurga.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Calorías totales Protéicas/kg (kcal/kg):'}
-						value={getCaloriasTotalesProteicasKg(prescriptionSave!).toFixed(2)}
+						value={getCaloriasTotalesProteicasKg(prescriptionSave!).conPurga.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Calorías totales No Protéicas CHO’S:'}
-						value={getCaloriasNoProteicasCHOS(prescriptionSave!).toFixed(2)}
+						value={getCaloriasNoProteicasCHOS(prescriptionSave!).conPurga.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Calorías totales No Protéicas Lípidos:'}
-						value={getCaloriasNoProteicasLIPIDOS(prescriptionSave!).toFixed(2)}
+						value={getCaloriasNoProteicasLIPIDOS(prescriptionSave!).conPurga.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Relación: Cal No Protéicas Protéicas/g Nitrogeno:'}
-						value={getRelacionCalNoProteicasN(prescriptionSave!).toFixed(2)}
+						value={getRelacionCalNoProteicasN(prescriptionSave!).conPurga.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Calorías No Protéicas/kg:'}
-						value={getCaloriasNoProteicasKg(prescriptionSave!).toFixed(2)}
+						value={getCaloriasNoProteicasKg(prescriptionSave!).conPurga.toFixed(2)}
 					/>
 
 					<TextParamsNumb
 						title={'Relación: Cal No Protéicas Protéicas/g Aminoacidos:'}
-						value={getRelacionCalNoProteicasAminoacidos(prescriptionSave!).toFixed(2)}
+						value={getRelacionCalNoProteicasAminoacidos(prescriptionSave!).conPurga.toFixed(2)}
 					/>
-
-					{/* <Divider />
-
-					<Typography
-						fontSize={'20px'}
-						paddingY={2}
-						style={{ fontWeight: 700, color: colorsKarbono.primary }}
-					>Distribución Porcentual
-					</Typography >
-
-					<TextParamsNumb
-						title={'Porcentaje de proteína:'}
-						value={param_nutricionales.porcentaje_de_proteina}
-						unidad={'ml'}
-					/>
-
-					<TextParamsNumb
-						title={'Porcentaje de lípidos:'}
-						value={param_nutricionales.porcentaje_de_lipidos}
-						unidad={'ml'}
-					/>
-					<TextParamsNumb
-						title={'Porcentaje de carbohidratos:'}
-						value={param_nutricionales.porcentaje_de_carbohidratos}
-						unidad={'ml'}
-					/> */}
 				</Box>
 			</Box>
 		</Card>

@@ -24,7 +24,7 @@ const ReportesMacronutrientes = () => {
         <>
             <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} paddingRight={'20px'} >
                 {/* <Grid item display='block' sx={{ marginTop: '30px', marginBottom: '15px', width: '40%', paddingLeft:'0' }}> */}
-                <Stack width='50%' direction={'row'} justifyContent={'space-between'}>
+                <Stack width='60%' direction={'row'} justifyContent={'space-between'}>
 
                     <Stack direction={'column'}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left' }}>Macronutrientes</Typography>
@@ -129,7 +129,56 @@ const ReportesMacronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getAgua(reporte!).toFixed(2)}
+                                    {getAgua(reporte!).volumen.toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                        </Stack>
+                    </Stack>
+
+                    <Stack direction={'column'}>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px',paddingRight: '15px', textAlign: 'left', width: '100%' }}>Corrección de Purga (ml)</Typography>
+                        <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getDextrosa(reporte!).conPurga.toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getAminoacidos(reporte!).conPurga.toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getLipidos(reporte!).conPurga.toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getOmegaven(reporte!).conPurga.toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getDipeptiven(reporte!).conPurga.toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getAgua(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
