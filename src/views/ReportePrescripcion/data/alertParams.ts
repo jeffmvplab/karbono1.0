@@ -9,7 +9,7 @@ export interface IAlarm {
 /////////////////////////////ALARMAS PARAMETROS FARMACEUTICOS////////////////////////////////////////////////////
 export const alertVolTotal = (prescription: IPrescriptions) => {
 
-    const volAgua: number = getAgua(prescription)
+    const volAgua: number = getAgua(prescription).volumen
     const oligoelementos: number = parseInt(prescription?.req_elementos_traza)
     const vitaminas: number = parseInt(prescription?.req_vit_hidrosolubles) + parseInt(prescription?.req_vit_liposolubles)
 
@@ -46,7 +46,7 @@ export const alertVolTotal = (prescription: IPrescriptions) => {
 export const alertViaDeAdmin = (prescription: IPrescriptions) => {
 
     const viaAdmin: string = prescription?.via_administracion;
-    const osmolaridad: number = getOsmolaridad(prescription)
+    const osmolaridad: number = getOsmolaridad(prescription).volumen
 
     const resp: IAlarm = { value: 0, alert: '' };
     resp.value = 0
@@ -92,7 +92,7 @@ export const alertRelacion_Calcio_Fosfato = (prescription: IPrescriptions) => {
 
 export const alertFactorDePrecipitacion = (prescription: IPrescriptions) => {
 
-    const concDeProteinas: number = getConcentracionDeProteinas(prescription);
+    const concDeProteinas: number = getConcentracionDeProteinas(prescription).volumen;
 
     const tp: string = prescription?.tipo_prescripcion!;
     const tipofosfato: string = prescription?.fosfato!;
@@ -354,13 +354,13 @@ export const concCalcioMexcla = (prescription: IPrescriptions) => {
 
 export const concMaxCalcioSegura = (prescription: IPrescriptions) => {
 
-    if (getConcentracionDeProteinas(prescription) >= 1 || getConcentracionDeProteinas(prescription) <= 1.25) {
+    if (getConcentracionDeProteinas(prescription).volumen >= 1 || getConcentracionDeProteinas(prescription).volumen <= 1.25) {
         return 40
     }
-    if (getConcentracionDeProteinas(prescription) >= 1.25 || getConcentracionDeProteinas(prescription) <= 2.5) {
+    if (getConcentracionDeProteinas(prescription).volumen >= 1.25 || getConcentracionDeProteinas(prescription).volumen <= 2.5) {
         return 70
     }
-    if (getConcentracionDeProteinas(prescription) >= 2.5) {
+    if (getConcentracionDeProteinas(prescription).volumen >= 2.5) {
         return 112
     }
 }
@@ -376,7 +376,7 @@ export const concFosfatoMexcla = (prescription: IPrescriptions) => {
     // //    fosfato = parseFloat(prescription?.magnesio!);
     //    fosfato = getFosforo(prescription!).requerimiento;
     // } else {
-    fosfato = getFosforo(prescription!).volumen;
+    fosfato = getFosfatoSodio(prescription!).volumen;
     // };
 
     const volTotalNPT: number = prescription?.volumen;
@@ -386,13 +386,13 @@ export const concFosfatoMexcla = (prescription: IPrescriptions) => {
 
 export const concMaxFosfatoSegura = (prescription: IPrescriptions) => {
 
-    if (getConcentracionDeProteinas(prescription) >= 1 || getConcentracionDeProteinas(prescription) <= 1.25) {
+    if (getConcentracionDeProteinas(prescription).volumen >= 1 || getConcentracionDeProteinas(prescription).volumen <= 1.25) {
         return 25
     }
-    if (getConcentracionDeProteinas(prescription) >= 1.25 || getConcentracionDeProteinas(prescription) <= 2.5) {
+    if (getConcentracionDeProteinas(prescription).volumen >= 1.25 || getConcentracionDeProteinas(prescription).volumen <= 2.5) {
         return 30
     }
-    if (getConcentracionDeProteinas(prescription) >= 2.5) {
+    if (getConcentracionDeProteinas(prescription).volumen >= 2.5) {
         return 48
     }
 }
