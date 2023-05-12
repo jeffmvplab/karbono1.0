@@ -1,7 +1,7 @@
 import { Grid, Typography, Box, Stack, Skeleton } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import { ReportesContext } from '../context/ReportesContext';
-import { IParamNumeric, getAgua, getAminoacidos, getCalcio, getDextrosa, getDipeptiven, getFosforo, getLipidos, getMagnesio, getOmegaven, getPotacio, getSodio, getVit_C } from '../data/functionsParams';
+import { IParamNumeric, getAgua, getAminoacidos, getCalcio, getDextrosa, getDipeptiven, getFosforo, getLipidos, getMagnesio, getOligoelementos, getOmegaven, getPotacio, getSodio, getVitHidroSolubles, getVitLiposSolubles, getVit_C } from '../data/functionsParams';
 
 const ReportesMicronutrientes = () => {
 
@@ -144,19 +144,19 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {reporte?.req_elementos_traza}
+                                    {getOligoelementos(reporte!).volumen.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                     {reporte?.req_vit_hidrosolubles}
+                                     {getVitHidroSolubles(reporte!).volumen.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {reporte?.req_vit_liposolubles}
+                                    {getVitLiposSolubles(reporte!).volumen.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -211,19 +211,19 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {reporte?.req_elementos_traza}
+                                    {getOligoelementos(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                     {reporte?.req_vit_hidrosolubles}
+                                     {getVitHidroSolubles(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {reporte?.req_vit_liposolubles}
+                                    {getVitLiposSolubles(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
