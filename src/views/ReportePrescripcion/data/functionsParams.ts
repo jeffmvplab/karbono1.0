@@ -288,12 +288,12 @@ export const getLipidos = (prescription: IPrescriptions) => {
     const peso: number = prescription?.peso!;
 
     if (tp === tipoPrescripcion) {
-        params.volumen = lipidos * peso / concSinLipidos
+        params.volumen = (lipidos * peso / concSinLipidos)-(getVitLiposSolubles(prescription).volumen/2)
         params.requerimiento = lipidos
         params.conPurga = params.volumen * correccionPurga(prescription);
     } else {
         params.requerimiento = lipidos * concSinLipidos / peso;
-        params.volumen = lipidos
+        params.volumen = (lipidos)-(getVitLiposSolubles(prescription).volumen/2)
         params.conPurga = params.volumen * correccionPurga(prescription);
     }
 
@@ -505,7 +505,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
     // }
 
     params.conPurga =
-        ((getDextrosa(prescription!).conPurga * 2780)
+        (     (getDextrosa(prescription!).conPurga * 2780)
             + (getAminoacidos(prescription!).conPurga * 1505)
             + (getLipidos(prescription!).conPurga * 290)
             + (getOmegaven(prescription!).conPurga * 273)
@@ -525,7 +525,8 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
             + (getVit_C(prescription!).conPurga * 1740)
             + (parseFloat(prescription?.acido_folico!) * 227)
             + (volAgua * 1))
-        / (volTotalNPT + prescription?.purga)
+        / (volTotalNPT)
+        
     return params;
 }
 
