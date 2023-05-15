@@ -288,12 +288,12 @@ export const getLipidos = (prescription: IPrescriptions) => {
     const peso: number = prescription?.peso!;
 
     if (tp === tipoPrescripcion) {
-        params.volumen = (lipidos * peso / concSinLipidos)-(getVitLiposSolubles(prescription).volumen/2)
+        params.volumen = (lipidos * peso / concSinLipidos)
         params.requerimiento = lipidos
         params.conPurga = params.volumen * correccionPurga(prescription);
     } else {
         params.requerimiento = lipidos * concSinLipidos / peso;
-        params.volumen = (lipidos)-(getVitLiposSolubles(prescription).volumen/2)
+        params.volumen = (lipidos)
         params.conPurga = params.volumen * correccionPurga(prescription);
     }
 
