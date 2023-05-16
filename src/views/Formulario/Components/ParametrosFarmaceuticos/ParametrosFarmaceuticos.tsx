@@ -75,8 +75,15 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 
 					<TextParamsString
 						title={'Factor de precipitación: '}
-						value={alertFactorDePrecipitacion(prescriptionSave!).value.toFixed(2)}
-						seguridad={alertFactorDePrecipitacion(prescriptionSave!).alert}
+						value={(alertFactorDePrecipitacion(prescriptionSave!).value!==0)
+							   ?alertFactorDePrecipitacion(prescriptionSave!).value.toFixed(2)
+							   :'-'
+							}
+						seguridad={
+							(alertFactorDePrecipitacion(prescriptionSave!).value!==0)
+							?alertFactorDePrecipitacion(prescriptionSave!).alert
+							:''
+						}
 					/>
 
 

@@ -29,14 +29,16 @@ const TextParamsString: React.FC<TextParamsStringProps> = ({
 			}}>
 			{(isNaN(value))?'-':value} 
 			</Typography>
-			<Typography
+			
+			{(seguridad!=='')
+			&&<Typography
 			style={{
 				fontSize:'14px',
 				fontWeight: 500,
 				color: (seguridad==='SEGURA'||seguridad==='ADECUADA') ?'#66D84A':'#FF2525' ,
 			}}>
 		   {seguridad}
-			</Typography>
+			</Typography>}
 			<Typography fontSize={'14px'} style={{ fontWeight: 500, }}>
 				{
 					(unidad === '' || unidad === undefined)
