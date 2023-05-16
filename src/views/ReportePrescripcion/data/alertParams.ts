@@ -105,12 +105,13 @@ export const alertFactorDePrecipitacion = (prescription: IPrescriptions) => {
     //     calcio = parseFloat(prescription?.req_calcio);
     //     fosfato_de_potasio = parseFloat(prescription?.req_fosfato);
     // } else {
-    if (tipofosfato === 'Fosfato de potacio') {
+    if (tipofosfato === 'Fosfato de potasio') {
         calcio = getCalcio(prescription!).volumen;
         fosfato_de_potasio = getFosfatoPotacio(prescription!).volumen;
         factor= ((calcio * 0.465) + (fosfato_de_potasio * 2.6)) * 100 / (volTotalNPT - (calcio + fosfato_de_potasio));
+        // console.log('Factor Precipitacion:',factor)
     }else{
-        factor= 0;
+        factor;
     }
     // }
 
