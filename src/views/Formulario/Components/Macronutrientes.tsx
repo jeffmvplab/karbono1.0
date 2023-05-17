@@ -28,8 +28,6 @@ const aminoPediatrico = [
     // { value: 'Trophamine', label: 'Trophamine' },
 ]
 
-
-
 const tiposLipidos = [
     { value: 'Smoflipid', label: 'Smoflipid 20%' },
     { value: 'Clinoleic', label: 'Clinoleic 20%' },
@@ -44,7 +42,6 @@ const Macronutrientes = () => {
 
     const {
         tipoPaciente,
-
         stateAcordion2, setStateAcordion2, matches, handleAcordion2,
         tipoPrescripcion,handleTipoPrescripcion,
         flujoMetabolico, handleFlujoMetabolico,

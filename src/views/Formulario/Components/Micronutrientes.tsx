@@ -43,7 +43,7 @@ const hidrosolublesAdulto = [
 ]
 const hidrosolublesPediatricos = [
     { value: 'Soluvit', label: 'Soluvit' },
-    { value: 'Multi12Potasio', label: 'Multi12Potasio' }
+    { value: 'Multi12Potasio', label: 'Multi12K1' }
 ]
 
 
