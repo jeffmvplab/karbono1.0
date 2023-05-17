@@ -206,6 +206,7 @@ export const getVit_C = (prescription: IPrescriptions) => {
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
 
+
     if (tp === tipoPrescripcion) {
         params.volumen = parseFloat(vitC) / 100
         params.requerimiento = parseFloat(vitC);
@@ -237,6 +238,9 @@ export const getDextrosa = (prescription: IPrescriptions) => {
         params.volumen = dextrosa
         params.conPurga = params.volumen * correccionPurga(prescription);
     }
+    // console.log('Flujo Metabolico Vol:', params.volumen,'Flujo Metabolico Req:',params.requerimiento)
+    // console.log('Dextrosa Vol:', params.volumen,'Dextrosa Req:',params.requerimiento)
+
     return params;
 }
 
@@ -284,7 +288,7 @@ export const getLipidos = (prescription: IPrescriptions) => {
 
     const tp: string = prescription?.tipo_prescripcion!;
     const lipidos: number = parseFloat(prescription?.req_lipidos);
-    const concSinLipidos: number =0.2;
+    const concSinLipidos: number = 0.2;
     const peso: number = prescription?.peso!;
 
     if (tp === tipoPrescripcion) {
@@ -296,9 +300,6 @@ export const getLipidos = (prescription: IPrescriptions) => {
         params.volumen = (lipidos)
         params.conPurga = params.volumen * correccionPurga(prescription);
     }
-
-    // console.log('Lipidos:',params.volumen)
-
     return params;
 }
 
@@ -309,6 +310,7 @@ export const getOmegaven = (prescription: IPrescriptions) => {
     const omegaven: number = parseFloat(prescription?.omegaven!);
     const concSinOmegaven: number = 0.1;
     const peso: number = prescription?.peso!;
+
 
     if (tp === tipoPrescripcion) {
         params.volumen = omegaven * peso / concSinOmegaven;
@@ -381,7 +383,7 @@ export const getAgua = (prescription: IPrescriptions) => {
 
     const volTotalNPT: number = prescription?.volumen!
     const vitaminas: number = getVitHidroSolubles(prescription!).volumen
-                         + getVitLiposSolubles(prescription!).volumen
+        + getVitLiposSolubles(prescription!).volumen
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
 
@@ -399,14 +401,14 @@ export const getAgua = (prescription: IPrescriptions) => {
     params.conPurga = params.volumen * correccionPurga(prescription);
     // }
 
-    console.log('COSAS:',
-        getDextrosa(prescription!).volumen, getLipidos(prescription!).volumen
-        , getAminoacidos(prescription!).volumen, getDipeptiven(prescription!).volumen
-        , getOmegaven(prescription!).volumen, getSodio(prescription!).volumen
-        , getPotacio(prescription!).volumen, getFosforo(prescription!).volumen
-        , getMagnesio(prescription!).volumen, getCalcio(prescription!).volumen
-        , getOligoelementos(prescription).volumen, vitaminas
-        , getVit_C(prescription!).volumen, parseFloat(prescription?.acido_folico!));
+    // console.log('COSAS:',
+    //     getDextrosa(prescription!).volumen, getLipidos(prescription!).volumen
+    //     , getAminoacidos(prescription!).volumen, getDipeptiven(prescription!).volumen
+    //     , getOmegaven(prescription!).volumen, getSodio(prescription!).volumen
+    //     , getPotacio(prescription!).volumen, getFosforo(prescription!).volumen
+    //     , getMagnesio(prescription!).volumen, getCalcio(prescription!).volumen
+    //     , getOligoelementos(prescription).volumen, vitaminas
+    //     , getVit_C(prescription!).volumen, parseFloat(prescription?.acido_folico!));
 
     return params;
 }
@@ -416,7 +418,7 @@ export const getVolTotal = (prescription: IPrescriptions) => {
 
     const volAgua: number = getAgua(prescription).volumen
     const vitaminas: number = getVitHidroSolubles(prescription!).volumen
-                            + getVitLiposSolubles(prescription!).volumen
+        + getVitLiposSolubles(prescription!).volumen
     let volTotal: number = 0;
 
 
@@ -430,7 +432,7 @@ export const getVolTotal = (prescription: IPrescriptions) => {
         + getVit_C(prescription!).volumen
         + parseFloat(prescription?.acido_folico!)
 
-    console.log('Volumen Total:', volTotal)
+    // console.log('Volumen Total:', volTotal)
 
     return volTotal;
 }
@@ -454,11 +456,29 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
     const tipo_paciente: string = prescription?.tipo_paciente!;
 
     const vit_hidrosoluble: string = prescription?.vit_hidrosolubles!;
+    const aminoacidos: string = prescription?.aminoacidos
+
+    console.log('Amino:',aminoacidos)
+    
+    const travasol: number = (aminoacidos === 'TravasolPlus')
+        ? getAminoacidos(prescription!).volumen  : 0;
+    const primene: number = (aminoacidos === 'Primene')
+        ? getAminoacidos(prescription!).volumen  : 0;
+    const aminovenInfantils: number = (aminoacidos === 'Aminoven' && tipo_paciente === 'Pediatrico')
+        ? getAminoacidos(prescription!).volumen  : 0;
+    const aminovenAdulto: number = (aminoacidos === 'Aminoven' && tipo_paciente === 'Adulto')
+        ? getAminoacidos(prescription!).volumen  : 0;
+    const aminoPlasmalCE: number = (aminoacidos === 'Aminoplasmal' && tipo_paciente === 'Adulto')
+        ? getAminoacidos(prescription!).volumen  : 0;
+    const aminoPlasmalSE: number = (aminoacidos === 'Aminoplasmal' && tipo_paciente === 'Pediatrico')
+        ? getAminoacidos(prescription!).volumen  : 0;
 
     const cernevit: number = (vit_hidrosoluble === 'Cernevit')
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
+
     const soluvit: number = (vit_hidrosoluble === 'Soluvit')
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
+
     const multi12K: number = (vit_hidrosoluble === 'Multi12Potasio')
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
 
@@ -482,7 +502,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
 
     params.volumen =
         ((getDextrosa(prescription!).volumen * 2780)
-            + (getAminoacidos(prescription!).volumen * 1505)
+            // + (getAminoacidos(prescription!).volumen * 1505)
             + (getLipidos(prescription!).volumen * 290)
             + (getOmegaven(prescription!).volumen * 273)
             + (getDipeptiven(prescription!).volumen * 921)
@@ -491,6 +511,13 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
             + (getFosforo(prescription!).volumen * 2570)
             + (getCalcio(prescription!).volumen * 626)
             + (getMagnesio(prescription!).volumen * 1623)
+            + (travasol*1357)
+            + (primene*780)
+            + (aminovenInfantils*885)
+            + (aminovenAdulto*1505)
+            + (aminoPlasmalCE*1030)
+            + (aminoPlasmalSE*864)
+            
             + (volOligoNulanza * 2500)
             + (volOligoSensitrace * 100)
             + (cernevit * 4820)
@@ -505,7 +532,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
     // }
 
     params.conPurga =
-        (     (getDextrosa(prescription!).conPurga * 2780)
+        ((getDextrosa(prescription!).conPurga * 2780)
             + (getAminoacidos(prescription!).conPurga * 1505)
             + (getLipidos(prescription!).conPurga * 290)
             + (getOmegaven(prescription!).conPurga * 273)
@@ -526,7 +553,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
             + (parseFloat(prescription?.acido_folico!) * 227)
             + (volAgua * 1))
         / (volTotalNPT)
-        
+
     return params;
 }
 
