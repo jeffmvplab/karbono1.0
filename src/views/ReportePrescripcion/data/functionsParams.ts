@@ -458,20 +458,21 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
     const vit_hidrosoluble: string = prescription?.vit_hidrosolubles!;
     const aminoacidos: string = prescription?.aminoacidos
 
-    console.log('Amino:',aminoacidos)
-    
+    console.log('Amino:', aminoacidos)
+
+    const aminovenAdulto: number = (aminoacidos === 'AminovenSE')
+        ? getAminoacidos(prescription!).volumen : 0;
     const travasol: number = (aminoacidos === 'TravasolPlus')
-        ? getAminoacidos(prescription!).volumen  : 0;
+        ? getAminoacidos(prescription!).volumen : 0;
+    const aminoPlasmalCE: number = (aminoacidos === 'Aminoplasmal SE')
+        ? getAminoacidos(prescription!).volumen : 0;
+    const aminoPlasmalSE: number = (aminoacidos === 'Aminoplasmal CE')
+        ? getAminoacidos(prescription!).volumen : 0;
+
+    const aminovenInfantils: number = (aminoacidos === 'Aminoven Infantil')
+        ? getAminoacidos(prescription!).volumen : 0;
     const primene: number = (aminoacidos === 'Primene')
-        ? getAminoacidos(prescription!).volumen  : 0;
-    const aminovenInfantils: number = (aminoacidos === 'Aminoven' && tipo_paciente === 'Pediatrico')
-        ? getAminoacidos(prescription!).volumen  : 0;
-    const aminovenAdulto: number = (aminoacidos === 'Aminoven' && tipo_paciente === 'Adulto')
-        ? getAminoacidos(prescription!).volumen  : 0;
-    const aminoPlasmalCE: number = (aminoacidos === 'Aminoplasmal' && tipo_paciente === 'Adulto')
-        ? getAminoacidos(prescription!).volumen  : 0;
-    const aminoPlasmalSE: number = (aminoacidos === 'Aminoplasmal' && tipo_paciente === 'Pediatrico')
-        ? getAminoacidos(prescription!).volumen  : 0;
+        ? getAminoacidos(prescription!).volumen : 0;
 
     const cernevit: number = (vit_hidrosoluble === 'Cernevit')
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
@@ -511,13 +512,13 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
             + (getFosforo(prescription!).volumen * 2570)
             + (getCalcio(prescription!).volumen * 626)
             + (getMagnesio(prescription!).volumen * 1623)
-            + (travasol*1357)
-            + (primene*780)
-            + (aminovenInfantils*885)
-            + (aminovenAdulto*1505)
-            + (aminoPlasmalCE*1030)
-            + (aminoPlasmalSE*864)
-            
+            + (travasol * 1357)
+            + (primene * 780)
+            + (aminovenInfantils * 885)
+            + (aminovenAdulto * 1505)
+            + (aminoPlasmalCE * 1030)
+            + (aminoPlasmalSE * 864)
+
             + (volOligoNulanza * 2500)
             + (volOligoSensitrace * 100)
             + (cernevit * 4820)
