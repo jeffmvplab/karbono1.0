@@ -74,7 +74,7 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 					/> */}
 					<TextParamsNumb
 						title={'Osmolaridad: '}
-						value={getOsmolaridad(prescriptionSave!).conPurga.toFixed(2)}
+						value={getOsmolaridad(prescriptionSave!).volumen.toFixed(2)}
 					/>
 					<TextParamsString
 						title={'Relación calcio/fosfato: '}
