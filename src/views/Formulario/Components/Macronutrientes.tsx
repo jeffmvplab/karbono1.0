@@ -14,26 +14,29 @@ const tipoPrescripciones = [
 ]
 
 const aminoAdultos = [
-    { value: 'Aminoven', label: 'Aminoven 15%' },
-    { value: 'TravasolPlus', label: 'TravasolPlus 15%' },
-    { value: 'Aminoplasmal', label: 'Aminoplasmal 15%' },
-    { value: 'Aminosteril', label: 'Aminosteril N-Hepa 8%' },
+    { value: 'AminovenSE', label: 'Aminoven 15% SE' },
+    { value: 'TravasolPlus', label: 'TravasolPlus 15% SE' },
+    { value: 'Aminoplasmal SE', label: 'Aminoplasmal 10% SE' },
+    { value: 'Aminoplasmal CE', label: 'Aminoplasmal 10% CE' },
+    // { value: 'Aminosteril', label: 'Aminosteril N-Hepa 8%' },
 ]
 
 const aminoPediatrico = [
-    { value: 'Aminoven', label: 'Aminoven 10%' },
-    { value: 'Aminoplasmal', label: 'Aminoplasmal 10%' },
-    { value: 'Trophamine', label: 'Trophamine' },
+    { value: 'Aminoven Infantil', label: 'Aminoven Inft 10% SE' },
+    { value: 'Primene', label: 'Primene 10% SE' },
+    // { value: 'Aminoplasmal', label: 'Aminoplasmal 10%' },
+    // { value: 'Trophamine', label: 'Trophamine' },
 ]
 
 
 
 const tiposLipidos = [
-    { value: 'Smoflipid', label: 'Smoflipid' },
-    { value: 'Clinoleic', label: 'Clinoleic' },
-    { value: 'Lipovenoes', label: 'Lipovenoes' },
-    { value: 'LipovenoesMCT', label: 'LipovenoesMCT' },
-    { value: 'Fresomega', label: 'Fresomega' },
+    { value: 'Smoflipid', label: 'Smoflipid 20%' },
+    { value: 'Clinoleic', label: 'Clinoleic 20%' },
+    { value: 'Lipoplus', label: 'Lipoplus 20%' },
+    // { value: 'Lipovenoes', label: 'Lipovenoes' },
+    // { value: 'LipovenoesMCT', label: 'LipovenoesMCT' },
+    // { value: 'Fresomega', label: 'Fresomega' },
 ]
 
 
