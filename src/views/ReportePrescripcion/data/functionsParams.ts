@@ -463,7 +463,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
 
     console.log('Amino:', aminoacidos)
 
-    const aminovenAdulto: number = (aminoacidos === 'AminovenSE')
+    const aminovenSE: number = (aminoacidos === 'AminovenSE')
         ? getAminoacidos(prescription!).volumen : 0;
     const travasol: number = (aminoacidos === 'TravasolPlus')
         ? getAminoacidos(prescription!).volumen : 0;
@@ -518,10 +518,9 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
             + (travasol * 1357)
             + (primene * 780)
             + (aminovenInfantils * 885)
-            + (aminovenAdulto * 1505)
+            + (aminovenSE * 1505)
             + (aminoPlasmalCE * 1030)
             + (aminoPlasmalSE * 864)
-
             + (volOligoNulanza * 2500)
             + (volOligoSensitrace * 100)
             + (cernevit * 4820)
@@ -532,7 +531,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
             + (getVit_C(prescription!).volumen * 1740)
             + (parseFloat(prescription?.acido_folico!) * 227)
             + (volAgua * 1))
-        / (volTotalNPT + prescription?.purga)
+        / (volTotalNPT)
     // }
 
     params.conPurga =
