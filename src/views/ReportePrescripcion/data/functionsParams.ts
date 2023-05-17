@@ -250,11 +250,14 @@ export const concAminoacidos = (prescription: IPrescriptions) => {
     let concSinAminoacidos: number = 0;
     const tipoPaciente: string = prescription?.tipo_paciente!;
 
-    if (tipoAminoacidos === 'Aminoven') { if (tipoPaciente === 'Adulto') { concSinAminoacidos = 0.15 } else { concSinAminoacidos = 0.1 } }
+    if (tipoAminoacidos === 'AminovenSE') {  concSinAminoacidos = 0.15  }
     if (tipoAminoacidos === 'TravasolPlus') { concSinAminoacidos = 0.15 }
-    if (tipoAminoacidos === 'Aminoplasmal') { if (tipoPaciente === 'Adulto') { concSinAminoacidos = 0.15 } else { concSinAminoacidos = 0.1 } }
-    if (tipoAminoacidos === 'Aminosteril') { concSinAminoacidos = 0.08 }
-    if (tipoAminoacidos === 'Trophamine') { concSinAminoacidos = 1 }
+    if (tipoAminoacidos === 'Aminoplasmal SE') { concSinAminoacidos = 0.1 }
+    if (tipoAminoacidos === 'Aminoplasmal CE') { concSinAminoacidos = 0.1 }
+    if (tipoAminoacidos === 'Aminoven Infantil') { concSinAminoacidos = 0.1 }
+    if (tipoAminoacidos === 'Primene') { concSinAminoacidos = 0.1 }
+    // if (tipoAminoacidos === 'Aminosteril') { concSinAminoacidos = 0.08 }
+    // if (tipoAminoacidos === 'Trophamine') { concSinAminoacidos = 1 }
 
     return concSinAminoacidos;
 }
