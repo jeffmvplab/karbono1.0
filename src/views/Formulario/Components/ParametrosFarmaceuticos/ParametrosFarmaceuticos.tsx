@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 import { param_farmaceuticos } from '../../data/data';
 import { TextParamsNumb } from '../TextParamsNumb';
 import { FormulariosContext } from '../../context/FormulariosContext';
-import { alarmConcCHOS, alarmConcDeLipidos, alarmConcDeProteinas, alarmConcMagnesio, alarmConcPotasio, alarmConcSodio, alertFactorDePrecipitacion, alertRelacion_Calcio_Fosfato, alertVelInfucion, alertViaDeAdmin, alertVolTotal } from '@/views/ReportePrescripcion/data/alertParams';
+import { alarmConcCHOS, alarmConcDeLipidos, alarmConcDeProteinas, alarmConcMagnesio, alarmConcPotasio, alarmConcSodio, alarmaAgua, alertFactorDePrecipitacion, alertRelacion_Calcio_Fosfato, alertVelInfucion, alertViaDeAdmin, alertVolTotal } from '@/views/ReportePrescripcion/data/alertParams';
 import { TextParamsString } from '../TextParamsString';
 import { getOsmolaridad } from '@/views/ReportePrescripcion/data/functionsParams';
 
@@ -49,8 +49,17 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 						title={'Volumen: '}
 						value={alertVolTotal(prescriptionSave!).toFixed(2)}
 						unidad={'ml'}
-						// seguridad={'Seguro'}
+					// seguridad={'Seguro'}
 					/>
+					<TextParamsString
+						title={'Agua: '}
+						value={(alarmaAgua (prescriptionSave!).value !== 0)
+							? alarmaAgua (prescriptionSave!).value.toFixed(2)
+							: '-'
+						}
+						seguridad={alarmaAgua(prescriptionSave!).alert}
+						/>
+					
 					<TextParamsString
 						title={'Via de administración: '}
 						seguridad={alertViaDeAdmin(prescriptionSave!).alert}
@@ -75,14 +84,14 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 
 					<TextParamsString
 						title={'Factor de precipitación: '}
-						value={(alertFactorDePrecipitacion(prescriptionSave!).value!==0)
-							   ?alertFactorDePrecipitacion(prescriptionSave!).value.toFixed(2)
-							   :'-'
-							}
+						value={(alertFactorDePrecipitacion(prescriptionSave!).value !== 0)
+							? alertFactorDePrecipitacion(prescriptionSave!).value.toFixed(2)
+							: '-'
+						}
 						seguridad={
-							(alertFactorDePrecipitacion(prescriptionSave!).value!==0)
-							?alertFactorDePrecipitacion(prescriptionSave!).alert
-							:''
+							(alertFactorDePrecipitacion(prescriptionSave!).value !== 0)
+								? alertFactorDePrecipitacion(prescriptionSave!).alert
+								: ''
 						}
 					/>
 

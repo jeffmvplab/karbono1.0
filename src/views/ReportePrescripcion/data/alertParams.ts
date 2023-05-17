@@ -1,9 +1,39 @@
 import { IPrescriptions } from "@/domain/models/prescriptions.model"
-import { concAminoacidos, getAgua, getAminoacidos, getCalcio, getConcentracionDeProteinas, getDextrosa, getDipeptiven, getFosfatoPotacio, getFosfatoSodio, getFosforo, getLipidos, getMagnesio, getOmegaven, getOsmolaridad, getPotacio, getSodio, getVit_C, tipoPrescripcion } from "./functionsParams"
+import { IParamFunc, concAminoacidos, getAgua, getAminoacidos, getCalcio, getConcentracionDeProteinas, getDextrosa, getDipeptiven, getFosfatoPotacio, getFosfatoSodio, getFosforo, getLipidos, getMagnesio, getOligoelementos, getOmegaven, getOsmolaridad, getPotacio, getSodio, getVitHidroSolubles, getVitLiposSolubles, getVit_C, tipoPrescripcion } from "./functionsParams"
 
 export interface IAlarm {
     value: number,
     alert: string,
+}
+///////////////////////////////////ALARMA AGUA/////////////////////////////////
+
+
+export const alarmaAgua = (prescription: IPrescriptions) => {
+
+    const volTotalNPT: number = prescription?.volumen!
+    const vitaminas: number = getVitHidroSolubles(prescription!).volumen
+        + getVitLiposSolubles(prescription!).volumen
+
+
+    const resp: IAlarm = { value: 0, alert: '' };
+
+   resp.value = volTotalNPT - (
+        getDextrosa(prescription!).volumen + getLipidos(prescription!).volumen
+        + getAminoacidos(prescription!).volumen + getDipeptiven(prescription!).volumen
+        + getOmegaven(prescription!).volumen + getSodio(prescription!).volumen
+        + getPotacio(prescription!).volumen + getFosforo(prescription!).volumen
+        + getMagnesio(prescription!).volumen + getCalcio(prescription!).volumen
+        + getOligoelementos(prescription).volumen + vitaminas
+        + getVit_C(prescription!).volumen + parseFloat(prescription?.acido_folico!)
+    );
+   
+    if ( resp.value > 0) {
+        resp.alert = 'ADECUADA';
+    } else {
+        resp.alert = 'INADECUADA';
+    }
+    
+    return resp;
 }
 
 /////////////////////////////ALARMAS PARAMETROS FARMACEUTICOS////////////////////////////////////////////////////
@@ -53,7 +83,7 @@ export const alertViaDeAdmin = (prescription: IPrescriptions) => {
 
 
     if (viaAdmin === 'Periférica') {
-        if (osmolaridad <= 800) {
+        if (osmolaridad <= 799) {
             resp.alert = 'ADECUADA';
         } else {
             resp.alert = 'INADECUADA';
@@ -76,7 +106,7 @@ export const alertRelacion_Calcio_Fosfato = (prescription: IPrescriptions) => {
     const PO4: number = concFosfatoMexcla(prescription);
     const CPO4: number = concMaxFosfatoSegura(prescription)!;
 
-    console.log('Rel  :', 'Ca', Ca, '<=', 'CCamax:', CCamax, 'PO4', PO4, '<=', 'CPO4:', CPO4,)
+    // console.log('Rel  :', 'Ca', Ca, '<=', 'CCamax:', CCamax, 'PO4', PO4, '<=', 'CPO4:', CPO4,)
 
     if (PO4 !== 0 && Ca !== 0) {
         if (Ca <= CCamax || PO4 <= CPO4) {

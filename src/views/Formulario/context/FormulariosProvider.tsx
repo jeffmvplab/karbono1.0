@@ -437,7 +437,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [flujoMetabolico, setFlujoMetabolico] = React.useState('');
+	const [flujoMetabolico, setFlujoMetabolico] = React.useState('0');
 	const [errorFlujoMetabolico, setErrorFlujoMetabolico] = React.useState(false);
 	const [messageErrorFlujoMetabolico, setMessageErrorFlujoMetabolico] = React.useState('');
 
@@ -446,7 +446,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [dextrosa, setDextrosa] = React.useState('');
+	const [dextrosa, setDextrosa] = React.useState('0');
 	const [errorDextrosa, setErrorDextrosa] = React.useState(false);
 	const [messageErrorDextrosa, setMessageErrorDextrosa] = React.useState('');
 
@@ -464,7 +464,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [requerimientoAminoacidos, setRequerimientoAminoacidos] = React.useState('');
+	const [requerimientoAminoacidos, setRequerimientoAminoacidos] = React.useState('0');
 	const [errorRequerimientoAminoacidos, setErrorRequerimientoAminoacidos] = React.useState(false);
 	const [messageErrorRequerimientoAminoacidos, setMessageErrorRequerimientoAminoacidos] = React.useState('');
 
@@ -482,7 +482,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [requerimientoLipidos, setRequerimientoLipidos] = React.useState('');
+	const [requerimientoLipidos, setRequerimientoLipidos] = React.useState('0');
 	const [errorRequerimientoLipidos, setErrorRequerimientoLipidos] = React.useState(false);
 	const [messageErrorRequerimientoLipidos, setMessageErrorRequerimientoLipidos] = React.useState('');
 
@@ -491,16 +491,16 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [omegaven, setOmegaven] = React.useState('');
+	const [omegaven, setOmegaven] = React.useState('0');
 	const [errorOmegaven, setErrorOmegaven] = React.useState(false);
 	const [messageErrorOmegaven, setMessageErrorOmegaven] = React.useState('');
 
 	const handleOmegaven = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setOmegaven(event.target.value);
-		// getPrescriptions();
+		console.log('PP:',event.target.value)
 	};
 
-	const [dipeptiven, setDipeptiven] = React.useState('');
+	const [dipeptiven, setDipeptiven] = React.useState('0');
 	const [errorDipeptiven, setErrorDipeptiven] = React.useState(false);
 	const [messageErrorDipeptiven, setMessageErrorDipeptiven] = React.useState('');
 
@@ -511,7 +511,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	////////////////////MICRONURIENTES////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////
-	const [sodioTotal, setSodioTotal] = React.useState('');
+	const [sodioTotal, setSodioTotal] = React.useState('0');
 	const [errorSodioTotal, setErrorSodioTotal] = React.useState(false);
 	const [messageErrorSodioTotal, setMessageErrorSodioTotal] = React.useState('');
 
@@ -520,7 +520,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [potacioTotal, setPotacioTotal] = React.useState('');
+	const [potacioTotal, setPotacioTotal] = React.useState('0');
 	const [errorPotacioTotal, setErrorPotacioTotal] = React.useState(false);
 	const [messageErrorPotacioTotal, setMessageErrorPotacioTotal] = React.useState('');
 
@@ -538,7 +538,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [requerimientoFosfato, setRequerimientoFosfato] = React.useState('');
+	const [requerimientoFosfato, setRequerimientoFosfato] = React.useState('0');
 	const [errorRequerimientoFosfato, setErrorRequerimientoFosfato] = React.useState(false);
 	const [messageErrorRequerimientoFosfato, setMessageErrorRequerimientoFosfato] = React.useState('');
 
@@ -565,7 +565,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [reqCalcio, setReqCalcio] = React.useState('');
+	const [reqCalcio, setReqCalcio] = React.useState('0');
 	const [errorReqCalcio, setErrorReqCalcio] = React.useState(false);
 	const [messageErrorReqCalcio, setMessageErrorReqCalcio] = React.useState('');
 
@@ -584,7 +584,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [reqMagnesio, setReqMagnesio] = React.useState('');
+	const [reqMagnesio, setReqMagnesio] = React.useState('0');
 	const [errorReqMagnesio, setErrorReqMagnesio] = React.useState(false);
 	const [messageErrorReqMagnesio, setMessageErrorReqMagnesio] = React.useState('');
 
@@ -602,7 +602,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [reqTraza, setReqTraza] = React.useState('');
+	const [reqTraza, setReqTraza] = React.useState('0');
 	const [errorReqTraza, setErrorReqTraza] = React.useState(false);
 	const [messageErrorReqTraza, setMessageErrorReqTraza] = React.useState('');
 
@@ -620,7 +620,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [reqVitHidrosolubles, setReqVitHidrosolubles] = React.useState('');
+	const [reqVitHidrosolubles, setReqVitHidrosolubles] = React.useState('0');
 	const [errorReqVitHidrosolubles, setErrorReqVitHidrosolubles] = React.useState(false);
 	const [messageErrorReqVitHidrosolubles, setMessageErrorReqVitHidrosolubles] = React.useState('');
 
@@ -629,7 +629,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [vitaminasLiposolubles, setVitaminasLiposolubles] = React.useState('');
+	const [vitaminasLiposolubles, setVitaminasLiposolubles] = React.useState('0');
 	const [errorVitaminasLiposolubles, setErrorVitaminasLiposolubles] = React.useState(false);
 	const [messageErrorVitaminasLiposolubles, setMessageErrorVitaminasLiposolubles] = React.useState('');
 
@@ -638,7 +638,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [vitaminasC, setVitaminasC] = React.useState('');
+	const [vitaminasC, setVitaminasC] = React.useState('0');
 	const [errorVitaminasC, setErrorVitaminasC] = React.useState(false);
 	const [messageErrorVitaminasC, setMessageErrorVitaminasC] = React.useState('');
 
@@ -647,7 +647,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [acidoFolico, setAcidoFolico] = React.useState('');
+	const [acidoFolico, setAcidoFolico] = React.useState('0');
 	const [errorAcidoFolico, setErrorAcidoFolico] = React.useState(false);
 	const [messageErrorAcidoFolico, setMessageErrorAcidoFolico] = React.useState('');
 
@@ -660,10 +660,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	///////////////////////////////INTEGRACION DE APIS//////////////////
 	const prescriptionsData: IPrescriptions = {
 		no_orden: parseFloat(numOrder) || 0,
-		tipo_prescripcion: tipoPrescripcion || ' 0',
-		fecha: fechaCreacion || ' 0',
-		ips: ips || ' 0',
-		no_identificacion: numIden || ' 0',
+		tipo_prescripcion: tipoPrescripcion || '0',
+		fecha: fechaCreacion || '0',
+		ips: ips || '0',
+		no_identificacion: numIden || '0',
 		nombre_paciente: namePaciente||'',
 		servicio: servicio||'',
 		ubicacion: ubicacion||'',
@@ -680,29 +680,29 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		tipo_paciente: tipoPaciente||'',
 		via_administracion: viaAdmin||'',
 		diagnostico: diagnostico||'',
-		flujo_metabolico: flujoMetabolico || ' 0',
-		aminoacidos: aminoacidos || ' 0',
-		dextrosa: dextrosa || ' 0',
-		req_aminoacidos: requerimientoAminoacidos || ' 0',
-		lipidos: lipidos || ' 0',
-		req_lipidos: requerimientoLipidos || ' 0',
-		omegaven: omegaven || ' 0',
-		dipeptiven: dipeptiven || ' 0',
-		sodio_total: sodioTotal || ' 0',
-		potasio_total: potacioTotal || ' 0',
-		fosfato: fosfato||'0',
-		req_fosfato: requerimientoFosfato || ' 0',
-		calcio: calcio||'0',
-		req_calcio: reqCalcio || ' 0',
-		magnesio: magnesio||'0',
-		req_magnesio: reqMagnesio || ' 0',
+		flujo_metabolico:(flujoMetabolico==='')?'0':flujoMetabolico,
+		aminoacidos: aminoacidos || '0',
+		dextrosa:( dextrosa==='')?'0':dextrosa,
+		req_aminoacidos: (requerimientoAminoacidos==='')?'0':requerimientoAminoacidos,
+		lipidos: lipidos || '',
+		req_lipidos: (requerimientoLipidos==='')?'0':requerimientoLipidos,
+		omegaven: (omegaven===' ')?'0':omegaven,
+		dipeptiven: (dipeptiven===' ')?'0':dipeptiven,
+		sodio_total: (sodioTotal==='')?'0':sodioTotal,
+		potasio_total: (potacioTotal==='')?'0':potacioTotal,
+		fosfato: fosfato||' ',
+		req_fosfato: (requerimientoFosfato==='')?'0':requerimientoFosfato,
+		calcio: calcio||' ',
+		req_calcio: (reqCalcio==='')?'0':reqCalcio,
+		magnesio: magnesio||' ',
+		req_magnesio: (reqMagnesio==='')?'0':reqMagnesio,
 		elementos_traza: elementosTraza||'0',
-		req_elementos_traza: reqTraza || ' 0',
+		req_elementos_traza: (reqTraza===' ')?'0':reqTraza,
 		vit_hidrosolubles: vitaminasHidrosolubles||'0',
-		req_vit_hidrosolubles: reqVitHidrosolubles || ' 0',
-		req_vit_liposolubles: vitaminasLiposolubles || ' 0',
-		vit_C: vitaminasC || ' 0',
-		acido_folico: acidoFolico || ' 0'
+		req_vit_hidrosolubles:( reqVitHidrosolubles==='')?'0':reqVitHidrosolubles,
+		req_vit_liposolubles:( vitaminasLiposolubles==='')?'0':vitaminasLiposolubles,
+		vit_C: (vitaminasC==='')?'0':vitaminasC,
+		acido_folico: (acidoFolico===' ')?'0':acidoFolico
 	}
 
 	const [prescriptionSave, setPrescriptionSave] = React.useState<IPrescriptions | undefined>();
