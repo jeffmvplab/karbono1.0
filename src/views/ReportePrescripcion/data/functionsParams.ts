@@ -496,7 +496,8 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
     const elementos_traza: string = prescription?.elementos_traza!
 
     const volOligoNulanza: number = (elementos_traza === 'Nulanza')
-        ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
+        ? parseFloat(prescription?.req_elementos_traza!) : 0;
+
     const volOligoSensitrace: number = (elementos_traza === 'Sencitrace')
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
 
@@ -534,6 +535,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
         / (volTotalNPT)
 
         console.log( 
+    '////////////////OSMOLARIDAD/////////////////////',
         'Dextrosa:', (getDextrosa(prescription!).volumen ),
         // + (getAminoacidos(prescription!).volumen * 1505)
        'Lipidos:',(getLipidos(prescription!).volumen),
