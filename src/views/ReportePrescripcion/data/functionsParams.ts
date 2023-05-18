@@ -631,8 +631,8 @@ export const getGramosTotalesNitro = (prescription: IPrescriptions) => {
 
     const concSinAminoacidos = concAminoacidos(prescription);
 
-    params.volumen = (getAminoacidos(prescription!).volumen * concSinAminoacidos * 0.16) + (getDipeptiven(prescription!).volumen * 0.32)
-    params.conPurga = (getAminoacidos(prescription!).conPurga * concSinAminoacidos * 0.16) + (getDipeptiven(prescription!).conPurga * 0.32)
+    params.volumen = (getAminoacidos(prescription!).volumen * concSinAminoacidos * 0.16) + (getDipeptiven(prescription!).volumen * 0.032)
+    params.conPurga = (getAminoacidos(prescription!).conPurga * concSinAminoacidos * 0.16) + (getDipeptiven(prescription!).conPurga * 0.032)
 
     return params;
 }
