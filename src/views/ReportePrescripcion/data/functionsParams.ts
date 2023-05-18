@@ -152,7 +152,7 @@ export const getFosfatoPotacio = (prescription: IPrescriptions) => {
     const tipofosfato: string = prescription?.fosfato!;
     const peso: number = prescription?.peso!;
 
-    if (tipofosfato === 'Fosfato de potacio')
+    if (tipofosfato === 'Fosfato de potasio')
         if (tp === tipoPrescripcion) {
             params.volumen = fosforo * peso / 2.6;
             params.conPurga = params.volumen * correccionPurga(prescription);
