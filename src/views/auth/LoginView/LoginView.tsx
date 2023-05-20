@@ -22,7 +22,7 @@ const LoginView: React.FC<LoginViewProps> = () => {
 		<>
 			<Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
 
-				<Typography variant="h4" fontWeight={600}>Inicio de Sesión</Typography>
+				<Typography sx={{fontSize:{xs:'24px',sm:'30px'}}} fontWeight={600}>Inicio de Sesión</Typography>
 
 				<Stack direction="row" spacing={0.5}>
 					<Typography variant="body2" fontWeight={700}>Nuevo usuario?</Typography>
