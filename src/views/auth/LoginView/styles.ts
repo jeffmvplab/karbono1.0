@@ -1,5 +1,6 @@
 // @mui
 import { bgGradient } from '@/styles/cssStyles';
+import { Box } from '@material-ui/core';
 import { styled, alpha } from '@mui/material/styles';
 // utils
 
@@ -24,16 +25,17 @@ export const StyledSection = styled('div')(({ theme }) => ({
   },
 }));
 
-export const StyledSectionBg = styled('div')(({ theme }) => ({
+export const StyledSectionBg = styled(Box)(({ theme }) => ({
   ...bgGradient({
-    color: alpha('#F1F5F54B', theme.palette.mode === 'light' ? 0.9 : 0.94),
-    imgUrl: '/assets/background/overlay_2.jpg',
+    // color: alpha('#F1F5F54B', theme.palette.mode === 'light' ? 0.9 : 0.94),
+    color:'transparent',
+    imgUrl: '/illustrations/sign-up.png',
   }),
   top: 0,
   left: 0,
   bottom: 0,
   zIndex: -1,
-  width: '100%',
+  width: '75%',
   height: '100%',
   position: 'absolute',
   transform: 'scaleX(-1)',

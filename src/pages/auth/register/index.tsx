@@ -16,11 +16,9 @@ const RegisterPage: NextPageWithLayout = () => {
 RegisterPage.getLayout = function getLayout(page: ReactElement) {
 
   return (
-    <MainLayout>
       <AuthLayout>
         {page}
       </AuthLayout>
-    </MainLayout>
   )
 }
 
