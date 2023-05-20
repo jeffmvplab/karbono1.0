@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { mainRoutes } from "@/routes/routes";
 import { TagManagerScript } from "@/scripts/TagManagerScript";
 import { GoogleAnalyticsScript } from "@/scripts/GoogleAnalyticsScript";
+import { title } from "process";
 
 export interface MainLayoutInterface {
   children: ReactNode;

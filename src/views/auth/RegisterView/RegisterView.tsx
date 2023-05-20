@@ -24,7 +24,7 @@ const RegisterView: React.FC<RegisterViewProps> = () => {
 		<>
 			<Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
 
-				<Typography variant="h4" fontWeight={600}>
+				<Typography sx={{fontSize:{xs:'24px',sm:'30px'}}} fontWeight={600}>
 					Empieza tu prueba
 					gratuita ahora
 				</Typography>
@@ -32,7 +32,7 @@ const RegisterView: React.FC<RegisterViewProps> = () => {
 				<Stack direction="row" spacing={0.5}>
 					<Typography variant="body2" fontWeight={700}>¿Ya estás registrado?</Typography>
 
-					<Link component={NextLink} href={mainRoutes.register} variant="subtitle2">
+					<Link component={NextLink} href={mainRoutes.login} variant="subtitle2">
 						Iniciar sesión
 					</Link>
 				</Stack>
