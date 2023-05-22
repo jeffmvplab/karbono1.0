@@ -43,11 +43,11 @@ const Macronutrientes = () => {
     const {
         tipoPaciente,
         stateAcordion2, setStateAcordion2, matches, handleAcordion2,
-        tipoPrescripcion,handleTipoPrescripcion,
-        flujoMetabolico, handleFlujoMetabolico,
-        aminoacidos, handleAminoacidos,
-        dextrosa, handleDextrosa,
-        requerimientoAminoacidos, handleRequerimientoAminoacidos,
+        tipoPrescripcion,handleTipoPrescripcion,errorTipoPrescripcion,messageErrorTipoPrescripcion,
+        flujoMetabolico, handleFlujoMetabolico,errorFlujoMetabolico,messageErrorFlujoMetabolico,
+        aminoacidos, handleAminoacidos,errorAminoacidos,messageErrorAminoacidos,
+        dextrosa, handleDextrosa,errorDextrosa,messageErrorDextrosa,
+        requerimientoAminoacidos,handleRequerimientoAminoacidos,messageErrorRequerimientoAminoacidos,
         lipidos,handleLipidos,
         requerimientoLipidos, handleRequerimientoLipidos,
         omegaven, handleOmegaven,
@@ -110,6 +110,7 @@ const Macronutrientes = () => {
                                         id='tipo-prescripción*'
                                         label='Tipo Prescripción*'
                                         select={true}
+                                        helperText={messageErrorTipoPrescripcion}
                                     >
                                         {tipoPrescripciones.map((option) => (
                                             <MenuItem key={option.value} value={option.value}>
@@ -150,6 +151,7 @@ const Macronutrientes = () => {
                                                 ? 'mg/kg/min'
                                                 : 'ml'}
                                             type='text'
+                                            helperText={messageErrorFlujoMetabolico}
                                         />
                                     </Grid>
                                 </LightTooltip>
@@ -168,6 +170,7 @@ const Macronutrientes = () => {
                                             ? 'g/kg/dia'
                                             : 'ml'}
                                         type='text'
+                                        helperText={messageErrorDextrosa}
                                     />
 
                                 </Grid>
@@ -224,6 +227,7 @@ const Macronutrientes = () => {
                                             ? 'g/kg/dían'
                                             : 'ml'}
                                         type='text'
+                                        helperText={messageErrorRequerimientoAminoacidos}
                                     />
                                     {/* <TextFieldInput id='requerimiento-aminoacidos' type='text' label='Requerimiento aminoácidos' /> */}
                                 </Grid>

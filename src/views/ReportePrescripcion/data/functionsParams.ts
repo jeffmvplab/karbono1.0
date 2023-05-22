@@ -462,7 +462,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
     const aminoacidos: string = prescription?.aminoacidos
     const lipidos: string =  prescription?.lipidos
 
-    console.log('Amino:', aminoacidos)
+    // console.log('Amino:', aminoacidos)
 
     const aminovenSE: number = (aminoacidos === 'AminovenSE')
         ? getAminoacidos(prescription!).volumen : 0;
@@ -546,36 +546,36 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
             + (volAgua * 1))
         / (volTotalNPT)
 
-    console.log(
-        '////////////////OSMOLARIDAD/////////////////////',
-        'Dextrosa:', (getDextrosa(prescription!).volumen),
-        // + (getAminoacidos(prescription!).volumen * 1505)
-        'Lipidos:', (getLipidos(prescription!).volumen),
-        'Omegaven:', (getOmegaven(prescription!).volumen),
-        'Dipeptiven:', (getDipeptiven(prescription!).volumen),
-        'Sodio:', (getSodio(prescription!).volumen),
-        'Potacio:', (getPotacio(prescription!).volumen),
-        'Fosforo:', (getFosforo(prescription!).volumen),
-        'Calcio:', (getCalcio(prescription!).volumen),
-        'Magnesio:', (getMagnesio(prescription!).volumen),
-        'travasol:', (travasol),
-        'primene:', (primene),
-        'aminovenInfantils:', (aminovenInfantils),
-        'aminovenSE:', (aminovenSE),
-        'aminoPlasmalCE:', (aminoPlasmalCE),
-        'aminoPlasmalSE:', (aminoPlasmalSE),
-        'volOligoNulanza:', (volOligoNulanza),
-        'volOligoSensitrace:', (volOligoSensitrace),
-        'cernevit:', (cernevit),
-        'multi12K:', (multi12K),
-        'vitaLipidInfantil:', (vitaLipidInfantil),
-        'vitaLipidAd:', (vitaLipidAd),
-        'soluvit:', (soluvit),
-        'Vit_C:', (getVit_C(prescription!).volumen),
-        'acido_folico:', (parseFloat(prescription?.acido_folico!)),
-        'Vol_Agua:', (volAgua * 1)
-    )
-    // }
+    // console.log(
+    //     '////////////////OSMOLARIDAD/////////////////////',
+    //     'Dextrosa:', (getDextrosa(prescription!).volumen),
+    //     // + (getAminoacidos(prescription!).volumen * 1505)
+    //     'Lipidos:', (getLipidos(prescription!).volumen),
+    //     'Omegaven:', (getOmegaven(prescription!).volumen),
+    //     'Dipeptiven:', (getDipeptiven(prescription!).volumen),
+    //     'Sodio:', (getSodio(prescription!).volumen),
+    //     'Potacio:', (getPotacio(prescription!).volumen),
+    //     'Fosforo:', (getFosforo(prescription!).volumen),
+    //     'Calcio:', (getCalcio(prescription!).volumen),
+    //     'Magnesio:', (getMagnesio(prescription!).volumen),
+    //     'travasol:', (travasol),
+    //     'primene:', (primene),
+    //     'aminovenInfantils:', (aminovenInfantils),
+    //     'aminovenSE:', (aminovenSE),
+    //     'aminoPlasmalCE:', (aminoPlasmalCE),
+    //     'aminoPlasmalSE:', (aminoPlasmalSE),
+    //     'volOligoNulanza:', (volOligoNulanza),
+    //     'volOligoSensitrace:', (volOligoSensitrace),
+    //     'cernevit:', (cernevit),
+    //     'multi12K:', (multi12K),
+    //     'vitaLipidInfantil:', (vitaLipidInfantil),
+    //     'vitaLipidAd:', (vitaLipidAd),
+    //     'soluvit:', (soluvit),
+    //     'Vit_C:', (getVit_C(prescription!).volumen),
+    //     'acido_folico:', (parseFloat(prescription?.acido_folico!)),
+    //     'Vol_Agua:', (volAgua * 1)
+    // )
+    // // }
 
     params.conPurga =
         ((getDextrosa(prescription!).conPurga * 2780)
