@@ -54,9 +54,9 @@ export class UserRepository implements IUserRepository {
             url: ApiUrlsEnum.register,
             method: 'post',
             body: {
-                'name':name,
-                'phone':phone,
-                "email": email,
+                "nombre": name,
+                "email":email,
+                "telefono":phone,
                 "password": password
             },
         });

@@ -468,9 +468,9 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
         ? getAminoacidos(prescription!).volumen : 0;
     const travasol: number = (aminoacidos === 'TravasolPlus')
         ? getAminoacidos(prescription!).volumen : 0;
-    const aminoPlasmalCE: number = (aminoacidos === 'Aminoplasmal SE')
+    const aminoPlasmalCE: number = (aminoacidos === 'Aminoplasmal CE')
         ? getAminoacidos(prescription!).volumen : 0;
-    const aminoPlasmalSE: number = (aminoacidos === 'Aminoplasmal CE')
+    const aminoPlasmalSE: number = (aminoacidos === 'Aminoplasmal SE')
         ? getAminoacidos(prescription!).volumen : 0;
 
     const aminovenInfantils: number = (aminoacidos === 'Aminoven Infantil')
