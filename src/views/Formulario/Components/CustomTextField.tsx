@@ -1,10 +1,13 @@
 import { InputAdornment, Stack, TextField } from '@mui/material'
+import { error } from 'console'
 import React from 'react'
 
 export interface CustomTextFieldProps {
     id: string
     label: string
     type?: string
+    error?:boolean|undefined
+    helperText?:string|undefined
     value?: any
     defaulValue?: any
     select?: boolean
@@ -29,6 +32,8 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
     onClick,
     onKeyPress,
     disabled = false,
+    error=false,
+    helperText=''
 }) => {
     return (
 
@@ -39,6 +44,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
             onChange={onChange}
             disabled={disabled}
             id={id}
+            error={error}
             label={label}
             type={type}
             value={value!}
@@ -47,6 +53,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
             color='secondary'
             fullWidth
             select={select}
+            helperText={helperText}
             // SelectProps={{
             //     MenuProps: {
             //         style: {
@@ -57,7 +64,12 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
             InputProps={{
                 endAdornment: <InputAdornment position="start">{endAdornament}</InputAdornment>,
             }}
-            sx={{ borderRadius: '20px' }}
+            sx={{ 
+                borderRadius: '20px',
+                "& .MuiFormHelperText-root ": {
+                    WebkitTextFillColor:'red',
+                },
+             }}
         >
             {children}
         </TextField>
