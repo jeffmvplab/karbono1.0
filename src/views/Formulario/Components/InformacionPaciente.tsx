@@ -72,18 +72,18 @@ const InformacionPaciente = () => {
     const { stateAcordion1, setStateAcordion1, matches, handleAcordion1,
 
         ips, handleIps,
-        numIden, handleNumIden,
-        namePaciente, handleNamePaciente,
-        servicio, handleServicio,
+        numIden, handleNumIden,errorNumIden,messageErrorNumIden,
+        namePaciente, handleNamePaciente,errorNamePaciente,messageErrorNamePaciente,
+        servicio, handleServicio,errorServicio,messageErrorServicio,
         cama, handleCama,
-        pesoKg, handlePesoKg,
+        pesoKg, handlePesoKg,errorPesoKg,messageErrorPesoKg,
         edad, handleEdad,
         tipoEdad, handleTipoEdad,
-        volumen, handleVolumen,
-        purga, handlePurga,
+        volumen, handleVolumen,errorVolumen,messageErrorVolumen,
+        purga, handlePurga,errorPurga,messageErrorPurga,
         tiempoDeInfucion, handleTiempoDeInfucion,
-        tipoPaciente, handleTipoPaciente,
-        viaAdmin, handleViaAdmin,
+        tipoPaciente, handleTipoPaciente,errorTipoPaciente,messageErrorTipoPaciente,
+        viaAdmin, handleViaAdmin,errorViaAdmin,messageErrorViaAdmin,
         diagnostico, handleDiagnostico,
         getPrescriptions,
     } = useContext(FormulariosContext)
@@ -156,10 +156,11 @@ const InformacionPaciente = () => {
                                         <CustomTextField
                                             onChange={handleNumIden}
                                             id='no-identificación'
-                                            label='No Identificacion*'
+                                            label='No Identificación*'
                                             type='text'
                                             value={numIden}
                                             defaulValue={numIden!}
+                                            helperText={messageErrorNumIden}
                                         />
                                     </Grid>
                                 </LightTooltip>
@@ -177,6 +178,7 @@ const InformacionPaciente = () => {
                                             type='text'
                                             value={namePaciente}
                                             defaulValue={namePaciente}
+                                            helperText={messageErrorNamePaciente}
                                         />
                                     </Grid>
                                 </LightTooltip>
@@ -195,6 +197,7 @@ const InformacionPaciente = () => {
                                             label='Tipo de paciente *'
                                             type='text'
                                             select
+                                            helperText={messageErrorTipoPaciente}
                                         >
                                             {tiposPacientes.map((option) => (
                                                 <MenuItem key={option.value} value={option.value}>
@@ -224,6 +227,7 @@ const InformacionPaciente = () => {
                                         type='text'
                                         value={servicio}
                                         defaulValue={servicio}
+                                        helperText={messageErrorServicio}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
@@ -247,6 +251,7 @@ const InformacionPaciente = () => {
                                         type='text'
                                         value={pesoKg}
                                         defaulValue={pesoKg}
+                                        helperText={messageErrorPesoKg}
                                     />
                                 </Grid>
 
@@ -316,6 +321,7 @@ const InformacionPaciente = () => {
                                             type='text'
                                             value={volumen}
                                             defaulValue={volumen}
+                                            helperText={messageErrorVolumen}
                                         />
                                     </Grid>
                                 </LightTooltip>
@@ -340,6 +346,7 @@ const InformacionPaciente = () => {
                                         type='text'
                                         value={purga}
                                         defaulValue={purga}
+                                        helperText={messageErrorPurga}
                                     />
                                 </Grid>
 
@@ -361,6 +368,7 @@ const InformacionPaciente = () => {
                                             max={24}
                                             valueLabelDisplay="auto"
                                             marks={marks1}
+                                            
                                         />
                                     </Box>
                                 </Grid>
@@ -380,6 +388,7 @@ const InformacionPaciente = () => {
                                             label='Vía de administración*'
                                             type='text'
                                             select={true}
+                                            helperText={messageErrorViaAdmin}
                                         >
                                             {viaAdministracion.map((option) => (
                                                 <MenuItem key={option.value} value={option.value}>

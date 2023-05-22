@@ -21,8 +21,8 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 
 	const router=useRouter();
 
-	// const validacionOK:boolean = valOKAlert;
-	const validacionOK:boolean = true;
+	const validacionOK:boolean = valOKAlert;
+	// const validacionOK:boolean = true;
 	
 	return (
 
@@ -120,12 +120,13 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 									<CustomButton
 										onClick={
 											
-											()=>{router.push(mainRoutes.reportePrescripcion)
-												// (valOKAlert)
-												// ?(saveOK)
-												//  ?router.push(mainRoutes.reportePrescripcion)
-												//  :handleCloseModalFormSaved()
-												// :handleCloseModalFormSaved()
+											()=>{
+												// router.push(mainRoutes.reportePrescripcion)
+												(valOKAlert)
+												?(saveOK)
+												 ?router.push(mainRoutes.reportePrescripcion)
+												 :handleCloseModalFormSaved()
+												:handleCloseModalFormSaved()
 												}
 	
 										}

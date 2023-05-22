@@ -33,7 +33,7 @@ const FormView: React.FC<FormViewProps> = () => {
 		loadingSave,
 		cancelForm,
 		getPrescriptions,
-		valOKAlert,
+		valOKAlert,validateAlert,
 		handleOpenModalFormSaved
 	} = useContext(FormulariosContext)
 
@@ -44,9 +44,12 @@ const FormView: React.FC<FormViewProps> = () => {
 
 	useEffect(() => {
 		getPrescriptions();
-		// validateAlert();
+		//  validateAlert();
+	
+
 	}, [loadingSave])
 
+	
 	return (
 
 		// <Card >
@@ -188,10 +191,11 @@ const FormView: React.FC<FormViewProps> = () => {
 
 					<CustomButton
 						// disabled={!valOKAlert}
-						onClick={()=>{savePrescription()}
-							// valOKAlert
-							// ?()=>{savePrescription()}
-							// :()=>{getPrescriptions(),handleOpenModalFormSaved()}
+						onClick={
+							// ()=>{savePrescription()}
+							valOKAlert
+							?()=>{savePrescription()}
+							:()=>{getPrescriptions(),handleOpenModalFormSaved()}
 						}
 						width={127}
 						text={'Guardar'}
