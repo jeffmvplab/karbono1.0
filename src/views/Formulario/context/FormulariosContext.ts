@@ -81,6 +81,7 @@ interface ContextProps {
     saveOK: boolean,
     valOKAlert: boolean,
     messageAPI: string,
+    validateCampos:() => boolean;
 
     //////MODAL//////
     openModalFormSaved: boolean,

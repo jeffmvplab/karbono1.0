@@ -8,10 +8,30 @@ export const GTM_TRACKING_ID = 'GTM-PV5TRWW'
 
 export default function Document() {
 
+//   const fontLink = (fontType: string) => {
+//     return <link
+//         rel="preload"
+//         href={`/fonts/CCBGradual/CCBGradual-${fontType}.woff2`}
+//         as="font"
+//         type="font/woff2"
+//         crossOrigin="anonymous"
+//     />
+// }
 
   return (
     <Html>
       <Head>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com"/>
+                <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;500;600;700;800&display=swap" rel="stylesheet" />
+{/* 
+                {fontLink('Thin')}
+                {fontLink('Light')}
+                {fontLink('Medium')}
+                {fontLink('Regular')}
+                {fontLink('Bold')}
+                {fontLink('Black')}
+                {fontLink('ExtraBold')} */}
        
         {/* <script
           dangerouslySetInnerHTML={{
