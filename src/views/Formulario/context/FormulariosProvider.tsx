@@ -269,7 +269,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorNumIden, setMessageErrorNumIden] = React.useState('');
 
 	const validateNumIdent = (numIden: string) => {
-		if (!isNaN(parseInt(numIden))) {
+		
+	
+
+		if (numIden!=='') {
 			setErrorNumIden(false);
 			setMessageErrorNumIden('')
 		} else {
@@ -289,6 +292,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorNamePaciente, setMessageErrorNamePaciente] = React.useState('');
 
 	const validateNombrePaciente = (name: string) => {
+		console.log('SDF:',name)
 		if (name !== '') {
 			setErrorNamePaciente(false);
 			setMessageErrorNamePaciente('')
@@ -547,7 +551,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [flujoMetabolico, setFlujoMetabolico] = React.useState('0');
+	const [flujoMetabolico, setFlujoMetabolico] = React.useState('');
 	const [errorFlujoMetabolico, setErrorFlujoMetabolico] = React.useState(false);
 	const [messageErrorFlujoMetabolico, setMessageErrorFlujoMetabolico] = React.useState('');
 
@@ -557,7 +561,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			setMessageErrorFlujoMetabolico('')
 		} else {
 			setErrorFlujoMetabolico(true);
-			if (tipoPrescripcion === 'Por requerimientos') {
+			if (tipoPrescripcion === 'Por requerimientos'||tipoPrescripcion ==='') {
 				setMessageErrorFlujoMetabolico('Introduzca el flujo metabolico')
 			} else {
 				setMessageErrorFlujoMetabolico('')
@@ -572,7 +576,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [dextrosa, setDextrosa] = React.useState('0');
+	const [dextrosa, setDextrosa] = React.useState('');
 	const [errorDextrosa, setErrorDextrosa] = React.useState(false);
 	const [messageErrorDextrosa, setMessageErrorDextrosa] = React.useState('');
 
@@ -859,7 +863,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [prescriptionSave, setPrescriptionSave] = React.useState<IPrescriptions | undefined>();
 
 	const getPrescriptions = async () => {
-		setPrescriptionSave(prescriptionsData)
+		setPrescriptionSave(prescriptionsData);
 		validateAlert();
 	}
 
@@ -922,7 +926,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			alarmConcSodio(prescriptionsData!).alert === 'REVISAR' ||
 			alarmConcPotasio(prescriptionsData!).alert === 'REVISAR' ||
 			alarmConcMagnesio(prescriptionsData!).alert === 'REVISAR'||
-			validateCampos(prescriptionsData)
+			validateCampos()
 
 		) {
 			setValOKAlert(false)
@@ -931,26 +935,24 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			setValOKAlert(true)
 			console.log('NO ALERT')
 		}
-
-		console.log('Validate:', valOKAlert);
 	}
 
-	const validateCampos = (prescripcion:IPrescriptions) => {
+	const validateCampos = () => {
 		if (
-			validateNumIdent(prescripcion.no_identificacion) ||
-			validateNombrePaciente(prescripcion.nombre_paciente) ||
-			validateTipoPaciente(prescripcion.nombre_paciente) ||
-			validateServicio(prescripcion.servicio) ||
-			validatePeso(prescripcion.peso.toString())||
-			validateVolumen(prescripcion.volumen.toString())||
-			validatePurga(prescripcion.purga.toString())||
-			validateTiempoInfucion(prescripcion.tiempo_infusion)||
-			validateTipoPrecripcion(prescripcion.volumen.toString())||
-			validateFlujoMetabolico(prescripcion.flujo_metabolico)||
-			validateDextrosa(prescripcion.dextrosa!)||
-			validateAminos(prescripcion.req_aminoacidos)
+			validateNumIdent(numIden) ||
+			validateNombrePaciente(namePaciente) ||
+			validateTipoPaciente(tipoPaciente) ||
+			validateServicio(servicio) ||
+			validatePeso(pesoKg)||
+			validateVolumen(volumen)||
+			validatePurga(purga)||
+			validateTiempoInfucion(tiempoDeInfucion)||
+			validateTipoPrecripcion(tipoPrescripcion)||
+			validateFlujoMetabolico(flujoMetabolico)||
+			validateDextrosa(dextrosa!)||
+			validateAminos(requerimientoAminoacidos)
 		) { return true }
-		else { false }
+		else {return false }
 	}
 
 	useEffect(() => {
@@ -1056,7 +1058,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			cancelForm,
 
 			getPrescriptions,
-			validateAlert
+			validateAlert,
+			validateCampos,
 
 
 

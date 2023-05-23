@@ -33,7 +33,7 @@ const FormView: React.FC<FormViewProps> = () => {
 		loadingSave,
 		cancelForm,
 		getPrescriptions,
-		valOKAlert,validateAlert,
+		valOKAlert,validateAlert,validateCampos,
 		handleOpenModalFormSaved
 	} = useContext(FormulariosContext)
 
@@ -195,7 +195,7 @@ const FormView: React.FC<FormViewProps> = () => {
 							// ()=>{savePrescription()}
 							valOKAlert
 							?()=>{savePrescription()}
-							:()=>{getPrescriptions(),handleOpenModalFormSaved()}
+							:()=>{validateCampos(),getPrescriptions(),handleOpenModalFormSaved()}
 						}
 						width={127}
 						text={'Guardar'}

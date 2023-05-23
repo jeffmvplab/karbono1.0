@@ -13,6 +13,7 @@ interface ContextProps {
 
     loadingAuth: boolean,
 
+
     name: string,
     errorName: boolean,
     messageErrorName: string,

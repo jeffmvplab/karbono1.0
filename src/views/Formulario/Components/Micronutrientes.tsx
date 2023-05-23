@@ -76,7 +76,7 @@ const Micronutrientes = () => {
         setStateAcordion3(matches);
     }, [matches])
 
-    console.log('Magnesio:', magnesio)
+    // console.log('Magnesio:', magnesio)
     /////////////////////////////////////////////////////////////////////
 
     return (
