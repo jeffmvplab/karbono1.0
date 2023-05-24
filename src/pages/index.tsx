@@ -8,6 +8,7 @@ import { HomeView } from '@/views/HomeView'
 const HomeMain: NextPageWithLayout = () => {
 
 
+  // return < HomeView />
   return < HomeView />
 }
 
