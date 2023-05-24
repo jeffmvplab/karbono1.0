@@ -31,7 +31,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		setLoadingGet(false);
 		console.log('Loading...')
 		const resp = await prescriptionsUseCase.prescripcionsAll(limit!)
-		console.log('Resp:', resp.body.message)
+		console.log('Resp:', resp.body)
 
 
 		if (resp.statusCode === 200) {
@@ -110,7 +110,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			repoPresc[0]= resp.body
 		}
         
-		console.log('RESP by Num:',repoPresc.length)
+		console.log('RESP by Num:',repoPresc)
 		if (resp.statusCode === 200) {
 			setReportes(repoPresc);
 			setErrorSearch(false)
@@ -151,7 +151,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		}else{
 			repoPresc[0]= resp.body
 		}
-		console.log('RESP by Name:',resp.body.length)
+		console.log('RESP by Name:',resp.body)
 		if (resp.statusCode === 201) {
 			setReportes(repoPresc);
 			setErrorSearch(false)

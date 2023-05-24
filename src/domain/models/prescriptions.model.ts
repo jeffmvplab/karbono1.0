@@ -1,5 +1,8 @@
 
 export interface IPrescriptions {
+
+    _id?:string,
+    user_id?: string,
     no_orden:number,
     tipo_prescripcion: string,
     fecha: string,
