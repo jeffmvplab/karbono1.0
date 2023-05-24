@@ -14,9 +14,11 @@ export interface TarjetaProyconProps { }
 
 const TarjetaProycon: React.FC<TarjetaProyconProps> = () => {
 
-  const router = useRouter();
+  const { isAuth, authStatus } = useContext(GlobalContext);
 
-
+  useEffect(() => {
+    authStatus()
+  })
 
   return (
 
@@ -35,12 +37,12 @@ const TarjetaProycon: React.FC<TarjetaProyconProps> = () => {
               <Typography variant='body1' sx={{ paddingBottom: '30px' }}>Este módulo te permite crear, editar y consultar datos de prescripciones  médicas de manera fácil y rápida.</Typography>
 
               <ButtonCardsHome
-              route={mainRoutes.prescripcion}
-              text=' Ingresar'
-              color={colorsKarbono.primary}
-              id='prescripcion'
+                route={isAuth ? mainRoutes.prescripcion : mainRoutes.login}
+                text=' Ingresar'
+                color={colorsKarbono.primary}
+                id='prescripcion'
               />
-                
+
             </Box>
             <Hidden smDown >
               <Box sx={{ justifyContent: 'center', display: 'flex', paddingRight: '20px', alignItems: 'center', width: '20%' }}>
@@ -71,11 +73,11 @@ const TarjetaProycon: React.FC<TarjetaProyconProps> = () => {
               {/* <Button sx={{ backgroundColor: '#372FC6', color: '#fff', padding: '10px 40px', borderRadius: '10px', ':hover': { backgroundColor: '#372FC6', color: '#e8e8e2' } }}>
                 Ingresar
               </Button> */}
-               <ButtonCardsHome
-              route={mainRoutes.prescripcion}
-              text=' Ingresar'
-              color={colorsKarbono.secundary}
-              id='configuracion'
+              <ButtonCardsHome
+                route={mainRoutes.prescripcion}
+                text=' Ingresar'
+                color={colorsKarbono.secundary}
+                id='configuracion'
               />
             </Box>
             <Hidden smDown>
