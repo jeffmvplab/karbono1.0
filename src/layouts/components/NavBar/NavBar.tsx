@@ -126,7 +126,7 @@ export const NavBar = () => {
             {/* <Grid item xs={12} sm={12} md={4} display='flex' alignItems='center' justifyContent='space-between' paddingRight='2' paddingLeft='80px' > */}
             <Stack  direction={'row'} spacing={2} justifyItems={'center'} >
               
-              <Box minWidth={{xs:'60%',sm:'100%',md:'30%',xl:'60%'}}/>
+              <Box minWidth={{xs:'60%',sm:'100%',md:'20%',xl:'60%'}}/>
 
               <Box display='flex' alignItems='center'>
                 {(isAuth)
