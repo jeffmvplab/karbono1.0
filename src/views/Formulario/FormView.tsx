@@ -70,7 +70,7 @@ const FormView: React.FC<FormViewProps> = () => {
 					{(!loadingSave)
 						? <Skeleton
 							variant="rectangular"
-							sx={{ marginX: '10px', paddingRight: '20px', borderRadius: '10px' }}
+							sx={{ marginX: '10px', paddingRight: '20px', borderRadius: '10px',	maxHeight:{ xs: '90vh', sm: '80vh', md: '60vh', xl: '90vh' }, }}
 							width='100%' height={700} />
 						: <Card elevation={10} sx={{ borderRadius: 4 }}>
 							<Box
@@ -78,7 +78,8 @@ const FormView: React.FC<FormViewProps> = () => {
 									bgcolor: '#F0F0F0',
 									padding: { xs: '1px', sm: 0.2 },
 									borderRadius: '15px',
-									// maxHeight:'80vh',
+									//  maxHeight:'80%',
+									maxHeight:{ xs: '90vh', sm: '80vh', md: '60vh', xl: '90vh' },
 									overflow: 'clip',
 								}}>
 
