@@ -26,8 +26,8 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 
 	const {getAll,reportes,loadingGet,loadingApi,goEdit,goReporte} = useContext(PrescripcionContext)
    
-	const pag:number=10;
 	const [page,setPage]=useState<number>();
+	const pag:number=15;
 
 	const handlePageChange=(params:any)=>{
 		setPage(params)
@@ -35,13 +35,13 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 	}
 
 	useEffect(() => {
-		getAll(pag*2);
+		getAll();
 	},[])
 
-	useEffect(() => {
-		getAll((page!+1)*pag*2);
-		console.log('Reportes List:',reportes)
-	},[page])
+	// useEffect(() => {
+	// 	getAll(pag*(page!+1));
+	// 	console.log('Reportes List:',reportes)
+	// },[page])
 	
 	const columns: GridColDef[] = [
 
@@ -154,12 +154,12 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 				}}
 				rows={reportes!}
 				columns={columns}
-				initialState={{pagination: { paginationModel: { pageSize: 10 } },}}
+				initialState={{pagination: { paginationModel: { pageSize:15} },}}
 				// disableColumnSelector
 			    // cledisableRowSelectionOnClick
 				autoHeight
-				// pageSizeOptions={[10,30,60]}
-				getRowId={(row: any) => row.no_orden}
+				//  pageSizeOptions={[10,30,60]}
+				getRowId={(row:IPrescriptions) => row._id!}
 				onPaginationModelChange={(e)=>{handlePageChange(e.page)}}
 
 			/>
