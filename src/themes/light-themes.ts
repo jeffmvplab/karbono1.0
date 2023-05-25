@@ -1,5 +1,6 @@
-import { createTheme } from "@mui/material";
+import { colors, createTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { colorsKarbono } from "./colors";
 
 
 export const lightThemes = createTheme({
@@ -59,6 +60,18 @@ export const lightThemes = createTheme({
             }
         },
 
+        MuiFormLabel: {
+            defaultProps: {
+            },
+            styleOverrides: {
+
+                root: {
+                    color:colorsKarbono.primary,
+                    ':hover':colorsKarbono.secundary,
+                }
+            }
+        },
+
         MuiInputBase: {
             defaultProps: {
 
@@ -82,7 +95,7 @@ export const lightThemes = createTheme({
                 }
             }
         },
-        
+
         MuiMenuItem: {
             defaultProps: {},
             styleOverrides: {
