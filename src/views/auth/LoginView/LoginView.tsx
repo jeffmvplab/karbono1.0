@@ -36,13 +36,13 @@ const LoginView: React.FC<LoginViewProps> = () => {
 
 			{(authOK)
 				? (errorEmail || errorPassword)
-					? <Alert severity="warning" sx={{ mb: 3 }}>
+					? <Alert severity="warning" sx={{ mb: 3 ,borderRadius:'10px'}}>
 						{messageErrorEmail || messageErrorPassword}
 					</Alert>
-					: <Alert severity="success" sx={{ mb: 3 }}>
+					: <Alert severity="success" sx={{ mb: 3 ,borderRadius:'10px'}}>
 						{'Sus datos tienen el formato correcto'}
 					</Alert>
-				: <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)' }}>
+				: <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)',borderRadius:'10px' }}>
 					{'Credenciales Inválidas'}
 				</Alert>
 			}

@@ -35,6 +35,10 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 						placeholder='Correo@google.com'
 						fullWidth
 						inputProps={{style:{ height:'15PX',}}}  
+						sx={{
+							bgcolor: 'transparent',
+							"& .MuiInputBase-root": { borderRadius: '10px' },
+						}}
 					/>
 				</Grid>
 
@@ -47,6 +51,10 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 						placeholder='Contraseña'
 						fullWidth
 						inputProps={{style:{ height:'15PX',}}}  
+						sx={{
+							bgcolor: 'transparent',
+							"& .MuiInputBase-root": { borderRadius: '10px' },
+						}}
 					/>
 				</Grid>
 

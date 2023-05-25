@@ -33,7 +33,7 @@ const FormView: React.FC<FormViewProps> = () => {
 		loadingSave,
 		cancelForm,
 		getPrescriptions,
-		valOKAlert,validateAlert,validateCampos,
+		valOKAlert, validateAlert, validateCampos,
 		handleOpenModalFormSaved
 	} = useContext(FormulariosContext)
 
@@ -45,11 +45,11 @@ const FormView: React.FC<FormViewProps> = () => {
 	useEffect(() => {
 		getPrescriptions();
 		//  validateAlert();
-	
+
 
 	}, [loadingSave])
 
-	
+
 	return (
 
 		// <Card >
@@ -70,7 +70,7 @@ const FormView: React.FC<FormViewProps> = () => {
 					{(!loadingSave)
 						? <Skeleton
 							variant="rectangular"
-							sx={{ marginX: '10px', paddingRight: '20px', borderRadius: '10px',	maxHeight:{ xs: '90vh', sm: '80vh', md: '60vh', xl: '90vh' }, }}
+							sx={{ marginX: '10px', paddingRight: '20px', borderRadius: '10px', maxHeight: { xs: '90vh', sm: '80vh', md: '60vh', xl: '90vh' }, }}
 							width='100%' height={700} />
 						: <Card elevation={10} sx={{ borderRadius: 4 }}>
 							<Box
@@ -79,14 +79,14 @@ const FormView: React.FC<FormViewProps> = () => {
 									padding: { xs: '1px', sm: 0.2 },
 									borderRadius: '15px',
 									//  maxHeight:'80%',
-									maxHeight:{ xs: '90vh', sm: '80vh', md: '60vh', xl: '90vh' },
+									maxHeight: { xs: '90vh', sm: '80vh', md: '60vh', xl: '90vh' },
 									overflow: 'clip',
 								}}>
 
 								<Grid container spacing={2} style={{ padding: '10px' }}>
 
 									<Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
-						
+
 										<TextField
 											onChange={handleNumOrder}
 											id='Numero-de-orden'
@@ -95,7 +95,10 @@ const FormView: React.FC<FormViewProps> = () => {
 											value={numOrder}
 											variant='outlined'
 											color='secondary'
-											sx={{ bgcolor: 'transparent' }}
+											sx={{
+												bgcolor: 'transparent',
+												"& .MuiInputBase-root": { borderRadius: '10px' },
+											}}
 											fullWidth
 										/>
 
@@ -111,7 +114,10 @@ const FormView: React.FC<FormViewProps> = () => {
 											value={fechaCreacion}
 											variant='outlined'
 											color='secondary'
-											sx={{ bgcolor: 'transparent' }}
+											sx={{
+												bgcolor: 'transparent',
+												"& .MuiInputBase-root": { borderRadius: '10px' },
+											}}
 											fullWidth
 										/>
 									</Grid>
@@ -195,8 +201,8 @@ const FormView: React.FC<FormViewProps> = () => {
 						onClick={
 							// ()=>{savePrescription()}
 							valOKAlert
-							?()=>{savePrescription()}
-							:()=>{validateCampos(),getPrescriptions(),handleOpenModalFormSaved()}
+								? () => { savePrescription() }
+								: () => { validateCampos(), getPrescriptions(), handleOpenModalFormSaved() }
 						}
 						width={127}
 						text={'Guardar'}

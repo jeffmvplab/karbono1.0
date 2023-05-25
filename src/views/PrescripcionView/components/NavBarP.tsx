@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import { mainRoutes } from '@/routes/routes';
 import { CustomButton } from '@/components/CustomButton';
+import { typographyKarbono } from '@/themes/typography';
 
 
 const NavbarP = ({ drawerWidth = 240, }) => {
@@ -54,11 +55,12 @@ const NavbarP = ({ drawerWidth = 240, }) => {
           <Stack direction={'row'} spacing={2} alignItems={'center'}>
             <Box display='flex' alignItems='center'>
               <span style={{ fontSize: '30px' }}>
-                <CallOutlinedIcon sx={{color:'black'}} />
+                <CallOutlinedIcon sx={{ color: 'black' }} />
               </span>
 
               <Link href='' style={{ textDecoration: 'none' }} >
                 <Typography
+                  fontFamily={typographyKarbono.outfit}
                   margin='0 15px'
                   color='#000'
                   alignItems='normal'
@@ -67,7 +69,7 @@ const NavbarP = ({ drawerWidth = 240, }) => {
               </Link>
 
             </Box>
-              <FadeMenu />
+            <FadeMenu />
 
           </Stack>
 

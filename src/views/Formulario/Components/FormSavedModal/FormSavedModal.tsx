@@ -8,22 +8,23 @@ import { CustomButton } from '@/components/CustomButton';
 import { LoadingComponent } from '@/components/LoadingComponent';
 import { useRouter } from 'next/router';
 import { mainRoutes } from '@/routes/routes';
+import { typographyKarbono } from '@/themes/typography';
 
 export interface FormSavedModalProps { }
 
 const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 
 	const {
-		saveOK,loadingSave,messageAPI,
+		saveOK, loadingSave, messageAPI,
 		openModalFormSaved,
-		handleCloseModalFormSaved,valOKAlert
+		handleCloseModalFormSaved, valOKAlert
 	} = useContext(FormulariosContext)
 
-	const router=useRouter();
+	const router = useRouter();
 
-	const validacionOK:boolean = valOKAlert;
+	const validacionOK: boolean = valOKAlert;
 	// const validacionOK:boolean = true;
-	
+
 	return (
 
 		<Modal
@@ -84,29 +85,31 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 									/>
 
 									<Typography
+										fontFamily={typographyKarbono.outfit}
 										paddingY={2}
 										fontSize={16}
 										textAlign={'center'}
 										//  paddingX={{sm:2}}
-										style={{ 
-											fontWeight: 700, 
-											color: validacionOK 
-											        ?(saveOK)
-												     ?colorsKarbono.secundary : 'red' 
-													:'black'
-													}}
-									>{validacionOK
+										style={{
+											fontWeight: 700,
+											color: validacionOK
 												? (saveOK)
-													? '¡Se ha guardado con éxito!'
-													:(messageAPI)
-													  ?'El número de orden que esta tratando de guardar ya existe. Por favor escriba otro número de orden'
-													  :messageAPI
-												: 'Error en la prescripción'}
+													? colorsKarbono.secundary : 'red'
+												: 'black'
+										}}
+									>{validacionOK
+										? (saveOK)
+											? '¡Se ha guardado con éxito!'
+											: (messageAPI)
+												? 'El número de orden que esta tratando de guardar ya existe. Por favor escriba otro número de orden'
+												: messageAPI
+										: 'Error en la prescripción'}
 									</Typography >
 
 									{
 										(!validacionOK)
 										&& <Typography
+											fontFamily={typographyKarbono.outfit}
 											paddingX={{ xs: 0, sm: 4 }}
 											paddingBottom={2}
 											fontSize={16}
@@ -119,20 +122,20 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 
 									<CustomButton
 										onClick={
-											
-											()=>{
+
+											() => {
 												// router.push(mainRoutes.reportePrescripcion)
 												(valOKAlert)
-												?(saveOK)
-												 ?router.push(mainRoutes.reportePrescripcion)
-												 :handleCloseModalFormSaved()
-												:handleCloseModalFormSaved()
-												}
-	
+													? (saveOK)
+														? router.push(mainRoutes.reportePrescripcion)
+														: handleCloseModalFormSaved()
+													: handleCloseModalFormSaved()
+											}
+
 										}
 										height={50}
 										width={137}
-										text={validacionOK ?(saveOK)? 'Ver reporte':'Ok' : 'Ok'}
+										text={validacionOK ? (saveOK) ? 'Ver reporte' : 'Ok' : 'Ok'}
 										sx={{ borderRadius: '10px' }}
 										color={colorsKarbono.secundary}
 										textColor='white'

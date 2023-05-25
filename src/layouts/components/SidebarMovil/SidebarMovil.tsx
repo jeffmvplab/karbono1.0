@@ -7,12 +7,15 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { ParametrosFarmaceuticos } from '@/views/Formulario/Components/ParametrosFarmaceuticos';
 import { FormulariosContext } from '@/views/Formulario/context/FormulariosContext';
 import { ParametrosNutricionales } from '@/views/Formulario/Components/ParametrosNutricionales';
+import router from 'next/router';
+import { mainRoutes } from '@/routes/routes';
+import { typographyKarbono } from '@/themes/typography';
 
 export interface SidebarMovilProps { }
 
 const SidebarMovil: React.FC<SidebarMovilProps> = () => {
 
-	const { open1,open2, handleMenu1, handleMenu2 } = useContext(FormulariosContext);
+	const { open1, open2, handleMenu1, handleMenu2 } = useContext(FormulariosContext);
 
 	// return focus to the button when we transitioned from !open -> open
 
@@ -30,13 +33,17 @@ const SidebarMovil: React.FC<SidebarMovilProps> = () => {
 				height={555}
 				alignItems={'center'}
 			>
-				<Image
-					src={'/assets/iconMenu.png'}
-					width={17.5}
-					height={25}
-					alt=''
-					style={{ marginTop: '5px', alignItems: 'center' }}
-				/>
+				<Button
+					onClick={() => { router.push(mainRoutes.home); }}
+				>
+					<Image
+						src={'/assets/iconMenu.png'}
+						width={17.5}
+						height={25}
+						alt=''
+						style={{ marginTop: '5px', alignItems: 'center' }}
+					/>
+				</Button>
 				<Button
 					onClick={() => handleMenu1()}
 					style={{
@@ -47,20 +54,22 @@ const SidebarMovil: React.FC<SidebarMovilProps> = () => {
 						borderRadius: 0,
 						transform: 'rotate(270deg)',
 						background: colorsKarbono.secundary,
-						marginTop:150,
+						marginTop: 150,
 						height: 50,
 						width: 240,
 					}}>
 					<Stack direction={'column'} alignItems='center'>
-						Parámetros farmacéuticos
+						<Typography fontFamily={typographyKarbono.outfit}>
+							Parámetros farmacéuticos
+						</Typography>
 						<ArrowForwardIosIcon sx={{ color: 'white', scale: '0.6', transform: 'rotate(90deg)', }} />
 					</Stack>
 				</Button>
 
 				<Box
 					display={{ xs: (open1) ? 'flex' : 'none' }}
-					style={{ position:'absolute', top: '93px', left: '50px' }}
-				><ParametrosFarmaceuticos isMovil={true}/>
+					style={{ position: 'absolute', top: '93px', left: '50px' }}
+				><ParametrosFarmaceuticos isMovil={true} />
 					{/* <ParametrosNutricionales /> */}
 				</Box>
 
@@ -79,7 +88,9 @@ const SidebarMovil: React.FC<SidebarMovilProps> = () => {
 						width: 240,
 					}}>
 					<Stack direction={'column'} alignItems='center'>
-						Parámetros Nutricionales
+						<Typography fontFamily={typographyKarbono.outfit}>
+							Parámetros Nutricionales
+						</Typography>
 						<ArrowForwardIosIcon sx={{ color: 'white', scale: '0.6', transform: 'rotate(90deg)', }} />
 					</Stack>
 
@@ -88,7 +99,7 @@ const SidebarMovil: React.FC<SidebarMovilProps> = () => {
 				<Box
 					display={{ xs: (open2) ? 'flex' : 'none' }}
 					style={{ position: 'fixed', top: '333px', left: '50px' }}
-				><ParametrosNutricionales isMovil={true}/>
+				><ParametrosNutricionales isMovil={true} />
 				</Box>
 
 			</Stack>
