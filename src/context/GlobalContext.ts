@@ -7,6 +7,8 @@ interface ContextProps {
 
     login:()=> void;
     register:()=>void;
+    errorAuth:string,
+
     logout:()=> void;
     isAuth: boolean;
     authStatus:()=> void;

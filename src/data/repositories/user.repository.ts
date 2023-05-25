@@ -30,21 +30,21 @@ export class UserRepository implements IUserRepository {
             },
         });
 
-        if (axiosRequest.statusCode === HttpStatusCode.ok) {
-            // const users = axiosRequest.body as User[];
-            // const user: IUser = axiosRequest.body;
-            // console.log(JSON.stringify(user));
-            return axiosRequest.body;
+        // if (axiosRequest.statusCode === HttpStatusCode.ok) {
+        //     // const users = axiosRequest.body as User[];
+        //     // const user: IUser = axiosRequest.body;
+        //     // console.log(JSON.stringify(user));
+        //     return axiosRequest.body;
 
-        } else if (axiosRequest.statusCode === HttpStatusCode.created) {
-            const user: IUser = axiosRequest.body;
-            // console.log(JSON.stringify(user));
-            return user;
-        } else if (axiosRequest.statusCode === HttpStatusCode.notFound) {
-            return axiosRequest.statusCode;
-        } else {
-            return axiosRequest.statusCode;
-        }
+        // } else if (axiosRequest.statusCode === HttpStatusCode.created) {
+        //     const user: IUser = axiosRequest.body;
+        //     // console.log(JSON.stringify(user));
+        //     return user;
+        // } else if (axiosRequest.statusCode === HttpStatusCode.notFound) {
+        //     return axiosRequest.statusCode;
+        // } else {
+            return axiosRequest;
+        // }
 
     }
     /////////////////////////////////REGISTER///////////////////////////////////////////////////
@@ -71,10 +71,8 @@ export class UserRepository implements IUserRepository {
             const user: IUser = axiosRequest.body;
             // console.log(JSON.stringify(user));
             return user;
-        } else if (axiosRequest.statusCode === HttpStatusCode.notFound) {
-            return axiosRequest.statusCode;
         } else {
-            return axiosRequest.statusCode;
+            return axiosRequest;
         }
 
     }

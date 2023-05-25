@@ -69,11 +69,11 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 						<CustomButton
 							fontSize={'20px'}
 							onClick={() => { login() }}
-							disabled={(!errorEmail && !errorPassword) ? false : true}
-							textColorHover={(!errorEmail && !errorPassword) ? 'white' : null}
+							disabled={(errorEmail || errorPassword) }
+							textColorHover={(!errorEmail || !errorPassword) ? 'white' : null}
 							textColor={'white'}
-							colorHover={(!errorEmail && !errorPassword) ? colorsKarbono.primary : ''}
-							colorActive={(!errorEmail && !errorPassword) ? colorsKarbono.primary : ''}
+							colorHover={(!errorEmail || !errorPassword) ? colorsKarbono.primary : ''}
+							colorActive={(!errorEmail || !errorPassword) ? colorsKarbono.primary : ''}
 							sx={{
 								width: '250px',
 								height: '35px',

@@ -116,11 +116,11 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						<CustomButton
 							fontSize={'20px'}
 							onClick={() => { register() }}
-							disabled={(!errorEmail && !errorPassword) ? false : true}
-							textColorHover={(!errorEmail && !errorPassword) ? 'white' : null}
+							disabled={(errorEmail || errorPassword || errorPasswordConfirm)}
+							textColorHover={(!errorEmail || !errorPassword||!errorPasswordConfirm) ? 'white' : null}
 							textColor={'white'}
-							colorHover={(!errorEmail && !errorPassword) ? colorsKarbono.primary : ''}
-							colorActive={(!errorEmail && !errorPassword) ? colorsKarbono.primary : ''}
+							colorHover={(!errorEmail || !errorPassword||!errorPasswordConfirm) ? colorsKarbono.primary : ''}
+							colorActive={(!errorEmail || !errorPassword||!errorPasswordConfirm) ? colorsKarbono.primary : ''}
 							sx={{
 								width: '250px',
 								height: '35px',

@@ -43,7 +43,7 @@ const LoginView: React.FC<LoginViewProps> = () => {
 						{'Sus datos tienen el formato correcto'}
 					</Alert>
 				: <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)',borderRadius:'10px' }}>
-					{'Credenciales Inválidas'}
+					<Typography sx={{color:'white'}}>{'Credenciales Inválidas'}</Typography>
 				</Alert>
 			}
 

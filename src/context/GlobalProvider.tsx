@@ -151,11 +151,11 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	const [isAuth, setIsAuth] = React.useState(false);
 
 	const authStatus = () => {
-		
-		const myToken=Cookies.get(CookiesKeysEnum.token)
+
+		const myToken = Cookies.get(CookiesKeysEnum.token)
 		// console.log('MyToken:',myToken)
-		
-	    if(myToken===null||myToken===undefined){
+
+		if (myToken === null || myToken === undefined) {
 			localStorageProtocol.delete(StorageKeysEnum.user)
 		}
 		if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
@@ -174,6 +174,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	const useruseCase = new UserUseCases();
 	const [loadingAuth, setLoadingAuth] = React.useState(false);
 	const [authOK, setAuthOk] = React.useState(true);
+	const [errorAuth, setErrorAuth] = React.useState('');
 
 	const login = async () => {
 		setLoadingAuth(true);
@@ -181,15 +182,27 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		const resp = await useruseCase.login(email, password)
 		console.log('RespAuth:', resp)
 
-		localStorageProtocol.set(StorageKeysEnum.user, resp);
-		Cookies.set(CookiesKeysEnum.token,resp.token, { sameSite: 'Strict'})
-		
+		if (resp.statusCode === 201) {
+			localStorageProtocol.set(StorageKeysEnum.user, resp.body);
+			Cookies.set(CookiesKeysEnum.token, resp.body.token, { sameSite: 'Strict' })
+		}
+
 		setLoadingAuth(false);
-		if (resp !== 401 && resp !== 400 && resp !== 500) {
+
+		if (resp.statusCode === 201) {
+			setErrorAuth('');
+			setAuthOk(true)
 			authStatus();
-			setAuthOk(true);
 			router.push(mainRoutes.home);
-		} else {
+			console.log('RES_API:', resp)
+
+		} else if (resp.body.statusCode === 400) {
+			console.log('Error Loguin:', resp.body.message)
+			setErrorAuth(resp.body.message);
+			setAuthOk(false)
+		} else if (resp.body.statusCode === 401){
+			console.log('Error Loguin:', resp.body.message)
+			setErrorAuth(resp.body.message);
 			setAuthOk(false)
 		}
 	}
@@ -202,17 +215,30 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		const resp = await useruseCase.register(name, phone, email, password)
 		console.log('RespRegister:', resp)
 
-		localStorageProtocol.set(StorageKeysEnum.user, resp);
-		Cookies.set(CookiesKeysEnum.token,resp.token, { sameSite: 'Strict'})
-		
-		setLoadingAuth(false);
-		if (resp !== 401 && resp !== 400 && resp !== 500) {
-			authStatus();
-			setAuthOk(true);
-			router.push(mainRoutes.home);
-		} else {
-			setAuthOk(false)
+		if (resp.body === undefined) {
+			localStorageProtocol.set(StorageKeysEnum.user, resp);
+			Cookies.set(CookiesKeysEnum.token, resp.token, { sameSite: 'Strict' })
 		}
+
+		setLoadingAuth(false);
+
+		if (resp.body !== undefined) {
+			setAuthOk(false);
+			console.log('RES_API:', resp)
+
+			if (resp.body.statusCode === 400) {
+				// console.log('Error Register:', resp.body.message[0])
+				setErrorAuth(resp.body.message);
+				setAuthOk(false)
+			}
+		}
+		else {
+			setErrorAuth('');
+			setAuthOk(true)
+			authStatus();
+			router.push(mainRoutes.home);
+		}
+
 	}
 	/////////////////////////////LOGOUT//////////////////////////////////////////////
 	const logout = async () => {
@@ -232,6 +258,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 			login,
 			register,
+			errorAuth,
 
 			logout,
 			loadingAuth,
