@@ -13,12 +13,12 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 
 
 	const {
-		login,register,loadingAuth,
+		login, register, loadingAuth,
 		email, errorEmail, handleEmail,
-		name,handleName,
-		phone,errorPhone,handlePhone,
+		name, handleName,
+		phone, errorPhone, handlePhone,
 		password, errorPassword, handlePassword,
-		passwordConfirm,errorPasswordConfirm,handlePasswordConfirm
+		passwordConfirm, errorPasswordConfirm, handlePasswordConfirm
 	} = React.useContext(GlobalContext)
 
 	return (
@@ -29,7 +29,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 				justifyContent='center'
 				alignItems='center'
 			>
-				
+
 				<Grid item xs={12} paddingBottom={2}>
 					<TextField
 						onChange={handleName}
@@ -38,7 +38,11 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						type="name"
 						placeholder='Nombre'
 						fullWidth
-						inputProps={{style:{ height:'15PX',}}}  
+						inputProps={{ style: { height: '15PX', } }}
+						sx={{
+							bgcolor: 'transparent',
+							"& .MuiInputBase-root": { borderRadius: '10px' },
+						}}
 					/>
 				</Grid>
 
@@ -51,7 +55,11 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						type="email"
 						placeholder='Email'
 						fullWidth
-						inputProps={{style:{ height:'15PX',}}}  
+						inputProps={{ style: { height: '15PX', } }}
+						sx={{
+							bgcolor: 'transparent',
+							"& .MuiInputBase-root": { borderRadius: '10px' },
+						}}
 					/>
 				</Grid>
 				<Grid item xs={12} paddingBottom={2}>
@@ -62,7 +70,11 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						type="number"
 						placeholder='Teléfono'
 						fullWidth
-						inputProps={{style:{ height:'15PX',}}}  
+						inputProps={{ style: { height: '15PX', } }}
+						sx={{
+							bgcolor: 'transparent',
+							"& .MuiInputBase-root": { borderRadius: '10px' },
+						}}
 					/>
 				</Grid>
 
@@ -74,7 +86,11 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						type="password"
 						placeholder='Contraseña'
 						fullWidth
-						inputProps={{style:{ height:'15PX',}}}  
+						inputProps={{ style: { height: '15PX', } }}
+						sx={{
+							bgcolor: 'transparent',
+							"& .MuiInputBase-root": { borderRadius: '10px' },
+						}}
 					/>
 				</Grid>
 
@@ -86,7 +102,11 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						type="password"
 						placeholder='Confirmar Contraseña'
 						fullWidth
-						inputProps={{style:{ height:'15PX',}}}  
+						inputProps={{ style: { height: '15PX', } }}
+						sx={{
+							bgcolor: 'transparent',
+							"& .MuiInputBase-root": { borderRadius: '10px' },
+						}}
 					/>
 				</Grid>
 
@@ -103,7 +123,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 							colorActive={(!errorEmail && !errorPassword) ? colorsKarbono.primary : ''}
 							sx={{
 								width: '250px',
-								height: '50px',
+								height: '35px',
 								color: colorsKarbono.primary
 							}}
 							variant='contained'

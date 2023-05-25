@@ -41,10 +41,10 @@ const RegisterView: React.FC<RegisterViewProps> = () => {
 
 			{
 				(errorEmail || errorPassword||errorPasswordConfirm||errorPhone)
-					? <Alert severity="warning" sx={{ mb: 3 }}>
+					? <Alert severity="warning" sx={{ mb: 3 ,borderRadius:'10px'}}>
 						{messageErrorEmail || messageErrorPassword||messageErrorPasswordConfirm||messageErrorPhone}
 					</Alert>
-					: <Alert severity="success" sx={{ mb: 3 }}>
+					: <Alert severity="success" sx={{ mb: 3 ,borderRadius:'10px'}}>
 						{'Sus datos tienen el formato correcto'}
 					</Alert>
 			}

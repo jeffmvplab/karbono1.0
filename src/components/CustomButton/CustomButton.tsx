@@ -34,6 +34,7 @@ export interface CustomButtonProps {
 	height?: number | string,
 	width?: number | string,
 	padding?: number | string,
+	borderRadius?: number | string,
 
 	startIcon?: ReactNode,
 	endIcon?: ReactNode,
@@ -66,6 +67,7 @@ const CustomButton: React.FC<CustomButtonProps> = (
 		height,
 		width = 100,
 		padding = '4px 30px',
+		borderRadius='12px',
 
 		color = colorsButton,
 		borderColor = colorsButton,
@@ -132,6 +134,7 @@ const CustomButton: React.FC<CustomButtonProps> = (
 					color: 'white',
 					backgroundColor: '#C0C2C3'
 				},
+				borderRadius:borderRadius,
 				width: width,
 				height: height,
 				padding: padding,

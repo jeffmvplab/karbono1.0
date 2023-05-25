@@ -20,6 +20,7 @@ export const lightThemes = createTheme({
     },
 
     components: {
+
         MuiAppBar: {
             defaultProps: {},
             styleOverrides: {
@@ -29,6 +30,7 @@ export const lightThemes = createTheme({
 
             }
         },
+
         MuiTypography: {
 
             defaultProps: {
@@ -80,6 +82,7 @@ export const lightThemes = createTheme({
                 }
             }
         },
+        
         MuiMenuItem: {
             defaultProps: {},
             styleOverrides: {
@@ -90,6 +93,7 @@ export const lightThemes = createTheme({
                 }
             },
         },
+
         MuiButton: {
             defaultProps: {},
             styleOverrides: {
