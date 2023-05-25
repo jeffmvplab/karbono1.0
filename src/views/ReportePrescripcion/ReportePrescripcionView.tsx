@@ -12,6 +12,7 @@ import { DescargarModal } from './components/Modals/DescargarModal';
 import { OrdenarModal } from './components/Modals/OrdenarModal';
 import { CustomButton } from '@/components/CustomButton';
 import { colorsKarbono } from '@/themes/colors';
+import { typographyKarbono } from '@/themes/typography';
 
 export interface ReportePrescripcionViewProps { }
 
@@ -63,59 +64,59 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 
 				<Grid item display={'flex'} sx={{ width: '100px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '10px 0 0 0' }}>
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>IPS:{reporte?.ips}</Typography>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center',fontFamily: typographyKarbono.outfit }}>IPS:{reporte?.ips}</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
 				</Grid>
 
 				<Grid item display={'flex'} sx={{ width: '200px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0 0 0 0' }}>
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Servicio:{reporte?.servicio}</Typography>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center',fontFamily: typographyKarbono.outfit }}>Servicio:{reporte?.servicio}</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
 				</Grid>
 
 				<Grid item display={'flex'} sx={{ width: '400px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0 0' }}>
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Nombres y Apellidos:{reporte?.nombre_paciente}</Typography>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '100%', textAlign: 'center',fontFamily: typographyKarbono.outfit }}>Nombres y Apellidos:{reporte?.nombre_paciente}</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
-					{/* <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Apellidos:</Typography>
+					{/* <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '100%', textAlign: 'center',fontFamily: typographyKarbono.outfit }}>Apellidos:</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} /> */}
 				</Grid>
 
 				<Grid item display={'flex'} sx={{ width: '100px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0 0' }}>
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Peso:{reporte?.peso}</Typography>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '15px', paddingLeft: '10px', width: '100%', textAlign: 'center',fontFamily: typographyKarbono.outfit }}>Peso:{reporte?.peso}</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
 				</Grid>
 
 				<Grid item display={'flex'} sx={{ width: '150px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0 0' }}>
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Identificación:{reporte?.no_identificacion}</Typography>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center',fontFamily: typographyKarbono.outfit }}>Identificación:{reporte?.no_identificacion}</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
 				</Grid>
 
 				<Grid item display={'flex'} sx={{ width: '150px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0px 0px', }}>
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Infusión continua por (hr):{reporte?.tiempo_infusion}</Typography>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center',fontFamily: typographyKarbono.outfit }}>Infusión continua por (hr):{reporte?.tiempo_infusion}</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
 				</Grid>
 
 				<Grid item display={'flex'} sx={{ width: '150px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0px 0px', }}>
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Volumen de purga:{reporte?.purga}</Typography>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center',fontFamily: typographyKarbono.outfit }}>Volumen de purga:{reporte?.purga}</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
 				</Grid>
 
 				<Grid item display={'flex'} sx={{ width: '150px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0px 0px', }}>
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Vía de administración:{reporte?.via_administracion}</Typography>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center',fontFamily: typographyKarbono.outfit }}>Vía de administración:{reporte?.via_administracion}</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
 				</Grid>
 
 				<Grid item display={'flex'} sx={{ width: '150px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0px  0px', }}>
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Volumen total NPT + purga:{(reporte?.volumen! + reporte?.purga!)}</Typography>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center',fontFamily: typographyKarbono.outfit }}>Volumen total NPT + purga:{(reporte?.volumen! + reporte?.purga!)}</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
 				</Grid>
 
 				<Grid item display={'flex'} sx={{ width: '150px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 0px 0px', }}>
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Volumen total NPT:{reporte?.volumen}</Typography>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center',fontFamily: typographyKarbono.outfit }}>Volumen total NPT:{reporte?.volumen}</Typography>
 					<Divider orientation='vertical' style={{ height: '60%' }} />
 				</Grid>
 
 				<Grid item display={'flex'} sx={{ width: '150px', backgroundColor: '#F0F0F0', height: '50px', alignItems: 'center', borderRadius: '0px 0px 10px 0px', }}>
-					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center' }}>Flujo metabólico:{reporte?.flujo_metabolico}</Typography>
+					<Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '13px', paddingLeft: '10px', width: '100%', textAlign: 'center',fontFamily: typographyKarbono.outfit }}>Flujo metabólico:{reporte?.flujo_metabolico}</Typography>
 
 				</Grid>
 

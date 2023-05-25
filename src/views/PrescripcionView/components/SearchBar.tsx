@@ -6,6 +6,7 @@ import { textAlign } from '@mui/system'
 import React, { useContext } from 'react'
 import { PrescripcionContext } from '../context/PrescripcionContext'
 import { Button } from '@material-ui/core'
+import { typographyKarbono } from '@/themes/typography'
 
 const SearchBar = () => {
 
@@ -33,6 +34,7 @@ const SearchBar = () => {
             variant='text'
           >
             <Typography
+              fontFamily={typographyKarbono.outfit}
               // color={textColor}
               textAlign={'center'}
               textTransform='initial'

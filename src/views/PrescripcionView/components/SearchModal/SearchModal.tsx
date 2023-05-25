@@ -3,12 +3,12 @@ import { LoadingComponent } from '@/components/LoadingComponent';
 import { mainRoutes } from '@/routes/routes';
 import { colorsKarbono } from '@/themes/colors';
 import { Modal, Avatar, Button, Stack, Box, Typography, TextField, InputAdornment, Radio, FormControlLabel, CircularProgress, Alert } from '@mui/material';
-import router from 'next/router';
 import React, { useContext } from 'react';
 import { PrescripcionContext } from '../../context/PrescripcionContext';
 import CloseIcon from '@mui/icons-material/Close';
 import { Search } from '@mui/icons-material'
-import { pink } from '@mui/material/colors';
+
+import { typographyKarbono } from '@/themes/typography';
 
 export interface SearchModalProps { }
 
@@ -158,10 +158,11 @@ const SearchModal: React.FC<SearchModalProps> = () => {
 										<Stack direction={'column'}>
 											{'Búsqueda Terminada'}
 											<Stack direction={'column'}>
-												<Button variant='text' onClick={()=>handleCloseModalSearch()}>
+												<Button variant='text' onClick={() => handleCloseModalSearch()}>
 													<Typography
+
 														textTransform='initial'
-														sx={{ fontSize: { xs: '14px', sm: '16px' }, fontWeight: '1px' }}
+														sx={{ fontSize: { xs: '14px', sm: '16px' }, fontWeight: '1px', fontFamily: typographyKarbono.outfit }}
 													>Ver Tabla
 													</Typography>
 												</Button>
@@ -187,10 +188,10 @@ const SearchModal: React.FC<SearchModalProps> = () => {
 
 							<CustomButton
 								onClick={() => handleFilterSearch()}
-								disabled={(search!=='')
-									        ?(loadingApi) ? false : true
-											:true
-										}
+								disabled={(search !== '')
+									? (loadingApi) ? false : true
+									: true
+								}
 								textColorHover={(loadingApi) ? 'white' : null}
 								textColor={'white'}
 								colorHover={(loadingApi) ? colorsKarbono.secundary : ''}
