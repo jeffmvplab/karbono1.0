@@ -126,7 +126,7 @@ const CustomButton: React.FC<CustomButtonProps> = (
 		<MyButton
 			id={id}
 			ref={ref!}
-			disabled={disabled || loading}
+			disabled={disabled}
 			variant={variant}
 			size={size}
 			sx={{
