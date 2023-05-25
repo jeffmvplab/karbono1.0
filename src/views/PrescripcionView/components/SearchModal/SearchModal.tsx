@@ -100,7 +100,7 @@ const SearchModal: React.FC<SearchModalProps> = () => {
 									type='text'
 									value={search}
 									variant='outlined'
-									sx={{ bgcolor: 'transparent', color: 'white'}}
+									sx={{ bgcolor: 'transparent', color: 'white' }}
 									InputProps={{
 										startAdornment:
 											<InputAdornment position="start">
@@ -158,11 +158,11 @@ const SearchModal: React.FC<SearchModalProps> = () => {
 										<Stack direction={'column'}>
 											{'Búsqueda Terminada'}
 											<Stack direction={'column'}>
-												<Button variant='text' onClick={()=>handleCloseModalSearch()}>
+												<Button variant='text' onClick={() => handleCloseModalSearch()}>
 													<Typography
-													  
+
 														textTransform='initial'
-														sx={{ fontSize: { xs: '14px', sm: '16px' }, fontWeight: '1px' }}
+														sx={{ fontSize: { xs: '14px', sm: '16px' }, fontWeight: '1px', fontFamily: typographyKarbono.outfit }}
 													>Ver Tabla
 													</Typography>
 												</Button>
@@ -188,10 +188,10 @@ const SearchModal: React.FC<SearchModalProps> = () => {
 
 							<CustomButton
 								onClick={() => handleFilterSearch()}
-								disabled={(search!=='')
-									        ?(loadingApi) ? false : true
-											:true
-										}
+								disabled={(search !== '')
+									? (loadingApi) ? false : true
+									: true
+								}
 								textColorHover={(loadingApi) ? 'white' : null}
 								textColor={'white'}
 								colorHover={(loadingApi) ? colorsKarbono.secundary : ''}

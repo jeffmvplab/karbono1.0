@@ -6,6 +6,7 @@ import { useContext } from "react"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { mainRoutes } from "@/routes/routes"
 import { useRouter } from "next/router"
+import { typographyKarbono } from "@/themes/typography"
 
 
 const BannerOrdenar = () => {
@@ -66,8 +67,9 @@ const BannerOrdenar = () => {
                 sx={{ justifyContent: 'center', alignItems: 'center' }}>
 
                     <Typography
+                    
                     width={{xs:'300px',sm:'450px'}}
-                     sx={{ fontSize: '20px', lineHeight: '22px', color: '#fff' }}>
+                     sx={{ fontSize: '20px', lineHeight: '22px', color: '#fff'}}>
                         Envía y ordena tu prescripción a la Central de Mezclas de tu 
                         preferencia en tan solo segundos, y lleva seguimiento de tu
                         pedido en tiempo real.

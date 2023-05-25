@@ -32,7 +32,7 @@ const ReportesMicronutrientes = () => {
                         <Box sx={{ justifyContent: 'start' }} >
                             <ul style={{}}>
                                 {Micronutrientes.map(lista => {
-                                    return <li style={{ listStyleType: 'none' }} key={lista}>{lista}</li>
+                                    return <li style={{ listStyleType: 'none' }} key={lista}><Typography>{lista}</Typography></li>
                                 })}
                             </ul>
                         </Box>
