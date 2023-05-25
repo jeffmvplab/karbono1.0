@@ -3,12 +3,12 @@ import { LoadingComponent } from '@/components/LoadingComponent';
 import { mainRoutes } from '@/routes/routes';
 import { colorsKarbono } from '@/themes/colors';
 import { Modal, Avatar, Button, Stack, Box, Typography, TextField, InputAdornment, Radio, FormControlLabel, CircularProgress, Alert } from '@mui/material';
-import router from 'next/router';
 import React, { useContext } from 'react';
 import { PrescripcionContext } from '../../context/PrescripcionContext';
 import CloseIcon from '@mui/icons-material/Close';
 import { Search } from '@mui/icons-material'
-import { pink } from '@mui/material/colors';
+
+import { typographyKarbono } from '@/themes/typography';
 
 export interface SearchModalProps { }
 
@@ -100,7 +100,7 @@ const SearchModal: React.FC<SearchModalProps> = () => {
 									type='text'
 									value={search}
 									variant='outlined'
-									sx={{ bgcolor: 'transparent', color: 'white' }}
+									sx={{ bgcolor: 'transparent', color: 'white'}}
 									InputProps={{
 										startAdornment:
 											<InputAdornment position="start">
@@ -160,6 +160,7 @@ const SearchModal: React.FC<SearchModalProps> = () => {
 											<Stack direction={'column'}>
 												<Button variant='text' onClick={()=>handleCloseModalSearch()}>
 													<Typography
+													  
 														textTransform='initial'
 														sx={{ fontSize: { xs: '14px', sm: '16px' }, fontWeight: '1px' }}
 													>Ver Tabla

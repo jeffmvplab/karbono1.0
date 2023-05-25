@@ -87,7 +87,7 @@ const FormView: React.FC<FormViewProps> = () => {
 
 									<Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
 						
-										<TextField
+										<TextField 
 											onChange={handleNumOrder}
 											id='Numero-de-orden'
 											label='Número de Orden'
@@ -95,7 +95,7 @@ const FormView: React.FC<FormViewProps> = () => {
 											value={numOrder}
 											variant='outlined'
 											color='secondary'
-											sx={{ bgcolor: 'transparent' }}
+											sx={{ bgcolor: 'transparent'}}
 											fullWidth
 										/>
 

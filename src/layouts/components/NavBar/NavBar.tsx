@@ -11,6 +11,7 @@ import { CustomButton } from '@/components/CustomButton';
 import { useRouter } from 'next/router';
 import { Button } from '@material-ui/core';
 import { colorsKarbono } from '@/themes/colors';
+import { typographyKarbono } from '@/themes/typography';
 
 
 export const NavBar = () => {
@@ -31,11 +32,12 @@ export const NavBar = () => {
     <AppBar color='inherit' position='sticky' elevation={0}>
       <Toolbar>
         {/* <Stack direction={'row'} alignContent={'space-between'} > */}
-          <Hidden mdUp>
-            <Button
-              onClick={() => { router.push(mainRoutes.home); console.log('Click') }}
-            >
-              <Image
+        <Hidden mdUp>
+          <Button
+            onClick={() => { router.push(mainRoutes.home); }}
+          >
+            {(router.asPath !== mainRoutes.form)
+              && <Image
                 src={(router.asPath === mainRoutes.login || router.asPath === mainRoutes.register)
                   ? '/assets/1.png'
                   : '/assets/iconMenu.png'
@@ -49,134 +51,141 @@ export const NavBar = () => {
                 }
                 alt=''
                 style={{ marginTop: '5px', alignItems: 'center' }}
-              />
+              />}
 
-            </Button>
-          </Hidden>
+          </Button>
+        </Hidden>
 
-          <Grid container display='flex' flexDirection='row'>
-            <Hidden mdDown>
-              <Grid item xs={12} sm={12} md={1} >
-                <Button
-                  onClick={() => { router.push(mainRoutes.home); console.log('Click') }}
-                >
-                  <Image
-                    src='/assets/1.png'
-                    width={120}
-                    height={30}
-                    alt=''
-                    style={{ marginTop: '5px', alignItems: 'center' }}
-                  />
-                </Button>
-              </Grid>
+        <Grid container display='flex' flexDirection='row'>
+          <Hidden mdDown>
+            <Grid item xs={12} sm={12} md={1} >
+              <Button
+                onClick={() => { router.push(mainRoutes.home); console.log('Click') }}
+              >
+                <Image
+                  src='/assets/1.png'
+                  width={120}
+                  height={30}
+                  alt=''
+                  style={{ marginTop: '5px', alignItems: 'center' }}
+                />
+              </Button>
+            </Grid>
 
-              <Grid item xs={12} sm={12} md={7} display='flex' alignItems='center' justifyContent='space-evenly'>
-                {
-                  (isAuth)
-                    ? <>
-                      <Link href='' style={{ textDecoration: 'none' }}>
-                        <Typography
-                          marginLeft='30px'
-                          marginRight='15px'
-                          color='#000'
-                          alignItems='center'
-                        >
-                          Produción
-                        </Typography></Link>
-
-                      <Link href='' style={{ textDecoration: 'none' }}>
-                        <Typography
-                          margin='0 15px'
-                          color='#000'
-                        >
-                          Configuración
-                        </Typography></Link>
-
-                      <Link href='' style={{ textDecoration: 'none' }}>
-                        <Typography
-                          margin='0 15px'
-                          color='#000'
-                        >
-                          Parámetros
-                        </Typography></Link>
-
-                      <Link href='' style={{ textDecoration: 'none' }}>
-                        <Typography
-                          margin='0 15px'
-                          color='#000'
-                        >
-                          Informes
-                        </Typography></Link>
-
-                      <Link href='' style={{ textDecoration: 'none' }}>
-                        <Typography
-                          margin='0 15px'
-                          color='#000'
-                        >
-                          Ayudas
-                        </Typography>
-                      </Link>
-                    </>
-                    : null
-                }
-
-              </Grid>
-
-            </Hidden>
-            {/* <Grid item xs={12} sm={12} md={4} display='flex' alignItems='center' justifyContent='space-between' paddingRight='2' paddingLeft='80px' > */}
-            <Stack  direction={'row'} spacing={2} justifyItems={'center'} >
-              
-              <Box minWidth={{xs:'60%',sm:'100%',md:'20%',xl:'60%'}}/>
-
-              <Box display='flex' alignItems='center'>
-                {(isAuth)
-                  ? <span style={{ fontSize: '30px',paddingTop:'5px' }}>
-                    <CallOutlinedIcon />
-                  </span>
-                  : null
-                }
-
-                {
-                  (isAuth)
-                    ? <Link href='' style={{ textDecoration: 'none' }} >
-                      <Typography
-                        display={{ xs: 'none', sm: 'block' }}
-                        margin='0 15px'
-                        color='#000'
-                        alignItems='normal'
-                      >Contáctanos
-                      </Typography>
-                    </Link>
-                    : <Link href={mainRoutes.login} style={{ textDecoration: 'none' }} >
-                      <Typography
-                        display={{ xs: 'none', sm: 'block' }}
-                        margin='0 15px'
-                        color='#000'
-                        alignItems='normal'
-                      >Iniciar Sesión
-                      </Typography>
-                    </Link>
-                }
-
-              </Box>
+            <Grid item xs={12} sm={12} md={7} display='flex' alignItems='center' justifyContent='space-evenly'>
               {
                 (isAuth)
-                  ? <FadeMenu />
-                  : <Link href={mainRoutes.register} style={{ textDecoration: 'none' }} >
-                    <Button
-                      style={{ color: '#fff', backgroundColor: '#2fc5c6', padding: '0.20em 2.70em', borderRadius: '10px' }}
-                      id="fade-button"
-                      onClick={() => { router.push(mainRoutes.register) }}
-                    >
-                      Registrarse
-                    </Button>
+                  ? <>
+                    <Link href='' style={{ textDecoration: 'none' }}>
+                      <Typography
+                        fontFamily={typographyKarbono.outfit}
+                        marginLeft='30px'
+                        marginRight='15px'
+                        color='#000'
+                        alignItems='center'
+                      >
+                        Produción
+                      </Typography></Link>
+
+                    <Link href='' style={{ textDecoration: 'none' }}>
+                      <Typography
+                        fontFamily={typographyKarbono.outfit}
+                        margin='0 15px'
+                        color='#000'
+                      >
+                        Configuración
+                      </Typography></Link>
+
+                    <Link href='' style={{ textDecoration: 'none' }}>
+                      <Typography
+                        fontFamily={typographyKarbono.outfit}
+                        margin='0 15px'
+                        color='#000'
+                      >
+                        Parámetros
+                      </Typography></Link>
+
+                    <Link href='' style={{ textDecoration: 'none' }}>
+                      <Typography
+                        fontFamily={typographyKarbono.outfit}
+                        margin='0 15px'
+                        color='#000'
+                      >
+                        Informes
+                      </Typography></Link>
+
+                    <Link href='' style={{ textDecoration: 'none' }}>
+                      <Typography
+                        fontFamily={typographyKarbono.outfit}
+                        margin='0 15px'
+                        color='#000'
+                      >
+                        Ayudas
+                      </Typography>
+                    </Link>
+                  </>
+                  : null
+              }
+
+            </Grid>
+
+          </Hidden>
+          {/* <Grid item xs={12} sm={12} md={4} display='flex' alignItems='center' justifyContent='space-between' paddingRight='2' paddingLeft='80px' > */}
+          <Stack direction={'row'} spacing={2} justifyItems={'center'} >
+
+            <Box minWidth={{ xs: '60%', sm: '100%', md: '20%', xl: '60%' }} />
+
+            <Box display='flex' alignItems='center'>
+              {(isAuth)
+                ? <span style={{ fontSize: '30px', paddingTop: '5px' }}>
+                  <CallOutlinedIcon />
+                </span>
+                : null
+              }
+
+              {
+                (isAuth)
+                  ? <Link href='' style={{ textDecoration: 'none' }} >
+                    <Typography
+                      fontFamily={typographyKarbono.outfit}
+                      display={{ xs: 'none', sm: 'block' }}
+                      margin='0 15px'
+                      color='#000'
+                      alignItems='normal'
+                    >Contáctanos
+                    </Typography>
+                  </Link>
+                  : <Link href={mainRoutes.login} style={{ textDecoration: 'none' }} >
+                    <Typography
+                      fontFamily={typographyKarbono.outfit}
+                      display={{ xs: 'none', sm: 'block' }}
+                      margin='0 15px'
+                      color='#000'
+                      alignItems='normal'
+                    >Iniciar Sesión
+                    </Typography>
                   </Link>
               }
-            </Stack>
-            {/* </Grid> */}
+
+            </Box>
+            {
+              (isAuth)
+                ? <FadeMenu />
+                : <Link href={mainRoutes.register} style={{ textDecoration: 'none' }} >
+                  <Button
+                    style={{ color: '#fff', backgroundColor: '#2fc5c6', padding: '0.20em 2.70em', borderRadius: '10px',fontFamily: typographyKarbono.outfit  }}
+                    id="fade-button"
+                    onClick={() => { router.push(mainRoutes.register) }}
+                  >
+                    Registrarse
+                  </Button>
+                </Link>
+            }
+          </Stack>
+          {/* </Grid> */}
 
 
-          </Grid>
+        </Grid>
         {/* </Stack> */}
       </Toolbar>
     </AppBar >

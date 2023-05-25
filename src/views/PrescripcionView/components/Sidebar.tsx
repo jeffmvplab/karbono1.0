@@ -10,6 +10,7 @@ import { colorsKarbono } from '@/themes/colors';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { PrescripcionContext } from '../context/PrescripcionContext';
 import { useRouter } from 'next/router';
+import { typographyKarbono } from '@/themes/typography';
 
 export const Sidebar = ({ drawerWidth = 240 }) => {
 
@@ -34,7 +35,7 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
           <Grid item >
             <Hidden smDown>
               <Button
-              onClick={()=>{router.push(mainRoutes.home)}}
+                onClick={() => { router.push(mainRoutes.home) }}
               >
                 <Box sx={{ textAlign: 'center', paddingTop: '10px' }}>
                   <Image
@@ -60,6 +61,7 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
               />
               <Link href='/prescripcion' style={{ textDecoration: 'none' }}>
                 <Typography
+                  fontFamily={typographyKarbono.outfit}
                   variant='h6'
                   sx={{
                     paddingTop: '0',

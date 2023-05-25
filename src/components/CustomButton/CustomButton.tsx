@@ -2,13 +2,14 @@ import { Button, CircularProgress, styled, SxProps, Theme, Typography } from '@m
 import { MouseEventHandler, ReactNode, RefObject } from 'react';
 import { fontWeight } from '@mui/system';
 import { colorsKarbono } from '@/themes/colors';
+import { typographyKarbono } from '@/themes/typography';
 
 
 
 export interface CustomButtonProps {
 
 	color?: string,
-    borderColor?:string[]|string| undefined,
+	borderColor?: string[] | string | undefined,
 	colorHover?: string,
 	colorActive?: string,
 	colorBorderHover?: string,
@@ -30,9 +31,9 @@ export interface CustomButtonProps {
 	variant?: "text" | "outlined" | "contained" | undefined,
 
 	size?: "small" | "medium" | "large" | undefined,
-	height?: number|string,
-	width?:number|string,
-	padding?: number|string,
+	height?: number | string,
+	width?: number | string,
+	padding?: number | string,
 
 	startIcon?: ReactNode,
 	endIcon?: ReactNode,
@@ -43,10 +44,10 @@ export interface CustomButtonProps {
 
 	sx?: SxProps<Theme> | undefined
 	ref?: RefObject<HTMLButtonElement> | ((instance: HTMLButtonElement | null) => void) | null | undefined;
-	id?:string | undefined
+	id?: string | undefined
 
 }
-const colorsButton=colorsKarbono.primary;
+const colorsButton = colorsKarbono.primary;
 
 const CustomButton: React.FC<CustomButtonProps> = (
 
@@ -56,7 +57,7 @@ const CustomButton: React.FC<CustomButtonProps> = (
 		textVariant,
 		textColor,
 
-		textColorHover='white',
+		textColorHover = 'white',
 		fontSize = 14,
 		fontSizeMovil = 12,
 		size = 'small',
@@ -67,7 +68,7 @@ const CustomButton: React.FC<CustomButtonProps> = (
 		padding = '4px 30px',
 
 		color = colorsButton,
-		borderColor=colorsButton,
+		borderColor = colorsButton,
 		colorActive = colorsButton,
 		colorFocus = colorsButton,
 		colorHover = colorsButton,
@@ -121,8 +122,8 @@ const CustomButton: React.FC<CustomButtonProps> = (
 	return (
 
 		<MyButton
-		    id={id}
-		    ref={ref!}
+			id={id}
+			ref={ref!}
 			disabled={disabled || loading}
 			variant={variant}
 			size={size}
@@ -139,7 +140,7 @@ const CustomButton: React.FC<CustomButtonProps> = (
 				...sx,
 			}}
 			style={{
-				background:color
+				background: color
 			}}
 			startIcon={startIcon && loading ? cirularProgress : startIcon}
 			endIcon={endIcon && loading ? cirularProgress : endIcon}
@@ -153,14 +154,14 @@ const CustomButton: React.FC<CustomButtonProps> = (
 					:
 
 					<Typography
-				        
+						fontFamily={typographyKarbono.outfit}
 						color={textColor}
 						textAlign={textAlign}
 						textTransform='initial'
 						variant={textVariant}
 						sx={{
 							fontSize: { xs: fontSizeMovil, sm: fontSize },
-							fontWeight:'1px'
+							fontWeight: '1px'
 						}}
 					>{text}</Typography>
 			}
