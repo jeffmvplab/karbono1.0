@@ -89,7 +89,7 @@ export const alertViaDeAdmin = (prescription: IPrescriptions) => {
             resp.alert = 'INADECUADA';
         }
     } else {
-        if (osmolaridad > 800) {
+        if (osmolaridad <= 1799) {
             resp.alert = 'ADECUADA';
         } else {
             resp.alert = 'INADECUADA';
