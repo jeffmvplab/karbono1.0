@@ -98,7 +98,7 @@ const InformacionPaciente = () => {
 
         <Stack direction={'column'}>
 
-            <Accordion onClick={() => { !matches && handleAcordion1() }} expanded={stateAcordion1} elevation={0}>
+            <Accordion expanded={stateAcordion1} elevation={0}>
                 {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
                 <Box sx={{ display: { sm: 'none' }, }}>
                     <AccordionSummary
@@ -113,6 +113,7 @@ const InformacionPaciente = () => {
                         id="panel1bh-header"
                     >
                         <Typography
+                         onClick={() => { !matches && handleAcordion1(),console.log('FFFF') }} 
                             fontSize={16}
                             // paddingY={{sm:2}}
                             style={{ fontWeight: 700, color: colorsKarbono.secundary }}
@@ -128,7 +129,11 @@ const InformacionPaciente = () => {
                 >Información del paciente:
                 </Typography >
                 {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                <AccordionDetails>
+                <AccordionDetails 
+                sx={{ 
+                    // overflow: { sm: 'scroll' },
+                    minHeight: '500px'
+                     }}>
 
                     <Grid container direction='column' >
 

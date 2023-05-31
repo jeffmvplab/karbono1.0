@@ -53,7 +53,7 @@ const Micronutrientes = () => {
     const {
         tipoPrescripcion, tipoPaciente,
         stateAcordion3, setStateAcordion3, matches, handleAcordion3,
-         prescriptionSave,
+        prescriptionSave,
         sodioTotal, handleSodioTotal,
         potacioTotal, handlePotacioTotal,
         fosfato, handleFosfato,
@@ -81,9 +81,9 @@ const Micronutrientes = () => {
 
     return (
 
-        <Stack direction={'column'} paddingBottom={{ xs: '80px' }} >
+        <Stack  direction={'column'} paddingBottom={{ xs: '80px' }} >
 
-            <Accordion onClick={() => !matches && handleAcordion3()} expanded={stateAcordion3} elevation={0}>
+            <Accordion expanded={stateAcordion3} elevation={0}>
                 {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
                 <Box sx={{ display: { sm: 'none' }, }}>
                     <AccordionSummary
@@ -98,6 +98,7 @@ const Micronutrientes = () => {
                         id="panel1bh-header"
                     >
                         <Typography
+                            onClick={() => !matches && handleAcordion3()}
                             fontSize={16}
                             // paddingY={2}
                             style={{ fontWeight: 700, color: colorsKarbono.secundary }}
@@ -114,7 +115,10 @@ const Micronutrientes = () => {
                 >Micronutrientes:
                 </Typography >
                 {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                <AccordionDetails sx={{ maxHeight: '200px' }}>
+                <AccordionDetails 
+                 sx={{ 
+                    minHeight: '500px'
+                     }}>
 
 
                     <Grid container>
@@ -149,7 +153,7 @@ const Micronutrientes = () => {
                                             <Grid item xs={4} sm={4} md={4}>
                                                 <CustomTextField
                                                     disabled={true}
-                                                   value={getSodioTotal(prescriptionSave!).toFixed(2)}
+                                                    value={getSodioTotal(prescriptionSave!).toFixed(2)}
                                                     id='Sodio-total'
                                                     label={'Sodio-total'}
                                                     endAdornament={(tipoPrescripcion === 'Por requerimientos')
