@@ -47,7 +47,6 @@ const FormView: React.FC<FormViewProps> = () => {
 		//  validateAlert();
 	}, [loadingSave])
 
-	console.log('MMMM:', getMovilHeight())
 
 	return (
 
