@@ -45,10 +45,9 @@ const FormView: React.FC<FormViewProps> = () => {
 	useEffect(() => {
 		getPrescriptions();
 		//  validateAlert();
-
-
 	}, [loadingSave])
 
+	console.log('MMMM:', getMovilHeight())
 
 	return (
 
@@ -79,7 +78,7 @@ const FormView: React.FC<FormViewProps> = () => {
 									padding: { xs: '1px', sm: 0.2 },
 									borderRadius: '15px',
 									//  maxHeight:'80%',
-									maxHeight: { xs: '90vh', sm: '80vh', md: '60vh', xl: '90vh' },
+									maxHeight: { xs:`${getMovilHeight()}+100px`, sm: '80vh', md: '60vh', xl: '90vh' },
 									overflow: 'clip',
 								}}>
 

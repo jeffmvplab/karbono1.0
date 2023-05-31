@@ -61,7 +61,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '2500px' }
 		if (stateAcordion1 && stateAcordion2 && !stateAcordion3) { return '2060px' }
 		if (!stateAcordion1 && !stateAcordion2 && !stateAcordion3) { return '150px' }
-		if (stateAcordion1 && !stateAcordion2 && !stateAcordion3) { return '1300px' }
+		if (stateAcordion1 && !stateAcordion2 && !stateAcordion3) { return '1325px' }
 		if (!stateAcordion1 && stateAcordion2 && !stateAcordion3) { return '920px' }
 		if (!stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '1360px' }
 	}

@@ -1,5 +1,5 @@
 import { colorsKarbono } from '@/themes/colors'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, Stack,Typography, useMediaQuery } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, Stack, Typography, useMediaQuery } from '@mui/material'
 import React, { useContext, useEffect } from 'react'
 import CustomTextField from './CustomTextField'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
@@ -43,12 +43,12 @@ const Macronutrientes = () => {
     const {
         tipoPaciente,
         stateAcordion2, setStateAcordion2, matches, handleAcordion2,
-        tipoPrescripcion,handleTipoPrescripcion,errorTipoPrescripcion,messageErrorTipoPrescripcion,
-        flujoMetabolico, handleFlujoMetabolico,errorFlujoMetabolico,messageErrorFlujoMetabolico,
-        aminoacidos, handleAminoacidos,errorAminoacidos,messageErrorAminoacidos,
-        dextrosa, handleDextrosa,errorDextrosa,messageErrorDextrosa,
-        requerimientoAminoacidos,handleRequerimientoAminoacidos,messageErrorRequerimientoAminoacidos,
-        lipidos,handleLipidos,
+        tipoPrescripcion, handleTipoPrescripcion, errorTipoPrescripcion, messageErrorTipoPrescripcion,
+        flujoMetabolico, handleFlujoMetabolico, errorFlujoMetabolico, messageErrorFlujoMetabolico,
+        aminoacidos, handleAminoacidos, errorAminoacidos, messageErrorAminoacidos,
+        dextrosa, handleDextrosa, errorDextrosa, messageErrorDextrosa,
+        requerimientoAminoacidos, handleRequerimientoAminoacidos, messageErrorRequerimientoAminoacidos,
+        lipidos, handleLipidos,
         requerimientoLipidos, handleRequerimientoLipidos,
         omegaven, handleOmegaven,
         dipeptiven, handleDipeptiven,
@@ -63,7 +63,7 @@ const Macronutrientes = () => {
 
         <Stack direction={'column'} >
 
-            <Accordion onClick={() => !matches && handleAcordion2()} expanded={stateAcordion2} elevation={0}>
+            <Accordion expanded={stateAcordion2} elevation={0}>
                 {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
                 <Box sx={{ display: { sm: 'none' }, }}>
                     <AccordionSummary
@@ -78,6 +78,7 @@ const Macronutrientes = () => {
                         id="panel1bh-header"
                     >
                         <Typography
+                            onClick={() => !matches && handleAcordion2()}
                             fontSize={16}
                             // paddingY={2}
                             style={{ fontWeight: 700, color: colorsKarbono.secundary }}
