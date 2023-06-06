@@ -44,13 +44,15 @@ const ReportesMacronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {reporte?.flujo_metabolico}
+                                    {getDextrosa(reporte!).requerimiento.toFixed(2)}
+                                    {/* {reporte?.flujo_metabolico} */}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getDextrosa(reporte!).requerimiento.toFixed(2)}
+                                      -
+                                    {/* {getDextrosa(reporte!).requerimiento.toFixed(2)} */}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -88,7 +90,7 @@ const ReportesMacronutrientes = () => {
                     </Stack>
 
                     <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px',paddingRight: '15px', textAlign: 'left', width: '50%' }}>Volumen</Typography>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', paddingRight: '15px', textAlign: 'left', width: '50%' }}>Volumen</Typography>
                         <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
 
                             {(loadingSave)
@@ -137,7 +139,7 @@ const ReportesMacronutrientes = () => {
                     </Stack>
 
                     <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px',paddingRight: '15px', textAlign: 'left', width: '100%' }}>Corrección de Purga (ml)</Typography>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', paddingRight: '15px', textAlign: 'left', width: '100%' }}>Corrección de Purga (ml)</Typography>
                         <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
 
                             {(loadingSave)
