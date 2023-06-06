@@ -225,7 +225,7 @@ const Macronutrientes = () => {
                                         id='requerimiento-aminoacidos'
                                         label={'Requerimiento aminoácidos*'}
                                         endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'g/kg/dían'
+                                            ? 'g/kg/día'
                                             : 'ml'}
                                         type='text'
                                         helperText={messageErrorRequerimientoAminoacidos}

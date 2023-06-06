@@ -353,7 +353,7 @@ const Micronutrientes = () => {
                                         id='requerimiento-sulfato-de-magnesio'
                                         label={magnesio}
                                         endAdornament={
-                                            (magnesio === 'Sulfato de magnesio')
+                                            (magnesio === 'Sulfato de Magnesio')
                                                 ? (tipoPrescripcion === 'Por requerimientos')
                                                     ? 'mg/kg/día'
                                                     : 'ml'
