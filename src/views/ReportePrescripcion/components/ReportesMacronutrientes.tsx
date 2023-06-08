@@ -44,14 +44,22 @@ const ReportesMacronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getDextrosa(reporte!).requerimiento.toFixed(2)}
-                                    {/* {reporte?.flujo_metabolico} */}
+                                    {/* {getDextrosa(reporte!).requerimiento.toFixed(2)} */}
+                                    {
+                                       ( reporte?.flujo_metabolico === '0')
+                                            ? '-'
+                                            : reporte?.flujo_metabolico
+                                    }
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                      -
+                                    {
+                                        (getDextrosa(reporte!).requerimiento === 0)
+                                            ? '-'
+                                            : getDextrosa(reporte!).requerimiento.toFixed(2)
+                                    }
                                     {/* {getDextrosa(reporte!).requerimiento.toFixed(2)} */}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
