@@ -230,6 +230,31 @@ export const getDextrosa = (prescription: IPrescriptions) => {
     const tiempoInfusion: number = prescription?.tiempo_infusion!;
 
     if (tp === tipoPrescripcion) {
+        params.requerimiento =0
+        params.volumen = flujoMetabolico * peso * tiempoInfusion * 0.12;
+        params.conPurga = params.volumen * correccionPurga(prescription);
+    } else {
+        params.requerimiento = dextrosa / (peso * tiempoInfusion * 0.12);
+        params.volumen = dextrosa
+        params.conPurga = params.volumen * correccionPurga(prescription);
+    }
+    // console.log('Flujo Metabolico Vol:', params.volumen,'Flujo Metabolico Req:',params.requerimiento)
+    // console.log('Dextrosa Vol:', params.volumen,'Dextrosa Req:',params.requerimiento)
+
+    return params;
+}
+
+export const getFlujoMetabolico = (prescription: IPrescriptions) => {
+
+    const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
+
+    const tp: string = prescription?.tipo_prescripcion!;
+    const dextrosa: number = parseFloat(prescription?.dextrosa!);
+    const flujoMetabolico: number = parseFloat(prescription?.flujo_metabolico!);
+    const peso: number = prescription?.peso!;
+    const tiempoInfusion: number = prescription?.tiempo_infusion!;
+
+    if (tp === tipoPrescripcion) {
         params.volumen = flujoMetabolico * peso * tiempoInfusion * 0.12;
         params.requerimiento = dextrosa
         params.conPurga = params.volumen * correccionPurga(prescription);
@@ -243,6 +268,7 @@ export const getDextrosa = (prescription: IPrescriptions) => {
 
     return params;
 }
+
 
 export const concAminoacidos = (prescription: IPrescriptions) => {
 
