@@ -2,7 +2,7 @@ import Macronutrientes from '@/views/Formulario/Components/Macronutrientes';
 import { Grid, Typography, Box, Stack, Skeleton } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import { ReportesContext } from '../context/ReportesContext';
-import { getAgua, getAminoacidos, getDextrosa, getDipeptiven, getLipidos, getOmegaven, getPotacio, getSodio } from '../data/functionsParams';
+import { getAgua, getAminoacidos, getDextrosa, getDipeptiven, getFlujoMetabolico, getLipidos, getOmegaven, getPotacio, getSodio } from '../data/functionsParams';
 
 const ReportesMacronutrientes = () => {
 
@@ -44,19 +44,22 @@ const ReportesMacronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {/* {getDextrosa(reporte!).requerimiento.toFixed(2)} */}
-                                    {
+                                    {getFlujoMetabolico(reporte!).requerimiento === 0
+                                        ? '-'
+                                        : getFlujoMetabolico(reporte!).requerimiento.toFixed(2)
+                                    }
+                                    {/* {
                                        ( reporte?.flujo_metabolico === '0')
                                             ? '-'
                                             : reporte?.flujo_metabolico
-                                    }
+                                    } */}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
                                     {
-                                        (getDextrosa(reporte!).requerimiento === 0)
+                                        (reporte?.tipo_prescripcion !== 'Por requerimientos')
                                             ? '-'
                                             : getDextrosa(reporte!).requerimiento.toFixed(2)
                                     }
