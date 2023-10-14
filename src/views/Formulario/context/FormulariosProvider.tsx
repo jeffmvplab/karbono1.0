@@ -269,8 +269,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorNumIden, setMessageErrorNumIden] = React.useState('');
 
 	const validateNumIdent = (numIden: string) => {
-		
-	
 
 		if (numIden!=='') {
 			setErrorNumIden(false);
@@ -489,7 +487,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			setErrorTipoPaciente(true);
 			setMessageErrorTipoPaciente('Introduzca el tipo de paciente')
 		}
-
 		return errorTipoPaciente;
 	}
 
