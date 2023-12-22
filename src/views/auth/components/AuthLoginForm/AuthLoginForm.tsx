@@ -78,7 +78,8 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 						type="password"
 						placeholder='Institución'
 						fullWidth
-						select
+						select 
+						
 						inputProps={{ style: { height: '15PX', } }}
 						sx={{
 							bgcolor: 'transparent',
