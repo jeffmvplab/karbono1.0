@@ -3,9 +3,6 @@ import { Box, Grid, MenuItem, Stack } from "@mui/material";
 import React, { useContext } from "react";
 import { ReactNode } from "react";
 import { SidebarMovil } from "../components/SidebarMovil";
-import CustomTextField from "@/views/Formulario/Components/CustomTextField";
-import { LightTooltip } from "@/views/Formulario/style/styleToolTips";
-
 
 export interface FormMovilLayoutInterface {
   children: ReactNode;
