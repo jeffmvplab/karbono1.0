@@ -4,8 +4,10 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
 import { GlobalContext } from '@/context/GlobalContext';
-import { Box, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Stack, Typography } from '@mui/material';
 import { typographyKarbono } from '@/themes/typography';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import PersonIcon from '@mui/icons-material/Person';
 
 export default function FadeMenu() {
 
@@ -33,7 +35,10 @@ export default function FadeMenu() {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
-      >Perfil
+        endIcon={<KeyboardArrowDownIcon />}
+      > <Avatar sx={{color:'white', background:'black'}}>
+          < PersonIcon />
+        </Avatar>
       </Button>
       <Menu
         id="fade-menu"
@@ -48,7 +53,7 @@ export default function FadeMenu() {
         <Stack
           padding={'5px'}
           alignItems={'start'}
-          minWidth={'135px'}
+          minWidth={'125px'}
           direction={'column'}>
           <MenuItem sx={{ fontFamily: typographyKarbono.outfit }} onClick={handleClose} >Perfil</MenuItem>
           <MenuItem sx={{ fontFamily: typographyKarbono.outfit }} onClick={handleClose}>Mi cuenta</MenuItem>

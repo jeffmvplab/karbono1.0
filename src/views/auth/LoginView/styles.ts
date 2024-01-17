@@ -1,6 +1,6 @@
 // @mui
 import { bgGradient } from '@/styles/cssStyles';
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
 // utils
 

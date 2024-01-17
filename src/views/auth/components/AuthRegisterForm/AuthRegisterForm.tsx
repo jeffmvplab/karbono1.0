@@ -2,26 +2,16 @@ import { CustomButton } from '@/components/CustomButton';
 import { GlobalContext } from '@/context/GlobalContext';
 import { colorsKarbono } from '@/themes/colors';
 import { Stack, Grid, Box, Link, Typography, TextField, CircularProgress, Button, FormControlLabel, Checkbox, MenuItem } from '@mui/material';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { typographyKarbono } from '@/themes/typography';
-import {
-	GoogleReCaptchaProvider,
-	withGoogleReCaptcha
-  } from 'react-google-recaptcha-v3';
+import { instituciones } from '@/views/ReportePrescripcion/data/instituciones';
+
 
 export interface AuthRegisterFormProps { }
 
 const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 
-	const instituciones = [
-		{ value: '0', label: 'Institucion 1', },
-		{ value: '1', label: 'Institucion 2', },
-		{ value: '2', label: 'Institucion 3', },
-		{ value: '3', label: 'Institucion 4', },
-		{ value: '4', label: 'Institucion 5', },
-		{ value: '5', label: 'Institucion 6', },
-		// { value: '2', label: 'Big Data', },
-	];
+
 
 	const {
 		login, register, loadingAuth,
@@ -29,21 +19,34 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 		name, handleName,
 		phone, errorPhone, handlePhone,
 		password, errorPassword, handlePassword,
-		passwordConfirm, errorPasswordConfirm, handlePasswordConfirm
+		passwordConfirm, errorPasswordConfirm, handlePasswordConfirm,
+		apellido,
+		errorApellido,
+		messageErrorApellido,
+		handleApellido,
+
+		nameYApellidos,
+		errorNameYApellidos,
+		messageErrorNameYApellidos,
+		handleNameYApellidos,
+
+		registroMedico,
+		errorRegistroMedico,
+		messageErrorRegistroMedico,
+		handleRegistroMedico,
+
+		entidadDeSalud,
+		errorEntidadDeSalud,
+		messageErrorEntidadDeSalud,
+		handleEntidadDeSalud,
+		politica_de_privacidad,handlePolitica,handleTipo,tipoCliente
 	} = React.useContext(GlobalContext)
 
 	const fontSize: number = 14;
 	const fontSizeMovil: number = 12;
 
-	const [politica_de_privacidad, setPolitica_de_privacidad] = React.useState<boolean>(false);
-
-	const handlePolitica = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
-		setPolitica_de_privacidad(event.target.checked);
-		console.log('Política de Privacidad:', politica_de_privacidad);
-	}
-
 	//////////////////////////////////////////////////////////////////////////
-	
+
 	//////////////////////////////////////////////////////////////
 	return (
 
@@ -53,14 +56,54 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 				justifyContent='center'
 				alignItems='center'
 			>
+				<Grid item xs={12} paddingBottom={3}>
+					<Stack direction={'row'} spacing={4}>
+						<TextField
+							onChange={handleTipo}
+							value={tipoCliente}
+							label="Tipo de usuario"
+							placeholder='Tipo de usuario'
+							fullWidth
+							select
+							inputProps={{ style: { height: '15PX', } }}
+							sx={{
+								bgcolor: 'transparent',
+								"& .MuiInputBase-root": { borderRadius: '10px' },
+							}}
+						>
+
+							<MenuItem
+								style={{
+									background: "white",
+									color: "black",
+								}}
+								value={'Cliente'}
+							>
+								{'Cliente'}
+							</MenuItem>
+							<MenuItem
+								style={{
+									background: "white",
+									color: "black",
+								}}
+
+								value={'Empleados'}
+							>
+								{'Empleados'}
+							</MenuItem>
+						</TextField>
+					</Stack>
+				</Grid>
 
 				<Grid item xs={12} paddingBottom={3}>
+
+
 					<TextField
-						onChange={handleName}
-						value={name}
-						label="Nombre y apellidos"
+						onChange={handleNameYApellidos}
+						value={nameYApellidos}
+						label="Nombre y Apellidos"
 						type="name"
-						placeholder='Nombre y apellidos'
+						placeholder='Nombre y Apellidos'
 						fullWidth
 						inputProps={{ style: { height: '15PX', } }}
 						sx={{
@@ -69,7 +112,6 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						}}
 					/>
 				</Grid>
-
 
 				<Grid item xs={12} paddingBottom={3}>
 					<TextField
@@ -86,11 +128,13 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						}}
 					/>
 				</Grid>
+
+
 				<Grid item xs={12} paddingBottom={3}>
 					<Stack direction={'row'} spacing={4}>
 						<TextField
-							// onChange={handlePhone}
-							// value={phone}
+							onChange={handleRegistroMedico}
+							value={registroMedico}
 							label="Registro médico"
 							type="number"
 							placeholder='Registro médico'
@@ -122,8 +166,8 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 				<Grid item xs={12} paddingBottom={3}>
 					<Stack direction={'row'} spacing={4}>
 						<TextField
-							// onChange={handlePhone}
-							// value={phone}
+							onChange={handleName}
+							value={name}
 							label="Primer nombre"
 							type="text"
 							placeholder='Primer nombre'
@@ -136,9 +180,9 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						/>
 
 						<TextField
-							// onChange={handlePhone}
-							// value={phone}
-							label="Primer Apellido"
+							onChange={handleApellido}
+							value={apellido}
+							label="Primer apellido"
 							type="text"
 							placeholder='Primer Apellido'
 							fullWidth
@@ -184,13 +228,13 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 					</Stack>
 				</Grid>
 
-				<Grid item xs={12} paddingBottom={3}>
+				{(tipoCliente==='Cliente')&&<Grid item xs={12} paddingBottom={3}>
 					<Stack direction={'row'} spacing={4}>
 						<TextField
-							onChange={handlePassword}
-							value={password}
+							onChange={handleEntidadDeSalud}
+							value={entidadDeSalud}
 							label="Entidad de salud"
-							type="password"
+							type="text"
 							placeholder='Entidad de salud'
 							fullWidth
 							select
@@ -214,7 +258,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 							))}
 						</TextField>
 					</Stack>
-				</Grid>
+				</Grid>}
 
 				<FormControlLabel
 					control={<Checkbox checked={politica_de_privacidad} onChange={handlePolitica} />}
@@ -232,7 +276,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 					}
 				/>
 
-				
+
 
 				<Grid container paddingY={3} >
 					<Grid item xs={12} display='flex' justifyContent='center' >
