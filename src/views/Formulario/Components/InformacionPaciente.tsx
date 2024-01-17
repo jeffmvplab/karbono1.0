@@ -1,12 +1,12 @@
 
-import { Typography, Grid, Box,Stack, AccordionSummary, AccordionDetails, Accordion, useMediaQuery, Slider, Tooltip, TooltipProps, styled, tooltipClasses } from '@mui/material'
+import { Typography, Grid, Box,Stack, AccordionSummary, AccordionDetails, Accordion, useMediaQuery, Slider, Tooltip, TooltipProps, styled, tooltipClasses, MenuItem } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import CustomTextField from './CustomTextField'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { colorsKarbono } from '@/themes/colors';
 import { FormulariosContext } from '../context/FormulariosContext';
 import { LightTooltip } from '../style/styleToolTips';
-import MenuItem from '@material-ui/core/MenuItem';
+
 
 const currencies = [
     { value: 'si', label: 'Si', },

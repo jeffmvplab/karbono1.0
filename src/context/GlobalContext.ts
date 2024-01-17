@@ -5,22 +5,49 @@ interface ContextProps {
 
     authOK: boolean;
 
-    login:()=> void;
-    register:()=>void;
-    errorAuth:string,
+    login: () => void;
+    register: () => void;
+    errorAuth: string,
 
-    logout:()=> void;
+    logout: () => void;
     isAuth: boolean;
-    authStatus:()=> void;
+    authStatus: () => void;
 
     loadingAuth: boolean,
 
+    tipoCliente: string,
+    handleTipo: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | undefined) => void,
 
     name: string,
     errorName: boolean,
     messageErrorName: string,
     handleName: (event: React.ChangeEvent<HTMLInputElement>) => void,
-    
+
+    apellido: string,
+    errorApellido: boolean,
+    messageErrorApellido: string,
+    handleApellido: (event: React.ChangeEvent<HTMLInputElement>) => void,
+
+    nameYApellidos: string,
+    errorNameYApellidos: boolean,
+    messageErrorNameYApellidos: string,
+    handleNameYApellidos: (event: React.ChangeEvent<HTMLInputElement>) => void,
+
+    registroMedico: string,
+    errorRegistroMedico: boolean,
+    messageErrorRegistroMedico: string,
+    handleRegistroMedico: (event: React.ChangeEvent<HTMLInputElement>) => void,
+
+    entidadDeSalud: string,
+    errorEntidadDeSalud: boolean,
+    messageErrorEntidadDeSalud: string,
+    handleEntidadDeSalud: (event: React.ChangeEvent<HTMLInputElement>) => void,
+
+    centralDeMezclas: string,
+    errorCentralDeMezclas: boolean,
+    messageErrorCentralDeMezclas: string,
+    handleCentralDeMezclas: (event: React.ChangeEvent<HTMLInputElement>) => void,
+
     phone: string,
     errorPhone: boolean,
     messageErrorPhone: string,
@@ -40,6 +67,9 @@ interface ContextProps {
     errorPasswordConfirm: boolean,
     messageErrorPasswordConfirm: string,
     handlePasswordConfirm: (event: React.ChangeEvent<HTMLInputElement>) => void,
+
+    politica_de_privacidad: boolean,
+    handlePolitica: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void
 
 }
 

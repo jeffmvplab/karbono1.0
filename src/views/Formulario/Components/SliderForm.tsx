@@ -1,9 +1,7 @@
 import {FC} from 'react'
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { Typography } from '@material-ui/core';
-
-
+import { Typography } from '@mui/material';
 
 const marks = [
     {value: 10,label: '10',},

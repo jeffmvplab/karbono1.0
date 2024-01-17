@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from 'react'
-import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import PictureAsPdfOutlinedIcon from '@mui/icons-material/PictureAsPdfOutlined';
-import { Hidden } from '@mui/material';
+import { Hidden, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { PrescripcionContext } from '../context/PrescripcionContext';
 
 

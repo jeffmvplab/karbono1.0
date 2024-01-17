@@ -102,6 +102,18 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	/////////////////////////////////Manejo Password//////////////////////////////////////////
 	// const isPass= /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,10}$/;
 
+	const [nameYApellidos, setNameYApellidos] = React.useState('');
+	const [errorNameYApellidos, setErrorNameYApellidos] = React.useState(false);
+	const [messageErrorNameYApellidos, setMessageErrorNameYApellidos] = React.useState('');
+
+	const handleNameYApellidos = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setNameYApellidos(event.target.value || '');
+
+		const nameYApellidos = event.target.value;
+
+		console.log('nameYApellidos:', nameYApellidos);
+	};
+
 	const [name, setName] = React.useState('');
 	const [errorName, setErrorName] = React.useState(false);
 	const [messageErrorName, setMessageErrorName] = React.useState('');
@@ -112,17 +124,69 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		const name = event.target.value;
 
 		console.log('name:', name);
-
-		// if (isPass.test( name)) {
-		// if (name.length > 7) {
-		// 	setErrorName(false);
-		// 	setMessageErrorName('')
-		// } else {
-		// 	setErrorName(true);
-		// 	// setMessageErrorName('Su contraseña debe contener mínimo 8 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial')
-		// 	setMessageErrorName('')
-		// }
 	};
+
+	const [apellido, setApellido] = React.useState('');
+	const [errorApellido, setErrorApellido] = React.useState(false);
+	const [messageErrorApellido, setMessageErrorApellido] = React.useState('');
+
+	const handleApellido = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setApellido(event.target.value || '');
+
+		const Aapellido = event.target.value;
+
+		console.log('Apellido:', apellido);
+	};
+
+	const [registroMedico, setRegistroMedico] = React.useState('');
+	const [errorRegistroMedico, setErrorRegistroMedico] = React.useState(false);
+	const [messageErrorRegistroMedico, setMessageErrorRegistroMedico] = React.useState('');
+
+	const handleRegistroMedico = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setRegistroMedico(event.target.value || '');
+
+		const registroMedico = event.target.value;
+
+		console.log('RegistroMedico:', registroMedico);
+	};
+
+
+	const [entidadDeSalud, setEntidadDeSalud] = React.useState('');
+	const [errorEntidadDeSalud, setErrorEntidadDeSalud] = React.useState(false);
+	const [messageErrorEntidadDeSalud, setMessageErrorEntidadDeSalud] = React.useState('');
+
+	const handleEntidadDeSalud = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setEntidadDeSalud(event.target.value || '');
+
+		const entidadDeSalud = event.target.value;
+
+		console.log('EntidadDeSalud:', entidadDeSalud);
+	};
+
+	const [centralDeMezclas, setCentralDeMezclas] = React.useState('');
+	const [errorCentralDeMezclas, setErrorCentralDeMezclas] = React.useState(false);
+	const [messageErrorCentralDeMezclas, setMessageErrorCentralDeMezclas] = React.useState('');
+
+	const handleCentralDeMezclas = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setCentralDeMezclas(event.target.value || '');
+
+		const CentralDeMezclas = event.target.value;
+
+		console.log('CentralDeMezclas:', CentralDeMezclas);
+	};
+
+
+	const [politica_de_privacidad, setPolitica_de_privacidad] = React.useState<boolean>(false);
+
+	const handlePolitica = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+		setPolitica_de_privacidad(event.target.checked);
+		console.log('Política de Privacidad:', politica_de_privacidad);
+	}
+
+	const [tipoCliente, setTipoCliente] = useState('Cliente')
+	const handleTipo = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | undefined) => {
+		setTipoCliente(event?.target?.value!)
+	}
 
 	const [phone, setPhone] = React.useState('');
 	const [errorPhone, setErrorPhone] = React.useState(false);
@@ -179,7 +243,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	const login = async () => {
 		setLoadingAuth(true);
 		console.log('Loading...')
-		const resp = await useruseCase.login(email, password)
+		const resp = await useruseCase.login(email, password,entidadDeSalud,centralDeMezclas)
 		console.log('RespAuth:', resp)
 
 		if (resp.statusCode === 201) {
@@ -200,7 +264,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			console.log('Error Loguin:', resp.body.message)
 			setErrorAuth(resp.body.message);
 			setAuthOk(false)
-		} else if (resp.body.statusCode === 401){
+		} else if (resp.body.statusCode === 401) {
 			console.log('Error Loguin:', resp.body.message)
 			setErrorAuth(resp.body.message);
 			setAuthOk(false)
@@ -212,7 +276,19 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 		setLoadingAuth(true);
 		console.log('Register...')
-		const resp = await useruseCase.register(name, phone, email, password)
+		const resp = await useruseCase.register(
+			[tipoCliente],
+			nameYApellidos,
+			name,
+			apellido,
+			registroMedico,
+			[entidadDeSalud],
+			'Corpaul',
+			phone,
+			email,
+			password,
+			politica_de_privacidad
+		)
 		console.log('RespRegister:', resp)
 
 		if (resp.body === undefined) {
@@ -263,10 +339,39 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			logout,
 			loadingAuth,
 
+			tipoCliente, handleTipo,
+
 			name,
 			errorName,
 			messageErrorName,
 			handleName,
+
+			apellido,
+			errorApellido,
+			messageErrorApellido,
+			handleApellido,
+
+			nameYApellidos,
+			errorNameYApellidos,
+			messageErrorNameYApellidos,
+			handleNameYApellidos,
+
+			politica_de_privacidad, handlePolitica,
+
+			registroMedico,
+			errorRegistroMedico,
+			messageErrorRegistroMedico,
+			handleRegistroMedico,
+
+			entidadDeSalud,
+			errorEntidadDeSalud,
+			messageErrorEntidadDeSalud,
+			handleEntidadDeSalud,
+
+			centralDeMezclas,
+			errorCentralDeMezclas,
+			messageErrorCentralDeMezclas,
+			handleCentralDeMezclas,
 
 			phone,
 			errorPhone,

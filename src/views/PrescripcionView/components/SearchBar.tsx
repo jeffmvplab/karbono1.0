@@ -1,11 +1,9 @@
-import { CustomButton } from '@/components/CustomButton'
-import { colorsKarbono } from '@/themes/colors'
+
 import { Search } from '@mui/icons-material'
-import { Autocomplete, Box, Grid, TextField, Typography } from '@mui/material'
-import { textAlign } from '@mui/system'
+import { Autocomplete, Box, Button, Grid, TextField, Typography } from '@mui/material'
 import React, { useContext } from 'react'
 import { PrescripcionContext } from '../context/PrescripcionContext'
-import { Button } from '@material-ui/core'
+
 import { typographyKarbono } from '@/themes/typography'
 
 const SearchBar = () => {
