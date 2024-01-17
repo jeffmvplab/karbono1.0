@@ -6,8 +6,18 @@ import { ApiUrlsEnum } from '@/utilities/enums';
 
 
 export interface IUserRepository {
-    login(email: string, password: string): Promise<IUser>;
-    register(name: string, phone: string, email: string, password: string): Promise<any>;
+    login(email: string, password: string,entidad_de_salud: string,central_de_mezclas:string): Promise<IUser>;
+    register(  roles:string[],
+        nombre_apellidos:string,
+        primer_nombre: string, 
+        primer_apellido: string, 
+        registro_medico: string, 
+        entidad_de_salud:string[],
+        central_de_mezclas:string,
+        phone: string, 
+        email: string, 
+        password: string,
+        he_leido:boolean): Promise<any>;
 }
 
 
@@ -19,15 +29,17 @@ export class UserRepository implements IUserRepository {
         this.axiosHttpClient = new AxiosHttpClient();
     }
     /////////////////////////////////LOGIN////////////////////////////////////////////////
-    async login(email: string, password: string,): Promise<any> {
+    async login(email: string, password: string,entidad_de_salud: string,central_de_mezclas:string): Promise<any> {
 
         const axiosRequest = await this.axiosHttpClient.request({
             url: ApiUrlsEnum.login,
             method: 'post',
-            body: {
+            body:{
                 "email": email,
-                "password": password
-            },
+                "password":password,
+                "entidad_de_salud": entidad_de_salud,
+                "central_de_mezclas": central_de_mezclas
+              }
         });
 
         // if (axiosRequest.statusCode === HttpStatusCode.ok) {
@@ -43,21 +55,41 @@ export class UserRepository implements IUserRepository {
         // } else if (axiosRequest.statusCode === HttpStatusCode.notFound) {
         //     return axiosRequest.statusCode;
         // } else {
-            return axiosRequest;
+        return axiosRequest;
         // }
 
     }
     /////////////////////////////////REGISTER///////////////////////////////////////////////////
-    async register(name: string, phone: string, email: string, password: string): Promise<any> {
+    async register(
+
+        roles:string[],
+        nombre_apellidos:string,
+        primer_nombre: string, 
+        primer_apellido: string, 
+        registro_medico: string, 
+        entidad_de_salud:string[],
+        central_de_mezclas:string,
+        phone: string, 
+        email: string, 
+        password: string,
+        he_leido:boolean
+        ): Promise<any> {
 
         const axiosRequest = await this.axiosHttpClient.request({
             url: ApiUrlsEnum.register,
             method: 'post',
             body: {
-                "nombre": name,
-                "email":email,
-                "telefono":phone,
-                "password": password
+                "nombre_apellidos":nombre_apellidos,
+                "email": email,
+                "telefono": phone,
+                "password":password,
+                "roles": roles,
+                "registro_medico":registro_medico,
+                "primer_nombre": primer_nombre,
+                "primer_apellido": primer_apellido,
+                "entidad_de_salud":entidad_de_salud,
+                "central_de_mezclas":central_de_mezclas,
+                "he_leido":  he_leido
             },
         });
 

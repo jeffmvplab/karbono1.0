@@ -5,7 +5,7 @@ import Head from "next/head";
 import { useTheme } from '@mui/material/styles';
 // import Image from '../../components/image';
 import Image from "next/image";
-import { withWidth } from "@material-ui/core";
+
 import { StyledContent, StyledSection, StyledSectionBg } from "@/views/auth/LoginView/styles";
 import { colorsKarbono } from "@/themes/colors";
 import { GlobalProvider } from "@/context/GlobalProvider";

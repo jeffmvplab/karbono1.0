@@ -14,7 +14,7 @@ export interface LoginViewProps { }
 const LoginView: React.FC<LoginViewProps> = () => {
 
 	const { errorEmail, messageErrorEmail, authOK,
-		errorPassword, messageErrorPassword,
+		errorPassword, messageErrorPassword,errorAuth
 	} = React.useContext(GlobalContext);
 
 
@@ -43,7 +43,7 @@ const LoginView: React.FC<LoginViewProps> = () => {
 						{'Sus datos tienen el formato correcto'}
 					</Alert>
 				: <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)',borderRadius:'10px' }}>
-					<Typography sx={{color:'white'}}>{'Credenciales Inválidas'}</Typography>
+					<Typography sx={{color:'white'}}>{errorAuth}</Typography>
 				</Alert>
 			}
 

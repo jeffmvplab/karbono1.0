@@ -1,17 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { AppBar, IconButton, Toolbar, Typography, Hidden, Grid, Box, Stack } from '@mui/material';
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import FadeMenu from './components/BotonPerfil';
 import { GlobalContext } from '@/context/GlobalContext';
 import React, { useEffect } from 'react';
 import { mainRoutes } from '@/routes/routes';
-import { CustomButton } from '@/components/CustomButton';
 import { useRouter } from 'next/router';
-import { Button } from '@material-ui/core';
-import { colorsKarbono } from '@/themes/colors';
 import { typographyKarbono } from '@/themes/typography';
+import { AppBar, Box, Button, Grid, Hidden, Stack, Toolbar, Typography } from '@mui/material';
+
 
 
 export const NavBar = () => {
@@ -56,7 +53,7 @@ export const NavBar = () => {
           </Button>
         </Hidden>
 
-        <Grid container display='flex' flexDirection='row'>
+        <Grid container maxWidth={'80vw'}  display='flex' flexDirection='row' justifyContent={'end'}>
           <Hidden mdDown>
             <Grid item xs={12} sm={12} md={1} >
               <Button
@@ -152,7 +149,8 @@ export const NavBar = () => {
                       margin='0 15px'
                       color='#000'
                       alignItems='normal'
-                    >Contáctanos
+                    // >Contáctanos
+                    >
                     </Typography>
                   </Link>
                   : <Link href={mainRoutes.login} style={{ textDecoration: 'none' }} >
@@ -162,6 +160,7 @@ export const NavBar = () => {
                       margin='0 15px'
                       color='#000'
                       alignItems='normal'
+                      minWidth={'100px'}
                     >Iniciar Sesión
                     </Typography>
                   </Link>

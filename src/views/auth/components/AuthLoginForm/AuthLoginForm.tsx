@@ -5,17 +5,9 @@ import { Stack, Grid, Box, Link, Typography, TextField, CircularProgress, MenuIt
 import React from 'react';
 import NextLink from 'next/link';
 import { typographyKarbono } from '@/themes/typography';
+import { instituciones } from '@/views/ReportePrescripcion/data/instituciones';
 
 
-const instituciones = [
-	{ value: '0', label: 'Institucion 1', },
-	{ value: '1', label: 'Institucion 2', },
-	{ value: '2', label: 'Institucion 3', },
-	{ value: '3', label: 'Institucion 4', },
-	{ value: '4', label: 'Institucion 5', },
-	{ value: '5', label: 'Institucion 6', },
-	// { value: '2', label: 'Big Data', },
-];
 export interface AuthLoginFormProps { }
 
 const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
@@ -24,7 +16,8 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 	const {
 		login, loadingAuth,
 		email, errorEmail, handleEmail,
-		password, errorPassword, handlePassword
+		password, errorPassword, handlePassword,
+		entidadDeSalud,handleEntidadDeSalud
 	} = React.useContext(GlobalContext)
 
 	const fontSize: number = 14;
@@ -72,13 +65,14 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 
 				<Grid item xs={12} paddingBottom={2}>
 					<TextField
-						onChange={handlePassword}
-						value={password}
+						onChange={handleEntidadDeSalud}
+						value={entidadDeSalud}
 						label="Institución"
 						type="password"
 						placeholder='Institución'
 						fullWidth
-						select
+						select 
+						
 						inputProps={{ style: { height: '15PX', } }}
 						sx={{
 							bgcolor: 'transparent',

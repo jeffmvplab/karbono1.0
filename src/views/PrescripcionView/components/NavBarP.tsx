@@ -64,7 +64,8 @@ const NavbarP = ({ drawerWidth = 240, }) => {
                   margin='0 15px'
                   color='#000'
                   alignItems='normal'
-                >Contáctanos
+                // >Contáctanos
+                >
                 </Typography>
               </Link>
 

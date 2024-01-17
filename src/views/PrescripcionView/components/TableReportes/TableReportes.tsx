@@ -5,10 +5,9 @@ import PictureAsPdfOutlinedIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import { colorsKarbono } from '@/themes/colors';
 import { PrescripcionContext } from '../../context/PrescripcionContext';
 import { IPrescriptions } from '@/domain/models/prescriptions.model';
-import { GridColDef } from '@mui/x-data-grid/models/colDef/gridColDef';
-import { GridRenderCellParams } from '@mui/x-data-grid/models/params/gridCellParams';
-import { DataGrid } from '@mui/x-data-grid/DataGrid';
+
 import { typographyKarbono } from '@/themes/typography';
+import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
 // const data = [
 // 	{ id: 0, paciente: 'Santiago Castillo', identificación: 7485926173, ips: 'Clínica Antioquia', tipo: 'Prescripcion por requerimiento', creación: '2021-04-22', usuario: 'Helen Pabon Hpabon' },
