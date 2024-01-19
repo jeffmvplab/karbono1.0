@@ -6,7 +6,7 @@ interface ContextProps {
     authOK: boolean;
 
     login: () => void;
-    register: () => void;
+    register: (recaptchaValue?:any) => void;
     errorAuth: string,
 
     logout: () => void;

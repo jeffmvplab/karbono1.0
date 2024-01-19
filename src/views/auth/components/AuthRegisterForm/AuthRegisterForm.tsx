@@ -5,7 +5,9 @@ import { Stack, Grid, Box, Link, Typography, TextField, CircularProgress, Button
 import React, { useState } from 'react';
 import { typographyKarbono } from '@/themes/typography';
 import { instituciones } from '@/views/ReportePrescripcion/data/instituciones';
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import ReCAPTCHAComponent from '../reCAPTCHA/reCAPTACHA';
 
 export interface AuthRegisterFormProps { }
 
@@ -39,14 +41,15 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 		errorEntidadDeSalud,
 		messageErrorEntidadDeSalud,
 		handleEntidadDeSalud,
-		politica_de_privacidad,handlePolitica,handleTipo,tipoCliente
+		politica_de_privacidad, handlePolitica, handleTipo, tipoCliente
 	} = React.useContext(GlobalContext)
 
 	const fontSize: number = 14;
 	const fontSizeMovil: number = 12;
 
 	//////////////////////////////////////////////////////////////////////////
-
+	const [seePassword, setSeePassword] = useState(false);
+	const [seeConfPassword, setSeeConfPassword] = useState(false);
 	//////////////////////////////////////////////////////////////
 	return (
 
@@ -202,7 +205,10 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 							onChange={handlePassword}
 							value={password}
 							label="Contraseña"
-							type="password"
+							type={(seePassword)
+								? "text"
+								: "password"
+							}
 							placeholder='Contraseña'
 							fullWidth
 							inputProps={{ style: { height: '15PX', } }}
@@ -210,13 +216,26 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 								bgcolor: 'transparent',
 								"& .MuiInputBase-root": { borderRadius: '10px' },
 							}}
+							InputProps={{
+								endAdornment: (
+									<Button onClick={() => setSeePassword(!seePassword)}>
+										{(seePassword)
+											? <VisibilityIcon />
+											: <VisibilityOffIcon />
+										}
+									</Button>
+								),
+							}}
 						/>
 
 						<TextField
 							onChange={handlePasswordConfirm}
 							value={passwordConfirm}
 							label="Confirmar Contraseña"
-							type="password"
+							type={(seeConfPassword)
+								? "text"
+								: "password"
+							}
 							placeholder='Confirmar Contraseña'
 							fullWidth
 							inputProps={{ style: { height: '15PX', } }}
@@ -224,11 +243,21 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 								bgcolor: 'transparent',
 								"& .MuiInputBase-root": { borderRadius: '10px' },
 							}}
+							InputProps={{
+								endAdornment: (
+									<Button onClick={() => setSeeConfPassword(!seeConfPassword)}>
+										{(seeConfPassword)
+											? <VisibilityIcon />
+											: <VisibilityOffIcon />
+										}
+									</Button>
+								),
+							}}
 						/>
 					</Stack>
 				</Grid>
 
-				{(tipoCliente==='Cliente')&&<Grid item xs={12} paddingBottom={3}>
+				{(tipoCliente === 'Cliente') && <Grid item xs={12} paddingBottom={3}>
 					<Stack direction={'row'} spacing={4}>
 						<TextField
 							onChange={handleEntidadDeSalud}
@@ -257,6 +286,9 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 								</MenuItem>
 							))}
 						</TextField>
+					</Stack>
+					<Stack direction={'row'} spacing={4} padding={4}>
+						<ReCAPTCHAComponent />
 					</Stack>
 				</Grid>}
 

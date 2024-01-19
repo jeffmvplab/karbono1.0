@@ -9,6 +9,7 @@ import { FC } from "react";
 import { GlobalContext } from "./GlobalContext";
 
 import Cookies from "js-cookie";
+import axios from "axios";
 
 type Props = {
 	children: JSX.Element,
@@ -272,23 +273,35 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	}
 
 	/////////////////////////////LOGIN//////////////////////////////////////////////
-	const register = async () => {
+	const register = async (recaptchaValue?:any) => {
 
 		setLoadingAuth(true);
 		console.log('Register...')
-		const resp = await useruseCase.register(
-			[tipoCliente],
-			nameYApellidos,
-			name,
-			apellido,
-			registroMedico,
-			[entidadDeSalud],
-			'Corpaul',
-			phone,
-			email,
-			password,
-			politica_de_privacidad
-		)
+
+		// Luego, dentro de tu función de manejo de registro:
+		const isRecaptchaValid = await verifyRecaptchaV3(recaptchaValue);
+	  
+		let resp;
+
+		if (isRecaptchaValid) {
+			resp = await useruseCase.register(
+				[tipoCliente],
+				nameYApellidos,
+				name,
+				apellido,
+				registroMedico,
+				[entidadDeSalud],
+				'Corpaul',
+				phone,
+				email,
+				password,
+				politica_de_privacidad
+			)
+		  // Procede con el registro
+		} else {
+		 console.log('CAPTCHA NO VALIDO')
+		}
+
 		console.log('RespRegister:', resp)
 
 		if (resp.body === undefined) {
@@ -316,6 +329,26 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		}
 
 	}
+
+	const verifyRecaptchaV3 = async (recaptchaValue:any) => {
+		const secretKey = '6LfWYFYpAAAAAIbQqOJyXqq61Diq_AL1jI9xlZq2'; // Reemplaza con tu clave secreta
+	  
+		const response = await axios.post(
+		  'https://www.google.com/recaptcha/api/siteverify',
+		  null,
+		  {
+			params: {
+			  secret: secretKey,
+			  response: recaptchaValue,
+			},
+		  }
+		);
+	  
+		return response.data.success;
+	  };
+	  
+	  
+	  
 	/////////////////////////////LOGOUT//////////////////////////////////////////////
 	const logout = async () => {
 		localStorageProtocol.delete(StorageKeysEnum.user);
