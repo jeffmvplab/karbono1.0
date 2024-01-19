@@ -273,17 +273,20 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	}
 
 	/////////////////////////////LOGIN//////////////////////////////////////////////
-	const register = async (recaptchaValue?:any) => {
+	const [captcha,setCaptcha]=useState('');
+
+	const register = async () => {
 
 		setLoadingAuth(true);
 		console.log('Register...')
 
 		// Luego, dentro de tu función de manejo de registro:
-		const isRecaptchaValid = await verifyRecaptchaV3(recaptchaValue);
-	  
+		// const isRecaptchaValid = await verifyRecaptchaV3(captcha);
+		// console.log('CAPTCHA:',isRecaptchaValid);
+		
 		let resp;
 
-		if (isRecaptchaValid) {
+		if (captcha!=='') {
 			resp = await useruseCase.register(
 				[tipoCliente],
 				nameYApellidos,
@@ -330,22 +333,23 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 	}
 
-	const verifyRecaptchaV3 = async (recaptchaValue:any) => {
-		const secretKey = '6LfWYFYpAAAAAIbQqOJyXqq61Diq_AL1jI9xlZq2'; // Reemplaza con tu clave secreta
+	// const verifyRecaptchaV3 = async (recaptchaValue:any) => {
+	// 	const secretKey = '6LeEcFYpAAAAAC99TBteoPgycDo_qXSovKaAKZP6'; // Reemplaza con tu clave secreta
+	// 	// const secretKey = '6LfWYFYpAAAAAIbQqOJyXqq61Diq_AL1jI9xlZq2'; // Reemplaza con tu clave secreta
+
+	// 	const response = await axios.post(
+	// 	  'https://www.google.com/recaptcha/api/siteverify',
+	// 	  null,
+	// 	  {
+	// 		params: {
+	// 		  secret: secretKey,
+	// 		  response: recaptchaValue,
+	// 		},
+	// 	  }
+	// 	);
 	  
-		const response = await axios.post(
-		  'https://www.google.com/recaptcha/api/siteverify',
-		  null,
-		  {
-			params: {
-			  secret: secretKey,
-			  response: recaptchaValue,
-			},
-		  }
-		);
-	  
-		return response.data.success;
-	  };
+	// 	return response.data.success;
+	//   };
 	  
 	  
 	  
@@ -371,6 +375,8 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 			logout,
 			loadingAuth,
+
+			captcha,setCaptcha,
 
 			tipoCliente, handleTipo,
 

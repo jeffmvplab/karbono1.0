@@ -23,25 +23,18 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 		password, errorPassword, handlePassword,
 		passwordConfirm, errorPasswordConfirm, handlePasswordConfirm,
 		apellido,
-		errorApellido,
-		messageErrorApellido,
 		handleApellido,
 
 		nameYApellidos,
-		errorNameYApellidos,
-		messageErrorNameYApellidos,
 		handleNameYApellidos,
 
 		registroMedico,
-		errorRegistroMedico,
-		messageErrorRegistroMedico,
 		handleRegistroMedico,
 
 		entidadDeSalud,
-		errorEntidadDeSalud,
-		messageErrorEntidadDeSalud,
 		handleEntidadDeSalud,
-		politica_de_privacidad, handlePolitica, handleTipo, tipoCliente
+		politica_de_privacidad, handlePolitica, handleTipo, tipoCliente,
+		captcha
 	} = React.useContext(GlobalContext)
 
 	const fontSize: number = 14;
@@ -337,7 +330,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						<CustomButton
 							fontSize={'20px'}
 							onClick={() => { register() }}
-							disabled={(errorEmail || errorPassword || errorPasswordConfirm)}
+							disabled={(errorEmail || errorPassword || errorPasswordConfirm||captcha==='')}
 							textColorHover={(!errorEmail || !errorPassword || !errorPasswordConfirm) ? 'white' : null}
 							textColor={'white'}
 							colorHover={(!errorEmail || !errorPassword || !errorPasswordConfirm) ? colorsKarbono.primary : ''}
@@ -345,7 +338,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 							sx={{
 								width: '250px',
 								height: '50px',
-								color: colorsKarbono.primary
+								color:colorsKarbono.primary
 							}}
 							variant='contained'
 							text={(!loadingAuth) ? 'Crear Cuenta' : 'Creando...'}
@@ -353,8 +346,6 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 								(!loadingAuth)
 									? <></>
 									: <CircularProgress sx={{ color: 'white' }} variant='indeterminate' size='30px' />} />
-
-
 					</Grid>
 				</Grid>
 
