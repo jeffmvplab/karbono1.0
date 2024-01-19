@@ -2,10 +2,12 @@ import { CustomButton } from '@/components/CustomButton';
 import { GlobalContext } from '@/context/GlobalContext';
 import { colorsKarbono } from '@/themes/colors';
 import { Stack, Grid, Box, Link, Typography, TextField, CircularProgress, MenuItem, Button } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import NextLink from 'next/link';
 import { typographyKarbono } from '@/themes/typography';
 import { instituciones } from '@/views/ReportePrescripcion/data/instituciones';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 
 export interface AuthLoginFormProps { }
@@ -17,11 +19,14 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 		login, loadingAuth,
 		email, errorEmail, handleEmail,
 		password, errorPassword, handlePassword,
-		entidadDeSalud,handleEntidadDeSalud
+		entidadDeSalud, handleEntidadDeSalud
 	} = React.useContext(GlobalContext)
 
 	const fontSize: number = 14;
 	const fontSizeMovil: number = 12;
+
+	const [seePassword, setSeePassword] = useState(false);
+	const [seeConfPassword, setSeeConfPassword] = useState(false);
 
 	return (
 
@@ -52,13 +57,26 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 						onChange={handlePassword}
 						value={password}
 						label="Contraseña"
-						type="password"
+						type={(seePassword)
+							? "text"
+							: "password"
+						}
 						placeholder='Contraseña'
 						fullWidth
 						inputProps={{ style: { height: '15PX', } }}
 						sx={{
 							bgcolor: 'transparent',
 							"& .MuiInputBase-root": { borderRadius: '10px' },
+						}}
+						InputProps={{
+							endAdornment: (
+								<Button onClick={() => setSeePassword(!seePassword)}>
+									{(seePassword)
+										? <VisibilityIcon />
+										: <VisibilityOffIcon />
+									}
+								</Button>
+							),
 						}}
 					/>
 				</Grid>
@@ -68,11 +86,11 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 						onChange={handleEntidadDeSalud}
 						value={entidadDeSalud}
 						label="Institución"
-						type="password"
+						type="text"
 						placeholder='Institución'
 						fullWidth
-						select 
-						
+						select
+
 						inputProps={{ style: { height: '15PX', } }}
 						sx={{
 							bgcolor: 'transparent',
