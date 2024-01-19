@@ -1,6 +1,7 @@
 
 
-import { useEffect } from "react";
+import { GlobalContext } from "@/context/GlobalContext";
+import { useContext, useEffect } from "react";
 import ReCAPTCHA from 'react-google-recaptcha';
 
 export interface ReCAPTCHAComponentProps { }
@@ -20,14 +21,19 @@ const ReCAPTCHAComponent: React.FC<ReCAPTCHAComponentProps> = () => {
 		};
 	}, []);
 
+	const { captcha, setCaptcha } = useContext(GlobalContext)
+
+
 	return (
-			<ReCAPTCHA
-				sitekey={'6LfWYFYpAAAAAFwp9FIasff9ntu7fLccXM1FhZZl'}
-				onChange={(value) => {
-					// El valor de reCAPTCHA v3 se envía directamente al servidor
-					// No es necesario manejar el cambio en el cliente
-				}}
-			/>
+		<ReCAPTCHA
+			// sitekey='6LfWYFYpAAAAAFwp9FIasff9ntu7fLccXM1FhZZl'
+			sitekey='6LeEcFYpAAAAAHUMq2QFOsgYsQw6Dnf4sg6V-RzS'
+			onChange={(value) => {
+				setCaptcha(value!)
+				// El valor de reCAPTCHA v3 se envía directamente al servidor
+				// No es necesario manejar el cambio en el cliente
+			}}
+		/>
 	);
 };
 
