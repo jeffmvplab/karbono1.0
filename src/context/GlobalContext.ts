@@ -38,6 +38,8 @@ interface ContextProps {
     messageErrorRegistroMedico: string,
     handleRegistroMedico: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
+    captcha: string,setCaptcha: React.Dispatch<React.SetStateAction<string>>,
+    
     entidadDeSalud: string,
     errorEntidadDeSalud: boolean,
     messageErrorEntidadDeSalud: string,
