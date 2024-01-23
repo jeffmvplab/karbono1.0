@@ -1,26 +1,25 @@
 import { Grid, Typography, Box, Stack, Skeleton } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import { ReportesContext } from '../context/ReportesContext';
-import { IParamNumeric, getAgua, getAminoacidos, getCalcio, getDextrosa, getDipeptiven, getFosforo, getLipidos, getMagnesio, getOligoelementos, getOmegaven, getPotacio, getSodio, getVitHidroSolubles, getVitLiposSolubles, getVit_C } from '../data/functionsParams';
+import { getCalcio, getFosforo, getMagnesio, getOligoelementos, getOmegaven, getPotacio, getSodio, getVitHidroSolubles, getVitLiposSolubles, getVit_C } from '../data/functionsParams';
 
 const ReportesMicronutrientes = () => {
 
-
     const [Micronutrientes, setMicronutrientes] = useState([
-        'Sodio (req./ml):',
-        'Potasio (req./ml):',
-        'Calcio (req./ml):',
-        'Fósforo (req./ml)',
-        'Magnesio (req./ml):',
-        'Oligoelementos (ml):',
-        'Vitaminas hidro. (ml):',
-        'Vitaminas lipo. (ml):',
-        'Vit. C (mg):',
-        'Acido fólico (mg):'
-
+        'Sodio',
+        'Potasio',
+        'Calcio',
+        'Fósforo',
+        'Magnesio',
+        'Oligoelementos ',
+        'Vitaminas hidro. ',
+        'Vitaminas lipo. ',
+        'Vit. C ',
+        'Acido fólico '
     ]);
+
     const { reporte, loadingSave } = useContext(ReportesContext)
-    
+
     return (
         <>
             <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} paddingRight={'20px'}>
@@ -28,13 +27,45 @@ const ReportesMicronutrientes = () => {
                 <Stack width='60%' direction={'row'} justifyContent={'space-between'}>
 
                     <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left' }}>Micronutrientes</Typography>
-                        <Box sx={{ justifyContent: 'start' }} >
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingBottom: '10px' }}>Micronutrientes</Typography>
+
+                        {/* <Box sx={{ justifyContent: 'start' }} >
                             <ul style={{}}>
                                 {Micronutrientes.map(lista => {
                                     return <li style={{ listStyleType: 'none' }} key={lista}><Typography>{lista}</Typography></li>
                                 })}
                             </ul>
+                        </Box> */}
+
+                        <Box sx={{ justifyContent: 'end' }} >
+                            <Typography>{Micronutrientes[0]}  (req./ml):</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'end' }} >
+                            <Typography>{Micronutrientes[1]}  (req./ml):</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'end' }} >
+                            <Typography>{Micronutrientes[2]} [ {reporte?.calcio} ] (req./ml):</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'end' }} >
+                            <Typography>{Micronutrientes[3]} [ {reporte?.fosfato} ] (req./ml):</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'end' }} >
+                            <Typography>{Micronutrientes[4]} [ {reporte?.magnesio} ] (req./ml):</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'end' }} >
+                            <Typography>{Micronutrientes[5]} [ {reporte?.elementos_traza} ] (ml):</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'end' }} >
+                            <Typography>{Micronutrientes[6]} [ {reporte?.vit_hidrosolubles} ] (ml):</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'end' }} >
+                            <Typography>{Micronutrientes[7]} (ml):</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'end' }} >
+                            <Typography>{Micronutrientes[8]} (mg):</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'end' }} >
+                            <Typography>{Micronutrientes[9]} (mg):</Typography>
                         </Box>
                     </Stack>
                     {/* </Grid>
@@ -150,7 +181,7 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                     {getVitHidroSolubles(reporte!).volumen.toFixed(2)}
+                                    {getVitHidroSolubles(reporte!).volumen.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -162,13 +193,13 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                      { getVit_C(reporte!).volumen}
+                                    {getVit_C(reporte!).volumen}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                  -
+                                    -
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
                         </Stack>
@@ -217,7 +248,7 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                     {getVitHidroSolubles(reporte!).conPurga.toFixed(2)}
+                                    {getVitHidroSolubles(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -229,13 +260,13 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                      { getVit_C(reporte!).conPurga.toFixed(2)}
+                                    {getVit_C(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                  -
+                                    -
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
                         </Stack>

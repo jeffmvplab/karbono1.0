@@ -139,10 +139,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 			if (resp.statusCode === 200) {
 				setSaveOk(true);
-				// console.log('Reporte:', repoPresc)
-				// setReporte(repoPresc);
-				// localStorageProtocol.set(StorageKeysEnum.reporte,repoPresc);
-				initState(repoPresc);
+				//
+				// console.log('Reporte:', resp)
+					// setReporte(repoPresc);
+					// localStorageProtocol.set(StorageKeysEnum.reporte,repoPresc);
+					(repoPresc._id || repoPresc.nombre_paciente)
+					&& initState(repoPresc);
 
 			} else if (resp.statusCode === 400) {
 				setMessageAPI(resp.body.message)
@@ -161,6 +163,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	}
 
 	const initState = (repor: IPrescriptions) => {
+
+		setCreatedAt(repor?.createdAt);
+		setUpdatedAt(repor?.updatedAt);
 
 		setNumOrder(repor?.no_orden.toString());
 		setPrescripcion(repor?.tipo_prescripcion);
@@ -270,7 +275,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const validateNumIdent = (numIden: string) => {
 
-		if (numIden!=='') {
+		if (numIden !== '') {
 			setErrorNumIden(false);
 			setMessageErrorNumIden('')
 		} else {
@@ -290,7 +295,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorNamePaciente, setMessageErrorNamePaciente] = React.useState('');
 
 	const validateNombrePaciente = (name: string) => {
-		console.log('SDF:',name)
+		console.log('SDF:', name)
 		if (name !== '') {
 			setErrorNamePaciente(false);
 			setMessageErrorNamePaciente('')
@@ -558,7 +563,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			setMessageErrorFlujoMetabolico('')
 		} else {
 			setErrorFlujoMetabolico(true);
-			if (tipoPrescripcion === 'Por requerimientos'||tipoPrescripcion ==='') {
+			if (tipoPrescripcion === 'Por requerimientos' || tipoPrescripcion === '') {
 				setMessageErrorFlujoMetabolico('Introduzca el flujo metabolico')
 			} else {
 				setMessageErrorFlujoMetabolico('')
@@ -808,10 +813,22 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
+	const [createdAt, setCreatedAt] = React.useState<Date | string | null>('');
+	const [updatedAt, setUpdatedAt] = React.useState<Date | string | null>('');
+
+	const [estado, setEstado] = React.useState<'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION'>('SOLICITADA');
+
 	////////////////////////////////////////////////////////////////////
 	///////////////////////////////INTEGRACION DE APIS//////////////////
 	const prescriptionsData: IPrescriptions = {
+
 		no_orden: parseFloat(numOrder) || 0,
+
+		createdAt: (createdAt === '') ? new Date().toISOString() : createdAt!,
+		updatedAt: new Date().toISOString(),
+
+		estado: estado,
+
 		tipo_prescripcion: tipoPrescripcion || '0',
 		fecha: fechaCreacion || '0',
 		ips: ips || '0',
@@ -835,6 +852,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		flujo_metabolico: (flujoMetabolico === '') ? '0' : flujoMetabolico,
 		aminoacidos: aminoacidos || '0',
 		dextrosa: (dextrosa === '') ? '0' : dextrosa,
+		req_dextrosa: '0',
 		req_aminoacidos: (requerimientoAminoacidos === '') ? '0' : requerimientoAminoacidos,
 		lipidos: lipidos || '',
 		req_lipidos: (requerimientoLipidos === '') ? '0' : requerimientoLipidos,
@@ -875,7 +893,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		console.log('NUMBER:', numPresc)
 		let resp: any = '';
 		if (numPresc) { resp = await prescriptionsUseCase.updatePrescripcions(prescriptionsData, numPresc); console.log('UPDATE') }
-		else { resp = await prescriptionsUseCase.savePrescripcions(prescriptionsData); console.log('SAVE') }
+		else { resp = await prescriptionsUseCase.savePrescripcions(prescriptionsData); }
 
 		console.log('Resp:', resp.body.message)
 
@@ -922,7 +940,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			alarmConcDeLipidos(prescriptionsData!).alert === 'REVISAR' ||
 			alarmConcSodio(prescriptionsData!).alert === 'REVISAR' ||
 			alarmConcPotasio(prescriptionsData!).alert === 'REVISAR' ||
-			alarmConcMagnesio(prescriptionsData!).alert === 'REVISAR'||
+			alarmConcMagnesio(prescriptionsData!).alert === 'REVISAR' ||
 			validateCampos()
 
 		) {
@@ -940,16 +958,16 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			validateNombrePaciente(namePaciente) ||
 			validateTipoPaciente(tipoPaciente) ||
 			validateServicio(servicio) ||
-			validatePeso(pesoKg)||
-			validateVolumen(volumen)||
-			validatePurga(purga)||
-			validateTiempoInfucion(tiempoDeInfucion)||
-			validateTipoPrecripcion(tipoPrescripcion)||
-			validateFlujoMetabolico(flujoMetabolico)||
-			validateDextrosa(dextrosa!)||
+			validatePeso(pesoKg) ||
+			validateVolumen(volumen) ||
+			validatePurga(purga) ||
+			validateTiempoInfucion(tiempoDeInfucion) ||
+			validateTipoPrecripcion(tipoPrescripcion) ||
+			validateFlujoMetabolico(flujoMetabolico) ||
+			validateDextrosa(dextrosa!) ||
 			validateAminos(requerimientoAminoacidos)
 		) { return true }
-		else {return false }
+		else { return false }
 	}
 
 	useEffect(() => {

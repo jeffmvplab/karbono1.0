@@ -9,13 +9,12 @@ const ReportesMacronutrientes = () => {
 
     const [Macronutrientes, setMacronutrientes] = useState([
         'Flujo Metabólico:',
-        'Dextrosa (g/kg/dia):',
-        'Aminoácidos (req./ml):',
-        'Lípidos (req./ml):',
-        'Omegaven (req./ml):',
-        'Dipeptiven (req./ml):',
-        'Agua (ml):'
-
+        'Dextrosa',
+        'Aminoácidos:',
+        'Lípidos',
+        'Omegaven',
+        'Dipeptiven',
+        'Agua'
     ]);
 
     const { reporte, loadingSave } = useContext(ReportesContext)
@@ -27,13 +26,34 @@ const ReportesMacronutrientes = () => {
                 <Stack width='60%' direction={'row'} justifyContent={'space-between'}>
 
                     <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left' }}>Macronutrientes</Typography>
-                        <Box sx={{ justifyContent: 'start' }} >
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left',paddingBottom: '10px' }}>Macronutrientes</Typography>
+                        {/* <Box sx={{ justifyContent: 'start' }} >
                             <ul style={{}}>
                                 {Macronutrientes.map(lista => {
                                     return <li style={{ listStyleType: 'none' }} key={lista}><Typography>{lista}</Typography></li>
                                 })}
                             </ul>
+                        </Box> */}
+                        <Box sx={{ justifyContent: 'start' }} >
+                            <Typography>{Macronutrientes[0]}</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'start' }} >
+                            <Typography>{Macronutrientes[1]} (g/kg/dia):</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'start' }} >
+                            <Typography>{Macronutrientes[2]} [ {reporte?.aminoacidos} ] (req./ml):</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'start' }} >
+                            <Typography>{Macronutrientes[3]} [ {reporte?.lipidos} ] (req./ml):</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'start' }} >
+                            <Typography>{Macronutrientes[4]} (req./ml):</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'start' }} >
+                            <Typography>{Macronutrientes[5]} (req./ml):</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'start' }}  >
+                            <Typography>{Macronutrientes[6]} (ml):</Typography>
                         </Box>
                     </Stack>
                     {/* </Grid>
