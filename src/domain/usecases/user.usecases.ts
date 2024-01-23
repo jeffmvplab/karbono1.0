@@ -1,9 +1,8 @@
 
 import { UserRepository, IUserRepository } from '../../data/repositories/user.repository';
-import { IUser } from '../models/user.model';
 
 export interface IUserUseCase {
-    login(email: string, password: string,entidad_de_salud: string,central_de_mezclas:string): Promise<any>;
+    login(email: string, password: string,entidad_de_salud: string[],central_de_mezclas:string): Promise<any>;
     register(
         roles: string[],
         nombre_apellidos: string,
@@ -27,7 +26,7 @@ export class UserUseCases implements IUserUseCase {
         this.userRepository = new UserRepository();
     }
 
-    login(email: string, password: string,entidad_de_salud: string,central_de_mezclas:string): Promise<any> {
+    login(email: string, password: string,entidad_de_salud: string[],central_de_mezclas:string): Promise<any> {
         return this.userRepository.login(email, password,entidad_de_salud,central_de_mezclas);
     }
 

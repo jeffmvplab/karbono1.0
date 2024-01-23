@@ -244,7 +244,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	const login = async () => {
 		setLoadingAuth(true);
 		console.log('Loading...')
-		const resp = await useruseCase.login(email, password,entidadDeSalud,centralDeMezclas)
+		const resp = await useruseCase.login(email, password,[entidadDeSalud],centralDeMezclas)
 		console.log('RespAuth:', resp)
 
 		if (resp.statusCode === 201) {
@@ -288,7 +288,8 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 		if (captcha!=='') {
 			resp = await useruseCase.register(
-				[tipoCliente],
+				// [tipoCliente],
+				['Administrador'],
 				nameYApellidos,
 				name,
 				apellido,

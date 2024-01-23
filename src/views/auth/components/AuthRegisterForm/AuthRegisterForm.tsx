@@ -52,7 +52,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 				justifyContent='center'
 				alignItems='center'
 			>
-				<Grid item xs={12} paddingBottom={3}>
+				{/* <Grid item xs={12} paddingBottom={3}>
 					<Stack direction={'row'} spacing={4}>
 						<TextField
 							onChange={handleTipo}
@@ -89,7 +89,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 							</MenuItem>
 						</TextField>
 					</Stack>
-				</Grid>
+				</Grid> */}
 
 				<Grid item xs={12} paddingBottom={3}>
 
@@ -292,7 +292,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 							He leído y acepto la{' '}
 							<a
 								style={{ color: colorsKarbono.primary, textDecoration: ' none', textDecorationLine: 'underline' }}
-								href="https://startbook.net/privacy-policy/"
+								href="https://purelife.cloud/index.php/politica-privacidad/"
 								target="_blank"
 								rel="noopener noreferrer">
 								política de privacidad de datos

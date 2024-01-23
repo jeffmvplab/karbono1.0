@@ -1,4 +1,4 @@
-import { UnexpectedError } from '../../domain/errors';
+
 import { AxiosHttpClient } from '../../protocols/http/axios-http-client';
 import { IUser } from '@/domain/models';
 import { HttpStatusCode } from '@/protocols/http/http_utilities';
@@ -6,7 +6,7 @@ import { ApiUrlsEnum } from '@/utilities/enums';
 
 
 export interface IUserRepository {
-    login(email: string, password: string,entidad_de_salud: string,central_de_mezclas:string): Promise<IUser>;
+    login(email: string, password: string,entidad_de_salud: string[],central_de_mezclas:string): Promise<IUser>;
     register(  roles:string[],
         nombre_apellidos:string,
         primer_nombre: string, 
@@ -29,7 +29,7 @@ export class UserRepository implements IUserRepository {
         this.axiosHttpClient = new AxiosHttpClient();
     }
     /////////////////////////////////LOGIN////////////////////////////////////////////////
-    async login(email: string, password: string,entidad_de_salud: string,central_de_mezclas:string): Promise<any> {
+    async login(email: string, password: string,entidad_de_salud: string[],central_de_mezclas:string): Promise<any> {
 
         const axiosRequest = await this.axiosHttpClient.request({
             url: ApiUrlsEnum.login,
