@@ -71,36 +71,37 @@ const ReportesMicronutrientes = () => {
                     {/* </Grid>
                  <Grid item display={'flex'} sx={{ marginTop: '30px', marginBottom: '30px', width: '60%' }}> */}
                     <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Requerimiento</Typography>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '60%' }}>Requerimiento</Typography>
                         <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getSodio(reporte!).requerimiento.toFixed(2)}  mEq/kg/día
+                                    {getSodio(reporte!).requerimiento.toFixed(2)}    (mEq/kg/día)
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+ 
+ 
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getPotacio(reporte!).requerimiento.toFixed(2)}    (mEq/kg/día)
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getPotacio(reporte!).requerimiento.toFixed(2)}  mEq/kg/día
+                                    {getCalcio(reporte!).requerimiento.toFixed(2)}    (mEq/kg/día)
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getCalcio(reporte!).requerimiento.toFixed(2)}  mEq/kg/día
+                                    {getFosforo(reporte!).requerimiento.toFixed(2)}    (mmol/kg/día)
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getFosforo(reporte!).requerimiento.toFixed(2)}  mmol/kg/día
-                                </Typography>
-                                : <Skeleton animation="wave" height={30} width="40%" />}
-
-                            {(loadingSave)
-                                ? <Typography>
-                                    {getMagnesio(reporte!).requerimiento.toFixed(2)}  mEq/kg/día
+                                    {getMagnesio(reporte!).requerimiento.toFixed(2)}   (mEq/kg/día)
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
