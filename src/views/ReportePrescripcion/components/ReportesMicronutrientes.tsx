@@ -79,7 +79,8 @@ const ReportesMicronutrientes = () => {
                                     {getSodio(reporte!).requerimiento.toFixed(2)}    (mEq/kg/día)
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
-
+ 
+ 
                             {(loadingSave)
                                 ? <Typography>
                                     {getPotacio(reporte!).requerimiento.toFixed(2)}    (mEq/kg/día)
