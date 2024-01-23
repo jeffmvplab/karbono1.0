@@ -67,7 +67,7 @@ const ReportesMacronutrientes = () => {
                                     {getFlujoMetabolico(reporte!).requerimiento === 0
                                         ? '-'
                                         : getFlujoMetabolico(reporte!).requerimiento.toFixed(2)
-                                    }
+                                    }  mg/kg/min
                                     {/* {
                                        ( reporte?.flujo_metabolico === '0')
                                             ? '-'
@@ -82,32 +82,32 @@ const ReportesMacronutrientes = () => {
                                         (reporte?.tipo_prescripcion !== 'Por requerimientos')
                                             ? '-'
                                             : getDextrosa(reporte!).requerimiento.toFixed(2)
-                                    }
+                                    } 
                                     {/* {getDextrosa(reporte!).requerimiento.toFixed(2)} */}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getAminoacidos(reporte!).requerimiento.toFixed(2)}
+                                    {getAminoacidos(reporte!).requerimiento.toFixed(2)}  g/kg/día
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getLipidos(reporte!).requerimiento.toFixed(2)}
+                                    {getLipidos(reporte!).requerimiento.toFixed(2)} g/kg/día
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getOmegaven(reporte!).requerimiento.toFixed(2)}
+                                    {getOmegaven(reporte!).requerimiento.toFixed(2)} g/kg/día
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getDipeptiven(reporte!).requerimiento.toFixed(2)}
+                                    {getDipeptiven(reporte!).requerimiento.toFixed(2)} g/kg/día
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 

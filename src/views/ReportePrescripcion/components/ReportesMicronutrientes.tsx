@@ -76,31 +76,31 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getSodio(reporte!).requerimiento.toFixed(2)}
+                                    {getSodio(reporte!).requerimiento.toFixed(2)}  mEq/kg/día
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getPotacio(reporte!).requerimiento.toFixed(2)}
+                                    {getPotacio(reporte!).requerimiento.toFixed(2)}  mEq/kg/día
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getCalcio(reporte!).requerimiento.toFixed(2)}
+                                    {getCalcio(reporte!).requerimiento.toFixed(2)}  mEq/kg/día
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getFosforo(reporte!).requerimiento.toFixed(2)}
+                                    {getFosforo(reporte!).requerimiento.toFixed(2)}  mmol/kg/día
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getMagnesio(reporte!).requerimiento.toFixed(2)}
+                                    {getMagnesio(reporte!).requerimiento.toFixed(2)}  mEq/kg/día
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
