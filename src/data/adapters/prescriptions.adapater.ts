@@ -3,6 +3,15 @@ import { IPrescriptions } from "@/domain/models/prescriptions.model";
 
 export const prescriptionsAdapter = (prescriptions: any): IPrescriptions => ({
   no_orden:prescriptions.no_orden,
+
+  createdAt:prescriptions.createdAt,
+  updatedAt:prescriptions.updatedAt,
+  
+  estado:prescriptions.estado,
+
+  dextrosa:prescriptions.dextrosa,
+  req_dextrosa:prescriptions.req_dextrosa,
+
   tipo_prescripcion:prescriptions.tipo_prescripcion,
   fecha:prescriptions.fecha,
   ips:prescriptions.ips,
