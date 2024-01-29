@@ -6,8 +6,8 @@ import { getCalcio, getFosforo, getMagnesio, getOligoelementos, getOmegaven, get
 const ReportesMicronutrientes = () => {
 
     const [Micronutrientes, setMicronutrientes] = useState([
-        'Sodio',
-        'Potasio',
+        'Cloruro de Sodio',
+        'Cloruro de Potasio',
         'Calcio',
         'Fósforo',
         'Magnesio',
@@ -38,34 +38,34 @@ const ReportesMicronutrientes = () => {
                         </Box> */}
 
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[0]}  (req./ml):</Typography>
+                            <Typography>{Micronutrientes[0]} :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[1]}  (req./ml):</Typography>
+                            <Typography>{Micronutrientes[1]} :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[2]} [ {reporte?.calcio} ] (req./ml):</Typography>
+                            <Typography>{Micronutrientes[2]} [ {reporte?.calcio} ]:</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[3]} [ {reporte?.fosfato} ] (req./ml):</Typography>
+                            <Typography>{Micronutrientes[3]} [ {reporte?.fosfato} ]:</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[4]} [ {reporte?.magnesio} ] (req./ml):</Typography>
+                            <Typography>{Micronutrientes[4]} [ {reporte?.magnesio} ]:</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[5]} [ {reporte?.elementos_traza} ] (ml):</Typography>
+                            <Typography>{Micronutrientes[5]} [ {reporte?.elementos_traza} ]</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[6]} [ {reporte?.vit_hidrosolubles} ] (ml):</Typography>
+                            <Typography>{Micronutrientes[6]} [ {reporte?.vit_hidrosolubles} ]</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[7]} (ml):</Typography>
+                            <Typography>{Micronutrientes[7]}:</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[8]} (mg):</Typography>
+                            <Typography>{Micronutrientes[8]} :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[9]} (mg):</Typography>
+                            <Typography>{Micronutrientes[9]} :</Typography>
                         </Box>
                     </Stack>
                     {/* </Grid>
@@ -126,13 +126,13 @@ const ReportesMicronutrientes = () => {
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getVit_C(reporte!).requerimiento}
+                                    {getVit_C(reporte!).requerimiento}  (mg)
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {reporte?.acido_folico}
+                                    {reporte?.acido_folico} (mg)
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
                         </Stack>
@@ -140,7 +140,7 @@ const ReportesMicronutrientes = () => {
                     </Stack>
 
                     <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Volumen</Typography>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Volumen(ml)</Typography>
                         <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
 
                             {(loadingSave)
@@ -207,7 +207,7 @@ const ReportesMicronutrientes = () => {
                     </Stack>
 
                     <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '100%' }}>Corrección de Purga (ml) </Typography>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '100%' }}>Corrección de Purga(ml) </Typography>
                         <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
 
                             {(loadingSave)

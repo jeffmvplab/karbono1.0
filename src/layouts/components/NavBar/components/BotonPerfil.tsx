@@ -8,6 +8,8 @@ import { Avatar, Box, Stack, Typography } from '@mui/material';
 import { typographyKarbono } from '@/themes/typography';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import PersonIcon from '@mui/icons-material/Person';
+import { useRouter } from 'next/router';
+import { mainRoutes } from '@/routes/routes';
 
 export default function FadeMenu() {
 
@@ -25,6 +27,8 @@ export default function FadeMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const router=useRouter();
 
   return (
     <Stack direction={'column'} >
@@ -56,7 +60,7 @@ export default function FadeMenu() {
           minWidth={'125px'}
           direction={'column'}>
           <MenuItem sx={{ fontFamily: typographyKarbono.outfit }} onClick={handleClose} >Perfil</MenuItem>
-          <MenuItem sx={{ fontFamily: typographyKarbono.outfit }} onClick={handleClose}>Mi cuenta</MenuItem>
+          <MenuItem sx={{ fontFamily: typographyKarbono.outfit }} onClick={()=>{handleClose(), router.push(mainRoutes.mi_cuenta)}}>Mi cuenta</MenuItem>
           <MenuItem sx={{ fontFamily: typographyKarbono.outfit }} onClick={() => { logout(); handleClose }}>Cerrar Sesión</MenuItem>
         </Stack>
       </Menu>
