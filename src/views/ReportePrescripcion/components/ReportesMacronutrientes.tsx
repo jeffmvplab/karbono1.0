@@ -38,22 +38,22 @@ const ReportesMacronutrientes = () => {
                             <Typography>{Macronutrientes[0]}</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[1]} (g/kg/dia):</Typography>
+                            <Typography>{Macronutrientes[1]}</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[2]} [ {reporte?.aminoacidos} ] (req./ml):</Typography>
+                            <Typography>{Macronutrientes[2]} [ {reporte?.aminoacidos} ] :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[3]} [ {reporte?.lipidos} ] (req./ml):</Typography>
+                            <Typography>{Macronutrientes[3]} [ {reporte?.lipidos} ] :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[4]} (req./ml):</Typography>
+                            <Typography>{Macronutrientes[4]} :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[5]} (req./ml):</Typography>
+                            <Typography>{Macronutrientes[5]} :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }}  >
-                            <Typography>{Macronutrientes[6]} (ml):</Typography>
+                            <Typography>{Macronutrientes[6]} :</Typography>
                         </Box>
                     </Stack>
                     {/* </Grid>
@@ -81,8 +81,8 @@ const ReportesMacronutrientes = () => {
                                     {
                                         (reporte?.tipo_prescripcion !== 'Por requerimientos')
                                             ? '-'
-                                            : getDextrosa(reporte!).requerimiento.toFixed(2)
-                                    } 
+                                            : getDextrosa(reporte!).requerimiento.toFixed(2)  
+                                    } (g/kg/dia)
                                     {/* {getDextrosa(reporte!).requerimiento.toFixed(2)} */}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
@@ -121,7 +121,7 @@ const ReportesMacronutrientes = () => {
                     </Stack>
 
                     <Stack direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', paddingRight: '15px', textAlign: 'left', width: '50%' }}>Volumen</Typography>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', paddingRight: '15px', textAlign: 'left', width: '50%' }}>Volumen(ml)</Typography>
                         <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
 
                             {(loadingSave)
