@@ -13,7 +13,8 @@ export interface IPrescriptionsRepository {
     getPrescripcionsById(id: string): Promise<any>;
     getPrescripcionsByIps(ips: string): Promise<any>;
     getPrescripcionsAll(limit: number): Promise<any>;
-    updatePrescripcions(prescriptions: IPrescriptions, number: string): Promise<any>
+    updatePrescripcions(prescriptions: IPrescriptions, number: string): Promise<any>;
+    getMaxNumberPres(): Promise<any>;
 }
 
 export class PrescriptionsRepository implements IPrescriptionsRepository {
@@ -156,6 +157,17 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
 
         return axiosRequest;
     }
+      /////////////////////////////////Get Max Number Pres////////////////////////////////////////////////
+      async getMaxNumberPres(): Promise<any> {
+
+        const axiosRequest = await this.axiosHttpClient.request({
+            url:ApiUrlsEnum.getMaxNumPresc,
+            method: 'get',
+            // body: {},
+        });
+        return axiosRequest;
+    }
+
     /////////////////////////////////Get Predscripcion By Number////////////////////////////////////////////////
     async getPrescripcionsByNumber(number: string): Promise<any> {
 
