@@ -9,4 +9,7 @@ export enum ApiUrlsEnum {
     getPrescriptionsById='prescriptions/no_identificacion',
     getPrescriptionsByIps='prescriptions/ips',
 
+   invitarUsuarios = 'auth/inviteUser',
+   aceptarInvitacion = 'auth/acceptInvitation',
+   registerByInvitation = 'auth/registerByInvitation',
 }
