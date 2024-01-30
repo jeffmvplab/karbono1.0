@@ -1,5 +1,5 @@
 import { Modal, Avatar, Button, Stack, Box, Typography } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { FormulariosContext } from '../../context/FormulariosContext';
 import CloseIcon from '@mui/icons-material/Close';
 import Image from 'next/image';
@@ -9,6 +9,7 @@ import { LoadingComponent } from '@/components/LoadingComponent';
 import { useRouter } from 'next/router';
 import { mainRoutes } from '@/routes/routes';
 import { typographyKarbono } from '@/themes/typography';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 
 export interface FormSavedModalProps { }
 
@@ -17,13 +18,15 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 	const {
 		saveOK, loadingSave, messageAPI,
 		openModalFormSaved,
-		handleCloseModalFormSaved, valOKAlert
+		handleCloseModalFormSaved, valOKAlert,savePrescription
 	} = useContext(FormulariosContext)
 
 	const router = useRouter();
 
 	const validacionOK: boolean = valOKAlert;
 	// const validacionOK:boolean = true;
+
+	const [saveStatus, setSaveStatus] = useState<boolean>(false)
 
 	return (
 
@@ -116,31 +119,61 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 											textAlign={'center'}
 											// paddingY={{sm:2}}
 											style={{ fontWeight: 400, color: 'black' }}
-										>Parametros Incorrectos.
+										>{(saveStatus)
+											? 'Si guardas y envías la prescripción con valores fuera de los límites permitidos, se efectuará bajo responsabilidad del prescriptor.'
+											: 'Revisa nuevamente los valores que has registrado en el formulario, ya que es posible que hayan parámetros que no se encuentren dentro de los límites permitidos.'
+											}
 										</Typography >
 									}
 
-									<CustomButton
-										onClick={
+									<Stack direction={'row'} spacing={3}>
+										{
+											(!validacionOK) && <CustomButton
+												onClick={
 
-											() => {
-												// router.push(mainRoutes.reportePrescripcion)
-												(valOKAlert)
-													? (saveOK)
-														? router.push(mainRoutes.reportePrescripcion)
-														: handleCloseModalFormSaved()
-													: handleCloseModalFormSaved()
+													() => {
+														// router.push(mainRoutes.reportePrescripcion)
+														(valOKAlert)
+															? (saveOK)
+																? router.push(mainRoutes.reportePrescripcion)
+																: handleCloseModalFormSaved()
+															:(saveStatus)?setSaveStatus(false) :setSaveStatus(true);
+													}
+
+												}
+												startIcon={<LogoutRoundedIcon sx={{ color: 'white', width: '30px', height: '30px', }} />}
+												height={50}
+												width={137}
+												text={(saveStatus) ? 'Regresar' : 'Guardar'}
+												sx={{ borderRadius: '10px' }}
+												color={'#BE3636'}
+												textColor='white'
+											/>}
+
+										<CustomButton
+											onClick={
+
+												() => {
+													// router.push(mainRoutes.reportePrescripcion)
+													(valOKAlert)
+														? (saveOK)
+															? router.push(mainRoutes.reportePrescripcion)
+															: handleCloseModalFormSaved()
+														:savePrescription(),
+														
+														handleCloseModalFormSaved()
+												}
+
 											}
-
-										}
-										height={50}
-										width={137}
-										text={validacionOK ? (saveOK) ? 'Ver reporte' : 'Ok' : 'Ok'}
-										sx={{ borderRadius: '10px' }}
-										color={colorsKarbono.secundary}
-										textColor='white'
-									/>
-
+											height={50}
+											width={(saveStatus) ? 170 : 137}
+											text={validacionOK ? (saveOK) ? 'Ver reporte' : 'Corregir' : (saveStatus) ? 'Confirmar Envío' : 'Corregir'}
+											sx={{ borderRadius: '10px' }}
+											color={colorsKarbono.secundary}
+											textColor='white'
+										/>
+									
+									</Stack>
 								</Stack>
 								: <Stack padding={6}>
 									<LoadingComponent

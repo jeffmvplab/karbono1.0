@@ -16,7 +16,6 @@ import { FormulariosContext } from './context/FormulariosContext';
 import { FormSavedModal } from './Components/FormSavedModal';
 import { mainRoutes } from '@/routes/routes';
 
-
 export interface FormViewProps { }
 
 
@@ -33,23 +32,22 @@ const FormView: React.FC<FormViewProps> = () => {
 		loadingSave,
 		cancelForm,
 		getPrescriptions,
-		valOKAlert, validateAlert, validateCampos,
-		handleOpenModalFormSaved
+		valOKAlert, validateCampos, validateAlert,
+		handleOpenModalFormSaved, getMaxNumPresc
 	} = useContext(FormulariosContext)
 
 	useEffect(() => {
 		fechaActual();
 		getPrescriptionsByNumber()
+		getMaxNumPresc()
 	}, [])
 
 	useEffect(() => {
 		getPrescriptions();
-		//  validateAlert();
 	}, [loadingSave])
 
 
 	return (
-
 		// <Card >
 		<Stack
 			direction={'column'}
@@ -77,7 +75,7 @@ const FormView: React.FC<FormViewProps> = () => {
 									padding: { xs: '1px', sm: 0.2 },
 									borderRadius: '15px',
 									//  maxHeight:'80%',
-									maxHeight: { xs:`${getMovilHeight()}+100px`, sm: '80vh', md: '60vh', xl: '90vh' },
+									maxHeight: { xs: `${getMovilHeight()}+100px`, sm: '80vh', md: '60vh', xl: '90vh' },
 									overflow: 'clip',
 								}}>
 
@@ -198,9 +196,9 @@ const FormView: React.FC<FormViewProps> = () => {
 						// disabled={!valOKAlert}
 						onClick={
 							// ()=>{savePrescription()}
-							valOKAlert
-								? () => { savePrescription() }
-								: () => { validateCampos(), getPrescriptions(), handleOpenModalFormSaved() }
+							validateAlert()
+								? () => {  savePrescription(), console.log('Save') }
+								: () => { console.log('NoSave'), validateCampos(), getPrescriptions(), handleOpenModalFormSaved() }
 						}
 						width={127}
 						text={'Guardar'}

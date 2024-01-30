@@ -141,9 +141,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 				setSaveOk(true);
 				//
 				// console.log('Reporte:', resp)
-					// setReporte(repoPresc);
-					// localStorageProtocol.set(StorageKeysEnum.reporte,repoPresc);
-					(repoPresc._id || repoPresc.nombre_paciente)
+				// setReporte(repoPresc);
+				// localStorageProtocol.set(StorageKeysEnum.reporte,repoPresc);
+				(repoPresc._id || repoPresc.nombre_paciente)
 					&& initState(repoPresc);
 
 			} else if (resp.statusCode === 400) {
@@ -162,6 +162,33 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	}
 
+	const getMaxNumPresc = async () => {
+		setLoadingSave(false);
+
+		const resp = await prescriptionsUseCase.getMaxNumberPres();
+
+		const repoPresc: IPrescriptions = resp.body
+
+		console.log('No Max Pres:', resp)
+		if (resp.statusCode === 200) {
+
+			setNumOrder(resp.body)
+		} else if (resp.statusCode === 400) {
+			setNumOrder('')
+		} else if (resp.statusCode === 404) {
+			setNumOrder('')
+		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
+			setNumOrder('')
+		} else {
+
+		}
+
+
+		setLoadingSave(true);
+
+	}
+
+
 	const initState = (repor: IPrescriptions) => {
 
 		setCreatedAt(repor?.createdAt);
@@ -170,6 +197,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setNumOrder(repor?.no_orden.toString());
 		setPrescripcion(repor?.tipo_prescripcion);
 		setIps(repor?.ips);
+		setNumIden(repor?.no_identificacion);
 		setNamePaciente(repor?.nombre_paciente);
 		setServicio(repor?.servicio);
 		setUbicacion(repor?.ubicacion);
@@ -879,7 +907,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const getPrescriptions = async () => {
 		setPrescriptionSave(prescriptionsData);
-		validateAlert();
 	}
 
 	const setPrescriptions = async () => {
@@ -895,7 +922,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (numPresc) { resp = await prescriptionsUseCase.updatePrescripcions(prescriptionsData, numPresc); console.log('UPDATE') }
 		else { resp = await prescriptionsUseCase.savePrescripcions(prescriptionsData); }
 
-		console.log('Resp:', resp.body.message)
+		console.log('Resp:', resp)
 
 		setLoadingSave(true);
 
@@ -945,9 +972,11 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 		) {
 			setValOKAlert(false)
+			return false
 			console.log('ALERT')
 		} else {
 			setValOKAlert(true)
+			return true
 			console.log('NO ALERT')
 		}
 	}
@@ -972,7 +1001,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	useEffect(() => {
 		console.log('ACTUALIZAR');
-		getPrescriptions()
+		validateAlert()
+		getPrescriptions();
 	}, [numOrder, tipoPrescripcion, fechaCreacion, ips, numIden,
 		namePaciente, servicio, ubicacion, cama, pesoKg, tipoEdad,
 		edad, volumen, purga, tiempoDeInfucion, overfill, filtro,
@@ -1014,6 +1044,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			prescriptionSave,
 			getPrescriptionsByNumber,
 			///////////////////////////ORDEN ///////////////////////////////
+			getMaxNumPresc,
 			numOrder, errorNumOrder, messageErrorNumOrder, handleNumOrder,
 			prescripcion, errorPrescripcion, messageErrorPrescripcion, handlePrescripcion,
 			fechaCreacion, errorFechaCreacion, messageErrorFechaCreacion, handleFechaCreacion, fechaActual,

@@ -8,6 +8,7 @@ export enum ApiUrlsEnum {
     getPrescriptionsByName='prescriptions/name',
     getPrescriptionsById='prescriptions/no_identificacion',
     getPrescriptionsByIps='prescriptions/ips',
+    getMaxNumPresc='prescriptions/me_max',
 
    invitarUsuarios = 'auth/inviteUser',
    aceptarInvitacion = 'auth/acceptInvitation',

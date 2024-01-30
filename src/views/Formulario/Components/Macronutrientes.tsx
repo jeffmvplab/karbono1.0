@@ -32,6 +32,7 @@ const tiposLipidos = [
     { value: 'Smoflipid', label: 'Smoflipid 20%' },
     { value: 'Clinoleic', label: 'Clinoleic 20%' },
     { value: 'Lipoplus', label: 'Lipoplus 20%' },
+    { value: 'Lipofundin', label: 'Lipofundin MCT/LCT 20%' },
     // { value: 'Lipovenoes', label: 'Lipovenoes' },
     // { value: 'LipovenoesMCT', label: 'LipovenoesMCT' },
     // { value: 'Fresomega', label: 'Fresomega' },
