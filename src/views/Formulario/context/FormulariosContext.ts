@@ -23,6 +23,7 @@ interface ContextProps {
     toggleDrawer: (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => void,
 
     ///////////////////////////ORDEN ///////////////////////////////
+    getMaxNumPresc: () => Promise<void>,
     numOrder: string, errorNumOrder: boolean, messageErrorNumOrder: string, handleNumOrder: (event: React.ChangeEvent<HTMLInputElement>) => void,
     prescripcion: string, errorPrescripcion: boolean, messageErrorPrescripcion: string, handlePrescripcion: (event: React.ChangeEvent<HTMLInputElement>) => void,
     fechaCreacion: string, errorFechaCreacion: boolean, messageErrorFechaCreacion: string, handleFechaCreacion: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -91,7 +92,7 @@ interface ContextProps {
     cancelForm:(route:string)=>void,
    
     getPrescriptions: () => void,
-    validateAlert: () => void,
+    validateAlert: () =>boolean,
 }
 
 export const FormulariosContext = createContext({} as ContextProps)
