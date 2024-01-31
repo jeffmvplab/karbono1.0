@@ -1,4 +1,4 @@
-import { InputAdornment, Stack, TextField } from '@mui/material'
+import { Button, InputAdornment, Stack, TextField } from '@mui/material'
 import { error } from 'console'
 import React from 'react'
 
@@ -17,7 +17,8 @@ export interface CustomTextFieldProps {
     borderRadius?: string | number,
     onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> | undefined
     onClick?: React.MouseEventHandler<HTMLDivElement> | undefined
-    onKeyPress?: React.KeyboardEventHandler<HTMLDivElement> | undefined
+    onKeyPress?: React.KeyboardEventHandler<HTMLDivElement> | undefined,
+    onClickEndAdornament?: React.MouseEventHandler<HTMLButtonElement> | undefined
 }
 
 const CustomTextField: React.FC<CustomTextFieldProps> = ({
@@ -35,7 +36,9 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
     disabled = false,
     error = false,
     helperText = '',
-    borderRadius = '12px'
+    borderRadius = '12px',
+    onClickEndAdornament,
+    
 }) => {
     return (
 
@@ -64,7 +67,10 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
             //     }
             // }}
             InputProps={{
-                endAdornment: <InputAdornment position="start">{endAdornament}</InputAdornment>,
+                endAdornment:
+                    <Button onClick={onClickEndAdornament} sx={{background:'transparent',height:'30px'}}>
+                        <InputAdornment position="start">{endAdornament}</InputAdornment>
+                    </Button>,
             }}
             sx={{
                 // borderRadius: '15px',

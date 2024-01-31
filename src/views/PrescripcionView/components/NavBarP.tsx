@@ -12,70 +12,88 @@ import { CustomButton } from '@/components/CustomButton';
 import { typographyKarbono } from '@/themes/typography';
 
 
-const NavbarP = ({ drawerWidth = 240, }) => {
+const NavbarP = ({ drawerWidth = 0, }) => {
 
-  const { isAuth } = React.useContext(GlobalContext)
+  const route = useRouter();
 
   return (
     <AppBar
       position='fixed'
       sx={{
         height: '0',
-        width: { sm: `calc(100% - ${drawerWidth}px)` },
+        width: { sm: `calc(100% - ${drawerWidth}px)`, md: '100%' },
         ml: { sm: `${drawerWidth}px` }
       }}
     >
-      <Toolbar sx={{
-        backgroundColor: '#fff',
-        height: '82px',
-      }}>
-        <Hidden smUp>
-          <Box sx={{ paddingTop: '10px' }}>
-            <Link href='/prescripcion'>
-              <Image
-                src='/assets/logo-mobile.png'
-                width={20}
-                height={30}
-                alt=''
-                style={{ justifyContent: 'center', marginLeft: '10px' }}
-              />
-            </Link>
-          </Box>
-        </Hidden>
-        {/* <IconButton sx={{ display: { sm: 'none' } }}> */}
-        {/* <MenuOutlined /> */}
-        {/* </IconButton> */}
-        <Grid container direction='row' justifyContent='space-between'>
-          <Grid item sx={{ marginTop: { xs: '15px' }, marginLeft: { xs: '0px', sm: '0px' } }}>
-            {/* <Hidden smDown> */}
-            <SearchBar />
-            {/* </Hidden> */}
-          </Grid>
+      <Stack direction={'row'} justifyContent={'space-between'}>
+        {(route.pathname === mainRoutes.prescripcion)
+          && <Box width={'120px'} sx={{ paddingTop: '10px' }}>
+            <Image
+              src='/assets/1.png'
+              width={120}
+              height={30}
+              alt=''
+              style={{ marginTop: '5px', alignItems: 'center', }}
+            />
+          </Box>}
 
-          <Stack direction={'row'} spacing={2} alignItems={'center'}>
-            <Box display='flex' alignItems='center'>
-              <span style={{ fontSize: '30px' }}>
-                <CallOutlinedIcon sx={{ color: 'black' }} />
-              </span>
+        <Toolbar sx={{
+          backgroundColor: '#fff',
+          height: '82px',
+        }}>
 
-              <Link href='' style={{ textDecoration: 'none' }} >
-                <Typography
-                  fontFamily={typographyKarbono.outfit}
-                  margin='0 15px'
-                  color='#000'
-                  alignItems='normal'
-                // >Contáctanos
-                >
-                </Typography>
+
+
+          <Hidden smUp>
+            <Box sx={{ paddingTop: '10px' }}>
+              <Link href='/prescripcion'>
+                <Image
+                  src='/assets/logo-mobile.png'
+                  width={20}
+                  height={30}
+                  alt=''
+                  style={{ justifyContent: 'center', marginLeft: '10px' }}
+                />
               </Link>
-
             </Box>
-            <FadeMenu />
+          </Hidden>
 
-          </Stack>
 
-        </Grid>
-      </Toolbar>
+          {/* <IconButton sx={{ display: { sm: 'none' } }}> */}
+          {/* <MenuOutlined /> */}
+          {/* </IconButton> */}
+          <Grid container direction='row' justifyContent='space-between'>
+            <Grid item sx={{ marginTop: { xs: '15px' }, marginLeft: { xs: '0px', sm: '0px' } }}>
+              {/* <Hidden smDown> */}
+              {/* <SearchBar /> */}
+              {/* </Hidden> */}
+            </Grid>
+
+            <Stack direction={'row'} spacing={2} alignItems={'center'}>
+              <Box display='flex' alignItems='center'>
+                <span style={{ fontSize: '30px' }}>
+                  <CallOutlinedIcon sx={{ color: 'black' }} />
+                </span>
+
+                <Link href='' style={{ textDecoration: 'none' }} >
+                  <Typography
+                    fontFamily={typographyKarbono.outfit}
+                    margin='0 15px'
+                    color='#000'
+                    alignItems='normal'
+                  // >Contáctanos
+                  >
+                  </Typography>
+                </Link>
+
+              </Box>
+              <FadeMenu />
+
+            </Stack>
+
+          </Grid>
+        </Toolbar>
+      </Stack>
     </AppBar>
   )
 }

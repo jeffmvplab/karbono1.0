@@ -44,7 +44,7 @@ const PrescripcionLayout: React.FC<PrescripcionLayoutInterface> = ({ children })
 
 
             {/*Sidebar draweWidth */}
-            <Sidebar />
+            {/* <Sidebar /> */}
 
             <Box
               component='main'
