@@ -124,6 +124,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		}
 		localStorageProtocol.set(StorageKeysEnum.prescripcionOrden, prescripcion);
 		getPrescriptions();
+		//
 	}
 
 	// const [reporte, setReporte] =useState<IPrescriptions>();
@@ -177,7 +178,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		console.log('No Max Pres:', resp)
 		if (resp.statusCode === 200) {
 
-			setNumOrder(resp.body)
+			setNumOrder(resp.body+1)
 		} else if (resp.statusCode === 400) {
 			setNumOrder('')
 		} else if (resp.statusCode === 404) {
@@ -189,8 +190,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		} else {
 
 		}
-
-
 		setLoadingSave(true);
 
 	}
