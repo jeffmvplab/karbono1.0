@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { mainRoutes } from "@/routes/routes";
 import { TagManagerScript } from "@/scripts/TagManagerScript";
 import { GoogleAnalyticsScript } from "@/scripts/GoogleAnalyticsScript";
+import ConexionStatusModal from "@/components/ConexionStatusModal/ConexionStatusModal";
 
 export interface MainLayoutInterface {
   children: ReactNode;
@@ -21,13 +22,16 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
   return (
     <GlobalProvider>
       <>
+       
         <Head>
           <title>Karbono</title>
           <meta name="description" content="Karbono" />
           <link rel="icon" href="/favicon.ico" />
 
         </Head>
+
         <MainLayoutScripts />
+        <ConexionStatusModal />
         {/* <Box
           sx={{ paddingTop:{xs:"5px",sm:"20px",md:"10px",lg:"10px",xl:"10px",},}}>
         </Box> */}

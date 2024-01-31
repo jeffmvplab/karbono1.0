@@ -1,12 +1,11 @@
 
-import { Alert, Box, Grid, Link, Stack, Tooltip, Typography } from '@mui/material';
+import { Alert,Link, Stack, Typography } from '@mui/material';
 import React from 'react';
 import NextLink from 'next/link';
 
 import { mainRoutes } from '@/routes/routes';
 import { AuthLoginForm } from '../components/AuthLoginForm';
 import { GlobalContext } from '@/context/GlobalContext';
-import { colorsKarbono } from '@/themes/colors';
 
 export interface LoginViewProps { }
 

@@ -39,6 +39,9 @@ export interface IUserRepository {
         primer_apellido: string,
         entidad_de_salud: [string],
         he_leido: boolean,): Promise<any>;
+
+        recuperarPassword(email: string): Promise<any>;
+        verificarCodigoRecuperacion(email: string,verificationCode:string,password:string): Promise<any>;
 }
 
 
@@ -163,6 +166,35 @@ export class UserRepository implements IUserRepository {
 
         return axiosRequest.body;
     }
+
+    async recuperarPassword(email: string): Promise<any> {
+
+        const axiosRequest = await this.axiosHttpClient.request({
+            url: ApiUrlsEnum.forgotPassword,
+            method: 'post',
+            body: {
+                "email": email
+              },
+        });
+
+        return axiosRequest.body;
+    }
+
+    async verificarCodigoRecuperacion(email: string,verificationCode:string,password:string): Promise<any> {
+
+        const axiosRequest = await this.axiosHttpClient.request({
+            url: ApiUrlsEnum.verifyCodeAndUpdatePassword,
+            method: 'post',
+            body:{
+                "email":email,
+                "verificationCode":verificationCode,
+                "password": password
+              },
+        });
+
+        return axiosRequest.body;
+    }
+
 
     async registerByInvitation(
         id: string,

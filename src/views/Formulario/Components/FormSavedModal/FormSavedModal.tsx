@@ -5,11 +5,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import Image from 'next/image';
 import { colorsKarbono } from '@/themes/colors';
 import { CustomButton } from '@/components/CustomButton';
-import { LoadingComponent } from '@/components/LoadingComponent';
 import { useRouter } from 'next/router';
 import { mainRoutes } from '@/routes/routes';
 import { typographyKarbono } from '@/themes/typography';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import LoadingComponent from '@/components/LoadingComponent/LoadingComponent';
 
 export interface FormSavedModalProps { }
 

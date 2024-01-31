@@ -4,11 +4,12 @@ import { LocalStorageProtocol } from "@/protocols/cache/local_cache";
 import { mainRoutes } from "@/routes/routes";
 import { StorageKeysEnum } from "@/utilities/enums";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FC } from "react";
 import { PrescripcionContext } from "./PrescripcionContext";
 import { PrescriptionsUseCases } from "@/domain/usecases/prescriptions.usecases";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
+import { GlobalContext } from "@/context/GlobalContext";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
@@ -20,6 +21,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 	const prescriptionsUseCase = new PrescriptionsUseCases();
 	const [loadingGet, setLoadingGet] = React.useState(false);
 	const [getOK, setGetOk] = React.useState(true);
+	const {handleOffline}=useContext(GlobalContext)
 	const [messageAPI, setMessageAPI] = React.useState('');
 
 	const [reportes, setReportes] = React.useState<IPrescriptions[]>([]);
@@ -44,6 +46,8 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			setGetOk(false)
 		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
 			setGetOk(false)
+		}else if (resp.statusCode === 408) {
+			handleOffline();
 		} else {
 			setGetOk(false)
 		}
@@ -132,6 +136,8 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			setMessageAPI(resp.body.message)
 			setErrorSearch(true)
 			setApiOk(false)
+		}else if (resp.statusCode === 408) {
+			handleOffline();
 		} else {
 			setErrorSearch(true)
 			setApiOk(false)
@@ -173,6 +179,8 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			setMessageAPI(resp.body.message)
 			setApiOk(false)
 			setErrorSearch(true)
+		}else if (resp.statusCode === 408) {
+			handleOffline();
 		} else {
 			setMessageAPI(resp.body.message)
 			setApiOk(false)
@@ -214,6 +222,8 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			setMessageAPI(resp.body.message)
 			setApiOk(false)
 			setErrorSearch(true)
+		}else if (resp.statusCode === 408) {
+			handleOffline();
 		} else {
 			setMessageAPI(resp.body.message)
 			setApiOk(false)
@@ -256,7 +266,9 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			setMessageAPI(resp.body.message)
 			setApiOk(false)
 			setErrorSearch(true)
-		} else {
+		} else if (resp.statusCode === 408) {
+			handleOffline();
+		}else {
 			setMessageAPI(resp.body.message)
 			setApiOk(false)
 			setErrorSearch(true)

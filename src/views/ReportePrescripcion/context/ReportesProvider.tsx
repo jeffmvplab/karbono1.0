@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FC } from "react";
 import { ReportesContext } from "./ReportesContext";
 import { PrescriptionsUseCases } from "@/domain/usecases/prescriptions.usecases";
@@ -7,12 +7,15 @@ import { LocalStorageProtocol } from "@/protocols/cache/local_cache";
 import { StorageKeysEnum } from "@/utilities/enums/storage_keys.enum";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
 import { useRouter } from "next/router";
+import { GlobalContext } from "@/context/GlobalContext";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
 };
 
 export const ReportesProvider: FC<Props> = ({ children }) => {
+
+	const {handleOffline}=useContext(GlobalContext)
 
 	/////////////////////////////HANDLE MODALS////////////////////
 	const [openModalDescargar, setOpenModalDescargar] = useState(false);
@@ -63,6 +66,8 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
 
 			setSaveOk(false)
+		}else if (resp.statusCode === 408) {
+			handleOffline();
 		} else {
 
 			setSaveOk(false)

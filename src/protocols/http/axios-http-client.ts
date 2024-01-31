@@ -36,10 +36,19 @@ export class AxiosHttpClient implements HttpClient {
       axiosResponse = error.response
     }
     // console.log('STATUSS:',axiosResponse)
-    return {
-      statusCode: axiosResponse.status,
-      body: axiosResponse.data
+    if (axiosResponse === undefined) {
+      
+      return {
+        statusCode: 408,
+        body: []
+      }
+    } else {
+      return {
+        statusCode: axiosResponse.status,
+        body: axiosResponse.data
+      }
     }
+
   }
 
   async uploadFile(params: UploadFileParams): Promise<HttpResponse> {
