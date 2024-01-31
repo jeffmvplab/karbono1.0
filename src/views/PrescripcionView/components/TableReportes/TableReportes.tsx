@@ -8,6 +8,8 @@ import { IPrescriptions } from '@/domain/models/prescriptions.model';
 
 import { typographyKarbono } from '@/themes/typography';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import { convertirFecha } from '@/utilities/get_String_from_Date';
+import { getColorForState } from '@/utilities/getColorByState';
 
 // const data = [
 // 	{ id: 0, paciente: 'Santiago Castillo', identificación: 7485926173, ips: 'Clínica Antioquia', tipo: 'Prescripcion por requerimiento', creación: '2021-04-22', usuario: 'Helen Pabon Hpabon' },
@@ -47,17 +49,14 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 
 		{
 			field: "nombre_paciente",
-			headerName: "Paciente",
+			headerName: "Nombre paciente",
 			headerClassName: 'table-color--header',
 			// cellClassName:'style-theme--cell',
 			flex: 1,
-			minWidth: 50,
+			minWidth: 200,
 			renderCell: (params: GridRenderCellParams) => (
-				<Button onClick={() => { goReporte(params.row.no_orden) }}>
-					<Typography
-						sx={{ fontFamily: typographyKarbono.outfit }}
-					>{params.value}.
-					</Typography>
+				<Button sx={{ fontFamily: typographyKarbono.outfit, fontSize: 16, textTransform: 'none' }} variant='text' onClick={() => { goReporte(params.row.no_orden) }}>
+					{params.value}
 				</Button>
 			)
 		},
@@ -68,46 +67,50 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Identificación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 50,
+			minWidth: 40,
 			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
 		},
 
 		{
-			field: "ips",
-			headerName: "Ips",
-			headerClassName: 'table-color--header',
-			flex: 1,
-			minWidth: 50,
-			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
-		},
 
-
-		{
 			field: "tipo_prescripcion",
-			headerName: "Tipo de Prescripción",
+			headerName: "Tipo de prescripción",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 80,
+			minWidth: 40,
 			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
 		},
 
 
 		{
-			field: "fecha",
-			headerName: "Creación",
+			field: "createdAt",
+			headerName: "Fecha de creación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			maxWidth: 100,
-			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+			minWidth: 50,
+			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}.</>
 		},
 
 		{
-			field: "usuario",
+			field: "updatedAt",
+			headerName: "Fecha de modificación",
+			headerClassName: 'table-color--header',
+			flex: 1,
+			minWidth: 50,
+			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}.</>
+		},
+
+		{
+			field: "estado",
 			headerName: "Usuario",
 			headerClassName: 'table-color--header',
 			flex: 1,
 			minWidth: 50,
-			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+			renderCell: (params: GridRenderCellParams) => <>{
+				<Typography  color={getColorForState(params.value)}>
+					{params.value}
+				</Typography>
+			}.</>
 		},
 
 		{
@@ -135,7 +138,8 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			? <Skeleton variant="rectangular" sx={{ marginX: '15px', borderRadius: '5px' }} width='100%' height={700} />
 			: <Box
 				sx={{
-					paddingX: '10px',
+
+					paddingX: '50px',
 					height: 700,
 					width: '100%',
 					'& .table-color--header': {
@@ -152,6 +156,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 				<DataGrid
 					style={{ width: "100%" }}
 					sx={{
+						borderRadius: '12px',
 						// '&:hover, &.Mui-hovered': { backgroundColor: 'rgb(0, 0,0,40%)' },
 						// '& .MuiDataGrid-row:hover': { backgroundColor: 'rgb(0,0,0,60%)' },
 						fontFamily: typographyKarbono.outfit
