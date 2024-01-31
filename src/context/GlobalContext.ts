@@ -5,8 +5,12 @@ interface ContextProps {
 
     authOK: boolean;
 
+    isOnline: boolean,
+    handleOnline: () => void,
+    handleOffline: () => void,
+
     login: () => void;
-    register: (recaptchaValue?:any) => void;
+    register: (recaptchaValue?: any) => void;
     errorAuth: string,
 
     logout: () => void;
@@ -38,8 +42,8 @@ interface ContextProps {
     messageErrorRegistroMedico: string,
     handleRegistroMedico: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
-    captcha: string,setCaptcha: React.Dispatch<React.SetStateAction<string>>,
-    
+    captcha: string, setCaptcha: React.Dispatch<React.SetStateAction<string>>,
+
     entidadDeSalud: string,
     errorEntidadDeSalud: boolean,
     messageErrorEntidadDeSalud: string,
@@ -73,6 +77,20 @@ interface ContextProps {
     politica_de_privacidad: boolean,
     handlePolitica: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void
 
+    codigoVerificacion: string,
+    errorCodigoVerificacion: boolean,
+    messageErrorCodigoVerificacion: string,
+    handleCodigoVerificacion: (event: React.ChangeEvent<HTMLInputElement>) => void,
+
+    recuperarPassword: () => Promise<void>,
+    verificarCodigoRecoveryPassword: () => Promise<void>,
+    openModalRecoveryPass: boolean,
+    handleOpenModalRecoveryPass: () => void,
+    handleCloseModalRecoveryPass: () => void,
+
+    openModalVerifyPass: boolean,
+    handleOpenModalVerifyPass:() => void,
+    handleCloseModalVerifyPass:() => void,
 }
 
 export const GlobalContext = createContext({} as ContextProps)

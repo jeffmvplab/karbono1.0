@@ -21,6 +21,11 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	const router = useRouter();
 	const localStorageProtocol = new LocalStorageProtocol();
 
+	const [isOnline, setIsOnline] = useState(true); // Estado para la conexión a internet
+	const handleOnline = async () => await setIsOnline(true);
+	const handleOffline = async () => 	await setIsOnline(false);
+
+
 	/////////////////////////////////Manejo Email//////////////////////////////////////////
 	const isEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
@@ -210,6 +215,29 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			setMessageErrorPhone('Introduzca un número de telefono válido')
 		}
 	};
+
+	const [codigoVerificacion, setCodigoVerificacion] = React.useState('');
+	const [errorCodigoVerificacion, setErrorCodigoVerificacion] = React.useState(false);
+	const [messageErrorCodigoVerificacion, setMessageErrorCodigoVerificacion] = React.useState('');
+
+	const handleCodigoVerificacion = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setCodigoVerificacion(event.target.value || '');
+
+		const codigoVerificacion = event.target.value;
+
+		console.log('CodigoVerificacion:', codigoVerificacion);
+
+		// if (isPass.test( CodigoVerificacion)) {
+		if (codigoVerificacion.length > 6 && !isNaN(parseInt(codigoVerificacion))) {
+			setErrorCodigoVerificacion(false);
+			setMessageErrorCodigoVerificacion('')
+		} else {
+			setErrorCodigoVerificacion(true);
+			// setMessageErrorCodigoVerificacion('Su contraseña debe contener mínimo 8 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial')
+			setMessageErrorCodigoVerificacion('Introduzca un código válido')
+		}
+	};
+
 	//////////////////////////////////MÉTODOS//////////////////////////////////////////////////////////////////
 	/////////////////////////////////AUTH STATUS//////////////////////////////////////////
 
@@ -269,6 +297,9 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			console.log('Error Loguin:', resp.body.message)
 			setErrorAuth(resp.body.message);
 			setAuthOk(false)
+		}else if (resp.statusCode === 408) {
+		
+			handleOffline();
 		}
 	}
 
@@ -324,6 +355,8 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 				setErrorAuth(resp.body.message);
 				setAuthOk(false)
 			}
+		}else if (resp.statusCode === 408) {
+			handleOffline();
 		}
 		else {
 			setErrorAuth('');
@@ -334,6 +367,77 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 	}
 
+	const [openModalRecoveryPass, setOpenModalRecoveryPass] = useState(false);
+	const handleOpenModalRecoveryPass = () => { setOpenModalRecoveryPass(true) };
+	const handleCloseModalRecoveryPass = () => setOpenModalRecoveryPass(false);
+
+	const recuperarPassword = async () => {
+
+		setLoadingAuth(true);
+		console.log('Recovery Pass...')
+		const resp = await useruseCase.recuperarPassword(email);
+		  // Procede con el registro
+		console.log('Recovery Pass:',resp.statusCode)
+
+		if (resp.statusCode===undefined) {
+			handleOpenModalRecoveryPass(),
+			console.log('RES_API:', resp)
+			setErrorAuth('');
+		}else if (resp.statusCode === 408) {
+			handleOffline();
+		}
+		else {
+			setErrorAuth('404');
+			// router.push(mainRoutes.home);
+			handleOpenModalRecoveryPass()
+		}
+		setLoadingAuth(false);
+	}
+
+	const [openModalVerifyPass, setOpenModalVerifyPass] = useState(false);
+	const handleOpenModalVerifyPass = () => { setOpenModalVerifyPass(true) };
+	const handleCloseModalVerifyPass = () => setOpenModalVerifyPass(false);
+
+	const verificarCodigoRecoveryPassword = async () => {
+
+		setLoadingAuth(true);
+		console.log('Verificar Pass...')
+		const resp = await useruseCase.verificarCodigoRecuperacion(email,codigoVerificacion,password);
+		  // Procede con el registro
+		console.log('Verificar Pass:',resp)
+
+		if (resp.statusCode === 201) {
+			Cookies.set(CookiesKeysEnum.token, resp.body.token, { sameSite: 'Strict' })
+		}
+
+		setLoadingAuth(false);
+
+		if (resp.statusCode ===undefined) {
+			setErrorAuth('');
+			setAuthOk(true);
+			handleOpenModalVerifyPass();
+			console.log('RES_API:', resp)
+
+		} else if (resp.statusCode === 400) {
+			console.log('Error Verificacion:', resp.message)
+			setErrorAuth(resp.message);
+			setAuthOk(false)
+		} else if (resp.statusCode === 401) {
+			console.log('Error Verificacion:', resp.message)
+			setErrorAuth(resp.message);
+			setAuthOk(false)
+		} else if (resp.statusCode === 404) {
+			console.log('Error Verificacion:', resp.message)
+			setErrorAuth(resp.message);
+			setAuthOk(false)
+		}else if (resp.statusCode === 408) {
+		
+			handleOffline();
+		}
+		setLoadingAuth(false);
+	}
+
+	
 	// const verifyRecaptchaV3 = async (recaptchaValue:any) => {
 	// 	const secretKey = '6LeEcFYpAAAAAC99TBteoPgycDo_qXSovKaAKZP6'; // Reemplaza con tu clave secreta
 	// 	// const secretKey = '6LfWYFYpAAAAAIbQqOJyXqq61Diq_AL1jI9xlZq2'; // Reemplaza con tu clave secreta
@@ -365,6 +469,10 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	return (
 
 		<GlobalContext.Provider value={{
+
+			isOnline,
+			handleOnline,
+			handleOffline,
 
 			authOK,
 			isAuth,
@@ -431,7 +539,20 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			passwordConfirm,
 			errorPasswordConfirm,
 			messageErrorPasswordConfirm,
-			handlePasswordConfirm
+			handlePasswordConfirm,
+			
+			codigoVerificacion,
+			errorCodigoVerificacion,
+			messageErrorCodigoVerificacion,
+			handleCodigoVerificacion,
+
+			recuperarPassword,verificarCodigoRecoveryPassword,
+			openModalRecoveryPass,
+			handleOpenModalRecoveryPass,
+			handleCloseModalRecoveryPass,
+			openModalVerifyPass,
+			handleOpenModalVerifyPass,
+			handleCloseModalVerifyPass,
 
 		}}>{children}
 		</GlobalContext.Provider>

@@ -7,6 +7,7 @@ import { GlobalProvider } from '@/context/GlobalProvider';
 import Head from 'next/head';
 import { NavBar } from '../components/NavBar';
 import NabvarReportePrescripcion from '@/views/ReportePrescripcion/components/NavBarReporte';
+import ConexionStatusModal from '@/components/ConexionStatusModal/ConexionStatusModal';
 
 
 
@@ -29,6 +30,7 @@ const ReportePrescripcionLayout: React.FC<ReportePrescripcionLayoutInterface> = 
 
       </Head>
 
+      <ConexionStatusModal />
       {/* <GlobalProvider>
         <PrescripcionProvider> */}
           <Box sx={{ display: 'flex', width:'100%' }}>

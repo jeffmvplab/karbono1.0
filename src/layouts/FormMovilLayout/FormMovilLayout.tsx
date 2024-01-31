@@ -3,6 +3,7 @@ import { Box, Grid, MenuItem, Stack } from "@mui/material";
 import React, { useContext } from "react";
 import { ReactNode } from "react";
 import { SidebarMovil } from "../components/SidebarMovil";
+import ConexionStatusModal from "@/components/ConexionStatusModal/ConexionStatusModal";
 
 export interface FormMovilLayoutInterface {
   children: ReactNode;
@@ -22,6 +23,8 @@ const FormMovilLayout: React.FC<FormMovilLayoutInterface> = ({ children }) => {
 
     <Grid container>
 
+      <ConexionStatusModal />
+      
       <Grid item xs={2} sx={{ display: { sm: 'none' } }} >
         <SidebarMovil />
       </Grid>

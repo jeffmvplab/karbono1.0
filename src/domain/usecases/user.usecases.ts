@@ -36,6 +36,9 @@ export interface IUserUseCase {
         entidad_de_salud: [string],
         he_leido: boolean,
     ): Promise<any>;
+
+    recuperarPassword(email: string): Promise<any>;
+    verificarCodigoRecuperacion(email: string,verificationCode:string,password:string): Promise<any>;
 }
 
 
@@ -118,6 +121,14 @@ export class UserUseCases implements IUserUseCase {
             entidad_de_salud,
             he_leido,
         );
+    };
+
+    recuperarPassword(email: string): Promise<any>{
+        return this.userRepository.recuperarPassword(email);
+    };
+    
+    verificarCodigoRecuperacion(email: string,verificationCode:string,password:string): Promise<any>{
+        return this.userRepository.verificarCodigoRecuperacion(email,verificationCode,password); 
     };
 }
 

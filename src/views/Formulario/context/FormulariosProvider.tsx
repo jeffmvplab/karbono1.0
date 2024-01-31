@@ -5,12 +5,13 @@ import { mainRoutes } from "@/routes/routes";
 import { StorageKeysEnum } from "@/utilities/enums";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FC } from "react";
 import { FormulariosContext } from "./FormulariosContext";
 import { PrescriptionsUseCases } from "@/domain/usecases/prescriptions.usecases";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
 import { alarmConcCHOS, alarmConcDeLipidos, alarmConcDeProteinas, alarmConcMagnesio, alarmConcPotasio, alarmConcSodio, alarmaAgua, alertFactorDePrecipitacion, alertRelacion_Calcio_Fosfato, alertVelInfucion, alertViaDeAdmin } from "@/views/ReportePrescripcion/data/alertParams";
+import { GlobalContext } from "@/context/GlobalContext";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
@@ -23,6 +24,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	///////////////////////////HANDLE ACORDIONS///////////////////////////
 	const router = useRouter();
 	let matches: boolean = useMediaQuery('(min-width:768px)')
+
+	const {handleOffline}=useContext(GlobalContext)
 
 	const [stateAcordion1, setStateAcordion1] = useState(false);
 	const handleAcordion1 = () => {
@@ -153,7 +156,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 				setSaveOk(false)
 			} else if (resp.statusCode === 401 && resp.statusCode === 500) {
 				setSaveOk(false)
-			} else {
+			} else if (resp.statusCode === 408) {
+				handleOffline();
+			} {
 				setSaveOk(false)
 			}
 		}
@@ -179,6 +184,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			setNumOrder('')
 		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
 			setNumOrder('')
+		}else if (resp.statusCode === 408) {
+			handleOffline();
 		} else {
 
 		}
@@ -938,6 +945,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			setSaveOk(false)
 		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
 			setSaveOk(false)
+		}else if (resp.statusCode === 408) {
+			handleOffline();
 		} else {
 			setSaveOk(false)
 		}

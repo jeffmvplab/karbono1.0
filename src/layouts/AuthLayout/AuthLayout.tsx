@@ -12,6 +12,7 @@ import { GlobalProvider } from "@/context/GlobalProvider";
 import { Footer } from "../components/Footer";
 import router from "next/router";
 import { mainRoutes } from "@/routes/routes";
+import ConexionStatusModal from "@/components/ConexionStatusModal/ConexionStatusModal";
 
 
 export interface AuthLayoutInterface {
@@ -31,6 +32,7 @@ const AuthLayout: React.FC<AuthLayoutInterface> = ({ children }) => {
 
         </Head>
 
+        <ConexionStatusModal/>
         {/* <Box
           sx={{ paddingTop:{xs:"5",sm:"20px",md:"10px",lg:"10px",xl:"10px",},}}>
         </Box> */}
