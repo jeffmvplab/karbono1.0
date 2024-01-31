@@ -22,6 +22,17 @@ interface ContextProps {
     messageErrorSearch: string,
     handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
+    searchName: string,
+    errorSearchName: boolean,
+    messageErrorSearchName: string,
+    handleSearchName: (event: React.ChangeEvent<HTMLInputElement>) => void,
+
+    searchId: string,
+    errorSearchId: boolean,
+    messageErrorSearchId: string,
+    handleSearchId: (event: React.ChangeEvent<HTMLInputElement>) => void,
+
+    
     selectedFilter: string,
     handleChangeFilter: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
@@ -29,6 +40,9 @@ interface ContextProps {
     apiOK:boolean,
     handleFilterSearch:() => Promise<void>,
     prescSearch:IPrescriptions|undefined,
+
+    getPrescriptionsByName: (name: string) => Promise<void>
+    getPrescriptionsById: (id: string) => Promise<void>
 }
 
 export const PrescripcionContext = createContext({} as ContextProps)

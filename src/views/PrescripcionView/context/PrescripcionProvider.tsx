@@ -90,6 +90,24 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		// const prescripcion = event.target.value;
 	};
 
+	const [searchName, setSearchName] = React.useState('');
+	const [errorSearchName, setErrorSearchName] = React.useState(false);
+	const [messageErrorSearchName, setMessageErrorSearchName] = React.useState('');
+
+	const handleSearchName = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchName(event.target.value);
+		// const prescripcion = event.target.value;
+	};
+
+	const [searchId, setSearchId] = React.useState('');
+	const [errorSearchId, setErrorSearchId] = React.useState(false);
+	const [messageErrorSearchId, setMessageErrorSearchId] = React.useState('');
+
+	const handleSearchId = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchId(event.target.value);
+		// const prescripcion = event.target.value;
+	};
+
 	const [selectedFilter, setSelectedFilter] = React.useState('a');
 
 	const handleChangeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -323,13 +341,25 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			messageErrorSearch,
 			handleSearch,
 
+			searchName,
+			errorSearchName,
+			messageErrorSearchName,
+			handleSearchName,
+
+			searchId,
+			errorSearchId,
+			messageErrorSearchId,
+			handleSearchId,
+
 			selectedFilter,
 			handleChangeFilter,
 
 			loadingApi,
 			apiOK,
 			handleFilterSearch,
-			prescSearch
+			prescSearch,
+			getPrescriptionsByName,
+			getPrescriptionsById
 
 
 		}}>{children}
