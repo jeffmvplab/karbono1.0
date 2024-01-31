@@ -8,6 +8,7 @@ import { Sidebar } from '../../views/PrescripcionView/components/Sidebar';
 import { PrescripcionProvider } from '@/views/PrescripcionView/context/PrescripcionProvider';
 import { GlobalProvider } from '@/context/GlobalProvider';
 import Head from 'next/head';
+import ConexionStatusModal from '@/components/ConexionStatusModal/ConexionStatusModal';
 
 
 
@@ -33,10 +34,13 @@ const PrescripcionLayout: React.FC<PrescripcionLayoutInterface> = ({ children })
 
       <GlobalProvider>
         <PrescripcionProvider>
+          
+          <ConexionStatusModal />
+
           <Box sx={{ display: 'flex' }}>
 
             {/*Navbar draweWidth */}
-            <NavbarP drawerWidth={draweWidth}  />
+            <NavbarP drawerWidth={draweWidth} />
 
 
             {/*Sidebar draweWidth */}

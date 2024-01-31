@@ -1,7 +1,9 @@
 
 export enum ApiUrlsEnum {
-    register = 'auth/register',
     login = 'auth/login',
+    register = 'auth/register',
+    forgotPassword = 'auth/forgotPassword',
+    verifyCodeAndUpdatePassword = 'auth/verifyCodeAndUpdatePassword',
     savePrescriptions='prescriptions',
     getAllPrescriptions='prescriptions/all',
     getPrescriptionsByNumber='prescriptions/no_orden',

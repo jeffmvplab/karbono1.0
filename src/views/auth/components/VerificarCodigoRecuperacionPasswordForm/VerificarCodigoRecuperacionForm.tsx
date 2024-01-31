@@ -1,30 +1,23 @@
 import { CustomButton } from '@/components/CustomButton';
 import { GlobalContext } from '@/context/GlobalContext';
 import { colorsKarbono } from '@/themes/colors';
-import { Stack, Grid, Box, Link, Typography, TextField, CircularProgress, MenuItem, Button } from '@mui/material';
+import { Stack, Grid, TextField, CircularProgress, Button, } from '@mui/material';
 import React, { useState } from 'react';
-import NextLink from 'next/link';
-import { typographyKarbono } from '@/themes/typography';
-import { instituciones } from '@/views/ReportePrescripcion/data/instituciones';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { mainRoutes } from '@/routes/routes';
 
+export interface VerificarCodigoRecuperacionFormProps { }
 
-export interface AuthLoginFormProps { }
-
-const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
+const VerificarCodigoRecuperacionForm: React.FC<VerificarCodigoRecuperacionFormProps> = () => {
 
 
 	const {
 		login, loadingAuth,
 		email, errorEmail, handleEmail,
 		password, errorPassword, handlePassword,
-		entidadDeSalud, handleEntidadDeSalud
+		codigoVerificacion, errorCodigoVerificacion, handleCodigoVerificacion,
+		verificarCodigoRecoveryPassword
 	} = React.useContext(GlobalContext)
-
-	const fontSize: number = 14;
-	const fontSizeMovil: number = 12;
 
 	const [seePassword, setSeePassword] = useState(false);
 	
@@ -43,6 +36,23 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 						label="Correo electrónico"
 						type="email"
 						placeholder='Correo@google.com'
+						fullWidth
+						inputProps={{ style: { height: '15PX', } }}
+						sx={{
+							bgcolor: 'transparent',
+							"& .MuiInputBase-root": { borderRadius: '10px' },
+						}}
+					/>
+				</Grid>
+
+
+				<Grid item xs={12} paddingBottom={2}>
+					<TextField
+						onChange={handleCodigoVerificacion}
+						value={codigoVerificacion}
+						label="Código"
+						type="text"
+						placeholder='00000'
 						fullWidth
 						inputProps={{ style: { height: '15PX', } }}
 						sx={{
@@ -81,66 +91,14 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 					/>
 				</Grid>
 
-				<Grid item xs={12} paddingBottom={2}>
-					<TextField
-						onChange={handleEntidadDeSalud}
-						value={entidadDeSalud}
-						label="Institución"
-						type="text"
-						placeholder='Institución'
-						fullWidth
-						select
-
-						inputProps={{ style: { height: '15PX', } }}
-						sx={{
-							bgcolor: 'transparent',
-							"& .MuiInputBase-root": { borderRadius: '10px' },
-						}}
-					>
-						{instituciones.map((option) => (
-							<MenuItem
-								style={{
-									background: "white",
-									color: "black",
-								}}
-								key={option.value}
-								value={option.label}
-							>
-								{option?.label!}
-							</MenuItem>
-						))}
-					</TextField>
-				</Grid>
-
 
 
 				<Grid container padding='10px' justifyContent='center'>
 					<Grid item xs={12} display='flex' justifyContent='center' paddingY={2}>
-						<Button
-							variant='outlined'
 
-							sx={{
-								width: '200px',
-								height: '50px',
-								borderRadius: '12px',
-								borderColor: 'grey'
-							}}
-						>
-							<Typography
-								fontFamily={typographyKarbono.outfit}
-								color={'grey'}
-								textTransform='initial'
-								sx={{
-									fontSize: { xs: fontSizeMovil, sm: fontSize },
-									fontWeight: '1px'
-								}}
-							>Cancelar</Typography>
-						</Button>
-
-						<Box width={10}></Box>
 						<CustomButton
 							fontSize={'20px'}
-							onClick={() => { login() }}
+							onClick={() => { verificarCodigoRecoveryPassword() }}
 							disabled={(errorEmail || errorPassword)}
 							textColorHover={(!errorEmail || !errorPassword) ? 'white' : null}
 							textColor={'white'}
@@ -152,21 +110,16 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 								color: colorsKarbono.primary
 							}}
 							variant='contained'
-							text={(!loadingAuth) ? 'Ingresar' : 'Ingresando...'}
+							text={(!loadingAuth) ? 'Confirmar' : 'Confirmando...'}
 							endIcon={
 								(!loadingAuth)
 									? <></>
 									: <CircularProgress sx={{ color: 'white' }} variant='indeterminate' size='30px' />} />
 					</Grid>
-
-					<Link component={NextLink} href={mainRoutes.recuperar_password} variant="subtitle2">
-						Recuperar contraseña
-					</Link>
-
 				</Grid>
 			</Grid>
 		</Stack>
 	);
 };
 
-export default AuthLoginForm;
+export default VerificarCodigoRecuperacionForm;
