@@ -28,6 +28,11 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 
 	const [saveStatus, setSaveStatus] = useState<boolean>(false)
 
+	const saveAndNav=()=>{
+		savePrescription(),
+		router.push(mainRoutes.reportePrescripcion)								
+	}
+
 	return (
 
 		<Modal
@@ -153,13 +158,14 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 										<CustomButton
 											onClick={
 
+												
 												() => {
 													// router.push(mainRoutes.reportePrescripcion)
 													(valOKAlert)
 														? (saveOK)
 															? router.push(mainRoutes.reportePrescripcion)
 															: handleCloseModalFormSaved()
-														:savePrescription(),
+														:(saveStatus)?saveAndNav() :handleCloseModalFormSaved()
 														
 														handleCloseModalFormSaved()
 												}
