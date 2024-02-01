@@ -3,8 +3,15 @@ import { Grid, Typography, Box, Stack, Skeleton } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import { ReportesContext } from '../context/ReportesContext';
 import { getAgua, getAminoacidos, getDextrosa, getDipeptiven, getFlujoMetabolico, getLipidos, getOmegaven, getPotacio, getSodio } from '../data/functionsParams';
+import { IPrescriptions } from '@/domain/models/prescriptions.model';
 
-const ReportesMacronutrientes = () => {
+
+export interface ReportesMacronutrientesProps {
+    reporte: IPrescriptions | undefined
+    loadingSave: boolean | undefined
+}
+
+const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ reporte, loadingSave }) => {
 
 
     const [Macronutrientes, setMacronutrientes] = useState([
@@ -16,8 +23,6 @@ const ReportesMacronutrientes = () => {
         'Dipeptiven',
         'Agua'
     ]);
-
-    const { reporte, loadingSave } = useContext(ReportesContext)
 
     return (
         <>

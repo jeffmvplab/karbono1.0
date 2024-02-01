@@ -170,13 +170,14 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		const resp = await prescriptionsUseCase.prescripcionsByName(name);
 		let repoPresc: IPrescriptions[] = []
 		
-		if(resp.body.length){
+		if(resp.body.length>0){
 			repoPresc= resp.body
 		}else{
-			repoPresc[0]= resp.body
+			repoPresc= []
 		}
 		console.log('RESP by Name:',resp.body)
 		if (resp.statusCode === 201) {
+			
 			setReportes(repoPresc);
 			setErrorSearch(false)
 			
@@ -255,10 +256,10 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		const resp = await prescriptionsUseCase.prescripcionsById(id);
 		let repoPresc: IPrescriptions[] = []
 		
-		if(resp.body.length){
+		if(resp.body.length>0){
 			repoPresc= resp.body
 		}else{
-			repoPresc[0]= resp.body
+			repoPresc= []
 		}
 		console.log('RESP by Id:',resp)
 
