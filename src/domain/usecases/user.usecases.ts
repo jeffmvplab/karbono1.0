@@ -38,7 +38,8 @@ export interface IUserUseCase {
     ): Promise<any>;
 
     recuperarPassword(email: string): Promise<any>;
-    verificarCodigoRecuperacion(email: string,verificationCode:string,password:string): Promise<any>;
+    verificarCodigoRecuperacion(email: string, verificationCode: string, password: string): Promise<any>;
+    getUserByRol(rol: string): Promise<any>;
 }
 
 
@@ -123,12 +124,17 @@ export class UserUseCases implements IUserUseCase {
         );
     };
 
-    recuperarPassword(email: string): Promise<any>{
+    recuperarPassword(email: string): Promise<any> {
         return this.userRepository.recuperarPassword(email);
     };
-    
-    verificarCodigoRecuperacion(email: string,verificationCode:string,password:string): Promise<any>{
-        return this.userRepository.verificarCodigoRecuperacion(email,verificationCode,password); 
+
+    verificarCodigoRecuperacion(email: string, verificationCode: string, password: string): Promise<any> {
+        return this.userRepository.verificarCodigoRecuperacion(email, verificationCode, password);
     };
+
+    getUserByRol(rol: string): Promise<any> {
+        return this.userRepository.getUserByRol(rol);
+    };
+
 }
 
