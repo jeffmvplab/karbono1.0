@@ -15,12 +15,14 @@ const VerificarCodigoRecuperacionForm: React.FC<VerificarCodigoRecuperacionFormP
 		login, loadingAuth,
 		email, errorEmail, handleEmail,
 		password, errorPassword, handlePassword,
+		passwordConfirm, errorPasswordConfirm, handlePasswordConfirm,
 		codigoVerificacion, errorCodigoVerificacion, handleCodigoVerificacion,
 		verificarCodigoRecoveryPassword
 	} = React.useContext(GlobalContext)
 
 	const [seePassword, setSeePassword] = useState(false);
-	
+	const [seeConfPassword, setSeeConfPassword] = useState(false);
+
 	return (
 
 		<Stack direction='column' alignItems='center'>
@@ -82,6 +84,35 @@ const VerificarCodigoRecuperacionForm: React.FC<VerificarCodigoRecuperacionFormP
 							endAdornment: (
 								<Button onClick={() => setSeePassword(!seePassword)}>
 									{(seePassword)
+										? <VisibilityIcon />
+										: <VisibilityOffIcon />
+									}
+								</Button>
+							),
+						}}
+					/>
+				</Grid>
+
+				<Grid item xs={12} paddingBottom={2}>
+					<TextField
+						onChange={handlePasswordConfirm}
+						value={passwordConfirm}
+						label="Confirmar Contraseña"
+						type={(seeConfPassword)
+							? "text"
+							: "password"
+						}
+						placeholder='Confirmar Contraseña'
+						fullWidth
+						inputProps={{ style: { height: '15PX', } }}
+						sx={{
+							bgcolor: 'transparent',
+							"& .MuiInputBase-root": { borderRadius: '10px' },
+						}}
+						InputProps={{
+							endAdornment: (
+								<Button onClick={() => setSeeConfPassword(!seeConfPassword)}>
+									{(seeConfPassword)
 										? <VisibilityIcon />
 										: <VisibilityOffIcon />
 									}
