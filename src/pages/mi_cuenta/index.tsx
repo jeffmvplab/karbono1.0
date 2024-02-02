@@ -8,6 +8,7 @@ import { GetServerSideProps } from 'next'
 import { MainLayout } from '@/layouts/MainLayout'
 import { GlobalProvider } from '@/context/GlobalProvider'
 import { MiCuentaView } from '@/views/MiCuentaView'
+import { PerfilProvider } from '@/views/MiCuentaView/context/PerfilProvider'
 
 
 const MiCuentaPages: NextPageWithLayout = () => {
@@ -15,7 +16,9 @@ const MiCuentaPages: NextPageWithLayout = () => {
 
   return (
     <GlobalProvider>
-      <MiCuentaView />
+      <PerfilProvider>
+        <MiCuentaView />
+      </PerfilProvider>
     </GlobalProvider>
 
   )

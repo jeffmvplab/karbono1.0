@@ -1,1 +1,1 @@
-export { default as MiCuentaView } from './MiCuentaView';
+export { default as MiCuentaView } from './ConfigurarCuentaView';
