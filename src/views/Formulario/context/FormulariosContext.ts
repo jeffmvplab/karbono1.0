@@ -81,7 +81,7 @@ interface ContextProps {
     loadingSave: boolean
     saveOK: boolean,
     valOKAlert: boolean,
-    messageAPI: string,
+    messageAPI: string|undefined,setMessageAPI: React.Dispatch<React.SetStateAction<string|undefined>>,
     validateCampos:() => boolean;
 
     //////MODAL//////
@@ -93,6 +93,8 @@ interface ContextProps {
    
     getPrescriptions: () => void,
     validateAlert: () =>boolean,
+    copyPrescriptions: (prescription: IPrescriptions | undefined) => Promise<void>
+    borrarPrescriptions: (prescription: IPrescriptions | undefined) => Promise<void>
 }
 
 export const FormulariosContext = createContext({} as ContextProps)

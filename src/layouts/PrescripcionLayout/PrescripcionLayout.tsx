@@ -9,6 +9,7 @@ import { PrescripcionProvider } from '@/views/PrescripcionView/context/Prescripc
 import { GlobalProvider } from '@/context/GlobalProvider';
 import Head from 'next/head';
 import ConexionStatusModal from '@/components/ConexionStatusModal/ConexionStatusModal';
+import { FormulariosProvider } from '@/views/Formulario/context/FormulariosProvider';
 
 
 
@@ -33,35 +34,36 @@ const PrescripcionLayout: React.FC<PrescripcionLayoutInterface> = ({ children })
       </Head>
 
       <GlobalProvider>
-        <PrescripcionProvider>
-          
-          <ConexionStatusModal />
+        <FormulariosProvider>
+          <PrescripcionProvider>
 
-          <Box sx={{ display: 'flex' }}>
+            <ConexionStatusModal />
 
-            {/*Navbar draweWidth */}
-            <NavbarP drawerWidth={draweWidth} />
+            <Box sx={{ display: 'flex' }}>
+
+              {/*Navbar draweWidth */}
+              <NavbarP drawerWidth={draweWidth} />
 
 
-            {/*Sidebar draweWidth */}
-            {/* <Sidebar /> */}
+              {/*Sidebar draweWidth */}
+              {/* <Sidebar /> */}
 
-            <Box
-              component='main'
-              sx={{ flexGrow: 1, padding: '3' }}
-            >
-              {/*Toolbar*/}
+              <Box
+                component='main'
+                sx={{ flexGrow: 1, padding: '3' }}
+              >
+                {/*Toolbar*/}
 
-              {children}
+                {children}
+
+              </Box>
+
+
+
 
             </Box>
-
-
-
-
-          </Box>
-        </PrescripcionProvider>
-
+          </PrescripcionProvider>
+        </FormulariosProvider>
       </GlobalProvider>
 
     </>

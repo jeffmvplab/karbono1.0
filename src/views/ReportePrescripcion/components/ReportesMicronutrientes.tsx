@@ -1,9 +1,13 @@
 import { Grid, Typography, Box, Stack, Skeleton } from '@mui/material'
 import React, { useContext, useState } from 'react'
-import { ReportesContext } from '../context/ReportesContext';
 import { getCalcio, getFosforo, getMagnesio, getOligoelementos, getOmegaven, getPotacio, getSodio, getVitHidroSolubles, getVitLiposSolubles, getVit_C } from '../data/functionsParams';
+import { IPrescriptions } from '@/domain/models/prescriptions.model';
 
-const ReportesMicronutrientes = () => {
+export interface ReportesMicronutrientesProps {
+    reporte: IPrescriptions | undefined
+    loadingSave: boolean | undefined
+}
+const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ reporte, loadingSave }) => {
 
     const [Micronutrientes, setMicronutrientes] = useState([
         'Cloruro de Sodio',
@@ -17,8 +21,6 @@ const ReportesMicronutrientes = () => {
         'Vit. C ',
         'Acido fólico '
     ]);
-
-    const { reporte, loadingSave } = useContext(ReportesContext)
 
     return (
         <>
@@ -79,8 +81,8 @@ const ReportesMicronutrientes = () => {
                                     {getSodio(reporte!).requerimiento.toFixed(2)}    (mEq/kg/día)
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
- 
- 
+
+
                             {(loadingSave)
                                 ? <Typography>
                                     {getPotacio(reporte!).requerimiento.toFixed(2)}    (mEq/kg/día)

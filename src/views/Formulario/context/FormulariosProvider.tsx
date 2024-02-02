@@ -25,7 +25,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const router = useRouter();
 	let matches: boolean = useMediaQuery('(min-width:768px)')
 
-	const {handleOffline}=useContext(GlobalContext)
+	const { handleOffline } = useContext(GlobalContext)
 
 	const [stateAcordion1, setStateAcordion1] = useState(false);
 	const handleAcordion1 = () => {
@@ -108,9 +108,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	////////////////////////////////////////////////////////////////////////////////////////////
 	const localStorageProtocol = new LocalStorageProtocol();
 	const prescriptionsUseCase = new PrescriptionsUseCases();
-	const [loadingSave, setLoadingSave] = React.useState(false);
+	const [loadingSave, setLoadingSave] = React.useState(true);
 	const [saveOK, setSaveOk] = React.useState(true);
-	const [messageAPI, setMessageAPI] = React.useState('');
+	const [messageAPI, setMessageAPI] = React.useState<string | undefined>('');
 
 	const savePrescription = () => {
 		setPrescriptions();
@@ -178,19 +178,20 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		console.log('No Max Pres:', resp)
 		if (resp.statusCode === 200) {
 
-			setNumOrder(resp.body+1)
+			setNumOrder(resp.body + 1)
 		} else if (resp.statusCode === 400) {
 			setNumOrder('')
 		} else if (resp.statusCode === 404) {
 			setNumOrder('')
 		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
 			setNumOrder('')
-		}else if (resp.statusCode === 408) {
+		} else if (resp.statusCode === 408) {
 			handleOffline();
 		} else {
 
 		}
 		setLoadingSave(true);
+		return resp.body
 
 	}
 
@@ -944,12 +945,86 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			setSaveOk(false)
 		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
 			setSaveOk(false)
-		}else if (resp.statusCode === 408) {
+		} else if (resp.statusCode === 408) {
 			handleOffline();
 		} else {
 			setSaveOk(false)
 		}
 	}
+
+	const copyPrescriptions = async (prescription: IPrescriptions | undefined) => {
+
+		setLoadingSave(false);
+		console.log('Copiando Prescripcion...')
+
+		const newnumber = await getMaxNumPresc();
+
+		if (newnumber) {
+			const copyPrescription: IPrescriptions = {
+				...prescription!,
+				no_orden: newnumber + 1
+			}
+
+			const resp = await prescriptionsUseCase.savePrescripcions(copyPrescription);
+
+			console.log('Copiado:', resp)
+
+
+			if (resp.statusCode === 201) {
+				setSaveOk(true);
+			} else if (resp.statusCode === 200) {
+				setMessageAPI(resp.body.message)
+				setSaveOk(true);
+			} else if (resp.statusCode === 400) {
+				setMessageAPI(resp.body.message)
+				setSaveOk(false)
+			} else if (resp.statusCode === 404) {
+				setMessageAPI(resp.body.message)
+				setSaveOk(false)
+			} else if (resp.statusCode === 401 && resp.statusCode === 500) {
+				setMessageAPI(resp.body.message)
+				setSaveOk(false)
+			} else if (resp.statusCode === 408) {
+				handleOffline();
+			} else {
+				setSaveOk(false)
+			}
+		}
+
+		setLoadingSave(true);
+	}
+
+	const borrarPrescriptions = async (prescription: IPrescriptions | undefined) => {
+
+		setLoadingSave(false);
+		console.log('Borrando Prescripcion...')
+
+		const resp = await prescriptionsUseCase.deletePrescriptions(prescription?.no_orden!);
+
+		console.log('Borrada:', resp)
+
+		if (resp.statusCode === 201) {
+			setSaveOk(true);
+		} else if (resp.statusCode === 200) {
+			setMessageAPI(resp.body.message)
+			setSaveOk(true);
+		} else if (resp.statusCode === 400) {
+			setMessageAPI(resp.body.message)
+			setSaveOk(false)
+		} else if (resp.statusCode === 404) {
+			setMessageAPI(resp.body.message)
+			setSaveOk(false)
+		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
+			setMessageAPI(resp.body.message)
+			setSaveOk(false)
+		} else if (resp.statusCode === 408) {
+			handleOffline();
+		} else {
+			setSaveOk(false)
+		}
+		setLoadingSave(true);
+	}
+
 
 	const [openModalFormSaved, setOpenModalFormSaved] = useState(false);
 	const handleOpenModalFormSaved = () => { setOpenModalFormSaved(true) };
@@ -1049,6 +1124,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			handleOpenModalFormSaved,
 			handleCloseModalFormSaved,
 			savePrescription,
+			borrarPrescriptions,
 			prescriptionSave,
 			getPrescriptionsByNumber,
 			///////////////////////////ORDEN ///////////////////////////////
@@ -1108,10 +1184,11 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			loadingSave,
 			saveOK,
 			valOKAlert,
-			messageAPI,
+			messageAPI, setMessageAPI,
 			cancelForm,
 
 			getPrescriptions,
+			copyPrescriptions,
 			validateAlert,
 			validateCampos,
 

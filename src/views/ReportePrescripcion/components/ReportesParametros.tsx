@@ -3,8 +3,15 @@ import { Grid, Typography, Box, Stack, Skeleton } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import { ReportesContext } from '../context/ReportesContext';
 import { getDextrosa, getAminoacidos, getLipidos, getOmegaven, getDipeptiven, getVolTotal, getVelinfusion, getOsmolaridad, getCalTotales, getCalTotalesKgDia, getGramosTotalesNitro, getCaloriasTotalesProteicas, getCaloriasTotalesProteicasKg, getCaloriasNoProteicasCHOS, getCaloriasNoProteicasLIPIDOS, getCaloriasNoProteicasKg, getRelacionCalNoProteicasN, getRelacionCalNoProteicasAminoacidos, getConcentracionDeCHOS, getConcentracionDeProteinas, getConcentracionDeLipidos } from '../data/functionsParams';
+import { IPrescriptions } from '@/domain/models/prescriptions.model';
 
-const ReportesParametros = () => {
+export interface ReportesParametrosProps {
+    reporte: IPrescriptions | undefined
+    loadingSave: boolean | undefined
+}
+
+
+const ReportesParametros : React.FC<ReportesParametrosProps> = ({ reporte, loadingSave }) => {
 
     const [Parametros, setParametros] = useState([
         'Volument total (ml):',
@@ -25,8 +32,6 @@ const ReportesParametros = () => {
         'Concentración de Proteína (%):',
         'Concentración de Lípidos (%):'
     ]);
-
-    const { reporte, loadingSave } = useContext(ReportesContext)
 
     return (
         <>

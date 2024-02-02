@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import Link from 'next/link';
 import FadeMenu from '@/layouts/components/NavBar/components/BotonPerfil';
-import { AppBar, Toolbar, IconButton, Hidden, Grid, Typography, Box, Stack } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Hidden, Grid, Typography, Box, Stack, Button } from '@mui/material';
 import SearchBar from './SearchBar'
 import Image from 'next/image'
 import { GlobalContext } from '@/context/GlobalContext';
@@ -27,15 +27,18 @@ const NavbarP = ({ drawerWidth = 0, }) => {
     >
       <Stack direction={'row'} justifyContent={'space-between'}>
         {(route.pathname === mainRoutes.prescripcion)
-          && <Box width={'120px'} sx={{ paddingTop: '10px' }}>
-            <Image
-              src='/assets/1.png'
-              width={120}
-              height={30}
-              alt=''
-              style={{ marginTop: '5px', alignItems: 'center', }}
-            />
-          </Box>}
+
+          && <Button onClick={()=>{route.push(mainRoutes.home)}} variant='text'>
+            <Box width={'120px'} sx={{paddingLeft: '20px' }}>
+              <Image
+                src='/assets/1.png'
+                width={120}
+                height={30}
+                alt=''
+                style={{ marginTop: '5px', alignItems: 'center', }}
+              />
+            </Box>
+          </Button>}
 
         <Toolbar sx={{
           backgroundColor: '#fff',

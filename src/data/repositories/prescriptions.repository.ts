@@ -8,6 +8,7 @@ import { ApiUrlsEnum } from '@/utilities/enums';
 
 export interface IPrescriptionsRepository {
     savePrescripcions(prescriptions: IPrescriptions): Promise<any>;
+    deletePrescriptions(no: number): Promise<any> ;
     getPrescripcionsByNumber(number: string): Promise<any>;
     getPrescripcionsByName(name: string): Promise<any>;
     getPrescripcionsById(id: string): Promise<any>;
@@ -233,7 +234,15 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
         return axiosRequest;
     }
 
+    async deletePrescriptions(no:  number): Promise<any> {
 
+        const axiosRequest = await this.axiosHttpClient.request({
+            url: `${ApiUrlsEnum.deletePrescriptions}/${no}`,
+            method: 'delete',
+            body: {},
+        });
+        return axiosRequest;
+    }
 
 
 }

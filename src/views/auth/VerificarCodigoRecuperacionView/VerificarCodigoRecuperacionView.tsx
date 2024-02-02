@@ -12,7 +12,7 @@ export interface VerificarCodigoRecuperacionViewProps { }
 const VerificarCodigoRecuperacionView: React.FC<VerificarCodigoRecuperacionViewProps> = () => {
 
 	const { errorEmail, messageErrorEmail, authOK,
-		errorPassword, messageErrorPassword, errorAuth
+		errorPassword, messageErrorPassword,errorPasswordConfirm, messageErrorPasswordConfirm, errorAuth
 	} = React.useContext(GlobalContext);
 
 
@@ -29,9 +29,9 @@ const VerificarCodigoRecuperacionView: React.FC<VerificarCodigoRecuperacionViewP
 			</Stack>
 
 			{(authOK)
-				? (errorEmail || errorPassword)
+				? (errorEmail || errorPassword|| errorPasswordConfirm)
 					? <Alert severity="warning" sx={{ mb: 3, borderRadius: '10px' }}>
-						{messageErrorEmail || messageErrorPassword}
+						{messageErrorEmail || messageErrorPassword|| messageErrorPasswordConfirm}
 					</Alert>
 					: <Alert severity="success" sx={{ mb: 3, borderRadius: '10px' }}>
 						{'Sus datos tienen el formato correcto'}
