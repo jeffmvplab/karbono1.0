@@ -40,8 +40,9 @@ export interface IUserRepository {
         entidad_de_salud: [string],
         he_leido: boolean,): Promise<any>;
 
-        recuperarPassword(email: string): Promise<any>;
-        verificarCodigoRecuperacion(email: string,verificationCode:string,password:string): Promise<any>;
+    recuperarPassword(email: string): Promise<any>;
+    verificarCodigoRecuperacion(email: string, verificationCode: string, password: string): Promise<any>;
+    getUserByRol(rol: string): Promise<any>;
 }
 
 
@@ -174,22 +175,22 @@ export class UserRepository implements IUserRepository {
             method: 'post',
             body: {
                 "email": email
-              },
+            },
         });
 
         return axiosRequest.body;
     }
 
-    async verificarCodigoRecuperacion(email: string,verificationCode:string,password:string): Promise<any> {
+    async verificarCodigoRecuperacion(email: string, verificationCode: string, password: string): Promise<any> {
 
         const axiosRequest = await this.axiosHttpClient.request({
             url: ApiUrlsEnum.verifyCodeAndUpdatePassword,
             method: 'post',
-            body:{
-                "email":email,
-                "verificationCode":verificationCode,
+            body: {
+                "email": email,
+                "verificationCode": verificationCode,
                 "password": password
-              },
+            },
         });
 
         return axiosRequest.body;
@@ -214,16 +215,27 @@ export class UserRepository implements IUserRepository {
             method: 'post',
             body: {
                 id: id,
-                email:email,
-                nombre_apellidos:nombre_apellidos,
+                email: email,
+                nombre_apellidos: nombre_apellidos,
                 telefono: telefono,
                 password: password,
-                registro_medico:registro_medico,
+                registro_medico: registro_medico,
                 primer_nombre: primer_nombre,
                 primer_apellido: primer_apellido,
                 entidad_de_salud: [entidad_de_salud],
                 he_leido: he_leido
             },
+        });
+
+        return axiosRequest.body;
+    }
+
+    async getUserByRol(rol: string): Promise<any> {
+
+        const axiosRequest = await this.axiosHttpClient.request({
+            url: `${ApiUrlsEnum.getUserByRol}/${rol}`,
+            method: 'get',
+            body: {},
         });
 
         return axiosRequest.body;
