@@ -1,6 +1,7 @@
 
 import { AxiosHttpClient } from '../../protocols/http/axios-http-client';
 import { IUser } from '@/domain/models';
+import { IUserEquipo } from '@/domain/models/equipo_user.model';
 import { HttpStatusCode } from '@/protocols/http/http_utilities';
 import { ApiUrlsEnum } from '@/utilities/enums';
 
@@ -24,6 +25,7 @@ export interface IUserRepository {
         roles: string[],
         central_de_mezclas: string,
         email: string,
+        nombre_apellidos:string
     ): Promise<any>;
 
     aceptarInvitacion(token: string): Promise<any>;
@@ -43,6 +45,12 @@ export interface IUserRepository {
     recuperarPassword(email: string): Promise<any>;
     verificarCodigoRecuperacion(email: string, verificationCode: string, password: string): Promise<any>;
     getUserByRol(rol: string): Promise<any>;
+
+    getMe(): Promise<any>;
+    upadateMe(user: IUserEquipo): Promise<any>;
+    getMeGrup(): Promise<any>;
+    upadateMeGrup(email: string, roles: string, group_admin: string): Promise<any>;
+
 }
 
 
@@ -141,12 +149,14 @@ export class UserRepository implements IUserRepository {
         roles: string[],
         central_de_mezclas: string,
         email: string,
+        nombre_apellidos:string
     ): Promise<any> {
 
         const axiosRequest = await this.axiosHttpClient.request({
             url: ApiUrlsEnum.invitarUsuarios,
             method: 'post',
             body: {
+                "nombre_apellidos":nombre_apellidos,
                 "email": email,
                 "roles": roles,
                 "central_de_mezclas": central_de_mezclas,
@@ -236,6 +246,57 @@ export class UserRepository implements IUserRepository {
             url: `${ApiUrlsEnum.getUserByRol}/${rol}`,
             method: 'get',
             body: {},
+        });
+
+        return axiosRequest.body;
+    }
+
+    async getMe(): Promise<any> {
+
+        const axiosRequest = await this.axiosHttpClient.request({
+            url: ApiUrlsEnum.getMe,
+            method: 'get',
+            body: {},
+        });
+
+        return axiosRequest.body;
+    }
+
+    async upadateMe(user: IUserEquipo): Promise<any> {
+
+        const axiosRequest = await this.axiosHttpClient.request({
+            url: ApiUrlsEnum.getMe,
+            method: 'patch',
+            body: { ...user },
+        });
+
+        return axiosRequest.body;
+    }
+
+
+    async getMeGrup(): Promise<any> {
+
+        const axiosRequest = await this.axiosHttpClient.request({
+            url: ApiUrlsEnum.getMeGroup,
+            method: 'get',
+            body: {},
+        });
+
+        return axiosRequest.body;
+    }
+
+    async upadateMeGrup(email: string, roles: string, group_admin: string): Promise<any> {
+
+        const axiosRequest = await this.axiosHttpClient.request({
+            url: ApiUrlsEnum.getMeGroup,
+            method: 'patch',
+            body: {
+                email: email,
+                roles: [
+                    roles
+                ],
+                group_admin: group_admin
+            }
         });
 
         return axiosRequest.body;

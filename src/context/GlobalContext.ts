@@ -1,4 +1,6 @@
-import { createContext } from "react";
+import { IUser } from "@/domain/models";
+import { IUserEquipo } from "@/domain/models/equipo_user.model";
+import { Dispatch, SetStateAction, createContext } from "react";
 
 
 interface ContextProps {
@@ -89,8 +91,26 @@ interface ContextProps {
     handleCloseModalRecoveryPass: () => void,
 
     openModalVerifyPass: boolean,
-    handleOpenModalVerifyPass:() => void,
-    handleCloseModalVerifyPass:() => void,
+    handleOpenModalVerifyPass: () => void,
+    handleCloseModalVerifyPass: () => void,
+
+    userInvitado: string, setuserInvitado: React.Dispatch<React.SetStateAction<string>>,
+    erroruserInvitado: boolean, setErroruserInvitado: React.Dispatch<React.SetStateAction<boolean>>,
+    messageErroruserInvitado: string, setMessageErroruserInvitado: React.Dispatch<React.SetStateAction<string>>
+    aceptarInvitacion: (token: string) => Promise<void>;
+
+    loadingApi: boolean, setLoadingApi: Dispatch<SetStateAction<boolean>>,
+    errorApi: string, setErrorApi: Dispatch<SetStateAction<string>>,
+    user: IUserEquipo | undefined, setUser: Dispatch<SetStateAction<IUserEquipo | undefined>>,
+    userEquipo: IUserEquipo[] | undefined, setUserEquipo: Dispatch<SetStateAction<IUserEquipo[] | undefined>>,
+
+    userInv: IUserEquipo | undefined, setUserInv: Dispatch<SetStateAction<IUserEquipo | undefined>>,
+    invitarUsuarios: () => Promise<void>,
+
+    getMeEquipo: () => Promise<void>,
+    getMe: () => Promise<void>,
+    updateMe: () => Promise<void>,
+    getMeRol: () => string[],
 }
 
 export const GlobalContext = createContext({} as ContextProps)

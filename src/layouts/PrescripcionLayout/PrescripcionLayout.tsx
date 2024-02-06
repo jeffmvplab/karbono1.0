@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 
 import { Box } from '@mui/material'
-import NavbarP from '../../views/PrescripcionView/components/NavBarP';
+import NavbarP from '../components/NavBar/NavBarP';
 import { Sidebar } from '../../views/PrescripcionView/components/Sidebar';
 import { PrescripcionProvider } from '@/views/PrescripcionView/context/PrescripcionProvider';
 import { GlobalProvider } from '@/context/GlobalProvider';
@@ -36,31 +36,19 @@ const PrescripcionLayout: React.FC<PrescripcionLayoutInterface> = ({ children })
       <GlobalProvider>
         <FormulariosProvider>
           <PrescripcionProvider>
-
             <ConexionStatusModal />
-
             <Box sx={{ display: 'flex' }}>
-
               {/*Navbar draweWidth */}
               <NavbarP drawerWidth={draweWidth} />
-
-
               {/*Sidebar draweWidth */}
               {/* <Sidebar /> */}
-
               <Box
                 component='main'
                 sx={{ flexGrow: 1, padding: '3' }}
               >
                 {/*Toolbar*/}
-
                 {children}
-
               </Box>
-
-
-
-
             </Box>
           </PrescripcionProvider>
         </FormulariosProvider>

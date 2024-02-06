@@ -280,7 +280,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 							))}
 						</TextField>
 					</Stack>
-					<Stack direction={'row'} spacing={4} padding={4}>
+					<Stack  direction={'row'} paddingY={3}>
 						<ReCAPTCHAComponent />
 					</Stack>
 				</Grid>}

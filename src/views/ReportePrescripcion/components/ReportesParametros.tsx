@@ -27,7 +27,7 @@ const ReportesParametros : React.FC<ReportesParametrosProps> = ({ reporte, loadi
         'Calorías No Protéicas LÍPIDOS:',
         'Calorías No Protéicas/kg:',
         'Relación Cal No Protéicas/g N:',
-        'Relación: Cal No Protéicas/g Aminoacidos=',
+        'Relación: Cal No Protéicas/g Aminoacidos',
         'Concentración de CHO-S (%):',
         'Concentración de Proteína (%):',
         'Concentración de Lípidos (%):'
@@ -35,11 +35,11 @@ const ReportesParametros : React.FC<ReportesParametrosProps> = ({ reporte, loadi
 
     return (
         <>
-            <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} paddingRight={'20px'}>
+            <Grid  container display={'flex'} width={'100%'} paddingTop={'20px'} paddingRight={'20px'}>
                 {/* <Grid item display='block' sx={{ marginTop: '30px', marginBottom: '15px', width: '40%', paddingLeft:'0' }}> */}
-                <Stack width='50%' direction={'row'} justifyContent={'space-between'}>
+                <Stack  width={{xs:'100%',md:'50%'}} direction={'row'} justifyContent={'space-between'} overflow={'scroll'}>
 
-                    <Stack direction={'column'}>
+                    <Stack  direction={'column'} minWidth={'350px'}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left' }}>Parametros</Typography>
                         <Box sx={{ justifyContent: 'start' }} >
                             <ul style={{}}>
@@ -50,10 +50,10 @@ const ReportesParametros : React.FC<ReportesParametrosProps> = ({ reporte, loadi
                         </Box>
                     </Stack>
                     {/* </Grid>
-                <Grid item display={'flex'} sx={{ marginTop: '30px', marginBottom: '30px', width: '60%' }}> */}
-                    <Stack direction={'column'}>
+                 <Grid item display={'flex'} sx={{ marginTop: '30px', marginBottom: '30px', width: '60%' }}> */}
+                    <Stack  direction={'column'}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Valores</Typography>
-                        <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
+                        <Stack  direction={'column'} alignItems={'center'} paddingTop='15px'>
 
                             {(loadingSave)
                                 ? <Typography>

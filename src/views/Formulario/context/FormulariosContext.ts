@@ -30,7 +30,7 @@ interface ContextProps {
     fechaActual: () => void;
     prescriptionSave: IPrescriptions | undefined;
 
-    getPrescriptionsByNumber:() => Promise<void>,
+    getPrescriptionsByNumber: () => Promise<void>,
     ////////////INFORMACION DEL PACIENTE///////////////////
     ips: string, errorIps: boolean, messageErrorIps: string, handleIps: (event: React.ChangeEvent<HTMLInputElement>) => void,
     numIden: string, errorNumIden: boolean, messageErrorNumIden: string, handleNumIden: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -81,20 +81,28 @@ interface ContextProps {
     loadingSave: boolean
     saveOK: boolean,
     valOKAlert: boolean,
-    messageAPI: string|undefined,setMessageAPI: React.Dispatch<React.SetStateAction<string|undefined>>,
-    validateCampos:() => boolean;
+    messageAPI: string | undefined, setMessageAPI: React.Dispatch<React.SetStateAction<string | undefined>>,
+    validateCampos: () => boolean;
 
     //////MODAL//////
     openModalFormSaved: boolean,
     handleOpenModalFormSaved: () => void,
     handleCloseModalFormSaved: () => void,
+
+    openModalFormCancel: boolean,
+    handleOpenModalFormCancel: () => void,
+    handleCloseModalFormCancel: () => void,
+
+
     savePrescription: () => void,
-    cancelForm:(route:string)=>void,
-   
+    cancelForm: (route: string) => void,
+
     getPrescriptions: () => void,
-    validateAlert: () =>boolean,
+    validateAlert: () => boolean,
     copyPrescriptions: (prescription: IPrescriptions | undefined) => Promise<void>
     borrarPrescriptions: (prescription: IPrescriptions | undefined) => Promise<void>
+
+    selectTab:number, setSelectTab: React.Dispatch<React.SetStateAction<number>>
 }
 
 export const FormulariosContext = createContext({} as ContextProps)

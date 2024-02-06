@@ -25,7 +25,8 @@ const ParametrosNutricionales: React.FC<ParametrosNutricionalesProps> = ({ isMov
 				borderTopRightRadius: borderRadius,
 				borderBottomLeftRadius: borderRadius,
 				borderBottomRightRadius: borderRadius,
-				marginBottom: '20px'
+				marginBottom: '20px',
+				marginX:'10px'
 			}}>
 			<Box
 				// borderRadius={'10px'}

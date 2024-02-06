@@ -1030,6 +1030,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const handleOpenModalFormSaved = () => { setOpenModalFormSaved(true) };
 	const handleCloseModalFormSaved = () => setOpenModalFormSaved(false);
 
+	const [openModalFormCancel, setOpenModalFormCancel] = useState(false);
+	const handleOpenModalFormCancel = () => { setOpenModalFormCancel(true) };
+	const handleCloseModalFormCancel = () => setOpenModalFormCancel(false);
+
 	// useEffect(() => {
 	// 		getPrescriptionsByNumber();
 	// 		console.log('PPPP:',reporte);
@@ -1097,6 +1101,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		reqVitHidrosolubles, vitaminasLiposolubles, vitaminasC, acidoFolico
 	])
 
+	const [selectTab, setSelectTab] = useState<number>(0);
+
+
 	return (
 
 		<FormulariosContext.Provider value={{
@@ -1123,6 +1130,11 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			openModalFormSaved,
 			handleOpenModalFormSaved,
 			handleCloseModalFormSaved,
+
+			openModalFormCancel,
+			handleOpenModalFormCancel,
+			handleCloseModalFormCancel,
+
 			savePrescription,
 			borrarPrescriptions,
 			prescriptionSave,
@@ -1192,7 +1204,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			validateAlert,
 			validateCampos,
 
-
+			selectTab, setSelectTab
 
 		}}>{children}
 		</FormulariosContext.Provider>

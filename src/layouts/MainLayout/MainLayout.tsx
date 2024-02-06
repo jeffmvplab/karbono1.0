@@ -10,6 +10,7 @@ import { mainRoutes } from "@/routes/routes";
 import { TagManagerScript } from "@/scripts/TagManagerScript";
 import { GoogleAnalyticsScript } from "@/scripts/GoogleAnalyticsScript";
 import ConexionStatusModal from "@/components/ConexionStatusModal/ConexionStatusModal";
+import NavbarP from "../components/NavBar/NavBarP";
 
 export interface MainLayoutInterface {
   children: ReactNode;
@@ -22,7 +23,7 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
   return (
     <GlobalProvider>
       <>
-       
+
         <Head>
           <title>Karbono</title>
           <meta name="description" content="Karbono" />
@@ -36,10 +37,11 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
           sx={{ paddingTop:{xs:"5px",sm:"20px",md:"10px",lg:"10px",xl:"10px",},}}>
         </Box> */}
 
-        <NavBar />
+        <NavbarP />
 
         <Box
           sx={{
+           marginTop:{xs:'60px',md:'130px'},
             padding: { xs: (router.asPath === mainRoutes.form) ? '0px' : '10px', sm: '0px' },
             paddingX: { xs: '0px', sm: '20px' },
           }}>
