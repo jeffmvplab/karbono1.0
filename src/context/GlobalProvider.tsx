@@ -19,7 +19,7 @@ type Props = {
 
 export const GlobalProvider: FC<Props> = ({ children }) => {
 
-	 const userEquEj: IUserEquipo[] = [
+	const userEquEj: IUserEquipo[] = [
 		{
 			nombre_apellidos: 'user 1',
 			email: 'user1@getMaxListeners.com',
@@ -259,6 +259,17 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		}
 	};
 
+	const [rol, setRol] = React.useState('');
+	const [errorRol, setErrorRol] = React.useState(false);
+	const [messageErrorRol, setMessageErrorRol] = React.useState('');
+
+	const handleRol = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setRol(event.target.value || '');
+
+		const Rol = event.target.value;
+
+		console.log('Rol:', Rol);
+	};
 	//////////////////////////////////MÉTODOS//////////////////////////////////////////////////////////////////
 	/////////////////////////////////AUTH STATUS//////////////////////////////////////////
 
@@ -341,7 +352,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	/////////////////////////////LOGIN//////////////////////////////////////////////
 	const [captcha, setCaptcha] = useState('');
 
-	const register = async () => {
+	const register = async (rol?:string) => {
 
 		setLoadingAuth(true);
 		console.log('Register...')
@@ -355,7 +366,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		if (captcha !== '') {
 			resp = await useruseCase.register(
 				// [tipoCliente],
-				['Administrador'],
+				[rol!],
 				nameYApellidos,
 				name,
 				apellido,
@@ -374,16 +385,18 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 		console.log('RespRegister:', resp)
 
-		if (resp.body === undefined) {
-			localStorageProtocol.set(StorageKeysEnum.user, resp);
-			Cookies.set(CookiesKeysEnum.token, resp.token, { sameSite: 'Strict' })
-		}
-
-		setLoadingAuth(false);
-
+		
+		
 		if (resp.body !== undefined) {
 			setAuthOk(false);
 			console.log('RES_API:', resp)
+			
+			if (resp.body === undefined) {
+				localStorageProtocol.set(StorageKeysEnum.user, resp);
+				Cookies.set(CookiesKeysEnum.token, resp.token, { sameSite: 'Strict' })
+			}
+
+			localStorageProtocol.delete(StorageKeysEnum.userInv);
 
 			if (resp.body.statusCode === 400) {
 				// console.log('Error Register:', resp.body.message[0])
@@ -400,20 +413,19 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			router.push(mainRoutes.home);
 		}
 
+		setLoadingAuth(false);
 	}
-
 
 	const [loadingApi, setLoadingApi] = useState(false);
 	const [errorApi, setErrorApi] = useState('');
 	const [userInv, setUserInv] = useState<IUserEquipo | undefined>();
-
 
 	const invitarUsuarios = async () => {
 
 		setLoadingApi(true);
 		console.log('Invitando...')
 
-		const resp = await useruseCase.invitarUsuarios([userInv?.rol!], userInv?.central_mezcla!, userInv?.email!,userInv?.nombre_apellidos!)
+		const resp = await useruseCase.invitarUsuarios(userInv?.rol!, userInv?.central_mezcla!, userInv?.email!, userInv?.nombre_apellidos!)
 
 		console.log('RespApi:', resp)
 
@@ -572,11 +584,20 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		const resp = await useruseCase.aceptarInvitacion(token)
 		console.log('RespAuth:', resp)
 
-		if (resp.statusCode === 201) {
+		if (resp && resp.statusCode === undefined) {
 			setErrorAuth('');
 			setAuthOk(true)
-			authStatus();
-			router.push(mainRoutes.home);
+			
+			await setUserInv({
+				central_mezcla:resp.central_de_mezclas,
+				email:resp.email,
+				nombre_apellidos:resp.nombre_apellidos,
+				rol:resp.roles[0]
+			});
+
+			localStorageProtocol.set(StorageKeysEnum.userInv,userInv!)
+
+			router.push(mainRoutes.register);
 			console.log('RES_API:', resp)
 
 		} else if (resp.statusCode === 400) {
@@ -655,7 +676,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 	const updateMe = async () => {
 		setLoadingAuth(true);
-		console.log('Upadate Me...')
+		console.log('Upadate Me...', user)
 		const resp = await useruseCase.upadateMe(user!)
 		console.log('RespAuth:', resp)
 
@@ -722,7 +743,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			messageErrorApellido,
 			handleApellido,
 
-			nameYApellidos,
+			nameYApellidos,setNameYApellidos,
 			errorNameYApellidos,
 			messageErrorNameYApellidos,
 			handleNameYApellidos,
@@ -744,12 +765,17 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			messageErrorCentralDeMezclas,
 			handleCentralDeMezclas,
 
+			rol,setRol,
+			errorRol,
+			messageErrorRol,
+			handleRol,
+
 			phone,
 			errorPhone,
 			messageErrorPhone,
 			handlePhone,
 
-			email,
+			email,setEmail,
 			errorEmail,
 			messageErrorEmail,
 			handleEmail,

@@ -22,7 +22,7 @@ export interface IUserRepository {
         he_leido: boolean): Promise<any>;
 
     invitarUsuarios(
-        roles: string[],
+        roles: string,
         central_de_mezclas: string,
         email: string,
         nombre_apellidos:string
@@ -47,7 +47,7 @@ export interface IUserRepository {
     getUserByRol(rol: string): Promise<any>;
 
     getMe(): Promise<any>;
-    upadateMe(user: IUserEquipo): Promise<any>;
+    upadateMe(user: any): Promise<any>;
     getMeGrup(): Promise<any>;
     upadateMeGrup(email: string, roles: string, group_admin: string): Promise<any>;
 
@@ -146,7 +146,7 @@ export class UserRepository implements IUserRepository {
 
 
     async invitarUsuarios(
-        roles: string[],
+        roles: string,
         central_de_mezclas: string,
         email: string,
         nombre_apellidos:string
@@ -158,8 +158,8 @@ export class UserRepository implements IUserRepository {
             body: {
                 "nombre_apellidos":nombre_apellidos,
                 "email": email,
-                "roles": roles,
                 "central_de_mezclas": central_de_mezclas,
+                "roles":[roles],
             },
         });
 
@@ -262,12 +262,12 @@ export class UserRepository implements IUserRepository {
         return axiosRequest.body;
     }
 
-    async upadateMe(user: IUserEquipo): Promise<any> {
+    async upadateMe(user: any): Promise<any> {
 
         const axiosRequest = await this.axiosHttpClient.request({
             url: ApiUrlsEnum.getMe,
             method: 'patch',
-            body: { ...user },
+            body:JSON.stringify(user),
         });
 
         return axiosRequest.body;

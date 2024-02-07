@@ -12,7 +12,7 @@ interface ContextProps {
     handleOffline: () => void,
 
     login: () => void;
-    register: (recaptchaValue?: any) => void;
+    register: (rol: string) => void;
     errorAuth: string,
 
     logout: () => void;
@@ -34,7 +34,7 @@ interface ContextProps {
     messageErrorApellido: string,
     handleApellido: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
-    nameYApellidos: string,
+    nameYApellidos: string, setNameYApellidos: React.Dispatch<React.SetStateAction<string>>,
     errorNameYApellidos: boolean,
     messageErrorNameYApellidos: string,
     handleNameYApellidos: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -56,12 +56,17 @@ interface ContextProps {
     messageErrorCentralDeMezclas: string,
     handleCentralDeMezclas: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
+    rol: string, setRol: React.Dispatch<React.SetStateAction<string>>
+    errorRol: boolean,
+    messageErrorRol: string,
+    handleRol: (event: React.ChangeEvent<HTMLInputElement>) => void,
+
     phone: string,
     errorPhone: boolean,
     messageErrorPhone: string,
     handlePhone: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
-    email: string,
+    email: string, setEmail: React.Dispatch<React.SetStateAction<string>>
     errorEmail: boolean,
     messageErrorEmail: string,
     handleEmail: (event: React.ChangeEvent<HTMLInputElement>) => void,

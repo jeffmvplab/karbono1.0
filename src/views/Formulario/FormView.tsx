@@ -146,79 +146,81 @@ const FormView: React.FC<FormViewProps> = () => {
 
 						}
 
+						{(loadingSave) && <>
+							<Card elevation={10} sx={{ borderRadius: 4 }} >
 
-						<Card elevation={10} sx={{ borderRadius: 4 }} >
-							<Box
+								<Box
 
-								paddingX={{ xs: '20px', md: '10px' }}
-								marginTop={'10px'}
-								bgcolor={'white'}>
+									paddingX={{ xs: '20px', md: '10px' }}
+									marginTop={'10px'}
+									bgcolor={'white'}>
 
 
-								<Stack
-									paddingX={1}
-									direction={'row'}
-									paddingY={4}
-									width={{ xs: '100%', md: '70%' }}
-									justifyContent={'space-between'}
-									overflow={'scroll'}
-									spacing={1}
-								>
+									<Stack
+										paddingX={1}
+										direction={'row'}
+										paddingY={4}
+										width={{ xs: '100%', md: '70%' }}
+										justifyContent={'space-between'}
+										overflow={'scroll'}
+										spacing={1}
+									>
 
-									<CustomButtonTab
-										onClick={() => setSelectTab(0)}
-										sx={{
+										<CustomButtonTab
+											onClick={() => setSelectTab(0)}
+											sx={{
 
-											minWidth: '200px',
-											background: (selectTab === 0) ? colorsKarbono.primary : 'white',
-											color: (selectTab === 0) ? 'white' : '#B8BDBDB2 '
-										}}
-									>Información del paciente
-									</CustomButtonTab>
+												minWidth: '200px',
+												background: (selectTab === 0) ? colorsKarbono.primary : 'white',
+												color: (selectTab === 0) ? 'white' : '#B8BDBDB2 '
+											}}
+										>Información del paciente
+										</CustomButtonTab>
 
-									<CustomButtonTab
-										onClick={() => setSelectTab(1)}
-										sx={{
+										<CustomButtonTab
+											onClick={() => setSelectTab(1)}
+											sx={{
 
-											minWidth: '150px',
-											background: (selectTab === 1) ? colorsKarbono.primary : 'white',
-											color: (selectTab === 1) ? 'white' : '#B8BDBDB2 '
-										}}
-									>Macronutrientes
-									</CustomButtonTab>
+												minWidth: '150px',
+												background: (selectTab === 1) ? colorsKarbono.primary : 'white',
+												color: (selectTab === 1) ? 'white' : '#B8BDBDB2 '
+											}}
+										>Macronutrientes
+										</CustomButtonTab>
 
-									<CustomButtonTab
-										onClick={() => setSelectTab(2)}
-										sx={{
+										<CustomButtonTab
+											onClick={() => setSelectTab(2)}
+											sx={{
 
-											minWidth: '150px',
-											background: (selectTab === 2) ? colorsKarbono.primary : 'white',
-											color: (selectTab === 2) ? 'white' : '#B8BDBDB2 '
-										}}
-									>Micronutrientes
-									</CustomButtonTab>
+												minWidth: '150px',
+												background: (selectTab === 2) ? colorsKarbono.primary : 'white',
+												color: (selectTab === 2) ? 'white' : '#B8BDBDB2 '
+											}}
+										>Micronutrientes
+										</CustomButtonTab>
 
-									<CustomButtonTab
-										onClick={() => setSelectTab(3)}
-										sx={{
+										<CustomButtonTab
+											onClick={() => setSelectTab(3)}
+											sx={{
 
-											minWidth: '150px',
-											background: (selectTab === 3) ? colorsKarbono.primary : 'white',
-											color: (selectTab === 3) ? 'white' : '#B8BDBDB2 '
-										}}
-									>Observaciones
-									</CustomButtonTab>
+												minWidth: '150px',
+												background: (selectTab === 3) ? colorsKarbono.primary : 'white',
+												color: (selectTab === 3) ? 'white' : '#B8BDBDB2 '
+											}}
+										>Observaciones
+										</CustomButtonTab>
 
-								</Stack>
+									</Stack>
 
-								{(selectTab === 0) && <InformacionPaciente />}
-								{(selectTab === 1) && <Macronutrientes />}
-								{(selectTab === 2) && <Micronutrientes />}
-								{(selectTab === 3) && <Observaciones />}
+									{(selectTab === 0) && <InformacionPaciente />}
+									{(selectTab === 1) && <Macronutrientes />}
+									{(selectTab === 2) && <Micronutrientes />}
+									{(selectTab === 3) && <Observaciones />}
 
-							</Box>
+								</Box>
 
-						</Card>
+							</Card>
+						</>}
 					</Stack>
 				</Grid>
 
@@ -266,7 +268,7 @@ const FormView: React.FC<FormViewProps> = () => {
 				>
 					<CustomButton
 						// onClick={() => cancelForm(mainRoutes.prescripcion)}
-						
+
 						onClick={
 							(selectTab === 0)
 								? () => handleOpenModalFormCancel()
@@ -280,7 +282,7 @@ const FormView: React.FC<FormViewProps> = () => {
 						startIcon={(selectTab === 0) ? <CloseIcon sx={{ color: 'white' }} /> : <ChevronLeftIcon sx={{ color: 'white' }} />}
 					/>
 
-					<Stack direction={{xs:(selectTab===3)?'column-reverse':'row',md:'row'}} spacing={2}>
+					<Stack direction={{ xs: (selectTab === 3) ? 'column-reverse' : 'row', md: 'row' }} spacing={2}>
 						{(selectTab === 3) && <CustomButton
 							// disabled={!valOKAlert}
 							onClick={() => { }}
@@ -306,10 +308,10 @@ const FormView: React.FC<FormViewProps> = () => {
 									width={20}
 									height={20}
 									alt=''
-									style={{alignItems: 'center' }}
+									style={{ alignItems: 'center' }}
 								/>
 							}
-							/>}
+						/>}
 
 						<CustomButton
 							// disabled={!valOKAlert}

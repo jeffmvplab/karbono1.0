@@ -18,7 +18,7 @@ export interface IUserUseCase {
         he_leido: boolean): Promise<any>;
 
     invitarUsuarios(
-        roles: string[],
+        roles: string,
         central_de_mezclas: string,
         email: string,
         nombre_apellidos:string
@@ -92,7 +92,7 @@ export class UserUseCases implements IUserUseCase {
     }
 
     invitarUsuarios(
-        roles: string[],
+        roles: string,
         central_de_mezclas: string,
         email: string,
         nombre_apellidos:string,
@@ -149,7 +149,7 @@ export class UserUseCases implements IUserUseCase {
     getMe(): Promise<any>{
         return this.userRepository.getMe();
     };
-    upadateMe(user: IUserEquipo): Promise<any>{
+    upadateMe(user: any): Promise<any>{
         return this.userRepository.upadateMe(user);
     };
     getMeGrup(): Promise<any>{

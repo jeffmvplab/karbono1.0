@@ -42,23 +42,25 @@ const AuthLayout: React.FC<AuthLayoutInterface> = ({ children }) => {
         {/* </Typography> */}
         <Grid container >
           <Grid display={{ xs: 'none', md: 'flex' }} item xs={12} sm={6} md={8} xl={9}>
-            <Button
-              onClick={() => { router.push(mainRoutes.home); console.log('Click') }}
-            >
-              <Image
-                src='/assets/1.png'
-                width={120}
-                height={30}
-                alt=''
-                style={{ marginTop: '5px', alignItems: 'center' }}
-              />
-            </Button>
+            <Stack>
+              <Button
+                onClick={() => { router.push(mainRoutes.home); console.log('Click') }}
+              >
+                <Image
+                  src='/assets/1.png'
+                  width={120}
+                  height={30}
+                  alt=''
+                  style={{ marginTop: '5px', alignItems: 'center' }}
+                />
+              </Button>
 
-            <StyledSectionBg sx={{ width: { xs: '100%', sm: '50%', md: '65%', xl: '75%' } }} />
+              <StyledSectionBg sx={{ width: { xs: '100%', sm: '50%', md: '65%', xl: '75%' } }} />
+            </Stack>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4} xl={3}
-            sx={{ padding: { xs: '20px', sm: '20px', md: '20px', xl: '40px' } }}       
+            sx={{ padding: { xs: '20px', sm: '20px', md: '20px', xl: '40px' } }}
           >
             <Card
               elevation={10}
@@ -66,20 +68,20 @@ const AuthLayout: React.FC<AuthLayoutInterface> = ({ children }) => {
                 display: { xs: 'flex', sm: 'none' },
                 padding: '10px',
                 overflow: 'scroll', // Agregamos scroll si el contenido excede el tamaño del contenedor
-                 maxHeight: '85vh', // Altura máxima del contenedor antes de agregar scroll
+                maxHeight: '85vh', // Altura máxima del contenedor antes de agregar scroll
                 // background: colorsKarbono.gradientCard
               }}>
               <Stack sx={{ width: 1 }}> {children} </Stack>
-          </Card>
+            </Card>
 
-          <Stack display={{ xs: 'none', sm: 'flex' }} sx={{ width: 1 }}> {children} </Stack>
+            <Stack display={{ xs: 'none', sm: 'flex' }} sx={{ width: 1 }}> {children} </Stack>
 
-        </Grid>
-        {/* </StyledContent>
+          </Grid>
+          {/* </StyledContent>
         </StyledRoot> */}
-      </Grid>
-      <Footer />
-    </>
+        </Grid>
+        <Footer />
+      </>
 
     </GlobalProvider >
   );

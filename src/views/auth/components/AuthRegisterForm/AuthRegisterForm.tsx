@@ -2,12 +2,14 @@ import { CustomButton } from '@/components/CustomButton';
 import { GlobalContext } from '@/context/GlobalContext';
 import { colorsKarbono } from '@/themes/colors';
 import { Stack, Grid, Box, Link, Typography, TextField, CircularProgress, Button, FormControlLabel, Checkbox, MenuItem } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { typographyKarbono } from '@/themes/typography';
 import { instituciones } from '@/views/ReportePrescripcion/data/instituciones';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ReCAPTCHAComponent from '../reCAPTCHA/reCAPTACHA';
+import { StorageKeysEnum } from '@/utilities/enums';
+import { LocalStorageProtocol } from '@/protocols/cache/local_cache';
 
 export interface AuthRegisterFormProps { }
 
@@ -17,7 +19,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 
 	const {
 		login, register, loadingAuth,
-		email, errorEmail, handleEmail,
+		email, setEmail, errorEmail, handleEmail,
 		name, handleName,
 		phone, errorPhone, handlePhone,
 		password, errorPassword, handlePassword,
@@ -25,7 +27,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 		apellido,
 		handleApellido,
 
-		nameYApellidos,
+		nameYApellidos, setNameYApellidos,
 		handleNameYApellidos,
 
 		registroMedico,
@@ -34,7 +36,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 		entidadDeSalud,
 		handleEntidadDeSalud,
 		politica_de_privacidad, handlePolitica, handleTipo, tipoCliente,
-		captcha
+		captcha, rol, setRol
 	} = React.useContext(GlobalContext)
 
 	const fontSize: number = 14;
@@ -43,6 +45,20 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 	//////////////////////////////////////////////////////////////////////////
 	const [seePassword, setSeePassword] = useState(false);
 	const [seeConfPassword, setSeeConfPassword] = useState(false);
+
+	const localStorageProtocol = new LocalStorageProtocol();
+
+
+	useEffect(() => {
+		if (localStorageProtocol.get(StorageKeysEnum.userInv)) {
+			const userInv = localStorageProtocol.get(StorageKeysEnum.userInv)
+			console.log('USER INV:', userInv)
+
+			setEmail(userInv.email);
+			setNameYApellidos(userInv.nombre_apellidos);
+			setRol(userInv.rol);
+		}
+	}, [])
 	//////////////////////////////////////////////////////////////
 	return (
 
@@ -280,7 +296,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 							))}
 						</TextField>
 					</Stack>
-					<Stack  direction={'row'} paddingY={3}>
+					<Stack direction={'row'} paddingY={3}>
 						<ReCAPTCHAComponent />
 					</Stack>
 				</Grid>}
@@ -329,8 +345,8 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						<Box width={10}></Box>
 						<CustomButton
 							fontSize={'20px'}
-							onClick={() => { register() }}
-							disabled={(errorEmail || errorPassword || errorPasswordConfirm||captcha==='')}
+							onClick={() => { register(rol === '' ? "Administrador" : rol) }}
+							disabled={(errorEmail || errorPassword || errorPasswordConfirm || captcha === '')}
 							textColorHover={(!errorEmail || !errorPassword || !errorPasswordConfirm) ? 'white' : null}
 							textColor={'white'}
 							colorHover={(!errorEmail || !errorPassword || !errorPasswordConfirm) ? colorsKarbono.primary : ''}
@@ -338,7 +354,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 							sx={{
 								width: '250px',
 								height: '50px',
-								color:colorsKarbono.primary
+								color: colorsKarbono.primary
 							}}
 							variant='contained'
 							text={(!loadingAuth) ? 'Crear Cuenta' : 'Creando...'}

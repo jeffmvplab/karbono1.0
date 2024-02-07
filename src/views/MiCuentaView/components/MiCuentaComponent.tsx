@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { colorsKarbono } from '@/themes/colors';
 import CustomTextField from '@/views/Formulario/Components/CustomTextField';
 import { GlobalContext } from '@/context/GlobalContext';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 export interface MiCuentaComponentProps { }
 
@@ -32,10 +31,6 @@ const MiCuentaComponent: React.FC<MiCuentaComponentProps> = () => {
 
 	const [editarCampos, setEditarCampos] = useState<EditCampos>();
 	const { user, setUser, getMe, loadingAuth, updateMe } = useContext(GlobalContext)
-
-	useEffect(() => {
-		getMe();
-	}, [])
 
 
 	return (

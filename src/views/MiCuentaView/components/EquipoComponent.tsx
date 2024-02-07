@@ -17,7 +17,7 @@ const options = [
 
 const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 
-	const { userEquipo, setUserEquipo, setUser, getMeEquipo, user, invitarUsuarios, loadingApi } = useContext(GlobalContext)
+	const {userInv,setUserInv, userEquipo, setUserEquipo, setUser, getMeEquipo, user, invitarUsuarios, loadingApi } = useContext(GlobalContext)
 
 	useEffect(() => {
 		// getMeEquipo();
@@ -116,8 +116,8 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 
 											<Grid item xs={12} sm={12} md={12} lg={2.5}>
 												<TextField
-													onChange={(e) => setUser({ ...user, nombre_apellidos: e.target.value })}
-													value={user?.nombre_apellidos}
+													onChange={(e) => setUserInv({ ...userInv, nombre_apellidos: e.target.value })}
+													value={userInv?.nombre_apellidos}
 													label="Nomber y Apellidos"
 
 													type="text"
@@ -135,8 +135,8 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 
 											<Grid item xs={12} sm={12} md={12} lg={2.5}>
 												<TextField
-													onChange={(e) => setUser({ ...user, email: e.target.value })}
-													value={user?.email}
+													onChange={(e) => setUserInv({ ...userInv, email: e.target.value })}
+													value={userInv?.email}
 													label="Correo electrónico"
 
 													type="email"
@@ -154,8 +154,8 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 
 											<Grid item xs={12} sm={12} md={12} lg={2}>
 												<TextField
-													onChange={(e) => setUser({ ...user, entidad_de_salud: [e.target.value] })}
-													value={user?.entidad_de_salud}
+													onChange={(e) => setUserInv({ ...userInv, entidad_de_salud: [e.target.value] })}
+													value={userInv?.entidad_de_salud}
 													label="Rol"
 													type="text"
 													placeholder='Rol'
@@ -185,8 +185,8 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 
 											<Grid item xs={12} sm={12} md={12} lg={2.5}>
 												<TextField
-													onChange={(e) => setUser({ ...user, central_mezcla: e.target.value })}
-													value={user?.central_mezcla}
+													onChange={(e) => setUserInv({ ...userInv, central_mezcla: e.target.value })}
+													value={userInv?.central_mezcla}
 													label="Central de mezcla"
 
 													type="textl"
