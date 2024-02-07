@@ -1,12 +1,11 @@
-import { Box, Button, Checkbox, Divider, Fade, Grid, IconButton, Menu, MenuItem, Stack, TextField, Typography, styled } from '@mui/material';
+import { Box, Button, Checkbox, CircularProgress, Divider, Fade, Grid, IconButton, Menu, MenuItem, Stack, TextField, Typography, styled } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { colorsKarbono } from '@/themes/colors';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Image from 'next/image'
-import { PerfilContext } from '../context/PerfilContext';
-import { typographyKarbono } from '@/themes/typography';
-import { IUserEquipo } from '@/domain/models/equipo_user.model';
+import ClearIcon from '@mui/icons-material/Clear';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { GlobalContext } from '@/context/GlobalContext';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 export interface EquipoComonentProps { }
 
@@ -18,10 +17,27 @@ const options = [
 
 const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 
-	const { userEquipo, setUserEquipo, getUserByRol, setUserInv, userInv } = useContext(PerfilContext)
+	const {userInv,setUserInv, userEquipo, setUserEquipo, setUser, getMeEquipo, user, invitarUsuarios, loadingApi } = useContext(GlobalContext)
 
 	useEffect(() => {
-		getUserByRol('');
+		// getMeEquipo();
+		setUserEquipo(
+			[{
+				nombre_apellidos: 'user 1',
+				email: 'user1@getMaxListeners.com',
+				rol: 'Prescriptor'
+			},
+			{
+				nombre_apellidos: 'user 2',
+				email: 'user2@getMaxListeners.com',
+				rol: 'Prescriptor'
+			},
+			{
+				nombre_apellidos: 'user 3',
+				email: 'user3@getMaxListeners.com',
+				rol: 'Prescriptor'
+			}]
+		);
 	}, [])
 
 	const [anchorEls, setAnchorEls] = useState<(null | HTMLElement)[]>([]);
@@ -50,197 +66,272 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 
 	return (
 
+		<Stack width={'100%'} paddingTop={{ xs: 0, md: 10 }} direction={'column'} paddingX={{ xs: 0, md: 0 }} paddingRight={{ lg: 20 }} spacing={2} >
+			<Typography display={{ xs: 'none', md: 'flex' }} fontSize={16} fontWeight={800}>
+				Equipo
+			</Typography>
+			<Box
+				padding={2}
+				height={(inv) ? { xs: '55vh', lg: '260px' } : '180px'}
+				bgcolor={colorsKarbono.secundary}
+			>
 
-		<Grid item xs={12} sm={12} md={9}>
+				<Stack direction={'row'} justifyContent={{ xs: 'center', md: 'space-between' }}>
+					<Stack direction={'column'} alignItems={{ xs: 'center', md: 'start' }} spacing={2} >
 
-			<Stack paddingTop={10} direction={'column'} paddingRight={20} spacing={2}>
-				<Typography fontSize={16} fontWeight={800}>
-					Equipo
-				</Typography>
-
-				<Box padding={2} height={'160px'} bgcolor={colorsKarbono.secundary}>
-					<Stack direction={'row'} justifyContent={'space-between'}>
-						<Stack direction={'column'} alignItems={'start'} spacing={2}>
-							<Typography color={'white'} fontSize={14} fontWeight={300}>
-								Invitar a las personas con las que trabajas
-							</Typography>
-							<Typography color={'white'} fontSize={14} fontWeight={500}>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							</Typography>
-
-							<Stack direction='row' >
-								{
-									(!inv)
-										? <Button
-											onClick={() => setInv(true)}
-											sx={{ borderRadius: '8px', height: '30px', color: 'white' }}
-											variant='contained'
-											endIcon={<ArrowForwardIosIcon />}
-										>
-											Invitar personas
-										</Button>
-										: <Stack direction={'row'} spacing={2}>
-											<TextField
-												onChange={(e) => setUserInv({ ...userInv, email: e.target.value })}
-												value={userInv?.email}
-												label=""
-
-												type="email"
-												placeholder='Correo electrónico'
-												fullWidth
-
-												inputProps={{ style: { color: 'white', borderBottomColor: 'blue'} }}
-												InputProps={{ style: { color: 'white' } }} // Para el color del texto
-												sx={{
-													bgcolor: 'transparent',
-													"& .MuiInputBase-root": { borderRadius: '10px' },
-												}}
-											/>
-
-
-											<TextField
-												onChange={(e) => setUserInv({ ...userInv, entidad_de_salud: [e.target.value] })}
-												value={userInv?.entidad_de_salud}
-												label=""
-												type="text"
-												placeholder=''
-												fullWidth
-												select
-												inputProps={{ style: { color: 'white', borderBottomColor: 'blue'} }}
-												InputProps={{ style: { color: 'white', padding: '0px 12px' } }} // Reducir el padding
-												sx={{
-													bgcolor: 'transparent',
-													"& .MuiInputBase-root": { borderRadius: '10px' },
-												}}
-											>
-												{options.map((option) => (
-													<MenuItem
-														style={{
-															background: "white",
-															color: "black",
-														}}
-														key={option}
-														value={option}
-													>
-														{option}
-													</MenuItem>
-												))}
-											</TextField>
-
-
-											<Button
-												onClick={() => setInv(true)}
-												sx={{ borderRadius: '8px', width: '230px', height: '55px', color: 'white' }}
-												variant='contained'
-												endIcon={<ArrowForwardIosIcon />}
-											>
-												Invitar
-											</Button>
-										</Stack>
-								}
+						<Stack direction={'row'} justifyContent={{ xs: 'center', md: 'space-between' }}>
+							<Stack direction={'column'} spacing={2}>
+								<Typography color={'white'} fontSize={14} fontWeight={300}>
+									Invitar a las personas con las que trabajas
+								</Typography>
+								<Typography color={'white'} fontSize={14} fontWeight={500}>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+								</Typography>
 							</Stack>
-
-
-
 						</Stack>
+
+						<Stack direction='row' >
+							{
+								(!inv)
+									? <Button
+										onClick={() => setInv(true)}
+										sx={{ borderRadius: '8px', height: '30px', color: 'white' }}
+										variant='contained'
+									// endIcon={<ArrowForwardIosIcon />}
+									>
+										Invitar personas
+									</Button>
+									: <Stack
+										direction={{ xs: 'column', md: 'row' }}
+										spacing={2}
+										alignItems={'center'}
+										justifyContent={'center'}
+										width={{ xs: '80vw', sm: '85vw', md: '50vw' }}
+									>
+
+										<Grid container spacing={2}>
+											<Grid display={{ xs: 'none', md: 'flex' }} item xs={12} sm={12} md={12} lg={0.5}>
+												<IconButton sx={{ paddingTop: '20px' }} onClick={() => { setInv(false) }}><ClearIcon sx={{ color: 'white' }} /></IconButton>
+											</Grid>
+
+											<Grid item xs={12} sm={12} md={12} lg={2.5}>
+												<TextField
+													onChange={(e) => setUserInv({ ...userInv, nombre_apellidos: e.target.value })}
+													value={userInv?.nombre_apellidos}
+													label="Nomber y Apellidos"
+
+													type="text"
+													placeholder='Nomber y Apellidos'
+													fullWidth
+
+													inputProps={{ style: { color: 'white', borderBottomColor: 'blue' } }}
+													InputProps={{ style: { color: 'white' } }} // Para el color del texto
+													sx={{
+														bgcolor: 'transparent',
+														"& .MuiInputBase-root": { borderRadius: '10px' },
+													}}
+												/>
+											</Grid>
+
+											<Grid item xs={12} sm={12} md={12} lg={2.5}>
+												<TextField
+													onChange={(e) => setUserInv({ ...userInv, email: e.target.value })}
+													value={userInv?.email}
+													label="Correo electrónico"
+
+													type="email"
+													placeholder='Correo electrónico'
+													fullWidth
+
+													inputProps={{ style: { color: 'white', borderBottomColor: 'blue' } }}
+													InputProps={{ style: { color: 'white' } }} // Para el color del texto
+													sx={{
+														bgcolor: 'transparent',
+														"& .MuiInputBase-root": { borderRadius: '10px' },
+													}}
+												/>
+											</Grid>
+
+											<Grid item xs={12} sm={12} md={12} lg={2}>
+												<TextField
+													onChange={(e) => setUserInv({ ...userInv, entidad_de_salud: [e.target.value] })}
+													value={userInv?.entidad_de_salud}
+													label="Rol"
+													type="text"
+													placeholder='Rol'
+													fullWidth
+													select
+													inputProps={{ style: { color: 'white', borderBottomColor: 'blue' } }}
+													InputProps={{ style: { color: 'white', padding: '0px 12px' } }} // Reducir el padding
+													sx={{
+														bgcolor: 'transparent',
+														"& .MuiInputBase-root": { borderRadius: '10px' },
+													}}
+												>
+													{options.map((option) => (
+														<MenuItem
+															style={{
+																background: "white",
+																color: "black",
+															}}
+															key={option}
+															value={option}
+														>
+															{option}
+														</MenuItem>
+													))}
+												</TextField>
+											</Grid>
+
+											<Grid item xs={12} sm={12} md={12} lg={2.5}>
+												<TextField
+													onChange={(e) => setUserInv({ ...userInv, central_mezcla: e.target.value })}
+													value={userInv?.central_mezcla}
+													label="Central de mezcla"
+
+													type="textl"
+													placeholder='Central de mezcla'
+													fullWidth
+
+													inputProps={{ style: { color: 'white', borderBottomColor: 'blue' } }}
+													InputProps={{ style: { color: 'white' } }} // Para el color del texto
+													sx={{
+														bgcolor: 'transparent',
+														"& .MuiInputBase-root": { borderRadius: '10px' },
+													}}
+												/>
+											</Grid>
+
+											<Grid textAlign={'center'} item xs={12} sm={12} md={12} lg={2} sx={{ paddingTop: '15px' }}>
+												<Stack direction={{ xs: 'column', md: 'row' }} alignItems={'center'}>
+
+													<Button
+														onClick={() => invitarUsuarios()}
+														sx={{ borderRadius: '8px', width: '150px', height: { xs: '40px', md: '50px' }, color: 'white' }}
+														variant='contained'
+														endIcon={(loadingApi) ? <CircularProgress sx={{ color: 'white' }} variant='indeterminate' size='30px' /> : <></>}
+													>
+														{(loadingApi) ? 'Invitando...' : 'Invitar'}
+													</Button>
+
+													<IconButton
+														onClick={() => setInv(false)}
+														sx={{
+															color: 'white'
+														}}>
+														<ExpandLessIcon />
+													</IconButton>
+												</Stack>
+
+											</Grid>
+										</Grid>
+									</Stack>
+							}
+						</Stack>
+					</Stack>
+
+					<Box display={{ xs: 'none', md: 'flex' }}>
 
 						<Image
 							src="/illustrations/illustration_dashboard2.jpg"
-							width={100}
-							height={100}
+							width={150}
+							height={150}
 							alt="Picture of the author" />
-					</Stack>
-				</Box>
+					</Box>
 
-				<Divider sx={{ backgroundColor: '#B8BDBDB2 ', height: '2px', }} />
+				</Stack>
+			</Box>
 
-				{(userEquipo?.length! > 0)
-					? userEquipo?.map((user, index) => {
+			<Divider sx={{ backgroundColor: '#B8BDBDB2 ', height: '2px', display: { xs: 'none', md: 'flex' } }} />
 
-						return <>
-							<Stack direction={'row'} justifyContent={'space-between'}>
+			{(userEquipo?.length! > 0)
+				? userEquipo?.map((user, index) => {
 
-								<Stack direction={'column'} spacing={2}>
-									<Typography fontSize={14} fontWeight={800}>
-										Nombre y apellidos
-									</Typography>
+					return <>
+						<Stack direction={'row'} justifyContent={'space-between'} paddingX={'10px'}>
+
+							<Stack direction={'column'} spacing={2}>
+								<Typography color={{xs:'blue',md:'black'}} fontSize={14} fontWeight={800}>
+									Nombre
+								</Typography>
+								<Typography fontSize={14} fontWeight={500}>
+									{user.nombre_apellidos}
+								</Typography>
+							</Stack>
+
+							<Stack direction={'column'} spacing={2}>
+								<Typography color={{xs:'blue',md:'black'}} fontSize={14} fontWeight={800}>
+									Correo
+								</Typography>
+								<Typography fontSize={14} fontWeight={500}>
+									{user.email}
+								</Typography>
+							</Stack>
+
+							<Stack display={{xs:'none',md:'flex'}} direction={'column'} spacing={2}>
+								<Typography fontSize={14} fontWeight={800}>
+									Rol en el equipo
+								</Typography>
+
+								<Stack  direction={'row'} spacing={3}>
 									<Typography fontSize={14} fontWeight={500}>
-										{user.nombre_apellidos}
+										{user.rol}
 									</Typography>
+									<div>
+										<IconButton
+											aria-label="more"
+											id={`long-button-${index}`}
+											aria-controls={openIndex === index ? 'long-menu' : undefined}
+											aria-expanded={openIndex === index ? 'true' : undefined}
+											aria-haspopup="true"
+											onClick={(event) => handleClick(event, index)}
+										>
+											<ExpandMoreIcon />
+										</IconButton>
+
+										<Menu
+											id="long-menu"
+											MenuListProps={{
+												'aria-labelledby': `long-button-${index}`,
+											}}
+											anchorEl={anchorEls[index]}
+											open={Boolean(anchorEls[index])}
+											onClose={() => handleClose(index)}
+											PaperProps={{
+												style: {
+													width: '20ch',
+												},
+											}}
+										>
+											{options.map((option) => (
+												<MenuItem
+													key={option}
+													selected={option === user.rol}
+													onClick={() => {
+														handleChangeRol(option, index);
+														handleClose(index);
+													}}
+												>
+													{option}
+												</MenuItem>
+											))}
+										</Menu>
+									</div>
 								</Stack>
-
-								<Stack direction={'column'} spacing={2}>
-									<Typography fontSize={14} fontWeight={800}>
-										Correo
-									</Typography>
-									<Typography fontSize={14} fontWeight={500}>
-										{user.email}
-									</Typography>
-								</Stack>
-
-								<Stack direction={'column'} spacing={2}>
-									<Typography fontSize={14} fontWeight={800}>
-										Rol en el equipo
-									</Typography>
-									<Stack direction={'row'} spacing={3}>
-										<Typography fontSize={14} fontWeight={500}>
-											{user.rol}
-										</Typography>
-										<div>
-											<IconButton
-												aria-label="more"
-												id={`long-button-${index}`}
-												aria-controls={openIndex === index ? 'long-menu' : undefined}
-												aria-expanded={openIndex === index ? 'true' : undefined}
-												aria-haspopup="true"
-												onClick={(event) => handleClick(event, index)}
-											>
-												<ExpandMoreIcon />
-											</IconButton>
-											<Menu
-												id="long-menu"
-												MenuListProps={{
-													'aria-labelledby': `long-button-${index}`,
-												}}
-												anchorEl={anchorEls[index]}
-												open={Boolean(anchorEls[index])}
-												onClose={() => handleClose(index)}
-												PaperProps={{
-													style: {
-														width: '20ch',
-													},
-												}}
-											>
-												{options.map((option) => (
-													<MenuItem
-														key={option}
-														selected={option === user.rol}
-														onClick={() => {
-															handleChangeRol(option, index);
-															handleClose(index);
-														}}
-													>
-														{option}
-													</MenuItem>
-												))}
-											</Menu>
-										</div>
-									</Stack>
-								</Stack>
+							</Stack>
 
 
-								<Checkbox inputProps={{ 'aria-label': '' }} defaultChecked />
-							</Stack >
+							<Checkbox sx={{display:{xs:'none',md:'flex'}}} inputProps={{ 'aria-label': '' }} defaultChecked />
+						</Stack >
 
-							<Divider sx={{ backgroundColor: '#B8BDBDB2 ', height: '2px', }} />
-						</>
+						<Divider sx={{ backgroundColor: '#B8BDBDB2 ', height: '2px', }} />
+					</>
 
-					})
+				})
 
-					: <></>
-				}
-			</Stack>
-		</Grid >
+				: <></>
+			}
+		</Stack>
 	)
 };
 

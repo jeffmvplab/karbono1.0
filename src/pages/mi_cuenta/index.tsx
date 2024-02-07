@@ -1,14 +1,9 @@
 
 import { ReactElement } from 'react'
 import { NextPageWithLayout } from '@/pages/_app'
-import ReportePrescripcionView from '@/views/ReportePrescripcion/ReportePrescripcionView'
-import ReportePrescripcionLayout from '@/layouts/ReportePrescripcionLayout copy/ReportePrescripcionLayout'
-import { ReportesProvider } from '@/views/ReportePrescripcion/context/ReportesProvider'
-import { GetServerSideProps } from 'next'
 import { MainLayout } from '@/layouts/MainLayout'
 import { GlobalProvider } from '@/context/GlobalProvider'
 import { MiCuentaView } from '@/views/MiCuentaView'
-import { PerfilProvider } from '@/views/MiCuentaView/context/PerfilProvider'
 
 
 const MiCuentaPages: NextPageWithLayout = () => {
@@ -16,9 +11,7 @@ const MiCuentaPages: NextPageWithLayout = () => {
 
   return (
     <GlobalProvider>
-      <PerfilProvider>
         <MiCuentaView />
-      </PerfilProvider>
     </GlobalProvider>
 
   )

@@ -71,20 +71,29 @@ const Micronutrientes = () => {
         getPrescriptions
     } = useContext(FormulariosContext)
 
-    useEffect(() => {
-        setStateAcordion3(matches);
-    }, [matches])
+    // useEffect(() => {
+    //     setStateAcordion3(matches);
+    // }, [matches])
 
     // console.log('Magnesio:', magnesio)
     /////////////////////////////////////////////////////////////////////
 
     return (
 
-        <Stack  direction={'column'} paddingBottom={{ xs: '80px' }} >
+        <Stack
+            direction={'column'}
+            height={'100%'}
+            paddingBottom={{ xs: '80px' }}
+            padding={1}
+            paddingTop={3}
+            overflow={'scroll'}>
 
-            <Accordion expanded={stateAcordion3} elevation={0}>
-                {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                <Box sx={{ display: { sm: 'none' }, }}>
+            {/* <Accordion 
+            // expanded={stateAcordion3} 
+            expanded={true} 
+            elevation={0}> */}
+            {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
+            {/* <Box sx={{ display: { sm: 'none' }, }}>
                     <AccordionSummary
                         sx={{
                             display: { sm: 'none' },
@@ -96,466 +105,466 @@ const Micronutrientes = () => {
                         aria-controls="panel1bh-content"
                         id="panel1bh-header"
                     >
-                        <Typography
+                        {/* <Typography
                             onClick={() => !matches && handleAcordion3()}
                             fontSize={16}
                             // paddingY={2}
                             style={{ fontWeight: 700, color: colorsKarbono.secundary }}
                         >Micronutrientes
-                        </Typography >
-                    </AccordionSummary>
-                </Box>
+                        </Typography > */}
+            {/* </AccordionSummary>
+                </Box> */}
 
-                <Typography
+            {/* <Typography
                     variant='h6'
                     paddingY={2}
                     style={{ fontWeight: 700, color: colorsKarbono.secundary, }}
                     sx={{ display: { xs: 'none', sm: 'flex' } }}
                 >Micronutrientes:
-                </Typography >
-                {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                <AccordionDetails 
+                </Typography > */}
+            {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
+            {/* <AccordionDetails 
                  sx={{ 
                     minHeight: '500px'
                      }}>
+ */}
 
+            <Grid container>
 
-                    <Grid container>
+                <Box display='flex' sx={{ width: '100%', }}>
+                    <Grid container spacing={2}>
 
-                        <Box display='flex' sx={{ width: '100%', }}>
-                            <Grid container spacing={2}>
-
-                                <LightTooltip
-                                    title='Requerimiento recomendado de sodio en g/kg/día es:
+                        <LightTooltip
+                            title='Requerimiento recomendado de sodio en g/kg/día es:
                                     Neonatos: 2 - 5
                                     Pediátricos: 1 - 2
                                     Adultos: 1 - 2.'
-                                    placement="top"
-                                    arrow
-                                >
-                                    <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                                        <Stack direction={'row'}>
-                                            <Grid item xs={8} sm={8} md={8} style={{ paddingRight: '10px' }}>
-                                                <CustomTextField
-                                                    onChange={handleSodioTotal}
-                                                    onClick={getPrescriptions}
-                                                    onKeyPress={getPrescriptions}
-                                                    value={sodioTotal}
-                                                    id='Cloruro de Sodio 2MEQ/ML'
-                                                    label={'Cloruro de Sodio 2MEQ/ML'}
-                                                    endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                                        ? 'mEq/kg/día'
-                                                        : 'ml'}
-                                                    type='text'
-                                                />
-                                            </Grid>
-                                            <Grid item xs={4} sm={4} md={4}>
-                                                <CustomTextField
-                                                    disabled={true}
-                                                    value={getSodioTotal(prescriptionSave!).toFixed(2)}
-                                                    id='Sodio-total'
-                                                    label={'Sodio-total'}
-                                                    endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                                        ? 'mEq/kg/día'
-                                                        : 'ml'}
-                                                    type='text'
-                                                />
-                                            </Grid>
-                                        </Stack>
-
+                            placement="top"
+                            arrow
+                        >
+                            <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Stack direction={'row'}>
+                                    <Grid item xs={8} sm={8} md={8} style={{ paddingRight: '10px' }}>
+                                        <CustomTextField
+                                            onChange={handleSodioTotal}
+                                            onClick={getPrescriptions}
+                                            onKeyPress={getPrescriptions}
+                                            value={sodioTotal}
+                                            id='Cloruro de Sodio 2MEQ/ML'
+                                            label={'Cloruro de Sodio 2MEQ/ML'}
+                                            endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                                ? 'mEq/kg/día'
+                                                : 'ml'}
+                                            type='text'
+                                        />
                                     </Grid>
-                                </LightTooltip>
+                                    <Grid item xs={4} sm={4} md={4}>
+                                        <CustomTextField
+                                            disabled={true}
+                                            value={getSodioTotal(prescriptionSave!).toFixed(2)}
+                                            id='Sodio-total'
+                                            label={'Sodio-total'}
+                                            endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                                ? 'mEq/kg/día'
+                                                : 'ml'}
+                                            type='text'
+                                        />
+                                    </Grid>
+                                </Stack>
 
-                                <LightTooltip
-                                    title='Requerimiento recomendado de potasio en g/kg/día es:
+                            </Grid>
+                        </LightTooltip>
+
+                        <LightTooltip
+                            title='Requerimiento recomendado de potasio en g/kg/día es:
                                     Neonatos: 2 - 4
                                     Pediátricos: 1 - 2
                                     Adultos: 1 - 2.'
-                                    placement="top"
-                                    arrow
-                                >
-                                    <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                                        <Stack direction={'row'}>
-                                            <Grid item xs={8} sm={8} md={8} style={{ paddingRight: '10px' }}>
-                                                <CustomTextField
-                                                    onChange={handlePotacioTotal}
-                                                    onClick={getPrescriptions}
-                                                    onKeyPress={getPrescriptions}
-                                                    value={potacioTotal}
-                                                    id='Cloruro de Potasio 2MEQ/ML'
-                                                    label={'Cloruro de Potasio 2MEQ/ML'}
-                                                    endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                                        ? 'mEq/kg/día'
-                                                        : 'ml'}
-                                                    type='text'
-                                                />
-                                            </Grid>
-                                            <Grid item xs={4} sm={4} md={4}>
-                                                <CustomTextField
-                                                    disabled={true}
-                                                    value={getPotacioTotal(prescriptionSave!).toFixed(2)}
-                                                    id='potasio-total'
-                                                    label={'Potasio total'}
-                                                    endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                                        ? 'mEq/kg/día'
-                                                        : 'ml'}
-                                                    type='text'
-                                                />
-                                            </Grid>
-                                        </Stack>
-                                        {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
+                            placement="top"
+                            arrow
+                        >
+                            <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                                <Stack direction={'row'}>
+                                    <Grid item xs={8} sm={8} md={8} style={{ paddingRight: '10px' }}>
+                                        <CustomTextField
+                                            onChange={handlePotacioTotal}
+                                            onClick={getPrescriptions}
+                                            onKeyPress={getPrescriptions}
+                                            value={potacioTotal}
+                                            id='Cloruro de Potasio 2MEQ/ML'
+                                            label={'Cloruro de Potasio 2MEQ/ML'}
+                                            endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                                ? 'mEq/kg/día'
+                                                : 'ml'}
+                                            type='text'
+                                        />
                                     </Grid>
-                                </LightTooltip>
+                                    <Grid item xs={4} sm={4} md={4}>
+                                        <CustomTextField
+                                            disabled={true}
+                                            value={getPotacioTotal(prescriptionSave!).toFixed(2)}
+                                            id='potasio-total'
+                                            label={'Potasio total'}
+                                            endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                                ? 'mEq/kg/día'
+                                                : 'ml'}
+                                            type='text'
+                                        />
+                                    </Grid>
+                                </Stack>
+                                {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
                             </Grid>
-                            {/* <TextFieldInput id='Sodio-total' type='text' label='Sodio total' />
+                        </LightTooltip>
+                    </Grid>
+                    {/* <TextFieldInput id='Sodio-total' type='text' label='Sodio total' />
                     <TextFieldInput id='potasio-total' type='text' label='Potasio total' /> */}
-                        </Box>
+                </Box>
 
-                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+                <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
 
-                            <Grid container spacing={2}>
-                                <LightTooltip
-                                    title='Requerimiento recomendado de fósforo en mmol/kg/día en pacientes neonatales o pediátricos es:
+                    <Grid container spacing={2}>
+                        <LightTooltip
+                            title='Requerimiento recomendado de fósforo en mmol/kg/día en pacientes neonatales o pediátricos es:
                                     Neonatos: 1 - 2 
                                     Pediátricos: 0.3 - 0.6 
                                     Requerimiento recomendado de fósforo en mmol/día en pacientes adultos es:
                                     Adultos: 20 - 40'
-                                    placement="top"
-                                    arrow
-                                >
-                                    <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                            placement="top"
+                            arrow
+                        >
+                            <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
-                                        <CustomTextField
-                                            onChange={handleFosfato}
-                                            onClick={getPrescriptions}
-                                            onKeyPress={getPrescriptions}
-                                            value={fosfato}
-                                            defaulValue={fosfato}
-                                            id='fosfato'
-                                            label='Fosfato'
-                                            type='text'
-                                            select
-                                        >
-                                            {tipoFosfato.map((option) => (
+                                <CustomTextField
+                                    onChange={handleFosfato}
+                                    onClick={getPrescriptions}
+                                    onKeyPress={getPrescriptions}
+                                    value={fosfato}
+                                    defaulValue={fosfato}
+                                    id='fosfato'
+                                    label='Fosfato'
+                                    type='text'
+                                    select
+                                >
+                                    {tipoFosfato.map((option) => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </CustomTextField>
+
+                            </Grid>
+                        </LightTooltip>
+
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                            <CustomTextField
+                                onChange={handleRequerimientoFosfato}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={requerimientoFosfato}
+                                id='requerimiento-fosfato'
+                                label={'Requerimiento fosfato'}
+                                endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                    ? 'mmol/kg/día'
+                                    : 'ml'}
+                                type='text'
+                            />
+                            {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
+                        </Grid>
+                    </Grid>
+                    {/* <TextFieldInput id='requerimiento-fosfato' type='text' label='Requerimiento fosfato' /> */}
+                </Box>
+
+                <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+
+                    <Grid container spacing={2}>
+
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                            <CustomTextField
+                                onChange={handleCalcio}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={calcio}
+                                defaulValue={calcio}
+                                id='calcio'
+                                label='Calcio'
+                                type='text'
+                                select
+                            >
+                                {tipoCalcio.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </CustomTextField>
+
+                            {/* <TextFieldInput id='calcio' type='text' label='Calcio' /> */}
+
+                        </Grid>
+
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                            <CustomTextField
+                                onChange={handleReqCalcio}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={reqCalcio}
+                                id='requerimiento_calcio'
+                                label={calcio}
+                                endAdornament={
+                                    (calcio === 'Gluconato de Calcio')
+                                        ? (tipoPrescripcion === 'Por requerimientos')
+                                            ? 'mg/kg/día'
+                                            : 'ml'
+                                        : (tipoPrescripcion === 'Por requerimientos')
+                                            ? 'mEq/kg/día'
+                                            : 'ml'
+
+                                }
+                                type='text'
+                            />
+                            {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
+                        </Grid>
+                    </Grid>
+                </Box>
+
+                <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+                    <Grid container spacing={2}>
+
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                            <CustomTextField
+                                onChange={handleMagnesio}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={magnesio}
+                                defaulValue={magnesio}
+                                id='magnesio'
+                                label='Magnesio'
+                                type='text'
+                                select
+                            >
+                                {tipoMagnesio.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </CustomTextField>
+
+                            {/* <TextFieldInput id='sulfato-de-magnesio' type='text' label='Sulfato de magnesio' /> */}
+                        </Grid>
+
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+                            <CustomTextField
+                                onChange={handleReqMagnesio}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={reqMagnesio}
+                                id='requerimiento-sulfato-de-magnesio'
+                                label={magnesio}
+                                endAdornament={
+                                    (magnesio === 'Sulfato de Magnesio')
+                                        ? (tipoPrescripcion === 'Por requerimientos')
+                                            ? 'mg/kg/día'
+                                            : 'ml'
+                                        : (tipoPrescripcion === 'Por requerimientos')
+                                            ? 'mEq/kg/día'
+                                            : 'ml'
+                                }
+                                type='text'
+                            />
+                            {/* <TextFieldInput id='requerimiento-sulfato-de-magnesio' type='text' label='Requerimiento sulfato de magnesio' /> */}
+                        </Grid>
+
+                    </Grid>
+                </Box>
+
+                <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+
+                    <Grid container spacing={2}>
+
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+                            <CustomTextField
+                                onChange={handleElementosTraza}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={elementosTraza}
+                                defaulValue={elementosTraza}
+                                id='elementos-traza'
+                                label={'Elementos traza'}
+                                type='text'
+                                select
+                            >
+                                {
+                                    (tipoPaciente === 'Adulto')
+                                        ? trazaAdulto.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>))
+
+                                        : trazaPediatrico.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>))
+                                }
+                            </CustomTextField>
+
+                        </Grid>
+
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                            <CustomTextField
+                                onChange={handleReqTraza}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={reqTraza}
+                                id='requerimiento-traza'
+                                label={'Requerimiento traza'}
+                                endAdornament={
+                                    (tipoPrescripcion === 'Por requerimientos')
+                                        ? 'ml/día'
+                                        : 'ml'
+                                }
+                                type='text'
+                            />
+                            {/* <TextFieldInput id='requerimiento-traza' type='text' label='Requerimiento traza' /> */}
+                        </Grid>
+                    </Grid>
+                </Box>
+
+                <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+
+                    <Grid container spacing={2}>
+
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+                            <CustomTextField
+                                onChange={handleVitaminasHidrosolubles}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={vitaminasHidrosolubles}
+                                defaulValue={vitaminasHidrosolubles}
+                                id='vitaminas-hidrosolubes'
+                                label={'Vitaminas hidrosolubes'}
+                                type='text'
+                                select
+                            >
+                                {
+                                    (tipoPaciente === 'Adulto')
+                                        ? hidrosolublesAdulto.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))
+                                        : (tipoPaciente === 'Pediatrico')
+                                            ? hidrosolublesPediatricos.map((option) => (
                                                 <MenuItem key={option.value} value={option.value}>
                                                     {option.label}
                                                 </MenuItem>
-                                            ))}
-                                        </CustomTextField>
+                                            ))
+                                            : hidrosolublesPediatricos.map((option) => (
+                                                <MenuItem key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </MenuItem>
+                                            ))
+                                }
+                            </CustomTextField>
+                        </Grid>
 
-                                    </Grid>
-                                </LightTooltip>
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                            <CustomTextField
+                                onChange={handleReqVitHidrosolubles}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={reqVitHidrosolubles}
+                                id='req-vitaminas-hidrosolubles'
+                                label={'Requerimientos Vitaminas hidrosolubes'}
+                                endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                    ? 'ml/día'
+                                    : 'ml'}
+                                type='text'
+                            />
+                        </Grid>
 
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                                    <CustomTextField
-                                        onChange={handleRequerimientoFosfato}
-                                        onClick={getPrescriptions}
-                                        onKeyPress={getPrescriptions}
-                                        value={requerimientoFosfato}
-                                        id='requerimiento-fosfato'
-                                        label={'Requerimiento fosfato'}
-                                        endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'mmol/kg/día'
-                                            : 'ml'}
-                                        type='text'
-                                    />
-                                    {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
-                                </Grid>
-                            </Grid>
-                            {/* <TextFieldInput id='requerimiento-fosfato' type='text' label='Requerimiento fosfato' /> */}
-                        </Box>
-
-                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
-
-                            <Grid container spacing={2}>
-
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                                    <CustomTextField
-                                        onChange={handleCalcio}
-                                        onClick={getPrescriptions}
-                                        onKeyPress={getPrescriptions}
-                                        value={calcio}
-                                        defaulValue={calcio}
-                                        id='calcio'
-                                        label='Calcio'
-                                        type='text'
-                                        select
-                                    >
-                                        {tipoCalcio.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </CustomTextField>
-
-                                    {/* <TextFieldInput id='calcio' type='text' label='Calcio' /> */}
-
-                                </Grid>
-
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                                    <CustomTextField
-                                        onChange={handleReqCalcio}
-                                        onClick={getPrescriptions}
-                                        onKeyPress={getPrescriptions}
-                                        value={reqCalcio}
-                                        id='requerimiento_calcio'
-                                        label={calcio}
-                                        endAdornament={
-                                            (calcio === 'Gluconato de Calcio')
-                                                ? (tipoPrescripcion === 'Por requerimientos')
-                                                    ? 'mg/kg/día'
-                                                    : 'ml'
-                                                : (tipoPrescripcion === 'Por requerimientos')
-                                                    ? 'mEq/kg/día'
-                                                    : 'ml'
-
-                                        }
-                                        type='text'
-                                    />
-                                    {/* <TextFieldInput id='flujo-metabolico' type='text' label='Flujo metabólico' /> */}
-                                </Grid>
-                            </Grid>
-                        </Box>
-
-                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
-                            <Grid container spacing={2}>
-
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                                    <CustomTextField
-                                        onChange={handleMagnesio}
-                                        onClick={getPrescriptions}
-                                        onKeyPress={getPrescriptions}
-                                        value={magnesio}
-                                        defaulValue={magnesio}
-                                        id='magnesio'
-                                        label='Magnesio'
-                                        type='text'
-                                        select
-                                    >
-                                        {tipoMagnesio.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </CustomTextField>
-
-                                    {/* <TextFieldInput id='sulfato-de-magnesio' type='text' label='Sulfato de magnesio' /> */}
-                                </Grid>
-
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-
-                                    <CustomTextField
-                                        onChange={handleReqMagnesio}
-                                        onClick={getPrescriptions}
-                                        onKeyPress={getPrescriptions}
-                                        value={reqMagnesio}
-                                        id='requerimiento-sulfato-de-magnesio'
-                                        label={magnesio}
-                                        endAdornament={
-                                            (magnesio === 'Sulfato de Magnesio')
-                                                ? (tipoPrescripcion === 'Por requerimientos')
-                                                    ? 'mg/kg/día'
-                                                    : 'ml'
-                                                : (tipoPrescripcion === 'Por requerimientos')
-                                                    ? 'mEq/kg/día'
-                                                    : 'ml'
-                                        }
-                                        type='text'
-                                    />
-                                    {/* <TextFieldInput id='requerimiento-sulfato-de-magnesio' type='text' label='Requerimiento sulfato de magnesio' /> */}
-                                </Grid>
-
-                            </Grid>
-                        </Box>
-
-                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
-
-                            <Grid container spacing={2}>
-
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-
-                                    <CustomTextField
-                                        onChange={handleElementosTraza}
-                                        onClick={getPrescriptions}
-                                        onKeyPress={getPrescriptions}
-                                        value={elementosTraza}
-                                        defaulValue={elementosTraza}
-                                        id='elementos-traza'
-                                        label={'Elementos traza'}
-                                        type='text'
-                                        select
-                                    >
-                                        {
-                                            (tipoPaciente === 'Adulto')
-                                                ? trazaAdulto.map((option) => (
-                                                    <MenuItem key={option.value} value={option.value}>
-                                                        {option.label}
-                                                    </MenuItem>))
-
-                                                : trazaPediatrico.map((option) => (
-                                                    <MenuItem key={option.value} value={option.value}>
-                                                        {option.label}
-                                                    </MenuItem>))
-                                        }
-                                    </CustomTextField>
-
-                                </Grid>
-
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                                    <CustomTextField
-                                        onChange={handleReqTraza}
-                                        onClick={getPrescriptions}
-                                        onKeyPress={getPrescriptions}
-                                        value={reqTraza}
-                                        id='requerimiento-traza'
-                                        label={'Requerimiento traza'}
-                                        endAdornament={
-                                            (tipoPrescripcion === 'Por requerimientos')
-                                                ? 'ml/día'
-                                                : 'ml'
-                                        }
-                                        type='text'
-                                    />
-                                    {/* <TextFieldInput id='requerimiento-traza' type='text' label='Requerimiento traza' /> */}
-                                </Grid>
-                            </Grid>
-                        </Box>
-
-                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
-
-                            <Grid container spacing={2}>
-
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-
-                                    <CustomTextField
-                                        onChange={handleVitaminasHidrosolubles}
-                                        onClick={getPrescriptions}
-                                        onKeyPress={getPrescriptions}
-                                        value={vitaminasHidrosolubles}
-                                        defaulValue={vitaminasHidrosolubles}
-                                        id='vitaminas-hidrosolubes'
-                                        label={'Vitaminas hidrosolubes'}
-                                        type='text'
-                                        select
-                                    >
-                                        {
-                                            (tipoPaciente === 'Adulto')
-                                                ? hidrosolublesAdulto.map((option) => (
-                                                    <MenuItem key={option.value} value={option.value}>
-                                                        {option.label}
-                                                    </MenuItem>
-                                                ))
-                                                : (tipoPaciente === 'Pediatrico')
-                                                    ? hidrosolublesPediatricos.map((option) => (
-                                                        <MenuItem key={option.value} value={option.value}>
-                                                            {option.label}
-                                                        </MenuItem>
-                                                    ))
-                                                    : hidrosolublesPediatricos.map((option) => (
-                                                        <MenuItem key={option.value} value={option.value}>
-                                                            {option.label}
-                                                        </MenuItem>
-                                                    ))
-                                        }
-                                    </CustomTextField>
-                                </Grid>
-
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                                    <CustomTextField
-                                        onChange={handleReqVitHidrosolubles}
-                                        onClick={getPrescriptions}
-                                        onKeyPress={getPrescriptions}
-                                        value={reqVitHidrosolubles}
-                                        id='req-vitaminas-hidrosolubles'
-                                        label={'Requerimientos Vitaminas hidrosolubes'}
-                                        endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'ml/día'
-                                            : 'ml'}
-                                        type='text'
-                                    />
-                                </Grid>
-
-                            </Grid>
-
-                        </Box>
-
-                        <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
-
-                            <Grid container spacing={2}>
-
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-
-
-                                </Grid>
-
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                                    <CustomTextField
-                                        onChange={handleVitaminasLiposolubles}
-                                        onClick={getPrescriptions}
-                                        onKeyPress={getPrescriptions}
-                                        value={vitaminasLiposolubles}
-                                        id='vitaminas-liposolubles'
-                                        label={
-                                            (tipoPaciente === 'Adulto')
-                                                ? 'Vitalipid adult (ml/día)'
-                                                : 'Vitalipid infant (ml/día)'
-                                        }
-                                        endAdornament={
-                                            (tipoPaciente === 'Adulto')
-                                                ? 'ml/día'
-                                                : 'ml'
-                                        }
-                                        type='text'
-                                    />
-                                </Grid>
-
-                            </Grid>
-
-                        </Box>
-
-                        <Box display='flex' sx={{ width: '100%', marginTop: '20px', marginBottom: { xs: '50px', sm: '0px' } }}>
-                            <Grid container spacing={2}>
-
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-
-                                    <CustomTextField
-                                        onChange={handleVitaminasC}
-                                        onClick={getPrescriptions}
-                                        onKeyPress={getPrescriptions}
-                                        value={vitaminasC}
-                                        id='vitamina-c'
-                                        label={'Vitamina C'}
-                                        endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'mg/día'
-                                            : 'ml'
-                                        }
-                                    />
-                                    {/* <TextFieldInput id='vitamina-c' type='text' label='Vitamina C' /> */}
-                                </Grid>
-
-                                <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                                    <CustomTextField
-                                        onChange={handleAcidoFolico}
-                                        onClick={getPrescriptions}
-                                        onKeyPress={getPrescriptions}
-                                        value={acidoFolico}
-                                        id='acido-folico'
-                                        label={'Acido folico (mg/día)'}
-                                        endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'mg/día'
-                                            : 'ml'
-                                        }
-                                        type='text'
-                                    />
-                                    {/* <TextFieldInput id='acido-folico' type='text' label='Acido folico' /> */}
-                                </Grid>
-
-                            </Grid>
-
-                        </Box>
                     </Grid>
-                </AccordionDetails>
-            </Accordion>
+
+                </Box>
+
+                <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+
+                    <Grid container spacing={2}>
+
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+
+                        </Grid>
+
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                            <CustomTextField
+                                onChange={handleVitaminasLiposolubles}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={vitaminasLiposolubles}
+                                id='vitaminas-liposolubles'
+                                label={
+                                    (tipoPaciente === 'Adulto')
+                                        ? 'Vitalipid adult (ml/día)'
+                                        : 'Vitalipid infant (ml/día)'
+                                }
+                                endAdornament={
+                                    (tipoPaciente === 'Adulto')
+                                        ? 'ml/día'
+                                        : 'ml'
+                                }
+                                type='text'
+                            />
+                        </Grid>
+
+                    </Grid>
+
+                </Box>
+
+                <Box display='flex' sx={{ width: '100%', marginTop: '20px', marginBottom: { xs: '50px', sm: '0px' } }}>
+                    <Grid container spacing={2}>
+
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+                            <CustomTextField
+                                onChange={handleVitaminasC}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={vitaminasC}
+                                id='vitamina-c'
+                                label={'Vitamina C'}
+                                endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                    ? 'mg/día'
+                                    : 'ml'
+                                }
+                            />
+                            {/* <TextFieldInput id='vitamina-c' type='text' label='Vitamina C' /> */}
+                        </Grid>
+
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+                            <CustomTextField
+                                onChange={handleAcidoFolico}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={acidoFolico}
+                                id='acido-folico'
+                                label={'Acido folico (mg/día)'}
+                                endAdornament={(tipoPrescripcion === 'Por requerimientos')
+                                    ? 'mg/día'
+                                    : 'ml'
+                                }
+                                type='text'
+                            />
+                            {/* <TextFieldInput id='acido-folico' type='text' label='Acido folico' /> */}
+                        </Grid>
+
+                    </Grid>
+
+                </Box>
+            </Grid>
+            {/* </AccordionDetails> */}
+            {/* </Accordion> */}
         </Stack>
     )
 }

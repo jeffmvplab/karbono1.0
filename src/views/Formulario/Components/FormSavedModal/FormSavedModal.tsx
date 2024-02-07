@@ -18,7 +18,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 	const {
 		saveOK, loadingSave, messageAPI,
 		openModalFormSaved,
-		handleCloseModalFormSaved, valOKAlert,savePrescription
+		handleCloseModalFormSaved, valOKAlert, savePrescription
 	} = useContext(FormulariosContext)
 
 	const router = useRouter();
@@ -28,9 +28,9 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 
 	const [saveStatus, setSaveStatus] = useState<boolean>(false)
 
-	const saveAndNav=()=>{
+	const saveAndNav = () => {
 		savePrescription(),
-		router.push(mainRoutes.reportePrescripcion)								
+			router.push(mainRoutes.reportePrescripcion)
 	}
 
 	return (
@@ -46,7 +46,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 				top: '20%', left: { xs: '20%', sm: '40%' },
 			}}>
 			<>
-				<Avatar
+				{/* <Avatar
 					sx={{
 						top: '15px',
 						right: { xs: '-250px', sm: validacionOK ? '-400px' : '-400px' },
@@ -57,7 +57,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 					<Button onClick={handleCloseModalFormSaved}>
 						<CloseIcon sx={{ color: 'white' }} />
 					</Button>
-				</Avatar>
+				</Avatar> */}
 
 				<Stack
 					direction='row'
@@ -111,7 +111,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 											: (messageAPI)
 												? 'El número de orden que esta tratando de guardar ya existe. Por favor escriba otro número de orden'
 												: messageAPI
-										: 'Error en la prescripción'}
+										: (saveStatus)?'Advertencia de envío.':'Error en la prescripción'}
 									</Typography >
 
 									{
@@ -131,9 +131,36 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 										</Typography >
 									}
 
-									<Stack direction={'row'} spacing={3}>
+									<Stack direction={(saveStatus) ? 'row-reverse' : 'row'} spacing={3}>
+										<CustomButton
+											onClick={
+
+
+												() => {
+													// router.push(mainRoutes.reportePrescripcion)
+													(valOKAlert)
+														? (saveOK)
+															? router.push(mainRoutes.reportePrescripcion)
+															: handleCloseModalFormSaved()
+														: (saveStatus) ? saveAndNav() : handleCloseModalFormSaved()
+
+													handleCloseModalFormSaved()
+												}
+
+											}
+											startIcon={(saveStatus) && <Image width={25} height={25} src={'/assets/alerta2.png'} alt={''} ></Image>}
+											height={50}
+											width={(saveStatus) ? 220 : 137}
+											text={validacionOK ? (saveOK) ? 'Ver reporte' : 'Corregir' : (saveStatus) ? 'Confirmar Envío' : 'Corregir'}
+											sx={{ borderRadius: '10px' }}
+											color={(!saveStatus) ? colorsKarbono.secundary : ' #FFA800'}
+											textColor='white'
+										/>
+
 										{
-											(!validacionOK) && <CustomButton
+
+											(!validacionOK)
+											&& <CustomButton
 												onClick={
 
 													() => {
@@ -142,7 +169,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 															? (saveOK)
 																? router.push(mainRoutes.reportePrescripcion)
 																: handleCloseModalFormSaved()
-															:(saveStatus)?setSaveStatus(false) :setSaveStatus(true);
+															: (saveStatus) ? setSaveStatus(false) : setSaveStatus(true);
 													}
 
 												}
@@ -151,34 +178,12 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 												width={137}
 												text={(saveStatus) ? 'Regresar' : 'Guardar'}
 												sx={{ borderRadius: '10px' }}
-												color={'#BE3636'}
+												color={(!saveStatus) ? ' #FFA800' : colorsKarbono.secundary}
 												textColor='white'
 											/>}
 
-										<CustomButton
-											onClick={
 
-												
-												() => {
-													// router.push(mainRoutes.reportePrescripcion)
-													(valOKAlert)
-														? (saveOK)
-															? router.push(mainRoutes.reportePrescripcion)
-															: handleCloseModalFormSaved()
-														:(saveStatus)?saveAndNav() :handleCloseModalFormSaved()
-														
-														handleCloseModalFormSaved()
-												}
 
-											}
-											height={50}
-											width={(saveStatus) ? 170 : 137}
-											text={validacionOK ? (saveOK) ? 'Ver reporte' : 'Corregir' : (saveStatus) ? 'Confirmar Envío' : 'Corregir'}
-											sx={{ borderRadius: '10px' }}
-											color={colorsKarbono.secundary}
-											textColor='white'
-										/>
-									
 									</Stack>
 								</Stack>
 								: <Stack padding={6}>

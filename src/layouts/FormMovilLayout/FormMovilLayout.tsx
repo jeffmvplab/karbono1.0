@@ -25,14 +25,14 @@ const FormMovilLayout: React.FC<FormMovilLayoutInterface> = ({ children }) => {
 
       <ConexionStatusModal />
       
-      <Grid item xs={2} sx={{ display: { sm: 'none' } }} >
+      <Grid item xs={1} sx={{ display: { sm: 'none' } }} >
         <SidebarMovil />
       </Grid>
 
       <Grid
         onClick={toggleDrawer(false)}
         onKeyDown={toggleDrawer(false)}
-        item xs={10} sm={12} >
+        item xs={11} sm={12} >
         {children}
       </Grid>
     </Grid>

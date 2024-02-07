@@ -11,6 +11,7 @@ export interface IUserEquipo {
     primer_apellido?: string,
     entidad_de_salud?: [string],
     he_leido?: boolean,
+    central_mezcla?:string,
     rol?: string
 
     // phoneNumber: string,
