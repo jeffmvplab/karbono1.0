@@ -20,6 +20,7 @@ export const NavBar = () => {
 
   const router = useRouter();
   // console.log('Router', router.asPath)
+  const route = useRouter();
 
   useEffect(() => {
     authStatus();
@@ -29,33 +30,41 @@ export const NavBar = () => {
     <AppBar color='inherit' position='sticky' elevation={0}>
       <Toolbar>
         {/* <Stack direction={'row'} alignContent={'space-between'} > */}
+        {/* <Hidden mdUp> */}
         <Hidden mdUp>
-          <Button
-            onClick={() => { router.push(mainRoutes.home); }}
-          >
-            {(router.asPath !== mainRoutes.form)
-              && <Image
-                src={(router.asPath === mainRoutes.login || router.asPath === mainRoutes.register)
-                  ? '/assets/1.png'
-                  : '/assets/iconMenu.png'
-                }
-                width={
-                  (router.asPath === mainRoutes.login || router.asPath === mainRoutes.register)
-                    ? 80 : 20}
-                height={
-                  (router.asPath === mainRoutes.login || router.asPath === mainRoutes.register)
-                    ? 20 : 25
-                }
-                alt=''
-                style={{ marginTop: '5px', alignItems: 'center' }}
-              />}
-
+          <Button onClick={() => { route.push(mainRoutes.home) }} variant='text'>
+            <Stack direction={'row'} alignItems={'center'}>
+              <Box sx={{ paddingTop: '10px' }}>
+                <Link href='/prescripcion'>
+                  <Image
+                    src='/assets/Group.png'
+                    width={20}
+                    height={20}
+                    alt=''
+                    style={{ justifyContent: 'center', marginLeft: '10px' }}
+                  />
+                </Link>
+              </Box>
+              <Box sx={{ paddingTop: '10px' }}>
+                <Link href='/prescripcion'>
+                  <Image
+                    src='/assets/logo-mobile.png'
+                    width={20}
+                    height={30}
+                    alt=''
+                    style={{ justifyContent: 'center', marginLeft: '10px' }}
+                  />
+                </Link>
+              </Box>
+            </Stack>
           </Button>
+
         </Hidden>
 
-        <Grid container maxWidth={'80vw'}  display='flex' flexDirection='row' justifyContent={'end'}>
+
+        <Grid container maxWidth={'80vw'} display='flex' flexDirection='row' justifyContent={'end'}>
           <Hidden mdDown>
-            <Grid item xs={12} sm={12} md={1} >
+            <Grid item xs={12} sm={12} md={3} >
               <Button
                 onClick={() => { router.push(mainRoutes.home); console.log('Click') }}
               >
@@ -69,70 +78,14 @@ export const NavBar = () => {
               </Button>
             </Grid>
 
-            <Grid item xs={12} sm={12} md={7} display='flex' alignItems='center' justifyContent='space-evenly'>
-              {
-                (isAuth)
-                  ? <>
-                    <Link href='' style={{ textDecoration: 'none' }}>
-                      <Typography
-                        fontFamily={typographyKarbono.outfit}
-                        marginLeft='30px'
-                        marginRight='15px'
-                        color='#000'
-                        alignItems='center'
-                      >
-                        Produción
-                      </Typography></Link>
-
-                    <Link href='' style={{ textDecoration: 'none' }}>
-                      <Typography
-                        fontFamily={typographyKarbono.outfit}
-                        margin='0 15px'
-                        color='#000'
-                      >
-                        Configuración
-                      </Typography></Link>
-
-                    <Link href='' style={{ textDecoration: 'none' }}>
-                      <Typography
-                        fontFamily={typographyKarbono.outfit}
-                        margin='0 15px'
-                        color='#000'
-                      >
-                        Parámetros
-                      </Typography></Link>
-
-                    <Link href='' style={{ textDecoration: 'none' }}>
-                      <Typography
-                        fontFamily={typographyKarbono.outfit}
-                        margin='0 15px'
-                        color='#000'
-                      >
-                        Informes
-                      </Typography></Link>
-
-                    <Link href='' style={{ textDecoration: 'none' }}>
-                      <Typography
-                        fontFamily={typographyKarbono.outfit}
-                        margin='0 15px'
-                        color='#000'
-                      >
-                        Ayudas
-                      </Typography>
-                    </Link>
-                  </>
-                  : null
-              }
-
-            </Grid>
-
+         
           </Hidden>
           {/* <Grid item xs={12} sm={12} md={4} display='flex' alignItems='center' justifyContent='space-between' paddingRight='2' paddingLeft='80px' > */}
           <Stack direction={'row'} spacing={2} justifyItems={'center'} >
 
-            <Box minWidth={{ xs: '60%', sm: '100%', md: '10%', xl: '60%' }} />
+            <Box minWidth={{ xs: '0%', sm: '0%', md: '10%', xl: '60%' }} />
 
-            <Box display='flex' alignItems='center'>
+             <Box display='flex' alignItems='center'>
               {(isAuth)
                 ? <span style={{ fontSize: '30px', paddingTop: '5px' }}>
                   <CallOutlinedIcon />
@@ -167,19 +120,22 @@ export const NavBar = () => {
               }
 
             </Box>
-            {
-              (isAuth)
-                ? <FadeMenu />
-                : <Link href={mainRoutes.register} style={{ textDecoration: 'none' }} >
-                  <Button
-                    style={{ color: '#fff', backgroundColor: '#2fc5c6', padding: '0.20em 2.70em', borderRadius: '10px',fontFamily: typographyKarbono.outfit  }}
-                    id="fade-button"
-                    onClick={() => { router.push(mainRoutes.register) }}
-                  >
-                    Registrarse
-                  </Button>
-                </Link>
-            }
+            <Box paddingX={'10px'}>
+              {
+
+                (isAuth)
+                  ? <FadeMenu />
+                  : <Link href={mainRoutes.register} style={{ textDecoration: 'none' }} >
+                    <Button
+                      style={{ color: '#fff', backgroundColor: '#2fc5c6', padding: '0.20em 2.70em', borderRadius: '10px', fontFamily: typographyKarbono.outfit }}
+                      id="fade-button"
+                      onClick={() => { router.push(mainRoutes.register) }}
+                    >
+                      Registrarse
+                    </Button>
+                  </Link>
+              }
+            </Box>
           </Stack>
           {/* </Grid> */}
 

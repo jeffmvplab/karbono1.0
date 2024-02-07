@@ -1,5 +1,6 @@
 
 import { UserRepository, IUserRepository } from '../../data/repositories/user.repository';
+import { IUserEquipo } from '../models/equipo_user.model';
 
 export interface IUserUseCase {
     login(email: string, password: string, entidad_de_salud: string[], central_de_mezclas: string): Promise<any>;
@@ -17,9 +18,10 @@ export interface IUserUseCase {
         he_leido: boolean): Promise<any>;
 
     invitarUsuarios(
-        roles: string[],
+        roles: string,
         central_de_mezclas: string,
         email: string,
+        nombre_apellidos:string
     ): Promise<any>;
 
     aceptarInvitacion(token: string): Promise<any>;
@@ -40,6 +42,12 @@ export interface IUserUseCase {
     recuperarPassword(email: string): Promise<any>;
     verificarCodigoRecuperacion(email: string, verificationCode: string, password: string): Promise<any>;
     getUserByRol(rol: string): Promise<any>;
+
+    getMe(): Promise<any>;
+    upadateMe(user: IUserEquipo): Promise<any>;
+    getMeGrup(): Promise<any>;
+    upadateMeGrup(email: string, roles: string, group_admin: string): Promise<any>;
+
 }
 
 
@@ -84,14 +92,16 @@ export class UserUseCases implements IUserUseCase {
     }
 
     invitarUsuarios(
-        roles: string[],
+        roles: string,
         central_de_mezclas: string,
         email: string,
+        nombre_apellidos:string,
     ): Promise<any> {
         return this.userRepository.invitarUsuarios(
             roles,
             central_de_mezclas,
             email,
+            nombre_apellidos
         );
     };
 
@@ -135,6 +145,20 @@ export class UserUseCases implements IUserUseCase {
     getUserByRol(rol: string): Promise<any> {
         return this.userRepository.getUserByRol(rol);
     };
+
+    getMe(): Promise<any>{
+        return this.userRepository.getMe();
+    };
+    upadateMe(user: any): Promise<any>{
+        return this.userRepository.upadateMe(user);
+    };
+    getMeGrup(): Promise<any>{
+        return this.userRepository.getMeGrup();
+    };
+    upadateMeGrup(email: string, roles: string, group_admin: string): Promise<any>{
+        return this.userRepository. upadateMeGrup(email, roles, group_admin);
+    };
+
 
 }
 

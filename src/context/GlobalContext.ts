@@ -1,4 +1,6 @@
-import { createContext } from "react";
+import { IUser } from "@/domain/models";
+import { IUserEquipo } from "@/domain/models/equipo_user.model";
+import { Dispatch, SetStateAction, createContext } from "react";
 
 
 interface ContextProps {
@@ -10,7 +12,7 @@ interface ContextProps {
     handleOffline: () => void,
 
     login: () => void;
-    register: (recaptchaValue?: any) => void;
+    register: (rol: string) => void;
     errorAuth: string,
 
     logout: () => void;
@@ -32,7 +34,7 @@ interface ContextProps {
     messageErrorApellido: string,
     handleApellido: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
-    nameYApellidos: string,
+    nameYApellidos: string, setNameYApellidos: React.Dispatch<React.SetStateAction<string>>,
     errorNameYApellidos: boolean,
     messageErrorNameYApellidos: string,
     handleNameYApellidos: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -54,12 +56,17 @@ interface ContextProps {
     messageErrorCentralDeMezclas: string,
     handleCentralDeMezclas: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
+    rol: string, setRol: React.Dispatch<React.SetStateAction<string>>
+    errorRol: boolean,
+    messageErrorRol: string,
+    handleRol: (event: React.ChangeEvent<HTMLInputElement>) => void,
+
     phone: string,
     errorPhone: boolean,
     messageErrorPhone: string,
     handlePhone: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
-    email: string,
+    email: string, setEmail: React.Dispatch<React.SetStateAction<string>>
     errorEmail: boolean,
     messageErrorEmail: string,
     handleEmail: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -89,8 +96,26 @@ interface ContextProps {
     handleCloseModalRecoveryPass: () => void,
 
     openModalVerifyPass: boolean,
-    handleOpenModalVerifyPass:() => void,
-    handleCloseModalVerifyPass:() => void,
+    handleOpenModalVerifyPass: () => void,
+    handleCloseModalVerifyPass: () => void,
+
+    userInvitado: string, setuserInvitado: React.Dispatch<React.SetStateAction<string>>,
+    erroruserInvitado: boolean, setErroruserInvitado: React.Dispatch<React.SetStateAction<boolean>>,
+    messageErroruserInvitado: string, setMessageErroruserInvitado: React.Dispatch<React.SetStateAction<string>>
+    aceptarInvitacion: (token: string) => Promise<void>;
+
+    loadingApi: boolean, setLoadingApi: Dispatch<SetStateAction<boolean>>,
+    errorApi: string, setErrorApi: Dispatch<SetStateAction<string>>,
+    user: IUserEquipo | undefined, setUser: Dispatch<SetStateAction<IUserEquipo | undefined>>,
+    userEquipo: IUserEquipo[] | undefined, setUserEquipo: Dispatch<SetStateAction<IUserEquipo[] | undefined>>,
+
+    userInv: IUserEquipo | undefined, setUserInv: Dispatch<SetStateAction<IUserEquipo | undefined>>,
+    invitarUsuarios: () => Promise<void>,
+
+    getMeEquipo: () => Promise<void>,
+    getMe: () => Promise<void>,
+    updateMe: () => Promise<void>,
+    getMeRol: () => string[],
 }
 
 export const GlobalContext = createContext({} as ContextProps)

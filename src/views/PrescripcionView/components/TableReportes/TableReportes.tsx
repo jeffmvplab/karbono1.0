@@ -20,7 +20,7 @@ import PDFPrescriptionComponent from '@/views/ReportePrescripcion/components/PDF
 import CloseIcon from '@mui/icons-material/Close';
 import { FormulariosContext } from '@/views/Formulario/context/FormulariosContext';
 import { CustomButton } from '@/components/CustomButton';
-
+import Image from 'next/image'
 
 
 export interface TableReportesProps { }
@@ -147,26 +147,12 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 					aria-labelledby="modal-modal-title"
 					aria-describedby="modal-modal-description"
 				><>
-						<Avatar
-							sx={{
-								position: 'absolute' as 'absolute',
-								zIndex: '999',
-								border: '2px solid black',
-								top: '21%',
-								left: '55%',
-								transform: 'translate(-50%, -50%)',
-								background: 'red',
-								width: '30px',
-								height: '30px'
-							}}>
-							<Button onClick={handleCloseCopy}>
-								<CloseIcon sx={{ color: 'white' }} />
-							</Button>
-						</Avatar>
 
-						<Stack borderRadius={'10px'} sx={style} bgcolor={'white'}>
-							<Typography>
-								Desea hacer una copia de la prescripción numero: {selectReporte?.no_orden}?
+						<Stack direction={'column'} borderRadius={'10px'} sx={style} bgcolor={'white'} alignItems={'center'}>
+							<Image width={30} height={30} src={'/assets/alerta.png'} alt={''} ></Image>
+							<Typography color={colorsKarbono.secundary} fontWeight={700} textAlign={'center'}>
+								¿Deseas crear una copia
+								de esta prescripción?
 							</Typography>
 						</Stack>
 
@@ -181,9 +167,9 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 								onClick={() => { handleCloseCopy() }}
 								height={40}
 								width={100}
-								text={'No'}
+								text={'Descartar'}
 								sx={{ borderRadius: '10px' }}
-								color={'#BE3636'}
+								color={colorsKarbono.secundary}
 								textColor='white'
 							/>
 
@@ -191,10 +177,10 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 								onClick={() => copyPrescriptions(selectReporte)}
 								height={40}
 								sx={{ borderRadius: '10px' }}
-								color={colorsKarbono.secundary}
+								color={'#2B8E12'}
 								textColor='white'
-								text={(loadingSave) ? 'Si' : 'Copiando...'}
-								width={(loadingSave) ? 100 : 130}
+								text={(loadingSave) ? 'Sicrear' : 'Copiando...'}
+								width={(loadingSave) ? 130 : 130}
 								endIcon={
 									(loadingSave)
 										? <></>
@@ -216,7 +202,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			top: '30%',
 			left: '50%',
 			transform: 'translate(-50%, -50%)',
-			width: '300px',
+			width: '340px',
 			bgcolor: 'background.paper',
 			border: '2px solid #000',
 			boxShadow: 24,
@@ -233,26 +219,12 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 					aria-labelledby="modal-modal-title"
 					aria-describedby="modal-modal-description"
 				><>
-						<Avatar
-							sx={{
-								position: 'absolute' as 'absolute',
-								zIndex: '999',
-								border: '2px solid black',
-								top: '21%',
-								left: '55%',
-								transform: 'translate(-50%, -50%)',
-								background: 'red',
-								width: '30px',
-								height: '30px'
-							}}>
-							<Button onClick={handleCloseDelete}>
-								<CloseIcon sx={{ color: 'white' }} />
-							</Button>
-						</Avatar>
 
-						<Stack borderRadius={'10px'} sx={style} bgcolor={'white'}>
-							<Typography>
-								Desea borrar la prescripción numero: {selectReporte?.no_orden}?
+						<Stack direction={'column'} borderRadius={'10px'} sx={style} bgcolor={'white'} alignItems={'center'}>
+							<Image width={30} height={30} src={'/assets/borrador.png'} alt={''} ></Image>
+							<Typography color={colorsKarbono.secundary} fontWeight={700} textAlign={'center'}>
+								¿Estás seguro de eliminar
+								la prescripción?
 							</Typography>
 						</Stack>
 
@@ -263,21 +235,12 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 							transform: 'translate(-50%, -50%)',
 						}}
 							direction={'row'} spacing={3}>
-							<CustomButton
-								onClick={() => { handleCloseDelete() }}
-								height={40}
-								width={100}
-								text={'No'}
-								sx={{ borderRadius: '10px' }}
-								color={'#BE3636'}
-								textColor='white'
-							/>
 
 							<CustomButton
 								onClick={() => { borrarPrescriptions(selectReporte) }}
 								height={40}
 								sx={{ borderRadius: '10px' }}
-								color={colorsKarbono.secundary}
+								color={' #C2C2C2'}
 								textColor='white'
 								text={(loadingSave) ? 'Si' : 'Borrando...'}
 								width={(loadingSave) ? 100 : 130}
@@ -285,6 +248,16 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 									(loadingSave)
 										? <></>
 										: <CircularProgress sx={{ color: 'white' }} variant='indeterminate' size='30px' />} />
+
+							<CustomButton
+								onClick={() => { handleCloseDelete() }}
+								height={40}
+								width={170}
+								text={'Seguir editando'}
+								sx={{ borderRadius: '10px' }}
+								color={'#2B8E12'}
+								textColor='white'
+							/>
 
 						</Stack>
 					</>
@@ -335,7 +308,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Identificación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 40,
+			minWidth: 100,
 			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
 		},
 
@@ -345,7 +318,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Tipo de prescripción",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 40,
+			minWidth:150,
 			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
 		},
 
@@ -355,7 +328,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Fecha de creación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 50,
+			minWidth:150,
 			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}.</>
 		},
 
@@ -364,7 +337,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Fecha de modificación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 50,
+			minWidth: 150,
 			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}.</>
 		},
 
@@ -373,7 +346,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Usuario",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 50,
+			minWidth:120,
 			renderCell: (params: GridRenderCellParams) => <>{
 				<Typography color={getColorForState(params.value)}>
 					{params.value}
@@ -386,7 +359,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Acciones",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 200,
+			minWidth: 150,
 
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>
@@ -394,7 +367,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 				<IoCreateOutline style={{ color: 'black', fontSize: 24 }} onClick={() => { goEdit(params.row.no_orden) }} />
 				< IoPrintOutline style={{ color: 'black', fontSize: 24 }} onClick={() => { setASelectReporte(params.row), handleOpen() }} />
 				< IoCopyOutline style={{ color: 'black', fontSize: 24 }} onClick={() => { setASelectReporte(params.row), handleOpenCopy() }} />
-				<IoTrashOutline style={{ color: 'black', fontSize: 24 }} onClick={() => { setASelectReporte(params.row), handleOpenDelete()}} />
+				<IoTrashOutline style={{ color: 'black', fontSize: 24 }} onClick={() => { setASelectReporte(params.row), handleOpenDelete() }} />
 			</Stack>)
 		},
 	];
@@ -411,9 +384,9 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 				<Box
 					sx={{
 
-						paddingX: '50px',
+						paddingX: {xs:'10px',md:'50px'},
 						height: 700,
-						width: '100%',
+						width: '100vw',
 						'& .table-color--header': {
 							backgroundColor: colorsKarbono.secundary,
 							color: 'white'
@@ -425,7 +398,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 						//   },
 					}}
 				>
-					<Stack direction={'column'}>		
+					<Stack direction={'column'}>
 						{(messageAPI)
 							&& <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)', borderRadius: '10px' }}>
 								{messageAPI}
@@ -433,27 +406,28 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 
 						}
 
+						<div style={{ overflowX: 'auto' }}>
+							<DataGrid
+								style={{ width: "100%" }}
+								sx={{
+									borderRadius: '12px',
+									// '&:hover, &.Mui-hovered': { backgroundColor: 'rgb(0, 0,0,40%)' },
+									// '& .MuiDataGrid-row:hover': { backgroundColor: 'rgb(0,0,0,60%)' },
+									fontFamily: typographyKarbono.outfit
+								}}
+								rows={reportes ? reportes : []}
+								columns={columns}
+								initialState={{ pagination: { paginationModel: { pageSize: 15 } }, }}
+								localeText={localeTextDataGrid}
+								// disableColumnSelector
+								// cledisableRowSelectionOnClick
+								autoHeight
+								//  pageSizeOptions={[10,30,60]}
+								getRowId={(row: IPrescriptions) => row._id!}
+								onPaginationModelChange={(e) => { handlePageChange(e.page) }}
 
-						<DataGrid
-							style={{ width: "100%" }}
-							sx={{
-								borderRadius: '12px',
-								// '&:hover, &.Mui-hovered': { backgroundColor: 'rgb(0, 0,0,40%)' },
-								// '& .MuiDataGrid-row:hover': { backgroundColor: 'rgb(0,0,0,60%)' },
-								fontFamily: typographyKarbono.outfit
-							}}
-							rows={reportes ? reportes : []}
-							columns={columns}
-							initialState={{ pagination: { paginationModel: { pageSize: 15 } }, }}
-							localeText={localeTextDataGrid}
-							// disableColumnSelector
-							// cledisableRowSelectionOnClick
-							autoHeight
-							//  pageSizeOptions={[10,30,60]}
-							getRowId={(row: IPrescriptions) => row._id!}
-							onPaginationModelChange={(e) => { handlePageChange(e.page) }}
-
-						/>
+							/>
+						</div>
 					</Stack>
 
 

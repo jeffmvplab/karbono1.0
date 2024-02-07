@@ -33,7 +33,7 @@ export default function FadeMenu() {
   return (
     <Stack direction={'column'} >
       <Button
-        style={{ color: '#fff', backgroundColor: '#2fc5c6', marginTop: '5px', padding: '5px 2.70em', borderRadius: '10px', fontFamily: typographyKarbono.outfit }}
+        style={{ color: '#fff', backgroundColor: '#2fc5c6', marginTop: '5px', padding: '10px', borderRadius: '10px', fontFamily: typographyKarbono.outfit }}
         id="fade-button"
         aria-controls={open ? 'fade-menu' : undefined}
         aria-haspopup="true"

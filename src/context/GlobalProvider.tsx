@@ -9,7 +9,8 @@ import { FC } from "react";
 import { GlobalContext } from "./GlobalContext";
 
 import Cookies from "js-cookie";
-import axios from "axios";
+import { IUserEquipo } from "@/domain/models/equipo_user.model";
+import { IUser } from "@/domain/models";
 
 type Props = {
 	children: JSX.Element,
@@ -18,12 +19,32 @@ type Props = {
 
 export const GlobalProvider: FC<Props> = ({ children }) => {
 
+	const userEquEj: IUserEquipo[] = [
+		{
+			nombre_apellidos: 'user 1',
+			email: 'user1@getMaxListeners.com',
+			rol: 'Prescriptor'
+		},
+		{
+			nombre_apellidos: 'user 2',
+			email: 'user2@getMaxListeners.com',
+			rol: 'Prescriptor'
+		},
+		{
+			nombre_apellidos: 'user 3',
+			email: 'user3@getMaxListeners.com',
+			rol: 'Prescriptor'
+		}
+
+
+	]
+
 	const router = useRouter();
 	const localStorageProtocol = new LocalStorageProtocol();
 
 	const [isOnline, setIsOnline] = useState(true); // Estado para la conexión a internet
 	const handleOnline = async () => await setIsOnline(true);
-	const handleOffline = async () => 	await setIsOnline(false);
+	const handleOffline = async () => await setIsOnline(false);
 
 
 	/////////////////////////////////Manejo Email//////////////////////////////////////////
@@ -238,6 +259,17 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		}
 	};
 
+	const [rol, setRol] = React.useState('');
+	const [errorRol, setErrorRol] = React.useState(false);
+	const [messageErrorRol, setMessageErrorRol] = React.useState('');
+
+	const handleRol = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setRol(event.target.value || '');
+
+		const Rol = event.target.value;
+
+		console.log('Rol:', Rol);
+	};
 	//////////////////////////////////MÉTODOS//////////////////////////////////////////////////////////////////
 	/////////////////////////////////AUTH STATUS//////////////////////////////////////////
 
@@ -263,6 +295,20 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		}
 	}
 
+	const getMeRol = () => {
+
+		if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
+			setIsAuth(true)
+			const rol: string[] = localStorageProtocol.get(StorageKeysEnum.user).rol;
+			console.log('ROL:', rol);
+			return rol;
+		} else {
+			setIsAuth(false);
+			console.log('ROL:', []);
+			return [];
+		}
+	}
+
 	/////////////////////////////LOGIN//////////////////////////////////////////////
 	const useruseCase = new UserUseCases();
 	const [loadingAuth, setLoadingAuth] = React.useState(false);
@@ -272,7 +318,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	const login = async () => {
 		setLoadingAuth(true);
 		console.log('Loading...')
-		const resp = await useruseCase.login(email, password,[entidadDeSalud],centralDeMezclas)
+		const resp = await useruseCase.login(email, password, [entidadDeSalud], centralDeMezclas)
 		console.log('RespAuth:', resp)
 
 		if (resp.statusCode === 201) {
@@ -297,16 +343,16 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			console.log('Error Loguin:', resp.body.message)
 			setErrorAuth(resp.body.message);
 			setAuthOk(false)
-		}else if (resp.statusCode === 408) {
-		
+		} else if (resp.statusCode === 408) {
+
 			handleOffline();
 		}
 	}
 
 	/////////////////////////////LOGIN//////////////////////////////////////////////
-	const [captcha,setCaptcha]=useState('');
+	const [captcha, setCaptcha] = useState('');
 
-	const register = async () => {
+	const register = async (rol?:string) => {
 
 		setLoadingAuth(true);
 		console.log('Register...')
@@ -314,13 +360,13 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		// Luego, dentro de tu función de manejo de registro:
 		// const isRecaptchaValid = await verifyRecaptchaV3(captcha);
 		// console.log('CAPTCHA:',isRecaptchaValid);
-		
+
 		let resp;
 
-		if (captcha!=='') {
+		if (captcha !== '') {
 			resp = await useruseCase.register(
 				// [tipoCliente],
-				['Administrador'],
+				[rol!],
 				nameYApellidos,
 				name,
 				apellido,
@@ -332,30 +378,32 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 				password,
 				politica_de_privacidad
 			)
-		  // Procede con el registro
+			// Procede con el registro
 		} else {
-		 console.log('CAPTCHA NO VALIDO')
+			console.log('CAPTCHA NO VALIDO')
 		}
 
 		console.log('RespRegister:', resp)
 
-		if (resp.body === undefined) {
-			localStorageProtocol.set(StorageKeysEnum.user, resp);
-			Cookies.set(CookiesKeysEnum.token, resp.token, { sameSite: 'Strict' })
-		}
-
-		setLoadingAuth(false);
-
+		
+		
 		if (resp.body !== undefined) {
 			setAuthOk(false);
 			console.log('RES_API:', resp)
+			
+			if (resp.body === undefined) {
+				localStorageProtocol.set(StorageKeysEnum.user, resp);
+				Cookies.set(CookiesKeysEnum.token, resp.token, { sameSite: 'Strict' })
+			}
+
+			localStorageProtocol.delete(StorageKeysEnum.userInv);
 
 			if (resp.body.statusCode === 400) {
 				// console.log('Error Register:', resp.body.message[0])
 				setErrorAuth(resp.body.message);
 				setAuthOk(false)
 			}
-		}else if (resp.statusCode === 408) {
+		} else if (resp.statusCode === 408) {
 			handleOffline();
 		}
 		else {
@@ -365,25 +413,94 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			router.push(mainRoutes.home);
 		}
 
+		setLoadingAuth(false);
+	}
+
+	const [loadingApi, setLoadingApi] = useState(false);
+	const [errorApi, setErrorApi] = useState('');
+	const [userInv, setUserInv] = useState<IUserEquipo | undefined>();
+
+	const invitarUsuarios = async () => {
+
+		setLoadingApi(true);
+		console.log('Invitando...')
+
+		const resp = await useruseCase.invitarUsuarios(userInv?.rol!, userInv?.central_mezcla!, userInv?.email!, userInv?.nombre_apellidos!)
+
+		console.log('RespApi:', resp)
+
+		if (resp.statusCode === 201) {
+
+			console.log('RES_API:', resp)
+
+		} else if (resp.statusCode === 400) {
+			console.log('Error :', resp.message)
+			setErrorApi(resp.message);
+		} else if (resp.statusCode === 401) {
+			console.log('Error :', resp.message)
+			setErrorApi(resp.message);
+		} else if (resp.statusCode === 408) {
+
+			handleOffline();
+		}
+
+		setLoadingApi(false);
+	}
+	const registerByInvitation = async () => {
+
+		setLoadingApi(true);
+		console.log('Register by Inv...')
+
+		const resp = await useruseCase.registerByInvitation(
+			userInv?.id!,
+			userInv?.email!,
+			userInv?.nombre_apellidos!,
+			userInv?.telefono!,
+			userInv?.password!,
+			userInv?.registro_medico!,
+			userInv?.primer_nombre!,
+			userInv?.primer_apellido!,
+			userInv?.entidad_de_salud!,
+			userInv?.he_leido!,
+		)
+		console.log('RespApi:', resp)
+
+		if (resp.statusCode === 201) {
+
+			console.log('RES_API:', resp)
+
+		} else if (resp.body.statusCode === 400) {
+			console.log('Error Loguin:', resp.body.message)
+			setErrorApi(resp.body.message);
+		} else if (resp.body.statusCode === 401) {
+			console.log('Error Loguin:', resp.body.message)
+			setErrorApi(resp.body.message);
+		} else if (resp.statusCode === 408) {
+
+			handleOffline();
+		}
+
+		setLoadingApi(false);
 	}
 
 	const [openModalRecoveryPass, setOpenModalRecoveryPass] = useState(false);
 	const handleOpenModalRecoveryPass = () => { setOpenModalRecoveryPass(true) };
 	const handleCloseModalRecoveryPass = () => setOpenModalRecoveryPass(false);
 
+
 	const recuperarPassword = async () => {
 
 		setLoadingAuth(true);
 		console.log('Recovery Pass...')
 		const resp = await useruseCase.recuperarPassword(email);
-		  // Procede con el registro
-		console.log('Recovery Pass:',resp.statusCode)
+		// Procede con el registro
+		console.log('Recovery Pass:', resp.statusCode)
 
-		if (resp.statusCode===undefined) {
+		if (resp.statusCode === undefined) {
 			handleOpenModalRecoveryPass(),
-			console.log('RES_API:', resp)
+				console.log('RES_API:', resp)
 			setErrorAuth('');
-		}else if (resp.statusCode === 408) {
+		} else if (resp.statusCode === 408) {
 			handleOffline();
 		}
 		else {
@@ -402,9 +519,9 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 		setLoadingAuth(true);
 		console.log('Verificar Pass...')
-		const resp = await useruseCase.verificarCodigoRecuperacion(email,codigoVerificacion,password);
-		  // Procede con el registro
-		console.log('Verificar Pass:',resp)
+		const resp = await useruseCase.verificarCodigoRecuperacion(email, codigoVerificacion, password);
+		// Procede con el registro
+		console.log('Verificar Pass:', resp)
 
 		if (resp.statusCode === 201) {
 			Cookies.set(CookiesKeysEnum.token, resp.body.token, { sameSite: 'Strict' })
@@ -412,7 +529,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 		setLoadingAuth(false);
 
-		if (resp.statusCode ===undefined) {
+		if (resp.statusCode === undefined) {
 			setErrorAuth('');
 			setAuthOk(true);
 			handleOpenModalVerifyPass();
@@ -430,14 +547,14 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			console.log('Error Verificacion:', resp.message)
 			setErrorAuth(resp.message);
 			setAuthOk(false)
-		}else if (resp.statusCode === 408) {
-		
+		} else if (resp.statusCode === 408) {
+
 			handleOffline();
 		}
 		setLoadingAuth(false);
 	}
 
-	
+
 	// const verifyRecaptchaV3 = async (recaptchaValue:any) => {
 	// 	const secretKey = '6LeEcFYpAAAAAC99TBteoPgycDo_qXSovKaAKZP6'; // Reemplaza con tu clave secreta
 	// 	// const secretKey = '6LfWYFYpAAAAAIbQqOJyXqq61Diq_AL1jI9xlZq2'; // Reemplaza con tu clave secreta
@@ -452,12 +569,138 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	// 		},
 	// 	  }
 	// 	);
-	  
+
 	// 	return response.data.success;
 	//   };
-	  
-	  
-	  
+
+	const [userInvitado, setuserInvitado] = React.useState('');
+	const [erroruserInvitado, setErroruserInvitado] = React.useState(false);
+	const [messageErroruserInvitado, setMessageErroruserInvitado] = React.useState('');
+
+
+	const aceptarInvitacion = async (token: string) => {
+		setLoadingAuth(true);
+		console.log('Aceptar Invitacion...')
+		const resp = await useruseCase.aceptarInvitacion(token)
+		console.log('RespAuth:', resp)
+
+		if (resp && resp.statusCode === undefined) {
+			setErrorAuth('');
+			setAuthOk(true)
+			
+			await setUserInv({
+				central_mezcla:resp.central_de_mezclas,
+				email:resp.email,
+				nombre_apellidos:resp.nombre_apellidos,
+				rol:resp.roles[0]
+			});
+
+			localStorageProtocol.set(StorageKeysEnum.userInv,userInv!)
+
+			router.push(mainRoutes.register);
+			console.log('RES_API:', resp)
+
+		} else if (resp.statusCode === 400) {
+			console.log('Error Loguin:', resp.message)
+			setErrorAuth(resp.message);
+			setAuthOk(false)
+		} else if (resp.statusCode === 401) {
+			console.log('Error Loguin:', resp.message)
+			setErrorAuth(resp.message);
+			setAuthOk(false)
+		} else if (resp.statusCode === 408) {
+
+			handleOffline();
+		}
+		setLoadingAuth(false);
+	}
+
+	const [userEquipo, setUserEquipo] = useState<IUserEquipo[] | undefined>();
+
+	const getMeEquipo = async () => {
+		setLoadingAuth(true);
+		console.log('Get Grup...')
+		const resp = await useruseCase.getMeGrup()
+		console.log('RespAuth:', resp)
+
+		if (resp) {
+			setErrorAuth('');
+			setAuthOk(true)
+			setUserEquipo(resp.body);
+			console.log('RES_API:', resp)
+
+		} else if (resp.statusCode === 400) {
+			console.log('Error Loguin:', resp.message)
+			setErrorAuth(resp.message);
+			setAuthOk(false)
+		} else if (resp.statusCode === 401) {
+			console.log('Error Loguin:', resp.message)
+			setErrorAuth(resp.message);
+			setAuthOk(false)
+		} else if (resp.statusCode === 408) {
+
+			handleOffline();
+		}
+		setLoadingAuth(false);
+	}
+
+	const [user, setUser] = useState<IUserEquipo>();
+
+	const getMe = async () => {
+		setLoadingAuth(true);
+		console.log('Get Me...')
+		const resp = await useruseCase.getMe()
+		console.log('RespAuth:', resp)
+
+		if (resp) {
+			setErrorAuth('');
+			setAuthOk(true)
+			setUser(resp);
+			console.log('RES_API:', resp)
+
+		} else if (resp.statusCode === 400) {
+			console.log('Error Loguin:', resp.message)
+			setErrorAuth(resp.message);
+			setAuthOk(false)
+		} else if (resp.statusCode === 401) {
+			console.log('Error Loguin:', resp.message)
+			setErrorAuth(resp.message);
+			setAuthOk(false)
+		} else if (resp.statusCode === 408) {
+
+			handleOffline();
+		}
+
+		setLoadingAuth(false);
+	}
+
+	const updateMe = async () => {
+		setLoadingAuth(true);
+		console.log('Upadate Me...', user)
+		const resp = await useruseCase.upadateMe(user!)
+		console.log('RespAuth:', resp)
+
+		if (resp) {
+			setErrorAuth('');
+			setAuthOk(true)
+			setUser(resp);
+			console.log('RES_API:', resp)
+
+		} else if (resp.statusCode === 400) {
+			console.log('Error Loguin:', resp.message)
+			setErrorAuth(resp.message);
+			setAuthOk(false)
+		} else if (resp.statusCode === 401) {
+			console.log('Error Loguin:', resp.message)
+			setErrorAuth(resp.message);
+			setAuthOk(false)
+		} else if (resp.statusCode === 408) {
+
+			handleOffline();
+		}
+		getMe();
+		setLoadingAuth(false);
+	}
 	/////////////////////////////LOGOUT//////////////////////////////////////////////
 	const logout = async () => {
 		localStorageProtocol.delete(StorageKeysEnum.user);
@@ -477,6 +720,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			authOK,
 			isAuth,
 			authStatus,
+			getMeRol,
 
 			login,
 			register,
@@ -485,7 +729,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			logout,
 			loadingAuth,
 
-			captcha,setCaptcha,
+			captcha, setCaptcha,
 
 			tipoCliente, handleTipo,
 
@@ -499,7 +743,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			messageErrorApellido,
 			handleApellido,
 
-			nameYApellidos,
+			nameYApellidos,setNameYApellidos,
 			errorNameYApellidos,
 			messageErrorNameYApellidos,
 			handleNameYApellidos,
@@ -521,12 +765,17 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			messageErrorCentralDeMezclas,
 			handleCentralDeMezclas,
 
+			rol,setRol,
+			errorRol,
+			messageErrorRol,
+			handleRol,
+
 			phone,
 			errorPhone,
 			messageErrorPhone,
 			handlePhone,
 
-			email,
+			email,setEmail,
 			errorEmail,
 			messageErrorEmail,
 			handleEmail,
@@ -540,20 +789,34 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			errorPasswordConfirm,
 			messageErrorPasswordConfirm,
 			handlePasswordConfirm,
-			
+
 			codigoVerificacion,
 			errorCodigoVerificacion,
 			messageErrorCodigoVerificacion,
 			handleCodigoVerificacion,
 
-			recuperarPassword,verificarCodigoRecoveryPassword,
+			recuperarPassword, verificarCodigoRecoveryPassword,
 			openModalRecoveryPass,
 			handleOpenModalRecoveryPass,
 			handleCloseModalRecoveryPass,
+
 			openModalVerifyPass,
 			handleOpenModalVerifyPass,
 			handleCloseModalVerifyPass,
 
+			userInvitado, setuserInvitado,
+			erroruserInvitado, setErroruserInvitado,
+			messageErroruserInvitado, setMessageErroruserInvitado,
+			aceptarInvitacion,
+
+			loadingApi, setLoadingApi,
+			errorApi, setErrorApi,
+			user, setUser,
+			userEquipo, setUserEquipo,
+			userInv, setUserInv,
+			invitarUsuarios,
+
+			getMeEquipo, getMe, updateMe
 		}}>{children}
 		</GlobalContext.Provider>
 	)

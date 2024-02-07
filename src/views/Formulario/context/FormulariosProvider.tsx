@@ -972,6 +972,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 			if (resp.statusCode === 201) {
 				setSaveOk(true);
+				
 			} else if (resp.statusCode === 200) {
 				setMessageAPI(resp.body.message)
 				setSaveOk(true);
@@ -1029,6 +1030,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [openModalFormSaved, setOpenModalFormSaved] = useState(false);
 	const handleOpenModalFormSaved = () => { setOpenModalFormSaved(true) };
 	const handleCloseModalFormSaved = () => setOpenModalFormSaved(false);
+
+	const [openModalFormCancel, setOpenModalFormCancel] = useState(false);
+	const handleOpenModalFormCancel = () => { setOpenModalFormCancel(true) };
+	const handleCloseModalFormCancel = () => setOpenModalFormCancel(false);
 
 	// useEffect(() => {
 	// 		getPrescriptionsByNumber();
@@ -1097,6 +1102,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		reqVitHidrosolubles, vitaminasLiposolubles, vitaminasC, acidoFolico
 	])
 
+	const [selectTab, setSelectTab] = useState<number>(0);
+
+
 	return (
 
 		<FormulariosContext.Provider value={{
@@ -1123,6 +1131,11 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			openModalFormSaved,
 			handleOpenModalFormSaved,
 			handleCloseModalFormSaved,
+
+			openModalFormCancel,
+			handleOpenModalFormCancel,
+			handleCloseModalFormCancel,
+
 			savePrescription,
 			borrarPrescriptions,
 			prescriptionSave,
@@ -1192,7 +1205,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			validateAlert,
 			validateCampos,
 
-
+			selectTab, setSelectTab
 
 		}}>{children}
 		</FormulariosContext.Provider>

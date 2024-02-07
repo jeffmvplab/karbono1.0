@@ -15,6 +15,12 @@ export enum ApiUrlsEnum {
 
     getUserByRol = 'auth/byRol',
 
+    getMe = 'auth/me',
+    updateMe = 'auth/me',
+
+    getMeGroup = 'auth/my-group',
+    updateMeGroup = 'auth/my-group',
+    
     invitarUsuarios = 'auth/inviteUser',
     aceptarInvitacion = 'auth/acceptInvitation',
     registerByInvitation = 'auth/registerByInvitation',

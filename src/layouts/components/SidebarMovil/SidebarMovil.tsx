@@ -1,14 +1,9 @@
-import { AppBar, Box, Button, Fade, Grow, Menu, MenuItem, Stack, Typography, } from '@mui/material';
+import { AppBar, Box, Button, Stack, Typography, } from '@mui/material';
 import React, { useContext } from 'react';
-import Image from 'next/image';
 import { colorsKarbono } from '@/themes/colors';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { ParametrosFarmaceuticos } from '@/views/Formulario/Components/ParametrosFarmaceuticos';
 import { FormulariosContext } from '@/views/Formulario/context/FormulariosContext';
 import { ParametrosNutricionales } from '@/views/Formulario/Components/ParametrosNutricionales';
-import router from 'next/router';
-import { mainRoutes } from '@/routes/routes';
 import { typographyKarbono } from '@/themes/typography';
 
 export interface SidebarMovilProps { }
@@ -23,7 +18,8 @@ const SidebarMovil: React.FC<SidebarMovilProps> = () => {
 		<AppBar
 			color='inherit'
 			position='fixed'
-			sx={{ left: '0px', width: '50px' }}
+			sx={{ left: '0px', width: '30px'}}
+			style={{ backgroundColor: 'transparent', boxShadow: 'none' }}
 			elevation={5}
 		>
 			<Stack
@@ -33,7 +29,7 @@ const SidebarMovil: React.FC<SidebarMovilProps> = () => {
 				height={555}
 				alignItems={'center'}
 			>
-				<Button
+				{/* <Button
 					onClick={() => { router.push(mainRoutes.home); }}
 				>
 					<Image
@@ -43,7 +39,7 @@ const SidebarMovil: React.FC<SidebarMovilProps> = () => {
 						alt=''
 						style={{ marginTop: '5px', alignItems: 'center' }}
 					/>
-				</Button>
+				</Button> */}
 				<Button
 					onClick={() => handleMenu1()}
 					style={{
@@ -51,24 +47,25 @@ const SidebarMovil: React.FC<SidebarMovilProps> = () => {
 						textTransform: 'none',
 						fontSize: 14,
 						color: 'white',
-						borderRadius: 0,
+						borderBottomLeftRadius: 10,
+						borderBottomRightRadius: 10,
 						transform: 'rotate(270deg)',
 						background: colorsKarbono.secundary,
 						marginTop: 150,
-						height: 50,
+						height: 30,
 						width: 240,
 					}}>
 					<Stack direction={'column'} alignItems='center'>
 						<Typography fontFamily={typographyKarbono.outfit}>
 							Parámetros farmacéuticos
 						</Typography>
-						<ArrowForwardIosIcon sx={{ color: 'white', scale: '0.6', transform: 'rotate(90deg)', }} />
+						{/* <ArrowForwardIosIcon sx={{ color: 'white', scale: '0.6', transform: 'rotate(90deg)', }} /> */}
 					</Stack>
 				</Button>
 
 				<Box
 					display={{ xs: (open1) ? 'flex' : 'none' }}
-					style={{ position: 'absolute', top: '93px', left: '50px' }}
+					style={{ position: 'absolute', top: '93px', left: '30px' }}
 				><ParametrosFarmaceuticos isMovil={true} />
 					{/* <ParametrosNutricionales /> */}
 				</Box>
@@ -80,26 +77,28 @@ const SidebarMovil: React.FC<SidebarMovilProps> = () => {
 						textTransform: 'none',
 						fontSize: 14,
 						color: 'white',
-						borderRadius: 0,
+						borderBottomLeftRadius: 10,
+						borderBottomRightRadius: 10,
 						transform: 'rotate(270deg)',
 						background: colorsKarbono.primary,
-						marginTop: 190,
-						height: 50,
+						marginTop: 210,
+						height: 30,
 						width: 240,
 					}}>
 					<Stack direction={'column'} alignItems='center'>
 						<Typography fontFamily={typographyKarbono.outfit}>
 							Parámetros Nutricionales
 						</Typography>
-						<ArrowForwardIosIcon sx={{ color: 'white', scale: '0.6', transform: 'rotate(90deg)', }} />
+						{/* <ArrowForwardIosIcon sx={{ color: 'white', scale: '0.6', transform: 'rotate(90deg)', }} /> */}
 					</Stack>
 
 				</Button>
 
 				<Box
 					display={{ xs: (open2) ? 'flex' : 'none' }}
-					style={{ position: 'fixed', top: '333px', left: '50px' }}
-				><ParametrosNutricionales isMovil={true} />
+					style={{ position: 'fixed', top: '333px', left: '20px' }}
+				>
+				<ParametrosNutricionales isMovil={true} />
 				</Box>
 
 			</Stack>

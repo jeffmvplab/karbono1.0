@@ -19,11 +19,11 @@ export interface PrescripcionViewProps { }
 
 const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 
-	const { goAddNew,getAll, handleSearchName, searchName, handleSearchId, searchId, getPrescriptionsByName, getPrescriptionsById } = useContext(PrescripcionContext)
+	const { goAddNew, getAll, handleSearchName, searchName, handleSearchId, searchId, getPrescriptionsByName, getPrescriptionsById } = useContext(PrescripcionContext)
 
 	return (
 		<>
-			<Grid container sx={{ marginTop: '150px', paddingRight: '50px', paddingLeft: '50px', marginBottom: '30px' }}>
+			<Grid container sx={{ marginTop: '150px', paddingRight: { xs: '10px', md: '50px' }, paddingLeft: { xs: '10px', md: '50px' }, marginBottom: '30px' }}>
 				<Grid item display='flex' xs={12} >
 					{/* <SearchModal /> */}
 					<Stack direction={'column'} spacing={3} width={'100%'}>
@@ -33,7 +33,7 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 							Pacientes prescritos
 						</Typography>
 
-						<Stack direction={'row'} justifyContent={'space-between'} spacing={4}>
+						<Stack direction={{ xs: 'column', md: 'row' }} justifyContent={'space-between'} spacing={4}>
 
 							<Stack margin={'5px'} direction={'column'} >
 								<CustomButton text={'Nueva prescripción'}
@@ -50,13 +50,13 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 								/>
 							</Stack>
 
-							<Stack direction={'row'} spacing={4}>
+							<Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
 
 								<Stack margin={'5px'} direction={'column'} >
 									<CustomTextField
 										onChange={handleSearchName}
 
-										onClickEndAdornament={() => { searchName? getPrescriptionsByName(searchName):getAll() }}
+										onClickEndAdornament={() => { searchName ? getPrescriptionsByName(searchName) : getAll() }}
 										id='Numero-de-orden'
 										label='Buscar por nombre'
 										type='text'
@@ -65,10 +65,10 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 									/>
 								</Stack>
 
-								<Stack margin={'5px'} width={'400px'} direction={'column'} >
+								<Stack margin={'5px'} direction={'column'} >
 									<CustomTextField
 										onChange={handleSearchId}
-										onClickEndAdornament={() => { searchId? getPrescriptionsById(searchId):getAll() }}
+										onClickEndAdornament={() => { searchId ? getPrescriptionsById(searchId) : getAll() }}
 										id='Numero-de-orden'
 										label='Búsqueda por número de identificación'
 										type='text'

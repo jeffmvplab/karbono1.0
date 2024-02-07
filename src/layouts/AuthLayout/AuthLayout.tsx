@@ -32,7 +32,7 @@ const AuthLayout: React.FC<AuthLayoutInterface> = ({ children }) => {
 
         </Head>
 
-        <ConexionStatusModal/>
+        <ConexionStatusModal />
         {/* <Box
           sx={{ paddingTop:{xs:"5",sm:"20px",md:"10px",lg:"10px",xl:"10px",},}}>
         </Box> */}
@@ -41,31 +41,35 @@ const AuthLayout: React.FC<AuthLayoutInterface> = ({ children }) => {
               {/* {'Pure Life'} */}
         {/* </Typography> */}
         <Grid container >
-          <Grid item xs={12} sm={6} md={8} xl={9}>
-            <Button
-              onClick={() => { router.push(mainRoutes.home); console.log('Click') }}
-            >
-              <Image
-                src='/assets/1.png'
-                width={120}
-                height={30}
-                alt=''
-                style={{ marginTop: '5px', alignItems: 'center' }}
-              />
-            </Button>
+          <Grid display={{ xs: 'none', md: 'flex' }} item xs={12} sm={6} md={8} xl={9}>
+            <Stack>
+              <Button
+                onClick={() => { router.push(mainRoutes.home); console.log('Click') }}
+              >
+                <Image
+                  src='/assets/1.png'
+                  width={120}
+                  height={30}
+                  alt=''
+                  style={{ marginTop: '5px', alignItems: 'center' }}
+                />
+              </Button>
 
-            <StyledSectionBg sx={{ width: { xs: '100%', sm: '50%', md: '65%', xl: '75%' } }} />
+              <StyledSectionBg sx={{ width: { xs: '100%', sm: '50%', md: '65%', xl: '75%' } }} />
+            </Stack>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4} xl={3}
-            sx={{ padding: { xs: '50px', sm: '20px', md: '20px', xl: '40px' } }}
+            sx={{ padding: { xs: '20px', sm: '20px', md: '20px', xl: '40px' } }}
           >
             <Card
               elevation={10}
               sx={{
                 display: { xs: 'flex', sm: 'none' },
-                padding: '30px',
-                background: colorsKarbono.gradientCard
+                padding: '10px',
+                overflow: 'scroll', // Agregamos scroll si el contenido excede el tamaño del contenedor
+                maxHeight: '85vh', // Altura máxima del contenedor antes de agregar scroll
+                // background: colorsKarbono.gradientCard
               }}>
               <Stack sx={{ width: 1 }}> {children} </Stack>
             </Card>
@@ -79,7 +83,7 @@ const AuthLayout: React.FC<AuthLayoutInterface> = ({ children }) => {
         <Footer />
       </>
 
-    </GlobalProvider>
+    </GlobalProvider >
   );
 };
 
