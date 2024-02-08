@@ -173,18 +173,16 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 		const resp = await prescriptionsUseCase.getMaxNumberPres();
 
-		const repoPresc: IPrescriptions = resp.body
 
 		console.log('No Max Pres:', resp)
 		if (resp.statusCode === 200) {
-
-			setNumOrder(resp.body + 1)
+			setmaxNumOrder(parseInt(resp.body))
 		} else if (resp.statusCode === 400) {
-			setNumOrder('')
+			setmaxNumOrder(undefined)
 		} else if (resp.statusCode === 404) {
-			setNumOrder('')
+			setmaxNumOrder(undefined)
 		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
-			setNumOrder('')
+			setmaxNumOrder(undefined)
 		} else if (resp.statusCode === 408) {
 			handleOffline();
 		} else {
@@ -202,6 +200,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setUpdatedAt(repor?.updatedAt);
 
 		setNumOrder(repor?.no_orden.toString());
+
 		setPrescripcion(repor?.tipo_prescripcion);
 		setIps(repor?.ips);
 		setNumIden(repor?.no_identificacion);
@@ -262,6 +261,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const handleNumOrder = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setNumOrder(event.target.value);
 	};
+
+	const [maxNumOrder, setmaxNumOrder] = React.useState<number|undefined>();
+
 
 	const [prescripcion, setPrescripcion] = React.useState('');
 	const [errorPrescripcion, setErrorPrescripcion] = React.useState(false);
@@ -920,11 +922,13 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 		setLoadingSave(false);
 		console.log('Loading...')
+		
 		const numPresc = (localStorageProtocol.get(StorageKeysEnum.prescripcionOrden))
 			? localStorageProtocol.get(StorageKeysEnum.prescripcionOrden).number
 			: null
 
 		console.log('NUMBER:', numPresc)
+
 		let resp: any = '';
 		if (numPresc) { resp = await prescriptionsUseCase.updatePrescripcions(prescriptionsData, numPresc); console.log('UPDATE') }
 		else { resp = await prescriptionsUseCase.savePrescripcions(prescriptionsData); }
@@ -972,7 +976,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 			if (resp.statusCode === 201) {
 				setSaveOk(true);
-				
+
 			} else if (resp.statusCode === 200) {
 				setMessageAPI(resp.body.message)
 				setSaveOk(true);
@@ -1142,6 +1146,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			getPrescriptionsByNumber,
 			///////////////////////////ORDEN ///////////////////////////////
 			getMaxNumPresc,
+			maxNumOrder, setmaxNumOrder,
 			numOrder, errorNumOrder, messageErrorNumOrder, handleNumOrder,
 			prescripcion, errorPrescripcion, messageErrorPrescripcion, handlePrescripcion,
 			fechaCreacion, errorFechaCreacion, messageErrorFechaCreacion, handleFechaCreacion, fechaActual,
