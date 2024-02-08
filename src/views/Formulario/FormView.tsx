@@ -53,8 +53,10 @@ const FormView: React.FC<FormViewProps> = () => {
 		getPrescriptions,
 		valOKAlert, validateCampos, validateAlert,
 		handleOpenModalFormSaved, getMaxNumPresc,
-		handleOpenModalFormCancel, setSelectTab, selectTab
+		handleOpenModalFormCancel, setSelectTab, selectTab, maxNumOrder
 	} = useContext(FormulariosContext)
+
+
 
 	useEffect(() => {
 		fechaActual();
@@ -69,7 +71,9 @@ const FormView: React.FC<FormViewProps> = () => {
 
 	return (
 		// <Card >
-		<Stack
+		// <>{(maxNumOrder)
+			//&&
+			<Stack
 			direction={'column'}
 			marginBottom={{ xs: 25, sm: 10 }} >
 
@@ -110,7 +114,7 @@ const FormView: React.FC<FormViewProps> = () => {
 												id='Numero-de-orden'
 												label='Número de Orden'
 												type='text'
-												value={numOrder}
+												value={numOrder === '' ? maxNumOrder : numOrder}
 												variant='outlined'
 												color='secondary'
 												sx={{
@@ -346,6 +350,8 @@ const FormView: React.FC<FormViewProps> = () => {
 				</Stack>
 			</Grid>
 		</Stack >
+		// }
+		// </>
 	)
 
 };

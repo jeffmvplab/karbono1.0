@@ -24,6 +24,7 @@ interface ContextProps {
 
     ///////////////////////////ORDEN ///////////////////////////////
     getMaxNumPresc: () => Promise<void>,
+    maxNumOrder: number|undefined, setmaxNumOrder: React.Dispatch<React.SetStateAction<number|undefined>>,
     numOrder: string, errorNumOrder: boolean, messageErrorNumOrder: string, handleNumOrder: (event: React.ChangeEvent<HTMLInputElement>) => void,
     prescripcion: string, errorPrescripcion: boolean, messageErrorPrescripcion: string, handlePrescripcion: (event: React.ChangeEvent<HTMLInputElement>) => void,
     fechaCreacion: string, errorFechaCreacion: boolean, messageErrorFechaCreacion: string, handleFechaCreacion: (event: React.ChangeEvent<HTMLInputElement>) => void,

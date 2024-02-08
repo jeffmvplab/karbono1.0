@@ -345,7 +345,12 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						<Box width={10}></Box>
 						<CustomButton
 							fontSize={'20px'}
-							onClick={() => { register(rol === '' ? "Administrador" : rol) }}
+							onClick={() => {
+								register((rol === '' || rol === null || rol === undefined)
+									? "Administrador"
+									: rol
+								)
+							}}
 							disabled={(errorEmail || errorPassword || errorPasswordConfirm || captcha === '')}
 							textColorHover={(!errorEmail || !errorPassword || !errorPasswordConfirm) ? 'white' : null}
 							textColor={'white'}
