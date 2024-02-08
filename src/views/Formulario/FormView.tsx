@@ -114,7 +114,7 @@ const FormView: React.FC<FormViewProps> = () => {
 												id='Numero-de-orden'
 												label='Número de Orden'
 												type='text'
-												value={numOrder === '' ? maxNumOrder : numOrder}
+												value={numOrder === '' ? (maxNumOrder! + 1) : numOrder}
 												variant='outlined'
 												color='secondary'
 												sx={{
