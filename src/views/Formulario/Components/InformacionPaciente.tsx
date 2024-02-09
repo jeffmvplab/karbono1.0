@@ -82,7 +82,7 @@ const InformacionPaciente = () => {
         tipoEdad, handleTipoEdad,
         volumen, handleVolumen, errorVolumen, messageErrorVolumen,
         purga, handlePurga, errorPurga, messageErrorPurga,
-        tiempoDeInfucion, handleTiempoDeInfucion,
+        tiempoDeInfucion, handleTiempoDeInfucion, errorTiempoDeInfucion, messageErrorTiempoDeInfucion,
         tipoPaciente, handleTipoPaciente, errorTipoPaciente, messageErrorTipoPaciente,
         viaAdmin, handleViaAdmin, errorViaAdmin, messageErrorViaAdmin,
         diagnostico, handleDiagnostico,
@@ -394,6 +394,10 @@ const InformacionPaciente = () => {
                                     marks={marks1}
 
                                 />
+                                {(errorTiempoDeInfucion)
+                                    && <Typography style={{ marginLeft: '15px', color: 'red', paddingTop: '7px' }}>
+                                        {messageErrorTiempoDeInfucion}
+                                    </Typography>}
                             </Box>
                         </Grid>
                         <LightTooltip
@@ -420,6 +424,8 @@ const InformacionPaciente = () => {
                                         </MenuItem>
                                     ))}
                                 </CustomTextField>
+
+                    
                             </Grid>
                         </LightTooltip>
                     </Grid>

@@ -12,6 +12,7 @@ import { PrescriptionsUseCases } from "@/domain/usecases/prescriptions.usecases"
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
 import { alarmConcCHOS, alarmConcDeLipidos, alarmConcDeProteinas, alarmConcMagnesio, alarmConcPotasio, alarmConcSodio, alarmaAgua, alertFactorDePrecipitacion, alertRelacion_Calcio_Fosfato, alertVelInfucion, alertViaDeAdmin } from "@/views/ReportePrescripcion/data/alertParams";
 import { GlobalContext } from "@/context/GlobalContext";
+import { IErrorsTab } from "@/domain/models/taps_errors";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
@@ -262,7 +263,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setNumOrder(event.target.value);
 	};
 
-	const [maxNumOrder, setmaxNumOrder] = React.useState<number|undefined>();
+	const [maxNumOrder, setmaxNumOrder] = React.useState<number | undefined>();
 
 
 	const [prescripcion, setPrescripcion] = React.useState('');
@@ -548,7 +549,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			setMessageErrorViaAdmin('')
 		} else {
 			setErrorViaAdmin(true);
-			setMessageErrorViaAdmin('Introduzca el tipo de paciente')
+			setMessageErrorViaAdmin('Introduzca la vía de administración')
 		}
 		return errorViaAdmin;
 	}
@@ -658,7 +659,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			setErrorRequerimientoAminoacidos(true);
 			setMessageErrorRequerimientoAminoacidos('Introduzca el valor de aminoacidos')
 		}
-		return errorAminoacidos;
+		return errorRequerimientoAminoacidos;
 	}
 
 	const handleRequerimientoAminoacidos = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -666,6 +667,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		validateAminos(event.target.value);
 		// getPrescriptions();
 	};
+
+
 
 	const [lipidos, setLipidos] = React.useState('');
 	const [errorLipidos, setErrorLipidos] = React.useState(false);
@@ -921,13 +924,13 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const setPrescriptions = async () => {
 
 		setLoadingSave(false);
-		console.log('Loading...')
-		
+		console.log('Loading...:', prescriptionsData)
+
 		const numPresc = (localStorageProtocol.get(StorageKeysEnum.prescripcionOrden))
 			? localStorageProtocol.get(StorageKeysEnum.prescripcionOrden).number
 			: null
 
-			
+
 		console.log('NUMBER:', numPresc)
 
 		let resp: any = '';
@@ -1074,7 +1077,47 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		}
 	}
 
+
+	const [tabsErrors, setTabErrors] = useState<IErrorsTab>({ info: false, macro: false, micro: false, obs: false })
+
+	const valTabsErrors1 = () => {
+
+		if (
+			validateNumIdent(numIden)
+			|| validateNombrePaciente(namePaciente)
+			|| validateTipoPaciente(tipoPaciente)
+			|| validateServicio(servicio)
+			|| validatePeso(pesoKg)
+			|| validateVolumen(volumen)
+			|| validatePurga(purga)
+			|| validateTiempoInfucion(tiempoDeInfucion)
+			|| validateViaAdmin(viaAdmin)
+		) {
+			console.log('VAL:', true)
+			return true
+		} else {
+			console.log('VAL:', false)
+			return false
+		}
+
+	}
+
+	const valTabsErrors2 = () => {
+
+		if (validateTipoPrecripcion(tipoPrescripcion) 
+			||validateFlujoMetabolico(flujoMetabolico) 
+			||validateDextrosa(dextrosa) 
+			||validateAminos(requerimientoAminoacidos)
+		) {
+			return true
+		} else {
+			return false
+		}
+
+	}
+
 	const validateCampos = () => {
+
 		if (
 			validateNumIdent(numIden) ||
 			validateNombrePaciente(namePaciente) ||
@@ -1083,18 +1126,26 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			validatePeso(pesoKg) ||
 			validateVolumen(volumen) ||
 			validatePurga(purga) ||
+			 validateViaAdmin(viaAdmin)||
 			validateTiempoInfucion(tiempoDeInfucion) ||
 			validateTipoPrecripcion(tipoPrescripcion) ||
 			validateFlujoMetabolico(flujoMetabolico) ||
 			validateDextrosa(dextrosa!) ||
 			validateAminos(requerimientoAminoacidos)
-		) { return true }
-		else { return false }
+		) {
+			console.log('Validar Campos:', true)
+			return true
+		}
+		else {
+			console.log('Validar Campos:', false)
+			return false
+		}
 	}
 
 	useEffect(() => {
 		console.log('ACTUALIZAR');
 		validateAlert()
+		validateCampos()
 		getPrescriptions();
 	}, [numOrder, tipoPrescripcion, fechaCreacion, ips, numIden,
 		namePaciente, servicio, ubicacion, cama, pesoKg, tipoEdad,
@@ -1211,8 +1262,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			validateAlert,
 			validateCampos,
 
-			selectTab, setSelectTab
-
+			selectTab, setSelectTab,
+			tabsErrors, setTabErrors,
+			valTabsErrors1, valTabsErrors2
 		}}>{children}
 		</FormulariosContext.Provider>
 	)
