@@ -344,7 +344,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 
 		{
 			field: "estado",
-			headerName: "Usuario",
+			headerName: "Estado",
 			headerClassName: 'table-color--header',
 			flex: 1,
 			minWidth:80,
