@@ -18,7 +18,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 	const {
 		saveOK, loadingSave, messageAPI,
 		openModalFormSaved,
-		handleCloseModalFormSaved, valOKAlert, savePrescription
+		handleCloseModalFormSaved, valOKAlert, savePrescription,validateCampos
 	} = useContext(FormulariosContext)
 
 	const router = useRouter();
@@ -137,12 +137,17 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 
 
 												() => {
+
 													// router.push(mainRoutes.reportePrescripcion)
 													(valOKAlert)
 														? (saveOK)
 															? router.push(mainRoutes.reportePrescripcion)
 															: handleCloseModalFormSaved()
-														: (saveStatus) ? saveAndNav() : handleCloseModalFormSaved()
+														: (saveStatus) 
+														  ?validateCampos()
+														//    ?handleCloseModalFormSaved()
+														//    : saveAndNav() 
+														  : handleCloseModalFormSaved()
 
 													handleCloseModalFormSaved()
 												}

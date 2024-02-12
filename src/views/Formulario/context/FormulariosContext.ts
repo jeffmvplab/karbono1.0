@@ -1,4 +1,5 @@
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
+import { IErrorsTab } from "@/domain/models/taps_errors";
 import { createContext, Dispatch, SetStateAction } from "react";
 
 
@@ -24,7 +25,7 @@ interface ContextProps {
 
     ///////////////////////////ORDEN ///////////////////////////////
     getMaxNumPresc: () => Promise<void>,
-    maxNumOrder: number|undefined, setmaxNumOrder: React.Dispatch<React.SetStateAction<number|undefined>>,
+    maxNumOrder: number | undefined, setmaxNumOrder: React.Dispatch<React.SetStateAction<number | undefined>>,
     numOrder: string, errorNumOrder: boolean, messageErrorNumOrder: string, handleNumOrder: (event: React.ChangeEvent<HTMLInputElement>) => void,
     prescripcion: string, errorPrescripcion: boolean, messageErrorPrescripcion: string, handlePrescripcion: (event: React.ChangeEvent<HTMLInputElement>) => void,
     fechaCreacion: string, errorFechaCreacion: boolean, messageErrorFechaCreacion: string, handleFechaCreacion: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -103,7 +104,10 @@ interface ContextProps {
     copyPrescriptions: (prescription: IPrescriptions | undefined) => Promise<void>
     borrarPrescriptions: (prescription: IPrescriptions | undefined) => Promise<void>
 
-    selectTab:number, setSelectTab: React.Dispatch<React.SetStateAction<number>>
+    selectTab: number, setSelectTab: React.Dispatch<React.SetStateAction<number>>
+
+    tabsErrors: IErrorsTab, setTabErrors: React.Dispatch<React.SetStateAction<IErrorsTab>>
+    valTabsErrors1: () => boolean|undefined, valTabsErrors2: () => boolean|undefined,
 }
 
 export const FormulariosContext = createContext({} as ContextProps)
