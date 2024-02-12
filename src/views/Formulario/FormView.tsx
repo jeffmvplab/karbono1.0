@@ -51,7 +51,7 @@ const FormView: React.FC<FormViewProps> = () => {
 		loadingSave,
 		cancelForm,
 		getPrescriptions,
-		valOKAlert, validateCampos, validateAlert,
+		valTabsErrors1, valTabsErrors2, validateAlert,validateCampos,
 		handleOpenModalFormSaved, getMaxNumPresc,
 		handleOpenModalFormCancel, setSelectTab, selectTab, maxNumOrder
 	} = useContext(FormulariosContext)
@@ -68,12 +68,27 @@ const FormView: React.FC<FormViewProps> = () => {
 		getPrescriptions();
 	}, [loadingSave])
 
+	const validate_and_sig = () => {
+		if (selectTab === 0) {
+			 !valTabsErrors1()&&setSelectTab(selectTab + 1)
+		} else if (selectTab === 1) {
+			!valTabsErrors2() && setSelectTab(selectTab + 1)
+		} else if (selectTab === 3) {
+			setSelectTab(selectTab + 1)
+		} else if (selectTab === 3) {
+			validateAlert()
+				? () => { savePrescription(), console.log('Save') }
+				: () => { console.log('NoSave'), getPrescriptions(), handleOpenModalFormSaved() }
+		}
+
+
+	}
 
 	return (
 		// <Card >
 		// <>{(maxNumOrder)
-			//&&
-			<Stack
+		//&&
+		<Stack
 			direction={'column'}
 			marginBottom={{ xs: 25, sm: 10 }} >
 
@@ -319,14 +334,7 @@ const FormView: React.FC<FormViewProps> = () => {
 
 						<CustomButton
 							// disabled={!valOKAlert}
-							onClick={
-								// ()=>{savePrescription()}
-								(selectTab === 3)
-									? validateAlert()
-										? () => { savePrescription(), console.log('Save') }
-										: () => { console.log('NoSave'), validateCampos(), getPrescriptions(), handleOpenModalFormSaved() }
-									: () => setSelectTab(selectTab + 1)
-							}
+							onClick={() => validate_and_sig()}
 							width={127}
 							text={(selectTab === 3) ? 'Guardar' : 'Siguiente'}
 							sx={{ borderRadius: '10px' }}

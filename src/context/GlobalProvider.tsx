@@ -591,14 +591,16 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			await setUserInv({
 				central_mezcla:resp.central_de_mezclas,
 				email:resp.email,
+				primer_nombre:'',
+				primer_apellido:'',
 				nombre_apellidos:resp.nombre_apellidos,
 				rol:resp.roles[0]
 			});
 
-			localStorageProtocol.set(StorageKeysEnum.userInv,userInv!)
+			localStorageProtocol.set(StorageKeysEnum.userInv,resp)
 
 			router.push(mainRoutes.register);
-			console.log('RES_API:', resp)
+			// console.log('RES_API:', resp)
 
 		} else if (resp.statusCode === 400) {
 			console.log('Error Loguin:', resp.message)
