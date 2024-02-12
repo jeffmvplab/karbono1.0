@@ -271,7 +271,12 @@ const InformacionPaciente = () => {
                                 onKeyPress={getPrescriptions}
                                 id='peso-kg'
                                 label='Peso*'
-                                endAdornament='kg'
+                                endAdornament={
+                                    <Typography
+                                        textTransform={'lowercase'}>
+                                        {'kg'}
+                                    </Typography>
+                                }
                                 type='text'
                                 value={pesoKg}
                                 defaulValue={pesoKg}
@@ -425,7 +430,7 @@ const InformacionPaciente = () => {
                                     ))}
                                 </CustomTextField>
 
-                    
+
                             </Grid>
                         </LightTooltip>
                     </Grid>

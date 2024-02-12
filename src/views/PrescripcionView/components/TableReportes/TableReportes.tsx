@@ -294,10 +294,11 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerClassName: 'table-color--header',
 			// cellClassName:'style-theme--cell',
 			flex: 1,
-			minWidth: 200,
+			minWidth: 250,
 			renderCell: (params: GridRenderCellParams) => (
-				<Button sx={{ fontFamily: typographyKarbono.outfit, fontSize: 16, textTransform: 'none' }} variant='text' onClick={() => { goReporte(params.row.no_orden) }}>
-					{params.value}
+				<Button sx={{ fontFamily: typographyKarbono.outfit, fontSize: 12,textTransform:'none'}} variant='text' 
+				 onClick={() => { goReporte(params.row.no_orden) }}>
+					<Typography textTransform='capitalize' >{params.value}</Typography>
 				</Button>
 			)
 		},
@@ -318,7 +319,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Tipo de prescripción",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth:150,
+			minWidth:80,
 			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
 		},
 
@@ -328,7 +329,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Fecha de creación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth:150,
+			minWidth:100,
 			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}.</>
 		},
 
@@ -337,7 +338,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Fecha de modificación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 150,
+			minWidth: 80,
 			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}.</>
 		},
 
@@ -346,7 +347,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Usuario",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth:120,
+			minWidth:80,
 			renderCell: (params: GridRenderCellParams) => <>{
 				<Typography color={getColorForState(params.value)}>
 					{params.value}
@@ -359,7 +360,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Acciones",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 150,
+			minWidth: 200,
 
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>

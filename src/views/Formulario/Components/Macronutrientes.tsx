@@ -95,7 +95,7 @@ const Macronutrientes = () => {
                         </Typography >
                     </AccordionSummary>
                 </Box> */}
-{/* 
+            {/* 
             <Typography
                 variant='h6'
                 paddingY={2}
@@ -158,9 +158,14 @@ const Macronutrientes = () => {
                                     value={flujoMetabolico}
                                     id='flujo-metabolico'
                                     label={'Flujo metabólico*'}
-                                    endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                        ? 'mg/kg/min'
-                                        : 'ml'}
+                                    endAdornament={
+                                        <Typography
+                                            textTransform={'lowercase'}>
+                                            {(tipoPrescripcion === 'Por requerimientos')
+                                                ? 'mg/kg/min'
+                                                : 'ml'}
+                                        </Typography>
+                                    }
                                     type='text'
                                     helperText={messageErrorFlujoMetabolico}
                                 />
@@ -177,16 +182,19 @@ const Macronutrientes = () => {
                                 value={dextrosa}
                                 id='dextrosa'
                                 label={'Dextrosa*'}
-                                endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                    ? 'g/kg/dia'
-                                    : 'ml'}
+                                endAdornament={
+                                    <Typography
+                                        textTransform={'lowercase'}>
+                                        {(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'g/kg/dia'
+                                            : 'ml'}
+                                    </Typography>
+                                }
                                 type='text'
                                 helperText={messageErrorDextrosa}
                             />
 
                         </Grid>
-
-
                     </Grid>
                 </Box>
 
@@ -234,9 +242,14 @@ const Macronutrientes = () => {
                                 value={requerimientoAminoacidos}
                                 id='requerimiento-aminoacidos'
                                 label={'Requerimiento aminoácidos*'}
-                                endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                    ? 'g/kg/día'
-                                    : 'ml'}
+                                endAdornament={
+                                    <Typography
+                                        textTransform={'lowercase'}>
+                                        {(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'g/kg/día'
+                                            : 'ml'}
+                                    </Typography>
+                                }
                                 type='text'
                                 helperText={messageErrorRequerimientoAminoacidos}
                             />
@@ -283,9 +296,14 @@ const Macronutrientes = () => {
                                     value={requerimientoLipidos}
                                     id='requerimiento-lipidos'
                                     label={'Requerimiento Lípidos'}
-                                    endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                        ? 'g/kg/día'
-                                        : 'ml'}
+                                    endAdornament={
+                                        <Typography
+                                            textTransform={'lowercase'}>
+                                            {(tipoPrescripcion === 'Por requerimientos')
+                                                ? 'g/kg/día'
+                                                : 'ml'}
+                                        </Typography>
+                                    }
                                     type='text'
                                 />
                                 {/* <TextFieldInput id='requerimiento-lipidos' type='text' label='Requerimiento Lípidos' /> */}
@@ -305,9 +323,14 @@ const Macronutrientes = () => {
                                 value={omegaven}
                                 id='omegaven'
                                 label={'Omegaven'}
-                                endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                    ? 'g/kg/día'
-                                    : 'ml'}
+                                endAdornament={
+                                    <Typography
+                                        textTransform={'lowercase'}>
+                                        {(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'g/kg/día'
+                                            : 'ml'}
+                                    </Typography>
+                                }
                                 type='text'
                             />
                             {/* <TextFieldInput id='omegaven' type='text' label='Omegaven' /> */}
@@ -320,9 +343,14 @@ const Macronutrientes = () => {
                                 value={dipeptiven}
                                 id='dipeptiven'
                                 label={'Dipeptiven'}
-                                endAdornament={(tipoPrescripcion === 'Por requerimientos')
-                                    ? 'g/kg/día'
-                                    : 'ml'}
+                                endAdornament={
+                                    <Typography
+                                        textTransform={'lowercase'}>
+                                        {(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'g/kg/día'
+                                            : 'ml'}
+                                    </Typography>
+                                }
                                 type='text'
                             />
                             {/*  <TextFieldInput id='dipeptiven' type='text' label='Dipeptiven' />*/}

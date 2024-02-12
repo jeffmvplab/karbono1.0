@@ -652,7 +652,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorRequerimientoAminoacidos, setMessageErrorRequerimientoAminoacidos] = React.useState('');
 
 	const validateAminos = (aminos: string) => {
-		if (aminos !== '') {
+		if (aminos !== '0') {
 			setErrorRequerimientoAminoacidos(false);
 			setMessageErrorRequerimientoAminoacidos('')
 		} else {
@@ -667,8 +667,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		validateAminos(event.target.value);
 		// getPrescriptions();
 	};
-
-
 
 	const [lipidos, setLipidos] = React.useState('');
 	const [errorLipidos, setErrorLipidos] = React.useState(false);
@@ -1067,16 +1065,15 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			validateCampos()
 
 		) {
+			console.log('ALERT')
 			setValOKAlert(false)
 			return false
-			console.log('ALERT')
 		} else {
+			console.log('NO ALERT')
 			setValOKAlert(true)
 			return true
-			console.log('NO ALERT')
 		}
 	}
-
 
 	const [tabsErrors, setTabErrors] = useState<IErrorsTab>({ info: false, macro: false, micro: false, obs: false })
 
@@ -1099,21 +1096,22 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			console.log('VAL:', false)
 			return false
 		}
-
 	}
 
 	const valTabsErrors2 = () => {
 
-		if (validateTipoPrecripcion(tipoPrescripcion) 
-			||validateFlujoMetabolico(flujoMetabolico) 
-			||validateDextrosa(dextrosa) 
-			||validateAminos(requerimientoAminoacidos)
-		) {
+		if (  
+			   validateTipoPrecripcion(tipoPrescripcion)
+			|| validateFlujoMetabolico(flujoMetabolico)
+			|| validateDextrosa(dextrosa)
+			|| validateAminos(requerimientoAminoacidos)
+			) {
+
+			console.log('YYYYY:',requerimientoAminoacidos)
 			return true
 		} else {
 			return false
 		}
-
 	}
 
 	const validateCampos = () => {
@@ -1126,7 +1124,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			validatePeso(pesoKg) ||
 			validateVolumen(volumen) ||
 			validatePurga(purga) ||
-			 validateViaAdmin(viaAdmin)||
+			validateViaAdmin(viaAdmin) ||
 			validateTiempoInfucion(tiempoDeInfucion) ||
 			validateTipoPrecripcion(tipoPrescripcion) ||
 			validateFlujoMetabolico(flujoMetabolico) ||
@@ -1159,7 +1157,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	])
 
 	const [selectTab, setSelectTab] = useState<number>(0);
-
 
 	return (
 
