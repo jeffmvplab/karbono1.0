@@ -30,7 +30,7 @@ interface EditCampos {
 const MiCuentaComponent: React.FC<MiCuentaComponentProps> = () => {
 
 	const [editarCampos, setEditarCampos] = useState<EditCampos>();
-	const { user, setUser, getMe, loadingAuth, updateMe } = useContext(GlobalContext)
+	const { user, setUser,loadingAuth, updateMe } = useContext(GlobalContext)
 
 
 	return (

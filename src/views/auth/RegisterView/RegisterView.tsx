@@ -5,6 +5,7 @@ import { mainRoutes } from '@/routes/routes';
 import { AuthLoginForm } from '../components/AuthLoginForm';
 import NextLink from 'next/link';
 import { AuthRegisterForm } from '../components/AuthRegisterForm';
+import { useRouter } from 'next/router';
 
 
 export interface RegisterViewProps { }
@@ -16,7 +17,7 @@ const RegisterView: React.FC<RegisterViewProps> = () => {
 		errorPhone, messageErrorPhone,
 		errorPassword, messageErrorPassword,
 		errorPasswordConfirm, messageErrorPasswordConfirm,
-		errorAuth,authOK
+		errorAuth, authOK
 
 	} = React.useContext(GlobalContext);
 
@@ -49,7 +50,7 @@ const RegisterView: React.FC<RegisterViewProps> = () => {
 						{'Sus datos tienen el formato correcto'}
 					</Alert>
 				: <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)', borderRadius: '10px' }}>
-					<Typography sx={{color:'white'}}>{errorAuth}</Typography> 
+					<Typography sx={{ color: 'white' }}>{errorAuth}</Typography>
 				</Alert>
 			}
 

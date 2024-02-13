@@ -53,7 +53,7 @@ const FormView: React.FC<FormViewProps> = () => {
 		getPrescriptions,
 		valTabsErrors1, valTabsErrors2, validateAlert,validateCampos,
 		handleOpenModalFormSaved, getMaxNumPresc,
-		handleOpenModalFormCancel, setSelectTab, selectTab, maxNumOrder
+		handleOpenModalFormCancel, setSelectTab, selectTab, maxNumOrder,saveBorrador
 	} = useContext(FormulariosContext)
 
 
@@ -73,7 +73,7 @@ const FormView: React.FC<FormViewProps> = () => {
 			 !valTabsErrors1()&&setSelectTab(selectTab + 1)
 		} else if (selectTab === 1) {
 			!valTabsErrors2() && setSelectTab(selectTab + 1)
-		} else if (selectTab === 3) {
+		} else if (selectTab === 2) {
 			setSelectTab(selectTab + 1)
 		} else if (selectTab === 3) {
 			validateAlert()
@@ -315,7 +315,7 @@ const FormView: React.FC<FormViewProps> = () => {
 
 						{(selectTab === 3) && <CustomButton
 							// disabled={!valOKAlert}
-							onClick={() => { }}
+							onClick={() =>saveBorrador()}
 							width={210}
 							text={'Guardar borrador'}
 							sx={{ borderRadius: '10px' }}
