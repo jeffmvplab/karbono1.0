@@ -99,6 +99,7 @@ interface ContextProps {
     savePrescription: () => void,
     cancelForm: (route: string) => void,
 
+    saveBorrador: () => Promise<void>,
     getPrescriptions: () => void,
     validateAlert: () => boolean,
     copyPrescriptions: (prescription: IPrescriptions | undefined) => Promise<void>

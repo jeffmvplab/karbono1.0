@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, CircularProgress, Divider, Fade, Grid, IconButton, Menu, MenuItem, Stack, TextField, Typography, styled } from '@mui/material';
+import { Box, Button, Checkbox, CircularProgress, Divider, Fade, Grid, IconButton, Menu, MenuItem, Modal, Stack, TextField, Typography, styled } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { colorsKarbono } from '@/themes/colors';
 import Image from 'next/image'
@@ -6,6 +6,9 @@ import ClearIcon from '@mui/icons-material/Clear';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { GlobalContext } from '@/context/GlobalContext';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import { CustomButton } from '@/components/CustomButton';
+import { error } from 'console';
+import { userInvNull } from '@/domain/models/equipo_user.model';
 
 export interface EquipoComonentProps { }
 
@@ -17,27 +20,19 @@ const options = [
 
 const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 
-	const {userInv,setUserInv, userEquipo, setUserEquipo, setUser, getMeEquipo, user, invitarUsuarios, loadingApi } = useContext(GlobalContext)
+	const {
+		userInv,
+		setUserInv,
+		userEquipo,
+		setUserEquipo,
+		getMeEquipo,
+		invitarUsuarios, loadingApi, loadingAuth,
+		modalInvOpen, handleModalInvClose,
+		errorApi, updateMeEquipo
+	} = useContext(GlobalContext)
 
 	useEffect(() => {
-		// getMeEquipo();
-		setUserEquipo(
-			[{
-				nombre_apellidos: 'user 1',
-				email: 'user1@getMaxListeners.com',
-				rol: 'Prescriptor'
-			},
-			{
-				nombre_apellidos: 'user 2',
-				email: 'user2@getMaxListeners.com',
-				rol: 'Prescriptor'
-			},
-			{
-				nombre_apellidos: 'user 3',
-				email: 'user3@getMaxListeners.com',
-				rol: 'Prescriptor'
-			}]
-		);
+		getMeEquipo();
 	}, [])
 
 	const [anchorEls, setAnchorEls] = useState<(null | HTMLElement)[]>([]);
@@ -58,15 +53,84 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 
 	const handleChangeRol = (option: string, index: number) => {
 		const newUserEquipo = [...userEquipo!];
-		newUserEquipo[index] = { ...newUserEquipo[index], rol: option };
+		newUserEquipo[index] = { ...newUserEquipo[index], roles: option };
 		setUserEquipo(newUserEquipo);
 	};
+
+
+	function InviteUserModal() {
+
+		const style = {
+			position: 'absolute' as 'absolute',
+			top: '30%',
+			left: '50%',
+			transform: 'translate(-50%, -50%)',
+			width: '300px',
+			bgcolor: 'background.paper',
+			border: '2px solid #000',
+			boxShadow: 24,
+			p: 4,
+			minHeight: '200px', // Agregar altura máxima y desplazamiento vertical
+			overflowY: 'auto',
+		};
+
+		return (
+			<div>
+				<Modal
+					open={modalInvOpen}
+					onClose={handleModalInvClose}
+					aria-labelledby="modal-modal-title"
+					aria-describedby="modal-modal-description"
+				><>
+
+						<Stack direction={'column'} borderRadius={'10px'} sx={style} bgcolor={'white'} alignItems={'center'}>
+							<Image width={30} height={30}
+								src={errorApi
+									? '/assets/no.png'
+									: '/assets/OK.png'}
+								alt={''} ></Image>
+							<Typography color={colorsKarbono.secundary} fontWeight={700} textAlign={'center'}>
+								{errorApi
+									? errorApi
+									: 'Se ha realizado la invitación correctamente'
+								}
+							</Typography>
+						</Stack>
+
+
+						<Stack sx={{
+							position: 'absolute' as 'absolute',
+							top: '35%',
+							left: '50%',
+							transform: 'translate(-50%, -50%)',
+						}}
+							direction={'row'} spacing={3}>
+							<CustomButton
+								onClick={() => { handleModalInvClose(); setInv(false) }}
+								height={40}
+								width={100}
+								text={'OK'}
+								sx={{ borderRadius: '10px' }}
+								color={colorsKarbono.secundary}
+								textColor='white'
+							/>
+
+						</Stack>
+					</>
+
+				</Modal>
+			</div>
+		);
+	}
 
 	const [inv, setInv] = useState(false);
 
 	return (
 
 		<Stack width={'100%'} paddingTop={{ xs: 0, md: 10 }} direction={'column'} paddingX={{ xs: 0, md: 0 }} paddingRight={{ lg: 20 }} spacing={2} >
+
+			<InviteUserModal />
+
 			<Typography display={{ xs: 'none', md: 'flex' }} fontSize={16} fontWeight={800}>
 				Equipo
 			</Typography>
@@ -94,7 +158,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 							{
 								(!inv)
 									? <Button
-										onClick={() => setInv(true)}
+										onClick={() => { setInv(true), setUserInv(userInvNull) }}
 										sx={{ borderRadius: '8px', height: '30px', color: 'white' }}
 										variant='contained'
 									// endIcon={<ArrowForwardIosIcon />}
@@ -154,8 +218,8 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 
 											<Grid item xs={12} sm={12} md={12} lg={2}>
 												<TextField
-													onChange={(e) => setUserInv({ ...userInv, entidad_de_salud: [e.target.value] })}
-													value={userInv?.entidad_de_salud}
+													onChange={(e) => setUserInv({ ...userInv, roles: e.target.value })}
+													value={userInv?.roles}
 													label="Rol"
 													type="text"
 													placeholder='Rol'
@@ -244,85 +308,88 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 
 			<Divider sx={{ backgroundColor: '#B8BDBDB2 ', height: '2px', display: { xs: 'none', md: 'flex' } }} />
 
-			{(userEquipo?.length! > 0)
+			{(Array.isArray(userEquipo))
 				? userEquipo?.map((user, index) => {
-
 					return <>
-						<Stack direction={'row'} justifyContent={'space-between'} paddingX={'10px'}>
+						{(!loadingAuth)
+							? <Stack direction={'row'} justifyContent={'space-between'} paddingX={'10px'}>
 
-							<Stack direction={'column'} spacing={2}>
-								<Typography color={{xs:'blue',md:'black'}} fontSize={14} fontWeight={800}>
-									Nombre
-								</Typography>
-								<Typography fontSize={14} fontWeight={500}>
-									{user.nombre_apellidos}
-								</Typography>
-							</Stack>
-
-							<Stack direction={'column'} spacing={2}>
-								<Typography color={{xs:'blue',md:'black'}} fontSize={14} fontWeight={800}>
-									Correo
-								</Typography>
-								<Typography fontSize={14} fontWeight={500}>
-									{user.email}
-								</Typography>
-							</Stack>
-
-							<Stack display={{xs:'none',md:'flex'}} direction={'column'} spacing={2}>
-								<Typography fontSize={14} fontWeight={800}>
-									Rol en el equipo
-								</Typography>
-
-								<Stack  direction={'row'} spacing={3}>
-									<Typography fontSize={14} fontWeight={500}>
-										{user.rol}
+								<Stack direction={'column'} spacing={2}>
+									<Typography color={{ xs: 'blue', md: 'black' }} fontSize={14} fontWeight={800}>
+										Nombre
 									</Typography>
-									<div>
-										<IconButton
-											aria-label="more"
-											id={`long-button-${index}`}
-											aria-controls={openIndex === index ? 'long-menu' : undefined}
-											aria-expanded={openIndex === index ? 'true' : undefined}
-											aria-haspopup="true"
-											onClick={(event) => handleClick(event, index)}
-										>
-											<ExpandMoreIcon />
-										</IconButton>
-
-										<Menu
-											id="long-menu"
-											MenuListProps={{
-												'aria-labelledby': `long-button-${index}`,
-											}}
-											anchorEl={anchorEls[index]}
-											open={Boolean(anchorEls[index])}
-											onClose={() => handleClose(index)}
-											PaperProps={{
-												style: {
-													width: '20ch',
-												},
-											}}
-										>
-											{options.map((option) => (
-												<MenuItem
-													key={option}
-													selected={option === user.rol}
-													onClick={() => {
-														handleChangeRol(option, index);
-														handleClose(index);
-													}}
-												>
-													{option}
-												</MenuItem>
-											))}
-										</Menu>
-									</div>
+									<Typography fontSize={14} fontWeight={500}>
+										{user.nombre_apellidos}
+									</Typography>
 								</Stack>
-							</Stack>
+
+								<Stack direction={'column'} spacing={2}>
+									<Typography color={{ xs: 'blue', md: 'black' }} fontSize={14} fontWeight={800}>
+										Correo
+									</Typography>
+									<Typography fontSize={14} fontWeight={500}>
+										{user.email}
+									</Typography>
+								</Stack>
+
+								<Stack display={{ xs: 'none', md: 'flex' }} direction={'column'} spacing={2}>
+									<Typography fontSize={14} fontWeight={800}>
+										Rol en el equipo
+									</Typography>
+
+									<Stack direction={'row'} spacing={3}>
+										<Typography fontSize={14} fontWeight={500}>
+											{user.roles}
+										</Typography>
+										<div>
+											<IconButton
+												aria-label="more"
+												id={`long-button-${index}`}
+												aria-controls={openIndex === index ? 'long-menu' : undefined}
+												aria-expanded={openIndex === index ? 'true' : undefined}
+												aria-haspopup="true"
+												onClick={(event) => handleClick(event, index)}
+											>
+												<ExpandMoreIcon />
+											</IconButton>
+
+											<Menu
+												id="long-menu"
+												MenuListProps={{
+													'aria-labelledby': `long-button-${index}`,
+												}}
+												anchorEl={anchorEls[index]}
+												open={Boolean(anchorEls[index])}
+												onClose={() => handleClose(index)}
+												PaperProps={{
+													style: {
+														width: '20ch',
+													},
+												}}
+											>
+												{options.map((option) => (
+													<MenuItem
+														key={option}
+														selected={option === user.roles}
+														onClick={async () => {
+															await updateMeEquipo(user?.email!, option, user?.group_admin!);
+															handleChangeRol(option, index);
+															getMeEquipo()
+															handleClose(index);
+														}}>
+														{option}
+													</MenuItem>
+												))}
+											</Menu>
+										</div>
+									</Stack>
+								</Stack>
 
 
-							<Checkbox sx={{display:{xs:'none',md:'flex'}}} inputProps={{ 'aria-label': '' }} defaultChecked />
-						</Stack >
+								<Checkbox sx={{ display: { xs: 'none', md: 'flex' } }} inputProps={{ 'aria-label': '' }} defaultChecked />
+							</Stack >
+							: <h2 key={index}>Actualizando...</h2>
+						}
 
 						<Divider sx={{ backgroundColor: '#B8BDBDB2 ', height: '2px', }} />
 					</>

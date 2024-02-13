@@ -958,6 +958,45 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		}
 	}
 
+
+	const saveBorrador = async () => {
+
+		setLoadingSave(false);
+		console.log('Loading...:', prescriptionsData)
+		const newnumber = await getMaxNumPresc();
+
+		const copyPrescription: IPrescriptions = {
+			...prescriptionsData,
+			no_orden: newnumber + 1
+		}
+
+
+		let resp = await prescriptionsUseCase.savePrescripcions(copyPrescription);
+
+		console.log('Resp:', resp)
+
+		setLoadingSave(true);
+
+		if (resp.statusCode === 201) {
+			setSaveOk(true);
+		} else if (resp.statusCode === 200) {
+			setMessageAPI(resp.body.message)
+			setSaveOk(true);
+		} else if (resp.statusCode === 400) {
+			setMessageAPI(resp.body.message)
+			setSaveOk(false)
+		} else if (resp.statusCode === 404) {
+			setSaveOk(false)
+		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
+			setSaveOk(false)
+		} else if (resp.statusCode === 408) {
+			handleOffline();
+		} else {
+			setSaveOk(false)
+		}
+	}
+
+
 	const copyPrescriptions = async (prescription: IPrescriptions | undefined) => {
 
 		setLoadingSave(false);
@@ -1100,14 +1139,14 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const valTabsErrors2 = () => {
 
-		if (  
-			   validateTipoPrecripcion(tipoPrescripcion)
+		if (
+			validateTipoPrecripcion(tipoPrescripcion)
 			|| validateFlujoMetabolico(flujoMetabolico)
 			|| validateDextrosa(dextrosa)
 			|| validateAminos(requerimientoAminoacidos)
-			) {
+		) {
 
-			console.log('YYYYY:',requerimientoAminoacidos)
+			console.log('YYYYY:', requerimientoAminoacidos)
 			return true
 		} else {
 			return false
@@ -1254,6 +1293,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			messageAPI, setMessageAPI,
 			cancelForm,
 
+			saveBorrador,
 			getPrescriptions,
 			copyPrescriptions,
 			validateAlert,

@@ -11,11 +11,36 @@ export interface IUserEquipo {
     primer_apellido?: string,
     entidad_de_salud?: [string],
     he_leido?: boolean,
-    central_mezcla?:string,
-    rol?: string
+    central_mezcla?: string,
+    roles?: string
+    group_admin?:string
 
     // phoneNumber: string,
     // cedula: string,
     // avatar?:string
 }
+
+
+export const userInvNull: IUserEquipo = {
+
+    id: '',
+    email: '',
+    nombre_apellidos: '',
+    telefono: '',
+    password: '',
+    registro_medico: '',
+    primer_nombre: '',
+    primer_apellido: '',
+    entidad_de_salud: [''],
+    he_leido: false,
+    central_mezcla: '',
+    roles: '',
+    group_admin:''
+
+    // phoneNumber: string,
+    // cedula: string,
+    // avatar?:string
+}
+
+
 
