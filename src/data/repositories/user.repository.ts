@@ -292,9 +292,7 @@ export class UserRepository implements IUserRepository {
             method: 'patch',
             body: {
                 email: email,
-                roles: [
-                    roles
-                ],
+                roles: [roles],
                 group_admin: group_admin
             }
         });

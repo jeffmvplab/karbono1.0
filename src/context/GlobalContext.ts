@@ -13,6 +13,7 @@ interface ContextProps {
 
     login: () => void;
     register: (rol: string) => void;
+    registerByInvitation: () => Promise<void>
     errorAuth: string,
 
     logout: () => void;
@@ -113,9 +114,14 @@ interface ContextProps {
     invitarUsuarios: () => Promise<void>,
 
     getMeEquipo: () => Promise<void>,
+    updateMeEquipo: (email: string, roles: string, group_admin: string) => Promise<void>,
     getMe: () => Promise<void>,
     updateMe: () => Promise<void>,
     getMeRol: () => string[],
+
+    modalInvOpen: boolean,
+    handleModalInvClose: () => void,
+    handleModalInvOpen: () => void,
 }
 
 export const GlobalContext = createContext({} as ContextProps)

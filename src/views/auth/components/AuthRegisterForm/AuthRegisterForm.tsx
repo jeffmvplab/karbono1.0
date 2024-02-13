@@ -10,15 +10,14 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ReCAPTCHAComponent from '../reCAPTCHA/reCAPTACHA';
 import { StorageKeysEnum } from '@/utilities/enums';
 import { LocalStorageProtocol } from '@/protocols/cache/local_cache';
+import { useRouter } from 'next/router';
 
 export interface AuthRegisterFormProps { }
 
 const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 
-
-
 	const {
-		login, register, loadingAuth,
+		login, register,registerByInvitation, loadingAuth,
 		email, setEmail, errorEmail, handleEmail,
 		name, handleName,
 		phone, errorPhone, handlePhone,
@@ -48,12 +47,15 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 
 	const localStorageProtocol = new LocalStorageProtocol();
 
+	const router = useRouter();
+	const query = router.query
+
 
 	useEffect(() => {
 		if (localStorageProtocol.get(StorageKeysEnum.userInv)) {
 			const userInv = localStorageProtocol.get(StorageKeysEnum.userInv)
 			console.log('USER INV:', userInv)
-
+			console.log('QUERY:', query.query)
 			setEmail(userInv.email);
 			setNameYApellidos(userInv.nombre_apellidos);
 			setRol(userInv.rol);
@@ -346,10 +348,13 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 						<CustomButton
 							fontSize={'20px'}
 							onClick={() => {
-								register((rol === '' || rol === null || rol === undefined)
-									? "Administrador"
-									: rol
-								)
+
+								query.query === 'invitación'
+								?registerByInvitation()
+								: register((rol === '' || rol === null || rol === undefined)
+										? "Administrador"
+										: rol
+									)
 							}}
 							disabled={(errorEmail || errorPassword || errorPasswordConfirm || captcha === '')}
 							textColorHover={(!errorEmail || !errorPassword || !errorPasswordConfirm) ? 'white' : null}
