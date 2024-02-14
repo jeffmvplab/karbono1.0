@@ -1,3 +1,4 @@
+import { IComment } from "@/domain/models/observaciones.model";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
 import { IErrorsTab } from "@/domain/models/taps_errors";
 import { createContext, Dispatch, SetStateAction } from "react";
@@ -33,6 +34,8 @@ interface ContextProps {
     prescriptionSave: IPrescriptions | undefined;
 
     getPrescriptionsByNumber: () => Promise<void>,
+
+    prescriptionCharge: IPrescriptions | undefined,
     ////////////INFORMACION DEL PACIENTE///////////////////
     ips: string, errorIps: boolean, messageErrorIps: string, handleIps: (event: React.ChangeEvent<HTMLInputElement>) => void,
     numIden: string, errorNumIden: boolean, messageErrorNumIden: string, handleNumIden: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -80,6 +83,9 @@ interface ContextProps {
     vitaminasC: string, errorVitaminasC: boolean, messageErrorVitaminasC: string, handleVitaminasC: (event: React.ChangeEvent<HTMLInputElement>) => void,
     acidoFolico: string, errorAcidoFolico: boolean, messageErrorAcidoFolico: string, handleAcidoFolico: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
+    newComment: IComment, setNewComment: React.Dispatch<React.SetStateAction<IComment>>,
+    saveComments: (comment:IComment) => Promise<void>,
+
     loadingSave: boolean
     saveOK: boolean,
     valOKAlert: boolean,
@@ -91,10 +97,13 @@ interface ContextProps {
     handleOpenModalFormSaved: () => void,
     handleCloseModalFormSaved: () => void,
 
+    openModalFormSavedBorrador: boolean,
+    handleOpenModalFormSavedBorrador: () => void,
+    handleCloseModalFormSavedBorrador: () => void,
+
     openModalFormCancel: boolean,
     handleOpenModalFormCancel: () => void,
     handleCloseModalFormCancel: () => void,
-
 
     savePrescription: () => void,
     cancelForm: (route: string) => void,
@@ -108,7 +117,8 @@ interface ContextProps {
     selectTab: number, setSelectTab: React.Dispatch<React.SetStateAction<number>>
 
     tabsErrors: IErrorsTab, setTabErrors: React.Dispatch<React.SetStateAction<IErrorsTab>>
-    valTabsErrors1: () => boolean|undefined, valTabsErrors2: () => boolean|undefined,
+    valTabsErrors1: () => boolean | undefined, valTabsErrors2: () => boolean | undefined,
+    validateTipoPrecripcion: (tipoPrescripcion: string) => boolean
 }
 
 export const FormulariosContext = createContext({} as ContextProps)

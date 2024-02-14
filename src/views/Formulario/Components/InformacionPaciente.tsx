@@ -89,10 +89,7 @@ const InformacionPaciente = () => {
         getPrescriptions,
     } = useContext(FormulariosContext)
 
-    useEffect(() => {
-        setStateAcordion1(matches);
 
-    }, [matches])
     /////////////////////////////////////////////////////////////////////
 
     return (

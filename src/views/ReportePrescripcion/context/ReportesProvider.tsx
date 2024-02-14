@@ -8,6 +8,7 @@ import { StorageKeysEnum } from "@/utilities/enums/storage_keys.enum";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
 import { useRouter } from "next/router";
 import { GlobalContext } from "@/context/GlobalContext";
+import { IComment } from "@/domain/models/observaciones.model";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
@@ -15,7 +16,7 @@ type Props = {
 
 export const ReportesProvider: FC<Props> = ({ children }) => {
 
-	const {handleOffline}=useContext(GlobalContext)
+	const { handleOffline } = useContext(GlobalContext)
 
 	/////////////////////////////HANDLE MODALS////////////////////
 	const [openModalDescargar, setOpenModalDescargar] = useState(false);
@@ -34,7 +35,7 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 	const [saveOK, setSaveOk] = React.useState(true);
 	const [messageAPI, setMessageAPI] = React.useState('');
 
-	const [reporte, setReporte] = React.useState<IPrescriptions|undefined>();
+	const [reporte, setReporte] = React.useState<IPrescriptions | undefined>();
 
 	const getPrescriptionsByNumber = async () => {
 
@@ -66,7 +67,7 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
 
 			setSaveOk(false)
-		}else if (resp.statusCode === 408) {
+		} else if (resp.statusCode === 408) {
 			handleOffline();
 		} else {
 
@@ -74,14 +75,36 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 		}
 	}
 
-    const router=useRouter();
-	
-	// const goEdit=(route:string)=>{
-	
-	// 	const prescripcion = {number:orden,}
-	// 	localStorageProtocol.get(StorageKeysEnum.prescripcionOrden );
-	//     router.push(route)
-	// }
+	const router = useRouter();
+
+	const saveComments = async (comment: IComment) => {
+
+		setLoadingSave(false);
+		console.log('Loading Commenst...:', comment)
+		let resp = await prescriptionsUseCase.createComments(comment);
+		console.log('Resp:', resp)
+		setLoadingSave(true);
+
+		if (resp.statusCode === 201) {
+			setSaveOk(true);
+			setMessageAPI(resp.body.message);
+			getPrescriptionsByNumber();
+		} else if (resp.statusCode === 200) {
+			setSaveOk(true);
+		} else if (resp.statusCode === 400) {
+			setMessageAPI(resp.body.message)
+			setSaveOk(false)
+		} else if (resp.statusCode === 404) {
+			setSaveOk(false)
+		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
+			setSaveOk(false)
+		} else if (resp.statusCode === 408) {
+			handleOffline();
+		} else {
+			setSaveOk(false)
+		}
+	}
+
 
 	return (
 
@@ -101,7 +124,7 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 			handleOpenModalOrdenar,
 			handleCloseModalOrdenar,
 			// goEdit,
-
+			saveComments,
 		}}>{children}
 		</ReportesContext.Provider>
 	)

@@ -1,4 +1,5 @@
 
+import { IComment } from '@/domain/models/observaciones.model';
 import { AxiosHttpClient } from '../../protocols/http/axios-http-client';
 import { IUser } from '@/domain/models';
 import { IPrescriptions } from '@/domain/models/prescriptions.model';
@@ -8,7 +9,7 @@ import { ApiUrlsEnum } from '@/utilities/enums';
 
 export interface IPrescriptionsRepository {
     savePrescripcions(prescriptions: IPrescriptions): Promise<any>;
-    deletePrescriptions(no: number): Promise<any> ;
+    deletePrescriptions(no: number): Promise<any>;
     getPrescripcionsByNumber(number: string): Promise<any>;
     getPrescripcionsByName(name: string): Promise<any>;
     getPrescripcionsById(id: string): Promise<any>;
@@ -16,6 +17,7 @@ export interface IPrescriptionsRepository {
     getPrescripcionsAll(limit: number): Promise<any>;
     updatePrescripcions(prescriptions: IPrescriptions, number: string): Promise<any>;
     getMaxNumberPres(): Promise<any>;
+    createComments(comment:IComment): Promise<any>;
 }
 
 export class PrescriptionsRepository implements IPrescriptionsRepository {
@@ -158,11 +160,11 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
 
         return axiosRequest;
     }
-      /////////////////////////////////Get Max Number Pres////////////////////////////////////////////////
-      async getMaxNumberPres(): Promise<any> {
+    /////////////////////////////////Get Max Number Pres////////////////////////////////////////////////
+    async getMaxNumberPres(): Promise<any> {
 
         const axiosRequest = await this.axiosHttpClient.request({
-            url:ApiUrlsEnum.getMaxNumPresc,
+            url: ApiUrlsEnum.getMaxNumPresc,
             method: 'get',
             // body: {},
         });
@@ -234,7 +236,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
         return axiosRequest;
     }
 
-    async deletePrescriptions(no:  number): Promise<any> {
+    async deletePrescriptions(no: number): Promise<any> {
 
         const axiosRequest = await this.axiosHttpClient.request({
             url: `${ApiUrlsEnum.deletePrescriptions}/${no}`,
@@ -244,5 +246,14 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
         return axiosRequest;
     }
 
+    /////////////////////////////////Get Max Number Pres////////////////////////////////////////////////
+    async createComments(comment:IComment): Promise<any> {
 
+        const axiosRequest = await this.axiosHttpClient.request({
+            url: ApiUrlsEnum.saveComments,
+            method: 'post',
+            body: JSON.stringify(comment)
+        });
+        return axiosRequest;
+    }
 }
