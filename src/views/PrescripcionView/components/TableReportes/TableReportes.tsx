@@ -6,7 +6,6 @@ import { IPrescriptions } from '@/domain/models/prescriptions.model';
 
 import { typographyKarbono } from '@/themes/typography';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { convertirFecha } from '@/utilities/get_String_from_Date';
 import { getColorForState } from '@/utilities/getColorByState';
 import { localeTextDataGrid } from '@/utilities/constants/loacaleTextGrid';
 
@@ -21,6 +20,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { FormulariosContext } from '@/views/Formulario/context/FormulariosContext';
 import { CustomButton } from '@/components/CustomButton';
 import Image from 'next/image'
+import { convertirFecha } from '@/utilities/get_String_from_Date_Esp';
 
 
 export interface TableReportesProps { }
