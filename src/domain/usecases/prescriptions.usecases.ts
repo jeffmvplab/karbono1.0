@@ -3,10 +3,11 @@ import { IPrescriptionsRepository, PrescriptionsRepository } from '@/data/reposi
 import { UserRepository, IUserRepository } from '../../data/repositories/user.repository';
 import { IPrescriptions } from '../models/prescriptions.model';
 import { IUser } from '../models/user.model';
+import { IComment } from '../models/observaciones.model';
 
 export interface IPrescriptionsUseCase {
     savePrescripcions(prescriptions: IPrescriptions): Promise<any>;
-    deletePrescriptions(no:  number): Promise<any>;
+    deletePrescriptions(no: number): Promise<any>;
     prescripcionsByNumber(number: string): Promise<any>;
     prescripcionsByName(name: string): Promise<any>;
     prescripcionsById(id: string): Promise<any>;
@@ -14,6 +15,7 @@ export interface IPrescriptionsUseCase {
     prescripcionsAll(limit: number): Promise<any>;
     updatePrescripcions(prescriptions: IPrescriptions, number: string): Promise<any>;
     getMaxNumberPres(): Promise<any>;
+    createComments(comment: IComment): Promise<any>;
 }
 
 
@@ -28,7 +30,7 @@ export class PrescriptionsUseCases implements IPrescriptionsUseCase {
     savePrescripcions(prescriptions: IPrescriptions): Promise<any> {
         return this.prescriptionsRepository.savePrescripcions(prescriptions);
     }
-    deletePrescriptions(no: number): Promise<any>{
+    deletePrescriptions(no: number): Promise<any> {
         return this.prescriptionsRepository.deletePrescriptions(no);
     }
     prescripcionsAll(limit: number): Promise<any> {
@@ -58,5 +60,9 @@ export class PrescriptionsUseCases implements IPrescriptionsUseCase {
         return this.prescriptionsRepository.getPrescripcionsByIps(ips);
     }
 
+    createComments(comment: IComment): Promise<any> {
+        return this.prescriptionsRepository.createComments(comment);
+
+    };
 }
 

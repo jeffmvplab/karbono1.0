@@ -1,17 +1,9 @@
-import { colorsKarbono } from '@/themes/colors'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, MenuItem, Stack, Typography, useMediaQuery } from '@mui/material'
+
+import { Box, Grid, MenuItem, Stack, Typography } from '@mui/material'
 import React, { useContext, useEffect } from 'react'
 import CustomTextField from './CustomTextField'
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { FormulariosContext } from '../context/FormulariosContext';
 import { LightTooltip } from '../style/styleToolTips';
-
-
-
-const tipoPrescripciones = [
-    { value: 'Por requerimientos', label: 'Por requerimientos' },
-    { value: 'Por volúmenes', label: 'Por volúmenes' }
-]
 
 const aminoAdultos = [
     { value: 'AminovenSE', label: 'Aminoven 15% SE' },
@@ -43,11 +35,11 @@ const Macronutrientes = () => {
 
     const {
         tipoPaciente,
-        stateAcordion2, setStateAcordion2, matches, handleAcordion2,
-        tipoPrescripcion, handleTipoPrescripcion, errorTipoPrescripcion, messageErrorTipoPrescripcion,
-        flujoMetabolico, handleFlujoMetabolico, errorFlujoMetabolico, messageErrorFlujoMetabolico,
-        aminoacidos, handleAminoacidos, errorAminoacidos, messageErrorAminoacidos,
-        dextrosa, handleDextrosa, errorDextrosa, messageErrorDextrosa,
+        setStateAcordion2, matches,
+        tipoPrescripcion, 
+        flujoMetabolico, handleFlujoMetabolico, messageErrorFlujoMetabolico,
+        aminoacidos, handleAminoacidos,
+        dextrosa, handleDextrosa, messageErrorDextrosa,
         requerimientoAminoacidos, handleRequerimientoAminoacidos, messageErrorRequerimientoAminoacidos,
         lipidos, handleLipidos,
         requerimientoLipidos, handleRequerimientoLipidos,
@@ -107,7 +99,7 @@ const Macronutrientes = () => {
             {/* <AccordionDetails> */}
 
             <Grid container direction='column' >
-                <Box display='flex' sx={{ marginTop: '20px' }}>
+                {/* <Box display='flex' sx={{ marginTop: '20px' }}>
                     <Grid container spacing={2}>
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
@@ -137,7 +129,7 @@ const Macronutrientes = () => {
                         </Grid>
 
                     </Grid>
-                </Box>
+                </Box> */}
 
                 <Box display='flex' sx={{ marginTop: '20px' }}>
                     <Grid container spacing={2}>

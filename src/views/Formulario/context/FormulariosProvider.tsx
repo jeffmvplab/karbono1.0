@@ -13,6 +13,7 @@ import { IPrescriptions } from "@/domain/models/prescriptions.model";
 import { alarmConcCHOS, alarmConcDeLipidos, alarmConcDeProteinas, alarmConcMagnesio, alarmConcPotasio, alarmConcSodio, alarmaAgua, alertFactorDePrecipitacion, alertRelacion_Calcio_Fosfato, alertVelInfucion, alertViaDeAdmin } from "@/views/ReportePrescripcion/data/alertParams";
 import { GlobalContext } from "@/context/GlobalContext";
 import { IErrorsTab } from "@/domain/models/taps_errors";
+import { IComment, deleteComment } from "@/domain/models/observaciones.model";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
@@ -128,7 +129,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		//
 	}
 
-	// const [reporte, setReporte] =useState<IPrescriptions>();
+	 const [prescriptionCharge, setprescriptionCharge] =useState<IPrescriptions>();
 
 	const getPrescriptionsByNumber = async () => {
 		setLoadingSave(false);
@@ -141,6 +142,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			const resp = await prescriptionsUseCase.prescripcionsByNumber(storagePredsc.number);
 
 			const repoPresc: IPrescriptions = resp.body
+
+			setprescriptionCharge(repoPresc);
 
 			if (resp.statusCode === 200) {
 				setSaveOk(true);
@@ -576,7 +579,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorTipoPrescripcion, setMessageErrorTipoPrescripcion] = React.useState('');
 
 	const validateTipoPrecripcion = (tipoPrescripcion: string) => {
-		if (tipoPrescripcion !== '') {
+		if (tipoPrescripcion !== '0') {
 			setErrorTipoPrescripcion(false);
 			setMessageErrorTipoPrescripcion('')
 		} else {
@@ -979,6 +982,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 		if (resp.statusCode === 201) {
 			setSaveOk(true);
+			handleOpenModalFormSavedBorrador()
 		} else if (resp.statusCode === 200) {
 			setMessageAPI(resp.body.message)
 			setSaveOk(true);
@@ -996,6 +1000,35 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		}
 	}
 
+	const [newComment,setNewComment]=useState<IComment>(deleteComment)
+
+	const saveComments = async (comment:IComment) => {
+
+		setLoadingSave(false);
+		console.log('Loading Commenst...:',comment)
+		let resp = await prescriptionsUseCase.createComments(comment);
+		console.log('Resp:', resp)
+		setLoadingSave(true);
+
+		if (resp.statusCode === 201) {
+			setSaveOk(true);
+			setMessageAPI(resp.body.message)
+		} else if (resp.statusCode === 200) {
+			getPrescriptionsByNumber();
+			setSaveOk(true);
+		} else if (resp.statusCode === 400) {
+			setMessageAPI(resp.body.message)
+			setSaveOk(false)
+		} else if (resp.statusCode === 404) {
+			setSaveOk(false)
+		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
+			setSaveOk(false)
+		} else if (resp.statusCode === 408) {
+			handleOffline();
+		} else {
+			setSaveOk(false)
+		}
+	}
 
 	const copyPrescriptions = async (prescription: IPrescriptions | undefined) => {
 
@@ -1076,6 +1109,11 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const handleOpenModalFormSaved = () => { setOpenModalFormSaved(true) };
 	const handleCloseModalFormSaved = () => setOpenModalFormSaved(false);
 
+	const [openModalFormSavedBorrador, setOpenModalFormSavedBorrador] = useState(false);
+	const handleOpenModalFormSavedBorrador = () => { setOpenModalFormSavedBorrador(true) };
+	const handleCloseModalFormSavedBorrador = () => setOpenModalFormSavedBorrador(false);
+
+
 	const [openModalFormCancel, setOpenModalFormCancel] = useState(false);
 	const handleOpenModalFormCancel = () => { setOpenModalFormCancel(true) };
 	const handleCloseModalFormCancel = () => setOpenModalFormCancel(false);
@@ -1140,8 +1178,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const valTabsErrors2 = () => {
 
 		if (
-			validateTipoPrecripcion(tipoPrescripcion)
-			|| validateFlujoMetabolico(flujoMetabolico)
+
+			validateFlujoMetabolico(flujoMetabolico)
 			|| validateDextrosa(dextrosa)
 			|| validateAminos(requerimientoAminoacidos)
 		) {
@@ -1182,7 +1220,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	useEffect(() => {
 		console.log('ACTUALIZAR');
 		validateAlert()
-		validateCampos()
 		getPrescriptions();
 	}, [numOrder, tipoPrescripcion, fechaCreacion, ips, numIden,
 		namePaciente, servicio, ubicacion, cama, pesoKg, tipoEdad,
@@ -1239,6 +1276,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			prescripcion, errorPrescripcion, messageErrorPrescripcion, handlePrescripcion,
 			fechaCreacion, errorFechaCreacion, messageErrorFechaCreacion, handleFechaCreacion, fechaActual,
 
+			prescriptionCharge,
 			////////////INFORMACION DEL PACIENTE///////////////////
 			ips, errorIps, messageErrorIps, handleIps,
 			numIden, errorNumIden, messageErrorNumIden, handleNumIden,
@@ -1286,6 +1324,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			vitaminasC, errorVitaminasC, messageErrorVitaminasC, handleVitaminasC,
 			acidoFolico, errorAcidoFolico, messageErrorAcidoFolico, handleAcidoFolico,
 
+
+			newComment,setNewComment,
+			saveComments,
 			/////////////////////////////////INTEGRACION APIS/////////////////////////////////////////
 			loadingSave,
 			saveOK,
@@ -1294,6 +1335,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			cancelForm,
 
 			saveBorrador,
+			openModalFormSavedBorrador,
+			handleOpenModalFormSavedBorrador,
+			handleCloseModalFormSavedBorrador,
+
 			getPrescriptions,
 			copyPrescriptions,
 			validateAlert,
@@ -1301,6 +1346,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 			selectTab, setSelectTab,
 			tabsErrors, setTabErrors,
+			validateTipoPrecripcion,
 			valTabsErrors1, valTabsErrors2
 		}}>{children}
 		</FormulariosContext.Provider>

@@ -5,6 +5,7 @@ export enum ApiUrlsEnum {
     forgotPassword = 'auth/forgotPassword',
     verifyCodeAndUpdatePassword = 'auth/verifyCodeAndUpdatePassword',
     savePrescriptions = 'prescriptions',
+    saveComments= 'prescriptions/comment',
     deletePrescriptions = 'prescriptions',
     getAllPrescriptions = 'prescriptions/all',
     getPrescriptionsByNumber = 'prescriptions/no_orden',

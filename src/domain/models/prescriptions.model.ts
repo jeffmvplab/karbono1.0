@@ -1,3 +1,4 @@
+import { IComment } from "./observaciones.model"
 
 export interface IPrescriptions {
 
@@ -52,6 +53,7 @@ export interface IPrescriptions {
     req_vit_hidrosolubles: string,
     req_vit_liposolubles: string,
     vit_C: string,
-    acido_folico: string
+    acido_folico: string,
+    observaciones?: IComment[]
 }
 

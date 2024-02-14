@@ -53,5 +53,6 @@ export const prescriptionsAdapter = (prescriptions: any): IPrescriptions => ({
   req_vit_hidrosolubles:prescriptions.req_vit_hidrosolubles,
   req_vit_liposolubles:prescriptions.req_vit_liposolubles,
   vit_C:prescriptions.vit_C,
-  acido_folico:prescriptions.acido_folico
+  acido_folico:prescriptions.acido_folico,
+  observaciones:prescriptions.observaciones
 });
