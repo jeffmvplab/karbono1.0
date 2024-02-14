@@ -1,21 +1,32 @@
+export function formatearFechaEsp(fechaISO: string): string {
+  // const fecha = new Date(fechaISO);
+  const fecha = new Date(fechaISO);
+  // Array con los nombres de los meses
+  const meses: string[] = [
+    "enero", "febrero", "marzo", "abril", "mayo", "junio",
+    "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+  ];
 
-export function convertirFecha(fecha: string | Date | undefined): string {
-    if (!fecha) {
-      return ""; // Devuelve una cadena vacía si la fecha es undefined
-    }
-  
-    if (typeof fecha === "string") {
-      fecha = new Date(fecha); // Convierte la cadena en un objeto Date
-    }
-  
-    if (fecha instanceof Date && !isNaN(fecha.getTime())) {
-      const año = fecha.getFullYear().toString().padStart(4, "0");
-      const mes = (fecha.getMonth() + 1).toString().padStart(2, "0");
-      const dia = fecha.getDate().toString().padStart(2, "0");
-      // return `${dia}/${mes}/${año}`;
-      return `${dia}/${mes}/${año}`;
+  // Obtenemos el día, mes y año de la fecha
+  const dia: number = fecha.getDate();
+  const mes: string = meses[fecha.getMonth()];
+  const año: number = fecha.getFullYear();
 
-    } else {
-      return "Fecha inválida"; // Devuelve un mensaje de error si la fecha no es válida
-    }
-  }
+  // Obtenemos la hora y los minutos
+  let hora: number = fecha.getHours();
+  const minutos: number = fecha.getMinutes();
+
+  // Convertimos la hora de formato de 24 horas a 12 horas
+  const ampm: string = hora >= 12 ? 'pm' : 'am';
+  hora = hora % 12;
+  hora = hora ? hora : 12; // Si hora es 0, la cambiamos a 12
+
+  // Formateamos la hora para asegurarnos de que tenga dos dígitos
+  const horaFormateada: string = hora < 10 ? '0' + hora : hora.toString();
+
+  // Formateamos los minutos para asegurarnos de que tenga dos dígitos
+  const minutosFormateados: string = minutos < 10 ? '0' + minutos : minutos.toString();
+
+  // Devolvemos la fecha formateada
+  return `${dia} ${mes} ${año} ${horaFormateada}:${minutosFormateados} ${ampm}`;
+}

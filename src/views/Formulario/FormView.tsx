@@ -2,7 +2,7 @@
 
 import { CustomButton } from '@/components/CustomButton';
 import { colorsKarbono } from '@/themes/colors';
-import { Box, Stack, TextField, Typography, Card, MenuItem, Skeleton, Grid, Button, styled } from '@mui/material';
+import { Box, Stack, TextField, Typography, Card, MenuItem, Skeleton, Grid, Button, styled, Alert } from '@mui/material';
 
 import React, { useContext, useEffect, useState } from 'react';
 import InformacionPaciente from './Components/InformacionPaciente';
@@ -20,6 +20,8 @@ import { color } from 'html2canvas/dist/types/css/types/color';
 import Observaciones from './Components/Observaciones';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { FormSavedBorradorModal } from './Components/FormSavedBorradorModal';
+import CustomTextField from './Components/CustomTextField';
 
 export interface FormViewProps { }
 
@@ -42,6 +44,10 @@ const FormView: React.FC<FormViewProps> = () => {
 		},
 	});
 
+	const tipoPrescripciones = [
+		{ value: 'Por requerimientos', label: 'Por requerimientos' },
+		{ value: 'Por volúmenes', label: 'Por volúmenes' }
+	]
 	const {
 		getMovilHeight, savePrescription,
 		numOrder, handleNumOrder,
@@ -51,9 +57,10 @@ const FormView: React.FC<FormViewProps> = () => {
 		loadingSave,
 		cancelForm,
 		getPrescriptions,
-		valTabsErrors1, valTabsErrors2, validateAlert,validateCampos,
-		handleOpenModalFormSaved, getMaxNumPresc,
-		handleOpenModalFormCancel, setSelectTab, selectTab, maxNumOrder,saveBorrador
+		valTabsErrors1, valTabsErrors2, validateAlert, validateCampos,
+		handleOpenModalFormSaved, getMaxNumPresc, validateTipoPrecripcion,
+		handleOpenModalFormCancel, setSelectTab, selectTab, maxNumOrder, saveBorrador,
+		handleTipoPrescripcion, messageErrorTipoPrescripcion, tipoPrescripcion,
 	} = useContext(FormulariosContext)
 
 
@@ -64,25 +71,31 @@ const FormView: React.FC<FormViewProps> = () => {
 		getMaxNumPresc()
 	}, [])
 
+
 	useEffect(() => {
 		getPrescriptions();
 	}, [loadingSave])
 
 	const validate_and_sig = () => {
 		if (selectTab === 0) {
-			 !valTabsErrors1()&&setSelectTab(selectTab + 1)
+			valTabsErrors1()
+
+			setSelectTab(selectTab + 1)
 		} else if (selectTab === 1) {
-			!valTabsErrors2() && setSelectTab(selectTab + 1)
+			valTabsErrors2()
+			setSelectTab(selectTab + 1)
 		} else if (selectTab === 2) {
 			setSelectTab(selectTab + 1)
 		} else if (selectTab === 3) {
+			validateCampos()
 			validateAlert()
 				? () => { savePrescription(), console.log('Save') }
 				: () => { console.log('NoSave'), getPrescriptions(), handleOpenModalFormSaved() }
 		}
-
-
 	}
+
+	validateTipoPrecripcion(tipoPrescripcion);
+	console.log('TPD:', tipoPrescripcion)
 
 	return (
 		// <Card >
@@ -94,6 +107,7 @@ const FormView: React.FC<FormViewProps> = () => {
 
 			<FormSavedModal />
 			<FormCancelModal />
+			<FormSavedBorradorModal />
 			<Typography variant='h5' padding={1} style={{ fontWeight: 700, }}>
 				Nueva Orden
 			</Typography>
@@ -108,63 +122,87 @@ const FormView: React.FC<FormViewProps> = () => {
 								variant="rectangular"
 								sx={{ marginX: '10px', paddingRight: '20px', borderRadius: '10px', maxHeight: { xs: '90vh', sm: '80vh', md: '60vh', xl: '90vh' }, }}
 								width='100%' height={700} />
-							:
-							<Card elevation={10} sx={{ borderRadius: 4 }}>
-								<Box
-									sx={{
-										bgcolor: 'white',
-										padding: { xs: '1px', sm: 0.2 },
-										borderRadius: '15px',
-										//  maxHeight:'80%',
-										// maxHeight: { xs: `${getMovilHeight()}+100px`, sm: '80vh', md: '60vh', xl: '90vh' },
-										overflow: 'clip',
-									}}>
+							: <>
+								{
+									(tipoPrescripcion) && <Card elevation={10} sx={{ borderRadius: 4 }}>
+										<Box
+											sx={{
+												bgcolor: 'white',
+												padding: { xs: '1px', sm: 0.2 },
+												borderRadius: '15px',
+												//  maxHeight:'80%',
+												// maxHeight: { xs: `${getMovilHeight()}+100px`, sm: '80vh', md: '60vh', xl: '90vh' },
+												overflow: 'clip',
+											}}>
 
-									<Grid container spacing={2} style={{ padding: '10px' }}>
+											<Grid container spacing={2} style={{ padding: '10px' }}>
 
-										<Grid item xs={12} sm={6} md={6}>
+												<Grid item xs={12} sm={4} md={4}>
 
-											<TextField
-												onChange={handleNumOrder}
-												id='Numero-de-orden'
-												label='Número de Orden'
-												type='text'
-												value={numOrder === '' ? (maxNumOrder! + 1) : numOrder}
-												variant='outlined'
-												color='secondary'
-												sx={{
-													bgcolor: 'transparent',
-													"& .MuiInputBase-root": { borderRadius: '10px' },
-												}}
-												fullWidth
-											/>
+													<TextField
+														onChange={handleNumOrder}
+														id='Numero-de-orden'
+														label='Número de Orden'
+														type='text'
+														value={numOrder === '' ? (maxNumOrder! + 1) : numOrder}
+														variant='outlined'
+														color='secondary'
+														sx={{
+															bgcolor: 'transparent',
+															"& .MuiInputBase-root": { borderRadius: '10px' },
+														}}
+														fullWidth
+													/>
 
-											{/* </CustomToolTip> */}
-										</Grid>
+													{/* </CustomToolTip> */}
+												</Grid>
 
-										<Grid item xs={12} sm={6} md={6} >
-											<TextField
-												onChange={handleFechaCreacion}
-												id='Fecha-de-creación'
-												label='Fecha de creación'
-												type='text'
-												value={fechaCreacion}
-												variant='outlined'
-												color='secondary'
-												sx={{
-													bgcolor: 'transparent',
-													"& .MuiInputBase-root": { borderRadius: '10px' },
-												}}
-												fullWidth
-											/>
-										</Grid>
+												<Grid item xs={12} sm={4} md={4}>
 
-									</Grid>
-								</Box>
-							</Card>
+													<CustomTextField
+														onChange={handleTipoPrescripcion}
+														onClick={getPrescriptions}
+														onKeyPress={getPrescriptions}
+														value={tipoPrescripcion}
+														defaulValue={tipoPrescripcion}
+														id='tipo-prescripción*'
+														label='Tipo Prescripción*'
+														select={true}
+														helperText={messageErrorTipoPrescripcion}
+													>
+														{tipoPrescripciones.map((option) => (
+															<MenuItem key={option.value} value={option.value}>
+																{option.label}
+															</MenuItem>
+														))}
+													</CustomTextField>
 
+													{/* </CustomToolTip> */}
+												</Grid>
+
+												<Grid item xs={12} sm={4} md={4} >
+													<TextField
+														onChange={handleFechaCreacion}
+														id='Fecha-de-creación'
+														label='Fecha de creación'
+														type='text'
+														value={fechaCreacion}
+														variant='outlined'
+														color='secondary'
+														sx={{
+															bgcolor: 'transparent',
+															"& .MuiInputBase-root": { borderRadius: '10px' },
+														}}
+														fullWidth
+													/>
+												</Grid>
+
+											</Grid>
+										</Box>
+									</Card>
+								}
+							</>
 						}
-
 						{(loadingSave) && <>
 							<Card elevation={10} sx={{ borderRadius: 4 }} >
 
@@ -174,6 +212,9 @@ const FormView: React.FC<FormViewProps> = () => {
 									marginTop={'10px'}
 									bgcolor={'white'}>
 
+									{(valTabsErrors1() || valTabsErrors2()) && <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)', borderRadius: '10px' }}>
+										<Typography sx={{ color: 'white' }}>Hay campos obligatorios vacíos en la prescripción</Typography>
+									</Alert>}
 
 									<Stack
 										paddingX={1}
@@ -188,7 +229,7 @@ const FormView: React.FC<FormViewProps> = () => {
 										<CustomButtonTab
 											onClick={() => setSelectTab(0)}
 											sx={{
-
+												borderColor: valTabsErrors1() ? 'red' : colorsKarbono.primary,
 												minWidth: '200px',
 												background: (selectTab === 0) ? colorsKarbono.primary : 'white',
 												color: (selectTab === 0) ? 'white' : '#B8BDBDB2 '
@@ -199,7 +240,7 @@ const FormView: React.FC<FormViewProps> = () => {
 										<CustomButtonTab
 											onClick={() => setSelectTab(1)}
 											sx={{
-
+												borderColor: valTabsErrors2() ? 'red' : colorsKarbono.primary,
 												minWidth: '150px',
 												background: (selectTab === 1) ? colorsKarbono.primary : 'white',
 												color: (selectTab === 1) ? 'white' : '#B8BDBDB2 '
@@ -210,7 +251,6 @@ const FormView: React.FC<FormViewProps> = () => {
 										<CustomButtonTab
 											onClick={() => setSelectTab(2)}
 											sx={{
-
 												minWidth: '150px',
 												background: (selectTab === 2) ? colorsKarbono.primary : 'white',
 												color: (selectTab === 2) ? 'white' : '#B8BDBDB2 '
@@ -221,7 +261,6 @@ const FormView: React.FC<FormViewProps> = () => {
 										<CustomButtonTab
 											onClick={() => setSelectTab(3)}
 											sx={{
-
 												minWidth: '150px',
 												background: (selectTab === 3) ? colorsKarbono.primary : 'white',
 												color: (selectTab === 3) ? 'white' : '#B8BDBDB2 '
@@ -315,7 +354,7 @@ const FormView: React.FC<FormViewProps> = () => {
 
 						{(selectTab === 3) && <CustomButton
 							// disabled={!valOKAlert}
-							onClick={() =>saveBorrador()}
+							onClick={() => saveBorrador()}
 							width={210}
 							text={'Guardar borrador'}
 							sx={{ borderRadius: '10px' }}
@@ -352,9 +391,6 @@ const FormView: React.FC<FormViewProps> = () => {
 							endIcon={(selectTab !== 3) && < ChevronRightIcon sx={{ color: 'white' }} />}
 						/>
 					</Stack>
-
-
-
 				</Stack>
 			</Grid>
 		</Stack >

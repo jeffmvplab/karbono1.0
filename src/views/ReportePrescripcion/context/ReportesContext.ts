@@ -1,3 +1,4 @@
+import { IComment } from "@/domain/models/observaciones.model";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
 import { createContext, Dispatch, SetStateAction } from "react";
 
@@ -17,6 +18,8 @@ interface ContextProps {
     handleCloseModalOrdenar: () => void,
     // goEdit:(route:string)=>void,
     reporte:IPrescriptions|undefined,
+
+    saveComments: (comment:IComment) => Promise<void>,
 }
 
 export const ReportesContext = createContext({} as ContextProps)

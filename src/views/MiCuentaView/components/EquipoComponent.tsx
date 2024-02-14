@@ -16,6 +16,7 @@ const options = [
 	'Prescriptor',
 	'Preparador NPT',
 	'Control de calidad',
+	'Quitar del equipo'
 ];
 
 const EquipoComonent: React.FC<EquipoComonentProps> = () => {
@@ -371,12 +372,20 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 													<MenuItem
 														key={option}
 														selected={option === user.roles}
-														onClick={async () => {
+														onClick={
+															(option!=='Quitar del equipo')?async () => {
 															await updateMeEquipo(user?.email!, option, user?.group_admin!);
 															handleChangeRol(option, index);
 															getMeEquipo()
 															handleClose(index);
-														}}>
+														}
+													:async () => {
+														await updateMeEquipo(user?.email!, option, ' ');
+														handleChangeRol(option, index);
+														getMeEquipo()
+														handleClose(index);
+													}
+													}>
 														{option}
 													</MenuItem>
 												))}

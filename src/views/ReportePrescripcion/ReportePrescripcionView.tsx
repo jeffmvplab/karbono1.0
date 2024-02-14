@@ -1,6 +1,6 @@
 
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
-import { Typography, Grid, Stack, Card, Button, CircularProgress, Drawer, IconButton } from '@mui/material';
+import { Typography, Grid, Stack, Card, Button, CircularProgress, Drawer, IconButton, Box } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { ReportesContext } from './context/ReportesContext';
 import { DescargarModal } from './components/Modals/DescargarModal';
@@ -12,20 +12,26 @@ import PDFPrescriptionComponent from './components/PDFPrescriptionComponent';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import CloseIcon from '@mui/icons-material/Close';
+import AddIcon from '@mui/icons-material/Add';
+import CustomTextField from '../Formulario/Components/CustomTextField';
+import { IComment } from '@/domain/models/observaciones.model';
+import { formatearFechaEsp } from '@/utilities/get_String_from_Date';
 
 export interface ReportePrescripcionViewProps { }
 
 const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 
-	const { getPrescriptionsByNumber, loadingSave, handleOpenModalDescargar, reporte, } = useContext(ReportesContext)
+	const { getPrescriptionsByNumber, loadingSave, reporte, saveComments } = useContext(ReportesContext)
+
 	const [openDrawer, setOpenDrawer] = useState(false);
 
 	useEffect(() => {
 		getPrescriptionsByNumber();
 	}, [])
 
-
+	const [isNew, setIsNew] = useState<boolean>(false);
+	const [newObs, setnewObs] = useState<string>();
 
 	return (
 		<>
@@ -111,6 +117,79 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 						<Card>
 							<Stack paddingX='15px' direction={'column'} minHeight={'50vh'} height={'100%'} overflow={'scroll'} alignItems={'center'}>
 								<Typography color={'#372FC6'} sx={{ fontWeight: 600, fontSize: '20px' }}>Observaciones y Cambios.</Typography>
+
+								<Stack width={'100%'} direction={'column'} minHeight={200} justifyContent={'end'}>
+
+									<Stack direction={'row'} padding={1} >
+
+										<Stack direction={'column'} spacing={3} width={'100%'}>
+											{reporte?.observaciones?.map((item, index) => {
+												return (
+													<ContainerComments 
+													key={index} 
+													user={item.usuario}
+													rol={item.rol![0]}
+													date={formatearFechaEsp(item.fecha!.toString())}
+													content={item.comentario}
+													/>
+													// <CustomTextField
+													// 	key={index}
+													// 	// onChange={handleNumIden}
+													// 	id='Observacion'
+													// 	label='Observaciones'
+													// 	type='text'
+													// 	value={item}
+													// // defaulValue={numIden!}
+													// // helperText={messageErrorNumIden}
+													// />
+												)
+											})
+											}
+										</Stack>
+									</Stack>
+
+									{isNew
+										&& <Stack direction={'row'} padding={4} >
+											<CustomTextField
+												onChange={(e) => setnewObs(e.target.value)}
+												id='Observacion'
+												label='Agrega una observación o comentario.'
+												type='text'
+												value={newObs}
+											// defaulValue={numIden!}
+											// helperText={messageErrorNumIden}
+											/>
+										</Stack>
+									}
+
+									<Stack direction={'row'} justifyContent={'flex-end'} paddingY={2}>
+										<CustomButton
+											// disabled={!valOKAlert}
+											onClick={
+												(!isNew)
+													? () => { setIsNew(true) }
+													: () => {
+														const newComment: IComment = {
+															prescriptionId: reporte?._id!,
+															comentario: newObs!,
+															// estado:' ',
+															// estado: StatePrescriptionKeysEnum.pendiente,
+														}
+														saveComments(newComment)
+														setIsNew(false)
+													}
+											}
+											width={220}
+											height={50}
+											text={(isNew) ? 'Guardar' : 'Crear Observacion'}
+											sx={{ borderRadius: '10px' }}
+											color={colorsKarbono.primary}
+											textColor='white'
+											endIcon={(!isNew) ? <AddIcon sx={{ color: 'white' }} /> : <></>}
+										/>
+									</Stack>
+								</Stack>
+
 							</Stack>
 						</Card>
 					</Grid>
@@ -162,3 +241,32 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 };
 
 export default ReportePrescripcionView;
+
+export interface ContainerCommentsProps {
+	user?: string,
+	rol?: string,
+	date?: string,
+	content?: string
+}
+
+const ContainerComments: React.FC<ContainerCommentsProps> = ({ user, rol, date, content }) => {
+	return (
+
+		<Stack  direction={'column'} alignContent={'center'}
+			sx={{
+				border: '1px solid #ccc',
+				borderRadius: '8px',
+				padding: '4px',
+				width: '100%',
+			}}>
+
+			<Typography color={'black'} sx={{ fontWeight: 500, fontSize: '14px', letterSpacing: '3%', lineHeight: '20px' }}>
+				{user}-{rol}-{date}
+			</Typography>
+
+			<Typography color={' #656474'} sx={{ fontWeight: 500, fontSize: '14px', letterSpacing: '3%', lineHeight: '20px' }}>
+				{content}
+			</Typography>
+		</Stack>
+	)
+}
