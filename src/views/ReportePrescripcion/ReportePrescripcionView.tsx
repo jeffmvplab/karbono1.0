@@ -12,8 +12,7 @@ import PDFPrescriptionComponent from './components/PDFPrescriptionComponent';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import CloseIcon from '@mui/icons-material/Close';
-import AddIcon from '@mui/icons-material/Add';
-import CustomTextField from '../Formulario/Components/CustomTextField';
+import SendIcon from '@mui/icons-material/Send'; import CustomTextField from '../Formulario/Components/CustomTextField';
 import { IComment } from '@/domain/models/observaciones.model';
 import { formatearFechaEsp } from '@/utilities/get_String_from_Date';
 
@@ -92,17 +91,74 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 							<CloseIcon />
 						</IconButton>
 
-						<Stack direction="row" justifyContent={'center'}>
+
+						<Stack direction="column" overflow={'scroll'} width={'100%'}>
+
 							<Typography color={'#372fc6'} fontSize={'16px'} fontWeight={700} gutterBottom>
 								Observaciones y Cambios
 							</Typography>
-
-							<Stack direction="column" overflow={'scroll'}>
-
+							<Stack direction={'row'} paddingY={2}>
+								<CustomButton
+									// disabled={!valOKAlert}
+									onClick={
+										(!isNew)
+											? () => { setIsNew(true) }
+											: () => {
+												const newComment: IComment = {
+													prescriptionId: reporte?._id!,
+													comentario: newObs!,
+													// estado:' ',
+													// estado: StatePrescriptionKeysEnum.pendiente,
+												}
+												saveComments(newComment)
+												setIsNew(false)
+											}
+									}
+									width={220}
+									height={50}
+									text={(isNew) ? 'Guardar' : 'Crear Observacion'}
+									sx={{ borderRadius: '10px' }}
+									color={colorsKarbono.primary}
+									textColor='white'
+									endIcon={(!isNew) ? <SendIcon sx={{ color: 'white' }} /> : <></>}
+								/>
 							</Stack>
 
-							{/* Otro contenido del Drawer */}
+							{isNew
+								&& <Stack direction={'row'} padding={4} >
+									<CustomTextField
+										onChange={(e) => setnewObs(e.target.value)}
+										id='Observacion'
+										label='Agrega una observación o comentario.'
+										type='text'
+										value={newObs}
+									// defaulValue={numIden!}
+									// helperText={messageErrorNumIden}
+									/>
+								</Stack>
+							}
+
+							<Stack direction={'row'} padding={1} >
+
+								<Stack direction={'column'} spacing={3} width={'100%'}>
+									{reporte?.observaciones?.map((item, index) => {
+										return (
+											<ContainerComments
+												key={index}
+												user={item.usuario}
+												rol={item.rol![0]}
+												date={formatearFechaEsp(item.fecha!.toString())}
+												content={item.comentario}
+											/>
+
+										)
+									})
+									}
+								</Stack>
+							</Stack>
 						</Stack>
+
+						{/* Otro contenido del Drawer */}
 					</Stack>
 				</Drawer>
 
@@ -120,47 +176,6 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 								<Stack width={'100%'} direction={'column'} minHeight={200} justifyContent={'end'}>
 
-									<Stack direction={'row'} padding={1} >
-
-										<Stack direction={'column'} spacing={3} width={'100%'}>
-											{reporte?.observaciones?.map((item, index) => {
-												return (
-													<ContainerComments 
-													key={index} 
-													user={item.usuario}
-													rol={item.rol![0]}
-													date={formatearFechaEsp(item.fecha!.toString())}
-													content={item.comentario}
-													/>
-													// <CustomTextField
-													// 	key={index}
-													// 	// onChange={handleNumIden}
-													// 	id='Observacion'
-													// 	label='Observaciones'
-													// 	type='text'
-													// 	value={item}
-													// // defaulValue={numIden!}
-													// // helperText={messageErrorNumIden}
-													// />
-												)
-											})
-											}
-										</Stack>
-									</Stack>
-
-									{isNew
-										&& <Stack direction={'row'} padding={4} >
-											<CustomTextField
-												onChange={(e) => setnewObs(e.target.value)}
-												id='Observacion'
-												label='Agrega una observación o comentario.'
-												type='text'
-												value={newObs}
-											// defaulValue={numIden!}
-											// helperText={messageErrorNumIden}
-											/>
-										</Stack>
-									}
 
 									<Stack direction={'row'} justifyContent={'flex-end'} paddingY={2}>
 										<CustomButton
@@ -185,8 +200,50 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 											sx={{ borderRadius: '10px' }}
 											color={colorsKarbono.primary}
 											textColor='white'
-											endIcon={(!isNew) ? <AddIcon sx={{ color: 'white' }} /> : <></>}
+											endIcon={(!isNew) ? <SendIcon sx={{ color: 'white' }} /> : <></>}
 										/>
+									</Stack>
+
+									{isNew
+										&& <Stack direction={'row'} padding={4} >
+											<CustomTextField
+												onChange={(e) => setnewObs(e.target.value)}
+												id='Observacion'
+												label='Agrega una observación o comentario.'
+												type='text'
+												value={newObs}
+											// defaulValue={numIden!}
+											// helperText={messageErrorNumIden}
+											/>
+										</Stack>
+									}
+
+									<Stack direction={'row'} padding={1} >
+
+										<Stack direction={'column'} spacing={3} width={'100%'}>
+											{reporte?.observaciones?.map((item, index) => {
+												return (
+													<ContainerComments
+														key={index}
+														user={item.usuario}
+														rol={item.rol![0]}
+														date={formatearFechaEsp(item.fecha!.toString())}
+														content={item.comentario}
+													/>
+													// <CustomTextField
+													// 	key={index}
+													// 	// onChange={handleNumIden}
+													// 	id='Observacion'
+													// 	label='Observaciones'
+													// 	type='text'
+													// 	value={item}
+													// // defaulValue={numIden!}
+													// // helperText={messageErrorNumIden}
+													// />
+												)
+											})
+											}
+										</Stack>
 									</Stack>
 								</Stack>
 
@@ -249,10 +306,10 @@ export interface ContainerCommentsProps {
 	content?: string
 }
 
-const ContainerComments: React.FC<ContainerCommentsProps> = ({ user, rol, date, content }) => {
+export const ContainerComments: React.FC<ContainerCommentsProps> = ({ user, rol, date, content }) => {
 	return (
 
-		<Stack  direction={'column'} alignContent={'center'}
+		<Stack direction={'column'} alignContent={'center'}
 			sx={{
 				border: '1px solid #ccc',
 				borderRadius: '8px',

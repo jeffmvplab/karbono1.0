@@ -95,7 +95,7 @@ const FormView: React.FC<FormViewProps> = () => {
 	}
 
 	validateTipoPrecripcion(tipoPrescripcion);
-	console.log('TPD:', tipoPrescripcion)
+	// console.log('TPD:', tipoPrescripcion)
 
 	return (
 		// <Card >
@@ -196,7 +196,6 @@ const FormView: React.FC<FormViewProps> = () => {
 														fullWidth
 													/>
 												</Grid>
-
 											</Grid>
 										</Box>
 									</Card>
@@ -207,7 +206,6 @@ const FormView: React.FC<FormViewProps> = () => {
 							<Card elevation={10} sx={{ borderRadius: 4 }} >
 
 								<Box
-
 									paddingX={{ xs: '20px', md: '10px' }}
 									marginTop={'10px'}
 									bgcolor={'white'}>
