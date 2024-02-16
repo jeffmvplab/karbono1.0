@@ -124,7 +124,7 @@ const FormView: React.FC<FormViewProps> = () => {
 								width='100%' height={700} />
 							: <>
 								{
-									(tipoPrescripcion) && <Card elevation={10} sx={{ borderRadius: 4 }}>
+									<Card elevation={10} sx={{ borderRadius: 4 }}>
 										<Box
 											sx={{
 												bgcolor: 'white',
@@ -168,7 +168,11 @@ const FormView: React.FC<FormViewProps> = () => {
 														id='tipo-prescripción*'
 														label='Tipo Prescripción*'
 														select={true}
-														helperText={messageErrorTipoPrescripcion}
+														helperText={
+															tipoPrescripcion === ''
+																? 'Este campo es obligatorio'
+																: ''
+														}
 													>
 														{tipoPrescripciones.map((option) => (
 															<MenuItem key={option.value} value={option.value}>
@@ -312,69 +316,94 @@ const FormView: React.FC<FormViewProps> = () => {
 				<Stack
 					zIndex={100}
 					position={{ xs: 'fixed', sm: 'initial' }}
-					bottom={'160px'}
+					bottom={(selectTab === 3) ? '170px' : '120px'}
 					left='5px'
 					marginY={0}
-					paddingX={{ xs: 6 }}
+					paddingX={{ xs: 1, md: 6 }}
 					height={'40px'}
 					minWidth={'100%'}
 					direction={'row'}
 					spacing={2}
 					justifyContent='space-between'
 				>
-					<CustomButton
-						// onClick={() => cancelForm(mainRoutes.prescripcion)}
 
-						onClick={
-							(selectTab === 0)
-								? () => handleOpenModalFormCancel()
-								: () => setSelectTab(selectTab - 1)
+					<Stack paddingTop={{ xs: (selectTab === 3) ? 2 : 0, md: 0 }} direction={{ xs: (selectTab === 3) ? 'column' : 'row', md: 'row' }} spacing={2}>
 
-						}
-						width={127}
-						text={(selectTab === 0) ? 'Cancelar' : 'Anterior'}
-						textColor={'white'}
-						color={(selectTab === 0) ? 'red' : colorsKarbono.secundary}
-						startIcon={(selectTab === 0) ? <CloseIcon sx={{ color: 'white' }} /> : <ChevronLeftIcon sx={{ color: 'white' }} />}
-					/>
-
-					<Stack direction={{ xs: (selectTab === 3) ? 'column-reverse' : 'row', md: 'row' }} spacing={2}>
-						{(selectTab === 3) && <CustomButton
-							// disabled={!valOKAlert}
-							onClick={() => { }}
-							width={127}
-							text={'Eliminar'}
-							sx={{ borderRadius: '10px' }}
-							color={'#D03939'}
-							textColor='white'
-							startIcon={<CloseIcon sx={{ color: 'white' }} />}
-						/>}
-
-						{(selectTab === 3) && <CustomButton
-							// disabled={!valOKAlert}
-							onClick={() => saveBorrador()}
-							width={210}
-							text={'Guardar borrador'}
-							sx={{ borderRadius: '10px' }}
-							color={'#FFA800'}
-							textColor='white'
-							startIcon={
-								(selectTab === 3) && <Image
-									src='/assets/goma.png'
-									width={20}
-									height={20}
-									alt=''
-									style={{ alignItems: 'center' }}
-								/>
+						<CustomButton
+							// onClick={() => cancelForm(mainRoutes.prescripcion)}
+							onClick={
+								(selectTab === 0)
+									? () => handleOpenModalFormCancel()
+									: () => setSelectTab(selectTab - 1)
 							}
-						/>}
+							sx={{ height: { xs: 30, md: 40 } }}
+							width={127}
+							text={(selectTab === 0) ? 'Cancelar' : 'Anterior'}
+							textColor={'white'}
+							color={(selectTab === 0) ? 'red' : colorsKarbono.secundary}
+							startIcon={(selectTab === 0) ? <CloseIcon sx={{ color: 'white' }} /> : <ChevronLeftIcon sx={{ color: 'white' }} />}
+						/>
+
+						{(selectTab === 3)
+							&& <Box display={{ xs: 'flex', md: 'none' }}>
+								<CustomButton
+									// disabled={!valOKAlert}
+									onClick={() => { }}
+									width={127}
+									text={'Eliminar'}
+									sx={{ borderRadius: '10px', height: { xs: 30, md: 40 } }}
+									color={'#D03939'}
+									textColor='white'
+									startIcon={<CloseIcon sx={{ color: 'white' }} />}
+								/>
+							</Box>
+						}
+					</Stack>
+
+					<Stack direction={{ xs: (selectTab === 3) ? 'column' : 'row', md: 'row' }} spacing={{ xs: 2, md: 2 }} paddingRight={1}>
+
+						{(selectTab === 3)
+							&& <Box display={{ xs: 'none', md: 'flex' }}>
+								<CustomButton
+									// disabled={!valOKAlert}
+									onClick={() => { }}
+									width={127}
+									text={'Eliminar'}
+									sx={{ borderRadius: '10px', height: { xs: 30, md: 40 } }}
+									color={'#D03939'}
+									textColor='white'
+									startIcon={<CloseIcon sx={{ color: 'white' }} />}
+								/>
+							</Box>
+						}
+
+
+						{(selectTab === 3)
+							&& <CustomButton
+								// disabled={!valOKAlert}
+								onClick={() => saveBorrador()}
+								text={'Guardar borrador'}
+								sx={{ borderRadius: '10px', width: { xs: 100, md: 210 }, height: { xs: 30, md: 40 } }}
+								color={'#FFA800'}
+								textColor='white'
+								startIcon={
+									(selectTab === 3) && <Image
+										src='/assets/goma.png'
+										width={20}
+										height={20}
+										alt=''
+										style={{ alignItems: 'center' }}
+									/>
+								}
+							/>
+						}
 
 						<CustomButton
 							// disabled={!valOKAlert}
 							onClick={() => validate_and_sig()}
-							width={127}
+							// width={127}
 							text={(selectTab === 3) ? 'Guardar' : 'Siguiente'}
-							sx={{ borderRadius: '10px' }}
+							sx={{ borderRadius: '10px', width: { xs: 100, md: 210 }, height: { xs: 30, md: 40 } }}
 							color={(selectTab === 3) ? colorsKarbono.primary : colorsKarbono.secundary}
 							textColor='white'
 							startIcon={

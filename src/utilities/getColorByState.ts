@@ -1,8 +1,8 @@
-export function getColorForState(estado:'PENDIENTE'| 'FINALIZAR'|'SOLICITADA'|'CALIDAD'|'PRODUCCION'|'CANCELADA') {
+export function getColorForState(estado:'PENDIENTE FINALIZAR'| 'FINALIZADA'|'SOLICITADA'|'CALIDAD'|'PRODUCCION'|'CANCELADA') {
   switch (estado) {
-    case 'PENDIENTE':
+    case 'PENDIENTE FINALIZAR':
       return 'blue'; // Puedes asignar el color que desees
-    case 'FINALIZAR':
+    case 'FINALIZADA':
       return 'green';
     case 'SOLICITADA':
       return 'orange';

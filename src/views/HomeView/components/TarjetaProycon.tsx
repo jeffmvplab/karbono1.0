@@ -74,7 +74,7 @@ const TarjetaProycon: React.FC<TarjetaProyconProps> = () => {
                 Ingresar
               </Button> */}
               <ButtonCardsHome
-                route={mainRoutes.prescripcion}
+                route={mainRoutes.mi_cuenta}
                 text=' Ingresar'
                 color={colorsKarbono.secundary}
                 id='configuracion'
