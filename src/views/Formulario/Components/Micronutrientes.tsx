@@ -51,7 +51,6 @@ const Micronutrientes = () => {
 
     const {
         tipoPrescripcion, tipoPaciente,
-        stateAcordion3, setStateAcordion3, matches, handleAcordion3,
         prescriptionSave,
         sodioTotal, handleSodioTotal,
         potacioTotal, handlePotacioTotal,

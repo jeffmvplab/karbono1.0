@@ -129,7 +129,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		//
 	}
 
-	 const [prescriptionCharge, setprescriptionCharge] =useState<IPrescriptions>();
+	const [prescriptionCharge, setprescriptionCharge] = useState<IPrescriptions>();
 
 	const getPrescriptionsByNumber = async () => {
 		setLoadingSave(false);
@@ -1000,12 +1000,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		}
 	}
 
-	const [newComment,setNewComment]=useState<IComment>(deleteComment)
+	const [newComment, setNewComment] = useState<IComment>(deleteComment)
 
-	const saveComments = async (comment:IComment) => {
+	const saveComments = async (comment: IComment) => {
 
 		setLoadingSave(false);
-		console.log('Loading Commenst...:',comment)
+		console.log('Loading Commenst...:', comment)
 		let resp = await prescriptionsUseCase.createComments(comment);
 		console.log('Resp:', resp)
 		setLoadingSave(true);
@@ -1078,7 +1078,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setLoadingSave(false);
 		console.log('Borrando Prescripcion...')
 
-		const resp = await prescriptionsUseCase.deletePrescriptions(prescription?.no_orden!);
+		const deletedComment: IComment = {
+			prescriptionId:prescription?._id!,
+			estado:'CANCELADA'
+		}
+		// const resp = await prescriptionsUseCase.deletePrescriptions(prescription?.no_orden!);
+		const resp = await prescriptionsUseCase.createComments(deletedComment);
 
 		console.log('Borrada:', resp)
 
@@ -1325,7 +1330,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			acidoFolico, errorAcidoFolico, messageErrorAcidoFolico, handleAcidoFolico,
 
 
-			newComment,setNewComment,
+			newComment, setNewComment,
 			saveComments,
 			/////////////////////////////////INTEGRACION APIS/////////////////////////////////////////
 			loadingSave,

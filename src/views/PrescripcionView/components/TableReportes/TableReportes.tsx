@@ -179,7 +179,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 								sx={{ borderRadius: '10px' }}
 								color={'#2B8E12'}
 								textColor='white'
-								text={(loadingSave) ? 'Sicrear' : 'Copiando...'}
+								text={(loadingSave) ? 'Si,crear' : 'Copiando...'}
 								width={(loadingSave) ? 130 : 130}
 								endIcon={
 									(loadingSave)

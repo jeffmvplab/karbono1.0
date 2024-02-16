@@ -3,11 +3,17 @@ import TarjetaProycon from './components/TarjetaProycon';
 import TarjetaPareinf from './components/TarjetaPareinf';
 import TarjetaAyudas from './components/TarjetaAyudas';
 import { Stack, Typography } from '@mui/material';
+import { LocalStorageProtocol } from '@/protocols/cache/local_cache';
+import { StorageKeysEnum } from '@/utilities/enums';
 
 export interface HomeViewProps { }
 
 
 const HomeView: React.FC<HomeViewProps> = () => {
+
+	const localStorage=new LocalStorageProtocol();
+	const email=localStorage.get(StorageKeysEnum.user)?localStorage.get(StorageKeysEnum.user).email:''
+
 	return (
 		<Stack 
 		justifyContent={'center'}
@@ -29,7 +35,7 @@ const HomeView: React.FC<HomeViewProps> = () => {
 					textAlign: 'left',
 				}}
 			>
-				Bienvenido, HPabon.
+				Bienvenido, {email}.
 			</Typography>
 			<TarjetaProycon />
 			<TarjetaPareinf />
