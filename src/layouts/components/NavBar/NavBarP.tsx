@@ -1,27 +1,44 @@
-import React, { ReactNode } from 'react'
+import React, { useContext } from 'react'
 import Link from 'next/link';
 import FadeMenu from '@/layouts/components/NavBar/components/BotonPerfil';
-import { AppBar, Toolbar, IconButton, Hidden, Grid, Typography, Box, Stack, Button } from '@mui/material';
-import SearchBar from '../../../views/PrescripcionView/components/SearchBar'
+import { AppBar, Hidden, Grid, Typography, Box, Stack, Button } from '@mui/material';
 import Image from 'next/image'
-import { GlobalContext } from '@/context/GlobalContext';
 import { useRouter } from 'next/router';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import { mainRoutes } from '@/routes/routes';
-import { CustomButton } from '@/components/CustomButton';
 import { typographyKarbono } from '@/themes/typography';
+import { GlobalContext } from '@/context/GlobalContext';
 
 
 const NavbarP = ({ drawerWidth = 0, }) => {
 
   const route = useRouter();
+  const { openMainDrawer, setOpenMainDrawer } = useContext(GlobalContext);
+
 
   return (
-    <AppBar 
-    color='inherit' 
-    position={(route.pathname===mainRoutes.home)?'sticky':'fixed'}
-    elevation={0}>
+    <AppBar
+      color='inherit'
+      position={(route.pathname === mainRoutes.home) ? 'sticky' : 'fixed'}
+      elevation={0}>
       <Stack direction={'row'} justifyContent={'space-between'} paddingX={'10px'}>
+
+        {(mainRoutes.home !== route.pathname) &&
+          <Box display={{ xs: 'none', md: 'flex' }} width={'60px'} sx={{ paddingLeft: '20px' }}>
+            <Button
+
+              onClick={() => setOpenMainDrawer(true)} variant='text'>
+              <Image
+                src='/assets/Group.png'
+                width={30}
+                height={30}
+                alt=''
+                style={{ marginTop: '5px', alignItems: 'center', }}
+              />
+            </Button>
+          </Box>
+        }
+
         {<Box display={{ xs: 'none', md: 'flex' }} width={'120px'} sx={{ paddingLeft: '20px' }}>
           <Button
 
@@ -38,21 +55,22 @@ const NavbarP = ({ drawerWidth = 0, }) => {
         }
 
         <Hidden mdUp>
-          <Button onClick={() => { route.push(mainRoutes.home) }} variant='text'>
-            <Stack direction={'row'} alignItems={'center'}>
-              <Box sx={{ paddingTop: '10px' }}>
-                <Link href='/prescripcion'>
+          {/* <Button onClick={() => { route.push(mainRoutes.home) }} variant='text'> */}
+            <Stack direction={'row'} alignItems={'center'} >
+              <Box>
+                <Button
+                  onClick={() => setOpenMainDrawer(true)} variant='text'>
                   <Image
                     src='/assets/Group.png'
-                    width={20}
-                    height={20}
+                    width={25}
+                    height={25}
                     alt=''
-                    style={{ justifyContent: 'center', marginLeft: '10px' }}
+                    style={{ marginTop: '5px', alignItems: 'center', }}
                   />
-                </Link>
+                </Button>
               </Box>
               <Box sx={{ paddingTop: '10px' }}>
-                <Link href='/prescripcion'>
+                <Link href='/'>
                   <Image
                     src='/assets/logo-mobile.png'
                     width={20}
@@ -63,7 +81,7 @@ const NavbarP = ({ drawerWidth = 0, }) => {
                 </Link>
               </Box>
             </Stack>
-          </Button>
+          {/* </Button> */}
 
         </Hidden>
         {/* <Toolbar sx={{

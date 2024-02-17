@@ -7,6 +7,8 @@ interface ContextProps {
 
     authOK: boolean;
 
+    openMainDrawer: boolean, setOpenMainDrawer: React.Dispatch<React.SetStateAction<boolean>>,
+
     isOnline: boolean,
     handleOnline: () => void,
     handleOffline: () => void,

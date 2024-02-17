@@ -23,6 +23,8 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	const router = useRouter();
 	const localStorageProtocol = new LocalStorageProtocol();
 
+	const [openMainDrawer, setOpenMainDrawer] = useState(false);
+
 	const [isOnline, setIsOnline] = useState(true); // Estado para la conexión a internet
 	const handleOnline = async () => await setIsOnline(true);
 	const handleOffline = async () => await setIsOnline(false);
@@ -756,6 +758,8 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			isOnline,
 			handleOnline,
 			handleOffline,
+
+			openMainDrawer, setOpenMainDrawer,
 
 			authOK,
 			isAuth,
