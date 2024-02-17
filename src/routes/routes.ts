@@ -10,4 +10,5 @@ export const mainRoutes = {
     prescripcion: '/prescripcion',
     form:'/formulario',
     reportePrescripcion: '/reporte',
+    ayuda:'/ayuda',
 }

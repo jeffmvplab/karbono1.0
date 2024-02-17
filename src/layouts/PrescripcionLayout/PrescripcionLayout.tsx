@@ -10,6 +10,7 @@ import { GlobalProvider } from '@/context/GlobalProvider';
 import Head from 'next/head';
 import ConexionStatusModal from '@/components/ConexionStatusModal/ConexionStatusModal';
 import { FormulariosProvider } from '@/views/Formulario/context/FormulariosProvider';
+import { MainDrawer } from '../components/MainDrawer';
 
 
 
@@ -40,6 +41,7 @@ const PrescripcionLayout: React.FC<PrescripcionLayoutInterface> = ({ children })
             <Box sx={{ display: 'flex' }}>
               {/*Navbar draweWidth */}
               <NavbarP drawerWidth={draweWidth} />
+              <MainDrawer/>
               {/*Sidebar draweWidth */}
               {/* <Sidebar /> */}
               <Box

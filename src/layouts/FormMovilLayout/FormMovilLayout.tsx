@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import { ReactNode } from "react";
 import { SidebarMovil } from "../components/SidebarMovil";
 import ConexionStatusModal from "@/components/ConexionStatusModal/ConexionStatusModal";
+import { MainDrawer } from "../components/MainDrawer";
 
 export interface FormMovilLayoutInterface {
   children: ReactNode;
@@ -27,6 +28,7 @@ const FormMovilLayout: React.FC<FormMovilLayoutInterface> = ({ children }) => {
       
       <Grid item xs={1} sx={{ display: { sm: 'none' } }} >
         <SidebarMovil />
+        <MainDrawer/>
       </Grid>
 
       <Grid
