@@ -11,6 +11,7 @@ import { TagManagerScript } from "@/scripts/TagManagerScript";
 import { GoogleAnalyticsScript } from "@/scripts/GoogleAnalyticsScript";
 import ConexionStatusModal from "@/components/ConexionStatusModal/ConexionStatusModal";
 import NavbarP from "../components/NavBar/NavBarP";
+import { MainDrawer } from "../components/MainDrawer";
 
 export interface MainLayoutInterface {
   children: ReactNode;
@@ -31,6 +32,8 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
 
         </Head>
 
+        
+
         <MainLayoutScripts />
         <ConexionStatusModal />
         {/* <Box
@@ -38,7 +41,8 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
         </Box> */}
 
         <NavbarP />
-
+        <MainDrawer/>
+        
         <Box
           sx={{
            marginTop:{xs:'60px',md:'130px'},

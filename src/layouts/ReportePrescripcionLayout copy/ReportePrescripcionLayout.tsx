@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { Box } from '@mui/material'
 import Head from 'next/head';
 import ConexionStatusModal from '@/components/ConexionStatusModal/ConexionStatusModal';
+import { MainDrawer } from '../components/MainDrawer';
 
 
 
@@ -20,6 +21,7 @@ const ReportePrescripcionLayout: React.FC<ReportePrescripcionLayoutInterface> = 
       </Head>
 
       <ConexionStatusModal />
+      <MainDrawer/>
       {/* <GlobalProvider>
         <PrescripcionProvider> */}
           <Box sx={{ display: 'flex', width:'100%' }}>
