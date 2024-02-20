@@ -1,6 +1,6 @@
 import { Search } from '@mui/icons-material'
-import { Autocomplete, Box, Grid, TextField } from '@mui/material'
-import { textAlign } from '@mui/system'
+import {  Box, Grid} from '@mui/material'
+
 import React from 'react'
 
 const SearchBar = () => {

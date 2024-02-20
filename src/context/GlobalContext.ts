@@ -20,7 +20,7 @@ interface ContextProps {
 
     logout: () => void;
     isAuth: boolean;
-    authStatus: () => void;
+    authStatus: () => any;
 
     loadingAuth: boolean,
 

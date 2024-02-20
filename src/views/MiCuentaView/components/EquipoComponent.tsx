@@ -235,6 +235,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 												>
 													{options.map((option) => (
 														<MenuItem
+														sx={{backgroundColor:'white'}}
 															style={{
 																background: "white",
 																color: "black",
@@ -370,6 +371,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 											>
 												{options.map((option) => (
 													<MenuItem
+													sx={{backgroundColor:'white'}}
 														key={option}
 														selected={option === user.roles}
 														onClick={

@@ -1,15 +1,12 @@
-import { Modal, Avatar, Button, Stack, Box, Typography } from '@mui/material';
-import React, { useContext, useState } from 'react';
+import { Modal, Stack,Typography } from '@mui/material';
+import React, { useContext} from 'react';
 import { FormulariosContext } from '../../context/FormulariosContext';
-import CloseIcon from '@mui/icons-material/Close';
+
 import Image from 'next/image';
 import { colorsKarbono } from '@/themes/colors';
 import { CustomButton } from '@/components/CustomButton';
 import { useRouter } from 'next/router';
 import { mainRoutes } from '@/routes/routes';
-import { typographyKarbono } from '@/themes/typography';
-import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
-import LoadingComponent from '@/components/LoadingComponent/LoadingComponent';
 
 export interface FormSavedModalProps { }
 

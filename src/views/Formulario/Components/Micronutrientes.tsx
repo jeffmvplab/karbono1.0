@@ -265,7 +265,7 @@ const Micronutrientes = () => {
                                     select
                                 >
                                     {tipoFosfato.map((option) => (
-                                        <MenuItem key={option.value} value={option.value}>
+                                        <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
                                             {option.label}
                                         </MenuItem>
                                     ))}
@@ -315,7 +315,7 @@ const Micronutrientes = () => {
                                 select
                             >
                                 {tipoCalcio.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
+                                    <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>
                                 ))}
@@ -373,7 +373,7 @@ const Micronutrientes = () => {
                                 select
                             >
                                 {tipoMagnesio.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
+                                    <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>
                                 ))}
@@ -438,12 +438,12 @@ const Micronutrientes = () => {
                                 {
                                     (tipoPaciente === 'Adulto')
                                         ? trazaAdulto.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
+                                            <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
                                                 {option.label}
                                             </MenuItem>))
 
                                         : trazaPediatrico.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
+                                            <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
                                                 {option.label}
                                             </MenuItem>))
                                 }
@@ -495,18 +495,18 @@ const Micronutrientes = () => {
                                 {
                                     (tipoPaciente === 'Adulto')
                                         ? hidrosolublesAdulto.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
+                                            <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
                                                 {option.label}
                                             </MenuItem>
                                         ))
                                         : (tipoPaciente === 'Pediatrico')
                                             ? hidrosolublesPediatricos.map((option) => (
-                                                <MenuItem key={option.value} value={option.value}>
+                                                <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
                                                     {option.label}
                                                 </MenuItem>
                                             ))
                                             : hidrosolublesPediatricos.map((option) => (
-                                                <MenuItem key={option.value} value={option.value}>
+                                                <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
                                                     {option.label}
                                                 </MenuItem>
                                             ))
