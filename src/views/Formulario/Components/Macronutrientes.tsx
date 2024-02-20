@@ -208,17 +208,17 @@ const Macronutrientes = () => {
                                 {
                                     (tipoPaciente === 'Adulto')
                                         ? aminoAdultos.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
+                                            <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
                                                 {option.label}
                                             </MenuItem>
                                         ))
                                         : (tipoPaciente === 'Pediatrico')
                                             ? aminoPediatrico.map((option) => (
-                                                <MenuItem key={option.value} value={option.value}>
+                                                <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
                                                     {option.label}
                                                 </MenuItem>))
                                             : aminoPediatrico.map((option) => (
-                                                <MenuItem key={option.value} value={option.value}>
+                                                <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
                                                     {option.label}
                                                 </MenuItem>
                                             ))
@@ -266,7 +266,7 @@ const Macronutrientes = () => {
                                 select={true}
                             >
                                 {tiposLipidos.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
+                                    <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>
                                 ))}

@@ -1,13 +1,11 @@
 
-import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
-import { Typography, Grid, Stack, Card, Button, CircularProgress, Drawer, IconButton, Box } from '@mui/material';
+import { Typography, Grid, Stack, Card, Button, CircularProgress, Drawer, IconButton } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { ReportesContext } from './context/ReportesContext';
 import { DescargarModal } from './components/Modals/DescargarModal';
 import { OrdenarModal } from './components/Modals/OrdenarModal';
 import { CustomButton } from '@/components/CustomButton';
 import { colorsKarbono } from '@/themes/colors';
-import { convertirAPDF } from '@/utilities/view_pdf_convert';
 import PDFPrescriptionComponent from './components/PDFPrescriptionComponent';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import TelegramIcon from '@mui/icons-material/Telegram';
@@ -16,12 +14,23 @@ import SendIcon from '@mui/icons-material/Send'; import CustomTextField from '..
 import { IComment } from '@/domain/models/observaciones.model';
 import { formatearFechaEsp } from '@/utilities/get_String_from_Date';
 
+
+import { GlobalContext } from '@/context/GlobalContext';
+import { VerificarModal } from './components/Modals/VerificarModal';
+import { CancelVerificarModal } from './components/Modals/CancelVerificarModal';
+
+import BarReporteNPT from './components/BarReporteNPT/BarReporteNPT';
+import BarReporteQF from './components/BarReporteQF/BarReporteQF';
+import BarReporteQF_Calidad from './components/BarReporteQF_Calidad/BarReporteQF_Calidad';
+
+
+
 export interface ReportePrescripcionViewProps { }
 
 const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
-
 	const { getPrescriptionsByNumber, loadingSave, reporte, saveComments } = useContext(ReportesContext)
+	const { getMeRol } = useContext(GlobalContext)
 
 	const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -29,14 +38,48 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 		getPrescriptionsByNumber();
 	}, [])
 
+
+	const [isHorizontalScroll, setIsHorizontalScroll] = useState(false);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			// Verificar si hay desplazamiento horizontal
+			if (window.innerWidth > document.documentElement.clientWidth) {
+				setIsHorizontalScroll(true);
+			} else {
+				setIsHorizontalScroll(false);
+			}
+		};
+
+		window.addEventListener('scroll', handleScroll);
+
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+
+	}, []);
+
+
 	const [isNew, setIsNew] = useState<boolean>(false);
 	const [newObs, setnewObs] = useState<string>();
 
+	console.log('ROLLLL:',getMeRol()[0])
 	return (
-		<>
+
+		<div onMouseOver={() => setIsHorizontalScroll(false)}>
+
+			{!isHorizontalScroll
+				&& (getMeRol()[0] === 'Prescriptor')
+				? <BarReporteNPT />
+				:(getMeRol()[0] === 'Preparador NPT')
+					? <BarReporteQF />
+					: <BarReporteQF_Calidad />
+			}
+
+			<VerificarModal />
+			<CancelVerificarModal />
 
 			<>
-
 				<Stack
 					direction={'row'}
 					display='flex'
@@ -45,26 +88,10 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 					padding={'20px'}>
 
 					<Typography sx={{ fontWeight: 700, fontSize: { xs: '20px', md: '32px' } }}>Reporte prescripción</Typography>
-
-					<CustomButton text={'Descargar'}
-						// onClick={handleOpenModalDescargar}
-						onClick={() => convertirAPDF('reporte_view', reporte?.nombre_paciente!)}
-						width='160px'
-						height='44px'
-						variant='outlined'
-						color='secundary'
-						fontSize={'16px'}
-						textColor={colorsKarbono.secundary}
-						borderColor={colorsKarbono.secundary}
-						endIcon={
-							<GetAppOutlinedIcon
-								style={{ color: '#372fc6', paddingLeft: '5px', scale: '1.5' }} />
-						}
-						sx={{ borderRadius: '10px' }}
-					/>
-
+					<Typography sx={{ fontWeight: 700, fontSize: { xs: '20px', md: '32px' } }}>Orden: {reporte?.no_orden}</Typography>
 
 				</Stack>
+
 				<DescargarModal />
 				<OrdenarModal />
 
@@ -292,7 +319,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 					</Stack>
 				</Grid >
 			</>
-		</>
+		</div>
 	)
 
 };

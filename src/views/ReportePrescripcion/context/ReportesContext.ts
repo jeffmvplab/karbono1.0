@@ -9,17 +9,25 @@ interface ContextProps {
     saveOK: boolean,
     messageAPI: string,
 
-    openModalDescargar:boolean,
+    openModalDescargar: boolean,
     handleOpenModalDescargar: () => void,
     handleCloseModalDescargar: () => void,
 
-    openModalOrdenar:boolean,
+    openModalOrdenar: boolean,
     handleOpenModalOrdenar: () => void,
     handleCloseModalOrdenar: () => void,
-    // goEdit:(route:string)=>void,
-    reporte:IPrescriptions|undefined,
 
-    saveComments: (comment:IComment) => Promise<void>,
+    openModalVerificar: boolean,
+    handleOpenModalVerificar: () => void,
+    handleCloseModalVerificar: () => void,
+
+    openModalCancelVerificar: boolean,
+    handleOpenModalCancelVerificar: () => void,
+    handleCloseModalCancelVerificar: () => void,
+    // goEdit:(route:string)=>void,
+    reporte: IPrescriptions | undefined,
+
+    saveComments: (comment: IComment) => Promise<void>,
 }
 
 export const ReportesContext = createContext({} as ContextProps)

@@ -1,7 +1,8 @@
 
 export enum StatePrescriptionKeysEnum {
 
-    pendiente = 'PENDIENTE',
+    pendiente_finalizar = 'PENDIENTE FINALIZAR',
+    cancelada = 'CANCELADA',
     finalizada = 'FINALIZADA',
     solicitada = 'SOLICITADA',
     calidad = 'CALIDAD',

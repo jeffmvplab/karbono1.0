@@ -21,15 +21,15 @@ import { FormulariosContext } from '@/views/Formulario/context/FormulariosContex
 import { CustomButton } from '@/components/CustomButton';
 import Image from 'next/image'
 import { convertirFecha } from '@/utilities/get_String_from_Date_Esp';
+import { GlobalContext } from '@/context/GlobalContext';
 
 
 export interface TableReportesProps { }
 
 const TableReportes: React.FC<TableReportesProps> = () => {
 
-	const { getAll, reportes, loadingGet, loadingApi, goEdit, goReporte } = useContext(PrescripcionContext)
-	const { copyPrescriptions, loadingSave, messageAPI, setMessageAPI, borrarPrescriptions } = useContext(FormulariosContext)
-
+	const { getAll, reportes, loadingGet, loadingApi, goEdit, goReporte } = useContext(PrescripcionContext);
+	const { copyPrescriptions, loadingSave, messageAPI, setMessageAPI, borrarPrescriptions } = useContext(FormulariosContext);
 
 	const [page, setPage] = useState<number>();
 	const pag: number = 15;
@@ -50,7 +50,6 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 	const [openDelete, setOpenDelete] = React.useState(false);
 	const handleOpenDelete = () => setOpenDelete(true);
 	const handleCloseDelete = () => setOpenDelete(false);
-
 
 	const [selectReporte, setASelectReporte] = React.useState<IPrescriptions | undefined>();
 
@@ -147,7 +146,6 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 					aria-labelledby="modal-modal-title"
 					aria-describedby="modal-modal-description"
 				><>
-
 						<Stack direction={'column'} borderRadius={'10px'} sx={style} bgcolor={'white'} alignItems={'center'}>
 							<Image width={30} height={30} src={'/assets/alerta.png'} alt={''} ></Image>
 							<Typography color={colorsKarbono.secundary} fontWeight={700} textAlign={'center'}>
@@ -194,6 +192,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			</div>
 		);
 	}
+
 
 	function DeleteModal() {
 
@@ -296,8 +295,8 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			flex: 1,
 			minWidth: 250,
 			renderCell: (params: GridRenderCellParams) => (
-				<Button sx={{ fontFamily: typographyKarbono.outfit, fontSize: 12,textTransform:'none'}} variant='text' 
-				 onClick={() => { goReporte(params.row.no_orden) }}>
+				<Button sx={{ fontFamily: typographyKarbono.outfit, fontSize: 12, textTransform: 'none' }} variant='text'
+					onClick={() => { goReporte(params.row.no_orden) }}>
 					<Typography textTransform='capitalize' >{params.value}</Typography>
 				</Button>
 			)
@@ -319,7 +318,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Tipo de prescripción",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth:80,
+			minWidth: 80,
 			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
 		},
 
@@ -329,7 +328,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Fecha de creación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth:100,
+			minWidth: 100,
 			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}.</>
 		},
 
@@ -342,12 +341,21 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}.</>
 		},
 
+		// {
+		// 	field: "user",
+		// 	headerName: "Usuario",
+		// 	headerClassName: 'table-color--header',
+		// 	flex: 1,
+		// 	minWidth: 80,
+		// 	renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+		// },
+
 		{
 			field: "estado",
 			headerName: "Estado",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth:80,
+			minWidth: 80,
 			renderCell: (params: GridRenderCellParams) => <>{
 				<Typography color={getColorForState(params.value)}>
 					{params.value}
@@ -364,11 +372,11 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>
-				<IoEyeOutline style={{ color: 'black', fontSize: 24 }} onClick={() => { goReporte(params.row.no_orden) }} />
-				<IoCreateOutline style={{ color: 'black', fontSize: 24 }} onClick={() => { goEdit(params.row.no_orden) }} />
-				< IoPrintOutline style={{ color: 'black', fontSize: 24 }} onClick={() => { setASelectReporte(params.row), handleOpen() }} />
-				< IoCopyOutline style={{ color: 'black', fontSize: 24 }} onClick={() => { setASelectReporte(params.row), handleOpenCopy() }} />
-				<IoTrashOutline style={{ color: 'black', fontSize: 24 }} onClick={() => { setASelectReporte(params.row), handleOpenDelete() }} />
+				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goReporte(params.row.no_orden) }} />
+				<IoCreateOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goEdit(params.row.no_orden) }} />
+				< IoPrintOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpen() }} />
+				< IoCopyOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpenCopy() }} />
+				<IoTrashOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpenDelete() }} />
 			</Stack>)
 		},
 	];
@@ -385,7 +393,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 				<Box
 					sx={{
 
-						paddingX: {xs:'10px',md:'50px'},
+						paddingX: { xs: '10px', md: '50px' },
 						height: 700,
 						width: '100vw',
 						'& .table-color--header': {
