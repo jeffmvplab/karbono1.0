@@ -973,7 +973,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			no_orden: newnumber + 1
 		}
 
-
 		let resp = await prescriptionsUseCase.savePrescripcions(copyPrescription);
 
 		console.log('Resp:', resp)
@@ -1047,10 +1046,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 			console.log('Copiado:', resp)
 
-
 			if (resp.statusCode === 201) {
 				setSaveOk(true);
-
 			} else if (resp.statusCode === 200) {
 				setMessageAPI(resp.body.message)
 				setSaveOk(true);

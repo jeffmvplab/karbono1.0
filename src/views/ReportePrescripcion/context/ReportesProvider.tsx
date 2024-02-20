@@ -27,6 +27,14 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 	const handleOpenModalOrdenar = () => { setOpenModalOrdenar(true) };
 	const handleCloseModalOrdenar = () => setOpenModalOrdenar(false);
 
+	const [openModalVerificar, setOpenModalVerificar] = useState(false);
+	const handleOpenModalVerificar = () => { setOpenModalVerificar(true) };
+	const handleCloseModalVerificar = () => setOpenModalVerificar(false);
+
+	const [openModalCancelVerificar, setOpenModalCancelVerificar] = useState(false);
+	const handleOpenModalCancelVerificar = () => { setOpenModalCancelVerificar(true) };
+	const handleCloseModalCancelVerificar = () => setOpenModalCancelVerificar(false);
+
 	////////////////////////////////////////////////////////////
 	const prescriptionsUseCase = new PrescriptionsUseCases();
 	const localStorageProtocol = new LocalStorageProtocol();
@@ -123,6 +131,14 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 			openModalOrdenar,
 			handleOpenModalOrdenar,
 			handleCloseModalOrdenar,
+
+			openModalVerificar,
+			handleOpenModalVerificar,
+			handleCloseModalVerificar,
+
+			openModalCancelVerificar,
+			handleOpenModalCancelVerificar,
+			handleCloseModalCancelVerificar,
 			// goEdit,
 			saveComments,
 		}}>{children}

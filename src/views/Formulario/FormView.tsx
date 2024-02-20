@@ -77,9 +77,9 @@ const FormView: React.FC<FormViewProps> = () => {
 	}, [loadingSave])
 
 	const validate_and_sig = () => {
+		
 		if (selectTab === 0) {
 			valTabsErrors1()
-
 			setSelectTab(selectTab + 1)
 		} else if (selectTab === 1) {
 			valTabsErrors2()
@@ -87,10 +87,11 @@ const FormView: React.FC<FormViewProps> = () => {
 		} else if (selectTab === 2) {
 			setSelectTab(selectTab + 1)
 		} else if (selectTab === 3) {
+			console.log('CCCC:',validateAlert())
 			validateCampos()
 			validateAlert()
-				? () => { savePrescription(), console.log('Save') }
-				: () => { console.log('NoSave'), getPrescriptions(), handleOpenModalFormSaved() }
+				? savePrescription()
+				: handleOpenModalFormSaved()
 		}
 	}
 
@@ -175,7 +176,10 @@ const FormView: React.FC<FormViewProps> = () => {
 														}
 													>
 														{tipoPrescripciones.map((option) => (
-															<MenuItem key={option.value} value={option.value}>
+															<MenuItem 
+															sx={{backgroundColor:'white'}}
+															key={option.value} 
+															value={option.value}>
 																{option.label}
 															</MenuItem>
 														))}

@@ -151,6 +151,7 @@ const InformacionPaciente = () => {
                     >
                         {instituciones.map((option) => (
                             <MenuItem
+                            
                                 style={{
                                     background: "white",
                                     color: "black",
@@ -221,7 +222,7 @@ const InformacionPaciente = () => {
                                     helperText={messageErrorTipoPaciente}
                                 >
                                     {tiposPacientes.map((option) => (
-                                        <MenuItem key={option.value} value={option.value}>
+                                        <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
                                             {option.label}
                                         </MenuItem>
                                     ))}
@@ -322,6 +323,7 @@ const InformacionPaciente = () => {
                                 >
                                     {tipoEdades.map((option) => (
                                         <MenuItem
+                                        sx={{backgroundColor:'white'}}
                                             key={option.value}
                                             value={option.value}>
                                             {option.label}
@@ -421,7 +423,7 @@ const InformacionPaciente = () => {
                                     helperText={messageErrorViaAdmin}
                                 >
                                     {viaAdministracion.map((option) => (
-                                        <MenuItem key={option.value} value={option.value}>
+                                        <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
                                             {option.label}
                                         </MenuItem>
                                     ))}

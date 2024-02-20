@@ -4,13 +4,12 @@ import { LocalStorageProtocol } from "@/protocols/cache/local_cache";
 import { mainRoutes } from "@/routes/routes";
 import { CookiesKeysEnum, StorageKeysEnum } from "@/utilities/enums";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { FC } from "react";
 import { GlobalContext } from "./GlobalContext";
 
 import Cookies from "js-cookie";
 import { IUserEquipo } from "@/domain/models/equipo_user.model";
-import { IUser } from "@/domain/models";
 
 type Props = {
 	children: JSX.Element,
@@ -18,7 +17,6 @@ type Props = {
 
 
 export const GlobalProvider: FC<Props> = ({ children }) => {
-
 
 	const router = useRouter();
 	const localStorageProtocol = new LocalStorageProtocol();
@@ -266,6 +264,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		if (myToken === null || myToken === undefined) {
 			localStorageProtocol.delete(StorageKeysEnum.user)
 		}
+
 		if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
 			setIsAuth(true)
 			// router.push(mainRoutes.home);
@@ -273,9 +272,10 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		} else {
 			setIsAuth(false);
 			Cookies.remove(CookiesKeysEnum.token)
-			router.push(mainRoutes.login);
-			console.log('IsAuth:', isAuth)
+			 router.push(mainRoutes.login);
+			console.log('IsAuth:', isAuth)		
 		}
+
 	}
 
 	const getMeRol = () => {
@@ -307,6 +307,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		if (resp.statusCode === 201) {
 			localStorageProtocol.set(StorageKeysEnum.user, resp.body);
 			Cookies.set(CookiesKeysEnum.token, resp.body.token, { sameSite: 'Strict' })
+			Cookies.set(CookiesKeysEnum.userName, resp.body.email, { sameSite: 'Strict' })
 		}
 
 		setLoadingAuth(false);
@@ -377,6 +378,8 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			if (resp.body === undefined) {
 				localStorageProtocol.set(StorageKeysEnum.user, resp);
 				Cookies.set(CookiesKeysEnum.token, resp.token, { sameSite: 'Strict' })
+				Cookies.set(CookiesKeysEnum.userName, resp.userName, { sameSite: 'Strict' })
+
 				router.push(mainRoutes.login);
 			}
 
@@ -534,6 +537,8 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 		if (resp.statusCode === 201) {
 			Cookies.set(CookiesKeysEnum.token, resp.body.token, { sameSite: 'Strict' })
+			Cookies.set(CookiesKeysEnum.userName, resp.body.userName, { sameSite: 'Strict' })
+
 		}
 
 		setLoadingAuth(false);
@@ -747,6 +752,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	const logout = async () => {
 		localStorageProtocol.delete(StorageKeysEnum.user);
 		Cookies.remove(CookiesKeysEnum.token)
+		Cookies.remove(CookiesKeysEnum.userName)
 		authStatus();
 	}
 	///////////////////////////////////////////////////////////////////////////////////

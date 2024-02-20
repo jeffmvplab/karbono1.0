@@ -137,9 +137,7 @@ const MainDrawer: React.FC<MainDrawerProps> = () => {
 						hIcon={20}
 						isActive={mainRoutes.ayuda === route.pathname}
 						rourte={mainRoutes.ayuda} />
-
 				</Stack>
-
 				{/* Otro contenido del Drawer */}
 			</Stack>
 		</Drawer>
