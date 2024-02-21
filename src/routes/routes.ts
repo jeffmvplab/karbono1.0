@@ -8,6 +8,7 @@ export const mainRoutes = {
     verificar_codigo_recuperacion: '/auth/verificar_codigo_recuperacion',
     mi_cuenta: '/mi_cuenta',
     prescripcion: '/prescripcion',
+    auditoria: '/auditoria',
     form:'/formulario',
     reportePrescripcion: '/reporte',
     ayuda:'/ayuda',

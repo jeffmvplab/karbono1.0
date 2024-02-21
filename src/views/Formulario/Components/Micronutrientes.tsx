@@ -1,11 +1,12 @@
 import { colorsKarbono } from '@/themes/colors'
 import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, MenuItem, Stack, TextField, Typography, useMediaQuery } from '@mui/material'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CustomTextField from './CustomTextField'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { FormulariosContext } from '../context/FormulariosContext';
 import { LightTooltip } from '../style/styleToolTips';
 import { getPotacioTotal, getSodioTotal } from '@/views/ReportePrescripcion/data/functionsParams';
+import { convertComaAPunto } from '@/views/ReportePrescripcion/data/comaTopoint';
 
 const tipoFosfato = [
     { value: 'Fosfato de sodio', label: 'Fosfato de sodio' },
@@ -46,6 +47,10 @@ const hidrosolublesPediatricos = [
 ]
 
 
+const sumVit = [
+    { value: 'Sumar Vitaminas', label: 'Sumar Vitaminas' },
+    { value: 'No Sumar Vitaminas', label: 'No Sumar Vitaminas' }
+]
 
 const Micronutrientes = () => {
 
@@ -67,6 +72,7 @@ const Micronutrientes = () => {
         vitaminasLiposolubles, handleVitaminasLiposolubles,
         vitaminasC, handleVitaminasC,
         acidoFolico, handleAcidoFolico,
+        soluvid_Vitalipid, handleSoluvid_Vitalipid,
         getPrescriptions
     } = useContext(FormulariosContext)
 
@@ -76,6 +82,8 @@ const Micronutrientes = () => {
 
     // console.log('Magnesio:', magnesio)
     /////////////////////////////////////////////////////////////////////
+    const [sumaVit, setSumaVit] = useState<string>('No Sumar Vitaminas');
+
 
     return (
 
@@ -148,7 +156,7 @@ const Micronutrientes = () => {
                                             onChange={handleSodioTotal}
                                             onClick={getPrescriptions}
                                             onKeyPress={getPrescriptions}
-                                            value={sodioTotal}
+                                            value={convertComaAPunto(sodioTotal)}
                                             id='Cloruro de Sodio 2MEQ/ML'
                                             label={'Cloruro de Sodio 2MEQ/ML'}
                                             endAdornament={
@@ -199,7 +207,7 @@ const Micronutrientes = () => {
                                             onChange={handlePotacioTotal}
                                             onClick={getPrescriptions}
                                             onKeyPress={getPrescriptions}
-                                            value={potacioTotal}
+                                            value={convertComaAPunto(potacioTotal)}
                                             id='Cloruro de Potasio 2MEQ/ML'
                                             label={'Cloruro de Potasio 2MEQ/ML'}
                                             endAdornament={
@@ -265,7 +273,7 @@ const Micronutrientes = () => {
                                     select
                                 >
                                     {tipoFosfato.map((option) => (
-                                        <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
+                                        <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
                                             {option.label}
                                         </MenuItem>
                                     ))}
@@ -279,7 +287,7 @@ const Micronutrientes = () => {
                                 onChange={handleRequerimientoFosfato}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
-                                value={requerimientoFosfato}
+                                value={convertComaAPunto(requerimientoFosfato)}
                                 id='requerimiento-fosfato'
                                 label={'Requerimiento fosfato'}
                                 endAdornament={
@@ -315,7 +323,7 @@ const Micronutrientes = () => {
                                 select
                             >
                                 {tipoCalcio.map((option) => (
-                                    <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
+                                    <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>
                                 ))}
@@ -330,7 +338,7 @@ const Micronutrientes = () => {
                                 onChange={handleReqCalcio}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
-                                value={reqCalcio}
+                                value={convertComaAPunto(reqCalcio)}
                                 id='requerimiento_calcio'
                                 label={calcio}
                                 endAdornament={
@@ -373,7 +381,7 @@ const Micronutrientes = () => {
                                 select
                             >
                                 {tipoMagnesio.map((option) => (
-                                    <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
+                                    <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>
                                 ))}
@@ -388,9 +396,9 @@ const Micronutrientes = () => {
                                 onChange={handleReqMagnesio}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
-                                value={reqMagnesio}
+                                value={convertComaAPunto(reqMagnesio)}
                                 id='requerimiento-sulfato-de-magnesio'
-                                label={magnesio}
+                                label={convertComaAPunto(magnesio)}
                                 endAdornament={
                                     (magnesio === 'Sulfato de Magnesio')
 
@@ -438,12 +446,12 @@ const Micronutrientes = () => {
                                 {
                                     (tipoPaciente === 'Adulto')
                                         ? trazaAdulto.map((option) => (
-                                            <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
+                                            <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
                                                 {option.label}
                                             </MenuItem>))
 
                                         : trazaPediatrico.map((option) => (
-                                            <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
+                                            <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
                                                 {option.label}
                                             </MenuItem>))
                                 }
@@ -456,7 +464,7 @@ const Micronutrientes = () => {
                                 onChange={handleReqTraza}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
-                                value={reqTraza}
+                                value={convertComaAPunto(reqTraza)}
                                 id='requerimiento-traza'
                                 label={'Requerimiento traza'}
                                 endAdornament={
@@ -482,6 +490,39 @@ const Micronutrientes = () => {
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
                             <CustomTextField
+                                onChange={(e) => setSumaVit(e.target.value)}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={sumaVit}
+                                defaulValue={soluvid_Vitalipid !== '' ? 'Sumar Vitaminas' : 'No Sumar Vitaminas'}
+                                id='sumar vit'
+                                label={'Sumar Vitaminas'}
+                                type='text'
+                                select
+                            >
+                                {
+                                    sumVit.map((option) => (
+                                        <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))
+                                }
+                            </CustomTextField>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+                        </Grid>
+                    </Grid>
+                </Box>
+
+                <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+
+                    <Grid container spacing={2}>
+
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+                            <CustomTextField
+                                disabled={sumaVit === 'Sumar Vitaminas'}
                                 onChange={handleVitaminasHidrosolubles}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
@@ -495,18 +536,18 @@ const Micronutrientes = () => {
                                 {
                                     (tipoPaciente === 'Adulto')
                                         ? hidrosolublesAdulto.map((option) => (
-                                            <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
+                                            <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
                                                 {option.label}
                                             </MenuItem>
                                         ))
                                         : (tipoPaciente === 'Pediatrico')
                                             ? hidrosolublesPediatricos.map((option) => (
-                                                <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
+                                                <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
                                                     {option.label}
                                                 </MenuItem>
                                             ))
                                             : hidrosolublesPediatricos.map((option) => (
-                                                <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
+                                                <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
                                                     {option.label}
                                                 </MenuItem>
                                             ))
@@ -515,11 +556,14 @@ const Micronutrientes = () => {
                         </Grid>
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
                             <CustomTextField
+                                disabled={sumaVit === 'Sumar Vitaminas'}
                                 onChange={handleReqVitHidrosolubles}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
-                                value={reqVitHidrosolubles}
+                                value={convertComaAPunto(reqVitHidrosolubles)}
+                                // disabled={!sumVit}
                                 id='req-vitaminas-hidrosolubles'
                                 label={'Requerimientos Vitaminas hidrosolubes'}
                                 endAdornament={
@@ -544,16 +588,37 @@ const Micronutrientes = () => {
                     <Grid container spacing={2}>
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-
+                            <CustomTextField
+                                disabled={sumaVit !== 'Sumar Vitaminas'}
+                                onChange={handleSoluvid_Vitalipid}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={convertComaAPunto(soluvid_Vitalipid)}
+                                // disabled={!sumVit}
+                                id='Soluvit+Vitalipit'
+                                label={'Soluvit+Vitalipit'}
+                                endAdornament={
+                                    <Typography
+                                        textTransform={'lowercase'}>
+                                        {(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'ml/día'
+                                            : 'ml'
+                                        }
+                                    </Typography>
+                                }
+                                type='text'
+                            />
 
                         </Grid>
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                             <CustomTextField
+                                disabled={sumaVit === 'Sumar Vitaminas'}
                                 onChange={handleVitaminasLiposolubles}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
-                                value={vitaminasLiposolubles}
+                                // disabled={!sumVit}
+                                value={convertComaAPunto(vitaminasLiposolubles)}
                                 id='vitaminas-liposolubles'
                                 label={
                                     (tipoPaciente === 'Adulto')
@@ -586,7 +651,7 @@ const Micronutrientes = () => {
                                 onChange={handleVitaminasC}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
-                                value={vitaminasC}
+                                value={convertComaAPunto(vitaminasC)}
                                 id='vitamina-c'
                                 label={'Vitamina C'}
                                 endAdornament={
@@ -607,7 +672,7 @@ const Micronutrientes = () => {
                                 onChange={handleAcidoFolico}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
-                                value={acidoFolico}
+                                value={convertComaAPunto(acidoFolico)}
                                 id='acido-folico'
                                 label={'Acido folico (mg/día)'}
                                 endAdornament={

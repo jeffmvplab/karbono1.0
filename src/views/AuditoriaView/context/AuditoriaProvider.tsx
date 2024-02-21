@@ -6,7 +6,7 @@ import { StorageKeysEnum } from "@/utilities/enums";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { FC } from "react";
-import { PrescripcionContext } from "./PrescripcionContext";
+import { AuditoriaContext } from "./AuditoriaContext";
 import { PrescriptionsUseCases } from "@/domain/usecases/prescriptions.usecases";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
 import { GlobalContext } from "@/context/GlobalContext";
@@ -16,12 +16,12 @@ type Props = {
 };
 
 
-export const PrescripcionProvider: FC<Props> = ({ children }) => {
+export const AuditoriaProvider: FC<Props> = ({ children }) => {
 
 	const prescriptionsUseCase = new PrescriptionsUseCases();
 	const [loadingGet, setLoadingGet] = React.useState(false);
 	const [getOK, setGetOk] = React.useState(true);
-	const { handleOffline } = useContext(GlobalContext)
+	const {handleOffline}=useContext(GlobalContext)
 	const [messageAPI, setMessageAPI] = React.useState('');
 
 	const [reportes, setReportes] = React.useState<IPrescriptions[]>([]);
@@ -46,67 +46,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			setGetOk(false)
 		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
 			setGetOk(false)
-		} else if (resp.statusCode === 408) {
-			handleOffline();
-		} else {
-			setGetOk(false)
-		}
-		setLoadingGet(true);
-		//  return resp.body;
-	}
-
-	const getPrescripcionsByLab = async () => {
-
-		setLoadingGet(false);
-		console.log('Loading PrescripcionsByLab...')
-		const resp = await prescriptionsUseCase.getPrescripcionsByLab()
-		console.log('PrescripcionsByLab Resp:', resp.body)
-
-
-		if (resp.statusCode === 200) {
-			setReportes(resp.body);
-			setGetOk(true);
-		} else if (resp.statusCode === 400) {
-			setMessageAPI(resp.body.message)
-			setGetOk(false)
-		} else if (resp.statusCode === 404) {
-			setGetOk(false)
-		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
-			setGetOk(false)
-		} else if (resp.statusCode === 408) {
-			handleOffline();
-		} else {
-			setGetOk(false)
-		}
-		setLoadingGet(true);
-		//  return resp.body;
-	}
-
-	const [preparador, setPreparador] = useState<string>()
-	const [controlador_de_calidad, setControlador_de_calidad] = useState<string>()
-	const [prescripcionID, setPrescripcionID] = useState<string>()
-
-	const setQuimicos = async () => {
-
-		setLoadingGet(false);
-		console.log('Loading PrescripcionsByLab...')
-		const resp = await prescriptionsUseCase.setQuimicos(
-			prescripcionID!, preparador!, controlador_de_calidad!
-		);
-		console.log('PrescripcionsByLab Resp:', resp.body)
-
-
-		if (resp.statusCode === 200) {
-			setReportes(resp.body);
-			setGetOk(true);
-		} else if (resp.statusCode === 400) {
-			setMessageAPI(resp.body.message)
-			setGetOk(false)
-		} else if (resp.statusCode === 404) {
-			setGetOk(false)
-		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
-			setGetOk(false)
-		} else if (resp.statusCode === 408) {
+		}else if (resp.statusCode === 408) {
 			handleOffline();
 		} else {
 			setGetOk(false)
@@ -185,19 +125,19 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 		const resp = await prescriptionsUseCase.prescripcionsByNumber(number);
 		let repoPresc: IPrescriptions[] = []
-
-		if (resp.body.length) {
-			repoPresc = resp.body
-		} else {
-			repoPresc[0] = resp.body
+		
+		if(resp.body.length){
+			repoPresc= resp.body
+		}else{
+			repoPresc[0]= resp.body
 		}
-
-		console.log('RESP by Num:', repoPresc)
+        
+		console.log('RESP by Num:',repoPresc)
 		if (resp.statusCode === 200) {
 			setReportes(repoPresc);
 			setErrorSearch(false)
 
-			if (resp.body.length === 0) {
+			if(resp.body.length===0){
 				setMessageAPI('No se encontró ninguna prescripción')
 				setErrorSearch(true)
 			}
@@ -214,7 +154,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			setMessageAPI(resp.body.message)
 			setErrorSearch(true)
 			setApiOk(false)
-		} else if (resp.statusCode === 408) {
+		}else if (resp.statusCode === 408) {
 			handleOffline();
 		} else {
 			setErrorSearch(true)
@@ -229,19 +169,19 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 		const resp = await prescriptionsUseCase.prescripcionsByName(name);
 		let repoPresc: IPrescriptions[] = []
-
-		if (resp.body.length > 0) {
-			repoPresc = resp.body
-		} else {
-			repoPresc = []
+		
+		if(resp.body.length>0){
+			repoPresc= resp.body
+		}else{
+			repoPresc= []
 		}
-		console.log('RESP by Name:', resp.body)
+		console.log('RESP by Name:',resp.body)
 		if (resp.statusCode === 201) {
-
+			
 			setReportes(repoPresc);
 			setErrorSearch(false)
-
-			if (resp.body.length === 0) {
+			
+			if(resp.body.length===0){
 				setMessageAPI('No se encontró ninguna prescripción')
 				setErrorSearch(true)
 			}
@@ -258,7 +198,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			setMessageAPI(resp.body.message)
 			setApiOk(false)
 			setErrorSearch(true)
-		} else if (resp.statusCode === 408) {
+		}else if (resp.statusCode === 408) {
 			handleOffline();
 		} else {
 			setMessageAPI(resp.body.message)
@@ -272,19 +212,19 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		setLoadingApi(false);
 		const resp = await prescriptionsUseCase.prescripcionsByIps(ips);
 		let repoPresc: IPrescriptions[] = []
-
-		if (resp.body.length) {
-			repoPresc = resp.body
-		} else {
-			repoPresc[0] = resp.body
+		
+		if(resp.body.length){
+			repoPresc= resp.body
+		}else{
+			repoPresc[0]= resp.body
 		}
-		console.log('RESP by Ips:', resp)
+		console.log('RESP by Ips:',resp)
 
 		if (resp.statusCode === 201) {
 			setReportes(repoPresc);
 			setErrorSearch(false)
 
-			if (resp.body.length === 0) {
+			if(resp.body.length===0){
 				setMessageAPI('No se encontró ninguna prescripción')
 				setErrorSearch(true)
 			}
@@ -301,7 +241,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			setMessageAPI(resp.body.message)
 			setApiOk(false)
 			setErrorSearch(true)
-		} else if (resp.statusCode === 408) {
+		}else if (resp.statusCode === 408) {
 			handleOffline();
 		} else {
 			setMessageAPI(resp.body.message)
@@ -315,19 +255,19 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		setLoadingApi(false);
 		const resp = await prescriptionsUseCase.prescripcionsById(id);
 		let repoPresc: IPrescriptions[] = []
-
-		if (resp.body.length > 0) {
-			repoPresc = resp.body
-		} else {
-			repoPresc = []
+		
+		if(resp.body.length>0){
+			repoPresc= resp.body
+		}else{
+			repoPresc= []
 		}
-		console.log('RESP by Id:', resp)
+		console.log('RESP by Id:',resp)
 
 		if (resp.statusCode === 201) {
 			setReportes(repoPresc);
 			setErrorSearch(false)
 
-			if (resp.body.length === 0) {
+			if(resp.body.length===0){
 				setMessageAPI('No se encontró ninguna prescripción')
 				console.log(resp.body)
 				setErrorSearch(true)
@@ -347,7 +287,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			setErrorSearch(true)
 		} else if (resp.statusCode === 408) {
 			handleOffline();
-		} else {
+		}else {
 			setMessageAPI(resp.body.message)
 			setApiOk(false)
 			setErrorSearch(true)
@@ -357,24 +297,24 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 	const handleFilterSearch = async () => {
 		switch (selectedFilter) {
-			case 'a': (isNaN(parseInt(search)))
-				? await getPrescriptionsByName(search)
-				: await getPrescriptionsByNumber(search)
+			case 'a':(isNaN(parseInt(search)))
+			          ?await getPrescriptionsByName(search)
+					  :await getPrescriptionsByNumber(search)
 				break;
-			case 'b': (isNaN(parseInt(search)))
-				? await getPrescriptionsByIps(search)
-				: await getPrescriptionsByNumber(search)
+			case 'b':(isNaN(parseInt(search)))
+			         ?await getPrescriptionsByIps(search)
+					 :await getPrescriptionsByNumber(search)
 				break;
-			case 'c': (!isNaN(parseInt(search)))
-				? (search.length > 7)
-					? await getPrescriptionsById(search)
-					: await getPrescriptionsByNumber(search)
-				: await getPrescriptionsByName(search)
+			case 'c':(!isNaN(parseInt(search)))
+			         ?(search.length>7)
+					  ?await getPrescriptionsById(search)
+					  :await getPrescriptionsByNumber(search)
+					 :await getPrescriptionsByName(search)
 				break;
-			case 'd': (!isNaN(parseInt(search)))
-				? await getPrescriptionsByNumber(search)
-				: await getPrescriptionsByName(search)
-				break;
+			case 'd':(!isNaN(parseInt(search)))
+			         ?await getPrescriptionsByNumber(search)
+					 :await getPrescriptionsByName(search)
+			break;
 				break;
 		}
 	}
@@ -382,7 +322,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 	//////////////////////////////////////////////////////////////////////////////////
 
 	return (
-		<PrescripcionContext.Provider value={{
+		<AuditoriaContext.Provider value={{
 
 			loadingGet,
 			getOK,
@@ -424,6 +364,6 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 
 		}}>{children}
-		</PrescripcionContext.Provider>
+		</AuditoriaContext.Provider>
 	)
 };

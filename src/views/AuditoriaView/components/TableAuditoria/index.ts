@@ -1,0 +1,1 @@
+export { default as TableAuditoria } from './TableAuditoria';

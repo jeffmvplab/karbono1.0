@@ -4,6 +4,7 @@ import React, { useContext, useEffect } from 'react'
 import CustomTextField from './CustomTextField'
 import { FormulariosContext } from '../context/FormulariosContext';
 import { LightTooltip } from '../style/styleToolTips';
+import { convertComaAPunto } from '@/views/ReportePrescripcion/data/comaTopoint';
 
 const aminoAdultos = [
     { value: 'AminovenSE', label: 'Aminoven 15% SE' },
@@ -147,7 +148,7 @@ const Macronutrientes = () => {
                                     onChange={handleFlujoMetabolico}
                                     onClick={getPrescriptions}
                                     onKeyPress={getPrescriptions}
-                                    value={flujoMetabolico}
+                                    value={convertComaAPunto(flujoMetabolico)}
                                     id='flujo-metabolico'
                                     label={'Flujo metabólico*'}
                                     endAdornament={
@@ -171,7 +172,7 @@ const Macronutrientes = () => {
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
                                 // disabled={true}
-                                value={dextrosa}
+                                value={convertComaAPunto(dextrosa)}
                                 id='dextrosa'
                                 label={'Dextrosa*'}
                                 endAdornament={
@@ -231,7 +232,7 @@ const Macronutrientes = () => {
                                 onChange={handleRequerimientoAminoacidos}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
-                                value={requerimientoAminoacidos}
+                                value={convertComaAPunto(requerimientoAminoacidos)}
                                 id='requerimiento-aminoacidos'
                                 label={'Requerimiento aminoácidos*'}
                                 endAdornament={
@@ -258,8 +259,8 @@ const Macronutrientes = () => {
                                 onChange={handleLipidos}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
-                                value={lipidos}
-                                defaulValue={lipidos}
+                                value={convertComaAPunto(lipidos)}
+                                defaulValue={convertComaAPunto(lipidos)}
                                 id='lipidos'
                                 label='Lípidos'
                                 type='text'
@@ -285,7 +286,7 @@ const Macronutrientes = () => {
                             <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                                 <CustomTextField
                                     onChange={handleRequerimientoLipidos}
-                                    value={requerimientoLipidos}
+                                    value={convertComaAPunto(requerimientoLipidos)}
                                     id='requerimiento-lipidos'
                                     label={'Requerimiento Lípidos'}
                                     endAdornament={
@@ -312,7 +313,7 @@ const Macronutrientes = () => {
                                 onChange={handleOmegaven}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
-                                value={omegaven}
+                                value={convertComaAPunto(omegaven)}
                                 id='omegaven'
                                 label={'Omegaven'}
                                 endAdornament={
@@ -332,7 +333,7 @@ const Macronutrientes = () => {
                                 onChange={handleDipeptiven}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
-                                value={dipeptiven}
+                                value={convertComaAPunto(dipeptiven)}
                                 id='dipeptiven'
                                 label={'Dipeptiven'}
                                 endAdornament={

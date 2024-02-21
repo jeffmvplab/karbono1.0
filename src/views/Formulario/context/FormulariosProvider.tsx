@@ -246,6 +246,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setVitaminasHidrosolubles(repor?.vit_hidrosolubles);
 		setReqVitHidrosolubles(repor?.req_vit_hidrosolubles);
 		setVitaminasLiposolubles(repor?.req_vit_liposolubles);
+		setSoluvid_Vitalipid(repor?.soluvit_vitalip)
 		setVitaminasC(repor?.vit_C);
 		setAcidoFolico(repor?.acido_folico);
 
@@ -827,12 +828,21 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
+
 	const [vitaminasLiposolubles, setVitaminasLiposolubles] = React.useState('0');
 	const [errorVitaminasLiposolubles, setErrorVitaminasLiposolubles] = React.useState(false);
 	const [messageErrorVitaminasLiposolubles, setMessageErrorVitaminasLiposolubles] = React.useState('');
 
 	const handleVitaminasLiposolubles = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setVitaminasLiposolubles(event.target.value);
+		// getPrescriptions();
+	};
+
+	
+	const [soluvid_Vitalipid, setSoluvid_Vitalipid] = React.useState('0');
+
+	const handleSoluvid_Vitalipid = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSoluvid_Vitalipid(event.target.value);
 		// getPrescriptions();
 	};
 
@@ -912,6 +922,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		vit_hidrosolubles: vitaminasHidrosolubles || '0',
 		req_vit_hidrosolubles: (reqVitHidrosolubles === '') ? '0' : reqVitHidrosolubles,
 		req_vit_liposolubles: (vitaminasLiposolubles === '') ? '0' : vitaminasLiposolubles,
+		soluvit_vitalip: (soluvid_Vitalipid=== '') ? '0' : soluvid_Vitalipid,
 		vit_C: (vitaminasC === '') ? '0' : vitaminasC,
 		acido_folico: (acidoFolico === ' ') ? '0' : acidoFolico
 	}
@@ -1323,6 +1334,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			vitaminasHidrosolubles, errorVitaminasHidrosolubles, messageErrorVitaminasHidrosolubles, handleVitaminasHidrosolubles,
 			reqVitHidrosolubles, errorReqVitHidrosolubles, messageErrorReqVitHidrosolubles, handleReqVitHidrosolubles,
 			vitaminasLiposolubles, errorVitaminasLiposolubles, messageErrorVitaminasLiposolubles, handleVitaminasLiposolubles,
+			
+			soluvid_Vitalipid,
+			handleSoluvid_Vitalipid,
+
 			vitaminasC, errorVitaminasC, messageErrorVitaminasC, handleVitaminasC,
 			acidoFolico, errorAcidoFolico, messageErrorAcidoFolico, handleAcidoFolico,
 

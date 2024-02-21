@@ -4,7 +4,7 @@ import { CustomButton } from '@/components/CustomButton';
 import { colorsKarbono } from '@/themes/colors';
 import { Box, Stack, TextField, Typography, Card, MenuItem, Skeleton, Grid, Button, styled, Alert } from '@mui/material';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect} from 'react';
 import InformacionPaciente from './Components/InformacionPaciente';
 import Macronutrientes from './Components/Macronutrientes';
 import Micronutrientes from './Components/Micronutrientes';
@@ -14,9 +14,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Image from 'next/image';
 import { FormulariosContext } from './context/FormulariosContext';
 import { FormSavedModal } from './Components/FormSavedModal';
-import { mainRoutes } from '@/routes/routes';
 import { FormCancelModal } from './Components/FormCancelModal';
-import { color } from 'html2canvas/dist/types/css/types/color';
 import Observaciones from './Components/Observaciones';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -49,18 +47,17 @@ const FormView: React.FC<FormViewProps> = () => {
 		{ value: 'Por volúmenes', label: 'Por volúmenes' }
 	]
 	const {
-		getMovilHeight, savePrescription,
+		 savePrescription,
 		numOrder, handleNumOrder,
 		fechaCreacion, handleFechaCreacion,
 		fechaActual,
 		getPrescriptionsByNumber,
 		loadingSave,
-		cancelForm,
 		getPrescriptions,
 		valTabsErrors1, valTabsErrors2, validateAlert, validateCampos,
 		handleOpenModalFormSaved, getMaxNumPresc, validateTipoPrecripcion,
 		handleOpenModalFormCancel, setSelectTab, selectTab, maxNumOrder, saveBorrador,
-		handleTipoPrescripcion, messageErrorTipoPrescripcion, tipoPrescripcion,
+		handleTipoPrescripcion,tipoPrescripcion,
 	} = useContext(FormulariosContext)
 
 

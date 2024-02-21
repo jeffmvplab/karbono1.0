@@ -7,6 +7,7 @@ import { colorsKarbono } from '@/themes/colors';
 import { FormulariosContext } from '../context/FormulariosContext';
 import { LightTooltip } from '../style/styleToolTips';
 import { instituciones } from '@/views/ReportePrescripcion/data/instituciones';
+import { convertComaAPunto } from '@/views/ReportePrescripcion/data/comaTopoint';
 
 
 const currencies = [
@@ -31,18 +32,28 @@ const viaAdministracion = [
 ]
 
 const marks1 = [
-    { value: 10, label: '10', },
+    { value: 0, label: '1', },
+    { value: 1, label: '', },
+    { value: 2, label: '', },
+    { value: 3, label: '', },
+    { value: 4, label: '4', },
+    { value: 5, label: '', },
+    { value: 6, label: '', },
+    { value: 7, label:'', },
+    { value: 8, label:  '8', },
+    { value: 9, label: '', },
+    { value: 10, label: '', },
     { value: 11, label: '', },
-    { value: 12, label: '', },
+    { value: 12, label: '12', },
     { value: 13, label: '', },
-    { value: 14, label: '14', },
+    { value: 14, label: '', },
     { value: 15, label: '', },
-    { value: 16, label: '', },
-    { value: 17, label: '17', },
+    { value: 16, label: '16', },
+    { value: 17, label: '', },
     { value: 18, label: '', },
     { value: 19, label: '', },
-    { value: 20, label: '', },
-    { value: 21, label: '21', },
+    { value: 20, label: '20', },
+    { value: 21, label: '', },
     { value: 22, label: '', },
     { value: 23, label: '', },
     { value: 24, label: '24', },
@@ -70,8 +81,7 @@ const marks2 = [
 
 const InformacionPaciente = () => {
 
-    const { stateAcordion1, setStateAcordion1, matches, handleAcordion1,
-
+    const { 
         ips, handleIps,
         numIden, handleNumIden, errorNumIden, messageErrorNumIden,
         namePaciente, handleNamePaciente, errorNamePaciente, messageErrorNamePaciente,
@@ -276,8 +286,8 @@ const InformacionPaciente = () => {
                                     </Typography>
                                 }
                                 type='text'
-                                value={pesoKg}
-                                defaulValue={pesoKg}
+                                value={convertComaAPunto(pesoKg)}
+                                defaulValue={convertComaAPunto(pesoKg)}
                                 helperText={messageErrorPesoKg}
                             />
                         </Grid>
@@ -347,8 +357,8 @@ const InformacionPaciente = () => {
                                     id='volumen'
                                     label='Volumen total NPT*'
                                     type='text'
-                                    value={volumen}
-                                    defaulValue={volumen}
+                                    value={convertComaAPunto(volumen)}
+                                    defaulValue={convertComaAPunto(volumen)}
                                     helperText={messageErrorVolumen}
                                 />
                             </Grid>
@@ -369,11 +379,11 @@ const InformacionPaciente = () => {
                                 onChange={handlePurga}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
-                                id='purga'
-                                label='Purga*'
+                                id='overfill'
+                                label='Overfill*'
                                 type='text'
-                                value={purga}
-                                defaulValue={purga}
+                                value={convertComaAPunto(purga)}
+                                defaulValue={convertComaAPunto(purga)}
                                 helperText={messageErrorPurga}
                             />
                         </Grid>
@@ -389,12 +399,12 @@ const InformacionPaciente = () => {
                                     onChange={handleTiempoDeInfucion}
                                     sx={{ margin: '0 5px', marginTop: '0px' }}
                                     aria-label="Small steps"
-                                    defaultValue={1}
+                                    defaultValue={tiempoDeInfucion}
                                     // getAriaValueText={valuetext}
                                     step={1}
-                                    min={10}
+                                    min={0}
                                     max={24}
-                                    valueLabelDisplay="auto"
+                                    valueLabelDisplay="on"
                                     marks={marks1}
 
                                 />

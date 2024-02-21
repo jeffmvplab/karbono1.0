@@ -230,7 +230,7 @@ export const getDextrosa = (prescription: IPrescriptions) => {
     const tiempoInfusion: number = prescription?.tiempo_infusion!;
 
     if (tp === tipoPrescripcion) {
-        params.requerimiento =dextrosa
+        params.requerimiento = dextrosa
         params.volumen = flujoMetabolico * peso * tiempoInfusion * 0.12;
         params.conPurga = params.volumen * correccionPurga(prescription);
     } else {
@@ -412,7 +412,7 @@ export const getAgua = (prescription: IPrescriptions) => {
 
     const volTotalNPT: number = prescription?.volumen!
     const vitaminas: number = getVitHidroSolubles(prescription!).volumen
-        + getVitLiposSolubles(prescription!).volumen
+        + getVitLiposSolubles(prescription!).volumen  + (parseFloat(prescription?.soluvit_vitalip!))
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
 
@@ -447,7 +447,7 @@ export const getVolTotal = (prescription: IPrescriptions) => {
 
     const volAgua: number = getAgua(prescription).volumen
     const vitaminas: number = getVitHidroSolubles(prescription!).volumen
-        + getVitLiposSolubles(prescription!).volumen
+        + getVitLiposSolubles(prescription!).volumen  + (parseFloat(prescription?.soluvit_vitalip!))
     let volTotal: number = 0;
 
 
@@ -486,7 +486,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
 
     const vit_hidrosoluble: string = prescription?.vit_hidrosolubles!;
     const aminoacidos: string = prescription?.aminoacidos
-    const lipidos: string =  prescription?.lipidos
+    const lipidos: string = prescription?.lipidos
 
     // console.log('Amino:', aminoacidos)
 
@@ -529,13 +529,13 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
     ////////////////////////////////////////////////////////////////////////////////
     const smoflipid: number = (lipidos === 'Smoflipid')
-        ?getLipidos(prescription).volumen : 0;
+        ? getLipidos(prescription).volumen : 0;
 
     const clinoleic: number = (lipidos === 'Clinoleic')
-        ?getLipidos(prescription).volumen : 0;
+        ? getLipidos(prescription).volumen : 0;
 
     const lipoplus: number = (lipidos === 'Lipoplus')
-        ?getLipidos(prescription).volumen : 0;
+        ? getLipidos(prescription).volumen : 0;
 
     // let osmolaridad: number = 0;
 
@@ -567,6 +567,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
             + (vitaLipidInfantil * 260)
             + (vitaLipidAd * 260)
             + (soluvit * 490)
+            + (parseFloat(prescription?.soluvit_vitalip!) * 770)
             + (getVit_C(prescription!).volumen * 1740)
             + (parseFloat(prescription?.acido_folico!) * 227)
             + (volAgua * 1))
@@ -621,6 +622,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
             + (vitaLipidInfantil * 260)
             + (vitaLipidAd * 260)
             + (soluvit * 490)
+            + (parseFloat(prescription?.soluvit_vitalip!) * 770)
             + (getVit_C(prescription!).conPurga * 1740)
             + (parseFloat(prescription?.acido_folico!) * 227)
             + (volAgua * 1))
