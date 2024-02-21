@@ -52,6 +52,7 @@ export interface IPrescriptions {
     vit_hidrosolubles: string,
     req_vit_hidrosolubles: string,
     req_vit_liposolubles: string,
+    soluvit_vitalip: string,
     vit_C: string,
     acido_folico: string,
     observaciones?: IComment[]

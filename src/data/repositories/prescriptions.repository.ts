@@ -17,7 +17,9 @@ export interface IPrescriptionsRepository {
     getPrescripcionsAll(limit: number): Promise<any>;
     updatePrescripcions(prescriptions: IPrescriptions, number: string): Promise<any>;
     getMaxNumberPres(): Promise<any>;
-    createComments(comment:IComment): Promise<any>;
+    createComments(comment: IComment): Promise<any>;
+    getPrescripcionsByLab(): Promise<any>;
+    setQuimicos(prescriptionId: string,preparador: string,controlador_de_calidad: string): Promise<any> ;
 }
 
 export class PrescriptionsRepository implements IPrescriptionsRepository {
@@ -221,6 +223,35 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
         });
         return axiosRequest;
     }
+    ////////////////////////////////Get Predscripcion By Lab////////////////////////////////////////////////
+    async getPrescripcionsByLab(): Promise<any> {
+
+        const axiosRequest = await this.axiosHttpClient.request({
+            url: ApiUrlsEnum.getPrescriptionsByLab,
+            method: 'get',
+        });
+        return axiosRequest;
+    }
+
+    ////////////////////////////////Get Predscripcion By Lab////////////////////////////////////////////////
+    async setQuimicos(
+        prescriptionId: string,
+        preparador: string,
+        controlador_de_calidad: string,
+    ): Promise<any> {
+
+        const axiosRequest = await this.axiosHttpClient.request({
+            url: ApiUrlsEnum.setQuimicos,
+            method: 'get',
+            body: {
+                prescriptionId: prescriptionId,
+                preparador: preparador,
+                controlador_de_calidad: controlador_de_calidad
+            },
+        });
+        return axiosRequest;
+    }
+
 
 
     /////////////////////////////////Get Predscripcion By Ips////////////////////////////////////////////////
@@ -247,7 +278,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
     }
 
     /////////////////////////////////Get Max Number Pres////////////////////////////////////////////////
-    async createComments(comment:IComment): Promise<any> {
+    async createComments(comment: IComment): Promise<any> {
 
         const axiosRequest = await this.axiosHttpClient.request({
             url: ApiUrlsEnum.saveComments,

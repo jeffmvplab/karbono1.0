@@ -75,6 +75,10 @@ interface ContextProps {
     reqCalcio: string, errorReqCalcio: boolean, messageErrorReqCalcio: string, handleReqCalcio: (event: React.ChangeEvent<HTMLInputElement>) => void,
     magnesio: string, errorMagnesio: boolean, messageErrorMagnesio: string, handleMagnesio: (event: React.ChangeEvent<HTMLInputElement>) => void,
     reqMagnesio: string, errorReqMagnesio: boolean, messageErrorReqMagnesio: string, handleReqMagnesio: (event: React.ChangeEvent<HTMLInputElement>) => void,
+   
+    soluvid_Vitalipid: string,
+    handleSoluvid_Vitalipid: (event: React.ChangeEvent<HTMLInputElement>) => void,
+
     elementosTraza: string, errorElementosTraza: boolean, messageErrorElementosTraza: string, handleElementosTraza: (event: React.ChangeEvent<HTMLInputElement>) => void,
     reqTraza: string, errorReqTraza: boolean, messageErrorReqTraza: string, handleReqTraza: (event: React.ChangeEvent<HTMLInputElement>) => void,
     vitaminasHidrosolubles: string, errorVitaminasHidrosolubles: boolean, messageErrorVitaminasHidrosolubles: string, handleVitaminasHidrosolubles: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -118,7 +122,9 @@ interface ContextProps {
 
     tabsErrors: IErrorsTab, setTabErrors: React.Dispatch<React.SetStateAction<IErrorsTab>>
     valTabsErrors1: () => boolean | undefined, valTabsErrors2: () => boolean | undefined,
-    validateTipoPrecripcion: (tipoPrescripcion: string) => boolean
+    validateTipoPrecripcion: (tipoPrescripcion: string) => boolean,
+
+
 }
 
 export const FormulariosContext = createContext({} as ContextProps)
