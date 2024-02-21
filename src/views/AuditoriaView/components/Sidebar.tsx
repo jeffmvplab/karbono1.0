@@ -8,13 +8,14 @@ import { CustomButton } from '@/components/CustomButton';
 import { mainRoutes } from '@/routes/routes';
 import { colorsKarbono } from '@/themes/colors';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { PrescripcionContext } from '../context/AuditoriaContext';
 import { useRouter } from 'next/router';
 import { typographyKarbono } from '@/themes/typography';
+import { PrescripcionContext } from '@/views/PrescripcionView/context/PrescripcionContext';
 
 export const Sidebar = ({ drawerWidth = 240 }) => {
 
   const { goAddNew } = useContext(PrescripcionContext)
+  
   const router = useRouter();
 
   return (

@@ -2,9 +2,8 @@
 import { Search } from '@mui/icons-material'
 import { Autocomplete, Box, Button, Grid, TextField, Typography } from '@mui/material'
 import React, { useContext } from 'react'
-import { PrescripcionContext } from '../context/AuditoriaContext'
-
 import { typographyKarbono } from '@/themes/typography'
+import { PrescripcionContext } from '@/views/PrescripcionView/context/PrescripcionContext'
 
 const SearchBar = () => {
 

@@ -1,6 +1,6 @@
 export * from '../../../layouts/components/NavBar/NavBarP';
 export * from './SearchBar';
 export * from './Sidebar';
-export * from './Tabla';
+export * from './TableAuditoria';
 
 
