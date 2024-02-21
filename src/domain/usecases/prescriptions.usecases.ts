@@ -16,6 +16,9 @@ export interface IPrescriptionsUseCase {
     updatePrescripcions(prescriptions: IPrescriptions, number: string): Promise<any>;
     getMaxNumberPres(): Promise<any>;
     createComments(comment: IComment): Promise<any>;
+
+    getPrescripcionsByLab(): Promise<any>;
+    setQuimicos(prescriptionId: string, preparador: string, controlador_de_calidad: string): Promise<any>;
 }
 
 
@@ -62,7 +65,14 @@ export class PrescriptionsUseCases implements IPrescriptionsUseCase {
 
     createComments(comment: IComment): Promise<any> {
         return this.prescriptionsRepository.createComments(comment);
+    }
 
-    };
+    getPrescripcionsByLab(): Promise<any> {
+        return this.prescriptionsRepository.getPrescripcionsByLab();
+    }
+
+    setQuimicos(prescriptionId: string, preparador: string, controlador_de_calidad: string): Promise<any> {
+        return this.prescriptionsRepository.setQuimicos(prescriptionId, preparador, controlador_de_calidad);
+    }
 }
 
