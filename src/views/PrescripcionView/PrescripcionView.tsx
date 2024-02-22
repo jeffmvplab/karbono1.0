@@ -1,8 +1,6 @@
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { Typography, Button, Box, Grid, Stack, TextField, InputAdornment } from '@mui/material/';
+
+import { Typography, Grid, Stack} from '@mui/material/';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import Tabla from './components/Tabla';
 import { mainRoutes } from '@/routes/routes';
 import { TableReportes } from './components/TableReportes';
 import { CustomButton } from '@/components/CustomButton';
@@ -11,7 +9,6 @@ import { useContext } from 'react';
 import { PrescripcionContext } from './context/PrescripcionContext';
 import { Search } from '@mui/icons-material';
 import CustomTextField from '../Formulario/Components/CustomTextField';
-
 
 
 export interface PrescripcionViewProps { }
