@@ -532,7 +532,6 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
     const multi12K: number = (vit_hidrosoluble === 'Multi12Potasio')
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
 
-
     const vitaLipidInfantil: number = (tipo_paciente === 'Pediatrico')
         ? parseFloat(prescription?.req_vit_liposolubles!) : 0;
 
