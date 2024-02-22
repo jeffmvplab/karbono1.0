@@ -82,6 +82,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
                 "vit_hidrosolubles": prescriptions.vit_hidrosolubles,
                 "req_vit_hidrosolubles": prescriptions.req_vit_hidrosolubles,
                 "req_vit_liposolubles": prescriptions.req_vit_liposolubles,
+                "soluvit_vitalip": prescriptions.soluvit_vitalip,
                 "vit_C": prescriptions.vit_C,
                 "acido_folico": prescriptions.acido_folico
             },
@@ -155,6 +156,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
                 "vit_hidrosolubles": prescriptions.vit_hidrosolubles,
                 "req_vit_hidrosolubles": prescriptions.req_vit_hidrosolubles,
                 "req_vit_liposolubles": prescriptions.req_vit_liposolubles,
+                "soluvit_vitalip": prescriptions.soluvit_vitalip,
                 "vit_C": prescriptions.vit_C,
                 "acido_folico": prescriptions.acido_folico
             },
