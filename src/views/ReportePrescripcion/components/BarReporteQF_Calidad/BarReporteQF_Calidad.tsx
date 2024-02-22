@@ -14,14 +14,14 @@ import { mainRoutes } from "@/routes/routes";
 const BarReporteQF_Calidad = () => {
 
 
-    const { reporte, saveComments, } = useContext(ReportesContext)
+    const { reporte} = useContext(ReportesContext)
 
     const router = useRouter();
 
     return (
-        <Card sx={{ position: 'fixed', width: '100%', top: '50%', left: '0px', paddingY: '10px' }} >
 
-            <Stack direction={'column'}>
+
+            <Stack direction={'column'}   width={'100%'}>
 
                 <Typography
                     sx={{ color: colorsKarbono.secundary, fontWeight: 700, fontSize: { xs: '16px', md: '16px' }, paddingX: '40px' }}>
@@ -29,6 +29,7 @@ const BarReporteQF_Calidad = () => {
                 </Typography>
 
                 <Stack
+              
                     paddingX={'40px'}
                     overflow={'scroll'}
                     bgcolor={'white'}
@@ -126,11 +127,10 @@ const BarReporteQF_Calidad = () => {
                         startIcon={
                             <LogoutRoundedIcon sx={{ color: 'white', width: '30px', height: '30px', }} />
                         }
-                        sx={{ borderRadius: '10px' }}
+                        sx={{ borderRadius: '10px'}}
                     />
                 </Stack>
             </Stack>
-        </Card>
     )
 }
 

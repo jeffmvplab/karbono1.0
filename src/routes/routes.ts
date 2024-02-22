@@ -9,6 +9,7 @@ export const mainRoutes = {
     mi_cuenta: '/mi_cuenta',
     prescripcion: '/prescripcion',
     auditoria: '/auditoria',
+    gestion: '/gestion',
     form:'/formulario',
     reportePrescripcion: '/reporte',
     ayuda:'/ayuda',

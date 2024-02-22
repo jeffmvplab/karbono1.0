@@ -395,6 +395,18 @@ export const getVitLiposSolubles = (prescription: IPrescriptions) => {
     return params;
 }
 
+export const getSoluv_Vit = (prescription: IPrescriptions) => {
+
+    const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
+
+const sol_vit=prescription?.req_vit_hidrosolubles === '' ? 0 : parseFloat(prescription?.req_vit_hidrosolubles!)
+
+    params.volumen = sol_vit
+    params.conPurga = sol_vit * correccionPurga(prescription)
+
+    return params;
+}
+
 export const getOligoelementos = (prescription: IPrescriptions) => {
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
@@ -412,7 +424,7 @@ export const getAgua = (prescription: IPrescriptions) => {
 
     const volTotalNPT: number = prescription?.volumen!
     const vitaminas: number = getVitHidroSolubles(prescription!).volumen
-        + getVitLiposSolubles(prescription!).volumen  + (parseFloat(prescription?.soluvit_vitalip!))
+        + getVitLiposSolubles(prescription!).volumen + getSoluv_Vit(prescription!).volumen
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
 
@@ -447,7 +459,7 @@ export const getVolTotal = (prescription: IPrescriptions) => {
 
     const volAgua: number = getAgua(prescription).volumen
     const vitaminas: number = getVitHidroSolubles(prescription!).volumen
-        + getVitLiposSolubles(prescription!).volumen  + (parseFloat(prescription?.soluvit_vitalip!))
+        + getVitLiposSolubles(prescription!).volumen + getSoluv_Vit(prescription!).volumen
     let volTotal: number = 0;
 
 
@@ -510,6 +522,8 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
     const soluvit: number = (vit_hidrosoluble === 'Soluvit')
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
 
+    const soluvit_vit: number = prescription?.req_vit_hidrosolubles === '' ? 0 : parseFloat(prescription?.req_vit_hidrosolubles!);
+
     const multi12K: number = (vit_hidrosoluble === 'Multi12Potasio')
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
 
@@ -567,7 +581,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
             + (vitaLipidInfantil * 260)
             + (vitaLipidAd * 260)
             + (soluvit * 490)
-            + (parseFloat(prescription?.soluvit_vitalip!) * 770)
+            + (soluvit_vit * 770)
             + (getVit_C(prescription!).volumen * 1740)
             + (parseFloat(prescription?.acido_folico!) * 227)
             + (volAgua * 1))
