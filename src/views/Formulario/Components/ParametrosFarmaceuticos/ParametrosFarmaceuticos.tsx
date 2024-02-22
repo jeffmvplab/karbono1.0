@@ -1,7 +1,6 @@
 import { colorsKarbono } from '@/themes/colors';
 import { Box, Typography, Divider, Stack, Card } from '@mui/material';
 import React, { useContext } from 'react';
-import { param_farmaceuticos } from '../../data/data';
 import { TextParamsNumb } from '../TextParamsNumb';
 import { FormulariosContext } from '../../context/FormulariosContext';
 import { alarmConcCHOS, alarmConcDeLipidos, alarmConcDeProteinas, alarmConcMagnesio, alarmConcPotasio, alarmConcSodio, alarmaAgua, alertFactorDePrecipitacion, alertRelacion_Calcio_Fosfato, alertVelInfucion, alertViaDeAdmin, alertVolTotal } from '@/views/ReportePrescripcion/data/alertParams';
@@ -16,7 +15,7 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 
 	const borderRadius: number = 10;
 
-	const { prescriptionSave, loadingSave } = useContext(FormulariosContext)
+	const { prescriptionSave} = useContext(FormulariosContext)
 
 	return (
 		<Card
@@ -48,6 +47,7 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 					<TextParamsNumb
 						title={'Volumen: '}
 						value={alertVolTotal(prescriptionSave!).toFixed(2)}
+						// value={getVolTotal(prescriptionSave!).toFixed(2)}
 						unidad={'ml'}
 					// seguridad={'Seguro'}
 					/>
