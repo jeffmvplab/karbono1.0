@@ -20,6 +20,7 @@ export interface IPrescriptionsRepository {
     createComments(comment: IComment): Promise<any>;
     getPrescripcionsByLab(): Promise<any>;
     setQuimicos(prescriptionId: string,preparador: string,controlador_de_calidad: string): Promise<any> ;
+    getLogs(number:string): Promise<any>
 }
 
 export class PrescriptionsRepository implements IPrescriptionsRepository {
@@ -286,6 +287,16 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
             url: ApiUrlsEnum.saveComments,
             method: 'post',
             body: JSON.stringify(comment)
+        });
+        return axiosRequest;
+    }
+
+    /////////////////////////////////Get Max Number Pres////////////////////////////////////////////////
+    async getLogs(number:string): Promise<any> {
+
+        const axiosRequest = await this.axiosHttpClient.request({
+            url: `${ApiUrlsEnum.getLogs}/${number}`,
+            method: 'get',
         });
         return axiosRequest;
     }

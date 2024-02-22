@@ -19,6 +19,8 @@ export interface IPrescriptionsUseCase {
 
     getPrescripcionsByLab(): Promise<any>;
     setQuimicos(prescriptionId: string, preparador: string, controlador_de_calidad: string): Promise<any>;
+
+    getLogs(number:string): Promise<any>
 }
 
 
@@ -73,6 +75,11 @@ export class PrescriptionsUseCases implements IPrescriptionsUseCase {
 
     setQuimicos(prescriptionId: string, preparador: string, controlador_de_calidad: string): Promise<any> {
         return this.prescriptionsRepository.setQuimicos(prescriptionId, preparador, controlador_de_calidad);
+    }
+
+    getLogs(number:string): Promise<any>{
+        return this.prescriptionsRepository.getLogs(number);
+
     }
 }
 

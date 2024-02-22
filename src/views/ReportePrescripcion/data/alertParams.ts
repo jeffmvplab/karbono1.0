@@ -17,7 +17,7 @@ export const alarmaAgua = (prescription: IPrescriptions) => {
 
     const resp: IAlarm = { value: 0, alert: '' };
 
-   resp.value = volTotalNPT - (
+    resp.value = volTotalNPT + prescription?.purga - (
         getDextrosa(prescription!).volumen + getLipidos(prescription!).volumen
         + getAminoacidos(prescription!).volumen + getDipeptiven(prescription!).volumen
         + getOmegaven(prescription!).volumen + getSodio(prescription!).volumen
@@ -26,13 +26,13 @@ export const alarmaAgua = (prescription: IPrescriptions) => {
         + getOligoelementos(prescription).volumen + vitaminas
         + getVit_C(prescription!).volumen + parseFloat(prescription?.acido_folico!)
     );
-   
-    if ( resp.value > 0) {
+
+    if (resp.value > 0) {
         resp.alert = 'ADECUADA';
     } else {
         resp.alert = 'INADECUADA';
     }
-    
+
     return resp;
 }
 
@@ -45,7 +45,7 @@ export const alertVolTotal = (prescription: IPrescriptions) => {
         + getVitLiposSolubles(prescription!).volumen + getSoluv_Vit(prescription!).volumen
 
 
-        const volTotal = volAgua
+    const volTotal = volAgua
         + getDextrosa(prescription!).volumen + getLipidos(prescription!).volumen
         + getAminoacidos(prescription!).volumen + getDipeptiven(prescription!).volumen
         + getOmegaven(prescription!).volumen + getSodio(prescription!).volumen
@@ -54,9 +54,9 @@ export const alertVolTotal = (prescription: IPrescriptions) => {
         + oligoelementos + vitaminas
         + getVit_C(prescription!).volumen
         + parseFloat(prescription?.acido_folico!)
-        
-        console.log('GGG:',vitaminas, 'VOL:',volTotal,'AGUA',volAgua)
-        
+
+    console.log('GGG:', vitaminas, 'VOL:', volTotal, 'AGUA', volAgua)
+
     return volTotal;
 }
 
@@ -126,9 +126,9 @@ export const alertFactorDePrecipitacion = (prescription: IPrescriptions) => {
     if (tipofosfato === 'Fosfato de potasio') {
         calcio = getCalcio(prescription!).volumen;
         fosfato_de_potasio = getFosfatoPotacio(prescription!).volumen;
-        factor= ((calcio * 0.465) + (fosfato_de_potasio * 2.6)) * 100 / (volTotalNPT - (calcio + fosfato_de_potasio));
+        factor = ((calcio * 0.465) + (fosfato_de_potasio * 2.6)) * 100 / (volTotalNPT - (calcio + fosfato_de_potasio));
         // console.log('Factor Precipitacion:',factor)
-    }else{
+    } else {
         factor;
     }
     // }

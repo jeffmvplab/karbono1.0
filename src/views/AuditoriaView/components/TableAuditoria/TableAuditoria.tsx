@@ -16,7 +16,8 @@ export interface TableAuditoriaProps { }
 
 const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 
-	const { getAll, reportes, loadingGet, loadingApi, goEdit, goReporte } = useContext(PrescripcionContext);
+	const { getAll, reportes, loadingGet, loadingApi, goEdit, goReporte,goActions } = useContext(PrescripcionContext);
+
 	const {loadingSave, messageAPI, setMessageAPI } = useContext(FormulariosContext);
 
 	const [page, setPage] = useState<number>();
@@ -125,15 +126,30 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}.</>
 		},
 
-		// {
-		// 	field: "user",
-		// 	headerName: "Usuario",
-		// 	headerClassName: 'table-color--header',
-		// 	flex: 1,
-		// 	minWidth: 80,
-		// 	renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
-		// },
-
+		{
+			field: "prescriptor",
+			headerName: "Prescriptor",
+			headerClassName: 'table-color--header',
+			flex: 1,
+			minWidth: 80,
+			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+		},
+		{
+			field: "controlador_de_calidad",
+			headerName: "Responsable control calidad",
+			headerClassName: 'table-color--header',
+			flex: 1,
+			minWidth: 200,
+			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+		},
+		{
+			field: "preparador",
+			headerName: "Preparador",
+			headerClassName: 'table-color--header',
+			flex: 1,
+			minWidth: 80,
+			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+		},
 
 
 		{
@@ -145,7 +161,7 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>
-				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goReporte(params.row.no_orden) }} />
+				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goActions(params.row.no_orden)}} />
 			</Stack>)
 		},
 	];
