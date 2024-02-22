@@ -135,16 +135,30 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}.</>
 		},
 
-		// {
-		// 	field: "user",
-		// 	headerName: "Usuario",
-		// 	headerClassName: 'table-color--header',
-		// 	flex: 1,
-		// 	minWidth: 80,
-		// 	renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
-		// },
-
-
+		{
+			field: "prescriptor",
+			headerName: "Prescriptor",
+			headerClassName: 'table-color--header',
+			flex: 1,
+			minWidth: 80,
+			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+		},
+		{
+			field: "controlador_de_calidad",
+			headerName: "Responsable control calidad",
+			headerClassName: 'table-color--header',
+			flex: 1,
+			minWidth: 200,
+			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+		},
+		{
+			field: "prescriptor",
+			headerName: "preparador",
+			headerClassName: 'table-color--header',
+			flex: 1,
+			minWidth: 80,
+			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+		},
 
 		{
 			field: "acciones",

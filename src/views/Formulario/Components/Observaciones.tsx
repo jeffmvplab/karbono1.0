@@ -6,7 +6,6 @@ import { FormulariosContext } from '../context/FormulariosContext';
 import { CustomButton } from '@/components/CustomButton';
 import SendIcon from '@mui/icons-material/Send';
 import { IComment } from '@/domain/models/observaciones.model';
-import { StatePrescriptionKeysEnum } from '@/utilities/enums/state_prescription_keys.enum';
 import { ContainerComments } from '@/views/ReportePrescripcion/ReportePrescripcionView';
 import { formatearFechaEsp } from '@/utilities/get_String_from_Date';
 

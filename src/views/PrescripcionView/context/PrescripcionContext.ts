@@ -1,3 +1,4 @@
+import { ILogs } from "@/domain/models/logs.model";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
 import { createContext } from "react";
 
@@ -16,6 +17,9 @@ interface ContextProps {
     openModalSearch: boolean,
     handleOpenModalSearch: () => void,
     handleCloseModalSearch: () => void,
+
+    openActionsDrawer: boolean, setOpenActionsDrawer: React.Dispatch<React.SetStateAction<boolean>>,
+    goActions:(orden: number) => void,
 
     search: string,
     handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -44,6 +48,8 @@ interface ContextProps {
     getPrescriptionsByName: (name: string) => Promise<void>
     getPrescriptionsById: (id: string) => Promise<void>
     getPrescriptionsByNumber: (number: string) => Promise<void>
+    getLogsByNumber: () => Promise<void>,
+    logs:ILogs[] | undefined
 }
 
 export const PrescripcionContext = createContext({} as ContextProps)

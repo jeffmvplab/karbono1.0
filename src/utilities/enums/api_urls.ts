@@ -27,4 +27,6 @@ export enum ApiUrlsEnum {
     invitarUsuarios = 'auth/inviteUser',
     aceptarInvitacion = 'auth/acceptInvitation',
     registerByInvitation = 'auth/registerByInvitation',
+
+    getLogs='prescriptions-logs'
 }
