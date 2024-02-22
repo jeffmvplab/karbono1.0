@@ -47,10 +47,10 @@ const hidrosolublesPediatricos = [
 ]
 
 
-const sumVit = [
-    { value: 'Sumar Vitaminas', label: 'Sumar Vitaminas' },
-    { value: 'No Sumar Vitaminas', label: 'No Sumar Vitaminas' }
-]
+// const sumVit = [
+//     { value: 'Sumar Vitaminas', label: 'Sumar Vitaminas' },
+//     { value: 'No Sumar Vitaminas', label: 'No Sumar Vitaminas' }
+// ]
 
 const Micronutrientes = () => {
 
@@ -483,7 +483,7 @@ const Micronutrientes = () => {
                     </Grid>
                 </Box>
 
-                <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
+                {/* <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
 
                     <Grid container spacing={2}>
 
@@ -513,7 +513,7 @@ const Micronutrientes = () => {
 
                         </Grid>
                     </Grid>
-                </Box>
+                </Box> */}
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
 
@@ -522,7 +522,7 @@ const Micronutrientes = () => {
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
                             <CustomTextField
-                                disabled={sumaVit === 'Sumar Vitaminas'}
+                                // disabled={sumaVit === 'Sumar Vitaminas'}
                                 onChange={handleVitaminasHidrosolubles}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
@@ -558,7 +558,7 @@ const Micronutrientes = () => {
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
                             <CustomTextField
-                                disabled={sumaVit === 'Sumar Vitaminas'}
+                                // disabled={sumaVit === 'Sumar Vitaminas'}
                                 onChange={handleReqVitHidrosolubles}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
@@ -589,30 +589,6 @@ const Micronutrientes = () => {
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                             <CustomTextField
-                                disabled={sumaVit !== 'Sumar Vitaminas'}
-                                onChange={handleSoluvid_Vitalipid}
-                                onClick={getPrescriptions}
-                                onKeyPress={getPrescriptions}
-                                value={convertComaAPunto(soluvid_Vitalipid)}
-                                // disabled={!sumVit}
-                                id='Soluvit+Vitalipit'
-                                label={'Soluvit+Vitalipit'}
-                                endAdornament={
-                                    <Typography
-                                        textTransform={'lowercase'}>
-                                        {(tipoPrescripcion === 'Por requerimientos')
-                                            ? 'ml/día'
-                                            : 'ml'
-                                        }
-                                    </Typography>
-                                }
-                                type='text'
-                            />
-
-                        </Grid>
-
-                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
-                            <CustomTextField
                                 disabled={sumaVit === 'Sumar Vitaminas'}
                                 onChange={handleVitaminasLiposolubles}
                                 onClick={getPrescriptions}
@@ -636,6 +612,32 @@ const Micronutrientes = () => {
                                 }
                                 type='text'
                             />
+
+                        </Grid>
+
+                        <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
+
+                            <CustomTextField
+                                // disabled={sumaVit !== 'Sumar Vitaminas'}
+                                onChange={handleSoluvid_Vitalipid}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={convertComaAPunto(soluvid_Vitalipid)}
+                                // disabled={!sumVit}
+                                id='Soluvit/Vitalipit'
+                                label={'Soluvit/Vitalipit'}
+                                endAdornament={
+                                    <Typography
+                                        textTransform={'lowercase'}>
+                                        {(tipoPrescripcion === 'Por requerimientos')
+                                            ? 'ml/día'
+                                            : 'ml'
+                                        }
+                                    </Typography>
+                                }
+                                type='text'
+                            />
+
                         </Grid>
 
                     </Grid>
