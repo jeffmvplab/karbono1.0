@@ -9,6 +9,7 @@ export interface IPrescriptions {
     estado:'PENDIENTE'| 'FINALIZAR'|'SOLICITADA'|'CALIDAD'|'PRODUCCION'|'CANCELADA'
 
     user_id?: string,
+    user?:any,
     no_orden: number,
     tipo_prescripcion: string,
     fecha: string,
@@ -57,4 +58,5 @@ export interface IPrescriptions {
     acido_folico: string,
     observaciones?: IComment[]
 }
+
 

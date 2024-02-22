@@ -922,7 +922,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		vit_hidrosolubles: vitaminasHidrosolubles || '0',
 		req_vit_hidrosolubles: (reqVitHidrosolubles === '') ? '0' : reqVitHidrosolubles,
 		req_vit_liposolubles: (vitaminasLiposolubles === '') ? '0' : vitaminasLiposolubles,
-		soluvit_vitalip: (soluvid_Vitalipid=== '') ? '0' : soluvid_Vitalipid,
+		soluvit_vitalip: (soluvid_Vitalipid === '') ? '0' : soluvid_Vitalipid,
 		vit_C: (vitaminasC === '') ? '0' : vitaminasC,
 		acido_folico: (acidoFolico === ' ') ? '0' : acidoFolico
 	}

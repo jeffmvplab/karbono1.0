@@ -151,8 +151,6 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 	};
 
 	const [searchName, setSearchName] = React.useState('');
-	const [errorSearchName, setErrorSearchName] = React.useState(false);
-	const [messageErrorSearchName, setMessageErrorSearchName] = React.useState('');
 
 	const handleSearchName = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchName(event.target.value);
@@ -160,16 +158,24 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 	};
 
 	const [searchId, setSearchId] = React.useState('');
-	const [errorSearchId, setErrorSearchId] = React.useState(false);
-	const [messageErrorSearchId, setMessageErrorSearchId] = React.useState('');
-
 	const handleSearchId = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchId(event.target.value);
 		// const prescripcion = event.target.value;
 	};
 
-	const [selectedFilter, setSelectedFilter] = React.useState('a');
+	const [searchNumber, setSearchNumber] = React.useState('');
+	const handleSearchNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchNumber(event.target.value);
+		// const prescripcion = event.target.value;
+	};
 
+	const [searchFecha, setSearchFecha] = React.useState('');
+	const handleSearchFecha = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchFecha(event.target.value);
+		// const prescripcion = event.target.value;
+	};
+
+	const [selectedFilter, setSelectedFilter] = React.useState('a');
 	const handleChangeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSelectedFilter(event.target.value);
 		console.log('Filter:', event.target.value)
@@ -398,19 +404,19 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			handleCloseModalSearch,
 
 			search,
-			errorSearch,
-			messageErrorSearch,
 			handleSearch,
 
 			searchName,
-			errorSearchName,
-			messageErrorSearchName,
 			handleSearchName,
 
 			searchId,
-			errorSearchId,
-			messageErrorSearchId,
 			handleSearchId,
+
+			searchNumber,
+			handleSearchNumber,
+
+			searchFecha,
+			handleSearchFecha,
 
 			selectedFilter,
 			handleChangeFilter,
@@ -420,7 +426,8 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			handleFilterSearch,
 			prescSearch,
 			getPrescriptionsByName,
-			getPrescriptionsById
+			getPrescriptionsById,
+			getPrescriptionsByNumber,
 
 
 		}}>{children}

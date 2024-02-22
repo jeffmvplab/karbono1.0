@@ -7,14 +7,14 @@ import { useContext } from 'react';
 import CustomTextField from '../Formulario/Components/CustomTextField';
 import { mainRoutes } from '@/routes/routes';
 import { Search } from '@mui/icons-material';
-import { TableAuditoria } from './TableAuditoria';
 import { PrescripcionContext } from '../PrescripcionView/context/PrescripcionContext';
+import { TableGestionPrescripciones } from './TableGestionPrescripciones';
 
 
 
-export interface PrescripcionViewProps { }
+export interface GestionPrescripcionesViewProps { }
 
-const AuditoriaView: React.FC<PrescripcionViewProps> = () => {
+const GestionPrescripcionesView: React.FC<GestionPrescripcionesViewProps> = () => {
 
 	const { 
 		goAddNew, 
@@ -41,25 +41,12 @@ const AuditoriaView: React.FC<PrescripcionViewProps> = () => {
 						<Typography
 							variant='h5'
 							sx={{ fontWeight: 700, fontSize: { xs: '15px', sm: '25px' }, marginTop: { xs: '5px' } }}>
-							Registros Auditoria.
+							Gestión de prescripciones
 						</Typography>
 
-						<Stack direction={{ xs: 'column', md: 'row' }} justifyContent={'space-between'} spacing={4}>
+						<Stack direction={{ xs: 'column', md: 'row' }} justifyContent={'end'} spacing={4}>
 
-							<Stack margin={'5px'} direction={'column'} >
-								<CustomButton text={'Nueva prescripción'}
-									onClick={() => { goAddNew(mainRoutes.form) }}
-									width='240px'
-									height='44px'
-									variant='outlined'
-									color={colorsKarbono.secundary}
-									fontSize={'16px'}
-									textColor={'white'}
-									borderColor={'transparent'}
-									endIcon={<AddCircleOutlineIcon style={{ color: 'white', paddingLeft: '5px', scale: '1.5' }} />}
-									sx={{ borderRadius: '10px' }}
-								/>
-							</Stack>
+							
 
 							<Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
 
@@ -121,11 +108,11 @@ const AuditoriaView: React.FC<PrescripcionViewProps> = () => {
 			</Grid>
 			<Grid container>
 				{/* <Tabla /> */}
-				<TableAuditoria />
+				<TableGestionPrescripciones />
 			</Grid>
 		</>
 	)
 
 };
 
-export default AuditoriaView;
+export default GestionPrescripcionesView;

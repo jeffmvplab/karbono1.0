@@ -28,7 +28,7 @@ const TarjetaPareinf = () => {
               Ingresar
             </Button> */}
              <ButtonCardsHome
-              route={mainRoutes.prescripcion}
+              route={mainRoutes.auditoria}
               text=' Ingresar'
               color={colorsKarbono.secundary}
               id='parametros'
