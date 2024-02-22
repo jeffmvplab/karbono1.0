@@ -1,5 +1,5 @@
 import { IPrescriptions } from "@/domain/models/prescriptions.model"
-import { IParamFunc, concAminoacidos, getAgua, getAminoacidos, getCalcio, getConcentracionDeProteinas, getDextrosa, getDipeptiven, getFosfatoPotacio, getFosfatoSodio, getFosforo, getLipidos, getMagnesio, getOligoelementos, getOmegaven, getOsmolaridad, getPotacio, getSodio, getVitHidroSolubles, getVitLiposSolubles, getVit_C, tipoPrescripcion } from "./functionsParams"
+import { concAminoacidos, getAgua, getAminoacidos, getCalcio, getConcentracionDeProteinas, getDextrosa, getDipeptiven, getFosfatoPotacio, getFosfatoSodio, getFosforo, getLipidos, getMagnesio, getOligoelementos, getOmegaven, getOsmolaridad, getPotacio, getSodio, getSoluv_Vit, getVitHidroSolubles, getVitLiposSolubles, getVit_C, tipoPrescripcion } from "./functionsParams"
 
 export interface IAlarm {
     value: number,
@@ -12,7 +12,7 @@ export const alarmaAgua = (prescription: IPrescriptions) => {
 
     const volTotalNPT: number = prescription?.volumen!
     const vitaminas: number = getVitHidroSolubles(prescription!).volumen
-        + getVitLiposSolubles(prescription!).volumen
+        + getVitLiposSolubles(prescription!).volumen + getSoluv_Vit(prescription!).volumen
 
 
     const resp: IAlarm = { value: 0, alert: '' };
@@ -40,26 +40,12 @@ export const alarmaAgua = (prescription: IPrescriptions) => {
 export const alertVolTotal = (prescription: IPrescriptions) => {
 
     const volAgua: number = getAgua(prescription).volumen
-    const oligoelementos: number = parseInt(prescription?.req_elementos_traza)
-    const vitaminas: number = parseInt(prescription?.req_vit_hidrosolubles) + parseInt(prescription?.req_vit_liposolubles)
+    const oligoelementos: number = parseFloat(prescription?.req_elementos_traza)
+    const vitaminas: number = getVitHidroSolubles(prescription!).volumen
+        + getVitLiposSolubles(prescription!).volumen + getSoluv_Vit(prescription!).volumen
 
-    const tp: string = prescription?.tipo_prescripcion!;
 
-    let volTotal: number = 0;
-
-    // if (tp === tipoPrescripcion) {
-
-    //     volTotal = volAgua
-    //         + parseFloat(prescription?.dextrosa!) + parseFloat(prescription?.req_lipidos!)
-    //         + parseFloat(prescription?.req_aminoacidos!) + parseFloat(prescription?.dipeptiven!)
-    //         + parseFloat(prescription?.omegaven!) + parseFloat(prescription?.sodio_total!)
-    //         + parseFloat(prescription?.potasio_total!) + parseFloat(prescription?.req_fosfato!)
-    //         + parseFloat(prescription?.req_magnesio!) + parseFloat(prescription?.req_calcio!)
-    //         + oligoelementos + vitaminas
-    //         + parseFloat(prescription?.vit_C!)
-    //         + parseFloat(prescription?.acido_folico!)
-    // } else {
-    volTotal = volAgua
+        const volTotal = volAgua
         + getDextrosa(prescription!).volumen + getLipidos(prescription!).volumen
         + getAminoacidos(prescription!).volumen + getDipeptiven(prescription!).volumen
         + getOmegaven(prescription!).volumen + getSodio(prescription!).volumen
@@ -68,7 +54,9 @@ export const alertVolTotal = (prescription: IPrescriptions) => {
         + oligoelementos + vitaminas
         + getVit_C(prescription!).volumen
         + parseFloat(prescription?.acido_folico!)
-    //}
+        
+        console.log('GGG:',vitaminas, 'VOL:',volTotal,'AGUA',volAgua)
+        
     return volTotal;
 }
 

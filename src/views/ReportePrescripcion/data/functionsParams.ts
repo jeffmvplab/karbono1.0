@@ -465,6 +465,8 @@ export const getVolTotal = (prescription: IPrescriptions) => {
         + getVitLiposSolubles(prescription!).volumen + getSoluv_Vit(prescription!).volumen
     let volTotal: number = 0;
 
+    
+    console.log('SSSS:',vitaminas)
 
     volTotal = volAgua
         + getDextrosa(prescription!).volumen + getLipidos(prescription!).volumen
@@ -525,7 +527,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
     const soluvit: number = (vit_hidrosoluble === 'Soluvit')
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
 
-    const soluvit_vit: number = prescription?.req_vit_hidrosolubles === '' ? 0 : parseFloat(prescription?.req_vit_hidrosolubles!);
+    const soluvit_vit: number = prescription?.soluvit_vitalip === '' ? 0 : parseFloat(prescription?.soluvit_vitalip!);
 
     const multi12K: number = (vit_hidrosoluble === 'Multi12Potasio')
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
@@ -556,6 +558,7 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
 
     // let osmolaridad: number = 0;
 
+    console.log('DDDDD:',prescription?.req_vit_hidrosolubles)
 
     params.volumen =
         ((getDextrosa(prescription!).volumen * 2780)
@@ -584,12 +587,14 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
             + (vitaLipidInfantil * 260)
             + (vitaLipidAd * 260)
             + (soluvit * 490)
-            + (soluvit_vit * 770)
+             + (soluvit_vit * 770)
             + (getVit_C(prescription!).volumen * 1740)
             + (parseFloat(prescription?.acido_folico!) * 227)
             + (volAgua * 1))
         / (volTotalNPT)
 
+
+        
     // console.log(
     //     '////////////////OSMOLARIDAD/////////////////////',
     //     'Dextrosa:', (getDextrosa(prescription!).volumen),
