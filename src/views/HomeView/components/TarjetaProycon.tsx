@@ -8,13 +8,14 @@ import { Box, Breadcrumbs, Grid, Button, Hidden, Typography, useStepContext } fr
 import { mainRoutes } from '@/routes/routes';
 import { ButtonCardsHome } from './ButtonCardsHome';
 import { colorsKarbono } from '@/themes/colors';
+import { RolUsersKeysEnum } from '@/utilities/enums/rol_user_keys.enum';
 
 
 export interface TarjetaProyconProps { }
 
 const TarjetaProycon: React.FC<TarjetaProyconProps> = () => {
 
-  const { isAuth, authStatus } = useContext(GlobalContext);
+  const { isAuth, authStatus, getMeRol } = useContext(GlobalContext);
 
   useEffect(() => {
     authStatus()
@@ -37,7 +38,7 @@ const TarjetaProycon: React.FC<TarjetaProyconProps> = () => {
               <Typography variant='body1' sx={{ paddingBottom: '30px' }}>Este módulo te permite crear, editar y consultar datos de prescripciones  médicas de manera fácil y rápida.</Typography>
 
               <ButtonCardsHome
-                route={isAuth ? mainRoutes.prescripcion : mainRoutes.login}
+                route={isAuth ? (getMeRol()[0] === RolUsersKeysEnum.prescriptor) ? mainRoutes.prescripcion : mainRoutes.gestion : mainRoutes.login}
                 text=' Ingresar'
                 color={colorsKarbono.primary}
                 id='prescripcion'

@@ -9,7 +9,6 @@ import { CustomButton } from '@/components/CustomButton';
 import { colorsKarbono } from '@/themes/colors';
 import { useContext } from 'react';
 import { PrescripcionContext } from './context/PrescripcionContext';
-import { SearchModal } from './components/SearchModal';
 import { Search } from '@mui/icons-material';
 import CustomTextField from '../Formulario/Components/CustomTextField';
 

@@ -22,6 +22,7 @@ import { CancelVerificarModal } from './components/Modals/CancelVerificarModal';
 import BarReporteNPT from './components/BarReporteNPT/BarReporteNPT';
 import BarReporteQF from './components/BarReporteQF/BarReporteQF';
 import BarReporteQF_Calidad from './components/BarReporteQF_Calidad/BarReporteQF_Calidad';
+import { RolUsersKeysEnum } from '@/utilities/enums/rol_user_keys.enum';
 
 
 
@@ -39,42 +40,44 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 	}, [])
 
 
-	const [isHorizontalScroll, setIsHorizontalScroll] = useState(false);
+	// const [isHorizontalScroll, setIsHorizontalScroll] = useState(false);
 
-	useEffect(() => {
-		const handleScroll = () => {
-			// Verificar si hay desplazamiento horizontal
-			if (window.innerWidth > document.documentElement.clientWidth) {
-				setIsHorizontalScroll(true);
-			} else {
-				setIsHorizontalScroll(false);
-			}
-		};
+	// useEffect(() => {
+	// 	const handleScroll = () => {
+	// 		// Verificar si hay desplazamiento horizontal
+	// 		if (window.innerWidth > document.documentElement.clientWidth) {
+	// 			setIsHorizontalScroll(true);
+	// 		} else {
+	// 			setIsHorizontalScroll(false);
+	// 		}
+	// 	};
 
-		window.addEventListener('scroll', handleScroll);
+	// 	window.addEventListener('scroll', handleScroll);
 
-		return () => {
-			window.removeEventListener('scroll', handleScroll);
-		};
+	// 	return () => {
+	// 		window.removeEventListener('scroll', handleScroll);
+	// 	};
 
-	}, []);
+	// }, []);
 
 
 	const [isNew, setIsNew] = useState<boolean>(false);
 	const [newObs, setnewObs] = useState<string>();
 
-	console.log('ROLLLL:',getMeRol()[0])
+	console.log('ROLLLL:', getMeRol()[0])
 	return (
 
-		<div onMouseOver={() => setIsHorizontalScroll(false)}>
-
-			{!isHorizontalScroll
-				&& (getMeRol()[0] === 'Prescriptor')
-				? <BarReporteNPT />
-				:(getMeRol()[0] === 'Preparador NPT')
-					? <BarReporteQF />
-					: <BarReporteQF_Calidad />
-			}
+		<div
+		// onMouseOver={() => setIsHorizontalScroll(false)}
+		>
+			<Card sx={{ display: { xs: 'none', md: 'flex' }, position: 'fixed', width: '100%', bottom: '40px', left: '0px' }} >
+				{(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+					? <BarReporteNPT />
+					: (getMeRol()[0] === RolUsersKeysEnum.preparador)
+						? <BarReporteQF />
+						: <BarReporteQF_Calidad />
+				}
+			</Card>
 
 			<VerificarModal />
 			<CancelVerificarModal />
@@ -280,42 +283,20 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 					{/* <BannerOrdenar /> */}
 
 
-					<Stack direction={'column'} display={{ xs: 'flex', md: 'none' }} paddingBottom={{ xs: '150px', md: '0' }}>
+					<Stack
+						overflow={'scroll'}
+						direction={'column'}
+						display={{ xs: 'flex', md: 'none' }}
+						paddingBottom={{ xs: '150px', md: '0' }}>
 
-						<Stack
-							bgcolor={'#2FC5C6'}
-							height={'70px'}
-							width={'100%'}
-							direction={'row'}
-							justifyContent={'center'}
-							alignItems={'center'}
-						>
-							<Button onClick={() => setOpenDrawer(true)}>
-								<Typography color={'white'} sx={{ fontWeight: 700, fontSize: '20px' }}>Observaciones y Cambios</Typography>
-								<ArrowRightIcon sx={{ color: 'white', fontSize: '34px' }} />
-							</Button>
-						</Stack>
 
-						<Stack direction={'row'} width={'100%'} padding={'30px'} spacing={4}>
-							<CustomButton
-								fontSize={'22px'}
-								onClick={() => { }}
-								textColor={'white'}
-								color='#372FC6'
-								sx={{
-									width: '200px',
-									height: '40px',
-								}}
-								variant='contained'
-								text={(loadingSave) ? 'Enviar' : 'Enviando...'}
-								startIcon={<TelegramIcon sx={{ color: 'white', fontSize: '34px' }} />}
-								endIcon={
-									(loadingSave)
-										? <></>
-										: <CircularProgress sx={{ color: 'white' }} variant='indeterminate' size='20px' />} />
-							<Typography color={'black'} sx={{ fontWeight: 500, fontSize: '16px', letterSpacing: '3%', lineHeight: '20px' }}>Ordena tu prescripción a la Central de Mezclas de tu preferencia en tan solo segundos.</Typography>
+						{(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+							? <BarReporteNPT />
+							: (getMeRol()[0] === RolUsersKeysEnum.preparador)
+								? <BarReporteQF />
+								: <BarReporteQF_Calidad />
+						}
 
-						</Stack>
 					</Stack>
 				</Grid >
 			</>

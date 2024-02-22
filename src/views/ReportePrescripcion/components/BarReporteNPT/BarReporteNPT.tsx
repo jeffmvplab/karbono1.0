@@ -21,10 +21,10 @@ const BarReporteNPT = () => {
 
 
     return (
-        <Card sx={{ position: 'fixed', width: '100%', top: '50%', left: '0px' }} >
+       
             <Stack
                 paddingX={'40px'}
-                // 
+                width={'100%'}
                 overflow={'scroll'}
                 bgcolor={'white'}
                 height={{ xs: '80px', md: '125px' }}
@@ -99,7 +99,6 @@ const BarReporteNPT = () => {
                     />
                 </Stack>
             </Stack>
-        </Card>
     )
 }
 
