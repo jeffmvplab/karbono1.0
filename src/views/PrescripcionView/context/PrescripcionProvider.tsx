@@ -10,6 +10,7 @@ import { PrescripcionContext } from "./PrescripcionContext";
 import { PrescriptionsUseCases } from "@/domain/usecases/prescriptions.usecases";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
 import { GlobalContext } from "@/context/GlobalContext";
+import { ILogs } from "@/domain/models/logs.model";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
@@ -26,7 +27,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 	const [reportes, setReportes] = React.useState<IPrescriptions[]>([]);
 
-	const [limit, setLimit] = React.useState(10);
+	const [openActionsDrawer, setOpenActionsDrawer] = useState(false);
 
 	const getAll = async (limit?: number) => {
 
@@ -54,6 +55,40 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		setLoadingGet(true);
 		//  return resp.body;
 	}
+
+
+	const [logs, setLogs] = useState<ILogs[]>();
+
+	const getLogsByNumber = async () => {
+
+		const storagePredsc = localStorageProtocol.get(StorageKeysEnum.prescripcionOrden)
+
+		console.log('Preds:', storagePredsc);
+		setLoadingGet(false);
+		console.log('Loading...')
+		// const resp = await prescriptionsUseCase.prescripcionsByNumber(storagePredsc.number);
+		const resp = await prescriptionsUseCase?.getLogs(storagePredsc.number);
+
+		setLoadingGet(true);
+		if (resp.statusCode === 200) {
+
+			console.log('Logs:', resp)
+			setLogs(resp.body)
+
+		} else if (resp.statusCode === 400) {
+			setMessageAPI(resp.body.message)
+
+		} else if (resp.statusCode === 404) {
+
+		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
+
+		} else if (resp.statusCode === 408) {
+			handleOffline();
+		} else {
+
+		}
+	}
+
 
 	const getPrescripcionsByLab = async () => {
 
@@ -130,6 +165,13 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		const prescripcion = { number: orden, }
 		localStorageProtocol.set(StorageKeysEnum.prescripcionOrden, prescripcion);
 		router.push(mainRoutes.reportePrescripcion)
+	}
+
+	const goActions = (orden: number) => {
+
+		const prescripcion = { number: orden, }
+		localStorageProtocol.set(StorageKeysEnum.prescripcionOrden, prescripcion);
+		setOpenActionsDrawer(true)
 	}
 
 	const goAddNew = (route: string) => {
@@ -399,6 +441,9 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			goReporte,
 			goAddNew,
 
+			openActionsDrawer, setOpenActionsDrawer,
+			goActions,logs,
+
 			openModalSearch,
 			handleOpenModalSearch,
 			handleCloseModalSearch,
@@ -429,6 +474,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			getPrescriptionsById,
 			getPrescriptionsByNumber,
 
+			getLogsByNumber,
 
 		}}>{children}
 		</PrescripcionContext.Provider>

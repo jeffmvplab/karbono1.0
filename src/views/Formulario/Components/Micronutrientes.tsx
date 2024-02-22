@@ -52,6 +52,7 @@ const hidrosolublesPediatricos = [
 //     { value: 'No Sumar Vitaminas', label: 'No Sumar Vitaminas' }
 // ]
 
+
 const Micronutrientes = () => {
 
     const {
@@ -82,8 +83,23 @@ const Micronutrientes = () => {
 
     // console.log('Magnesio:', magnesio)
     /////////////////////////////////////////////////////////////////////
-    const [sumaVit, setSumaVit] = useState<string>('No Sumar Vitaminas');
 
+    const mensajeVit = 'Solo puede ingresar datos a la vez en vitaminas hidrosoluble y liposolubles o soluvit/vitalip'
+
+    const getError = () => {
+
+        const vitLip=vitaminasLiposolubles===''?'0':vitaminasLiposolubles;
+        const vitHid=reqVitHidrosolubles===''?'0':reqVitHidrosolubles;
+        const vit_soluv=soluvid_Vitalipid===''?'0':soluvid_Vitalipid;
+
+        console.log('OOOOO:',vitLip,vitHid,vit_soluv)
+       
+        if ((vitLip !== '0' || vitHid !== '0') && (vit_soluv !== '0')) {
+            return true
+        } else {
+            false
+        }
+    }
 
     return (
 
@@ -576,6 +592,8 @@ const Micronutrientes = () => {
                                     </Typography>
                                 }
                                 type='text'
+                                // error={getError()}
+                                helperText={getError() && mensajeVit}
                             />
                         </Grid>
 
@@ -589,7 +607,7 @@ const Micronutrientes = () => {
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                             <CustomTextField
-                                disabled={sumaVit === 'Sumar Vitaminas'}
+                                // disabled={sumaVit === 'Sumar Vitaminas'}
                                 onChange={handleVitaminasLiposolubles}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
@@ -611,6 +629,8 @@ const Micronutrientes = () => {
                                     </Typography>
                                 }
                                 type='text'
+                                // error={getError()}
+                                helperText={getError() && mensajeVit}
                             />
 
                         </Grid>
@@ -636,6 +656,8 @@ const Micronutrientes = () => {
                                     </Typography>
                                 }
                                 type='text'
+                                // error={getError()}
+                                helperText={getError() && mensajeVit}
                             />
 
                         </Grid>
