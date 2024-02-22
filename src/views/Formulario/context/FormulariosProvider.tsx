@@ -1242,7 +1242,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		lipidos, requerimientoLipidos, omegaven, dipeptiven, sodioTotal,
 		potacioTotal, fosfato, requerimientoFosfato, calcio, reqCalcio,
 		magnesio, reqMagnesio, elementosTraza, reqTraza, vitaminasHidrosolubles,
-		reqVitHidrosolubles, vitaminasLiposolubles, vitaminasC, acidoFolico
+		reqVitHidrosolubles, vitaminasLiposolubles,soluvid_Vitalipid, vitaminasC, acidoFolico
 	])
 
 	const [selectTab, setSelectTab] = useState<number>(0);
