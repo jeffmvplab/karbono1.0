@@ -400,7 +400,9 @@ export const getSoluv_Vit = (prescription: IPrescriptions) => {
     const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
 
 
-const sol_vit=prescription?.soluvit_vitalip === '' ? 0 : parseFloat(prescription?.soluvit_vitalip!)
+    const sol_vit = (prescription?.soluvit_vitalip === ''||prescription?.soluvit_vitalip===undefined) ? 0 : parseFloat(prescription?.soluvit_vitalip!)
+
+    console.log('PPPPP:',prescription?.soluvit_vitalip)
 
     params.volumen = sol_vit
     params.conPurga = sol_vit * correccionPurga(prescription)
