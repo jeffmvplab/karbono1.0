@@ -145,8 +145,8 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 															: handleCloseModalFormSaved()
 														: (saveStatus) 
 														  ?validateCampos()
-														//    ?handleCloseModalFormSaved()
-														//    : saveAndNav() 
+														    ?handleCloseModalFormSaved()
+														    : saveAndNav() 
 														  : handleCloseModalFormSaved()
 
 													handleCloseModalFormSaved()
