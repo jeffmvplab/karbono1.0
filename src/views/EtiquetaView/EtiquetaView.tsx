@@ -10,12 +10,18 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 
 
 	return (
-		<>
-			<Container
+		<Stack 
+		direction={'column'} 
+		overflow={'scroll'} 
+		paddingBottom={20} 
+		alignContent={'center'}>
+			<Box
 				// maxWidth="100vw"
 				sx={{
+					width:'1281px',
+					paddingX:'10px',
 					// marginX:'50px',
-					height: '80vh',
+					height: '1925px',
 					backgroundColor: '#ccc',
 					borderRadius: '10px',
 					display: 'block',
@@ -24,7 +30,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 					paddingY: '30px'
 				}}
 			>
-				<Stack paddingX={6} borderRadius={2} bgcolor={'white'} width={'100%'} height={'100%'} direction={'column'}>
+				<Stack display={'block'} paddingX={6} borderRadius={2} bgcolor={'white'} width={'100%'} height={'100%'} direction={'column'}>
 					{//////////////Fecha-Version-etc///////////////////////////////////////////////
 					}
 					<Stack paddingTop={3} direction={'row'} justifyContent={'end'}>
@@ -38,6 +44,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 					<Stack paddingTop={1} direction={'row'} justifyContent={'end'}>
 
 						<Grid container spacing={2}>
+
 							<Grid item xs={3}>
 								{/*  */}
 								<Stack
@@ -62,7 +69,6 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 									height={'100%'}
 									direction={'column'}
 									justifyContent={'end'}>
-
 									<ContainerText title="Fecha" value="xxxxxxxx" />
 								</Stack>
 							</Grid>
@@ -88,7 +94,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
  
 							<Grid item xs={5}>
 								<Stack direction={'column'} spacing={2}>
-									<ContainerText title="Fecha" value="xxxxxxxx" />
+									<ContainerText title="Institución" value="xxxxxxxx" />
 								</Stack>
 							</Grid>
 
@@ -110,8 +116,8 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 
 
 				</Stack>
-			</Container>
-		</>
+			</Box>
+		</Stack>
 	)
 
 };
