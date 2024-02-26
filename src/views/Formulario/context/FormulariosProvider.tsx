@@ -119,7 +119,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		handleOpenModalFormSaved();
 
 		const prescripcion = {
-			number: numOrder,
+			number: parseFloat(numOrder) || maxNumOrder! +1,
 			name: namePaciente,
 			id: numIden,
 			ips: ips
@@ -871,9 +871,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	////////////////////////////////////////////////////////////////////
 	///////////////////////////////INTEGRACION DE APIS//////////////////
+	
 	const prescriptionsData: IPrescriptions = {
 
-		no_orden: parseFloat(numOrder) || 0,
+		no_orden: parseFloat(numOrder) || maxNumOrder! +1,
 
 		createdAt: (createdAt === '') ? new Date().toISOString() : createdAt!,
 		updatedAt: new Date().toISOString(),
@@ -935,8 +936,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const setPrescriptions = async () => {
 
+		// getMaxNumPresc();
+
 		setLoadingSave(false);
-		console.log('Loading...:', prescriptionsData)
+		console.log('Loading Save & Update Pres...:', prescriptionsData)
 
 		const numPresc = (localStorageProtocol.get(StorageKeysEnum.prescripcionOrden))
 			? localStorageProtocol.get(StorageKeysEnum.prescripcionOrden).number

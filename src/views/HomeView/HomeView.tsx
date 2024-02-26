@@ -30,33 +30,35 @@ const HomeView: React.FC<HomeViewProps> = () => {
 
 	return (
 		<>
-			{<Stack
-				justifyContent={'center'}
-				sx={{ overflow: 'auto' }}
-				direction={'column'}
-				paddingBottom={'10vh'}
-			// height={'80vh'} 
-			// paddingTop={'1000px'}
-			>
+			{
 
-				<Typography
-					sx={{
-						paddingLeft: '30px',
-						fontFamily: 'Outfit',
-						fontSize: '25px',
-						fontWeight: 700,
-						lineHeight: '32px',
-						letterSpacing: '0.02em',
-						textAlign: 'left',
-					}}
+				<Stack
+					justifyContent={'center'}
+					sx={{ overflow: 'auto' }}
+					direction={'column'}
+					paddingBottom={'10vh'}
+				// height={'80vh'} 
+				// paddingTop={'1000px'}
 				>
-					Bienvenido, {email}.
-				</Typography>
-				<TarjetaProycon />
-				{getMeRol()[0] === RolUsersKeysEnum.administrador
-					&& < TarjetaPareinf />}
-				<TarjetaAyudas />
-			</Stack >}
+
+					<Typography
+						sx={{
+							paddingLeft: '30px',
+							fontFamily: 'Outfit',
+							fontSize: '25px',
+							fontWeight: 700,
+							lineHeight: '32px',
+							letterSpacing: '0.02em',
+							textAlign: 'left',
+						}}
+					>
+						Bienvenido, {email}.
+					</Typography>
+					<TarjetaProycon />
+					{Array.isArray(getMeRol())&&getMeRol()[0] === RolUsersKeysEnum.administrador 
+						&& < TarjetaPareinf />}
+					<TarjetaAyudas />
+				</Stack >}
 		</>
 
 	)
