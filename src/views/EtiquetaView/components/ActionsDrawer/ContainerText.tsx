@@ -3,21 +3,20 @@ import { blueGrey } from "@mui/material/colors";
 
 export interface ContainerTextProps {
 
-	title: string,titleSize?:string,
-	value: string,valueSize?:string,
+	title: string, titleSize?: string,
+	value: string, valueSize?: string,
 }
 
-const ContainerText: React.FC<ContainerTextProps> = ({ title, value,titleSize,valueSize}) => {
-
+const ContainerText: React.FC<ContainerTextProps> = ({ title, value, titleSize, valueSize }) => {
 
 	return (
 
-		<Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
+		<Stack bgcolor={'red'} width={'100%'} direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
 			<Typography fontSize={titleSize}>
 				{title}:
 			</Typography>
-			<Box bgcolor='#ccc' borderRadius={2} padding={0.5}>
-				<Typography fontSize={valueSize}>
+			<Box width={'100%'} bgcolor='#ccc' borderRadius={2} paddingY={0.5}>
+				<Typography fontSize={valueSize} textAlign={"center"}>
 					{value}
 				</Typography>
 			</Box>
