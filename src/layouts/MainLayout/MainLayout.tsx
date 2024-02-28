@@ -29,17 +29,13 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
           <title>Karbono</title>
           <meta name="description" content="Karbono" />
           <link rel="icon" href="/favicon.ico" />
-
         </Head>
-
-        
 
         <MainLayoutScripts />
         <ConexionStatusModal />
         {/* <Box
           sx={{ paddingTop:{xs:"5px",sm:"20px",md:"10px",lg:"10px",xl:"10px",},}}>
         </Box> */}
-
         <NavbarP />
         <MainDrawer/>
         
@@ -53,7 +49,6 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
         </Box>
 
         <Footer />
-
       </>
     </GlobalProvider>
 
@@ -61,8 +56,6 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
 };
 
 export default MainLayout;
-
-
 
 const MainLayoutScripts = () => {
   return (

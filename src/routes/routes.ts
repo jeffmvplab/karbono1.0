@@ -10,7 +10,9 @@ export const mainRoutes = {
     prescripcion: '/prescripcion',
     auditoria: '/auditoria',
     gestion: '/gestion',
-    form:'/formulario',
+    form: '/formulario',
+    etiqueta: '/etiqueta',
+    plan_produccion: '/plan_produccion',
     reportePrescripcion: '/reporte',
-    ayuda:'/ayuda',
+    ayuda: '/ayuda',
 }
