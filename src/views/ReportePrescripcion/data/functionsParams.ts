@@ -13,7 +13,7 @@ export interface IParamNumeric {
 // export const tipoPrescripcion:string='Por volúmenes';
 export const tipoPrescripcion: string = 'Por requerimientos';
 //////////////////////////////FORMULACIONES//////////////
-const correccionPurga = (prescription: IPrescriptions) => {
+export const correccionPurga = (prescription: IPrescriptions) => {
 
     const volTotalNPT: number = prescription?.volumen;
     const purga: number = prescription?.purga;
@@ -798,7 +798,44 @@ export const getConcentracionDeLipidos = (prescription: IPrescriptions) => {
     return params;
 }
 
+export const tipo_bolsa = (volTotal: number) => {
 
+    if ((volTotal >= 0) && (150 >= volTotal)) {
+        return 'FREKA x 150 mL'
+    } else if ((volTotal >= 150) && (250 >= volTotal)) {
+        return 'FREKA x 250 mL'
+    } else if ((volTotal >= 250) && (500 >= volTotal)) {
+        return 'FREKA x 500 mL'
+    } else if ((volTotal >= 500) && (1000 >= volTotal)) {
+        return 'FREKA x 1000 mL'
+    } else if ((volTotal >= 1000) && (1800 >= volTotal)) {
+        return 'FREKA x 2000 mL'
+    } else if ((volTotal >= 1800) && (2800 >= volTotal)) {
+        return 'FREKA x 3000 mL'
+    } else if ((volTotal >= 2800) && (5000 >= volTotal)) {
+        return 'PISA x 3000 mL'
+    } else {
+        return '-'
+    }
+
+}
+
+export const peso_teorico = (reporte: IPrescriptions) => {
+
+    const peso_teorico = correccionPurga(reporte) * (
+        getDextrosa(reporte!).volumen + getLipidos(reporte!).volumen
+        + getAminoacidos(reporte!).volumen + getDipeptiven(reporte!).volumen
+        + getOmegaven(reporte!).volumen + getSodio(reporte!).volumen
+        + getPotacio(reporte!).volumen + getFosforo(reporte!).volumen
+        + getMagnesio(reporte!).volumen + getCalcio(reporte!).volumen
+        + getOligoelementos(reporte).volumen + getVitHidroSolubles(reporte!).volumen
+        + getVitLiposSolubles(reporte!).volumen + getSoluv_Vit(reporte!).volumen
+        + getVit_C(reporte!).volumen
+        + parseFloat(reporte?.acido_folico!)
+    )
+
+    return peso_teorico;
+}
 
 
 

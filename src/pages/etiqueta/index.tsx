@@ -7,15 +7,16 @@ import PrescripcionLayout from '@/layouts/PrescripcionLayout/PrescripcionLayout'
 import { MainLayout } from '@/layouts/MainLayout'
 import { AyudaView } from '@/views/AyudaView'
 import { EtiquetaView } from '@/views/EtiquetaView'
+import { ReportesProvider } from '@/views/ReportePrescripcion/context/ReportesProvider'
 
 
 const EtiquetaPages: NextPageWithLayout = () => {
 
 
   return (
-    // <PrescripcionProvider>
-      <EtiquetaView/>
-    // </PrescripcionProvider>
+    <ReportesProvider>
+      <EtiquetaView />
+    </ReportesProvider>
 
   )
 }

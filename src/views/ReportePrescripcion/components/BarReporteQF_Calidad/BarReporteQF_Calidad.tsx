@@ -43,9 +43,7 @@ const BarReporteQF_Calidad = () => {
                     <Stack  direction={'row'} spacing={2}>
                         <CustomButton text={'Etiqueta'}
                             // onClick={handleOpenModalDescargar}
-                            onClick={() => {
-
-                            }}
+                            onClick={() =>router.push(mainRoutes.etiqueta)}
                             width='160px'
                             height='44px'
                             // variant='outlined'
@@ -61,9 +59,7 @@ const BarReporteQF_Calidad = () => {
 
                         <CustomButton text={'Plan de producción'}
                             // onClick={handleOpenModalDescargar}
-                            onClick={() => {
-
-                            }}
+                            onClick={() =>router.push(mainRoutes.plan_produccion)}
                             width='240px'
                             height='44px'
                             // variant='outlined'

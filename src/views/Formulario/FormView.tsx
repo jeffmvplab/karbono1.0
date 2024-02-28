@@ -68,7 +68,6 @@ const FormView: React.FC<FormViewProps> = () => {
 		getMaxNumPresc()
 	}, [])
 
-
 	useEffect(() => {
 		getPrescriptions();
 	}, [loadingSave])
@@ -84,7 +83,7 @@ const FormView: React.FC<FormViewProps> = () => {
 		} else if (selectTab === 2) {
 			setSelectTab(selectTab + 1)
 		} else if (selectTab === 3) {
-			console.log('CCCC:',validateAlert())
+			// console.log('CCCC:',validateAlert())
 			validateCampos()
 			validateAlert()
 				? savePrescription()

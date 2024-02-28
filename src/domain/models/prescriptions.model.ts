@@ -4,12 +4,12 @@ export interface IPrescriptions {
 
     _id?: string,
 
-    createdAt: Date|string,
-    updatedAt: Date|string,
-    estado:'PENDIENTE'| 'FINALIZAR'|'SOLICITADA'|'CALIDAD'|'PRODUCCION'|'CANCELADA'
+    createdAt: Date | string,
+    updatedAt: Date | string,
+    estado: 'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION' | 'CANCELADA'
 
     user_id?: string,
-    user?:any,
+    user?: any,
     no_orden: number,
     tipo_prescripcion: string,
     fecha: string,
@@ -56,7 +56,10 @@ export interface IPrescriptions {
     soluvit_vitalip: string,
     vit_C: string,
     acido_folico: string,
-    observaciones?: IComment[]
+    observaciones?: IComment[],
+    preparador?: string,
+    controlador_de_calidad?: string,
+
 }
 
 
