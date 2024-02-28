@@ -55,5 +55,7 @@ export const prescriptionsAdapter = (prescriptions: any): IPrescriptions => ({
   soluvit_vitalip: prescriptions.soluvit_vitalip,
   vit_C: prescriptions.vit_C,
   acido_folico: prescriptions.acido_folico,
-  observaciones: prescriptions.observaciones
+  observaciones: prescriptions.observaciones,
+  preparador: prescriptions.preparador,
+  controlador_de_calidad: prescriptions.controlador_de_calidad
 });

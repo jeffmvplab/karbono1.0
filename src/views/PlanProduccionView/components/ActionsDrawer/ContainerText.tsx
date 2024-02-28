@@ -5,9 +5,14 @@ export interface ContainerTextProps {
 	title: string, titleSize?: string,
 	value: string, valueSize?: string,
 	isUpper?: boolean, color?: string,
+	titleWeigth?: string,
+	valueWeigth?: string,
 }
 
-const ContainerText: React.FC<ContainerTextProps> = ({ title, value, titleSize, valueSize, isUpper = false, color }) => {
+const ContainerText: React.FC<ContainerTextProps> = ({
+	title, value, titleSize, valueSize, isUpper = false, color, titleWeigth='normal',
+	valueWeigth='normal',
+}) => {
 
 	return (
 
@@ -21,8 +26,8 @@ const ContainerText: React.FC<ContainerTextProps> = ({ title, value, titleSize, 
 			<Typography
 				style={{
 					color: color,
-					fontSize: isUpper ? 14 : valueSize,
-					fontWeight: isUpper ? 'bold' : 'normal',
+					fontSize: isUpper ? 14 : titleSize,
+					fontWeight: isUpper ? 'bold' : titleWeigth,
 				}}>
 				{isUpper ? title : `${title}:`}
 			</Typography>
@@ -35,15 +40,12 @@ const ContainerText: React.FC<ContainerTextProps> = ({ title, value, titleSize, 
 				paddingY={0.5}
 				justifyContent={'center'}
 				style={{
-					fontSize: titleSize,
-					fontWeight: isUpper ? 'bold' : 'normal',
-				}}>
-				<Typography minWidth={'70px'} minHeight={'20px'} fontSize={isUpper ? 14 : valueSize} textAlign={"center"} paddingX={1}>
-					{value
-						? value === undefined
-							? '-'
-							: value === 'null' ? '-' : value
-						: '-'}
+					fontSize: valueSize,
+					fontWeight: isUpper ? 'bold' : valueWeigth,
+				}}
+			>
+				<Typography fontSize={isUpper ? 14 : valueSize} textAlign={"center"} paddingX={1}>
+					{value}
 				</Typography>
 			</Stack>
 
