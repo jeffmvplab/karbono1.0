@@ -15,21 +15,9 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 
 	const { getPrescriptionsByNumber, loadingSave, reporte } = useContext(ReportesContext)
 
-	const CustomTextField = styled(TextField)({
-		'& .MuiInput-underline:before': {
-			borderBottom: 'none',
-		},
-		'& .MuiInput-underline:after': {
-			borderBottom: 'none',
-		},
-
-		'& .MuiOutlinedInput-root': {
-			borderRadius: 8, // Ajusta el radio de los bordes del TextField
-		},
-	});
-
 	const [pesoReal, setPesoReal] = useState(0);
 	const [area, setArea] = useState('');
+	const [intervencion, setIntervención] = useState('');
 
 	useEffect(() => {
 		getPrescriptionsByNumber();
@@ -98,11 +86,11 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 								</Stack>
 							</Grid>
 
-							<Grid item xs={5}>
+							<Grid item xs={4}>
 
 							</Grid>
 
-							<Grid item xs={2}>
+							<Grid item xs={3}>
 								<Stack
 									height={'100%'}
 									direction={'column'}
@@ -284,8 +272,17 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 												Peso Real:
 											</Typography>
 
-											<CustomTextField
-												sx={{ background: '#EDF1F1', borderRadius: '12px'}}
+											<TextField
+												sx={{
+													background: '#EDF1F1',
+													borderRadius: '12px',
+													'& .MuiInput-underline:before': {
+														borderBottom: 'none',
+													},
+													'& .MuiInput-underline:after': {
+														borderBottom: 'none',
+													},
+												}}
 												variant="standard"
 												value={pesoReal}
 												onChange={(e) => setPesoReal(parseInt(e.target.value))}
@@ -295,16 +292,26 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 										</Stack>
 
 										<Stack width={'100%'} direction={'row'} justifyContent={'space-between'}>
+
 											<Typography width={'100%'} fontSize='14px' fontWeight={600} textAlign={"start"} >
 												Area de producción:
 											</Typography>
 
-											<CustomTextField
-												sx={{ background: '#EDF1F1', borderRadius: '12px' }}
+											<TextField
+												sx={{
+													background: '#EDF1F1',
+													borderRadius: '12px',
+													'& .MuiInput-underline:before': {
+														borderBottom: 'none',
+													},
+													'& .MuiInput-underline:after': {
+														borderBottom: 'none',
+													},
+												}}
 												variant="standard"
 												value={area}
 												onChange={(e) => setArea(e.target.value)}
-												type="number"
+												type="text"
 											/>
 
 										</Stack>
@@ -453,7 +460,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 										<ContainerText isUpper title="BOLSA EVA" value={`${tipo_bolsa(reporte?.volumen!)}`} />
 									</Box>
 									<Box width={'100%'} paddingY={1}>
-										<ContainerText isUpper title="DISPOCITIVO ADICIONAL" value="xxxxxxxxx" />
+										<ContainerText isUpper title="DISPOCITIVO ADICIONAL" value={reporte?.filtro ? 'Si' : 'No'} />
 									</Box>
 								</Grid>
 								{///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -644,7 +651,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 										<ContainerText titleWeigth="700" titleSize="20px" title="PRESCRIPTOR" color={colorsKarbono.primary} value="xxxxxxxxx" />
 									</Grid>
 									<Grid item xs={6}>
-										<ContainerText titleWeigth="700" titleSize="20px" title="PREPARÓ" color={colorsKarbono.primary} value="xxxxxxxxx" />
+										<ContainerText titleWeigth="700" titleSize="20px" title="PREPARÓ" color={colorsKarbono.primary} value={`${reporte?.preparador ? 'reporte?.preparador' : '-'}`} />
 									</Grid>
 								</Grid>
 							</Stack>
@@ -654,7 +661,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 
 								<Grid item xs={8}>
 									<Box width={'100%'} paddingY={1}>
-										<ContainerText titleWeigth="700" titleSize="20px" title="Responsable del Control de Calidad" color={colorsKarbono.primary} value="xxxxxxxxx" />
+										<ContainerText titleWeigth="700" titleSize="20px" title="Responsable del Control de Calidad" color={colorsKarbono.primary} value={`${reporte?.controlador_de_calidad ? 'reporte?.controlador_de_calidad' : '-'}`} />
 									</Box>
 								</Grid>
 							</Grid>
@@ -669,9 +676,9 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 									justifyContent={'normal'}>
 
 									<Typography fontWeight={700} width={'100px'}>
-										INTERVENCÓN FARMACÉUTICA CORPAUL:
+										INTERVENCIÓN FARMACÉUTICA CORPAUL:
 									</Typography>
-
+									{/* 
 									<Stack
 										width={'100%'}
 										direction={'row'}
@@ -679,12 +686,27 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 										bgcolor='#EDF1F1'
 										borderRadius={3}
 										paddingY={0.5}
-										justifyContent={'center'}>
+										justifyContent={'center'}> */}
 
-										<Typography textAlign={"center"} paddingX={1}>
-											XXXXXXX
-										</Typography>
-									</Stack>
+									<TextField
+										sx={{
+											width: '100%',
+											background: '#EDF1F1',
+											borderRadius: '12px',
+											'& .MuiInput-underline:before': {
+												borderBottom: 'none',
+											},
+											'& .MuiInput-underline:after': {
+												borderBottom: 'none',
+											},
+										}}
+										variant="standard"
+										value={intervencion}
+										onChange={(e) => setIntervención(e.target.value)}
+										type="text"
+									/>
+
+									{/* </Stack> */}
 								</Stack>
 
 							</Grid>
