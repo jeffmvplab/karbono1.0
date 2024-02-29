@@ -5,9 +5,10 @@ export interface ContainerTextProps {
 	title: string, titleSize?: string,
 	value: string, valueSize?: string,
 	isUpper?: boolean, color?: string,
+	transform?: 'none' | 'capitalize' | 'uppercase' | 'lowercase' | 'full-width' | 'full-size-kana'
 }
 
-const ContainerText: React.FC<ContainerTextProps> = ({ title, value, titleSize, valueSize, isUpper = false, color }) => {
+const ContainerText: React.FC<ContainerTextProps> = ({ title, value, transform, titleSize, valueSize, isUpper = false, color }) => {
 
 	return (
 
@@ -23,6 +24,7 @@ const ContainerText: React.FC<ContainerTextProps> = ({ title, value, titleSize, 
 					color: color,
 					fontSize: isUpper ? 14 : valueSize,
 					fontWeight: isUpper ? 'bold' : 'normal',
+					textTransform: transform
 				}}>
 				{isUpper ? title : `${title}:`}
 			</Typography>

@@ -54,9 +54,12 @@ const HomeView: React.FC<HomeViewProps> = () => {
 					>
 						Bienvenido, {email}.
 					</Typography>
+
 					<TarjetaProycon />
-					{Array.isArray(getMeRol())&&getMeRol()[0] === RolUsersKeysEnum.administrador 
+
+					{Array.isArray(getMeRol())&&getMeRol()[0] !== RolUsersKeysEnum.prescriptor 
 						&& < TarjetaPareinf />}
+
 					<TarjetaAyudas />
 				</Stack >}
 		</>

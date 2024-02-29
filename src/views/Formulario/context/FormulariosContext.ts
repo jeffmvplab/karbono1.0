@@ -49,7 +49,7 @@ interface ContextProps {
     volumen: string, errorVolumen: boolean, messageErrorVolumen: string, handleVolumen: (event: React.ChangeEvent<HTMLInputElement>) => void,
     purga: string, errorPurga: boolean, messageErrorPurga: string, handlePurga: (event: React.ChangeEvent<HTMLInputElement>) => void,
     tiempoDeInfucion: number, errorTiempoDeInfucion: boolean, messageErrorTiempoDeInfucion: string, handleTiempoDeInfucion: (event: Event, newValue: number | number[]) => void,
-    overfill: number, errorOverfill: boolean, messageErrorOverfill: string, handleOverfill: (event: Event, newValue: number | number[]) => void,
+    overfill: number,setOverfill: React.Dispatch<React.SetStateAction<number>>, errorOverfill: boolean, messageErrorOverfill: string, handleOverfill: (event: Event, newValue: number | number[]) => void,
     filtro: string, errorFiltro: boolean, messageErrorFiltro: string, handleFiltro: (event: React.ChangeEvent<HTMLInputElement>) => void,
     eqFotosencible: string, errorEqFotosencible: boolean, messageErrorEqFotosencible: string, handleEqFotosencible: (event: React.ChangeEvent<HTMLInputElement>) => void,
     tipoPaciente: string, errorTipoPaciente: boolean, messageErrorTipoPaciente: string, handleTipoPaciente: (event: React.ChangeEvent<HTMLInputElement>) => void,
