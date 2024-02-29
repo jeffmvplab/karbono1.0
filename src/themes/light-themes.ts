@@ -102,7 +102,7 @@ export const lightThemes = createTheme({
                 root: {
                     fontFamily: "Outfit,sans-serif",
                     display: 'block',
-                    background: 'red'
+                    background: 'white'
                 }
             },
         },

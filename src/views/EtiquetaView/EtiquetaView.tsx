@@ -26,18 +26,14 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 	const [caducidad, setCaducidad] = useState('');
 	const [instalado, setInstalado] = useState('');
 
-	const CustomTextField = styled(TextField)({
-		'& .MuiInput-underline:before': {
-			borderBottom: 'none',
-		},
-		'& .MuiInput-underline:after': {
-			borderBottom: 'none',
-		},
-
-		'& .MuiOutlinedInput-root': {
-			borderRadius: 8, // Ajusta el radio de los bordes del TextField
-		},
-	});
+	// const CustomTextField = styled(TextField)({
+	// 	// '& .MuiInput-underline:before': {
+	// 	// 	borderBottom: 'none',
+	// 	// },
+	// 	'& .MuiInput-underline:after': {
+	// 		borderBottom: 'none',
+	// 	},
+	// });
 	return (
 		<Stack
 			// width={{ xs: '1281px', sm: '100%' }}
@@ -395,11 +391,20 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 												Peso Real:
 											</Typography>
 
-											<CustomTextField
-												sx={{ background: '#EDF1F1', borderRadius: '12px' }}
+											<TextField
+												sx={{
+													background: '#EDF1F1',
+													borderRadius: '12px',
+													'& .MuiInput-underline:before': {
+														borderBottom: 'none',
+													},
+													'& .MuiInput-underline:after': {
+														borderBottom: 'none',
+													},
+												}}
 												variant="standard"
-												// value={pesoReal}
-												// onChange={(e) => setPesoReal(parseInt(e.target.value))}
+												value={pesoReal}
+												onChange={(e) => setPesoReal(parseInt(e.target.value))}
 												type="number"
 											/>
 

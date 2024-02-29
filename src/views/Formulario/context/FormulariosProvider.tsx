@@ -972,6 +972,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		} else if (resp.statusCode === 400) {
 			setMessageAPI(resp.body.message)
 			setSaveOk(false)
+		} else if (resp.statusCode === 403) {
+			setMessageAPI(resp.body.message)
+			setSaveOk(false)
 		} else if (resp.statusCode === 404) {
 			setSaveOk(false)
 		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
@@ -1151,6 +1154,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [valOKAlert, setValOKAlert] = React.useState(true);
 
 	const validateAlert = () => {
+
 		if (
 			// alertViaDeAdmin(prescriptionsData!).alert==='INADECUADA'||
 			alarmaAgua(prescriptionsData!).alert === 'INADECUADA' ||
@@ -1162,8 +1166,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			alarmConcDeLipidos(prescriptionsData!).alert === 'REVISAR' ||
 			alarmConcSodio(prescriptionsData!).alert === 'REVISAR' ||
 			alarmConcPotasio(prescriptionsData!).alert === 'REVISAR' ||
-			alarmConcMagnesio(prescriptionsData!).alert === 'REVISAR' ||
-			validateCampos()
+			alarmConcMagnesio(prescriptionsData!).alert === 'REVISAR'
+			// validateCampos()
 
 		) {
 			// console.log('ALERT')
@@ -1181,7 +1185,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const valTabsErrors1 = () => {
 
 		console.log('WWWWWW:',
-			  validateNumIdent(numIden)
+			validateNumIdent(numIden)
 			, validateNombrePaciente(namePaciente)
 			, validateTipoPaciente(tipoPaciente)
 			, validateTipoPrecripcion(tipoPrescripcion)
@@ -1215,8 +1219,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (
 			// validateFlujoMetabolico(flujoMetabolico)
 			// || validateDextrosa(dextrosa)
-			// || 
-
 			validateAminos(requerimientoAminoacidos)
 		) {
 			setTabErrors({ ...tabsErrors, macro: true })
@@ -1224,7 +1226,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			// console.log('YYYYY:', requerimientoAminoacidos)
 			return true
 		} else {
-			setTabErrors({ ...tabsErrors, macro: true })
+			setTabErrors({ ...tabsErrors, macro: false })
 			// setTabErrors({...tabsErrors,micro:false})
 			return false
 		}
