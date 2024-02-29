@@ -14,12 +14,11 @@ import { alarmConcCHOS, alarmConcDeLipidos, alarmConcDeProteinas, alarmConcMagne
 import { GlobalContext } from "@/context/GlobalContext";
 import { IErrorsTab } from "@/domain/models/taps_errors";
 import { IComment, deleteComment } from "@/domain/models/observaciones.model";
+import { obtenerOverfillPorLabel } from "@/views/ReportePrescripcion/data/instituciones";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
 };
-
-
 
 export const FormulariosProvider: FC<Props> = ({ children }) => {
 
@@ -92,7 +91,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		}
 	};
 
-
 	const toggleDrawer =
 		(open: boolean) =>
 			(event: React.KeyboardEvent | React.MouseEvent) => {
@@ -103,7 +101,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 				) {
 					return;
 				}
-
 				setOpen1(open);
 				setOpen2(open);
 			};
@@ -119,7 +116,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		handleOpenModalFormSaved();
 
 		const prescripcion = {
-			number: parseFloat(numOrder) || maxNumOrder! +1,
+			number: parseFloat(numOrder) || maxNumOrder! + 1,
 			name: namePaciente,
 			id: numIden,
 			ips: ips
@@ -147,7 +144,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 			if (resp.statusCode === 200) {
 				setSaveOk(true);
-				//
 				// console.log('Reporte:', resp)
 				// setReporte(repoPresc);
 				// localStorageProtocol.set(StorageKeysEnum.reporte,repoPresc);
@@ -309,6 +305,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setIps(event.target.value);
 		// const ips = event.target.value;
 		// console.log(' ips:', ips)
+		setOverfill(obtenerOverfillPorLabel(event.target.value) as number)
 	};
 
 	const [numIden, setNumIden] = React.useState('');
@@ -320,11 +317,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (numIden !== '') {
 			setErrorNumIden(false);
 			setMessageErrorNumIden('')
+			return false;
 		} else {
 			setErrorNumIden(true);
 			setMessageErrorNumIden('Introduzca un número de identificación')
+			return true;
 		}
-		return errorNumIden;
 	}
 
 	const handleNumIden = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -341,11 +339,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (name !== '') {
 			setErrorNamePaciente(false);
 			setMessageErrorNamePaciente('')
+			return false;
 		} else {
 			setErrorNamePaciente(true);
 			setMessageErrorNamePaciente('Introduzca el nombre del paciente')
+			return true;
 		}
-		return errorNamePaciente;
 	}
 
 	const handleNamePaciente = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -400,11 +399,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (peso !== '') {
 			setErrorPesoKg(false);
 			setMessageErrorPesoKg('')
+			return false;
 		} else {
 			setErrorPesoKg(true);
 			setMessageErrorPesoKg('Introduzca el peso del paciente')
+			return true;
 		}
-		return errorPesoKg;
 	}
 
 	const handlePesoKg = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -438,12 +438,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (volumen !== '') {
 			setErrorVolumen(false);
 			setMessageErrorVolumen('')
+			return false;
 		} else {
 			setErrorVolumen(true);
 			setMessageErrorVolumen('Introduzca el volumen')
+			return true;
 		}
-
-		return errorVolumen;
 	}
 
 	const handleVolumen = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -482,11 +482,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (tiempoInfucion !== 0) {
 			setErrorTiempoDeInfucion(false);
 			setMessageErrorTiempoDeInfucion('')
+			return false;
 		} else {
 			setErrorTiempoDeInfucion(true);
 			setMessageErrorTiempoDeInfucion('El tiempo de infución no puede ser 0')
+			return true;
 		}
-		return errorTiempoDeInfucion;
 	}
 
 	const handleTiempoDeInfucion = (event: Event, newValue: number | number[]) => {
@@ -530,11 +531,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (tipoPaciente !== '') {
 			setErrorTipoPaciente(false);
 			setMessageErrorTipoPaciente('')
+			return false;
 		} else {
 			setErrorTipoPaciente(true);
 			setMessageErrorTipoPaciente('Introduzca el tipo de paciente')
+			return true;
 		}
-		return errorTipoPaciente;
 	}
 
 	const handleTipoPaciente = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -551,11 +553,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (viaAdmin !== '') {
 			setErrorViaAdmin(false);
 			setMessageErrorViaAdmin('')
+			return false;
 		} else {
 			setErrorViaAdmin(true);
 			setMessageErrorViaAdmin('Introduzca la vía de administración')
+			return true;
 		}
-		return errorViaAdmin;
 	}
 
 	const handleViaAdmin = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -580,14 +583,16 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorTipoPrescripcion, setMessageErrorTipoPrescripcion] = React.useState('');
 
 	const validateTipoPrecripcion = (tipoPrescripcion: string) => {
-		if (tipoPrescripcion !== '0') {
+		if (tipoPrescripcion !== '') {
+			console.log('TP', tipoPrescripcion)
 			setErrorTipoPrescripcion(false);
 			setMessageErrorTipoPrescripcion('')
+			return false;
 		} else {
 			setErrorTipoPrescripcion(true);
 			setMessageErrorTipoPrescripcion('Introduzca el tipo de prescripción')
+			return true;
 		}
-		return errorTipoPrescripcion;
 	}
 	const handleTipoPrescripcion = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTipoPrescripcion(event.target.value);
@@ -603,6 +608,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (flujoMetabolico !== '') {
 			setErrorFlujoMetabolico(false);
 			setMessageErrorFlujoMetabolico('')
+			return false;
 		} else {
 			setErrorFlujoMetabolico(true);
 			if (tipoPrescripcion === 'Por requerimientos' || tipoPrescripcion === '') {
@@ -610,8 +616,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			} else {
 				setMessageErrorFlujoMetabolico('')
 			}
+			return true;
 		}
-		return errorFlujoMetabolico;
 	}
 
 	const handleFlujoMetabolico = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -628,11 +634,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (dextrosa !== '') {
 			setErrorDextrosa(false);
 			setMessageErrorDextrosa('')
+			return false;
 		} else {
 			setErrorDextrosa(true);
 			setMessageErrorDextrosa('Introduzca el valor de dextrosa')
+			return true;
 		}
-		return errorDextrosa;
 	}
 
 	const handleDextrosa = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -659,11 +666,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (aminos !== '0') {
 			setErrorRequerimientoAminoacidos(false);
 			setMessageErrorRequerimientoAminoacidos('')
+			return false;
 		} else {
 			setErrorRequerimientoAminoacidos(true);
 			setMessageErrorRequerimientoAminoacidos('Introduzca el valor de aminoacidos')
+			return true;
 		}
-		return errorRequerimientoAminoacidos;
 	}
 
 	const handleRequerimientoAminoacidos = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -838,7 +846,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	
+
 	const [soluvid_Vitalipid, setSoluvid_Vitalipid] = React.useState('0');
 
 	const handleSoluvid_Vitalipid = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -871,10 +879,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	////////////////////////////////////////////////////////////////////
 	///////////////////////////////INTEGRACION DE APIS//////////////////
-	
+
 	const prescriptionsData: IPrescriptions = {
 
-		no_orden: parseFloat(numOrder) || maxNumOrder! +1,
+		no_orden: parseFloat(numOrder) || maxNumOrder! + 1,
 
 		createdAt: (createdAt === '') ? new Date().toISOString() : createdAt!,
 		updatedAt: new Date().toISOString(),
@@ -1090,8 +1098,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		console.log('Borrando Prescripcion...')
 
 		const deletedComment: IComment = {
-			prescriptionId:prescription?._id!,
-			estado:'CANCELADA'
+			prescriptionId: prescription?._id!,
+			estado: 'CANCELADA'
 		}
 		// const resp = await prescriptionsUseCase.deletePrescriptions(prescription?.no_orden!);
 		const resp = await prescriptionsUseCase.createComments(deletedComment);
@@ -1158,11 +1166,11 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			validateCampos()
 
 		) {
-			console.log('ALERT')
+			// console.log('ALERT')
 			setValOKAlert(false)
 			return false
 		} else {
-			console.log('NO ALERT')
+			// console.log('NO ALERT')
 			setValOKAlert(true)
 			return true
 		}
@@ -1172,21 +1180,32 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const valTabsErrors1 = () => {
 
+		console.log('WWWWWW:',
+			  validateNumIdent(numIden)
+			, validateNombrePaciente(namePaciente)
+			, validateTipoPaciente(tipoPaciente)
+			, validateTipoPrecripcion(tipoPrescripcion)
+			, validatePeso(pesoKg)
+			, validateVolumen(volumen)
+			, validateTiempoInfucion(tiempoDeInfucion)
+			, validateViaAdmin(viaAdmin))
+
 		if (
 			validateNumIdent(numIden)
 			|| validateNombrePaciente(namePaciente)
 			|| validateTipoPaciente(tipoPaciente)
-			|| validateServicio(servicio)
+			|| validateTipoPrecripcion(tipoPrescripcion)
 			|| validatePeso(pesoKg)
 			|| validateVolumen(volumen)
-			|| validatePurga(purga)
 			|| validateTiempoInfucion(tiempoDeInfucion)
 			|| validateViaAdmin(viaAdmin)
 		) {
-			console.log('VAL:', true)
+			setTabErrors({ ...tabsErrors, info: true })
+			console.log('VAL TRUE:', true)
 			return true
 		} else {
-			console.log('VAL:', false)
+			setTabErrors({ ...tabsErrors, info: false })
+			console.log('VAL FALSE:', false)
 			return false
 		}
 	}
@@ -1194,15 +1213,19 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const valTabsErrors2 = () => {
 
 		if (
+			// validateFlujoMetabolico(flujoMetabolico)
+			// || validateDextrosa(dextrosa)
+			// || 
 
-			validateFlujoMetabolico(flujoMetabolico)
-			|| validateDextrosa(dextrosa)
-			|| validateAminos(requerimientoAminoacidos)
+			validateAminos(requerimientoAminoacidos)
 		) {
-
-			console.log('YYYYY:', requerimientoAminoacidos)
+			setTabErrors({ ...tabsErrors, macro: true })
+			// setTabErrors({...tabsErrors,macro:true})
+			// console.log('YYYYY:', requerimientoAminoacidos)
 			return true
 		} else {
+			setTabErrors({ ...tabsErrors, macro: true })
+			// setTabErrors({...tabsErrors,micro:false})
 			return false
 		}
 	}
@@ -1220,15 +1243,15 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			validateViaAdmin(viaAdmin) ||
 			validateTiempoInfucion(tiempoDeInfucion) ||
 			validateTipoPrecripcion(tipoPrescripcion) ||
-			validateFlujoMetabolico(flujoMetabolico) ||
-			validateDextrosa(dextrosa!) ||
+			// validateFlujoMetabolico(flujoMetabolico) ||
+			// validateDextrosa(dextrosa!) ||
 			validateAminos(requerimientoAminoacidos)
 		) {
-			console.log('Validar Campos:', true)
+			// console.log('Validar Campos:', true)
 			return true
 		}
 		else {
-			console.log('Validar Campos:', false)
+			// console.log('Validar Campos:', false)
 			return false
 		}
 	}
@@ -1245,7 +1268,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		lipidos, requerimientoLipidos, omegaven, dipeptiven, sodioTotal,
 		potacioTotal, fosfato, requerimientoFosfato, calcio, reqCalcio,
 		magnesio, reqMagnesio, elementosTraza, reqTraza, vitaminasHidrosolubles,
-		reqVitHidrosolubles, vitaminasLiposolubles,soluvid_Vitalipid, vitaminasC, acidoFolico
+		reqVitHidrosolubles, vitaminasLiposolubles, soluvid_Vitalipid, vitaminasC, acidoFolico
 	])
 
 	const [selectTab, setSelectTab] = useState<number>(0);
@@ -1306,7 +1329,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			volumen, errorVolumen, messageErrorVolumen, handleVolumen,
 			purga, errorPurga, messageErrorPurga, handlePurga,
 			tiempoDeInfucion, errorTiempoDeInfucion, messageErrorTiempoDeInfucion, handleTiempoDeInfucion,
-			overfill, errorOverfill, messageErrorOverfill, handleOverfill,
+			overfill, setOverfill, errorOverfill, messageErrorOverfill, handleOverfill,
 			filtro, errorFiltro, messageErrorFiltro, handleFiltro,
 			eqFotosencible, errorEqFotosencible, messageErrorEqFotosencible, handleEqFotosencible,
 			tipoPaciente, errorTipoPaciente, messageErrorTipoPaciente, handleTipoPaciente,
@@ -1337,7 +1360,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			vitaminasHidrosolubles, errorVitaminasHidrosolubles, messageErrorVitaminasHidrosolubles, handleVitaminasHidrosolubles,
 			reqVitHidrosolubles, errorReqVitHidrosolubles, messageErrorReqVitHidrosolubles, handleReqVitHidrosolubles,
 			vitaminasLiposolubles, errorVitaminasLiposolubles, messageErrorVitaminasLiposolubles, handleVitaminasLiposolubles,
-			
+
 			soluvid_Vitalipid,
 			handleSoluvid_Vitalipid,
 

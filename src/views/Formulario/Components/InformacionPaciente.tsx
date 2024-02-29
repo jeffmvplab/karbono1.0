@@ -2,11 +2,9 @@
 import { Typography, Grid, Box, Stack, AccordionSummary, AccordionDetails, Accordion, useMediaQuery, Slider, Tooltip, TooltipProps, styled, tooltipClasses, MenuItem } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import CustomTextField from './CustomTextField'
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import { colorsKarbono } from '@/themes/colors';
 import { FormulariosContext } from '../context/FormulariosContext';
 import { LightTooltip } from '../style/styleToolTips';
-import { instituciones } from '@/views/ReportePrescripcion/data/instituciones';
+import { instituciones, obtenerOverfillPorLabel } from '@/views/ReportePrescripcion/data/instituciones';
 import { convertComaAPunto } from '@/views/ReportePrescripcion/data/comaTopoint';
 
 
@@ -31,8 +29,13 @@ const viaAdministracion = [
     { value: 'Periférica', label: 'Periférica' }
 ]
 
+const si_no = [
+    { value: 'Si', label: 'Si' },
+    { value: 'No', label: 'No' }
+]
+
 const marks1 = [
-    
+
     { value: 0, label: '0', },
     { value: 1, label: '', },
     { value: 2, label: '', },
@@ -40,8 +43,8 @@ const marks1 = [
     { value: 4, label: '4', },
     { value: 5, label: '', },
     { value: 6, label: '', },
-    { value: 7, label:'', },
-    { value: 8, label:  '8', },
+    { value: 7, label: '', },
+    { value: 8, label: '8', },
     { value: 9, label: '', },
     { value: 10, label: '', },
     { value: 11, label: '', },
@@ -63,26 +66,30 @@ const marks1 = [
 
 const marks2 = [
     { value: 0, label: '0', },
-    { value: 2, label: '', },
-    { value: 4, label: '', },
-    { value: 6, label: '', },
     { value: 8, label: '8', },
-    { value: 10, label: '', },
-    { value: 12, label: '', },
-    { value: 14, label: '', },
-    { value: 16, label: '16', },
-    { value: 18, label: '', },
-    { value: 20, label: '', },
-    { value: 22, label: '', },
-    { value: 24, label: '24', },
-    { value: 26, label: '', },
-    { value: 28, label: '', },
-    { value: 30, label: '30', },
+    { value: 15, label: '15', },
+    { value: 23, label: '23', },
+    { value: 50, label: '50', },
+];
+
+
+const servicios = [
+    { value: 'GINECOBSTETRICIA', label: 'GINECOBSTETRICIA', },
+    { value: 'HOSPITALIZACIÓN', label: 'HOSPITALIZACIÓN', },
+    { value: 'LACTANTES', label: 'LACTANTES', },
+    { value: 'ONCOLOGIA', label: 'ONCOLOGIA', },
+    { value: 'PEDIATRIA', label: 'PEDIATRIA', },
+    { value: 'UCE ADULTOS', label: 'UCE ADULTOS', },
+    { value: 'UCE PEDIATRIA', label: 'UCE PEDIATRIA', },
+    { value: 'UCI ADULTOS', label: 'UCI ADULTOS', },
+    { value: 'UCI NEONATOS', label: 'UCI NEONATOS', },
+    { value: 'UCI PEDIATRIA', label: 'UCI PEDIATRIA', },
+    { value: 'URGENCIAS', label: 'URGENCIAS', },
 ];
 
 const InformacionPaciente = () => {
 
-    const { 
+    const {
         ips, handleIps,
         numIden, handleNumIden, errorNumIden, messageErrorNumIden,
         namePaciente, handleNamePaciente, errorNamePaciente, messageErrorNamePaciente,
@@ -98,6 +105,10 @@ const InformacionPaciente = () => {
         viaAdmin, handleViaAdmin, errorViaAdmin, messageErrorViaAdmin,
         diagnostico, handleDiagnostico,
         getPrescriptions,
+
+        handleUbicacion, ubicacion,
+        handleFiltro, filtro,
+        overfill, handleOverfill, errorOverfill, setOverfill,
     } = useContext(FormulariosContext)
 
 
@@ -110,43 +121,6 @@ const InformacionPaciente = () => {
             paddingBottom={{ xs: '80px' }}
             padding={1}
             overflow={'scroll'}>
-
-            {/* <Accordion expanded={stateAcordion1} elevation={0}> */}
-            {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
-            {/* <Box sx={{ display: { sm: 'none' }, }}>
-                    <AccordionSummary
-                        sx={{
-                            display: { sm: 'none' },
-                            '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-                                transform: 'rotate(90deg)',
-                            },
-                        }}
-                        expandIcon={<ArrowRightIcon sx={{ color: `${colorsKarbono.primary}` }} />}
-                        aria-controls="panel1bh-content"
-                        id="panel1bh-header"
-                    >
-                        {/* <Typography
-                            onClick={() => { !matches && handleAcordion1(), console.log('FFFF') }}
-                            fontSize={16}
-                            // paddingY={{sm:2}}
-                            style={{ fontWeight: 700, color: colorsKarbono.secundary }}
-                        >Información del paciente
-                        </Typography> */}
-            {/* </AccordionSummary>
-                </Box> */}
-            {/* <Typography
-                    variant='h6'
-                    paddingY={2}
-                    style={{ fontWeight: 700, color: colorsKarbono.secundary, }}
-                    sx={{ display: { xs: 'none', sm: 'flex' } }}
-                >Información del paciente:
-                </Typography > */}
-            {/* //////////////////////////////////////////////////////////////////////////////////////////////////// */}
-            {/* <AccordionDetails
-                    sx={{
-                        // overflow: { sm: 'scroll' },
-                        minHeight: '500px'
-                    }}> */}
 
             <Grid container direction='column' >
 
@@ -162,7 +136,6 @@ const InformacionPaciente = () => {
                     >
                         {instituciones.map((option) => (
                             <MenuItem
-                            
                                 style={{
                                     background: "white",
                                     color: "black",
@@ -223,22 +196,23 @@ const InformacionPaciente = () => {
                         >
                             <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                 <CustomTextField
-                                    onChange={handleTipoPaciente}
-                                    value={tipoPaciente}
-                                    defaulValue={tipoPaciente}
-                                    id='tipo-de-paciente'
-                                    label='Tipo de paciente *'
+                                    onChange={handleServicio}
+                                    id='serviios'
+                                    label='Servicios'
                                     type='text'
+                                    value={servicio}
+                                    defaulValue={servicio}
                                     select
-                                    helperText={messageErrorTipoPaciente}
                                 >
-                                    {tiposPacientes.map((option) => (
-                                        <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
+                                    {servicios.map((option) => (
+                                        <MenuItem
+                                            sx={{ backgroundColor: 'white' }}
+                                            key={option.value}
+                                            value={option.value}>
                                             {option.label}
                                         </MenuItem>
                                     ))}
                                 </CustomTextField>
-
                             </Grid>
                         </LightTooltip>
                     </Grid>
@@ -254,15 +228,15 @@ const InformacionPaciente = () => {
 
                         <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                             <CustomTextField
-                                onChange={handleServicio}
-                                id='servicio'
-                                label='Servicio*'
+                                onChange={handleUbicacion}
+                                id='ubicacion'
+                                label='Ubicaión'
                                 type='text'
-                                value={servicio}
-                                defaulValue={servicio}
-                                helperText={messageErrorServicio}
+                                value={ubicacion}
+                                defaulValue={ubicacion}
                             />
                         </Grid>
+
                         <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                             <CustomTextField
                                 onChange={handleCama}
@@ -334,7 +308,7 @@ const InformacionPaciente = () => {
                                 >
                                     {tipoEdades.map((option) => (
                                         <MenuItem
-                                        sx={{backgroundColor:'white'}}
+                                            sx={{ backgroundColor: 'white' }}
                                             key={option.value}
                                             value={option.value}>
                                             {option.label}
@@ -374,20 +348,8 @@ const InformacionPaciente = () => {
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px', }} >
 
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }}>
 
-                            <CustomTextField
-                                onChange={handlePurga}
-                                onClick={getPrescriptions}
-                                onKeyPress={getPrescriptions}
-                                id='overfill'
-                                label='Overfill*'
-                                type='text'
-                                value={convertComaAPunto(purga)}
-                                defaulValue={convertComaAPunto(purga)}
-                                helperText={messageErrorPurga}
-                            />
-                        </Grid>
+
 
                         <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                             <Box sx={{ justifyContent: 'left' }}>
@@ -415,6 +377,76 @@ const InformacionPaciente = () => {
                                     </Typography>}
                             </Box>
                         </Grid>
+                        <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                            <Box sx={{ justifyContent: 'left' }}>
+                                <Typography style={{ marginLeft: '15px' }}>
+                                    Overfill*
+                                </Typography>
+
+                                <Slider
+                                    value={overfill === 0 ? obtenerOverfillPorLabel(ips)! : overfill}
+                                    onChange={handleOverfill}
+                                    sx={{ margin: '0 5px', marginTop: '0px' }}
+                                    aria-label="Small steps"
+                                    defaultValue={obtenerOverfillPorLabel(ips) ? obtenerOverfillPorLabel(ips)! : overfill}
+                                    // getAriaValueText={valuetext}
+                                    step={1}
+                                    min={0}
+                                    max={50}
+                                    valueLabelDisplay="on"
+                                    marks={marks2}
+
+                                />
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </Box>
+
+
+                <Box display='flex' sx={{ width: '100%', marginTop: '20px', }} >
+
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }}>
+
+                            <CustomTextField
+                                onChange={handleFiltro}
+                                onClick={getPrescriptions}
+                                onKeyPress={getPrescriptions}
+                                value={filtro}
+                                defaulValue={filtro}
+                                id='filtro'
+                                label='Filtro'
+                                type='text'
+                                select={true}
+                            >
+                                {si_no.map((option) => (
+                                    <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </CustomTextField>
+                        </Grid>
+
+                        <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
+                            <Box sx={{ justifyContent: 'left' }}>
+                                <CustomTextField
+                                    onChange={handleTipoPaciente}
+                                    value={tipoPaciente}
+                                    defaulValue={tipoPaciente}
+                                    id='tipo-de-paciente'
+                                    label='Tipo de paciente *'
+                                    type='text'
+                                    select
+                                    helperText={messageErrorTipoPaciente}
+                                >
+                                    {tiposPacientes.map((option) => (
+                                        <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </CustomTextField>
+                            </Box>
+                        </Grid>
                         <LightTooltip
                             title='Seleccion vía de administración central para una osmolaridad igual o superior a 800 mOsm/L'
                             placement="top"
@@ -434,7 +466,7 @@ const InformacionPaciente = () => {
                                     helperText={messageErrorViaAdmin}
                                 >
                                     {viaAdministracion.map((option) => (
-                                        <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
+                                        <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
                                             {option.label}
                                         </MenuItem>
                                     ))}
@@ -445,6 +477,7 @@ const InformacionPaciente = () => {
                         </LightTooltip>
                     </Grid>
                 </Box>
+
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
 

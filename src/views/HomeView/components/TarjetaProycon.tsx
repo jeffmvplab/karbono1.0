@@ -38,7 +38,11 @@ const TarjetaProycon: React.FC<TarjetaProyconProps> = () => {
               <Typography variant='body1' sx={{ paddingBottom: '30px' }}>Este módulo te permite crear, editar y consultar datos de prescripciones  médicas de manera fácil y rápida.</Typography>
 
               <ButtonCardsHome
-                route={isAuth ? (getMeRol()[0] === RolUsersKeysEnum.prescriptor) ? mainRoutes.prescripcion : mainRoutes.gestion : mainRoutes.login}
+                route={isAuth 
+                  ? (getMeRol()[0] === RolUsersKeysEnum.prescriptor) 
+                    ? mainRoutes.prescripcion 
+                    : mainRoutes.gestion 
+                  : mainRoutes.login}
                 text=' Ingresar'
                 color={colorsKarbono.primary}
                 id='prescripcion'
