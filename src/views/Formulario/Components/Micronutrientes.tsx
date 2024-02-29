@@ -44,6 +44,8 @@ const hidrosolublesAdulto = [
 const hidrosolublesPediatricos = [
     { value: 'Soluvit', label: 'Soluvit' },
     { value: 'Multi12Potasio', label: 'Multi12K1' }
+    // { value: 'Multi12K tapa rosada', label: 'Multi12K tapa rosada' },
+    // { value: 'Multi12K tapa azul', label: 'Multi12K tapa azul' }
 ]
 
 

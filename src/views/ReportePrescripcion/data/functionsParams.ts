@@ -16,9 +16,10 @@ export const tipoPrescripcion: string = 'Por requerimientos';
 export const correccionPurga = (prescription: IPrescriptions) => {
 
     const volTotalNPT: number = prescription?.volumen;
-    const purga: number = prescription?.purga;
+    const purga: number = prescription?.overfill;
     const correccion: number = ((volTotalNPT + purga) / volTotalNPT)
 
+    // console.log('Overfill:', correccion)
     return correccion;
 
 }
@@ -317,18 +318,58 @@ export const getLipidos = (prescription: IPrescriptions) => {
 
     const tp: string = prescription?.tipo_prescripcion!;
     const lipidos: number = parseFloat(prescription?.req_lipidos);
+    const tipo_lipidos: string = prescription?.lipidos;
     const concSinLipidos: number = 0.2;
     const peso: number = prescription?.peso!;
+    const tipo_paciente: string = prescription?.tipo_paciente!;
 
-    if (tp === tipoPrescripcion) {
-        params.volumen = (lipidos * peso / concSinLipidos)
-        params.requerimiento = lipidos
-        params.conPurga = params.volumen * correccionPurga(prescription);
+
+    const vitaLipid: number =  parseFloat(prescription?.req_vit_liposolubles!);
+
+    const vit_lipo = prescription?.soluvit_vitalip !== '0'
+        ? parseFloat(prescription?.soluvit_vitalip!) : 0;
+
+        
+    if (tipo_lipidos === 'Smoflipid') {
+
+        if (vit_lipo !== 0) {
+
+            if (tp === tipoPrescripcion) {
+                params.volumen = ((lipidos * peso * 5) - (vit_lipo / 2) - vitaLipid / 2)
+                params.requerimiento = lipidos
+                params.conPurga = params.volumen * correccionPurga(prescription);
+            } else {
+                params.requerimiento = lipidos * concSinLipidos / peso;
+                params.volumen = (lipidos)
+                params.conPurga = params.volumen * correccionPurga(prescription);
+            }
+
+        } else {
+
+            if (tp === tipoPrescripcion) {
+                params.volumen = ((lipidos * peso * 5) -  vitaLipid / 2)
+                params.requerimiento = lipidos
+                params.conPurga = params.volumen * correccionPurga(prescription);
+            } else {
+                params.requerimiento = lipidos * concSinLipidos / peso;
+                params.volumen = (lipidos)
+                params.conPurga = params.volumen * correccionPurga(prescription);
+            }
+        }
     } else {
-        params.requerimiento = lipidos * concSinLipidos / peso;
-        params.volumen = (lipidos)
-        params.conPurga = params.volumen * correccionPurga(prescription);
+
+        if (tp === tipoPrescripcion) {
+            params.volumen = (lipidos * peso *5)
+            params.requerimiento = lipidos
+            params.conPurga = params.volumen * correccionPurga(prescription);
+        } else {
+            params.requerimiento = lipidos * concSinLipidos / peso;
+            params.volumen = (lipidos)
+            params.conPurga = params.volumen * correccionPurga(prescription);
+        }
+
     }
+
     return params;
 }
 
@@ -402,7 +443,7 @@ export const getSoluv_Vit = (prescription: IPrescriptions) => {
 
     const sol_vit = (prescription?.soluvit_vitalip === '' || prescription?.soluvit_vitalip === undefined) ? 0 : parseFloat(prescription?.soluvit_vitalip!)
 
-    console.log('PPPPP:', prescription?.soluvit_vitalip)
+    // console.log('PPPPP:', prescription?.soluvit_vitalip)
 
     params.volumen = sol_vit
     params.conPurga = sol_vit * correccionPurga(prescription)
@@ -820,18 +861,123 @@ export const tipo_bolsa = (volTotal: number) => {
 
 }
 
-export const peso_teorico = (reporte: IPrescriptions) => {
+export const peso_teorico = (prescription: IPrescriptions) => {
 
-    const peso_teorico = correccionPurga(reporte) * (
-        getDextrosa(reporte!).volumen + getLipidos(reporte!).volumen
-        + getAminoacidos(reporte!).volumen + getDipeptiven(reporte!).volumen
-        + getOmegaven(reporte!).volumen + getSodio(reporte!).volumen
-        + getPotacio(reporte!).volumen + getFosforo(reporte!).volumen
-        + getMagnesio(reporte!).volumen + getCalcio(reporte!).volumen
-        + getOligoelementos(reporte).volumen + getVitHidroSolubles(reporte!).volumen
-        + getVitLiposSolubles(reporte!).volumen + getSoluv_Vit(reporte!).volumen
-        + getVit_C(reporte!).volumen
-        + parseFloat(reporte?.acido_folico!)
+    // ([$volpurgaDextrosatrosa * 1.11]
+    //     + [$volpurgaAminoven 15 % SE * 1.048]
+    //     + [$volpurgaTravasol 15 % * 1.05]
+    //     + [$volpurgaPrimene 10 % * 1.03]
+    //     + [$volpurgaAminoven Infant 10 % * 1.029]
+    //     + [$volpurgaAminoplasmal 10 % CE * 1.03]
+    //     + [$volpurgaAminoplasmal 10 % SE * 1.03]
+    //     + [$volpurgaClinoleic * 1.986]
+    //     + [$volpurgaSmoflipid * 0.988]
+    //     + [$volpurgaLipoplus * 0.98]
+    //     + [$volpurgaOmegaven * 0.996]
+    //     + [$volpurgaDipeptiven * 1.069]
+    //     + [$volpurgaSodio * 1.075]
+    //     + [$volpurgaPotasio + 1.09]
+    //     + [$volpurgaFosfato de potasio * 1.32]
+    //     + [$volpurgaFosfato de sodio * 1.147]
+    //     + [$volpurgaCalcio * 1.05]
+    //     + [$volpurgaMagnesio * 1.21]
+    //     + [$volpurgaOligoNulanza * 1.099]
+    //     + [$volpurgaOligoSensitrace * 1]
+    //     + [$volpurgaOligoPeditrace * 0.999][$volpurgaCernevit * 1]
+    //     + [$volpurgaMulti12k * 1]
+    //     + [$volpurgaVitaLipidInfantil * 1]
+    //     + [$volpurgaVitaLipidAdultos * 0.1]
+    //     + [$volpurgaSoluvit * 1]
+    //     + ($VolpurgaSoluvit / Vitalipit * 1.015)
+    //     + [$volpurgaVitaminaC * 1] + [$volpurgaAcidoFolico * 1]
+    //     + [$volpurgaAgua * 1])
+
+    const tipo_paciente: string = prescription?.tipo_paciente!;
+    const volAgua: number = getAgua(prescription!).volumen;
+    const vit_hidrosoluble: string = prescription?.vit_hidrosolubles!;
+    const aminoacidos: string = prescription?.aminoacidos
+    const lipidos: string = prescription?.lipidos
+
+    const aminovenSE: number = (aminoacidos === 'AminovenSE')
+        ? getAminoacidos(prescription!).volumen : 0;
+    const travasol: number = (aminoacidos === 'TravasolPlus')
+        ? getAminoacidos(prescription!).volumen : 0;
+    const aminoPlasmalCE: number = (aminoacidos === 'Aminoplasmal CE')
+        ? getAminoacidos(prescription!).volumen : 0;
+    const aminoPlasmalSE: number = (aminoacidos === 'Aminoplasmal SE')
+        ? getAminoacidos(prescription!).volumen : 0;
+
+    const aminovenInfantils: number = (aminoacidos === 'Aminoven Infantil')
+        ? getAminoacidos(prescription!).volumen : 0;
+    const primene: number = (aminoacidos === 'Primene')
+        ? getAminoacidos(prescription!).volumen : 0;
+
+    const cernevit: number = (vit_hidrosoluble === 'Cernevit')
+        ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
+
+    const soluvit: number = (vit_hidrosoluble === 'Soluvit')
+        ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
+
+    const soluvit_vit: number = prescription?.soluvit_vitalip === '' ? 0 : parseFloat(prescription?.soluvit_vitalip!);
+
+    const multi12K: number = (vit_hidrosoluble === 'Multi12Potasio')
+        ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
+
+    const vitaLipidInfantil: number = (tipo_paciente === 'Pediatrico')
+        ? parseFloat(prescription?.req_vit_liposolubles!) : 0;
+
+    const vitaLipidAd: number = (tipo_paciente === 'Adulto')
+        ? parseFloat(prescription?.req_vit_liposolubles!) : 0;
+
+    const elementos_traza: string = prescription?.elementos_traza!
+
+    const volOligoNulanza: number = (elementos_traza === 'Nulanza')
+        ? parseFloat(prescription?.req_elementos_traza!) : 0;
+
+    const volOligoSensitrace: number = (elementos_traza === 'Sencitrace')
+        ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
+    ////////////////////////////////////////////////////////////////////////////////
+    const smoflipid: number = (lipidos === 'Smoflipid')
+        ? getLipidos(prescription).volumen : 0;
+
+    const clinoleic: number = (lipidos === 'Clinoleic')
+        ? getLipidos(prescription).volumen : 0;
+
+    const lipoplus: number = (lipidos === 'Lipoplus')
+        ? getLipidos(prescription).volumen : 0;
+
+
+    const peso_teorico = (
+        ((getDextrosa(prescription!).volumen * 1.11)
+            // + (getAminoacidos(prescription!).volumen * 1505)
+            + (aminovenSE * 1.048)
+            + (travasol * 1.05)
+            + (primene * 1.03)
+            + (aminovenInfantils * 1.029)
+            + (aminoPlasmalCE * 1.03)
+            + (aminoPlasmalSE * 1.03)
+            + (clinoleic * 1.986)
+            + (smoflipid * 0.988)
+            + (lipoplus * 0.98)
+            + (getOmegaven(prescription!).volumen * 0.996)
+            + (getDipeptiven(prescription!).volumen * 1.069)
+            + (getSodio(prescription!).volumen * 1.075)
+            + (getPotacio(prescription!).volumen * 1.09)
+            + (getFosfatoPotacio(prescription!).volumen * 1.32)
+            + (getFosfatoSodio(prescription!).volumen * 1.147)
+            + (getCalcio(prescription!).volumen * 1.05)
+            + (getMagnesio(prescription!).volumen * 1.21)
+            + (volOligoNulanza * 1.099)
+            + (volOligoSensitrace * 1)
+            + (cernevit * 1)
+            + (multi12K * 1)
+            + (vitaLipidInfantil * 1)
+            + (vitaLipidAd * 0.1)
+            + (soluvit * 1)
+            + (soluvit_vit * 1.015)
+            + (getVit_C(prescription!).volumen * 1)
+            + (parseFloat(prescription?.acido_folico!) * 1)
+            + (volAgua * 1))
     )
 
     return peso_teorico;

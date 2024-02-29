@@ -61,7 +61,7 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
                             <Typography>{Micronutrientes[6]} [ {reporte?.vit_hidrosolubles} ]</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[7]}:</Typography>
+                            <Typography>{Micronutrientes[7]} [ {'Vitalip'} ]:</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
                             <Typography>{Micronutrientes[8]} :</Typography>
@@ -72,7 +72,7 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
                     </Stack>
                     {/* </Grid>
                  <Grid item display={'flex'} sx={{ marginTop: '30px', marginBottom: '30px', width: '60%' }}> */}
-                    <Stack direction={'column'}  minWidth={'150px'}>
+                    <Stack direction={'column'} minWidth={'150px'}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '60%' }}>Requerimiento</Typography>
                         <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
 

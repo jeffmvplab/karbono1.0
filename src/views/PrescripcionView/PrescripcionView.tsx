@@ -1,5 +1,5 @@
 
-import { Typography, Grid, Stack} from '@mui/material/';
+import { Typography, Grid, Stack } from '@mui/material/';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { mainRoutes } from '@/routes/routes';
 import { TableReportes } from './components/TableReportes';
@@ -15,7 +15,7 @@ export interface PrescripcionViewProps { }
 
 const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 
-	const { goAddNew, getAll, handleSearchName, searchName, handleSearchId, searchId, getPrescriptionsByName, getPrescriptionsById } = useContext(PrescripcionContext)
+	const { goAddNew, getAll, handleSearchName, searchName, handleSearchId, searchId,searchNumber,getPrescriptionsByNumber, getPrescriptionsByName, getPrescriptionsById } = useContext(PrescripcionContext)
 
 	return (
 		<>
@@ -67,6 +67,19 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 										onClickEndAdornament={() => { searchId ? getPrescriptionsById(searchId) : getAll() }}
 										id='Numero-de-orden'
 										label='Búsqueda por número de identificación'
+										type='text'
+										value={searchId}
+										endAdornament={<Search style={{ color: 'black', paddingLeft: '5px', scale: '1.5' }} />}
+									/>
+								</Stack>
+
+
+								<Stack margin={'5px'} direction={'column'} >
+									<CustomTextField
+										onChange={handleSearchId}
+										onClickEndAdornament={() => { searchId ? getPrescriptionsByNumber(searchNumber) : getAll() }}
+										id='Numero-de-orden'
+										label='Búsqueda por número de orden'
 										type='text'
 										value={searchId}
 										endAdornament={<Search style={{ color: 'black', paddingLeft: '5px', scale: '1.5' }} />}

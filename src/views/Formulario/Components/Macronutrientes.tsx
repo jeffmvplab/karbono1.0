@@ -160,7 +160,7 @@ const Macronutrientes = () => {
                                         </Typography>
                                     }
                                     type='text'
-                                    helperText={messageErrorFlujoMetabolico}
+                                    // helperText={messageErrorFlujoMetabolico}
                                 />
                             </Grid>
                         </LightTooltip>
@@ -184,7 +184,7 @@ const Macronutrientes = () => {
                                     </Typography>
                                 }
                                 type='text'
-                                helperText={messageErrorDextrosa}
+                                // helperText={messageErrorDextrosa}
                             />
 
                         </Grid>

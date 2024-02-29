@@ -2,9 +2,9 @@
 
 import { CustomButton } from '@/components/CustomButton';
 import { colorsKarbono } from '@/themes/colors';
-import { Box, Stack, TextField, Typography, Card, MenuItem, Skeleton, Grid, Button, styled, Alert } from '@mui/material';
+import { Box, Stack, TextField, Typography, Card, MenuItem, Skeleton, Grid, Button, styled, Alert, Tabs } from '@mui/material';
 
-import React, { useContext, useEffect} from 'react';
+import React, { useContext, useEffect } from 'react';
 import InformacionPaciente from './Components/InformacionPaciente';
 import Macronutrientes from './Components/Macronutrientes';
 import Micronutrientes from './Components/Micronutrientes';
@@ -47,7 +47,7 @@ const FormView: React.FC<FormViewProps> = () => {
 		{ value: 'Por volúmenes', label: 'Por volúmenes' }
 	]
 	const {
-		 savePrescription,
+		savePrescription,
 		numOrder, handleNumOrder,
 		fechaCreacion, handleFechaCreacion,
 		fechaActual,
@@ -55,9 +55,11 @@ const FormView: React.FC<FormViewProps> = () => {
 		loadingSave,
 		getPrescriptions,
 		valTabsErrors1, valTabsErrors2, validateAlert, validateCampos,
-		handleOpenModalFormSaved, getMaxNumPresc, validateTipoPrecripcion,
+		handleOpenModalFormSaved, getMaxNumPresc, validateTipoPrecripcion,errorTipoPrescripcion,
 		handleOpenModalFormCancel, setSelectTab, selectTab, maxNumOrder, saveBorrador,
-		handleTipoPrescripcion,tipoPrescripcion,
+		handleTipoPrescripcion, tipoPrescripcion,
+
+		tabsErrors
 	} = useContext(FormulariosContext)
 
 
@@ -73,7 +75,7 @@ const FormView: React.FC<FormViewProps> = () => {
 	}, [loadingSave])
 
 	const validate_and_sig = () => {
-		
+
 		if (selectTab === 0) {
 			valTabsErrors1()
 			setSelectTab(selectTab + 1)
@@ -91,8 +93,8 @@ const FormView: React.FC<FormViewProps> = () => {
 		}
 	}
 
-	validateTipoPrecripcion(tipoPrescripcion);
-	// console.log('TPD:', tipoPrescripcion)
+	// validateTipoPrecripcion(tipoPrescripcion);
+	console.log('TPD:',tabsErrors)
 
 	return (
 		// <Card >
@@ -147,8 +149,17 @@ const FormView: React.FC<FormViewProps> = () => {
 														sx={{
 															bgcolor: 'transparent',
 															"& .MuiInputBase-root": { borderRadius: '10px' },
+															"& .MuiFormHelperText-root ": {
+																WebkitTextFillColor: 'red',
+															},
 														}}
 														fullWidth
+
+														helperText={
+															(numOrder.length >= 3 && numOrder.length <= 5)
+																? ''
+																: 'El número de orden debe ser mayor que 3 y menor que 5'
+														}
 													/>
 
 													{/* </CustomToolTip> */}
@@ -165,17 +176,18 @@ const FormView: React.FC<FormViewProps> = () => {
 														id='tipo-prescripción*'
 														label='Tipo Prescripción*'
 														select={true}
+
 														helperText={
-															tipoPrescripcion === ''
+															errorTipoPrescripcion
 																? 'Este campo es obligatorio'
 																: ''
 														}
 													>
 														{tipoPrescripciones.map((option) => (
-															<MenuItem 
-															sx={{backgroundColor:'white'}}
-															key={option.value} 
-															value={option.value}>
+															<MenuItem
+																sx={{ backgroundColor: 'white' }}
+																key={option.value}
+																value={option.value}>
 																{option.label}
 															</MenuItem>
 														))}
@@ -214,7 +226,8 @@ const FormView: React.FC<FormViewProps> = () => {
 									marginTop={'10px'}
 									bgcolor={'white'}>
 
-									{(valTabsErrors1() || valTabsErrors2()) && <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)', borderRadius: '10px' }}>
+									{(tabsErrors.info || tabsErrors.macro||tabsErrors.micro)
+									 && <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)', borderRadius: '10px' }}>
 										<Typography sx={{ color: 'white' }}>Hay campos obligatorios vacíos en la prescripción</Typography>
 									</Alert>}
 
@@ -231,7 +244,7 @@ const FormView: React.FC<FormViewProps> = () => {
 										<CustomButtonTab
 											onClick={() => setSelectTab(0)}
 											sx={{
-												borderColor: valTabsErrors1() ? 'red' : colorsKarbono.primary,
+												borderColor: tabsErrors.info ? 'red' : colorsKarbono.primary,
 												minWidth: '200px',
 												background: (selectTab === 0) ? colorsKarbono.primary : 'white',
 												color: (selectTab === 0) ? 'white' : '#B8BDBDB2 '
@@ -242,7 +255,7 @@ const FormView: React.FC<FormViewProps> = () => {
 										<CustomButtonTab
 											onClick={() => setSelectTab(1)}
 											sx={{
-												borderColor: valTabsErrors2() ? 'red' : colorsKarbono.primary,
+												borderColor: tabsErrors.macro ? 'red' : colorsKarbono.primary,
 												minWidth: '150px',
 												background: (selectTab === 1) ? colorsKarbono.primary : 'white',
 												color: (selectTab === 1) ? 'white' : '#B8BDBDB2 '

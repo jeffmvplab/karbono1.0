@@ -1,11 +1,11 @@
-import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
+import { Box, Divider, Grid, Stack, TextField, Typography, styled } from "@mui/material";
 import Image from 'next/image'
 import { ContainerText } from "./components/ActionsDrawer";
 import { colorsKarbono } from "@/themes/colors";
 import BarEtiqueta from "../ReportePrescripcion/components/BarEtiqueta/BaEtiqueta";
 import { useContext, useEffect } from "react";
 import { ReportesContext } from "../ReportePrescripcion/context/ReportesContext";
-import { convertirFecha } from "@/utilities/get_String_from_Date_Esp";
+import { convertirFecha, convertirFechaLote } from "@/utilities/get_String_from_Date_Esp";
 import { getAgua, getSodio, getPotacio, getMagnesio, getVitLiposSolubles, getVitHidroSolubles, getVit_C, getCalcio, peso_teorico, tipo_bolsa } from "../ReportePrescripcion/data/functionsParams";
 
 
@@ -14,6 +14,19 @@ export interface PlanProduccionViewProps { }
 const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 
 	const { getPrescriptionsByNumber, loadingSave, reporte } = useContext(ReportesContext)
+
+	const CustomTextField = styled(TextField)({
+		'& .MuiInput-underline:before': {
+			borderBottom: 'none',
+		},
+		'& .MuiInput-underline:after': {
+			borderBottom: 'none',
+		},
+
+		'& .MuiOutlinedInput-root': {
+			borderRadius: 8, // Ajusta el radio de los bordes del TextField
+		},
+	});
 
 	useEffect(() => {
 		getPrescriptionsByNumber();
@@ -91,7 +104,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 									height={'100%'}
 									direction={'column'}
 									justifyContent={'end'}>
-									<ContainerText title="Lote" value="xxxxxxxx" />
+									<ContainerText title="Lote" value={`NPT${convertirFechaLote(new Date())}-${reporte?.no_identificacion}`} />
 								</Stack>
 							</Grid>
 
@@ -218,27 +231,27 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 											</Typography>
 
 											<Typography fontSize='16px' color={colorsKarbono.primary} fontWeight={700} textAlign={"center"} paddingY={2}>
-												VOLUMNE (ml)
+												VOLUMEN (ml)
 											</Typography>
 										</Stack>
+
 										<ContainerText isUpper title="OMEGAVEN 10%" value={`${reporte?.omegaven!}`} />
-										<ContainerText isUpper title="LISTA DE LIPIDOS" value={`${reporte?.lipidos!}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.lipidos!}`} value={`${reporte?.req_lipidos!}`} />
 										<ContainerText isUpper title="GLUTAMUNA DIPEPTIDO 20%" value={`${reporte?.dipeptiven!}`} />
-										<ContainerText isUpper title="LISTA DE AMINOACIDOS" value={`${reporte?.aminoacidos!}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.aminoacidos!}`} value={`${reporte?.req_aminoacidos!}`} />
 										<ContainerText isUpper title="DEXTROSA 50%" value={`${reporte?.dextrosa!}`} />
 										<ContainerText isUpper title="AGUA ESTERIL" value={`${getAgua(reporte!).volumen}`} />
-										<ContainerText isUpper title="LISTA DE FOSFATO" value={`${reporte?.fosfato!}`} />
-										<ContainerText isUpper title="LISTA DE ELEMENTOS TRAZA" value={`${reporte?.elementos_traza!}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.fosfato!}`} value={`${reporte?.req_fosfato!}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.elementos_traza!}`} value={`${reporte?.req_elementos_traza!}`} />
 										<ContainerText isUpper title="CLORURO DE SODIO 2 MEQ/ML" value={`${getSodio(reporte!).requerimiento.toFixed(2)}`} />
 										<ContainerText isUpper title="CLORURO DE POTACIO 2 MEQ/ML" value={`${getPotacio(reporte!).requerimiento.toFixed(2)}`} />
-										<ContainerText isUpper title="LISTA DE MAGNESIO" value={`${getMagnesio(reporte!).requerimiento.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.magnesio!}`} value={`${getMagnesio(reporte!).requerimiento.toFixed(2)}`} />
 										<ContainerText isUpper title="SOLUVIT_VITALIPID" value={`${reporte?.soluvit_vitalip}`} />
-										<ContainerText isUpper title="LISTA DE VITAMINAS LIPOSOLUBLES" value={`${getVitLiposSolubles(reporte!).volumen.toFixed(2)}`} />
-										<ContainerText isUpper title="LISTA DE VITAMINAS HIDROSOLUBLES" value={`${getVitHidroSolubles(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper title="VITALIPID" value={`${getVitLiposSolubles(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.vit_hidrosolubles!}`} value={`${getVitHidroSolubles(reporte!).volumen.toFixed(2)}`} />
 										<ContainerText isUpper title="VITAMINA C" value={`${getVit_C(reporte!).volumen}`} />
 										<ContainerText isUpper title="ACIDO FOLICO" value={`${reporte?.acido_folico}`} />
-										<ContainerText isUpper title="LISTADO DE CALCIO" value={`${getCalcio(reporte!).requerimiento.toFixed(2)}`} />
-
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.calcio!}`} value={`${getCalcio(reporte!).requerimiento.toFixed(2)}`} />
 
 									</Stack>
 								</Box>
@@ -261,7 +274,23 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 										<ContainerText isUpper title="Peso Máximo (+3%)" value={`${peso_teorico(reporte!) + (peso_teorico(reporte!) * 3 / 100)}`} />
 										<ContainerText isUpper title="Peso teórico" value={`${peso_teorico(reporte!)}`} />
 										<ContainerText isUpper title="Peso Mínimo (-3%)" value={`${peso_teorico(reporte!) - (peso_teorico(reporte!) * 3 / 100)}`} />
-										<ContainerText isUpper title="Peso Real" value="xxxxxxxxx" />
+
+
+										<Stack width={'100%'} direction={'row'} justifyContent={'space-between'}>
+											<Typography width={'100%'} fontSize='14px' fontWeight={600} textAlign={"start"} paddingY={2}>
+												Peso Real:
+											</Typography>
+
+											<CustomTextField
+												sx={{ background: '#EDF1F1' }}
+												variant="standard"
+												// value={pesoReal}
+												// onChange={(e) => setPesoReal(parseInt(e.target.value))}
+												type="number"
+											/>
+
+										</Stack>
+
 										<ContainerText isUpper title="Area de producción" value="xxxxxxxxx" />
 
 										<Divider sx={{ paddingY: 2 }} />

@@ -55,7 +55,7 @@ export const alertVolTotal = (prescription: IPrescriptions) => {
         + getVit_C(prescription!).volumen
         + parseFloat(prescription?.acido_folico!)
 
-    console.log('GGG:', vitaminas, 'VOL:', volTotal, 'AGUA', volAgua)
+    // console.log('GGG:', vitaminas, 'VOL:', volTotal, 'AGUA', volAgua)
 
     return volTotal;
 }
