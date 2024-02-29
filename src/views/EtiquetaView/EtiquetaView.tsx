@@ -1,4 +1,4 @@
-import { Box, Container, Divider, Grid, Stack, TextField, Typography } from "@mui/material";
+import { Box, Container, Divider, Grid, Stack, TextField, Typography, styled } from "@mui/material";
 import Image from 'next/image'
 import { colorsKarbono } from "@/themes/colors";
 import BarEtiqueta from "../ReportePrescripcion/components/BarEtiqueta/BaEtiqueta";
@@ -26,6 +26,18 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 	const [caducidad, setCaducidad] = useState('');
 	const [instalado, setInstalado] = useState('');
 
+	const CustomTextField = styled(TextField)({
+		'& .MuiInput-underline:before': {
+			borderBottom: 'none',
+		},
+		'& .MuiInput-underline:after': {
+			borderBottom: 'none',
+		},
+
+		'& .MuiOutlinedInput-root': {
+			borderRadius: 8, // Ajusta el radio de los bordes del TextField
+		},
+	});
 	return (
 		<Stack
 			// width={{ xs: '1281px', sm: '100%' }}
@@ -378,26 +390,18 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 								<Grid item xs={6}>
 									<Stack height={'100%'} direction={'column'} justifyContent={'end'}>
 
-										<Stack direction={'row'} paddingY={1} alignItems={'end'}>
-											<Typography width={'100%'} fontSize='16px' color={colorsKarbono.primary} fontWeight={700} textAlign={"start"} paddingY={2}>
+										<Stack width={'100%'} direction={'row'} justifyContent={'space-between'}>
+											<Typography width={'100%'} fontSize='14px' fontWeight={600} textAlign={"start"} >
 												Peso Real:
 											</Typography>
 
-											<Stack
-												direction={'row'}
-												flexGrow={1}
-												bgcolor='#EDF1F1'
-												paddingY={0.5}
-												borderRadius={3}
-												justifyContent={'center'}>
-												<TextField
-													sx={{ background: '#EDF1F1' }}
-													variant="standard"
-													value={pesoReal}
-													onChange={(e) => setPesoReal(parseInt(e.target.value))}
-													type="number"
-												/>
-											</Stack>
+											<CustomTextField
+												sx={{ background: '#EDF1F1', borderRadius: '12px' }}
+												variant="standard"
+												// value={pesoReal}
+												// onChange={(e) => setPesoReal(parseInt(e.target.value))}
+												type="number"
+											/>
 
 										</Stack>
 									</Stack>
@@ -437,12 +441,12 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 					<Grid container width={'80%'} paddingLeft={1} direction={'row'} justifyContent={'space-between'}>
 
 						<Grid xs={4} item>
-							<Stack  direction={'row'}  alignItems={'center'} paddingRight={2}>
+							<Stack direction={'row'} alignItems={'center'} paddingRight={2}>
 								<Typography width={'100%'} fontSize='14px' fontWeight={700} textAlign={"start"} paddingY={2}>
 									Hora de preparación:
 								</Typography>
 								<TextField
-								 sx={{width:'100%'}}
+									sx={{ width: '100%' }}
 									variant="standard"
 									value={hora}
 									onChange={(e) => setHora(e.target.value)}
@@ -451,12 +455,12 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 							</Stack>
 						</Grid>
 						<Grid xs={4} item>
-							<Stack  direction={'row'}  alignItems={'center'} paddingRight={2}>
+							<Stack direction={'row'} alignItems={'center'} paddingRight={2}>
 								<Typography width={'100%'} fontSize='14px' fontWeight={700} textAlign={"start"} paddingY={2}>
 									Fecha caducidad:
 								</Typography>
 								<TextField
-								    sx={{width:'100%'}}
+									sx={{ width: '100%' }}
 									variant="standard"
 									value={caducidad}
 									onChange={(e) => setCaducidad(e.target.value)}
@@ -465,12 +469,12 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 							</Stack>
 						</Grid>
 						<Grid xs={4} item>
-							<Stack  direction={'row'}  alignItems={'center'} paddingRight={2}>
+							<Stack direction={'row'} alignItems={'center'} paddingRight={2}>
 								<Typography width={'100%'} fontSize='14px' fontWeight={700} textAlign={"start"} paddingY={2}>
 									Instalado por:
 								</Typography>
 								<TextField
-								 sx={{width:'100%'}}
+									sx={{ width: '100%' }}
 									variant="standard"
 									value={instalado}
 									onChange={(e) => setInstalado(e.target.value)}
@@ -481,12 +485,12 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 					</Grid>
 
 				</Stack>
-			</Box>
+			</Box >
 
 
 			<BarEtiqueta idDescargar='etiqueta_view' title="Etiqueta" />
 
-		</Stack>
+		</Stack >
 	)
 
 };
