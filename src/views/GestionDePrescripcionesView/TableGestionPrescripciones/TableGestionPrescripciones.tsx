@@ -204,10 +204,11 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 
 						}
 
-						<div style={{ overflowX: 'auto' }}>
+						{/* <div style={{ overflowX: 'auto' }}> */}
 							<DataGrid
-								style={{ width: "100%" }}
+								// style={{ width: "100%"}}
 								sx={{
+									width: "100%",
 									borderRadius: '12px',
 									// '&:hover, &.Mui-hovered': { backgroundColor: 'rgb(0, 0,0,40%)' },
 									// '& .MuiDataGrid-row:hover': { backgroundColor: 'rgb(0,0,0,60%)' },
@@ -225,7 +226,7 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 								onPaginationModelChange={(e) => { handlePageChange(e.page) }}
 
 							/>
-						</div>
+						{/* </div> */}
 					</Stack>
 
 
