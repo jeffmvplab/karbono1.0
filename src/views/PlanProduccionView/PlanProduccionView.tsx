@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { ContainerText } from "./components/ActionsDrawer";
 import { colorsKarbono } from "@/themes/colors";
 import BarEtiqueta from "../ReportePrescripcion/components/BarEtiqueta/BaEtiqueta";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ReportesContext } from "../ReportePrescripcion/context/ReportesContext";
 import { convertirFecha, convertirFechaLote } from "@/utilities/get_String_from_Date_Esp";
 import { getAgua, getSodio, getPotacio, getMagnesio, getVitLiposSolubles, getVitHidroSolubles, getVit_C, getCalcio, peso_teorico, tipo_bolsa } from "../ReportePrescripcion/data/functionsParams";
@@ -27,6 +27,9 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 			borderRadius: 8, // Ajusta el radio de los bordes del TextField
 		},
 	});
+
+	const [pesoReal, setPesoReal] = useState(0);
+	const [area, setArea] = useState('');
 
 	useEffect(() => {
 		getPrescriptionsByNumber();
@@ -277,21 +280,35 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 
 
 										<Stack width={'100%'} direction={'row'} justifyContent={'space-between'}>
-											<Typography width={'100%'} fontSize='14px' fontWeight={600} textAlign={"start"} paddingY={2}>
+											<Typography width={'100%'} fontSize='14px' fontWeight={600} textAlign={"start"} >
 												Peso Real:
 											</Typography>
 
 											<CustomTextField
-												sx={{ background: '#EDF1F1' }}
+												sx={{ background: '#EDF1F1', borderRadius: '12px'}}
 												variant="standard"
-												// value={pesoReal}
-												// onChange={(e) => setPesoReal(parseInt(e.target.value))}
+												value={pesoReal}
+												onChange={(e) => setPesoReal(parseInt(e.target.value))}
 												type="number"
 											/>
 
 										</Stack>
 
-										<ContainerText isUpper title="Area de producción" value="xxxxxxxxx" />
+										<Stack width={'100%'} direction={'row'} justifyContent={'space-between'}>
+											<Typography width={'100%'} fontSize='14px' fontWeight={600} textAlign={"start"} >
+												Area de producción:
+											</Typography>
+
+											<CustomTextField
+												sx={{ background: '#EDF1F1', borderRadius: '12px' }}
+												variant="standard"
+												value={area}
+												onChange={(e) => setArea(e.target.value)}
+												type="number"
+											/>
+
+										</Stack>
+										{/* <ContainerText isUpper title="Area de producción" value="xxxxxxxxx" /> */}
 
 										<Divider sx={{ paddingY: 2 }} />
 
