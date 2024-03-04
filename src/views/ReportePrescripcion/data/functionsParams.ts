@@ -176,17 +176,17 @@ export const getAportesFosfato = (prescription: IPrescriptions) => {
     const aportes: Aportes = aportesNew;
 
     if (tipofosfato === 'Fosfato de sodio') {
-        aportes.a_sodio = getFosfatoSodio(prescription).volumen * 2 / 1
+        aportes.a_sodio = getFosfatoSodio(prescription).requerimiento * 2 / 1
         aportes.a_potacio = 0
         aportes.a_magnesio = 0
         aportes.a_fosforo = 0
         aportes.a_cloruro = 0
-    }else{
+    } else {
         aportes.a_sodio = 0
-        aportes.a_potacio = getFosfatoPotacio(prescription).volumen * 3.8 / 1
+        aportes.a_potacio = getFosfatoPotacio(prescription).requerimiento * 3.8 / 1
         aportes.a_magnesio = 0
         aportes.a_fosforo = 0
-        aportes.a_cloruro = 0 
+        aportes.a_cloruro = 0
     }
     return aportes;
 }
@@ -348,6 +348,12 @@ export const getAportesAminoacidos = (prescription: IPrescriptions) => {
         aportes.a_magnesio = getAminoacidos(prescription).volumen * 0.0025 / peso
         aportes.a_fosforo = getAminoacidos(prescription).volumen * 0.01 / peso
         aportes.a_cloruro = getAminoacidos(prescription).volumen * 0.052 / peso
+    } else {
+        aportes.a_sodio = 0
+        aportes.a_potacio = 0
+        aportes.a_magnesio = 0
+        aportes.a_fosforo = 0
+        aportes.a_cloruro = 0
     }
 
     return aportes;
@@ -930,8 +936,8 @@ export const getConcentracionDeLipidos = (prescription: IPrescriptions) => {
     const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
     const volTotalNPT: number = prescription?.volumen!;
 
-    params.volumen = ((getLipidos(prescription!).volumen * 20 + getOmegaven(prescription!).volumen * 10 + getSoluv_Vit(prescription!).volumen * 10+ getVitLiposSolubles(prescription!).volumen * 10) / volTotalNPT) 
-    params.conPurga = ((getLipidos(prescription!).conPurga * 20 + getOmegaven(prescription!).conPurga * 10+ getSoluv_Vit(prescription!).conPurga * 10+ getVitLiposSolubles(prescription!).conPurga * 10) / volTotalNPT)
+    params.volumen = ((getLipidos(prescription!).volumen * 20 + getOmegaven(prescription!).volumen * 10 + getSoluv_Vit(prescription!).volumen * 10 + getVitLiposSolubles(prescription!).volumen * 10) / volTotalNPT)
+    params.conPurga = ((getLipidos(prescription!).conPurga * 20 + getOmegaven(prescription!).conPurga * 10 + getSoluv_Vit(prescription!).conPurga * 10 + getVitLiposSolubles(prescription!).conPurga * 10) / volTotalNPT)
 
     return params;
 }
