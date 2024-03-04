@@ -158,25 +158,25 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
 
                             {(loadingSave)
                                 ? <Typography>
-                                    -
+                                    {getOligoelementos(reporte!).requerimiento.toFixed(2)}   (mL/día)
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getSoluv_Vit(reporte!).requerimiento.toFixed(2)}   (mEq/kg/día)
+                                    {getSoluv_Vit(reporte!).requerimiento.toFixed(2)}    (mL/día)
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    -
+                                    {getVitHidroSolubles(reporte!).requerimiento.toFixed(2)}    (mL/día)
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    -
+                                    {getVitLiposSolubles(reporte!).requerimiento.toFixed(2)}    (mL/día)
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -258,7 +258,7 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
 
                             {(loadingSave)
                                 ? <Typography>
-                                    -
+                                    {getOligoelementos(reporte!).volumen.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -270,21 +270,23 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
 
                             {(loadingSave)
                                 ? <Typography>
-                                    -
+                                    {getVitHidroSolubles(reporte!).volumen.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    -
+                                    {getVitLiposSolubles(reporte!).volumen.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
+
                             {(loadingSave)
                                 ? <Typography>
-                                   -
+                                    {getVit_C(reporte!).volumen.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
+
 
                             {(loadingSave)
                                 ? <Typography>
@@ -356,7 +358,7 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
 
                             {(loadingSave)
                                 ? <Typography>
-                                    -
+                                    {getOligoelementos(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -365,22 +367,22 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
                                     {getSoluv_Vit(reporte!).requerimiento.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
-
                             {(loadingSave)
                                 ? <Typography>
-                                    -
+                                    {getVitHidroSolubles(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    -
+                                    {getVitLiposSolubles(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
+
                             {(loadingSave)
                                 ? <Typography>
-                                   -
+                                    -
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
