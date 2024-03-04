@@ -523,6 +523,7 @@ export const getVitHidroSolubles = (prescription: IPrescriptions) => {
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
 
+    params.requerimiento = parseFloat(prescription?.req_vit_hidrosolubles!)
     params.volumen = parseFloat(prescription?.req_vit_hidrosolubles!)
     params.conPurga = parseFloat(prescription?.req_vit_hidrosolubles!) * correccionPurga(prescription)
 
@@ -533,6 +534,7 @@ export const getVitLiposSolubles = (prescription: IPrescriptions) => {
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
 
+    params.requerimiento = parseFloat(prescription?.req_vit_liposolubles)
     params.volumen = parseFloat(prescription?.req_vit_liposolubles)
     params.conPurga = parseFloat(prescription?.req_vit_liposolubles) * correccionPurga(prescription)
 
@@ -547,7 +549,7 @@ export const getSoluv_Vit = (prescription: IPrescriptions) => {
     const sol_vit = (prescription?.soluvit_vitalip === '' || prescription?.soluvit_vitalip === undefined) ? 0 : parseFloat(prescription?.soluvit_vitalip!)
 
     // console.log('PPPPP:', prescription?.soluvit_vitalip)
-
+    params.requerimiento = sol_vit
     params.volumen = sol_vit
     params.conPurga = sol_vit * correccionPurga(prescription)
 
@@ -558,6 +560,7 @@ export const getOligoelementos = (prescription: IPrescriptions) => {
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
 
+    params.requerimiento = parseFloat(prescription?.req_elementos_traza)
     params.volumen = parseFloat(prescription?.req_elementos_traza)
     params.conPurga = parseFloat(prescription?.req_elementos_traza) * correccionPurga(prescription)
 
