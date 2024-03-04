@@ -2,7 +2,7 @@ import Macronutrientes from '@/views/Formulario/Components/Macronutrientes';
 import { Grid, Typography, Box, Stack, Skeleton } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import { ReportesContext } from '../context/ReportesContext';
-import { getAgua, getAminoacidos, getDextrosa, getDipeptiven, getFlujoMetabolico, getLipidos, getOmegaven, getPotacio, getSodio } from '../data/functionsParams';
+import { getAgua, getAminoacidos, getAportesAminoacidos, getAportesLipidos, getDextrosa, getDipeptiven, getFlujoMetabolico, getLipidos, getOmegaven, getPotacio, getSodio } from '../data/functionsParams';
 import { IPrescriptions } from '@/domain/models/prescriptions.model';
 
 
@@ -18,9 +18,17 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
         'Flujo Metabólico:',
         'Dextrosa',
         'Aminoácidos:',
+        '*Aporte de Sodio:',
+        '*Aporte de Potasio:',
+        '*Aporte de Magnesio:',
+        '*Aporte de Fósforo:',
+        '*Aporte de Cloruro:',
         'Lípidos',
+        '*Aporte de Fósforo:',
+        '*Aporte de Sodio:',
         'Omegaven',
         'Dipeptiven',
+        '*Aporte total de L-glutamina',
         'Agua'
     ]);
 
@@ -31,7 +39,7 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                 <Stack width='100%' direction={'row'} justifyContent={'space-between'} overflow={'scroll'} spacing={2}>
 
                     <Stack direction={'column'} minWidth={'220px'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left',paddingBottom: '10px' }}>Macronutrientes</Typography>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingBottom: '10px' }}>Macronutrientes</Typography>
                         {/* <Box sx={{ justifyContent: 'start' }} >
                             <ul style={{}}>
                                 {Macronutrientes.map(lista => {
@@ -49,16 +57,37 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                             <Typography>{Macronutrientes[2]} [ {reporte?.aminoacidos} ] :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[3]} [ {reporte?.lipidos} ] :</Typography>
+                            <Typography>{Macronutrientes[3]}</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[4]} :</Typography>
+                            <Typography>{Macronutrientes[4]}</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[5]} :</Typography>
+                            <Typography>{Macronutrientes[5]}</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'start' }} >
+                            <Typography>{Macronutrientes[6]}</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'start' }} >
+                            <Typography>{Macronutrientes[7]}</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'start' }} >
+                            <Typography>{Macronutrientes[8]} [ {reporte?.lipidos} ] :</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'start' }} >
+                            <Typography>{Macronutrientes[9]}</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'start' }} >
+                            <Typography>{Macronutrientes[10]}</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'start' }} >
+                            <Typography>{Macronutrientes[11]} :</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'start' }} >
+                            <Typography>{Macronutrientes[12]} :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }}  >
-                            <Typography>{Macronutrientes[6]} :</Typography>
+                            <Typography>{Macronutrientes[14]} :</Typography>
                         </Box>
                     </Stack>
                     {/* </Grid>
@@ -86,7 +115,7 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                                     {
                                         (reporte?.tipo_prescripcion !== 'Por requerimientos')
                                             ? '-'
-                                            : getDextrosa(reporte!).requerimiento.toFixed(2)  
+                                            : getDextrosa(reporte!).requerimiento.toFixed(2)
                                     } (g/kg/dia)
                                     {/* {getDextrosa(reporte!).requerimiento.toFixed(2)} */}
                                 </Typography>
@@ -100,7 +129,50 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
 
                             {(loadingSave)
                                 ? <Typography>
+                                    {getAportesAminoacidos(reporte!).a_sodio.toFixed(2)}    (Meq/Kg/Dia)
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getAportesAminoacidos(reporte!).a_potacio.toFixed(2)}    (Meq/Kg/Dia)
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getAportesAminoacidos(reporte!).a_magnesio.toFixed(2)}    (Meq/Kg/Dia)
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getAportesAminoacidos(reporte!).a_fosforo.toFixed(2)}    (Meq/Kg/Dia)
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getAportesAminoacidos(reporte!).a_cloruro.toFixed(2)}    (Meq/Kg/Dia)
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+
+                            {(loadingSave)
+                                ? <Typography>
                                     {getLipidos(reporte!).requerimiento.toFixed(2)}    (g/kg/día)
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getAportesLipidos(reporte!).a_fosforo.toFixed(2)}    (Meq/Kg/Dia)
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    {getAportesLipidos(reporte!).a_sodio.toFixed(2)}    (Meq/Kg/Dia)
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -149,7 +221,50 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
 
                             {(loadingSave)
                                 ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+
+                            {(loadingSave)
+                                ? <Typography>
                                     {getLipidos(reporte!).volumen.toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -195,10 +310,50 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                                     {getAminoacidos(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
                                     {getLipidos(reporte!).conPurga.toFixed(2)}
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
+                                </Typography>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Typography>
+                                    -
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
