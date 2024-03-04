@@ -288,7 +288,7 @@ export const alarmConcSodio = (prescription: IPrescriptions) => {
 
     // let sodioVol: number = ((sodio * 2) + (aporte_sodio_del_fosfato* prescription?.peso!)) / (volTotalNPT / 1000);
 
-    let sodioVol: number = ((sodio * 2) + (aporte_sodio_del_fosfato!)) / (volTotalNPT / 1000);
+    let sodioVol: number = ((sodio * 2) + (aporte_sodio_del_fosfato!* prescription?.peso!)) / (volTotalNPT / 1000);
     // let sodioVol: number = ((sodio + fosfato_de_sodio) * 2) / (volTotalNPT / 1000);
 
     const resp: IAlarm = { value: 0, alert: '' };
@@ -321,7 +321,7 @@ export const alarmConcPotasio = (prescription: IPrescriptions) => {
     const volTotalNPT: number = prescription?.volumen;
 
     // let potacioVol: number = (potacio * 2 + fosfato_de_potasio * 3.8) / (volTotalNPT / 1000);
-    let potacioVol: number = (potacio * 2 + aporte_potasio_del_fosfato!) / (volTotalNPT / 1000);
+    let potacioVol: number = (potacio * 2 + aporte_potasio_del_fosfato!* prescription?.peso!) / (volTotalNPT / 1000);
     // let potacioVol: number = (potacio * 2 + fosfato_de_potasio * prescription?.peso!) / (volTotalNPT / 1000);
 
     const resp: IAlarm = { value: 0, alert: '' };
