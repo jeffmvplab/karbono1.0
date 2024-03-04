@@ -175,7 +175,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 							</Stack>
 						</Drawer>
 
-						<Grid container sx={{ marginTop: '30px', marginBottom: { xs: '0px', md: '30px' } }} spacing={{ xs: 0, md: 2 }}>
+						<Grid container sx={{ marginTop: '30px', marginBottom: { xs: '0px', md: '30px' } }} paddingBottom={'100px'} spacing={{ xs: 0, md: 2 }}>
 
 							<Grid item xs={12} md={8} paddingX='15px'>
 								<PDFPrescriptionComponent reporte={reporte} loading={loadingSave} />

@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react'
 import { ReportesContext } from '../context/ReportesContext';
 import { getDextrosa, getAminoacidos, getLipidos, getOmegaven, getDipeptiven, getVolTotal, getVelinfusion, getOsmolaridad, getCalTotales, getCalTotalesKgDia, getGramosTotalesNitro, getCaloriasTotalesProteicas, getCaloriasTotalesProteicasKg, getCaloriasNoProteicasCHOS, getCaloriasNoProteicasLIPIDOS, getCaloriasNoProteicasKg, getRelacionCalNoProteicasN, getRelacionCalNoProteicasAminoacidos, getConcentracionDeCHOS, getConcentracionDeProteinas, getConcentracionDeLipidos } from '../data/functionsParams';
 import { IPrescriptions } from '@/domain/models/prescriptions.model';
+import { alarmConcCHOS, alarmConcDeLipidos, alarmConcDeProteinas, alarmConcMagnesio, alarmConcPotasio, alarmConcSodio, alertVelInfucion, alertViaDeAdmin } from '../data/alertParams';
 
 export interface ReportesParametrosProps {
     reporte: IPrescriptions | undefined
@@ -11,7 +12,7 @@ export interface ReportesParametrosProps {
 }
 
 
-const ReportesParametros : React.FC<ReportesParametrosProps> = ({ reporte, loadingSave }) => {
+const ReportesParametros: React.FC<ReportesParametrosProps> = ({ reporte, loadingSave }) => {
 
     const [Parametros, setParametros] = useState([
         'Volument total (ml):',
@@ -30,17 +31,20 @@ const ReportesParametros : React.FC<ReportesParametrosProps> = ({ reporte, loadi
         'Relación: Cal No Protéicas/g Aminoacidos',
         'Concentración de CHO-S (%):',
         'Concentración de Proteína (%):',
-        'Concentración de Lípidos (%):'
+        'Concentración de Lípidos (%):',
+        'Concentración de Sodio(mEq/L)::',
+        'Concentración de Potasio (mEq/L)::',
+        'Concentración de Magnesio (mEq/L)::'
     ]);
 
     return (
         <>
-            <Grid  container display={'flex'} width={'100%'} paddingTop={'20px'} paddingRight={'20px'}>
+            <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} paddingRight={'20px'}>
                 {/* <Grid item display='block' sx={{ marginTop: '30px', marginBottom: '15px', width: '40%', paddingLeft:'0' }}> */}
-                <Stack  width={{xs:'100%',md:'50%'}} direction={'row'} justifyContent={'space-between'} overflow={'scroll'}>
+                <Stack width={{ xs: '100%', md: '50%' }} direction={'row'} justifyContent={'space-between'} overflow={'scroll'}>
 
-                    <Stack  direction={'column'} minWidth={'350px'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left' }}>Parametros</Typography>
+                    <Stack direction={'column'} minWidth={'350px'}>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left' }}>Parámetros Nutricionales</Typography>
                         <Box sx={{ justifyContent: 'start' }} >
                             <ul style={{}}>
                                 {Parametros.map(lista => {
@@ -51,9 +55,9 @@ const ReportesParametros : React.FC<ReportesParametrosProps> = ({ reporte, loadi
                     </Stack>
                     {/* </Grid>
                  <Grid item display={'flex'} sx={{ marginTop: '30px', marginBottom: '30px', width: '60%' }}> */}
-                    <Stack  direction={'column'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Valores</Typography>
-                        <Stack  direction={'column'} alignItems={'center'} paddingTop='15px'>
+                    <Stack direction={'column'}>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '70px', textAlign: 'left', width: '50%' }}>Valores</Typography>
+                        <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
 
                             {(loadingSave)
                                 ? <Typography>
@@ -74,9 +78,14 @@ const ReportesParametros : React.FC<ReportesParametrosProps> = ({ reporte, loadi
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
-                                ? <Typography>
-                                    {reporte?.via_administracion}
-                                </Typography>
+                                ? <Stack direction={'row'} paddingLeft={'80px'} spacing={2}>
+                                    <Typography>
+                                        {reporte?.via_administracion}
+                                    </Typography>
+                                    <Typography color={alertViaDeAdmin(reporte!).alert === 'INADECUADA' ? 'red' : 'green'}>
+                                        {alertViaDeAdmin(reporte!).alert}
+                                    </Typography>
+                                </Stack>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
@@ -139,23 +148,73 @@ const ReportesParametros : React.FC<ReportesParametrosProps> = ({ reporte, loadi
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
+
                             {(loadingSave)
-                                ? <Typography>
-                                    {getConcentracionDeCHOS(reporte!).volumen.toFixed(2)}
-                                </Typography>
+                                ? <Stack direction={'row'} paddingLeft={'80px'} spacing={2}>
+                                    <Typography>
+                                        {getConcentracionDeCHOS(reporte!).volumen.toFixed(2)}
+                                    </Typography>
+                                    <Typography color={alarmConcCHOS(reporte!).alert === 'REVISAR' ? 'red' : 'green'}>
+                                        {alarmConcCHOS(reporte!).alert}
+                                    </Typography>
+                                </Stack>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
-                                ? <Typography>
-                                    {getConcentracionDeProteinas(reporte!).volumen.toFixed(2)}
-                                </Typography>
+                                ? <Stack direction={'row'} paddingLeft={'80px'} spacing={2}>
+                                    <Typography>
+                                        {getConcentracionDeProteinas(reporte!).volumen.toFixed(2)}
+                                    </Typography>
+                                    <Typography color={alarmConcDeProteinas(reporte!).alert === 'REVISAR' ? 'red' : 'green'}>
+                                        {alarmConcDeProteinas(reporte!).alert}
+                                    </Typography>
+                                </Stack>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
-                                ? <Typography>
-                                    {getConcentracionDeLipidos(reporte!).volumen.toFixed(2)}
-                                </Typography>
+                                ? <Stack direction={'row'} paddingLeft={'80px'} spacing={2}>
+                                    <Typography>
+                                        {getConcentracionDeLipidos(reporte!).volumen.toFixed(2)}
+                                    </Typography>
+                                    <Typography color={alarmConcDeLipidos(reporte!).alert === 'REVISAR' ? 'red' : 'green'}>
+                                        {alarmConcDeLipidos(reporte!).alert}
+                                    </Typography>
+                                </Stack>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Stack direction={'row'} paddingLeft={'80px'} spacing={2}>
+                                    <Typography>
+                                        {alarmConcSodio(reporte!).value.toFixed(2)}
+                                    </Typography>
+                                    <Typography color={alarmConcSodio(reporte!).alert === 'REVISAR' ? 'red' : 'green'}>
+                                        {alarmConcSodio(reporte!).alert}
+                                    </Typography>
+                                </Stack>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Stack direction={'row'} paddingLeft={'80px'} spacing={2}>
+                                    <Typography>
+                                        {alarmConcPotasio(reporte!).value.toFixed(2)}
+                                    </Typography>
+                                    <Typography color={alarmConcPotasio(reporte!).alert === 'REVISAR' ? 'red' : 'green'}>
+                                        {alarmConcPotasio(reporte!).alert}
+                                    </Typography>
+                                </Stack>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
+                            {(loadingSave)
+                                ? <Stack direction={'row'} paddingLeft={'80px'} spacing={2}>
+                                    <Typography>
+                                        {alarmConcMagnesio(reporte!).value.toFixed(2)}
+                                    </Typography>
+                                    <Typography color={alarmConcMagnesio(reporte!).alert === 'REVISAR' ? 'red' : 'green'}>
+                                        {alarmConcMagnesio(reporte!).alert}
+                                    </Typography>
+                                </Stack>
+                                : <Skeleton animation="wave" height={30} width="40%" />}
+
 
 
                         </Stack>

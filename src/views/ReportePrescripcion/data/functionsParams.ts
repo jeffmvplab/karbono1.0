@@ -1,3 +1,4 @@
+import { Aportes, aportesNew } from "@/domain/models/logs.model";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
 
 export interface IParamFunc {
@@ -144,6 +145,7 @@ export const getFosfatoSodio = (prescription: IPrescriptions) => {
     return params;
 }
 
+
 export const getFosfatoPotacio = (prescription: IPrescriptions) => {
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
@@ -165,6 +167,28 @@ export const getFosfatoPotacio = (prescription: IPrescriptions) => {
         }
 
     return params;
+}
+
+
+export const getAportesFosfato = (prescription: IPrescriptions) => {
+
+    const tipofosfato: string = prescription?.fosfato!;
+    const aportes: Aportes = aportesNew;
+
+    if (tipofosfato === 'Fosfato de sodio') {
+        aportes.a_sodio = getFosfatoSodio(prescription).volumen * 2 / 1
+        aportes.a_potacio = 0
+        aportes.a_magnesio = 0
+        aportes.a_fosforo = 0
+        aportes.a_cloruro = 0
+    }else{
+        aportes.a_sodio = 0
+        aportes.a_potacio = getFosfatoPotacio(prescription).volumen * 3.8 / 1
+        aportes.a_magnesio = 0
+        aportes.a_fosforo = 0
+        aportes.a_cloruro = 0 
+    }
+    return aportes;
 }
 
 export const getFosforo = (prescription: IPrescriptions) => {
@@ -275,7 +299,7 @@ export const concAminoacidos = (prescription: IPrescriptions) => {
 
     const tipoAminoacidos: string = prescription?.aminoacidos!;
     let concSinAminoacidos: number = 0;
-    const tipoPaciente: string = prescription?.tipo_paciente!;
+    // const tipoPaciente: string = prescription?.tipo_paciente!;
 
     if (tipoAminoacidos === 'AminovenSE') { concSinAminoacidos = 0.15 }
     if (tipoAminoacidos === 'TravasolPlus') { concSinAminoacidos = 0.15 }
@@ -312,6 +336,23 @@ export const getAminoacidos = (prescription: IPrescriptions) => {
     return params;
 }
 
+export const getAportesAminoacidos = (prescription: IPrescriptions) => {
+
+    const tipoAminoacidos: string = prescription?.aminoacidos!;
+    const peso: number = prescription?.peso!;
+    const aportes: Aportes = aportesNew;
+
+    if (tipoAminoacidos === 'Aminoplasmal CE') {
+        aportes.a_sodio = getAminoacidos(prescription).volumen * 0.05 / peso
+        aportes.a_potacio = getAminoacidos(prescription).volumen * 0.025 / peso
+        aportes.a_magnesio = getAminoacidos(prescription).volumen * 0.0025 / peso
+        aportes.a_fosforo = getAminoacidos(prescription).volumen * 0.01 / peso
+        aportes.a_cloruro = getAminoacidos(prescription).volumen * 0.052 / peso
+    }
+
+    return aportes;
+}
+
 export const getLipidos = (prescription: IPrescriptions) => {
 
     const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
@@ -324,12 +365,12 @@ export const getLipidos = (prescription: IPrescriptions) => {
     const tipo_paciente: string = prescription?.tipo_paciente!;
 
 
-    const vitaLipid: number =  parseFloat(prescription?.req_vit_liposolubles!);
+    const vitaLipid: number = parseFloat(prescription?.req_vit_liposolubles!);
 
     const vit_lipo = prescription?.soluvit_vitalip !== '0'
         ? parseFloat(prescription?.soluvit_vitalip!) : 0;
 
-        
+
     if (tipo_lipidos === 'Smoflipid') {
 
         if (vit_lipo !== 0) {
@@ -347,7 +388,7 @@ export const getLipidos = (prescription: IPrescriptions) => {
         } else {
 
             if (tp === tipoPrescripcion) {
-                params.volumen = ((lipidos * peso * 5) -  vitaLipid / 2)
+                params.volumen = ((lipidos * peso * 5) - vitaLipid / 2)
                 params.requerimiento = lipidos
                 params.conPurga = params.volumen * correccionPurga(prescription);
             } else {
@@ -359,7 +400,7 @@ export const getLipidos = (prescription: IPrescriptions) => {
     } else {
 
         if (tp === tipoPrescripcion) {
-            params.volumen = (lipidos * peso *5)
+            params.volumen = (lipidos * peso * 5)
             params.requerimiento = lipidos
             params.conPurga = params.volumen * correccionPurga(prescription);
         } else {
@@ -371,6 +412,46 @@ export const getLipidos = (prescription: IPrescriptions) => {
     }
 
     return params;
+}
+
+
+export const getAportesLipidos = (prescription: IPrescriptions) => {
+
+    const tipoLipidos: string = prescription?.lipidos!;
+    const peso: number = prescription?.peso!;
+    const aportes: Aportes = aportesNew;
+
+    if (tipoLipidos === 'Clinoleic') {
+        aportes.a_sodio = 0
+        aportes.a_potacio = 0
+        aportes.a_magnesio = 0
+        aportes.a_fosforo = getLipidos(prescription).volumen * 0.015 / peso
+        aportes.a_cloruro = 0
+
+    } else if (tipoLipidos === 'Lipoplus') {
+        aportes.a_sodio = getLipidos(prescription).volumen * 0.0026 / peso
+        aportes.a_potacio = 0
+        aportes.a_magnesio = 0
+        aportes.a_fosforo = getLipidos(prescription).volumen * 0.0145 / peso
+        aportes.a_cloruro = 0
+
+    } else if (tipoLipidos === 'Smoflipid') {
+
+        aportes.a_sodio = 0
+        aportes.a_potacio = 0
+        aportes.a_magnesio = 0
+        aportes.a_fosforo = getLipidos(prescription).volumen * 0.015 / peso
+        aportes.a_cloruro = 0
+
+    } else if (tipoLipidos === 'Lipofundin') {
+        aportes.a_sodio = getLipidos(prescription).volumen * 0.001 / peso
+        aportes.a_potacio = 0
+        aportes.a_magnesio = 0
+        aportes.a_fosforo = getLipidos(prescription).volumen * 0.0145 / peso
+        aportes.a_cloruro = 0
+    }
+
+    return aportes;
 }
 
 export const getOmegaven = (prescription: IPrescriptions) => {
@@ -415,6 +496,22 @@ export const getDipeptiven = (prescription: IPrescriptions) => {
     // console.log('Dipep:',params)
     return params;
 }
+
+
+export const getAportesDipeptiven = (prescription: IPrescriptions) => {
+
+    const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
+
+    const dipeptiven: number = parseFloat(prescription?.dipeptiven!);
+    const concSinDipeptiven: number = 0.20;
+    const peso: number = prescription?.peso!;
+
+    params.volumen = dipeptiven * concSinDipeptiven / peso;
+    params.requerimiento = dipeptiven * 13.46 / 20
+
+    return params;
+}
+
 
 export const getVitHidroSolubles = (prescription: IPrescriptions) => {
 
@@ -833,8 +930,8 @@ export const getConcentracionDeLipidos = (prescription: IPrescriptions) => {
     const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
     const volTotalNPT: number = prescription?.volumen!;
 
-    params.volumen = ((getLipidos(prescription!).volumen * 0.2 + getOmegaven(prescription!).volumen * 0.1) / volTotalNPT) * 100
-    params.conPurga = ((getLipidos(prescription!).conPurga * 0.2 + getOmegaven(prescription!).conPurga * 0.1) / volTotalNPT) * 100
+    params.volumen = ((getLipidos(prescription!).volumen * 20 + getOmegaven(prescription!).volumen * 10 + getSoluv_Vit(prescription!).volumen * 10+ getVitLiposSolubles(prescription!).volumen * 10) / volTotalNPT) 
+    params.conPurga = ((getLipidos(prescription!).conPurga * 20 + getOmegaven(prescription!).conPurga * 10+ getSoluv_Vit(prescription!).conPurga * 10+ getVitLiposSolubles(prescription!).conPurga * 10) / volTotalNPT)
 
     return params;
 }

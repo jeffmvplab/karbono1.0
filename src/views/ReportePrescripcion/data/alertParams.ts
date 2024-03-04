@@ -1,5 +1,5 @@
 import { IPrescriptions } from "@/domain/models/prescriptions.model"
-import { concAminoacidos, getAgua, getAminoacidos, getCalcio, getConcentracionDeProteinas, getDextrosa, getDipeptiven, getFosfatoPotacio, getFosfatoSodio, getFosforo, getLipidos, getMagnesio, getOligoelementos, getOmegaven, getOsmolaridad, getPotacio, getSodio, getSoluv_Vit, getVitHidroSolubles, getVitLiposSolubles, getVit_C, tipoPrescripcion } from "./functionsParams"
+import { concAminoacidos, getAgua, getAminoacidos, getAportesFosfato, getCalcio, getConcentracionDeProteinas, getDextrosa, getDipeptiven, getFosfatoPotacio, getFosfatoSodio, getFosforo, getLipidos, getMagnesio, getOligoelementos, getOmegaven, getOsmolaridad, getPotacio, getSodio, getSoluv_Vit, getVitHidroSolubles, getVitLiposSolubles, getVit_C, tipoPrescripcion } from "./functionsParams"
 
 export interface IAlarm {
     value: number,
@@ -235,7 +235,8 @@ export const alarmConcDeLipidos = (prescription: IPrescriptions) => {
 
     let lipidos: number = 0;
     let omegaven: number = 0;
-
+    let soluv_vitalip: number = 0;
+    let vit_liposolubles: number = 0;
     // if (tp === tipoPrescripcion) {
     //     lipidos = parseFloat(prescription?.req_lipidos);
     //     omegaven = parseFloat(prescription?.omegaven);
@@ -243,11 +244,15 @@ export const alarmConcDeLipidos = (prescription: IPrescriptions) => {
 
     lipidos = getLipidos(prescription!).volumen;
     omegaven = getOmegaven(prescription!).volumen
+    soluv_vitalip = getSoluv_Vit(prescription!).volumen
+    vit_liposolubles = getVitLiposSolubles(prescription!).volumen
     // }
 
     const volTotalNPT: number = prescription?.volumen;
 
-    let concDeLipidos: number = (((lipidos * 0.2) + (omegaven * 0.1)) / volTotalNPT) * 100
+    // let concDeLipidos: number = (((lipidos * 0.2) + (omegaven * 0.1)) / volTotalNPT) * 100
+    let concDeLipidos: number = (((lipidos * 20) + (omegaven * 10) + (soluv_vitalip * 10) + (vit_liposolubles * 10)) / volTotalNPT)
+
     const resp: IAlarm = { value: 0, alert: '' };
     resp.value = concDeLipidos
 
@@ -262,10 +267,10 @@ export const alarmConcDeLipidos = (prescription: IPrescriptions) => {
 
 export const alarmConcSodio = (prescription: IPrescriptions) => {
 
-    const tp: string = prescription?.tipo_prescripcion!;
+    // const tp: string = prescription?.tipo_prescripcion!;
 
     let sodio: number = 0;
-    let fosfato_de_sodio: number = 0;
+    let aporte_sodio_del_fosfato: number = 0;
 
     // if (tp === tipoPrescripcion) {
     //     sodio = parseFloat(prescription?.req_calcio);
@@ -273,14 +278,19 @@ export const alarmConcSodio = (prescription: IPrescriptions) => {
     // } else {
 
     sodio = getSodio(prescription!).volumen;
-    fosfato_de_sodio = getFosfatoSodio(prescription!).volumen;
+    aporte_sodio_del_fosfato = getAportesFosfato(prescription!).a_sodio;
+
     // }
     // const sodio: number = parseFloat(prescription?.sodio_total);
     // const fosfato_de_sodio: number = parseFloat(prescription?.req_fosfato);
 
     const volTotalNPT: number = prescription?.volumen;
 
-    let sodioVol: number = ((sodio + fosfato_de_sodio) * 2) / (volTotalNPT / 1000);
+    // let sodioVol: number = ((sodio * 2) + (aporte_sodio_del_fosfato* prescription?.peso!)) / (volTotalNPT / 1000);
+
+    let sodioVol: number = ((sodio * 2) + (aporte_sodio_del_fosfato!)) / (volTotalNPT / 1000);
+    // let sodioVol: number = ((sodio + fosfato_de_sodio) * 2) / (volTotalNPT / 1000);
+
     const resp: IAlarm = { value: 0, alert: '' };
     resp.value = sodioVol
 
@@ -298,19 +308,22 @@ export const alarmConcPotasio = (prescription: IPrescriptions) => {
     const tp: string = prescription?.tipo_prescripcion!;
 
     let potacio: number = 0;
-    let fosfato_de_potasio: number = 0;
+    let aporte_potasio_del_fosfato: number = 0;
 
     // if (tp === tipoPrescripcion) {
     //     potacio = parseFloat(prescription?.potasio_total);
     //     fosfato_de_potasio = parseFloat(prescription?.req_fosfato);
     // } else {
     potacio = getPotacio(prescription!).volumen;
-    fosfato_de_potasio = getFosfatoPotacio(prescription!).volumen;
+    aporte_potasio_del_fosfato= getAportesFosfato(prescription!).a_potacio;
     // }
 
     const volTotalNPT: number = prescription?.volumen;
 
-    let potacioVol: number = (potacio * 2 + fosfato_de_potasio * 3.8) / (volTotalNPT / 1000);
+    // let potacioVol: number = (potacio * 2 + fosfato_de_potasio * 3.8) / (volTotalNPT / 1000);
+    let potacioVol: number = (potacio * 2 + aporte_potasio_del_fosfato!) / (volTotalNPT / 1000);
+    // let potacioVol: number = (potacio * 2 + fosfato_de_potasio * prescription?.peso!) / (volTotalNPT / 1000);
+
     const resp: IAlarm = { value: 0, alert: '' };
     resp.value = potacioVol
 
