@@ -1,8 +1,7 @@
-import { colorsKarbono } from '@/themes/colors'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, MenuItem, Stack, TextField, Typography, useMediaQuery } from '@mui/material'
+
+import {  Box, Grid, MenuItem, Stack, Typography, useMediaQuery } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import CustomTextField from './CustomTextField'
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { FormulariosContext } from '../context/FormulariosContext';
 import { LightTooltip } from '../style/styleToolTips';
 import { getPotacioTotal, getSodioTotal } from '@/views/ReportePrescripcion/data/functionsParams';
