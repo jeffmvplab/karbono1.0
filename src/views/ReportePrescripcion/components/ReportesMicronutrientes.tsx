@@ -34,7 +34,7 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
                 <Stack width='100%' direction={'row'} justifyContent={'space-between'} overflow={'scroll'} spacing={2}>
 
                     <Stack direction={'column'} minWidth={'250px'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingBottom: '10px' }}>Micronutrientes</Typography>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingBottom: '15px' }}>Micronutrientes</Typography>
 
                         {/* <Box sx={{ justifyContent: 'start' }} >
                             <ul style={{}}>
@@ -207,7 +207,7 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getSodioTotal(reporte!).toFixed(2)}
+                                    -
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -220,7 +220,7 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getPotacioTotal(reporte!).toFixed(2)}
+                                    -
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -307,7 +307,7 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getSodioTotal(reporte!).toFixed(2)}
+                                   -
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -320,7 +320,7 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getPotacioTotal(reporte!).toFixed(2)}
+                                   -
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 

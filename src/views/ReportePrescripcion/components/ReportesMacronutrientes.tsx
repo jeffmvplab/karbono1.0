@@ -29,7 +29,7 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
         'Omegaven',
         'Dipeptiven',
         '*Aporte total de L-glutamina',
-        'Agua'
+        // 'Agua'
     ]);
 
     return (
@@ -38,8 +38,8 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                 {/* <Grid item display='block' sx={{ marginTop: '30px', marginBottom: '15px', width: '40%', paddingLeft:'0' }}> */}
                 <Stack width='100%' direction={'row'} justifyContent={'space-between'} overflow={'scroll'} spacing={2}>
 
-                    <Stack direction={'column'} minWidth={'220px'}>
-                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingBottom: '10px' }}>Macronutrientes</Typography>
+                    <Stack direction={'column'} minWidth={'150px'} maxWidth={'220px'}>
+                        <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingBottom: '15px' }}>Macronutrientes</Typography>
                         {/* <Box sx={{ justifyContent: 'start' }} >
                             <ul style={{}}>
                                 {Macronutrientes.map(lista => {
@@ -86,9 +86,9 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                         <Box sx={{ justifyContent: 'start' }} >
                             <Typography>{Macronutrientes[12]} :</Typography>
                         </Box>
-                        <Box sx={{ justifyContent: 'start' }}  >
+                        {/* <Box sx={{ justifyContent: 'start' }}  >
                             <Typography>{Macronutrientes[14]} :</Typography>
-                        </Box>
+                        </Box> */}
                     </Stack>
                     {/* </Grid>
                 <Grid item display={'flex'} sx={{ marginTop: '30px', marginBottom: '30px', width: '60%' }}> */}
@@ -188,12 +188,11 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
-                            {(loadingSave)
+                            {/* {(loadingSave)
                                 ? <Typography>
                                     -
                                 </Typography>
-                                : <Skeleton animation="wave" height={30} width="40%" />}
-
+                                : <Skeleton animation="wave" height={30} width="40%" />} */}
                         </Stack>
                     </Stack>
 
@@ -280,11 +279,11 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
-                            {(loadingSave)
+                            {/* {(loadingSave)
                                 ? <Typography>
                                     {getAgua(reporte!).volumen.toFixed(2)}
                                 </Typography>
-                                : <Skeleton animation="wave" height={30} width="40%" />}
+                                : <Skeleton animation="wave" height={30} width="40%" />} */}
 
                         </Stack>
                     </Stack>
@@ -368,12 +367,12 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                                     {getDipeptiven(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
-
+{/* 
                             {(loadingSave)
                                 ? <Typography>
                                     {getAgua(reporte!).conPurga.toFixed(2)}
                                 </Typography>
-                                : <Skeleton animation="wave" height={30} width="40%" />}
+                                : <Skeleton animation="wave" height={30} width="40%" />} */}
 
                         </Stack>
                     </Stack>

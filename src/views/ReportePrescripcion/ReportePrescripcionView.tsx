@@ -177,12 +177,12 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 						<Grid container sx={{ marginTop: '30px', marginBottom: { xs: '0px', md: '30px' } }} paddingBottom={'100px'} spacing={{ xs: 0, md: 2 }}>
 
-							<Grid item xs={12} md={8} paddingX='15px'>
+							<Grid item xs={12} lg={8} paddingX='15px'>
 								<PDFPrescriptionComponent reporte={reporte} loading={loadingSave} />
 							</Grid>
 
 
-							<Grid item xs={12} md={4} display={{ xs: 'none', md: 'block' }} paddingBottom={{ xs: '150px', md: '0' }}>
+							<Grid item xs={12} lg={4} display={{ xs: 'none', md: 'block' }} paddingBottom={{ xs: '150px', md: '0' }}>
 								<Card>
 									<Stack paddingX='15px' direction={'column'} minHeight={'50vh'} height={'100%'} overflow={'scroll'} alignItems={'center'}>
 										<Typography color={'#372FC6'} sx={{ fontWeight: 600, fontSize: '20px' }}>Observaciones y Cambios.</Typography>

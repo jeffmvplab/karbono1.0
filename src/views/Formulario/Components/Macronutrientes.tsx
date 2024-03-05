@@ -37,7 +37,7 @@ const Macronutrientes = () => {
     const {
         tipoPaciente,
         setStateAcordion2, matches,
-        tipoPrescripcion, 
+        tipoPrescripcion,
         flujoMetabolico, handleFlujoMetabolico, messageErrorFlujoMetabolico,
         aminoacidos, handleAminoacidos,
         dextrosa, handleDextrosa, messageErrorDextrosa,
@@ -160,7 +160,7 @@ const Macronutrientes = () => {
                                         </Typography>
                                     }
                                     type='text'
-                                    // helperText={messageErrorFlujoMetabolico}
+                                // helperText={messageErrorFlujoMetabolico}
                                 />
                             </Grid>
                         </LightTooltip>
@@ -184,7 +184,7 @@ const Macronutrientes = () => {
                                     </Typography>
                                 }
                                 type='text'
-                                // helperText={messageErrorDextrosa}
+                            // helperText={messageErrorDextrosa}
                             />
 
                         </Grid>
@@ -209,17 +209,17 @@ const Macronutrientes = () => {
                                 {
                                     (tipoPaciente === 'Adulto')
                                         ? aminoAdultos.map((option) => (
-                                            <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
+                                            <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
                                                 {option.label}
                                             </MenuItem>
                                         ))
                                         : (tipoPaciente === 'Pediatrico')
                                             ? aminoPediatrico.map((option) => (
-                                                <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
+                                                <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
                                                     {option.label}
                                                 </MenuItem>))
                                             : aminoPediatrico.map((option) => (
-                                                <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
+                                                <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
                                                     {option.label}
                                                 </MenuItem>
                                             ))
@@ -234,7 +234,9 @@ const Macronutrientes = () => {
                                 onKeyPress={getPrescriptions}
                                 value={convertComaAPunto(requerimientoAminoacidos)}
                                 id='requerimiento-aminoacidos'
-                                label={'Requerimiento aminoácidos*'}
+                                label={(tipoPrescripcion === 'Por requerimientos')
+                                    ? 'Requerimiento aminoácidos*'
+                                    : 'Volumen aminoácidos*'}
                                 endAdornament={
                                     <Typography
                                         textTransform={'lowercase'}>
@@ -267,7 +269,7 @@ const Macronutrientes = () => {
                                 select={true}
                             >
                                 {tiposLipidos.map((option) => (
-                                    <MenuItem sx={{backgroundColor:'white'}} key={option.value} value={option.value}>
+                                    <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>
                                 ))}
@@ -288,7 +290,9 @@ const Macronutrientes = () => {
                                     onChange={handleRequerimientoLipidos}
                                     value={convertComaAPunto(requerimientoLipidos)}
                                     id='requerimiento-lipidos'
-                                    label={'Requerimiento Lípidos'}
+                                    label={(tipoPrescripcion === 'Por requerimientos')
+                                    ? 'Requerimiento Lípidos*'
+                                    : 'Volumen Lípidos*'}
                                     endAdornament={
                                         <Typography
                                             textTransform={'lowercase'}>
