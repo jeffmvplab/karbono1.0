@@ -579,7 +579,7 @@ export const getAgua = (prescription: IPrescriptions) => {
     const params: IParamFunc = { requerimiento: 0, volumen: 0, conPurga: 0 };
 
 
-    params.volumen = volTotalNPT + prescription?.purga - (
+    params.volumen = volTotalNPT - (
         getDextrosa(prescription!).volumen + getLipidos(prescription!).volumen
         + getAminoacidos(prescription!).volumen + getDipeptiven(prescription!).volumen
         + getOmegaven(prescription!).volumen + getSodio(prescription!).volumen
