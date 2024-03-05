@@ -1,5 +1,5 @@
 
-import {  Box, Grid, MenuItem, Stack, Typography, useMediaQuery } from '@mui/material'
+import { Box, Grid, MenuItem, Stack, Typography, useMediaQuery } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import CustomTextField from './CustomTextField'
 import { FormulariosContext } from '../context/FormulariosContext';
@@ -89,12 +89,12 @@ const Micronutrientes = () => {
 
     const getError = () => {
 
-        const vitLip=vitaminasLiposolubles===''?'0':vitaminasLiposolubles;
-        const vitHid=reqVitHidrosolubles===''?'0':reqVitHidrosolubles;
-        const vit_soluv=soluvid_Vitalipid===''?'0':soluvid_Vitalipid;
+        const vitLip = vitaminasLiposolubles === '' ? '0' : vitaminasLiposolubles;
+        const vitHid = reqVitHidrosolubles === '' ? '0' : reqVitHidrosolubles;
+        const vit_soluv = soluvid_Vitalipid === '' ? '0' : soluvid_Vitalipid;
 
-        console.log('OOOOO:',vitLip,vitHid,vit_soluv)
-       
+        console.log('OOOOO:', vitLip, vitHid, vit_soluv)
+
         if ((vitLip !== '0' || vitHid !== '0') && (vit_soluv !== '0')) {
             return true
         } else {
@@ -306,7 +306,9 @@ const Micronutrientes = () => {
                                 onKeyPress={getPrescriptions}
                                 value={convertComaAPunto(requerimientoFosfato)}
                                 id='requerimiento-fosfato'
-                                label={'Requerimiento fosfato'}
+                                label={(tipoPrescripcion === 'Por requerimientos')
+                                    ? 'Requerimiento fosfato'
+                                    : 'Volumen fosfato'}
                                 endAdornament={
                                     <Typography
                                         textTransform={'lowercase'}>
@@ -483,7 +485,9 @@ const Micronutrientes = () => {
                                 onKeyPress={getPrescriptions}
                                 value={convertComaAPunto(reqTraza)}
                                 id='requerimiento-traza'
-                                label={'Requerimiento traza'}
+                                label={(tipoPrescripcion === 'Por requerimientos')
+                                ? 'Requerimiento traza'
+                                : 'Volumen traza'}
                                 endAdornament={
                                     <Typography
                                         textTransform={'lowercase'}>
@@ -582,7 +586,9 @@ const Micronutrientes = () => {
                                 value={convertComaAPunto(reqVitHidrosolubles)}
                                 // disabled={!sumVit}
                                 id='req-vitaminas-hidrosolubles'
-                                label={'Requerimientos Vitaminas hidrosolubes'}
+                                label={(tipoPrescripcion === 'Por requerimientos')
+                                ? 'Requerimientos Vitaminas hidrosolubes'
+                                : 'Volumen Vitaminas hidrosolubes'}
                                 endAdornament={
                                     <Typography
                                         textTransform={'lowercase'}>
@@ -715,7 +721,6 @@ const Micronutrientes = () => {
                         </Grid>
 
                     </Grid>
-
                 </Box>
             </Grid>
             {/* </AccordionDetails> */}
