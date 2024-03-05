@@ -17,7 +17,7 @@ export const alarmaAgua = (prescription: IPrescriptions) => {
 
     const resp: IAlarm = { value: 0, alert: '' };
 
-    resp.value = volTotalNPT + prescription?.purga - (
+    resp.value = volTotalNPT - (
         getDextrosa(prescription!).volumen + getLipidos(prescription!).volumen
         + getAminoacidos(prescription!).volumen + getDipeptiven(prescription!).volumen
         + getOmegaven(prescription!).volumen + getSodio(prescription!).volumen
@@ -173,20 +173,17 @@ export const alarmConcCHOS = (prescription: IPrescriptions) => {
     const tp: string = prescription?.tipo_prescripcion!;
 
     let dextrosa: number = 0;
-
     // if (tp === tipoPrescripcion) {
     //     dextrosa = parseFloat(prescription?.dextrosa!);
     // } else {
     dextrosa = getDextrosa(prescription!).volumen;
     // };
 
-
     const volTotalNPT: number = prescription?.volumen;
 
     let concCHOS: number = (dextrosa * 0.5 / volTotalNPT) * 100;
     const resp: IAlarm = { value: 0, alert: '' };
     resp.value = concCHOS
-
 
     if (concCHOS >= 5 && concCHOS <= 35) {
         resp.alert = 'SEGURA';
