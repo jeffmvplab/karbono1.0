@@ -17,7 +17,7 @@ export interface GestionPrescripcionesViewProps { }
 const GestionPrescripcionesView: React.FC<GestionPrescripcionesViewProps> = () => {
 
 	const { 
-		goAddNew, 
+		// goAddNew, 
 		getAll, 
 		handleSearchName, 
 		searchName, 
@@ -25,8 +25,8 @@ const GestionPrescripcionesView: React.FC<GestionPrescripcionesViewProps> = () =
 		searchId, 
 		handleSearchNumber, 
 		searchNumber, 
-		handleSearchFecha, 
-		searchFecha, 
+		// handleSearchFecha, 
+		// searchFecha, 
 		getPrescriptionsByName, 
 		getPrescriptionsById,
 		getPrescriptionsByNumber
@@ -45,8 +45,6 @@ const GestionPrescripcionesView: React.FC<GestionPrescripcionesViewProps> = () =
 						</Typography>
 
 						<Stack direction={{ xs: 'column', md: 'row' }} justifyContent={'end'} spacing={4}>
-
-							
 
 							<Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
 
