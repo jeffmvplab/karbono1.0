@@ -418,6 +418,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	const handleModalInvOpen = () => {
 		setModalInvOpen(true);
 	};
+	
 	const invitarUsuarios = async () => {
 
 		setLoadingApi(true);
@@ -427,17 +428,15 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 		console.log('RespApi:', resp)
 
-		if (resp.statusCode === undefined || resp !== '') {
+		if (resp.statusCode === undefined || !resp.message) {
 
 			console.log('RES_API:', resp)
 			handleModalInvOpen()
-		} else if (resp.statusCode === 400) {
+		} else if (resp.statusCode === 400||resp.statusCode ===401||resp.statusCode ===500) {
 			console.log('Error :', resp.message)
 			setErrorApi(resp.message);
-		} else if (resp.statusCode === 401) {
-			console.log('Error :', resp.message)
-			setErrorApi(resp.message);
-		} else if (resp.statusCode === 408) {
+			handleModalInvOpen();
+		}  else if (resp.statusCode === 408) {
 
 			handleOffline();
 		}
