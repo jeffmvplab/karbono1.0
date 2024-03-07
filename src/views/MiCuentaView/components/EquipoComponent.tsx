@@ -66,12 +66,12 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 			top: '30%',
 			left: '50%',
 			transform: 'translate(-50%, -50%)',
-			width: '300px',
+			width: '320px',
 			bgcolor: 'background.paper',
 			border: '2px solid #000',
 			boxShadow: 24,
 			p: 4,
-			minHeight: '200px', // Agregar altura máxima y desplazamiento vertical
+			minHeight: '320px', // Agregar altura máxima y desplazamiento vertical
 			overflowY: 'auto',
 		};
 
@@ -101,7 +101,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 
 						<Stack sx={{
 							position: 'absolute' as 'absolute',
-							top: '35%',
+							top: '40%',
 							left: '50%',
 							transform: 'translate(-50%, -50%)',
 						}}
