@@ -92,7 +92,7 @@ const ActionsDrawer: React.FC<ActionsDrawerProps> = () => {
 				</Stack>
 
 				<Stack direction={'column'} spacing={3} paddingX={2}>
-					{logs?.map((item,index) => {
+					{logs?.map((item, index) => {
 
 						return <ContainerComments
 							key={index}
@@ -101,7 +101,7 @@ const ActionsDrawer: React.FC<ActionsDrawerProps> = () => {
 							date={formatearFechaEsp(item.date!.toString())}
 							content={item.opcion}
 						/>
-						
+
 					})
 					}
 

@@ -73,7 +73,7 @@ const VerificarModal: React.FC<OrdenarModalProps> = () => {
 								const newComment: IComment = {
 									prescriptionId: reporte?._id!,
 									// comentario: newObs!,
-									estado: StatePrescriptionKeysEnum.solicitada,
+									estado: StatePrescriptionKeysEnum.produccion,
 								}
 								saveComments(newComment)
 							}}

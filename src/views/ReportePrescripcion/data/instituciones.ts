@@ -42,6 +42,22 @@ export const instituciones = [
 ];
 
 
+export const centrales_de_mezclas = [
+    { value: '0', label: 'Central de mezclas Corpaul' },
+    { value: '1', label: 'Central de mezclas Clínica del Rosario'},
+    { value: '2', label: 'Central de mezclas Clínica las Américas'},
+    { value: '3', label: 'Central de mezclas Hospital Pablo Tobón Uribe'},
+    { value: '4', label: 'Central de mezclas Hospital general'},
+    { value: '5', label: 'Central de mezclas Cardiovid'},
+    { value: '6', label: 'Central de mezclas San Vicente Medellín'},
+    { value: '7', label: 'Central de mezclas San Vicente Rionegro'},
+    { value: '8', label: 'Central de mezclas Hospital Manuel Uribe Angel'},
+    { value: '9', label: 'Inversión en salud de Antioquia'},
+    { value: '10', label: 'Unidosis'},
+    { value: '11', label: 'Asisfarma'},
+];
+
+
 export const obtenerOverfillPorLabel = (label: string): number | null => {
     const institucion = instituciones.find(inst => inst.label === label);
     return institucion ? institucion.overfill : null;

@@ -76,8 +76,8 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 
 								<Stack margin={'5px'} direction={'column'} >
 									<CustomTextField
-										onChange={handleSearchId}
-										onClickEndAdornament={() => { searchId ? getPrescriptionsByNumber(searchNumber) : getAll() }}
+										onChange={handleSearchName}
+										onClickEndAdornament={() => { searchNumber ? getPrescriptionsByNumber(searchNumber) : getAll() }}
 										id='Numero-de-orden'
 										label='Búsqueda por número de orden'
 										type='text'

@@ -38,7 +38,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 
 		if (resp.statusCode === 200) {
-			setReportes(resp.body);
+			setReportes(Array.isArray(resp.body)?resp.body.reverse():[]);
 			setGetOk(true);
 		} else if (resp.statusCode === 400) {
 			setMessageAPI(resp.body.message)
@@ -99,7 +99,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 
 		if (resp.statusCode === 200) {
-			setReportes(resp.body);
+			setReportes(Array.isArray(resp.body)?resp.body.reverse():[]);
 			setGetOk(true);
 		} else if (resp.statusCode === 400) {
 			setMessageAPI(resp.body.message)
@@ -242,7 +242,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 		console.log('RESP by Num:', repoPresc)
 		if (resp.statusCode === 200) {
-			setReportes(repoPresc);
+			setReportes(Array.isArray(repoPresc)?repoPresc.reverse():[]);
 			setErrorSearch(false)
 
 			if (resp.body.length === 0) {
@@ -283,10 +283,11 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		} else {
 			repoPresc = []
 		}
+
 		console.log('RESP by Name:', resp.body)
 		if (resp.statusCode === 201) {
 
-			setReportes(repoPresc);
+			setReportes(Array.isArray(repoPresc)?repoPresc.reverse():[]);
 			setErrorSearch(false)
 
 			if (resp.body.length === 0) {
@@ -329,7 +330,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		console.log('RESP by Ips:', resp)
 
 		if (resp.statusCode === 201) {
-			setReportes(repoPresc);
+			setReportes(Array.isArray(repoPresc)?repoPresc.reverse():[]);
 			setErrorSearch(false)
 
 			if (resp.body.length === 0) {
@@ -372,7 +373,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		console.log('RESP by Id:', resp)
 
 		if (resp.statusCode === 201) {
-			setReportes(repoPresc);
+			setReportes(Array.isArray(repoPresc)?repoPresc.reverse():[]);
 			setErrorSearch(false)
 
 			if (resp.body.length === 0) {

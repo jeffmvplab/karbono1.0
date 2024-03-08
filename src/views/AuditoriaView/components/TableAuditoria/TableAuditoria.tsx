@@ -50,7 +50,7 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 			headerClassName: 'table-color--header',
 			// cellClassName:'style-theme--cell',
 			flex: 1,
-			minWidth: 100,
+			minWidth: 250,
 			renderCell: (params: GridRenderCellParams) => (
 				<Button sx={{ fontFamily: typographyKarbono.outfit, fontSize: 12 }} variant='text'
 				>
