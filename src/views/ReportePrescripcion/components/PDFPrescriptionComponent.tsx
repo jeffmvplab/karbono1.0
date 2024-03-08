@@ -12,13 +12,18 @@ import { alertVelInfucion } from '../data/alertParams'
 export interface PDFPrescriptionComponentProps {
     reporte: IPrescriptions | undefined
     loading: boolean | undefined
+    print?: boolean
 }
 
-const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ reporte, loading }) => {
+const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ reporte, loading, print = false }) => {
 
     return (
         <>
-            {<Stack id='reporte_view' direction={'column'} maxWidth={'1200px'} minWidth={'1000px'} spacing={5} >
+            {<Stack id='reporte_view' direction={'column'}
+                maxWidth={'1500px'}
+                minWidth={{ xs: print ? '1300px' : '100%', md: '1300px' }}
+                overflow={'scroll'}
+                spacing={5} >
 
                 <Stack>
                     <Card>
@@ -81,7 +86,7 @@ const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ rep
                             <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
                             <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
                                 <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Velocidad de infusión:</Typography>
-                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{alertVelInfucion(reporte!)}</Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{alertVelInfucion(reporte!).toFixed(2)}</Typography>
                             </Stack>
                             <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
 

@@ -3,7 +3,7 @@ import { IComment } from "./observaciones.model"
 export interface ILogs {
 
        _id: string,
-       user: string,
+       user: any,
        prescription: number,
        opcion: string,
        date: string,

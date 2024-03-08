@@ -6,7 +6,7 @@ import BarEtiqueta from "../ReportePrescripcion/components/BarEtiqueta/BaEtiquet
 import { useContext, useEffect, useState } from "react";
 import { ReportesContext } from "../ReportePrescripcion/context/ReportesContext";
 import { convertirFecha, convertirFechaLote } from "@/utilities/get_String_from_Date_Esp";
-import { getAgua, getSodio, getPotacio, getMagnesio, getVitLiposSolubles, getVitHidroSolubles, getVit_C, getCalcio, peso_teorico, tipo_bolsa } from "../ReportePrescripcion/data/functionsParams";
+import { getAgua, getSodio, getPotacio, getMagnesio, getVitLiposSolubles, getVitHidroSolubles, getVit_C, getCalcio, peso_teorico, tipo_bolsa, getAminoacidos, getDipeptiven, getFosforo, getLipidos, getOmegaven, getSoluv_Vit } from "../ReportePrescripcion/data/functionsParams";
 
 
 export interface PlanProduccionViewProps { }
@@ -226,23 +226,24 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 											</Typography>
 										</Stack>
 
-										<ContainerText isUpper title="OMEGAVEN 10%" value={`${reporte?.omegaven!}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.lipidos!}`} value={`${reporte?.req_lipidos!}`} />
-										<ContainerText isUpper title="GLUTAMUNA DIPEPTIDO 20%" value={`${reporte?.dipeptiven!}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.aminoacidos!}`} value={`${reporte?.req_aminoacidos!}`} />
+										<ContainerText isUpper title="OMEGAVEN 10%" value={`${getOmegaven(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.lipidos!}`} value={`${getLipidos(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper title="GLUTAMINA DIPEPTIDO 20%" value={`${getDipeptiven(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.aminoacidos!}`} value={`${getAminoacidos(reporte!).volumen.toFixed(2)}`} />
 										<ContainerText isUpper title="DEXTROSA 50%" value={`${reporte?.dextrosa!}`} />
-										<ContainerText isUpper title="AGUA ESTERIL" value={`${getAgua(reporte!).volumen}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.fosfato!}`} value={`${reporte?.req_fosfato!}`} />
+										<ContainerText isUpper title="AGUA ESTERIL" value={`${getAgua(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.fosfato!}`} value={`${getFosforo(reporte!).volumen.toFixed(2)}`} />
 										<ContainerText isUpper transform="uppercase" title={`${reporte?.elementos_traza!}`} value={`${reporte?.req_elementos_traza!}`} />
-										<ContainerText isUpper title="CLORURO DE SODIO 2 MEQ/ML" value={`${getSodio(reporte!).requerimiento.toFixed(2)}`} />
-										<ContainerText isUpper title="CLORURO DE POTACIO 2 MEQ/ML" value={`${getPotacio(reporte!).requerimiento.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.magnesio!}`} value={`${getMagnesio(reporte!).requerimiento.toFixed(2)}`} />
-										<ContainerText isUpper title="SOLUVIT_VITALIPID" value={`${reporte?.soluvit_vitalip}`} />
-										<ContainerText isUpper title="VITALIPID" value={`${getVitLiposSolubles(reporte!).volumen.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.vit_hidrosolubles!}`} value={`${getVitHidroSolubles(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper title="CLORURO DE SODIO 2 MEQ/ML" value={`${getSodio(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper title="CLORURO DE POTACIO 2 MEQ/ML" value={`${getPotacio(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.magnesio!}`} value={`${getMagnesio(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper title="SOLUVIT_VITALIPID" value={`${getSoluv_Vit(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper title={(reporte?.tipo_paciente === 'Adulto')
+											? 'VITALIPID ADULT'
+											: 'VITALIPID INFANT'} value={`${getVitLiposSolubles(reporte!).volumen.toFixed(2)}`} />										<ContainerText isUpper transform="uppercase" title={`${reporte?.vit_hidrosolubles!}`} value={`${getVitHidroSolubles(reporte!).volumen.toFixed(2)}`} />
 										<ContainerText isUpper title="VITAMINA C" value={`${getVit_C(reporte!).volumen}`} />
 										<ContainerText isUpper title="ACIDO FOLICO" value={`${reporte?.acido_folico}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.calcio!}`} value={`${getCalcio(reporte!).requerimiento.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.calcio!}`} value={`${getCalcio(reporte!).volumen.toFixed(2)}`} />
 
 									</Stack>
 								</Box>
@@ -262,9 +263,9 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 
 										</Typography>
 
-										<ContainerText isUpper title="Peso Máximo (+3%)" value={`${peso_teorico(reporte!) + (peso_teorico(reporte!) * 3 / 100)}`} />
-										<ContainerText isUpper title="Peso teórico" value={`${peso_teorico(reporte!)}`} />
-										<ContainerText isUpper title="Peso Mínimo (-3%)" value={`${peso_teorico(reporte!) - (peso_teorico(reporte!) * 3 / 100)}`} />
+										<ContainerText isUpper title="Peso Máximo (+3%)" value={`${(peso_teorico(reporte!) + (peso_teorico(reporte!) * 3 / 100)).toFixed(2)}`} />
+										<ContainerText isUpper title="Peso teórico" value={`${peso_teorico(reporte!).toFixed(2)}`} />
+										<ContainerText isUpper title="Peso Mínimo (-3%)" value={`${(peso_teorico(reporte!) - (peso_teorico(reporte!) * 3 / 100)).toFixed(2)}`} />
 
 
 										<Stack width={'100%'} direction={'row'} justifyContent={'space-between'}>
@@ -460,7 +461,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 										<ContainerText isUpper title="BOLSA EVA" value={`${tipo_bolsa(reporte?.volumen!)}`} />
 									</Box>
 									<Box width={'100%'} paddingY={1}>
-										<ContainerText isUpper title="DISPOCITIVO ADICIONAL" value={reporte?.filtro ? 'Si' : 'No'} />
+										<ContainerText isUpper title="DISPOCITIVO ADICIONAL" value={reporte?.filtro ? 'Filtro' : '-'} />
 									</Box>
 								</Grid>
 								{///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -648,7 +649,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 							<Stack direction={'row'}>
 								<Grid container spacing={10}>
 									<Grid item xs={6}>
-										<ContainerText titleWeigth="700" titleSize="20px" title="PRESCRIPTOR" color={colorsKarbono.primary} value="xxxxxxxxx" />
+										<ContainerText titleWeigth="700" titleSize="20px" title="PRESCRIPTOR" color={colorsKarbono.primary} value={reporte?.user?.nombre_apellidos ? reporte?.user?.nombre_apellidos : '-'}/>
 									</Grid>
 									<Grid item xs={6}>
 										<ContainerText titleWeigth="700" titleSize="20px" title="PREPARÓ" color={colorsKarbono.primary} value={`${reporte?.preparador ? 'reporte?.preparador' : '-'}`} />

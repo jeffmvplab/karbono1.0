@@ -21,7 +21,7 @@ const ReportesSubtotales: React.FC<ReportesSubtotalesProps> = ({ reporte, loadin
                 {/* <Grid item display='block' sx={{ marginTop: '30px', marginBottom: '15px', width: '40%', paddingLeft:'0' }}> */}
                 <Stack width='100%' direction={'row'} justifyContent={'space-between'} overflow={'scroll'} spacing={2}>
 
-                    <Stack direction={'column'} minWidth={'250px'}>
+                    <Stack direction={'column'} minWidth={'70px'}>
                         {/* <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingBottom: '10px' }}></Typography> */}
 
                         {/* <Box sx={{ justifyContent: 'start' }} >
@@ -43,7 +43,7 @@ const ReportesSubtotales: React.FC<ReportesSubtotalesProps> = ({ reporte, loadin
                     </Stack>
                     {/* </Grid>
                  <Grid item display={'flex'} sx={{ marginTop: '30px', marginBottom: '30px', width: '60%' }}> */}
-                    <Stack direction={'column'} minWidth={'150px'}>
+                    <Stack direction={'column'} minWidth={'100px'}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '60%' }}>Unidades</Typography>
                         <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
 
@@ -62,7 +62,7 @@ const ReportesSubtotales: React.FC<ReportesSubtotalesProps> = ({ reporte, loadin
 
                     </Stack>
 
-                    <Stack direction={'column'} >
+                    <Stack direction={'column'}  minWidth={'120px'}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '50%' }}>Volumen(ml)</Typography>
                         <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
 

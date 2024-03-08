@@ -287,10 +287,9 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
-
                             {(loadingSave)
                                 ? <Typography>
-                                    -
+                                    {reporte?.acido_folico}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
                         </Stack>
@@ -307,7 +306,7 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
 
                             {(loadingSave)
                                 ? <Typography>
-                                   -
+                                    -
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -320,7 +319,7 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
 
                             {(loadingSave)
                                 ? <Typography>
-                                   -
+                                    -
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
@@ -382,13 +381,13 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
 
                             {(loadingSave)
                                 ? <Typography>
-                                    -
+                                    {getVit_C(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
                             {(loadingSave)
                                 ? <Typography>
-                                    -
+                                    {reporte?.acido_folico}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
                         </Stack>

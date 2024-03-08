@@ -38,7 +38,7 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                 {/* <Grid item display='block' sx={{ marginTop: '30px', marginBottom: '15px', width: '40%', paddingLeft:'0' }}> */}
                 <Stack width='100%' direction={'row'} justifyContent={'space-between'} overflow={'scroll'} spacing={2}>
 
-                    <Stack direction={'column'} minWidth={'150px'} maxWidth={'220px'}>
+                    <Stack direction={'column'} minWidth={'220px'} maxWidth={'220px'}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingBottom: '15px' }}>Macronutrientes</Typography>
                         {/* <Box sx={{ justifyContent: 'start' }} >
                             <ul style={{}}>

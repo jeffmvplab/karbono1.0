@@ -93,13 +93,13 @@ export class UserUseCases implements IUserUseCase {
 
     invitarUsuarios(
         roles: string,
-        central_de_mezclas: string,
+        // central_de_mezclas: string,
         email: string,
         nombre_apellidos:string,
     ): Promise<any> {
         return this.userRepository.invitarUsuarios(
             roles,
-            central_de_mezclas,
+            // central_de_mezclas,
             email,
             nombre_apellidos
         );

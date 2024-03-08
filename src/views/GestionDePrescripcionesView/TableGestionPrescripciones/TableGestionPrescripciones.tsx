@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Alert, Avatar, Box, Button, CircularProgress, Modal, Skeleton, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Skeleton, Stack, Typography } from '@mui/material';
 import { colorsKarbono } from '@/themes/colors';
 import { IPrescriptions } from '@/domain/models/prescriptions.model';
 
@@ -8,42 +8,41 @@ import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { getColorForState } from '@/utilities/getColorByState';
 import { localeTextDataGrid } from '@/utilities/constants/loacaleTextGrid';
 
-import { IoCopyOutline } from "react-icons/io5";
-import { IoCreateOutline } from "react-icons/io5";
+
 import { IoEyeOutline } from "react-icons/io5";
-import { IoPrintOutline } from "react-icons/io5";
-import { IoTrashOutline } from "react-icons/io5";
-import { convertirAPDF } from '@/utilities/view_pdf_convert';
-import PDFPrescriptionComponent from '@/views/ReportePrescripcion/components/PDFPrescriptionComponent';
-import CloseIcon from '@mui/icons-material/Close';
+
 import { FormulariosContext } from '@/views/Formulario/context/FormulariosContext';
-import { CustomButton } from '@/components/CustomButton';
-import Image from 'next/image'
 import { convertirFecha } from '@/utilities/get_String_from_Date_Esp';
 import { PrescripcionContext } from '@/views/PrescripcionView/context/PrescripcionContext';
+import { PDFModal } from '@/components/PDFModal';
+import { IoPrintOutline } from "react-icons/io5";
 
 export interface TableGestionPrescripcionesProps { }
 
 const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = () => {
 
 	const { getAll, reportes, loadingGet, loadingApi, goEdit, goReporte } = useContext(PrescripcionContext);
-	const { copyPrescriptions, loadingSave, messageAPI, setMessageAPI, borrarPrescriptions } = useContext(FormulariosContext);
+	const {loadingSave, messageAPI, setMessageAPI} = useContext(FormulariosContext);
 
 	const [page, setPage] = useState<number>();
-	const pag: number = 15;
-
+	
 	const handlePageChange = (params: any) => {
 		setPage(params)
 		console.log('Params:', params)
 	}
 
-	
+	const [open, setOpen] = React.useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+
+	const [selectReporte, setASelectReporte] = React.useState<IPrescriptions | undefined>();
+
 	useEffect(() => {
 		getAll();
 	}, [])
 
 	useEffect(() => {
-		if (loadingSave) {		
+		if (loadingSave) {
 			setMessageAPI('')
 			getAll()
 		}
@@ -59,7 +58,7 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 			headerClassName: 'table-color--header',
 			// cellClassName:'style-theme--cell',
 			flex: 1,
-			minWidth: 100,
+			minWidth: 250,
 			renderCell: (params: GridRenderCellParams) => (
 				<Button sx={{ fontFamily: typographyKarbono.outfit, fontSize: 12 }} variant='text'
 				>
@@ -152,8 +151,8 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
 		},
 		{
-			field: "prescriptor",
-			headerName: "preparador",
+			field: "preparador",
+			headerName: "Preparador",
 			headerClassName: 'table-color--header',
 			flex: 1,
 			minWidth: 80,
@@ -170,6 +169,7 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>
 				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goReporte(params.row.no_orden) }} />
+				< IoPrintOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpen() }} />
 			</Stack>)
 		},
 	];
@@ -179,6 +179,7 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 		(!loadingGet || !loadingApi)
 			? <Skeleton variant="rectangular" sx={{ marginX: '15px', borderRadius: '5px' }} width='100%' height={700} />
 			: <>
+				<PDFModal open={open} handleClose={handleClose} selectReporte={selectReporte} loadingApi={loadingApi} />
 				<Box
 					sx={{
 
@@ -205,27 +206,27 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 						}
 
 						{/* <div style={{ overflowX: 'auto' }}> */}
-							<DataGrid
-								// style={{ width: "100%"}}
-								sx={{
-									width: "100%",
-									borderRadius: '12px',
-									// '&:hover, &.Mui-hovered': { backgroundColor: 'rgb(0, 0,0,40%)' },
-									// '& .MuiDataGrid-row:hover': { backgroundColor: 'rgb(0,0,0,60%)' },
-									fontFamily: typographyKarbono.outfit
-								}}
-								rows={reportes ? reportes : []}
-								columns={columns}
-								initialState={{ pagination: { paginationModel: { pageSize: 15 } }, }}
-								localeText={localeTextDataGrid}
-								// disableColumnSelector
-								// cledisableRowSelectionOnClick
-								autoHeight
-								//  pageSizeOptions={[10,30,60]}
-								getRowId={(row: IPrescriptions) => row._id!}
-								onPaginationModelChange={(e) => { handlePageChange(e.page) }}
+						<DataGrid
+							// style={{ width: "100%"}}
+							sx={{
+								width: "100%",
+								borderRadius: '12px',
+								// '&:hover, &.Mui-hovered': { backgroundColor: 'rgb(0, 0,0,40%)' },
+								// '& .MuiDataGrid-row:hover': { backgroundColor: 'rgb(0,0,0,60%)' },
+								fontFamily: typographyKarbono.outfit
+							}}
+							rows={reportes ? reportes: []}
+							columns={columns}
+							initialState={{ pagination: { paginationModel: { pageSize: 15 } }, }}
+							localeText={localeTextDataGrid}
+							// disableColumnSelector
+							// cledisableRowSelectionOnClick
+							autoHeight
+							//  pageSizeOptions={[10,30,60]}
+							getRowId={(row: IPrescriptions) => row._id!}
+							onPaginationModelChange={(e) => { handlePageChange(e.page) }}
 
-							/>
+						/>
 						{/* </div> */}
 					</Stack>
 

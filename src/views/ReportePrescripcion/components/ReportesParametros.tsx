@@ -69,7 +69,7 @@ const ReportesParametros: React.FC<ReportesParametrosProps> = ({ reporte, loadin
                 <Grid item display='block' xs={12} sm={6}>
                     <Stack width={{ xs: '100%' }} direction={'row'} justifyContent={'space-between'} overflow={'scroll'}>
 
-                        <Stack direction={'column'} minWidth={'220px'}>
+                        <Stack direction={'column'} minWidth={'350px'}>
                             <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left',paddingLeft: '20px', }}>Parámetros Nutricionales</Typography>
                             <Box sx={{ justifyContent: 'start' }} >
                                 <ul style={{}}>
@@ -153,7 +153,7 @@ const ReportesParametros: React.FC<ReportesParametrosProps> = ({ reporte, loadin
                 <Grid item display='block' xs={12} sm={6}>
                     <Stack width={{ xs: '100%' }} direction={'row'} justifyContent={'space-between'} overflow={'scroll'}>
 
-                        <Stack direction={'column'} minWidth={'220px'}>
+                        <Stack direction={'column'} minWidth={'320px'}>
                             <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left',paddingLeft: '20px', }}>Parámetros Farmacéuticos</Typography>
                             <Box sx={{ justifyContent: 'start' }} >
                                 <ul style={{}}>

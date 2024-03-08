@@ -18,6 +18,7 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 
 	const { handleOffline } = useContext(GlobalContext)
 
+	const [print,setPrint]=useState(false);
 	/////////////////////////////HANDLE MODALS////////////////////
 	const [openModalDescargar, setOpenModalDescargar] = useState(false);
 	const handleOpenModalDescargar = () => { setOpenModalDescargar(true) };
@@ -117,6 +118,8 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 	return (
 
 		<ReportesContext.Provider value={{
+			print,setPrint,
+			
 			getPrescriptionsByNumber,
 			loadingSave,
 			saveOK,
