@@ -4,20 +4,21 @@ import { colorsKarbono } from '@/themes/colors';
 import { Stack, Grid, Box, Link, Typography, TextField, CircularProgress, Button, FormControlLabel, Checkbox, MenuItem } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { typographyKarbono } from '@/themes/typography';
-import { instituciones } from '@/views/ReportePrescripcion/data/instituciones';
+import { centrales_de_mezclas, instituciones } from '@/views/ReportePrescripcion/data/instituciones';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ReCAPTCHAComponent from '../reCAPTCHA/reCAPTACHA';
 import { StorageKeysEnum } from '@/utilities/enums';
 import { LocalStorageProtocol } from '@/protocols/cache/local_cache';
 import { useRouter } from 'next/router';
+import { RolUsersKeysEnum } from '@/utilities/enums/rol_user_keys.enum';
 
 export interface AuthRegisterFormProps { }
 
 const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 
 	const {
-		login, register,registerByInvitation, loadingAuth,
+		login, register, registerByInvitation, loadingAuth,
 		email, setEmail, errorEmail, handleEmail,
 		name, handleName,
 		phone, errorPhone, handlePhone,
@@ -34,6 +35,9 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 
 		entidadDeSalud,
 		handleEntidadDeSalud,
+
+		centralDeMezclas, handleCentralDeMezclas,
+
 		politica_de_privacidad, handlePolitica, handleTipo, tipoCliente,
 		captcha, rol, setRol
 	} = React.useContext(GlobalContext)
@@ -58,6 +62,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 			console.log('QUERY:', query.query)
 			setEmail(userInv.email);
 			setNameYApellidos(userInv.nombre_apellidos);
+			// setRol(userInv.rol);
 			setRol(userInv.rol);
 		}
 	}, [])
@@ -70,44 +75,6 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 				justifyContent='center'
 				alignItems='center'
 			>
-				{/* <Grid item xs={12} paddingBottom={3}>
-					<Stack direction={'row'} spacing={4}>
-						<TextField
-							onChange={handleTipo}
-							value={tipoCliente}
-							label="Tipo de usuario"
-							placeholder='Tipo de usuario'
-							fullWidth
-							select
-							inputProps={{ style: { height: '15PX', } }}
-							sx={{
-								bgcolor: 'transparent',
-								"& .MuiInputBase-root": { borderRadius: '10px' },
-							}}
-						>
-
-							<MenuItem
-								style={{
-									background: "white",
-									color: "black",
-								}}
-								value={'Cliente'}
-							>
-								{'Cliente'}
-							</MenuItem>
-							<MenuItem
-								style={{
-									background: "white",
-									color: "black",
-								}}
-
-								value={'Empleados'}
-							>
-								{'Empleados'}
-							</MenuItem>
-						</TextField>
-					</Stack>
-				</Grid> */}
 
 				<Grid item xs={12} paddingBottom={3}>
 
@@ -127,25 +94,8 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 					/>
 				</Grid>
 
-				<Grid item xs={12} paddingBottom={3}>
-					<TextField
-						onChange={handleEmail}
-						value={email}
-						label="Correo electrónico"
-						type="email"
-						placeholder='Correo electrónico'
-						fullWidth
-						inputProps={{ style: { height: '15PX', } }}
-						sx={{
-							bgcolor: 'transparent',
-							"& .MuiInputBase-root": { borderRadius: '10px' },
-						}}
-					/>
-				</Grid>
-
-
-				<Grid item xs={12} paddingBottom={3}>
-					<Stack direction={'row'} spacing={4}>
+				{(rol === RolUsersKeysEnum.prescriptor||rol ==='')
+					&& <Grid item xs={12} paddingBottom={3}>
 						<TextField
 							onChange={handleRegistroMedico}
 							value={registroMedico}
@@ -159,6 +109,26 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 								"& .MuiInputBase-root": { borderRadius: '10px' },
 							}}
 						/>
+					</Grid>}
+
+
+				<Grid item xs={12} paddingBottom={3}>
+					<Stack direction={'row'} spacing={4}>
+
+						<TextField
+							onChange={handleEmail}
+							value={email}
+							label="Correo electrónico"
+							type="email"
+							placeholder='Correo electrónico'
+							fullWidth
+							inputProps={{ style: { height: '15PX', } }}
+							sx={{
+								bgcolor: 'transparent',
+								"& .MuiInputBase-root": { borderRadius: '10px' },
+							}}
+						/>
+
 
 						<TextField
 							onChange={handlePhone}
@@ -268,40 +238,78 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 					</Stack>
 				</Grid>
 
-				{(tipoCliente === 'Cliente') && <Grid item xs={12} paddingBottom={3}>
-					<Stack direction={'row'} spacing={4}>
-						<TextField
-							onChange={handleEntidadDeSalud}
-							value={entidadDeSalud}
-							label="Entidad de salud"
-							type="text"
-							placeholder='Entidad de salud'
-							fullWidth
-							select
-							inputProps={{ style: { height: '15PX', } }}
-							sx={{
-								bgcolor: 'transparent',
-								"& .MuiInputBase-root": { borderRadius: '10px' },
-							}}
-						>
-							{instituciones.map((option) => (
-								<MenuItem
-									style={{
-										background: "white",
-										color: "black",
+				{
+					(rol === RolUsersKeysEnum.prescriptor||rol ==='')
+						? <Grid item xs={12} paddingBottom={3}>
+							<Stack direction={'row'} spacing={4}>
+								<TextField
+									onChange={handleEntidadDeSalud}
+									value={entidadDeSalud}
+									label="Entidad de salud"
+									type="text"
+									placeholder='Entidad de salud'
+									fullWidth
+									select
+									inputProps={{ style: { height: '15PX', } }}
+									sx={{
+										bgcolor: 'transparent',
+										"& .MuiInputBase-root": { borderRadius: '10px' },
 									}}
-									key={option.value}
-									value={option.label}
 								>
-									{option?.label!}
-								</MenuItem>
-							))}
-						</TextField>
-					</Stack>
-					<Stack direction={'row'} paddingY={3}>
-						<ReCAPTCHAComponent />
-					</Stack>
-				</Grid>}
+									{instituciones.map((option) => (
+										<MenuItem
+											style={{
+												background: "white",
+												color: "black",
+											}}
+											key={option.value}
+											value={option.label}
+										>
+											{option?.label!}
+										</MenuItem>
+									))}
+								</TextField>
+							</Stack>
+							<Stack direction={'row'} paddingY={3}>
+								<ReCAPTCHAComponent />
+							</Stack>
+						</Grid>
+						: <Grid item xs={12} paddingBottom={3}>
+							<Stack direction={'row'} spacing={4}>
+								<TextField
+									onChange={handleCentralDeMezclas}
+									value={centralDeMezclas}
+									label="Nombre de Central de Mezclas"
+									type="text"
+									placeholder='Nombre de Central de Mezclas'
+									fullWidth
+									select
+									inputProps={{ style: { height: '15PX', } }}
+									sx={{
+										bgcolor: 'transparent',
+										"& .MuiInputBase-root": { borderRadius: '10px' },
+									}}
+								>
+									{centrales_de_mezclas.map((option) => (
+										<MenuItem
+											style={{
+												background: "white",
+												color: "black",
+											}}
+											key={option.value}
+											value={option.label}
+										>
+											{option?.label!}
+										</MenuItem>
+									))}
+								</TextField>
+							</Stack>
+							<Stack direction={'row'} paddingY={3}>
+								<ReCAPTCHAComponent />
+							</Stack>
+						</Grid>
+
+				}
 
 				<FormControlLabel
 					control={<Checkbox checked={politica_de_privacidad} onChange={handlePolitica} />}
@@ -350,8 +358,8 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 							onClick={() => {
 
 								query.query === 'invitación'
-								?registerByInvitation()
-								: register((rol === '' || rol === null || rol === undefined)
+									? registerByInvitation()
+									: register((rol === '' || rol === null || rol === undefined)
 										? "Administrador"
 										: rol
 									)

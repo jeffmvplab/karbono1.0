@@ -26,6 +26,10 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 	const [caducidad, setCaducidad] = useState('');
 	const [instalado, setInstalado] = useState('');
 
+	const fechaActual = new Date();
+	fechaActual.setDate(fechaActual.getDate() + 2);
+	const fechaConAdelantoISOString = fechaActual.toISOString();
+
 	// const CustomTextField = styled(TextField)({
 	// 	// '& .MuiInput-underline:before': {
 	// 	// 	borderBottom: 'none',
@@ -249,27 +253,35 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 									}}
 								>
 									<Stack width={'100%'} direction={'column'} alignItems={'start'} padding={2} spacing={1}>
-										<Typography fontSize='16px' color={colorsKarbono.primary} fontWeight={700} textAlign={"center"} paddingY={2}>
-											VOLUMEN (ml)
-										</Typography>
 
-										<ContainerText isUpper title="OMEGAVEN 10%" value={`${reporte?.omegaven!}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.lipidos!}`} value={`${reporte?.req_lipidos!}`} />
-										<ContainerText isUpper title="GLUTAMUNA DIPEPTIDO 20%" value={`${reporte?.dipeptiven!}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.aminoacidos!}`} value={`${reporte?.req_aminoacidos!}`} />
+										<Stack width={'100%'} direction={'row'} justifyContent={'space-between'} paddingY={2}>
+											<Typography fontSize='16px' color={colorsKarbono.primary} fontWeight={700} textAlign={"center"} >
+												VOLUMEN
+											</Typography>
+											<Typography fontSize='16px' color={colorsKarbono.primary} fontWeight={700} paddingRight={2} >
+												(ml)
+											</Typography>
+										</Stack>
+
+										<ContainerText isUpper title="OMEGAVEN 10%" value={`${getOmegaven(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.lipidos!}`} value={`${getLipidos(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper title="GLUTAMINA DIPEPTIDO 20%" value={`${getDipeptiven(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.aminoacidos!}`} value={`${getAminoacidos(reporte!).volumen.toFixed(2)}`} />
 										<ContainerText isUpper title="DEXTROSA 50%" value={`${reporte?.dextrosa!}`} />
-										<ContainerText isUpper title="AGUA ESTERIL" value={`${getAgua(reporte!).volumen}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.fosfato!}`} value={`${reporte?.req_fosfato!}`} />
+										<ContainerText isUpper title="AGUA ESTERIL" value={`${getAgua(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.fosfato!}`} value={`${getFosforo(reporte!).volumen.toFixed(2)}`} />
 										<ContainerText isUpper transform="uppercase" title={`${reporte?.elementos_traza!}`} value={`${reporte?.req_elementos_traza!}`} />
-										<ContainerText isUpper title="CLORURO DE SODIO 2 MEQ/ML" value={`${getSodio(reporte!).requerimiento.toFixed(2)}`} />
-										<ContainerText isUpper title="CLORURO DE POTACIO 2 MEQ/ML" value={`${getPotacio(reporte!).requerimiento.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.magnesio!}`} value={`${getMagnesio(reporte!).requerimiento.toFixed(2)}`} />
-										<ContainerText isUpper title="SOLUVIT_VITALIPID" value={`${reporte?.soluvit_vitalip}`} />
-										<ContainerText isUpper title="VITALIPID" value={`${getVitLiposSolubles(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper title="CLORURO DE SODIO 2 MEQ/ML" value={`${getSodio(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper title="CLORURO DE POTACIO 2 MEQ/ML" value={`${getPotacio(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.magnesio!}`} value={`${getMagnesio(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper title="SOLUVIT_VITALIPID" value={`${getSoluv_Vit(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper title={(reporte?.tipo_paciente === 'Adulto')
+											? 'VITALIPID ADULT'
+											: 'VITALIPID INFANT'} value={`${getVitLiposSolubles(reporte!).volumen.toFixed(2)}`} />
 										<ContainerText isUpper transform="uppercase" title={`${reporte?.vit_hidrosolubles!}`} value={`${getVitHidroSolubles(reporte!).volumen.toFixed(2)}`} />
 										<ContainerText isUpper title="VITAMINA C" value={`${getVit_C(reporte!).volumen}`} />
 										<ContainerText isUpper title="ACIDO FOLICO" value={`${reporte?.acido_folico}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.calcio!}`} value={`${getCalcio(reporte!).requerimiento.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.calcio!}`} value={`${getCalcio(reporte!).volumen.toFixed(2)}`} />
 
 									</Stack>
 								</Box>
@@ -285,10 +297,14 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 									}}
 								>
 									<Stack width={'100%'} direction={'column'} alignItems={'start'} padding={3} spacing={1}>
-										<Typography fontSize='16px' color={colorsKarbono.primary} fontWeight={700} textAlign={"center"} paddingY={2}>
-											PARÁMETROS NUTRICIONALES
-										</Typography>
-
+										<Stack width={'100%'} direction={'row'} justifyContent={'space-between'} paddingY={2}>
+											<Typography fontSize='16px' color={colorsKarbono.primary} fontWeight={700} textAlign={"center"} >
+												PARÁMETROS NUTRICIONALES
+											</Typography>
+											<Typography fontSize='16px' color={colorsKarbono.primary} fontWeight={700} paddingRight={3} >
+												(ml)
+											</Typography>
+										</Stack>
 										<ContainerText isUpper title="Calorías Totales" value={`${getCalTotales(reporte!).volumen.toFixed(2)}`} />
 										<ContainerText isUpper title="Calorías Totales/kg/día" value={`${getCalTotalesKgDia(reporte!).volumen.toFixed(2)}`} />
 										<ContainerText isUpper title="Gramos totales de Nitrógeno" value={`${getGramosTotalesNitro(reporte!).volumen.toFixed(2)}`} />
@@ -342,7 +358,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 										<ContainerText isUpper title="Osmolaridad (mOsm/L)" value={`${getOsmolaridad(reporte!).volumen.toFixed(2)}`} />
 									</Box>
 									<Box width={'100%'} paddingY={1}>
-										<ContainerText isUpper title="Factor de precipitación" value={`${alertFactorDePrecipitacion(reporte!).value}`} />
+										<ContainerText isUpper title="Factor de precipitación" value={`${alertFactorDePrecipitacion(reporte!).alert}`} />
 									</Box>
 								</Grid>
 
@@ -372,10 +388,10 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 							<Stack direction={'row'}>
 								<Grid container spacing={10}>
 									<Grid item xs={6}>
-										<ContainerText isUpper title="REVISA:" color={colorsKarbono.primary} value={`${reporte?.controlador_de_calidad!}`} />
+										<ContainerText isUpper title="REVISA:" color={colorsKarbono.primary} value={reporte?.controlador_de_calidad ? `${reporte?.controlador_de_calidad!}` : '-'} />
 									</Grid>
 									<Grid item xs={6}>
-										<ContainerText isUpper title="PREPARA:" color={colorsKarbono.primary} value={`${reporte?.preparador!}`} />
+										<ContainerText isUpper title="PREPARA:" color={colorsKarbono.primary} value={reporte?.preparador ? `${reporte?.preparador!}` : '-'} />
 									</Grid>
 								</Grid>
 							</Stack>
@@ -415,13 +431,13 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 								<Grid item xs={6}>
 									<Stack height={'100%'} direction={'column'} justifyContent={'end'} spacing={1}>
 										<Box width={'100%'}>
-											<ContainerText isUpper title="D.E +3%:" color={colorsKarbono.primary} value={`${peso_teorico(reporte!) + (peso_teorico(reporte!) * 3 / 100)}`} />
+											<ContainerText isUpper title="D.E +3%:" color={colorsKarbono.primary} value={`${(peso_teorico(reporte!) + (peso_teorico(reporte!) * 3 / 100)).toFixed(2)}`} />
 										</Box>
 										<Box width={'100%'}>
-											<ContainerText isUpper title="D.E -3%:" color={colorsKarbono.primary} value={`${peso_teorico(reporte!) - (peso_teorico(reporte!) * 3 / 100)}`} />
+											<ContainerText isUpper title="D.E -3%:" color={colorsKarbono.primary} value={`${(peso_teorico(reporte!) - (peso_teorico(reporte!) * 3 / 100)).toFixed(2)}`} />
 										</Box>
 										<Box width={'100%'}>
-											<ContainerText isUpper title="Peso Teórico (g):" color={colorsKarbono.primary} value={`${peso_teorico(reporte!)}`} />
+											<ContainerText isUpper title="Peso Teórico (g):" color={colorsKarbono.primary} value={`${peso_teorico(reporte!).toFixed(2)}`} />
 										</Box>
 									</Stack>
 								</Grid>
@@ -464,13 +480,16 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 								<Typography width={'100%'} fontSize='14px' fontWeight={700} textAlign={"start"} paddingY={2}>
 									Fecha caducidad:
 								</Typography>
-								<TextField
+								<Typography sx={{ textDecoration: 'underline' }} width={'100%'} fontSize='14px' fontWeight={700} textAlign={"start"} paddingY={2}>
+									{convertirFecha(fechaConAdelantoISOString)}
+								</Typography>
+								{/* <TextField
 									sx={{ width: '100%' }}
 									variant="standard"
 									value={caducidad}
 									onChange={(e) => setCaducidad(e.target.value)}
 									type="text"
-								/>
+								/> */}
 							</Stack>
 						</Grid>
 						<Grid xs={4} item>

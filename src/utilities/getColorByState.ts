@@ -9,7 +9,7 @@ export function getColorForState(estado:'PENDIENTE FINALIZAR'| 'FINALIZADA'|'SOL
     case 'CALIDAD':
       return 'purple'; // Puedes asignar el color que desees
     case 'PRODUCCION':
-      return 'yellow'; // Puedes asignar el color que desees
+      return '#C7C425'; // Puedes asignar el color que desees
     case 'CANCELADA':
       return 'red';
     default:

@@ -422,9 +422,9 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	const invitarUsuarios = async () => {
 
 		setLoadingApi(true);
-		console.log('Invitando...:', userInv?.roles!, userInv?.central_mezcla!, userInv?.email!, userInv?.nombre_apellidos!)
+		console.log('Invitando...:', userInv?.roles!,  userInv?.email!, userInv?.nombre_apellidos!)
 
-		const resp = await useruseCase.invitarUsuarios(userInv?.roles!, userInv?.central_mezcla!, userInv?.email!, userInv?.nombre_apellidos!)
+		const resp = await useruseCase.invitarUsuarios(userInv?.roles!, userInv?.email!, userInv?.nombre_apellidos!)
 
 		console.log('RespApi:', resp)
 
@@ -721,6 +721,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	}
 
 	const updateMe = async () => {
+		
 		setLoadingAuth(true);
 		console.log('Upadate Me...', user)
 		const resp = await useruseCase.upadateMe(user!)

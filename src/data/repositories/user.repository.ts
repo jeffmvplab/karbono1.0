@@ -23,7 +23,7 @@ export interface IUserRepository {
 
     invitarUsuarios(
         roles: string,
-        central_de_mezclas: string,
+        // central_de_mezclas: string,
         email: string,
         nombre_apellidos:string
     ): Promise<any>;
@@ -147,7 +147,7 @@ export class UserRepository implements IUserRepository {
 
     async invitarUsuarios(
         roles: string,
-        central_de_mezclas: string,
+        // central_de_mezclas: string,
         email: string,
         nombre_apellidos:string
     ): Promise<any> {
@@ -158,7 +158,7 @@ export class UserRepository implements IUserRepository {
             body: {
                 "nombre_apellidos":nombre_apellidos,
                 "email": email,
-                "central_de_mezclas": central_de_mezclas,
+                // "central_de_mezclas": central_de_mezclas,
                 "roles":[roles],
             },
         });
@@ -267,7 +267,19 @@ export class UserRepository implements IUserRepository {
         const axiosRequest = await this.axiosHttpClient.request({
             url: ApiUrlsEnum.getMe,
             method: 'patch',
-            body:JSON.stringify(user),
+            body: {
+                "nombre_apellidos":user.nombre_apellidos,
+                "email": user.email,
+                "telefono": user.phone,
+                // "password": user.password,
+                "roles": user.roles,
+                "registro_medico": user.registro_medico,
+                "primer_nombre": user.primer_nombre,
+                "primer_apellido": user.primer_apellido,
+                "entidad_de_salud": user.entidad_de_salud,
+                "central_de_mezclas": user.central_de_mezclas,
+                "he_leido": user.he_leido
+            },
         });
 
         return axiosRequest.body;

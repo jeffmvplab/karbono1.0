@@ -1,5 +1,5 @@
 
-import { Typography, Grid, Stack, Card, Button, CircularProgress, Drawer, IconButton } from '@mui/material';
+import { Typography, Grid, Stack, Card, Drawer, IconButton } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { ReportesContext } from './context/ReportesContext';
 import { DescargarModal } from './components/Modals/DescargarModal';
@@ -7,8 +7,7 @@ import { OrdenarModal } from './components/Modals/OrdenarModal';
 import { CustomButton } from '@/components/CustomButton';
 import { colorsKarbono } from '@/themes/colors';
 import PDFPrescriptionComponent from './components/PDFPrescriptionComponent';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import TelegramIcon from '@mui/icons-material/Telegram';
+
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send'; import CustomTextField from '../Formulario/Components/CustomTextField';
 import { IComment } from '@/domain/models/observaciones.model';
@@ -23,6 +22,7 @@ import BarReporteNPT from './components/BarReporteNPT/BarReporteNPT';
 import BarReporteQF from './components/BarReporteQF/BarReporteQF';
 import BarReporteQF_Calidad from './components/BarReporteQF_Calidad/BarReporteQF_Calidad';
 import { RolUsersKeysEnum } from '@/utilities/enums/rol_user_keys.enum';
+import { convertirFecha } from '@/utilities/get_String_from_Date_Esp';
 
 
 
@@ -30,7 +30,7 @@ export interface ReportePrescripcionViewProps { }
 
 const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
-	const { getPrescriptionsByNumber, loadingSave, reporte, saveComments } = useContext(ReportesContext)
+	const { getPrescriptionsByNumber, loadingSave, reporte, saveComments, print } = useContext(ReportesContext)
 	const { getMeRol } = useContext(GlobalContext)
 
 	const [openDrawer, setOpenDrawer] = useState(false);
@@ -41,13 +41,13 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 		getPrescriptionsByNumber();
 		const rol = getMeRol()[0];
 		setRol(rol)
-		console.log('ROLLLL:', getMeRol()[0])
 	}, [])
 
 
 	const [isNew, setIsNew] = useState<boolean>(false);
 	const [newObs, setnewObs] = useState<string>();
 
+	console.log('ROLLLL:', getMeRol()[0], 'ESTADO :', reporte?.estado)
 	// 
 	return (
 		<>
@@ -57,8 +57,8 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 						{(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
 							? <BarReporteNPT />
 							: (getMeRol()[0] === RolUsersKeysEnum.preparador)
-								? <BarReporteQF />
-								: <BarReporteQF_Calidad />
+								? reporte?.estado === 'CALIDAD' ? <BarReporteQF /> : <BarReporteQF_Calidad />
+								: reporte?.estado === 'CALIDAD' ? <BarReporteQF /> : <BarReporteQF_Calidad />
 						}
 					</Card>
 
@@ -177,12 +177,11 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 						<Grid container sx={{ marginTop: '30px', marginBottom: { xs: '0px', md: '30px' } }} paddingBottom={'100px'} spacing={{ xs: 0, md: 2 }}>
 
-							<Grid item xs={12} lg={8} paddingX='15px'>
+							<Grid item xs={12} lg={10} paddingX='15px'>
 								<PDFPrescriptionComponent reporte={reporte} loading={loadingSave} />
 							</Grid>
 
-
-							<Grid item xs={12} lg={4} display={{ xs: 'none', md: 'block' }} paddingBottom={{ xs: '150px', md: '0' }}>
+							<Grid item xs={12} lg={2} display={{ xs: 'none', md: 'block' }} paddingBottom={{ xs: '150px', md: '0' }}>
 								<Card>
 									<Stack paddingX='15px' direction={'column'} minHeight={'50vh'} height={'100%'} overflow={'scroll'} alignItems={'center'}>
 										<Typography color={'#372FC6'} sx={{ fontWeight: 600, fontSize: '20px' }}>Observaciones y Cambios.</Typography>
@@ -292,7 +291,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 export default ReportePrescripcionView;
 
 export interface ContainerCommentsProps {
-	user?: string,
+	user?: any,
 	rol?: string,
 	date?: string,
 	content?: string
@@ -310,7 +309,7 @@ export const ContainerComments: React.FC<ContainerCommentsProps> = ({ user, rol,
 			}}>
 
 			<Typography color={'black'} sx={{ fontWeight: 500, fontSize: '14px', letterSpacing: '3%', lineHeight: '20px' }}>
-				{user}-{rol}-{date}
+				{user?.nombre_apellidos!}-{rol}-{convertirFecha(date)}
 			</Typography>
 
 			<Typography color={' #656474'} sx={{ fontWeight: 500, fontSize: '14px', letterSpacing: '3%', lineHeight: '20px' }}>

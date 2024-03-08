@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Alert, Avatar, Box, Button, CircularProgress, Modal, Skeleton, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Skeleton, Stack, Typography } from '@mui/material';
 import { colorsKarbono } from '@/themes/colors';
 import { PrescripcionContext } from '../../context/PrescripcionContext';
 import { IPrescriptions } from '@/domain/models/prescriptions.model';
@@ -14,14 +14,11 @@ import { IoCreateOutline } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoPrintOutline } from "react-icons/io5";
 import { IoTrashOutline } from "react-icons/io5";
-import { convertirAPDF } from '@/utilities/view_pdf_convert';
-import PDFPrescriptionComponent from '@/views/ReportePrescripcion/components/PDFPrescriptionComponent';
-import CloseIcon from '@mui/icons-material/Close';
 import { FormulariosContext } from '@/views/Formulario/context/FormulariosContext';
-import { CustomButton } from '@/components/CustomButton';
-import Image from 'next/image'
 import { convertirFecha } from '@/utilities/get_String_from_Date_Esp';
-import { GlobalContext } from '@/context/GlobalContext';
+import { PDFModal } from '@/components/PDFModal';
+import { CopyPresciptionModal } from '@/components/CopyPresciptionModal';
+import { DeleteModal } from '@/components/DeleteModal';
 
 
 export interface TableReportesProps { }
@@ -52,219 +49,6 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 	const handleCloseDelete = () => setOpenDelete(false);
 
 	const [selectReporte, setASelectReporte] = React.useState<IPrescriptions | undefined>();
-
-	function PDFModal() {
-
-		const style = {
-			position: 'absolute' as 'absolute',
-			top: '50%',
-			left: '50%',
-			transform: 'translate(-50%, -50%)',
-			width: '90%',
-			bgcolor: 'background.paper',
-			border: '2px solid #000',
-			boxShadow: 24,
-			p: 4,
-			maxHeight: '70vh', // Agregar altura máxima y desplazamiento vertical
-			overflowY: 'auto',
-		};
-
-		return (
-			<div>
-				<Modal
-					open={open}
-					onClose={handleClose}
-					aria-labelledby="modal-modal-title"
-					aria-describedby="modal-modal-description"
-				><>
-						<Stack sx={{
-							zIndex: '999',
-							position: 'absolute',
-							top: '15%',
-							left: '85%',
-							transform: 'translate(-50%, -50%)',
-						}} direction={'row'} spacing={2}>
-
-							<Avatar
-								sx={{
-									border: '2px solid black',
-									background: 'white',
-									width: '50px',
-									height: '50px'
-								}}>
-								<Button onClick={handleClose}>
-									< IoPrintOutline style={{ color: 'black', fontSize: 24 }} onClick={() => { convertirAPDF('reporte_view', selectReporte!.nombre_paciente) }} />
-								</Button>
-							</Avatar>
-
-							<Avatar
-								sx={{
-									border: '2px solid black',
-									background: 'red',
-									width: '50px',
-									height: '50px'
-								}}>
-								<Button onClick={handleClose}>
-									<CloseIcon sx={{ color: 'white' }} />
-								</Button>
-							</Avatar>
-						</Stack>
-
-
-						<Stack sx={style} bgcolor={'white'}>
-							<PDFPrescriptionComponent reporte={selectReporte} loading={loadingApi} />
-						</Stack>
-					</>
-
-				</Modal>
-			</div>
-		);
-	}
-
-
-	function CopyPresciptionModal() {
-
-		const style = {
-			position: 'absolute' as 'absolute',
-			top: '30%',
-			left: '50%',
-			transform: 'translate(-50%, -50%)',
-			width: '300px',
-			bgcolor: 'background.paper',
-			border: '2px solid #000',
-			boxShadow: 24,
-			p: 4,
-			minHeight: '200px', // Agregar altura máxima y desplazamiento vertical
-			overflowY: 'auto',
-		};
-
-		return (
-			<div>
-				<Modal
-					open={openCopy}
-					onClose={handleCloseCopy}
-					aria-labelledby="modal-modal-title"
-					aria-describedby="modal-modal-description"
-				><>
-						<Stack direction={'column'} borderRadius={'10px'} sx={style} bgcolor={'white'} alignItems={'center'}>
-							<Image width={30} height={30} src={'/assets/alerta.png'} alt={''} ></Image>
-							<Typography color={colorsKarbono.secundary} fontWeight={700} textAlign={'center'}>
-								¿Deseas crear una copia
-								de esta prescripción?
-							</Typography>
-						</Stack>
-
-						<Stack sx={{
-							position: 'absolute' as 'absolute',
-							top: '35%',
-							left: '50%',
-							transform: 'translate(-50%, -50%)',
-						}}
-							direction={'row'} spacing={3}>
-							<CustomButton
-								onClick={() => { handleCloseCopy() }}
-								height={40}
-								width={100}
-								text={'Descartar'}
-								sx={{ borderRadius: '10px' }}
-								color={colorsKarbono.secundary}
-								textColor='white'
-							/>
-
-							<CustomButton
-								onClick={() => copyPrescriptions(selectReporte)}
-								height={40}
-								sx={{ borderRadius: '10px' }}
-								color={'#2B8E12'}
-								textColor='white'
-								text={(loadingSave) ? 'Si,crear' : 'Copiando...'}
-								width={(loadingSave) ? 130 : 130}
-								endIcon={
-									(loadingSave)
-										? <></>
-										: <CircularProgress sx={{ color: 'white' }} variant='indeterminate' size='30px' />} />
-
-
-						</Stack>
-					</>
-
-				</Modal>
-			</div>
-		);
-	}
-
-
-	function DeleteModal() {
-
-		const style = {
-			position: 'absolute' as 'absolute',
-			top: '30%',
-			left: '50%',
-			transform: 'translate(-50%, -50%)',
-			width: '340px',
-			bgcolor: 'background.paper',
-			border: '2px solid #000',
-			boxShadow: 24,
-			p: 4,
-			minHeight: '200px', // Agregar altura máxima y desplazamiento vertical
-			overflowY: 'auto',
-		};
-
-		return (
-			<div>
-				<Modal
-					open={openDelete}
-					onClose={handleCloseDelete}
-					aria-labelledby="modal-modal-title"
-					aria-describedby="modal-modal-description"
-				><>
-
-						<Stack direction={'column'} borderRadius={'10px'} sx={style} bgcolor={'white'} alignItems={'center'}>
-							<Image width={30} height={30} src={'/assets/borrador.png'} alt={''} ></Image>
-							<Typography color={colorsKarbono.secundary} fontWeight={700} textAlign={'center'}>
-								¿Estás seguro de eliminar
-								la prescripción?
-							</Typography>
-						</Stack>
-
-						<Stack sx={{
-							position: 'absolute' as 'absolute',
-							top: '35%',
-							left: '50%',
-							transform: 'translate(-50%, -50%)',
-						}}
-							direction={'row'} spacing={3}>
-
-							<CustomButton
-								onClick={() => { borrarPrescriptions(selectReporte) }}
-								height={40}
-								sx={{ borderRadius: '10px' }}
-								color={' #C2C2C2'}
-								textColor='white'
-								text={(loadingSave) ? 'Si' : 'Borrando...'}
-								width={(loadingSave) ? 100 : 130}
-								endIcon={
-									(loadingSave)
-										? <></>
-										: <CircularProgress sx={{ color: 'white' }} variant='indeterminate' size='30px' />} />
-
-							<CustomButton
-								onClick={() => { handleCloseDelete() }}
-								height={40}
-								width={170}
-								text={'Seguir editando'}
-								sx={{ borderRadius: '10px' }}
-								color={'#2B8E12'}
-								textColor='white'
-							/>
-
-						</Stack>
-					</>
-
-				</Modal>
-			</div>
-		);
-	}
 
 	useEffect(() => {
 		getAll();
@@ -386,9 +170,9 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 		(!loadingGet || !loadingApi)
 			? <Skeleton variant="rectangular" sx={{ marginX: '15px', borderRadius: '5px' }} width='100%' height={700} />
 			: <>
-				<PDFModal />
-				<CopyPresciptionModal />
-				<DeleteModal />
+				<PDFModal open={open} handleClose={handleClose} selectReporte={selectReporte} loadingApi={loadingApi} />
+				<CopyPresciptionModal openCopy={openCopy} handleCloseCopy={handleCloseCopy} selectReporte={selectReporte} loadingApi={loadingApi} onClick={()=>copyPrescriptions(selectReporte)} loadingSave={undefined}  />
+				<DeleteModal openDelete={openDelete} handleCloseDelete={handleCloseDelete} selectReporte={selectReporte} loadingApi={loadingApi} onClick={()=> borrarPrescriptions(selectReporte) } loadingSave={loadingSave} />
 
 				<Box
 					sx={{

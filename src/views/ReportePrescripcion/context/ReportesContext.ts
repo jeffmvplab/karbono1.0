@@ -4,6 +4,8 @@ import { createContext, Dispatch, SetStateAction } from "react";
 
 
 interface ContextProps {
+    print: boolean,setPrint: React.Dispatch<React.SetStateAction<boolean>>,
+
     getPrescriptionsByNumber: () => void,
     loadingSave: boolean,
     saveOK: boolean,

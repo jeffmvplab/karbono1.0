@@ -15,7 +15,7 @@ export interface EquipoComonentProps { }
 const options = [
 	'Prescriptor',
 	'Preparador NPT',
-	'Control de calidad',
+	'Control de Calidad',
 	'Quitar del equipo'
 ];
 
@@ -250,7 +250,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 											</Grid>
 
 											<Grid item xs={12} sm={12} md={12} lg={2.5}>
-												<TextField
+												{/* <TextField
 													onChange={(e) => setUserInv({ ...userInv, central_mezcla: e.target.value })}
 													value={userInv?.central_mezcla}
 													label="Central de mezcla"
@@ -265,7 +265,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 														bgcolor: 'transparent',
 														"& .MuiInputBase-root": { borderRadius: '10px' },
 													}}
-												/>
+												/> */}
 											</Grid>
 
 											<Grid textAlign={'center'} item xs={12} sm={12} md={12} lg={2} sx={{ paddingTop: '15px' }}>
