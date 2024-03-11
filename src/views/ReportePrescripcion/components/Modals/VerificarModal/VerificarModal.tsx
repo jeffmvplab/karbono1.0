@@ -76,6 +76,7 @@ const VerificarModal: React.FC<OrdenarModalProps> = () => {
 									estado: StatePrescriptionKeysEnum.produccion,
 								}
 								saveComments(newComment)
+								handleCloseModalVerificar()
 							}}
 							height={40}
 							sx={{ borderRadius: '10px' }}

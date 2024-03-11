@@ -155,14 +155,14 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 
 							<Grid item xs={4}>
 								<Stack direction={'column'}>
-									<ContainerText title="Peso" value={`${reporte?.peso!}`} />
+									<ContainerText title="Peso (Kg)" value={`${reporte?.peso!}`} />
 								</Stack>
 							</Grid>
 
 
 							<Grid item xs={4}>
 								<Stack direction={'column'}>
-									<ContainerText title="Edad" value={`${reporte?.edad!}`} />
+									<ContainerText title={`Edad (${reporte?.tipo_edad})`} value={`${reporte?.edad!}`}  />
 								</Stack>
 							</Grid>
 
@@ -226,24 +226,24 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 											</Typography>
 										</Stack>
 
-										<ContainerText isUpper title="OMEGAVEN 10%" value={`${getOmegaven(reporte!).volumen.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.lipidos!}`} value={`${getLipidos(reporte!).volumen.toFixed(2)}`} />
-										<ContainerText isUpper title="GLUTAMINA DIPEPTIDO 20%" value={`${getDipeptiven(reporte!).volumen.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.aminoacidos!}`} value={`${getAminoacidos(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper title="OMEGAVEN 10%" value={`${getOmegaven(reporte!).conPurga.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.lipidos!}`} value={`${getLipidos(reporte!).conPurga.toFixed(2)}`} />
+										<ContainerText isUpper title="GLUTAMINA DIPEPTIDO 20%" value={`${getDipeptiven(reporte!).conPurga.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.aminoacidos!}`} value={`${getAminoacidos(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper title="DEXTROSA 50%" value={`${reporte?.dextrosa!}`} />
-										<ContainerText isUpper title="AGUA ESTERIL" value={`${getAgua(reporte!).volumen.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.fosfato!}`} value={`${getFosforo(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper title="AGUA ESTERIL" value={`${getAgua(reporte!).conPurga.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.fosfato!}`} value={`${getFosforo(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper transform="uppercase" title={`${reporte?.elementos_traza!}`} value={`${reporte?.req_elementos_traza!}`} />
-										<ContainerText isUpper title="CLORURO DE SODIO 2 MEQ/ML" value={`${getSodio(reporte!).volumen.toFixed(2)}`} />
-										<ContainerText isUpper title="CLORURO DE POTACIO 2 MEQ/ML" value={`${getPotacio(reporte!).volumen.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.magnesio!}`} value={`${getMagnesio(reporte!).volumen.toFixed(2)}`} />
-										<ContainerText isUpper title="SOLUVIT_VITALIPID" value={`${getSoluv_Vit(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper title="CLORURO DE SODIO 2 MEQ/ML" value={`${getSodio(reporte!).conPurga.toFixed(2)}`} />
+										<ContainerText isUpper title="CLORURO DE POTACIO 2 MEQ/ML" value={`${getPotacio(reporte!).conPurga.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.magnesio!}`} value={`${getMagnesio(reporte!).conPurga.toFixed(2)}`} />
+										<ContainerText isUpper title="SOLUVIT_VITALIPID" value={`${getSoluv_Vit(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper title={(reporte?.tipo_paciente === 'Adulto')
 											? 'VITALIPID ADULT'
-											: 'VITALIPID INFANT'} value={`${getVitLiposSolubles(reporte!).volumen.toFixed(2)}`} />										<ContainerText isUpper transform="uppercase" title={`${reporte?.vit_hidrosolubles!}`} value={`${getVitHidroSolubles(reporte!).volumen.toFixed(2)}`} />
-										<ContainerText isUpper title="VITAMINA C" value={`${getVit_C(reporte!).volumen}`} />
+											: 'VITALIPID INFANT'} value={`${getVitLiposSolubles(reporte!).conPurga.toFixed(2)}`} />										<ContainerText isUpper transform="uppercase" title={`${reporte?.vit_hidrosolubles!}`} value={`${getVitHidroSolubles(reporte!).conPurga.toFixed(2)}`} />
+										<ContainerText isUpper title="VITAMINA C" value={`${getVit_C(reporte!).conPurga}`} />
 										<ContainerText isUpper title="ACIDO FOLICO" value={`${reporte?.acido_folico}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.calcio!}`} value={`${getCalcio(reporte!).volumen.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.calcio!}`} value={`${getCalcio(reporte!).conPurga.toFixed(2)}`} />
 
 									</Stack>
 								</Box>
@@ -263,9 +263,9 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 
 										</Typography>
 
-										<ContainerText isUpper title="Peso Máximo (+3%)" value={`${(peso_teorico(reporte!) + (peso_teorico(reporte!) * 3 / 100)).toFixed(2)}`} />
-										<ContainerText isUpper title="Peso teórico" value={`${peso_teorico(reporte!).toFixed(2)}`} />
-										<ContainerText isUpper title="Peso Mínimo (-3%)" value={`${(peso_teorico(reporte!) - (peso_teorico(reporte!) * 3 / 100)).toFixed(2)}`} />
+										<ContainerText isUpper title="Peso Máximo  (+3%)" value={`${(peso_teorico(reporte!) + (peso_teorico(reporte!) * 3 / 100)).toFixed(2)}`} />
+										<ContainerText isUpper title="Peso teórico " value={`${peso_teorico(reporte!).toFixed(2)}`} />
+										<ContainerText isUpper title="Peso Mínimo  (-3%)" value={`${(peso_teorico(reporte!) - (peso_teorico(reporte!) * 3 / 100)).toFixed(2)}`} />
 
 
 										<Stack width={'100%'} direction={'row'} justifyContent={'space-between'}>

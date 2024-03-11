@@ -307,7 +307,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		if (resp.statusCode === 201) {
 			localStorageProtocol.set(StorageKeysEnum.user, resp.body);
 			Cookies.set(CookiesKeysEnum.token, resp.body.token, { sameSite: 'Strict' })
-			Cookies.set(CookiesKeysEnum.userName, resp.body.email, { sameSite: 'Strict' })
+			Cookies.set(CookiesKeysEnum.userName, resp.body.nombre_apellidos, { sameSite: 'Strict' })
 		}
 
 		setLoadingAuth(false);
@@ -378,7 +378,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			if (resp.body === undefined) {
 				localStorageProtocol.set(StorageKeysEnum.user, resp);
 				Cookies.set(CookiesKeysEnum.token, resp.token, { sameSite: 'Strict' })
-				Cookies.set(CookiesKeysEnum.userName, resp.userName, { sameSite: 'Strict' })
+				Cookies.set(CookiesKeysEnum.userName, resp.body.nombre_apellidos, { sameSite: 'Strict' })
 
 				router.push(mainRoutes.login);
 			}

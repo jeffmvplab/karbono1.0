@@ -18,9 +18,9 @@ export const correccionPurga = (prescription: IPrescriptions) => {
 
     const volTotalNPT: number = prescription?.volumen;
     const purga: number = prescription?.overfill;
-    const correccion: number = ((volTotalNPT + purga) / volTotalNPT)
+    const correccion: number = ((volTotalNPT + purga) / volTotalNPT)?((volTotalNPT + purga) / volTotalNPT):1
 
-    //  console.log('Overfill:', correccion)
+  console.log('Overfill:', correccion)
     return correccion;
 
 }
