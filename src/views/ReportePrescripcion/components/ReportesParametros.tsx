@@ -272,7 +272,7 @@ const ReportesParametros: React.FC<ReportesParametrosProps> = ({ reporte, loadin
                                             {alertFactorDePrecipitacion(reporte!).value.toFixed(2)}
                                         </Typography> */}
                                         <Typography color={alertFactorDePrecipitacion(reporte!).alert === 'REVISAR' ? 'red' : 'green'}>
-                                            {alertFactorDePrecipitacion(reporte!).alert}
+                                            {alertFactorDePrecipitacion(reporte!).alert?alertFactorDePrecipitacion(reporte!).alert:'-'}
                                         </Typography>
                                     </Stack>
                                     : <Skeleton animation="wave" height={30} width="40%" />}

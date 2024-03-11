@@ -1,3 +1,3 @@
 export * from './TarjetaProycon';
-export * from './TarjetaPareinf';
+export * from './TarjetaPar';
 export * from './TarjetaAyudas';
