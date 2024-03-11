@@ -16,8 +16,6 @@ const sx = {
 	textTransform: 'capitalize', 
 };
 
-
-
 interface EditCampos {
 	editInstitucion?: boolean,
 	editEmail?: boolean,

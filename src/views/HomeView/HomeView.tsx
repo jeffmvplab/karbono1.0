@@ -1,14 +1,16 @@
 // 'use client';
 
 import React, { useContext, useEffect, useState } from 'react';
-import TarjetaProycon from './components/TarjetaProycon';
-import TarjetaPareinf from './components/TarjetaPareinf';
-import TarjetaAyudas from './components/TarjetaAyudas';
-import { Stack, Typography } from '@mui/material';
+import { Grid, Stack, Typography } from '@mui/material';
 import Cookies from "js-cookie";
 import { CookiesKeysEnum, StorageKeysEnum } from '@/utilities/enums';
 import { GlobalContext } from '@/context/GlobalContext';
 import { RolUsersKeysEnum } from '@/utilities/enums/rol_user_keys.enum';
+import TarjetaPres from './components/TarjetaPres';
+import TarjetaInf from './components/TarjetaInf';
+import TarjetaAyudas from './components/TarjetaAyudas';
+import TarjetaConf from './components/TarjetaConf';
+import TarjetaPar from './components/TarjetaPar';
 // import { LocalStorageProtocol } from "@/protocols/cache/local_cache";
 
 
@@ -17,13 +19,12 @@ export interface HomeViewProps { }
 
 const HomeView: React.FC<HomeViewProps> = () => {
 
-	const [email, setEmail] = useState('');
-
 	const { getMeRol } = useContext(GlobalContext)
+	const [name, setName] = useState('');
 
 	useEffect(() => {
-		const email = Cookies.get(CookiesKeysEnum.userName) ? Cookies.get(CookiesKeysEnum.userName) : ''
-		setEmail(email!)
+		const name = Cookies.get(CookiesKeysEnum.userName) ? Cookies.get(CookiesKeysEnum.userName) : ''
+		setName(name!)
 	}, [])
 	// const localStorage = new LocalStorageProtocol();
 	// let email=localStorage.get(StorageKeysEnum.user) ? localStorage.get(StorageKeysEnum.user).email : '';
@@ -52,15 +53,22 @@ const HomeView: React.FC<HomeViewProps> = () => {
 							textAlign: 'left',
 						}}
 					>
-						Bienvenido, {email}.
+						Bienvenido, {name ? name : ''}.
 					</Typography>
+					<Grid container>
+						<TarjetaPres />
+						<TarjetaConf />
+					</Grid>
 
-					<TarjetaProycon />
+					<Grid container>
+						{Array.isArray(getMeRol()) && getMeRol()[0] !== RolUsersKeysEnum.prescriptor
+							&&
+							<TarjetaPar />
+						}
+						<TarjetaInf />
 
-					{Array.isArray(getMeRol())&&getMeRol()[0] !== RolUsersKeysEnum.prescriptor 
-						&& < TarjetaPareinf />}
-
-					<TarjetaAyudas />
+						<TarjetaAyudas />
+					</Grid>
 				</Stack >}
 		</>
 

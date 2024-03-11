@@ -83,7 +83,6 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 					aria-labelledby="modal-modal-title"
 					aria-describedby="modal-modal-description"
 				><>
-
 						<Stack direction={'column'} borderRadius={'10px'} sx={style} bgcolor={'white'} alignItems={'center'}>
 							<Image width={30} height={30}
 								src={errorApi
@@ -147,11 +146,10 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 						<Stack direction={'row'} justifyContent={{ xs: 'center', md: 'space-between' }}>
 							<Stack direction={'column'} spacing={2}>
 								<Typography color={'white'} fontSize={14} fontWeight={300}>
-									Invitar a las personas con las que trabajas
+									Invita a unirse a las personas de tu equipo
 								</Typography>
-								<Typography color={'white'} fontSize={14} fontWeight={500}>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-								</Typography>
+								<Typography color={'white'} fontSize={14} fontWeight={300}>
+									Invita a los prescriptores de NPT asignados por las IPS clientes, y a las personas que en tú CM cumplen la función de realizar el control de calidad y la preparación de NPTs.								</Typography>
 							</Stack>
 						</Stack>
 
@@ -235,7 +233,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 												>
 													{options.map((option) => (
 														<MenuItem
-														sx={{backgroundColor:'white'}}
+															sx={{ backgroundColor: 'white' }}
 															style={{
 																background: "white",
 																color: "black",
@@ -371,23 +369,23 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 											>
 												{options.map((option) => (
 													<MenuItem
-													sx={{backgroundColor:'white'}}
+														sx={{ backgroundColor: 'white' }}
 														key={option}
 														selected={option === user.roles}
 														onClick={
-															(option!=='Quitar del equipo')?async () => {
-															await updateMeEquipo(user?.email!, option, user?.group_admin!);
-															handleChangeRol(option, index);
-															getMeEquipo()
-															handleClose(index);
-														}
-													:async () => {
-														await updateMeEquipo(user?.email!, option, ' ');
-														handleChangeRol(option, index);
-														getMeEquipo()
-														handleClose(index);
-													}
-													}>
+															(option !== 'Quitar del equipo') ? async () => {
+																await updateMeEquipo(user?.email!, option, user?.group_admin!);
+																handleChangeRol(option, index);
+																getMeEquipo()
+																handleClose(index);
+															}
+																: async () => {
+																	await updateMeEquipo(user?.email!, option, ' ');
+																	handleChangeRol(option, index);
+																	getMeEquipo()
+																	handleClose(index);
+																}
+														}>
 														{option}
 													</MenuItem>
 												))}

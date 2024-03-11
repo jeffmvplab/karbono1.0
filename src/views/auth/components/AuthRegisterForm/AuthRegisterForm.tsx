@@ -67,6 +67,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 		}
 	}, [])
 	//////////////////////////////////////////////////////////////
+	console.log('REGISTER PAGE:','ROL:',rol)
 	return (
 
 		<Stack direction='column' alignItems='center'>
@@ -75,9 +76,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 				justifyContent='center'
 				alignItems='center'
 			>
-
 				<Grid item xs={12} paddingBottom={3}>
-
 
 					<TextField
 						onChange={handleNameYApellidos}
@@ -94,7 +93,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 					/>
 				</Grid>
 
-				{(rol === RolUsersKeysEnum.prescriptor||rol ==='')
+				{(rol === RolUsersKeysEnum.prescriptor)
 					&& <Grid item xs={12} paddingBottom={3}>
 						<TextField
 							onChange={handleRegistroMedico}
@@ -110,7 +109,6 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 							}}
 						/>
 					</Grid>}
-
 
 				<Grid item xs={12} paddingBottom={3}>
 					<Stack direction={'row'} spacing={4}>
@@ -239,7 +237,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 				</Grid>
 
 				{
-					(rol === RolUsersKeysEnum.prescriptor||rol ==='')
+					(rol === RolUsersKeysEnum.prescriptor)
 						? <Grid item xs={12} paddingBottom={3}>
 							<Stack direction={'row'} spacing={4}>
 								<TextField

@@ -133,8 +133,6 @@ export const alertFactorDePrecipitacion = (prescription: IPrescriptions) => {
     }
     // }
 
-
-
     const resp: IAlarm = { value: 0, alert: '' };
     resp.value = factor
 
@@ -151,10 +149,12 @@ export const alertFactorDePrecipitacion = (prescription: IPrescriptions) => {
         } else {
             resp.alert = 'REVISAR';
         }
+    }else{
+        resp.alert = 'REVISAR';
     }
 
+    console.log('factor:', resp)
     return resp;
-    // console.log('factor:',factor)
 }
 
 

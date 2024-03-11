@@ -18,7 +18,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 	const {
 		saveOK, loadingSave, messageAPI,
 		openModalFormSaved,
-		handleCloseModalFormSaved, valOKAlert, savePrescription,validateCampos
+		handleCloseModalFormSaved, valOKAlert, savePrescription, validateCampos
 	} = useContext(FormulariosContext)
 
 	const router = useRouter();
@@ -32,6 +32,8 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 		savePrescription(),
 			router.push(mainRoutes.reportePrescripcion)
 	}
+
+	console.log('MODAL:', saveOK, valOKAlert)
 
 	return (
 
@@ -111,7 +113,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 											: (messageAPI)
 												? 'El número de orden que esta tratando de guardar ya existe. Por favor escriba otro número de orden'
 												: messageAPI
-										: (saveStatus)?'Advertencia de envío.':'Error en la prescripción'}
+										: (saveStatus) ? 'Advertencia de envío.' : 'Error en la prescripción'}
 									</Typography >
 
 									{
@@ -143,11 +145,12 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 														? (saveOK)
 															? router.push(mainRoutes.reportePrescripcion)
 															: handleCloseModalFormSaved()
-														: (saveStatus) 
-														  ?validateCampos()
-														    ?handleCloseModalFormSaved()
-														    : saveAndNav() 
-														  : handleCloseModalFormSaved()
+														: (saveStatus)
+															? validateCampos()
+																? saveAndNav()
+																// ? handleCloseModalFormSaved()
+																: saveAndNav()
+															: handleCloseModalFormSaved()
 
 													handleCloseModalFormSaved()
 												}
