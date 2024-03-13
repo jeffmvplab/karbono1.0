@@ -36,76 +36,11 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
         const axiosRequest = await this.axiosHttpClient.request({
             url: ApiUrlsEnum.savePrescriptions,
             method: 'post',
-            body: {
-                "no_orden": prescriptions.no_orden,
-                "createdAt": prescriptions.createdAt,
-                "updatedAt": prescriptions.updatedAt,
-                "estado": prescriptions.estado,
-                "tipo_prescripcion": prescriptions.tipo_prescripcion,
-                "fecha": prescriptions.fecha,
-                "ips": prescriptions.ips,
-                "no_identificacion": prescriptions.no_identificacion,
-                "nombre_paciente": prescriptions.nombre_paciente,
-                "servicio": prescriptions.servicio,
-                "ubicacion": prescriptions.ubicacion,
-                "cama": prescriptions.cama,
-                "peso": prescriptions.peso,
-                "tipo_edad": prescriptions.tipo_edad,
-                "edad": prescriptions.edad,
-                "volumen": prescriptions.volumen,
-                "purga": prescriptions.purga,
-                "tiempo_infusion": prescriptions.tiempo_infusion,
-                "overfill": prescriptions.overfill,
-                "filtro": prescriptions.filtro,
-                "equipo_fotosensible": prescriptions.equipo_fotosensible,
-                "tipo_paciente": prescriptions.tipo_paciente,
-                "via_administracion": prescriptions.via_administracion,
-                "diagnostico": prescriptions.diagnostico,
-                "flujo_metabolico": prescriptions.flujo_metabolico,
-                "aminoacidos": prescriptions.aminoacidos,
-                "dextrosa": prescriptions.dextrosa,
-                "req_dextrosa": prescriptions.req_dextrosa,
-                "req_aminoacidos": prescriptions.req_aminoacidos,
-                "lipidos": prescriptions.lipidos,
-                "req_lipidos": prescriptions.req_lipidos,
-                "omegaven": prescriptions.omegaven,
-                "dipeptiven": prescriptions.dipeptiven,
-                "sodio_total": prescriptions.sodio_total,
-                "potasio_total": prescriptions.potasio_total,
-                "fosfato": prescriptions.fosfato,
-                "req_fosfato": prescriptions.req_fosfato,
-                "calcio": prescriptions.calcio,
-                "req_calcio": prescriptions.req_calcio,
-                "magnesio": prescriptions.magnesio,
-                "req_magnesio": prescriptions.req_magnesio,
-                "elementos_traza": prescriptions.elementos_traza,
-                "req_elementos_traza": prescriptions.req_elementos_traza,
-                "vit_hidrosolubles": prescriptions.vit_hidrosolubles,
-                "req_vit_hidrosolubles": prescriptions.req_vit_hidrosolubles,
-                "req_vit_liposolubles": prescriptions.req_vit_liposolubles,
-                "soluvit_vitalip": prescriptions.soluvit_vitalip,
-                "vit_C": prescriptions.vit_C,
-                "acido_folico": prescriptions.acido_folico
-            },
+            body:JSON.stringify(prescriptions)
         });
 
         return axiosRequest;
-        // if (axiosRequest.statusCode === HttpStatusCode.ok) {
-        //     // const users = axiosRequest.body as User[];
-        //     // const user: IUser = axiosRequest.body;
-        //     // console.log(JSON.stringify(user));
-        //     return axiosRequest.statusCode;
-
-        // } else if (axiosRequest.statusCode === HttpStatusCode.created) {
-        //     // console.log(JSON.stringify(user));
-        //     return axiosRequest.statusCode;
-        // } else if (axiosRequest.statusCode === HttpStatusCode.notFound) {
-        //     return axiosRequest;
-        // }else if (axiosRequest.statusCode === HttpStatusCode.badRequest) {
-        //     return axiosRequest;
-        // } else {
-        //     return axiosRequest;
-        // }
+       
 
     }
     /////////////////////////////////Get Prescripcion By Number////////////////////////////////////////////////
@@ -113,54 +48,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
         const axiosRequest = await this.axiosHttpClient.request({
             url: `${ApiUrlsEnum.savePrescriptions}/${number}`,
             method: 'patch',
-            body: {
-                "no_orden": prescriptions.no_orden,
-                "tipo_prescripcion": prescriptions.tipo_prescripcion,
-                "fecha": prescriptions.fecha,
-                "ips": prescriptions.ips,
-                "no_identificacion": prescriptions.no_identificacion,
-                "nombre_paciente": prescriptions.nombre_paciente,
-                "servicio": prescriptions.servicio,
-                "ubicacion": prescriptions.ubicacion,
-                "cama": prescriptions.cama,
-                "peso": prescriptions.peso,
-                "tipo_edad": prescriptions.tipo_edad,
-                "edad": prescriptions.edad,
-                "volumen": prescriptions.volumen,
-                "purga": prescriptions.purga,
-                "tiempo_infusion": prescriptions.tiempo_infusion,
-                "overfill": prescriptions.overfill,
-                "filtro": prescriptions.filtro,
-                "equipo_fotosensible": prescriptions.equipo_fotosensible,
-                "tipo_paciente": prescriptions.tipo_paciente,
-                "via_administracion": prescriptions.via_administracion,
-                "diagnostico": prescriptions.diagnostico,
-                "flujo_metabolico": prescriptions.flujo_metabolico,
-                "aminoacidos": prescriptions.aminoacidos,
-                "dextrosa": prescriptions.dextrosa,
-                "req_dextrosa": '',
-                "req_aminoacidos": prescriptions.req_aminoacidos,
-                "lipidos": prescriptions.lipidos,
-                "req_lipidos": prescriptions.req_lipidos,
-                "omegaven": prescriptions.omegaven,
-                "dipeptiven": prescriptions.dipeptiven,
-                "sodio_total": prescriptions.sodio_total,
-                "potasio_total": prescriptions.potasio_total,
-                "fosfato": prescriptions.fosfato,
-                "req_fosfato": prescriptions.req_fosfato,
-                "calcio": prescriptions.calcio,
-                "req_calcio": prescriptions.req_calcio,
-                "magnesio": prescriptions.magnesio,
-                "req_magnesio": prescriptions.req_magnesio,
-                "elementos_traza": prescriptions.elementos_traza,
-                "req_elementos_traza": prescriptions.req_elementos_traza,
-                "vit_hidrosolubles": prescriptions.vit_hidrosolubles,
-                "req_vit_hidrosolubles": prescriptions.req_vit_hidrosolubles,
-                "req_vit_liposolubles": prescriptions.req_vit_liposolubles,
-                "soluvit_vitalip": prescriptions.soluvit_vitalip,
-                "vit_C": prescriptions.vit_C,
-                "acido_folico": prescriptions.acido_folico
-            },
+            body: JSON.stringify(prescriptions)
         });
 
         return axiosRequest;

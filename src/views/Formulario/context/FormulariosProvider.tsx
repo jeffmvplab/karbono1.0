@@ -1,7 +1,5 @@
 
-import { UserUseCases } from "@/domain/usecases";
 import { LocalStorageProtocol } from "@/protocols/cache/local_cache";
-import { mainRoutes } from "@/routes/routes";
 import { StorageKeysEnum } from "@/utilities/enums";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
@@ -953,7 +951,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		const numPresc = (localStorageProtocol.get(StorageKeysEnum.prescripcionOrden))
 			? localStorageProtocol.get(StorageKeysEnum.prescripcionOrden).number
 			: null
-
 
 		console.log('NUMBER:', numPresc)
 
