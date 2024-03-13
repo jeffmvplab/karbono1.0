@@ -267,10 +267,10 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 										<ContainerText isUpper transform="uppercase" title={`${reporte?.lipidos!}`} value={`${getLipidos(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper title="GLUTAMINA DIPEPTIDO 20%" value={`${getDipeptiven(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper transform="uppercase" title={`${reporte?.aminoacidos!}`} value={`${getAminoacidos(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper title="DEXTROSA 50%" value={`${reporte?.dextrosa!}`} />
+										<ContainerText isUpper title="DEXTROSA 50%" value={`${getDextrosa(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper title="AGUA ESTERIL" value={`${getAgua(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper transform="uppercase" title={`${reporte?.fosfato!}`} value={`${getFosforo(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.elementos_traza!}`} value={`${reporte?.req_elementos_traza!}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.elementos_traza!}`} value={`${getOligoelementos(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper title="CLORURO DE SODIO 2 MEQ/ML" value={`${getSodio(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper title="CLORURO DE POTACIO 2 MEQ/ML" value={`${getPotacio(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper transform="uppercase" title={`${reporte?.magnesio!}`} value={`${getMagnesio(reporte!).conPurga.toFixed(2)}`} />

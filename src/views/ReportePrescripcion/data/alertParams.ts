@@ -153,7 +153,7 @@ export const alertFactorDePrecipitacion = (prescription: IPrescriptions) => {
         resp.alert = 'REVISAR';
     }
 
-    console.log('factor:', resp)
+    // console.log('factor:', resp)
     return resp;
 }
 
@@ -226,7 +226,6 @@ export const alarmConcDeProteinas = (prescription: IPrescriptions) => {
 }
 
 export const alarmConcDeLipidos = (prescription: IPrescriptions) => {
-
 
     const tp: string = prescription?.tipo_prescripcion!;
 

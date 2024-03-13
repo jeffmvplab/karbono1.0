@@ -26,7 +26,7 @@ const TarjetaInf = () => {
               Ingresar
             </Button> */}
           <ButtonCardsHome
-            // route={mainRoutes.prescripcion}
+            route={mainRoutes.home}
             text=' Ingresar'
             color={colorsKarbono.primary}
             id='informes'

@@ -100,7 +100,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 
 						<Stack sx={{
 							position: 'absolute' as 'absolute',
-							top: '40%',
+							top: '35%',
 							left: '50%',
 							transform: 'translate(-50%, -50%)',
 						}}

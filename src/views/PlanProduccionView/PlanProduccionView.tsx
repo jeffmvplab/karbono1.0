@@ -6,7 +6,7 @@ import BarEtiqueta from "../ReportePrescripcion/components/BarEtiqueta/BaEtiquet
 import { useContext, useEffect, useState } from "react";
 import { ReportesContext } from "../ReportePrescripcion/context/ReportesContext";
 import { convertirFecha, convertirFechaLote } from "@/utilities/get_String_from_Date_Esp";
-import { getAgua, getSodio, getPotacio, getMagnesio, getVitLiposSolubles, getVitHidroSolubles, getVit_C, getCalcio, peso_teorico, tipo_bolsa, getAminoacidos, getDipeptiven, getFosforo, getLipidos, getOmegaven, getSoluv_Vit } from "../ReportePrescripcion/data/functionsParams";
+import { getAgua, getSodio, getPotacio, getMagnesio, getVitLiposSolubles, getVitHidroSolubles, getVit_C, getCalcio, peso_teorico, tipo_bolsa, getAminoacidos, getDipeptiven, getFosforo, getLipidos, getOmegaven, getSoluv_Vit, getOligoelementos, getDextrosa } from "../ReportePrescripcion/data/functionsParams";
 
 
 export interface PlanProduccionViewProps { }
@@ -105,7 +105,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 									height={'100%'}
 									direction={'column'}
 									justifyContent={'end'}>
-									<ContainerText title="Fecha" value={convertirFecha(reporte?.createdAt)} />
+									<ContainerText title="Fecha" value={convertirFecha(new Date())} />
 								</Stack>
 							</Grid>
 
@@ -162,7 +162,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 
 							<Grid item xs={4}>
 								<Stack direction={'column'}>
-									<ContainerText title={`Edad (${reporte?.tipo_edad})`} value={`${reporte?.edad!}`}  />
+									<ContainerText title={`Edad (${reporte?.tipo_edad})`} value={`${reporte?.edad!}`} />
 								</Stack>
 							</Grid>
 
@@ -230,17 +230,18 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 										<ContainerText isUpper transform="uppercase" title={`${reporte?.lipidos!}`} value={`${getLipidos(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper title="GLUTAMINA DIPEPTIDO 20%" value={`${getDipeptiven(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper transform="uppercase" title={`${reporte?.aminoacidos!}`} value={`${getAminoacidos(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper title="DEXTROSA 50%" value={`${reporte?.dextrosa!}`} />
+										<ContainerText isUpper title="DEXTROSA 50%" value={`${getDextrosa(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper title="AGUA ESTERIL" value={`${getAgua(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper transform="uppercase" title={`${reporte?.fosfato!}`} value={`${getFosforo(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.elementos_traza!}`} value={`${reporte?.req_elementos_traza!}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.elementos_traza!}`} value={`${getOligoelementos(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper title="CLORURO DE SODIO 2 MEQ/ML" value={`${getSodio(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper title="CLORURO DE POTACIO 2 MEQ/ML" value={`${getPotacio(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper transform="uppercase" title={`${reporte?.magnesio!}`} value={`${getMagnesio(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper title="SOLUVIT_VITALIPID" value={`${getSoluv_Vit(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper title={(reporte?.tipo_paciente === 'Adulto')
 											? 'VITALIPID ADULT'
-											: 'VITALIPID INFANT'} value={`${getVitLiposSolubles(reporte!).conPurga.toFixed(2)}`} />										<ContainerText isUpper transform="uppercase" title={`${reporte?.vit_hidrosolubles!}`} value={`${getVitHidroSolubles(reporte!).conPurga.toFixed(2)}`} />
+											: 'VITALIPID INFANT'} value={`${getVitLiposSolubles(reporte!).conPurga.toFixed(2)}`} />
+										<ContainerText isUpper transform="uppercase" title={`${reporte?.vit_hidrosolubles!}`} value={`${getVitHidroSolubles(reporte!).conPurga.toFixed(2)}`} />
 										<ContainerText isUpper title="VITAMINA C" value={`${getVit_C(reporte!).conPurga}`} />
 										<ContainerText isUpper title="ACIDO FOLICO" value={`${reporte?.acido_folico}`} />
 										<ContainerText isUpper transform="uppercase" title={`${reporte?.calcio!}`} value={`${getCalcio(reporte!).conPurga.toFixed(2)}`} />
@@ -649,7 +650,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 							<Stack direction={'row'}>
 								<Grid container spacing={10}>
 									<Grid item xs={6}>
-										<ContainerText titleWeigth="700" titleSize="20px" title="PRESCRIPTOR" color={colorsKarbono.primary} value={reporte?.user?.nombre_apellidos ? reporte?.user?.nombre_apellidos : '-'}/>
+										<ContainerText titleWeigth="700" titleSize="20px" title="PRESCRIPTOR" color={colorsKarbono.primary} value={reporte?.user?.nombre_apellidos ? reporte?.user?.nombre_apellidos : '-'} />
 									</Grid>
 									<Grid item xs={6}>
 										<ContainerText titleWeigth="700" titleSize="20px" title="PREPARÓ" color={colorsKarbono.primary} value={`${reporte?.preparador ? 'reporte?.preparador' : '-'}`} />
