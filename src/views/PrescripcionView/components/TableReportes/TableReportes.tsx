@@ -171,7 +171,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			? <Skeleton variant="rectangular" sx={{ marginX: '15px', borderRadius: '5px' }} width='100%' height={700} />
 			: <>
 				<PDFModal open={open} handleClose={handleClose} selectReporte={selectReporte} loadingApi={loadingApi} />
-				<CopyPresciptionModal openCopy={openCopy} handleCloseCopy={handleCloseCopy} selectReporte={selectReporte} loadingApi={loadingApi} onClick={()=>copyPrescriptions(selectReporte)} loadingSave={undefined}  />
+				<CopyPresciptionModal openCopy={openCopy} handleCloseCopy={handleCloseCopy} selectReporte={selectReporte} loadingApi={loadingApi} onClick={()=>copyPrescriptions(selectReporte)} loadingSave={loadingSave}  />
 				<DeleteModal openDelete={openDelete} handleCloseDelete={handleCloseDelete} selectReporte={selectReporte} loadingApi={loadingApi} onClick={()=> borrarPrescriptions(selectReporte) } loadingSave={loadingSave} />
 
 				<Box

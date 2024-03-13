@@ -111,8 +111,8 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 										? (saveOK)
 											? '¡Se ha guardado con éxito!'
 											: (messageAPI)
-												? 'El número de orden que esta tratando de guardar ya existe. Por favor escriba otro número de orden'
-												: messageAPI
+												? messageAPI
+												: 'El número de orden que esta tratando de guardar ya existe. Por favor escriba otro número de orden'
 										: (saveStatus) ? 'Advertencia de envío.' : 'Error en la prescripción'}
 									</Typography >
 

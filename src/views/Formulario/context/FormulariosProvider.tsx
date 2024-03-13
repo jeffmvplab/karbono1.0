@@ -304,7 +304,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const handleIps = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setIps(event.target.value);
 		// const ips = event.target.value;
-		// console.log(' ips:', ips)
+		console.log(' ips-overfill:', obtenerOverfillPorLabel(event.target.value))
 		setOverfill(obtenerOverfillPorLabel(event.target.value) as number)
 	};
 
@@ -501,6 +501,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorOverfill, setMessageErrorOverfill] = React.useState('');
 
 	const handleOverfill = (event: Event, newValue: number | number[]) => {
+		console.log('Overfil:', newValue)
 		setOverfill(newValue as number);
 		// getPrescriptions();
 	};
@@ -1057,15 +1058,17 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const copyPrescriptions = async (prescription: IPrescriptions | undefined) => {
 
 		setLoadingSave(false);
-		console.log('Copiando Prescripcion...')
 
 		const newnumber = await getMaxNumPresc();
 
 		if (newnumber) {
 			const copyPrescription: IPrescriptions = {
 				...prescription!,
+				createdAt: new Date().toISOString(),
+				updatedAt: new Date().toISOString(),
 				no_orden: newnumber + 1
 			}
+			console.log('Copiando Prescripcion...:', copyPrescription)
 
 			const resp = await prescriptionsUseCase.savePrescripcions(copyPrescription);
 
