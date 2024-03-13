@@ -229,26 +229,26 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 	const [prescSearch, setPrescSearch] = React.useState<IPrescriptions>();
 
 	const getPrescriptionsByNumber = async (number: string) => {
+
 		setLoadingApi(false);
 
 		const resp = await prescriptionsUseCase.prescripcionsByNumber(number);
 		let repoPresc: IPrescriptions[] = []
 
-		if (resp.body.length) {
+		if (resp.body.length>0) {
 			repoPresc = resp.body
 		} else {
 			repoPresc[0] = resp.body
 		}
-
-		console.log('RESP by Num:', repoPresc)
+		
+		console.log('RESP by Num:',repoPresc)
 		if (resp.statusCode === 200) {
-			setReportes(Array.isArray(repoPresc)?repoPresc.reverse():[]);
-			setErrorSearch(false)
-
-			if (resp.body.length === 0) {
-				setMessageAPI('No se encontró ninguna prescripción')
-				setErrorSearch(true)
-			}
+			setReportes(repoPresc);
+			setErrorSearch(false)	
+			// if (resp.body.length === 0) {
+			// 	setMessageAPI('No se encontró ninguna prescripción')
+			// 	setErrorSearch(true)
+			// }
 			setApiOk(false)
 		} else if (resp.statusCode === 400) {
 			setMessageAPI(resp.body.message)
@@ -318,26 +318,32 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 	}
 
 	const getPrescriptionsByIps = async (ips: string) => {
+
 		setLoadingApi(false);
+
 		const resp = await prescriptionsUseCase.prescripcionsByIps(ips);
 		let repoPresc: IPrescriptions[] = []
 
-		if (resp.body.length) {
+		if (resp.body.length>0) {
 			repoPresc = resp.body
 		} else {
 			repoPresc[0] = resp.body
 		}
-		console.log('RESP by Ips:', resp)
+
+		console.log('RESP by Ips:',repoPresc)
 
 		if (resp.statusCode === 201) {
-			setReportes(Array.isArray(repoPresc)?repoPresc.reverse():[]);
+
+			setReportes(Array.isArray(repoPresc)?repoPresc.reverse():repoPresc);
 			setErrorSearch(false)
 
 			if (resp.body.length === 0) {
 				setMessageAPI('No se encontró ninguna prescripción')
 				setErrorSearch(true)
 			}
+
 			setApiOk(false)
+
 		} else if (resp.statusCode === 400) {
 			setMessageAPI(resp.body.message)
 			setApiOk(false)
@@ -362,25 +368,27 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 	const getPrescriptionsById = async (id: string) => {
 		setLoadingApi(false);
+		
 		const resp = await prescriptionsUseCase.prescripcionsById(id);
+		
 		let repoPresc: IPrescriptions[] = []
-
+		
 		if (resp.body.length > 0) {
 			repoPresc = resp.body
 		} else {
-			repoPresc = []
+			repoPresc[0]= resp.body
 		}
-		console.log('RESP by Id:', resp)
+		console.log('RESP by Id:',repoPresc)
 
 		if (resp.statusCode === 201) {
-			setReportes(Array.isArray(repoPresc)?repoPresc.reverse():[]);
+			setReportes(repoPresc);
 			setErrorSearch(false)
 
-			if (resp.body.length === 0) {
-				setMessageAPI('No se encontró ninguna prescripción')
-				console.log(resp.body)
-				setErrorSearch(true)
-			}
+			// if (resp.body.length === 0) {
+			// 	setMessageAPI('No se encontró ninguna prescripción')
+			// 	console.log(resp.body)
+			// 	setErrorSearch(true)
+			// }
 			setApiOk(false)
 		} else if (resp.statusCode === 400) {
 			setMessageAPI(resp.body.message)

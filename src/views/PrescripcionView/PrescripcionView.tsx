@@ -15,7 +15,18 @@ export interface PrescripcionViewProps { }
 
 const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 
-	const { goAddNew, getAll, handleSearchName, searchName, handleSearchId, searchId,searchNumber,getPrescriptionsByNumber, getPrescriptionsByName, getPrescriptionsById } = useContext(PrescripcionContext)
+	const { 
+		goAddNew, 
+		getAll, 
+		handleSearchName, 
+		searchName, 
+		handleSearchId, 
+		searchId,
+		searchNumber,
+		handleSearchNumber,
+		getPrescriptionsByNumber, 
+		getPrescriptionsByName, 
+		getPrescriptionsById } = useContext(PrescripcionContext)
 
 	return (
 		<>
@@ -76,12 +87,12 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 
 								<Stack margin={'5px'} direction={'column'} >
 									<CustomTextField
-										onChange={handleSearchName}
+										onChange={handleSearchNumber}
 										onClickEndAdornament={() => { searchNumber ? getPrescriptionsByNumber(searchNumber) : getAll() }}
 										id='Numero-de-orden'
 										label='Búsqueda por número de orden'
 										type='text'
-										value={searchId}
+										value={searchNumber}
 										endAdornament={<Search style={{ color: 'black', paddingLeft: '5px', scale: '1.5' }} />}
 									/>
 								</Stack>
