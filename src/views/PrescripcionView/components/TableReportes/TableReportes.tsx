@@ -61,7 +61,6 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			setMessageAPI('')
 			getAll()
 		}
-
 	}, [loadingSave])
 
 	// useEffect(() => {
