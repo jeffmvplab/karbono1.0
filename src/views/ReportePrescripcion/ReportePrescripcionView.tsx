@@ -23,6 +23,7 @@ import BarReporteQF from './components/BarReporteQF/BarReporteQF';
 import BarReporteQF_Calidad from './components/BarReporteQF_Calidad/BarReporteQF_Calidad';
 import { RolUsersKeysEnum } from '@/utilities/enums/rol_user_keys.enum';
 import { convertirFecha } from '@/utilities/get_String_from_Date_Esp';
+import { useRouter } from 'next/router';
 
 
 
@@ -37,17 +38,20 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 	const [rol, setRol] = useState('');
 
+	const router = useRouter();
+
 	useEffect(() => {
 		getPrescriptionsByNumber();
 		const rol = getMeRol()[0];
 		setRol(rol)
-	}, [])
+		// console.log('REPORTE')
+	}, [router.pathname])
 
 
 	const [isNew, setIsNew] = useState<boolean>(false);
 	const [newObs, setnewObs] = useState<string>();
 
-	console.log('ROLLLL:', getMeRol()[0], 'ESTADO :', reporte?.estado)
+	// console.log('ROLLLL:', getMeRol()[0], 'ESTADO :', reporte?.estado)
 	// 
 	return (
 		<>
