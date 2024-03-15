@@ -12,7 +12,7 @@ import { GlobalContext } from '@/context/GlobalContext';
 
 const TarjetaInf = () => {
 
-  const { isAuth, authStatus, getMeRol } = useContext(GlobalContext);
+  const { getMeRol } = useContext(GlobalContext);
 
   return (
 
@@ -27,7 +27,7 @@ const TarjetaInf = () => {
           <Typography variant='h5' sx={{ color: '#2FC5C6', paddingBottom: '20px' }}>Informes</Typography>
           <Typography variant='body1' sx={{ paddingBottom: '30px' }}>
             {getMeRol()[0] === RolUsersKeysEnum.prescriptor
-              ? 'Este módulo te permite editar los datos dEste módulo te proporciona acceso a métricas  y estadísticas de interés sobre tus prescripciones solicitadas'
+              ? 'Este módulo te proporciona acceso a métricas  y estadísticas de interés sobre tus prescripciones solicitadas'
               : 'Este módulo te proporciona acceso a métricas  y estadísticas de interés sobre tus pacientes y clientes.'}
           </Typography>
           {/* 
@@ -46,6 +46,7 @@ const TarjetaInf = () => {
             <Typography variant='body1'> *Proximamente</Typography>
           </Stack>
         </Box>
+        
         <Hidden smDown >
           <Box sx={{ justifyContent: 'center', display: 'flex', paddingRight: '20px', alignItems: 'center', width: '20%' }}>
             <Image

@@ -328,13 +328,13 @@ const FormView: React.FC<FormViewProps> = () => {
 
 				</Grid>
 
-				<Box 
-				display={{xs:'flex', md:'none'}} 
-				zIndex={99} bottom={0} left={0} 
-				 position={{ xs: 'fixed', sm: 'initial' }}
-				  bgcolor={'white'} 
-				  width={'100%'} 
-				  height={(selectTab === 3) ? '210px' : '180px'}>
+				<Box
+					display={{ xs: 'flex', md: 'flex' }}
+					zIndex={99} bottom={0} left={0}
+					position={{ xs: 'fixed'}}
+					bgcolor={{xs:'white',md:'transparent'}}
+					width={'100%'}
+					height={(selectTab === 3) ? {xs:'210px', md: '100px' }: {xs:'180px', md: '100px' }}>
 
 					<Stack
 						zIndex={100}
