@@ -12,11 +12,17 @@ import { userInvNull } from '@/domain/models/equipo_user.model';
 
 export interface EquipoComonentProps { }
 
-const options = [
+const optionsUser = [
 	'Prescriptor',
 	'Preparador NPT',
 	'Control de Calidad',
 	'Quitar del equipo'
+];
+
+const optionsCreateUser = [
+	'Prescriptor',
+	'Preparador NPT',
+	'Control de Calidad',
 ];
 
 const EquipoComonent: React.FC<EquipoComonentProps> = () => {
@@ -29,11 +35,12 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 		getMeEquipo,
 		invitarUsuarios, loadingApi, loadingAuth,
 		modalInvOpen, handleModalInvClose,
-		errorApi, updateMeEquipo
+		errorApi, updateMeEquipo, setErrorApi
 	} = useContext(GlobalContext)
 
 	useEffect(() => {
 		getMeEquipo();
+		setErrorApi('');
 	}, [])
 
 	const [anchorEls, setAnchorEls] = useState<(null | HTMLElement)[]>([]);
@@ -231,7 +238,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 														"& .MuiInputBase-root": { borderRadius: '10px' },
 													}}
 												>
-													{options.map((option) => (
+													{optionsCreateUser.map((option) => (
 														<MenuItem
 															sx={{ backgroundColor: 'white' }}
 															style={{
@@ -367,7 +374,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 													},
 												}}
 											>
-												{options.map((option) => (
+												{optionsUser.map((option) => (
 													<MenuItem
 														sx={{ backgroundColor: 'white' }}
 														key={option}

@@ -3,6 +3,7 @@ import { error } from 'console'
 import React from 'react'
 
 export interface CustomTextFieldProps {
+    component?: any,
     id: string
     label: string
     type?: string
@@ -13,6 +14,7 @@ export interface CustomTextFieldProps {
     select?: boolean
     children?: any
     endAdornament?: any,
+    startAdornament?: any,
     disabled?: boolean,
     borderRadius?: string | number,
     onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> | undefined
@@ -30,6 +32,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
     select,
     children,
     endAdornament = '',
+    startAdornament = '',
     onChange,
     onClick,
     onKeyPress,
@@ -38,12 +41,12 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
     helperText = '',
     borderRadius = '12px',
     onClickEndAdornament,
-    
+    component
 }) => {
     return (
 
         <TextField
-
+            component={component}
             onKeyPress={onKeyPress}
             onClick={onClick}
             onChange={onChange}
@@ -68,8 +71,9 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
             // }}
             InputProps={{
                 endAdornment:
-                    <Button onClick={onClickEndAdornament} sx={{background:'transparent',height:'30px'}}>
+                    <Button onClick={onClickEndAdornament} sx={{ background: 'transparent', height: '30px' }}>
                         <InputAdornment position="start">{endAdornament}</InputAdornment>
+
                     </Button>,
             }}
             sx={{
@@ -80,7 +84,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
                 "& .MuiInputBase-root": {
                     borderRadius: borderRadius,
                 },
-                
+
             }}
         >
             {children}

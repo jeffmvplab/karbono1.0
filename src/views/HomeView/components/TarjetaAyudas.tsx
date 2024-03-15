@@ -2,7 +2,7 @@ import React from 'react';
 
 import Image from 'next/image'
 
-import { Box, Breadcrumbs, Grid, Button, Hidden, Typography } from '@mui/material'
+import { Box, Breadcrumbs, Grid, Button, Hidden, Typography, Stack } from '@mui/material'
 import { ButtonCardsHome } from './ButtonCardsHome';
 import { colorsKarbono } from '@/themes/colors';
 import { mainRoutes } from '@/routes/routes';
@@ -28,12 +28,17 @@ const TarjetaAyudas = () => {
             {/*<Button sx={{backgroundColor:'#2FC5C6',  color:'#fff', padding:'10px 40px', borderRadius:'10px', ':hover':{backgroundColor:'#2fc5c1', color:'#e8e8e2'}}}>
              Ingresar
           </Button>*/}
-            <ButtonCardsHome
-              route={mainRoutes.home}
-              text='Ingresar'
-              color={'#90AFB0'}
-              id='ayudas'
-            />
+            <Stack width={'100%'} direction={'row'} justifyContent={'space-between'} alignItems={'end'}>
+              <ButtonCardsHome
+                route={mainRoutes.home}
+                text='Ingresar'
+                color={'#90AFB0'}
+                id='ayudas'
+              />
+              <Typography variant='body1'> *Proximamente</Typography>
+            </Stack>
+
+
           </Box>
           <Hidden smDown >
             <Box sx={{ justifyContent: 'center', display: 'flex', paddingRight: '20px', alignItems: 'center', width: '20%' }}>

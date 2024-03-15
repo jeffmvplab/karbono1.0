@@ -24,44 +24,48 @@ const TarjetaPres: React.FC<TarjetaPresProps> = () => {
   return (
 
     <>
-        <Grid item xs={12} sm={12} md={5.30} lg={5.50} sx={{ maxHeight: '260', borderRadius: '20px', backgroundColor: '#fff', marginTop: '50px', marginLeft: '20px', marginRight: '30px' }} className='box-shadow'>
-          <Box display='flex'>
-            <Box
-              sx={{
-                padding: '30px',
-                width: '80%'
-              }}
-            >
-              <Typography variant='h5' sx={{ color: '#2FC5C6', paddingBottom: '20px' }}>Prescripción</Typography>
-              <Typography variant='body1' sx={{ paddingBottom: '30px' }}>Este módulo te permite consultar las prescripciones solicitadas por las IPS, y generar la etiqueta y PP.</Typography>
+      <Grid item xs={12} sm={12} md={5.30} lg={5.50} sx={{ maxHeight: '260', borderRadius: '20px', backgroundColor: '#fff', marginTop: '50px', marginLeft: '20px', marginRight: '30px' }} className='box-shadow'>
+        <Box display='flex'>
+          <Box
+            sx={{
+              padding: '30px',
+              width: '80%'
+            }}
+          >
+            <Typography variant='h5' sx={{ color: '#2FC5C6', paddingBottom: '20px' }}>Prescripción</Typography>
+            <Typography variant='body1' sx={{ paddingBottom: '30px' }}>
+              {getMeRol()[0] === RolUsersKeysEnum.prescriptor
+              ?'Este módulo te permite crear, editar y consultar datos de prescripciones médicas de manera fácil y rápida'
+              :'Este módulo te permite consultar las prescripciones solicitadas por las IPS, y generar la etiqueta y PP.'}
+            </Typography>
 
-              <ButtonCardsHome
-                route={isAuth 
-                  ? (getMeRol()[0] === RolUsersKeysEnum.prescriptor) 
-                    ? mainRoutes.prescripcion 
-                    : mainRoutes.gestion 
-                  : mainRoutes.login}
-                text=' Ingresar'
-                color={colorsKarbono.primary}
-                id='prescripcion'
-              />
+            <ButtonCardsHome
+              route={isAuth
+                ? (getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+                  ? mainRoutes.prescripcion
+                  : mainRoutes.gestion
+                : mainRoutes.login}
+              text=' Ingresar'
+              color={colorsKarbono.primary}
+              id='prescripcion'
+            />
 
-            </Box>
-            <Hidden smDown >
-              <Box sx={{ justifyContent: 'center', display: 'flex', paddingRight: '20px', alignItems: 'center', width: '20%' }}>
-                <Image
-                  src='/assets/icon-producción.png'
-                  width={80}
-                  height={80}
-                  alt=''
-                  style={{ marginTop: '5px', alignItems: 'center' }}
-
-                ></Image>
-              </Box>
-            </Hidden>
           </Box>
+          <Hidden smDown >
+            <Box sx={{ justifyContent: 'center', display: 'flex', paddingRight: '20px', alignItems: 'center', width: '20%' }}>
+              <Image
+                src='/assets/icon-producción.png'
+                width={80}
+                height={80}
+                alt=''
+                style={{ marginTop: '5px', alignItems: 'center' }}
 
-        </Grid>
+              ></Image>
+            </Box>
+          </Hidden>
+        </Box>
+
+      </Grid>
 
     </>
 

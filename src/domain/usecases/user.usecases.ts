@@ -32,7 +32,7 @@ export interface IUserUseCase {
         nombre_apellidos: string,
         telefono: string,
         password: string,
-        registro_medico: string,
+        registro_medico: string|null|undefined,
         primer_nombre: string,
         primer_apellido: string,
         entidad_de_salud: [string],
@@ -59,7 +59,12 @@ export class UserUseCases implements IUserUseCase {
         this.userRepository = new UserRepository();
     }
 
-    login(email: string, password: string, entidad_de_salud: string[], central_de_mezclas: string): Promise<any> {
+    login(
+        email: string, 
+        
+        password: string, entidad_de_salud: string[], 
+        central_de_mezclas: string
+        ): Promise<any> {
         return this.userRepository.login(email, password, entidad_de_salud, central_de_mezclas);
     }
 
@@ -115,7 +120,7 @@ export class UserUseCases implements IUserUseCase {
         nombre_apellidos: string,
         telefono: string,
         password: string,
-        registro_medico: string,
+        registro_medico: string|null|undefined,
         primer_nombre: string,
         primer_apellido: string,
         entidad_de_salud: [string],

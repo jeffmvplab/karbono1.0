@@ -1,6 +1,8 @@
 import { ILogs } from "@/domain/models/logs.model";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
-import { createContext } from "react";
+import { Dayjs } from "dayjs";
+
+import { ChangeEvent, createContext } from "react";
 
 
 interface ContextProps {
@@ -30,12 +32,13 @@ interface ContextProps {
     searchNumber: string,
     handleSearchNumber: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
-    searchFecha: string,
-    handleSearchFecha: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    searchFecha: any,
+    setSearchFecha: React.Dispatch<React.SetStateAction<string | Dayjs | null|undefined>>,
 
     searchId: string,
     handleSearchId: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
+    handleFiltrosBorrar: () => void,
 
     selectedFilter: string,
     handleChangeFilter: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -47,6 +50,7 @@ interface ContextProps {
 
     getPrescriptionsByName: (name: string) => Promise<void>
     getPrescriptionsById: (id: string) => Promise<void>
+    getPrescriptionsByDate: (date: string) => Promise<void>
     getPrescriptionsByNumber: (number: string) => Promise<void>
     getLogsByNumber: () => Promise<void>,
     logs:ILogs[] | undefined

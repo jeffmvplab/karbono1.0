@@ -1,9 +1,10 @@
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
+import { newIUserTable } from "@/utilities/getnameByObject";
 
 
 export const prescriptionsAdapter = (prescriptions: any): IPrescriptions => ({
   no_orden: prescriptions.no_orden,
-  user: prescriptions.user,
+  user: prescriptions.user?prescriptions.user:newIUserTable,
   createdAt: prescriptions.createdAt,
   updatedAt: prescriptions.updatedAt,
 
@@ -57,5 +58,6 @@ export const prescriptionsAdapter = (prescriptions: any): IPrescriptions => ({
   acido_folico: prescriptions.acido_folico,
   observaciones: prescriptions.observaciones,
   preparador: prescriptions.preparador,
-  controlador_de_calidad: prescriptions.controlador_de_calidad
+  controlador_de_calidad: prescriptions.controlador_de_calidad,
+  por_clonacion:prescriptions.por_clonacion
 });

@@ -112,7 +112,7 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 			headerClassName: 'table-color--header',
 			flex: 1,
 			minWidth: 150,
-			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+			renderCell: (params: GridRenderCellParams) => <>{params.value}</>
 		},
 
 
@@ -122,7 +122,7 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 			headerClassName: 'table-color--header',
 			flex: 1,
 			minWidth: 120,
-			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}.</>
+			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}</>
 		},
 
 		{
@@ -131,16 +131,16 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 			headerClassName: 'table-color--header',
 			flex: 1,
 			minWidth: 140,
-			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}.</>
+			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}</>
 		},
 
 		{
-			field: "prescriptor",
+			field: "user",
 			headerName: "Prescriptor",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 80,
-			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+			minWidth: 180,
+			renderCell: (params: GridRenderCellParams) => <>{params.value?.nombre_apellidos}</>
 		},
 		{
 			field: "controlador_de_calidad",
@@ -148,7 +148,7 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 			headerClassName: 'table-color--header',
 			flex: 1,
 			minWidth: 200,
-			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+			renderCell: (params: GridRenderCellParams) => <>{params.value?.nombre_apellidos}</>
 		},
 		{
 			field: "preparador",
@@ -156,7 +156,7 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 			headerClassName: 'table-color--header',
 			flex: 1,
 			minWidth: 80,
-			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+			renderCell: (params: GridRenderCellParams) => <>{params.value?.nombre_apellidos}</>
 		},
 
 		{

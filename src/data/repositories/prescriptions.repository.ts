@@ -13,14 +13,15 @@ export interface IPrescriptionsRepository {
     getPrescripcionsByNumber(number: string): Promise<any>;
     getPrescripcionsByName(name: string): Promise<any>;
     getPrescripcionsById(id: string): Promise<any>;
+    getPrescripcionsByDate(date: string): Promise<any>;
     getPrescripcionsByIps(ips: string): Promise<any>;
     getPrescripcionsAll(limit: number): Promise<any>;
     updatePrescripcions(prescriptions: IPrescriptions, number: string): Promise<any>;
     getMaxNumberPres(): Promise<any>;
     createComments(comment: IComment): Promise<any>;
     getPrescripcionsByLab(): Promise<any>;
-    setQuimicos(prescriptionId: string,preparador: string,controlador_de_calidad: string): Promise<any> ;
-    getLogs(number:string): Promise<any>
+    setQuimicos(prescriptionId: string, preparador: string, controlador_de_calidad: string): Promise<any>;
+    getLogs(number: string): Promise<any>
 }
 
 export class PrescriptionsRepository implements IPrescriptionsRepository {
@@ -36,11 +37,11 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
         const axiosRequest = await this.axiosHttpClient.request({
             url: ApiUrlsEnum.savePrescriptions,
             method: 'post',
-            body:JSON.stringify(prescriptions)
+            body: JSON.stringify(prescriptions)
         });
 
         return axiosRequest;
-       
+
 
     }
     /////////////////////////////////Get Prescripcion By Number////////////////////////////////////////////////
@@ -114,6 +115,18 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
         });
         return axiosRequest;
     }
+    /////////////////////////////////Get Predscripcion By Date////////////////////////////////////////////////
+    async getPrescripcionsByDate(date: string): Promise<any> {
+
+        const axiosRequest = await this.axiosHttpClient.request({
+            url: ApiUrlsEnum.getPrescriptionsByDate,
+            method: 'post',
+            body: {
+                "date": date,
+            },
+        });
+        return axiosRequest;
+    }
     ////////////////////////////////Get Predscripcion By Lab////////////////////////////////////////////////
     async getPrescripcionsByLab(): Promise<any> {
 
@@ -180,7 +193,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
     }
 
     /////////////////////////////////Get Max Number Pres////////////////////////////////////////////////
-    async getLogs(number:string): Promise<any> {
+    async getLogs(number: string): Promise<any> {
 
         const axiosRequest = await this.axiosHttpClient.request({
             url: `${ApiUrlsEnum.getLogs}/${number}`,
