@@ -355,7 +355,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 				nameYApellidos,
 				name,
 				apellido,
-				registroMedico,
+				undefined,
 				[entidadDeSalud],
 				'Corpaul',
 				phone,
