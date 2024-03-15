@@ -1,35 +1,34 @@
 
-import { Typography, Button, Box, Grid, Stack, TextField, InputAdornment } from '@mui/material/';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { CustomButton } from '@/components/CustomButton';
-import { colorsKarbono } from '@/themes/colors';
+import { Typography, Grid, Stack, styled, Button, TextField } from '@mui/material/';
 import { useContext } from 'react';
 import CustomTextField from '../Formulario/Components/CustomTextField';
-import { mainRoutes } from '@/routes/routes';
 import { Search } from '@mui/icons-material';
 import { PrescripcionContext } from '../PrescripcionView/context/PrescripcionContext';
 import { TableGestionPrescripciones } from './TableGestionPrescripciones';
 
-
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import 'dayjs/locale/es'; // Asegúrate de importar el idioma español de Day.js
+import CloseIcon from '@mui/icons-material/Close';
 
 export interface GestionPrescripcionesViewProps { }
 
 const GestionPrescripcionesView: React.FC<GestionPrescripcionesViewProps> = () => {
 
-	const { 
+	const {
 		// goAddNew, 
-		getAll, 
-		handleSearchName, 
-		searchName, 
-		handleSearchId, 
-		searchId, 
-		handleSearchNumber, 
-		searchNumber, 
-		// handleSearchFecha, 
-		// searchFecha, 
-		getPrescriptionsByName, 
+		getAll,
+		handleSearchName,
+		searchName,
+		handleSearchId,
+		searchId,
+		handleSearchNumber,
+		searchNumber,
+		setSearchFecha,
+		searchFecha,
+		getPrescriptionsByName,
 		getPrescriptionsById,
-		getPrescriptionsByNumber
+		getPrescriptionsByNumber, getPrescriptionsByDate, handleFiltrosBorrar
 	} = useContext(PrescripcionContext)
 
 	return (
@@ -76,7 +75,7 @@ const GestionPrescripcionesView: React.FC<GestionPrescripcionesViewProps> = () =
 								<Stack margin={'5px'} direction={'column'} >
 									<CustomTextField
 										onChange={handleSearchNumber}
-										onClickEndAdornament={() => {searchNumber? getPrescriptionsByNumber(searchNumber) : getAll() }}
+										onClickEndAdornament={() => { searchNumber ? getPrescriptionsByNumber(searchNumber) : getAll() }}
 										id='Numero-de-orden'
 										label='# de orden'
 										type='text'
@@ -85,25 +84,41 @@ const GestionPrescripcionesView: React.FC<GestionPrescripcionesViewProps> = () =
 									/>
 								</Stack>
 
+								<Stack margin={'5px'} direction={'column'} >
+									<LocalizationProvider
+										dateAdapter={AdapterDayjs}
+										adapterLocale='es'
+									>
+										<DatePicker
+											sx={{
+												'.MuiOutlinedInput-root': { borderRadius: '12px' },
+											}}
+											label="Fecha"
+											views={['day', 'month', 'year',]}
+											onChange={(e) => setSearchFecha(e)}
+											onAccept={() => { searchFecha ? getPrescriptionsByDate(searchFecha) : getAll() }}
+											value={searchFecha}
+										/>
 
-								{/* <Stack margin={'5px'} direction={'column'} >
-									<CustomTextField
-										onChange={handleSearchFecha}
-										onClickEndAdornament={() => { searchFecha ? getPrescriptionsByFecha(searchFecha) : getAll() }}
-										id='Fecha'
-										label='Fecha'
-										type='text'
-										value={searchFecha}
-										endAdornament={<Search style={{ color: 'black', paddingLeft: '5px', scale: '1.5' }} />}
-									/>
-								</Stack> */}
+									</LocalizationProvider>
+
+								</Stack>
+
+								<Stack direction={'row'} width={'200px'}>
+									<Button onClick={handleFiltrosBorrar}>
+										<Typography textTransform={'none'}>
+											Borrar Filtros
+										</Typography>
+										<CloseIcon />
+									</Button>
+								</Stack>
 							</Stack>
 
 						</Stack>
 					</Stack>
 
 				</Grid>
-			</Grid>
+			</Grid >
 			<Grid container>
 				{/* <Tabla /> */}
 				<TableGestionPrescripciones />

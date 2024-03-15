@@ -31,9 +31,9 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
         <>
             <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} paddingRight={'20px'}>
                 {/* <Grid item display='block' sx={{ marginTop: '30px', marginBottom: '15px', width: '40%', paddingLeft:'0' }}> */}
-                <Stack width='100%' direction={'row'} justifyContent={'space-between'} overflow={'scroll'} spacing={2}>
+                <Stack width='100%' direction={'row'}  overflow={'scroll'} justifyContent={{xs:'start',md:'center'}} spacing={4}>
 
-                    <Stack direction={'column'} minWidth={'250px'}>
+                    <Stack direction={'column'} width={'300px'}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingBottom: '15px' }}>Micronutrientes</Typography>
 
                         {/* <Box sx={{ justifyContent: 'start' }} >
@@ -45,52 +45,52 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
                         </Box> */}
 
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[0]} :</Typography>
+                            <Typography width='300px'>{Micronutrientes[0]} :</Typography>
                         </Box>
 
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[1]} :</Typography>
+                            <Typography width='300px'>{Micronutrientes[1]} :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[2]} :</Typography>
+                            <Typography width='300px'>{Micronutrientes[2]} :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[3]} :</Typography>
+                            <Typography width='300px'>{Micronutrientes[3]} :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[4]} [ {reporte?.fosfato} ]:</Typography>
+                            <Typography width='300px'>{Micronutrientes[4]} [ {reporte?.fosfato} ]:</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[5]}</Typography>
+                            <Typography width='300px'>{Micronutrientes[5]}</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[6]}</Typography>
-                        </Box>
-
-                        <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[7]} [ {reporte?.calcio} ]:</Typography>
-                        </Box>
-                        <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[8]} [ {reporte?.magnesio} ]:</Typography>
-                        </Box>
-                        <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[9]} [ {reporte?.elementos_traza} ]</Typography>
-                        </Box>
-                        <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[10]}</Typography>
+                            <Typography width='300px'>{Micronutrientes[6]}</Typography>
                         </Box>
 
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[11]} [ {reporte?.vit_hidrosolubles} ]</Typography>
+                            <Typography width='300px'>{Micronutrientes[7]} [ {reporte?.calcio} ]:</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[12]} [ {'Vitalip'} ]:</Typography>
+                            <Typography width='300px'>{Micronutrientes[8]} [ {reporte?.magnesio} ]:</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[13]}</Typography>
+                            <Typography width='300px'>{Micronutrientes[9]} [ {reporte?.elementos_traza} ]</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'end' }} >
-                            <Typography>{Micronutrientes[14]}:</Typography>
+                            <Typography width='300px'>{Micronutrientes[10]}</Typography>
+                        </Box>
+
+                        <Box sx={{ justifyContent: 'end' }} >
+                            <Typography width='300px'>{Micronutrientes[11]} [ {reporte?.vit_hidrosolubles} ]</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'end' }} >
+                            <Typography width='300px'>{Micronutrientes[12]} [ {'Vitalip'} ]:</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'end' }} >
+                            <Typography width='300px'>{Micronutrientes[13]}</Typography>
+                        </Box>
+                        <Box sx={{ justifyContent: 'end' }} >
+                            <Typography width='300px'>{Micronutrientes[14]}:</Typography>
                         </Box>
                     </Stack>
                     {/* </Grid>

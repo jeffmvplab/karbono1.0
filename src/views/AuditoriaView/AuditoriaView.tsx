@@ -11,6 +11,11 @@ import { TableAuditoria } from './components/TableAuditoria';
 import { PrescripcionContext } from '../PrescripcionView/context/PrescripcionContext';
 import { ActionsDrawer } from './components/ActionsDrawer';
 
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import 'dayjs/locale/es'; // Asegúrate de importar el idioma español de Day.js
+import CloseIcon from '@mui/icons-material/Close';
+
 
 
 export interface PrescripcionViewProps { }
@@ -26,11 +31,12 @@ const AuditoriaView: React.FC<PrescripcionViewProps> = () => {
 		searchId,
 		handleSearchNumber,
 		searchNumber,
-		handleSearchFecha,
+		setSearchFecha,
 		searchFecha,
 		getPrescriptionsByName,
 		getPrescriptionsById,
-		getPrescriptionsByNumber
+		getPrescriptionsByNumber,
+		getPrescriptionsByDate, handleFiltrosBorrar
 	} = useContext(PrescripcionContext)
 
 	return (
@@ -102,19 +108,34 @@ const AuditoriaView: React.FC<PrescripcionViewProps> = () => {
 										endAdornament={<Search style={{ color: 'black', paddingLeft: '5px', scale: '1.5' }} />}
 									/>
 								</Stack>
+								<Stack margin={'5px'} direction={'column'} >
+									<LocalizationProvider
+										dateAdapter={AdapterDayjs}
+										adapterLocale='es'
+									>
+										<DatePicker
+											sx={{
+												'.MuiOutlinedInput-root': { borderRadius: '12px' },
+											}}
+											label="Fecha"
+											views={['day', 'month', 'year',]}
+											onChange={(e) => setSearchFecha(e)}
+											onAccept={() => { searchFecha ? getPrescriptionsByDate(searchFecha) : getAll() }}
+											value={searchFecha}
+										/>
 
+									</LocalizationProvider>
 
-								{/* <Stack margin={'5px'} direction={'column'} >
-									<CustomTextField
-										onChange={handleSearchFecha}
-										onClickEndAdornament={() => { searchFecha ? getPrescriptionsByFecha(searchFecha) : getAll() }}
-										id='Fecha'
-										label='Fecha'
-										type='text'
-										value={searchFecha}
-										endAdornament={<Search style={{ color: 'black', paddingLeft: '5px', scale: '1.5' }} />}
-									/>
-								</Stack> */}
+								</Stack>
+
+								<Stack direction={'row'} width={'200px'}>
+									<Button onClick={handleFiltrosBorrar}>
+										<Typography textTransform={'none'}>
+											Borrar Filtros
+										</Typography>
+										<CloseIcon />
+									</Button>
+								</Stack>
 							</Stack>
 
 						</Stack>

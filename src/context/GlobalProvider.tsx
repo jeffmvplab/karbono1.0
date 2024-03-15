@@ -10,6 +10,7 @@ import { GlobalContext } from "./GlobalContext";
 
 import Cookies from "js-cookie";
 import { IUserEquipo } from "@/domain/models/equipo_user.model";
+import { RolUsersKeysEnum } from "@/utilities/enums/rol_user_keys.enum";
 
 type Props = {
 	children: JSX.Element,
@@ -283,11 +284,11 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
 			setIsAuth(true)
 			const rol: string[] = localStorageProtocol.get(StorageKeysEnum.user).rol;
-			console.log('ROL:', rol);
+			// console.log('ROL:', rol);
 			return rol;
 		} else {
 			setIsAuth(false);
-			console.log('ROL:', []);
+			// console.log('ROL:', []);
 			return [];
 		}
 	}
@@ -450,6 +451,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		setLoadingApi(true);
 		const userInv = localStorageProtocol.get(StorageKeysEnum.userInv)
 
+		console.log('ROL...:',userInv.roles)
 		console.log('Register by Inv...:',
 			userInv._id,
 			email,
@@ -459,7 +461,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			registroMedico!,
 			name!,
 			apellido!,
-			[entidadDeSalud],
+			userInv.roles[0]===RolUsersKeysEnum.prescriptor?[entidadDeSalud]:[centralDeMezclas],
 			politica_de_privacidad,)
 
 		const resp = await useruseCase.registerByInvitation(
@@ -468,7 +470,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			nameYApellidos,
 			phone!,
 			password,
-			registroMedico!,
+			(userInv.roles[0]===RolUsersKeysEnum.prescriptor)?registroMedico!:undefined,
 			name!,
 			apellido!,
 			[entidadDeSalud],

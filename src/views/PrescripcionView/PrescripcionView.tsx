@@ -1,5 +1,5 @@
 
-import { Typography, Grid, Stack } from '@mui/material/';
+import { Typography, Grid, Stack, Button } from '@mui/material/';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { mainRoutes } from '@/routes/routes';
 import { TableReportes } from './components/TableReportes';
@@ -10,22 +10,29 @@ import { PrescripcionContext } from './context/PrescripcionContext';
 import { Search } from '@mui/icons-material';
 import CustomTextField from '../Formulario/Components/CustomTextField';
 
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import 'dayjs/locale/es'; // Asegúrate de importar el idioma español de Day.js
+import CloseIcon from '@mui/icons-material/Close';
+
 
 export interface PrescripcionViewProps { }
 
 const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 
-	const { 
-		goAddNew, 
-		getAll, 
-		handleSearchName, 
-		searchName, 
-		handleSearchId, 
+	const {
+		goAddNew,
+		getAll,
+		handleSearchName,
+		searchName,
+		handleSearchId,
 		searchId,
 		searchNumber,
+		searchFecha,
+		setSearchFecha, handleFiltrosBorrar,
 		handleSearchNumber,
-		getPrescriptionsByNumber, 
-		getPrescriptionsByName, 
+		getPrescriptionsByNumber,
+		getPrescriptionsByName, getPrescriptionsByDate,
 		getPrescriptionsById } = useContext(PrescripcionContext)
 
 	return (
@@ -96,6 +103,37 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 										endAdornament={<Search style={{ color: 'black', paddingLeft: '5px', scale: '1.5' }} />}
 									/>
 								</Stack>
+
+
+								<Stack margin={'5px'} direction={'column'} >
+									<LocalizationProvider
+										dateAdapter={AdapterDayjs}
+										adapterLocale='es'
+									>
+										<DatePicker
+											sx={{
+												'.MuiOutlinedInput-root': { borderRadius: '12px' },
+											}}
+											label="Fecha"
+											views={['day', 'month', 'year',]}
+											onChange={(e) => setSearchFecha(e)}
+											onAccept={() => { searchFecha ? getPrescriptionsByDate(searchFecha) : getAll() }}
+											value={searchFecha}
+										/>
+
+									</LocalizationProvider>
+
+								</Stack>
+
+								<Stack direction={'row'} width={'200px'}>
+									<Button onClick={handleFiltrosBorrar}>
+										<Typography textTransform={'none'}>
+											Borrar Filtros
+										</Typography>
+										<CloseIcon />
+									</Button>
+								</Stack>
+
 							</Stack>
 
 						</Stack>

@@ -304,12 +304,12 @@ export const concAminoacidos = (prescription: IPrescriptions) => {
     let concSinAminoacidos: number = 0;
     // const tipoPaciente: string = prescription?.tipo_paciente!;
 
-    if (tipoAminoacidos === 'AminovenSE') { concSinAminoacidos = 0.15 }
-    if (tipoAminoacidos === 'TravasolPlus') { concSinAminoacidos = 0.15 }
-    if (tipoAminoacidos === 'Aminoplasmal SE') { concSinAminoacidos = 0.1 }
-    if (tipoAminoacidos === 'Aminoplasmal CE') { concSinAminoacidos = 0.1 }
-    if (tipoAminoacidos === 'Aminoven Infantil') { concSinAminoacidos = 0.1 }
-    if (tipoAminoacidos === 'Primene') { concSinAminoacidos = 0.1 }
+    if (tipoAminoacidos === 'Aminoven 15% SE') { concSinAminoacidos = 0.15 }
+    if (tipoAminoacidos === 'TravasolPlus 15% SE') { concSinAminoacidos = 0.15 }
+    if (tipoAminoacidos === 'Aminoplasmal 10% SE') { concSinAminoacidos = 0.1 }
+    if (tipoAminoacidos === 'Aminoplasmal 10% CE') { concSinAminoacidos = 0.1 }
+    if (tipoAminoacidos === 'Aminoven Inft 10% SE') { concSinAminoacidos = 0.1 }
+    if (tipoAminoacidos === 'Primene 10% SE') { concSinAminoacidos = 0.1 }
     // if (tipoAminoacidos === 'Aminosteril') { concSinAminoacidos = 0.08 }
     // if (tipoAminoacidos === 'Trophamine') { concSinAminoacidos = 1 }
 
@@ -345,7 +345,7 @@ export const getAportesAminoacidos = (prescription: IPrescriptions) => {
     const peso: number = prescription?.peso!;
     const aportes: Aportes = aportesNew;
 
-    if (tipoAminoacidos === 'Aminoplasmal CE') {
+    if (tipoAminoacidos === 'Aminoplasmal 10% CE') {
         aportes.a_sodio = getAminoacidos(prescription).volumen * 0.05 / peso
         aportes.a_potacio = getAminoacidos(prescription).volumen * 0.025 / peso
         aportes.a_magnesio = getAminoacidos(prescription).volumen * 0.0025 / peso
@@ -380,7 +380,7 @@ export const getLipidos = (prescription: IPrescriptions) => {
         ? parseFloat(prescription?.soluvit_vitalip!) : 0;
 
 
-    if (tipo_lipidos === 'Smoflipid') {
+    if (tipo_lipidos === 'Smoflipid 20%') {
 
         if (vit_lipo !== 0) {
 
@@ -430,21 +430,21 @@ export const getAportesLipidos = (prescription: IPrescriptions) => {
     const peso: number = prescription?.peso!;
     const aportes: Aportes = aportesNew;
 
-    if (tipoLipidos === 'Clinoleic') {
+    if (tipoLipidos === 'Clinoleic 20%') {
         aportes.a_sodio = 0
         aportes.a_potacio = 0
         aportes.a_magnesio = 0
         aportes.a_fosforo = getLipidos(prescription).volumen * 0.015 / peso
         aportes.a_cloruro = 0
 
-    } else if (tipoLipidos === 'Lipoplus') {
+    } else if (tipoLipidos === 'Lipoplus 20%') {
         aportes.a_sodio = getLipidos(prescription).volumen * 0.0026 / peso
         aportes.a_potacio = 0
         aportes.a_magnesio = 0
         aportes.a_fosforo = getLipidos(prescription).volumen * 0.0145 / peso
         aportes.a_cloruro = 0
 
-    } else if (tipoLipidos === 'Smoflipid') {
+    } else if (tipoLipidos === 'Smoflipid 20%') {
 
         aportes.a_sodio = 0
         aportes.a_potacio = 0
@@ -452,7 +452,7 @@ export const getAportesLipidos = (prescription: IPrescriptions) => {
         aportes.a_fosforo = getLipidos(prescription).volumen * 0.015 / peso
         aportes.a_cloruro = 0
 
-    } else if (tipoLipidos === 'Lipofundin') {
+    } else if (tipoLipidos === 'Lipoplus 20%') {
         aportes.a_sodio = getLipidos(prescription).volumen * 0.001 / peso
         aportes.a_potacio = 0
         aportes.a_magnesio = 0
@@ -633,6 +633,31 @@ export const getVolTotal = (prescription: IPrescriptions) => {
     return volTotal;
 }
 
+export const getVolTotalConPurga = (prescription: IPrescriptions) => {
+
+    const volAgua: number = getAgua(prescription).conPurga
+    const vitaminas: number = getVitHidroSolubles(prescription!).conPurga
+        + getVitLiposSolubles(prescription!).conPurga + getSoluv_Vit(prescription!).conPurga
+    let volTotal: number = 0;
+
+
+    console.log('SSSS:', vitaminas)
+
+    volTotal = volAgua
+        + getDextrosa(prescription!).conPurga + getLipidos(prescription!).conPurga
+        + getAminoacidos(prescription!).conPurga + getDipeptiven(prescription!).conPurga
+        + getOmegaven(prescription!).conPurga + getSodio(prescription!).conPurga
+        + getPotacio(prescription!).conPurga + getFosforo(prescription!).conPurga
+        + getMagnesio(prescription!).conPurga + getCalcio(prescription!).conPurga
+        + getOligoelementos(prescription).conPurga + vitaminas
+        + getVit_C(prescription!).conPurga
+        + parseFloat(prescription?.acido_folico!)
+
+    // console.log('Volumen Total:', volTotal)
+
+    return volTotal;
+}
+
 export const getVelinfusion = (prescription: IPrescriptions) => {
 
     const volTotal: number = getVolTotal(prescription);
@@ -657,18 +682,18 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
 
     // console.log('Amino:', aminoacidos)
 
-    const aminovenSE: number = (aminoacidos === 'AminovenSE')
+    const aminovenSE: number = (aminoacidos === 'Aminoven 15% SE')
         ? getAminoacidos(prescription!).volumen : 0;
-    const travasol: number = (aminoacidos === 'TravasolPlus')
+    const travasol: number = (aminoacidos === 'TravasolPlus 15% SE')
         ? getAminoacidos(prescription!).volumen : 0;
-    const aminoPlasmalCE: number = (aminoacidos === 'Aminoplasmal CE')
+    const aminoPlasmalCE: number = (aminoacidos === 'Aminoplasmal 10% CE')
         ? getAminoacidos(prescription!).volumen : 0;
-    const aminoPlasmalSE: number = (aminoacidos === 'Aminoplasmal SE')
+    const aminoPlasmalSE: number = (aminoacidos === 'Aminoplasmal 10% SE')
         ? getAminoacidos(prescription!).volumen : 0;
 
-    const aminovenInfantils: number = (aminoacidos === 'Aminoven Infantil')
+    const aminovenInfantils: number = (aminoacidos === 'Aminoven Inft 10% SE')
         ? getAminoacidos(prescription!).volumen : 0;
-    const primene: number = (aminoacidos === 'Primene')
+    const primene: number = (aminoacidos === 'Primene 10% SE')
         ? getAminoacidos(prescription!).volumen : 0;
 
     const cernevit: number = (vit_hidrosoluble === 'Cernevit')
@@ -696,13 +721,13 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
     const volOligoSensitrace: number = (elementos_traza === 'Sencitrace')
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
     ////////////////////////////////////////////////////////////////////////////////
-    const smoflipid: number = (lipidos === 'Smoflipid')
+    const smoflipid: number = (lipidos === 'Smoflipid 20%')
         ? getLipidos(prescription).volumen : 0;
 
-    const clinoleic: number = (lipidos === 'Clinoleic')
+    const clinoleic: number = (lipidos === 'Clinoleic 20%')
         ? getLipidos(prescription).volumen : 0;
 
-    const lipoplus: number = (lipidos === 'Lipoplus')
+    const lipoplus: number = (lipidos === 'Lipoplus 20%')
         ? getLipidos(prescription).volumen : 0;
 
     // let osmolaridad: number = 0;
@@ -981,18 +1006,18 @@ export const peso_teorico = (prescription: IPrescriptions) => {
     const calcio: string = prescription?.calcio
     const magnesio: string = prescription?.magnesio
 
-    const aminovenSE: number = (aminoacidos === 'AminovenSE')
+    const aminovenSE: number = (aminoacidos === 'Aminoven 15% SE')
         ? getAminoacidos(prescription!).volumen : 0;
-    const travasol: number = (aminoacidos === 'TravasolPlus')
+    const travasol: number = (aminoacidos === 'TravasolPlus 15% SE')
         ? getAminoacidos(prescription!).volumen : 0;
-    const aminoPlasmalCE: number = (aminoacidos === 'Aminoplasmal CE')
+    const aminoPlasmalCE: number = (aminoacidos === 'Aminoplasmal 10% CE')
         ? getAminoacidos(prescription!).volumen : 0;
-    const aminoPlasmalSE: number = (aminoacidos === 'Aminoplasmal SE')
+    const aminoPlasmalSE: number = (aminoacidos === 'Aminoplasmal 10% SE')
         ? getAminoacidos(prescription!).volumen : 0;
 
-    const aminovenInfantils: number = (aminoacidos === 'Aminoven Infantil')
+    const aminovenInfantils: number = (aminoacidos === 'Aminoven Inft 10% SE')
         ? getAminoacidos(prescription!).volumen : 0;
-    const primene: number = (aminoacidos === 'Primene')
+    const primene: number = (aminoacidos === 'Primene 10% SE')
         ? getAminoacidos(prescription!).volumen : 0;
 
     const cernevit: number = (vit_hidrosoluble === 'Cernevit')
@@ -1020,15 +1045,15 @@ export const peso_teorico = (prescription: IPrescriptions) => {
     const volOligoSensitrace: number = (elementos_traza === 'Sencitrace')
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
     ////////////////////////////////////////////////////////////////////////////////
-    const smoflipid: number = (lipidos === 'Smoflipid')
+    const smoflipid: number = (lipidos === 'Smoflipid 20%')
         ? getLipidos(prescription).volumen : 0;
-    const lipofundin: number = (lipidos === 'Lipofundin')
-        ? getLipidos(prescription).volumen : 0;
-
-    const clinoleic: number = (lipidos === 'Clinoleic')
+    const lipofundin: number = (lipidos === 'Lipoplus 20%')
         ? getLipidos(prescription).volumen : 0;
 
-    const lipoplus: number = (lipidos === 'Lipoplus')
+    const clinoleic: number = (lipidos === 'Clinoleic 20%')
+        ? getLipidos(prescription).volumen : 0;
+
+    const lipoplus: number = (lipidos === 'Lipoplus 20%')
         ? getLipidos(prescription).volumen : 0;
 
     const calcio_elemental: number = (calcio === 'Calcio Elemental')

@@ -17,7 +17,7 @@ const TarjetaPar = () => {
               padding: '30px',
               width:'80%'
             }}>
-            <Typography variant='h5'  sx={{ color: '#372FC6', paddingBottom: '20px' }}>Parámetros</Typography>
+            <Typography variant='h5'  sx={{ color: '#372FC6', paddingBottom: '20px' }}>Registros</Typography>
             <Typography variant='body1' sx={{ paddingBottom: '30px' }}>Este módulo te permite consultar los registros (acciones) de cada caso de prescripción solicitada por las IPS.</Typography>
 {/* 
             <Button sx={{ backgroundColor: '#372FC6', color: '#fff', padding: '10px 40px', borderRadius: '10px', ':hover': { backgroundColor: '#372FC6', color: '#e8e8e2' } }}>

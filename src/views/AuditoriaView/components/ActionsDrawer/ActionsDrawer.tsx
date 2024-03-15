@@ -97,7 +97,7 @@ const ActionsDrawer: React.FC<ActionsDrawerProps> = () => {
 						return <ContainerComments
 							key={index}
 							user={item.user}
-							rol={''}
+							rol={item.user.roles[0]}
 							date={formatearFechaEsp(item.date!.toString())}
 							content={item.opcion}
 						/>

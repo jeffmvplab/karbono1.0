@@ -4,13 +4,14 @@ import { LocalStorageProtocol } from "@/protocols/cache/local_cache";
 import { mainRoutes } from "@/routes/routes";
 import { StorageKeysEnum } from "@/utilities/enums";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import { FC } from "react";
 import { PrescripcionContext } from "./PrescripcionContext";
 import { PrescriptionsUseCases } from "@/domain/usecases/prescriptions.usecases";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
 import { GlobalContext } from "@/context/GlobalContext";
 import { ILogs } from "@/domain/models/logs.model";
+import { Dayjs } from "dayjs";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
@@ -38,7 +39,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 
 		if (resp.statusCode === 200) {
-			setReportes(Array.isArray(resp.body)?resp.body.reverse():[]);
+			setReportes(Array.isArray(resp.body) ? resp.body.reverse() : []);
 			setGetOk(true);
 		} else if (resp.statusCode === 400) {
 			setMessageAPI(resp.body.message)
@@ -99,7 +100,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 
 		if (resp.statusCode === 200) {
-			setReportes(Array.isArray(resp.body)?resp.body.reverse():[]);
+			setReportes(Array.isArray(resp.body) ? resp.body.reverse() : []);
 			setGetOk(true);
 		} else if (resp.statusCode === 400) {
 			setMessageAPI(resp.body.message)
@@ -193,7 +194,6 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 	};
 
 	const [searchName, setSearchName] = React.useState('');
-
 	const handleSearchName = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchName(event.target.value);
 		// const prescripcion = event.target.value;
@@ -211,17 +211,21 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		// const prescripcion = event.target.value;
 	};
 
-	const [searchFecha, setSearchFecha] = React.useState('');
-	const handleSearchFecha = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchFecha(event.target.value);
-		// const prescripcion = event.target.value;
-	};
+	const [searchFecha, setSearchFecha] = React.useState<Dayjs | null | string>();
 
 	const [selectedFilter, setSelectedFilter] = React.useState('a');
 	const handleChangeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSelectedFilter(event.target.value);
 		console.log('Filter:', event.target.value)
 	};
+
+	const handleFiltrosBorrar = () => {
+		setSearchNumber('');
+		setSearchId('');
+		setSearchName('');
+		setSearchFecha(null);
+		getAll();
+	}
 
 	/////////////////////////////////Integración de Busquedas///////////////////////////////////////////////
 	const [loadingApi, setLoadingApi] = React.useState(true);
@@ -235,16 +239,16 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		const resp = await prescriptionsUseCase.prescripcionsByNumber(number);
 		let repoPresc: IPrescriptions[] = []
 
-		if (resp.body.length>0) {
+		if (resp.body.length > 0) {
 			repoPresc = resp.body
 		} else {
 			repoPresc[0] = resp.body
 		}
-		
-		console.log('RESP by Num:',repoPresc)
+
+		console.log('RESP by Num:', repoPresc)
 		if (resp.statusCode === 200) {
 			setReportes(repoPresc);
-			setErrorSearch(false)	
+			setErrorSearch(false)
 			// if (resp.body.length === 0) {
 			// 	setMessageAPI('No se encontró ninguna prescripción')
 			// 	setErrorSearch(true)
@@ -280,14 +284,14 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 		if (resp.body.length > 0) {
 			repoPresc = resp.body
+			console.log('RESP by Name:', resp.body)
 		} else {
 			repoPresc = []
 		}
 
-		console.log('RESP by Name:', resp.body)
 		if (resp.statusCode === 201) {
 
-			setReportes(Array.isArray(repoPresc)?repoPresc.reverse():[]);
+			setReportes(Array.isArray(repoPresc) ? repoPresc.reverse() : []);
 			setErrorSearch(false)
 
 			if (resp.body.length === 0) {
@@ -324,17 +328,17 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		const resp = await prescriptionsUseCase.prescripcionsByIps(ips);
 		let repoPresc: IPrescriptions[] = []
 
-		if (resp.body.length>0) {
+		if (resp.body.length > 0) {
 			repoPresc = resp.body
 		} else {
 			repoPresc[0] = resp.body
 		}
 
-		console.log('RESP by Ips:',repoPresc)
+		console.log('RESP by Ips:', repoPresc)
 
 		if (resp.statusCode === 201) {
 
-			setReportes(Array.isArray(repoPresc)?repoPresc.reverse():repoPresc);
+			setReportes(Array.isArray(repoPresc) ? repoPresc.reverse() : repoPresc);
 			setErrorSearch(false)
 
 			if (resp.body.length === 0) {
@@ -368,27 +372,61 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 	const getPrescriptionsById = async (id: string) => {
 		setLoadingApi(false);
-		
+
 		const resp = await prescriptionsUseCase.prescripcionsById(id);
-		
+
 		let repoPresc: IPrescriptions[] = []
-		
+
 		if (resp.body.length > 0) {
 			repoPresc = resp.body
 		} else {
-			repoPresc[0]= resp.body
+			repoPresc[0] = resp.body
 		}
-		console.log('RESP by Id:',repoPresc)
+		console.log('RESP by Id:', repoPresc)
 
 		if (resp.statusCode === 201) {
 			setReportes(repoPresc);
 			setErrorSearch(false)
+			setApiOk(false)
+		} else if (resp.statusCode === 400) {
+			setMessageAPI(resp.body.message)
+			setApiOk(false)
+			setErrorSearch(true)
+		} else if (resp.statusCode === 404) {
+			setMessageAPI(resp.body.message)
+			setApiOk(false)
+			setErrorSearch(true)
+		} else if (resp.statusCode === 401 || resp.statusCode === 500) {
+			setMessageAPI(resp.body.message)
+			setApiOk(false)
+			setErrorSearch(true)
+		} else if (resp.statusCode === 408) {
+			handleOffline();
+		} else {
+			setMessageAPI(resp.body.message)
+			setApiOk(false)
+			setErrorSearch(true)
+		}
+		setLoadingApi(true);
+	}
 
-			// if (resp.body.length === 0) {
-			// 	setMessageAPI('No se encontró ninguna prescripción')
-			// 	console.log(resp.body)
-			// 	setErrorSearch(true)
-			// }
+	const getPrescriptionsByDate = async (date: string) => {
+		setLoadingApi(false);
+
+		const resp = await prescriptionsUseCase.getPrescripcionsByDate(date);
+
+		let repoPresc: IPrescriptions[] = []
+
+		if (resp.body.length > 0) {
+			repoPresc = resp.body
+		} else {
+			repoPresc = resp.body
+		}
+		console.log('RESP by Date:', repoPresc)
+
+		if (resp.statusCode === 201) {
+			setReportes(repoPresc);
+			setErrorSearch(false)
 			setApiOk(false)
 		} else if (resp.statusCode === 400) {
 			setMessageAPI(resp.body.message)
@@ -451,7 +489,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			goAddNew,
 
 			openActionsDrawer, setOpenActionsDrawer,
-			goActions,logs,
+			goActions, logs,
 
 			openModalSearch,
 			handleOpenModalSearch,
@@ -468,9 +506,10 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 			searchNumber,
 			handleSearchNumber,
+			handleFiltrosBorrar,
 
 			searchFecha,
-			handleSearchFecha,
+			setSearchFecha,
 
 			selectedFilter,
 			handleChangeFilter,
@@ -481,6 +520,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			prescSearch,
 			getPrescriptionsByName,
 			getPrescriptionsById,
+			getPrescriptionsByDate,
 			getPrescriptionsByNumber,
 
 			getLogsByNumber,

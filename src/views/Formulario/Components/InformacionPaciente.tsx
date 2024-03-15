@@ -230,7 +230,7 @@ const InformacionPaciente = () => {
                             <CustomTextField
                                 onChange={handleUbicacion}
                                 id='ubicacion'
-                                label='Ubicaión'
+                                label='Ubicación'
                                 type='text'
                                 value={ubicacion}
                                 defaulValue={ubicacion}
