@@ -6,6 +6,7 @@ import { colorsKarbono } from '@/themes/colors';
 import MiCuentaComponent from './components/MiCuentaComponent';
 import EquipoComonent from './components/EquipoComponent';
 import { GlobalContext } from '@/context/GlobalContext';
+import { RolUsersKeysEnum } from '@/utilities/enums/rol_user_keys.enum';
 
 export interface ConfigurarCuentaViewProps { }
 
@@ -86,7 +87,7 @@ const ConfigurarCuentaView: React.FC<ConfigurarCuentaViewProps> = () => {
 							</Button>
 
 							{
-								(getMeRol()[0] === 'Administrador')
+								(getMeRol()[0] === RolUsersKeysEnum.administrador)
 								&&
 								<Button
 									onClick={() => setSelectPerfil('equipo')}
@@ -107,7 +108,7 @@ const ConfigurarCuentaView: React.FC<ConfigurarCuentaViewProps> = () => {
 
 					<Stack direction={'column'} display={{ xs: 'flex', md: 'none' }} >
 
-						<Stack top={'2px'} direction={'row'} width={'100%'} justifyContent={'center'} spacing={2}>
+						<Stack top={'2px'} direction={'row'} width={'100%'} justifyContent={{xs:'start',md:'center'}} spacing={2}>
 							<Button
 								onClick={() => setSelectPerfil('mi_cuenta')}
 								sx={{
@@ -121,7 +122,7 @@ const ConfigurarCuentaView: React.FC<ConfigurarCuentaViewProps> = () => {
 							</Button>
 
 							{
-								(getMeRol()[0] === 'Administrador')
+								(getMeRol()[0] === RolUsersKeysEnum.administrador)
 								&&
 								<Button
 									onClick={() => setSelectPerfil('equipo')}

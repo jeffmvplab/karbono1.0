@@ -11,6 +11,7 @@ export interface IPrescriptionsUseCase {
     prescripcionsByNumber(number: string): Promise<any>;
     prescripcionsByName(name: string): Promise<any>;
     prescripcionsById(id: string): Promise<any>;
+    getPrescripcionsByDate(date: string): Promise<any>;
     prescripcionsByIps(ips: string): Promise<any>;
     prescripcionsAll(limit: number): Promise<any>;
     updatePrescripcions(prescriptions: IPrescriptions, number: string): Promise<any>;
@@ -20,7 +21,7 @@ export interface IPrescriptionsUseCase {
     getPrescripcionsByLab(): Promise<any>;
     setQuimicos(prescriptionId: string, preparador: string, controlador_de_calidad: string): Promise<any>;
 
-    getLogs(number:string): Promise<any>
+    getLogs(number: string): Promise<any>
 }
 
 
@@ -60,7 +61,9 @@ export class PrescriptionsUseCases implements IPrescriptionsUseCase {
     prescripcionsById(id: string): Promise<any> {
         return this.prescriptionsRepository.getPrescripcionsById(id);
     }
-
+    getPrescripcionsByDate(date: string): Promise<any> {
+        return this.prescriptionsRepository.getPrescripcionsByDate(date);
+    };
     prescripcionsByIps(ips: string): Promise<any> {
         return this.prescriptionsRepository.getPrescripcionsByIps(ips);
     }
@@ -77,7 +80,7 @@ export class PrescriptionsUseCases implements IPrescriptionsUseCase {
         return this.prescriptionsRepository.setQuimicos(prescriptionId, preparador, controlador_de_calidad);
     }
 
-    getLogs(number:string): Promise<any>{
+    getLogs(number: string): Promise<any> {
         return this.prescriptionsRepository.getLogs(number);
 
     }

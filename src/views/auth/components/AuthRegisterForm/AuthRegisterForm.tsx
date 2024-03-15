@@ -52,14 +52,14 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 	const localStorageProtocol = new LocalStorageProtocol();
 
 	const router = useRouter();
-	const query = router.query
+	const query = router.query.query
 
 
 	useEffect(() => {
 		if (localStorageProtocol.get(StorageKeysEnum.userInv)) {
 			const userInv = localStorageProtocol.get(StorageKeysEnum.userInv)
 			console.log('USER INV:', userInv)
-			console.log('QUERY:', query.query)
+			console.log('QUERY:', query)
 			setEmail(userInv.email);
 			setNameYApellidos(userInv.nombre_apellidos);
 			// setRol(userInv.rol);
@@ -236,9 +236,8 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 								/>
 							</Stack>
 						</Grid>
-
-						{
-							(userInv?.roles! === RolUsersKeysEnum.prescriptor)
+						{(query)
+							? (userInv?.roles! === RolUsersKeysEnum.prescriptor)
 								? <Grid item xs={12} paddingBottom={3}>
 									<Stack direction={'row'} spacing={4}>
 										<TextField
@@ -269,10 +268,11 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 											))}
 										</TextField>
 									</Stack>
-									<Stack direction={'row'} paddingY={3}>
-										<ReCAPTCHAComponent />
-									</Stack>
 								</Grid>
+								: <></>
+
+							: (userInv?.roles! === RolUsersKeysEnum.prescriptor)
+								? <></>
 								: <Grid item xs={12} paddingBottom={3}>
 									<Stack direction={'row'} spacing={4}>
 										<TextField
@@ -303,13 +303,12 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 											))}
 										</TextField>
 									</Stack>
-									<Stack direction={'row'} paddingY={3}>
-										<ReCAPTCHAComponent />
-									</Stack>
 								</Grid>
 
 						}
-
+						<Stack direction={'row'} paddingY={3}>
+							<ReCAPTCHAComponent />
+						</Stack>
 						<FormControlLabel
 							control={<Checkbox checked={politica_de_privacidad} onChange={handlePolitica} />}
 							label={
@@ -356,7 +355,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 									fontSize={'20px'}
 									onClick={() => {
 
-										query.query === 'invitación'
+										query === 'invitación'
 											? registerByInvitation()
 											: register((userInv?.roles! === '' || userInv?.roles! === null || userInv?.roles! === undefined)
 												? "Administrador"

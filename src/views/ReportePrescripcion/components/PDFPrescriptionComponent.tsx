@@ -31,20 +31,20 @@ const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ rep
                             {/* <Grid container paddingBottom={5}> */}
 
                             <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
-                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Institucion:</Typography>
-                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.ips}</Typography>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Institucion:</Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.ips}</Typography>
                             </Stack>
                             <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
 
                             <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
-                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Servicio:</Typography>
-                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.servicio}</Typography>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Servicio:</Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.servicio}</Typography>
                             </Stack>
                             <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
 
                             <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
-                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Nombre:</Typography>
-                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.nombre_paciente}</Typography>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Nombre:</Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.nombre_paciente}</Typography>
                             </Stack>
                             <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
 
@@ -55,8 +55,8 @@ const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ rep
                             <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} /> */}
 
                             <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
-                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>identificación:</Typography>
-                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.no_identificacion}</Typography>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>identificación:</Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.no_identificacion}</Typography>
                             </Stack>
 
                             {/* </Grid> */}
@@ -68,37 +68,37 @@ const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ rep
                             {/* <Grid container paddingBottom={5}> */}
 
                             <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
-                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Peso (kg):</Typography>
-                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.peso}</Typography>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Peso (kg):</Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.peso}</Typography>
                             </Stack>
                             <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
 
                             <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
-                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Edad(años):</Typography>
-                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.edad}</Typography>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Edad(años):</Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.edad}</Typography>
                             </Stack>
                             <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
 
                             <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
-                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Tiempo de infusión (h):</Typography>
-                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.tiempo_infusion}</Typography>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Tiempo de infusión (h):</Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.tiempo_infusion}</Typography>
                             </Stack>
                             <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
                             <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
-                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Velocidad de infusión:</Typography>
-                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{alertVelInfucion(reporte!).toFixed(2)}</Typography>
-                            </Stack>
-                            <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
-
-                            <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
-                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Volumen(ml):</Typography>
-                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.volumen}</Typography>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Velocidad de infusión:</Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{alertVelInfucion(reporte!).toFixed(2)}</Typography>
                             </Stack>
                             <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
 
                             <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
-                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Overfill:</Typography>
-                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: '18px', textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.overfill}</Typography>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Volumen(ml):</Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.volumen}</Typography>
+                            </Stack>
+                            <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
+
+                            <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Overfill:</Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize:{xs:'12px',md:'18px'}, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.overfill}</Typography>
                             </Stack>
 
                             {/* </Grid> */}

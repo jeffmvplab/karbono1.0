@@ -3,17 +3,19 @@ import React, { useContext, useEffect, useState } from 'react';
 import { colorsKarbono } from '@/themes/colors';
 import CustomTextField from '@/views/Formulario/Components/CustomTextField';
 import { GlobalContext } from '@/context/GlobalContext';
+import { IoCreateOutline } from 'react-icons/io5';
 
 export interface MiCuentaComponentProps { }
 
 const sx = {
+
 	color: { xs: 'white', md: 'black' },
 	backgroundColor: { xs: colorsKarbono.primary, sm: '#B8BDBDB2 ' },
 	'&:hover': {
 		backgroundColor: { xs: colorsKarbono.primary, sm: '#B8BDBDB2 ' }
 		// colorsKarbono.primary,
 	},
-	textTransform: 'capitalize', 
+	textTransform: 'capitalize',
 };
 
 interface EditCampos {
@@ -28,26 +30,26 @@ interface EditCampos {
 const MiCuentaComponent: React.FC<MiCuentaComponentProps> = () => {
 
 	const [editarCampos, setEditarCampos] = useState<EditCampos>();
-	const { user, setUser,loadingAuth, updateMe } = useContext(GlobalContext)
+	const { user, setUser, loadingAuth, updateMe } = useContext(GlobalContext)
 
 
 	return (
 		<>
 			{(!loadingAuth)
-				&& <Stack width={'100%'} paddingX={'10px'}  paddingTop={10} direction={'column'} paddingRight={{md: 20 }} spacing={2}>
+				&& <Stack width={'100%'} paddingX={'10px'} paddingTop={10} direction={'column'} paddingRight={{ md: 20 }} spacing={2}>
 					<Typography display={{ xs: 'none', sm: 'flex' }} fontSize={16} fontWeight={800}>
 						Configuración
 					</Typography>
 
 
-					<Divider sx={{ backgroundColor: '#B8BDBDB2 ', height: '2px',display:{xs:'none',md:'flex'} }} />
+					<Divider sx={{ backgroundColor: '#B8BDBDB2 ', height: '2px', display: { xs: 'none', md: 'flex' } }} />
 
 
-					<Typography fontSize={14} fontWeight={800}>
+
+					<Typography color={colorsKarbono.secundary} fontSize={14} fontWeight={800}>
 						Correo electrónico
 					</Typography>
-
-					<Stack direction={'row'} justifyContent={'space-between'} spacing={2}>
+					<Stack direction={'row'} justifyContent={'space-between'} spacing={2} alignItems={'center'}>
 						<Stack >
 							{(editarCampos?.editEmail)
 								? <CustomTextField
@@ -56,13 +58,15 @@ const MiCuentaComponent: React.FC<MiCuentaComponentProps> = () => {
 									id='Correo electrónico'
 									label={'Correo electrónico'}
 								/>
-								: <Typography fontSize={16} fontWeight={500}>
+								: <Typography color={'#696969'} fontSize={16} fontWeight={400}>
 									{user?.email}
 								</Typography>}
 						</Stack>
 
 						<Button
 							sx={sx}
+							size='large'
+							style={{ borderRadius: '10px' }}
 							onClick={
 								() => {
 									(editarCampos?.editEmail) && updateMe(),
@@ -70,15 +74,16 @@ const MiCuentaComponent: React.FC<MiCuentaComponentProps> = () => {
 								}
 							}>
 							{editarCampos?.editEmail ? 'Guardar' : 'Editar'}
+							<IoCreateOutline style={{ padding: '2px', fontSize: 20, cursor: 'pointer' }} />
 						</Button>
 					</Stack>
 
 					<Divider sx={{ backgroundColor: '#B8BDBDB2 ', height: '2px', }} />
 
-					<Typography fontSize={14} fontWeight={800}>
+					<Typography color={colorsKarbono.secundary} fontSize={14} fontWeight={800}>
 						Nombre y apellidos
 					</Typography>
-					<Stack direction={'row'} justifyContent={'space-between'} spacing={2}>
+					<Stack direction={'row'} justifyContent={'space-between'} spacing={2} alignItems={'center'}>
 						<Stack>
 							{(editarCampos?.editName)
 								? <CustomTextField
@@ -87,28 +92,31 @@ const MiCuentaComponent: React.FC<MiCuentaComponentProps> = () => {
 									id='Nombre y Apellidos'
 									label={'Nombre y Apellidos'}
 								/>
-								: <Typography fontSize={16} fontWeight={500}>
+								: <Typography color={'#696969'} fontSize={16} fontWeight={400}>
 									{user?.nombre_apellidos}
 								</Typography>}
 						</Stack>
 
 						<Button
 							sx={sx}
+							size='large'
+							style={{ borderRadius: '10px' }}
 							onClick={() => {
 								(editarCampos?.editName) && updateMe(),
 									setEditarCampos({ ...editarCampos, editName: !editarCampos?.editName })
 							}
 							}>
 							{editarCampos?.editName ? 'Guardar' : 'Editar'}
+							<IoCreateOutline style={{ padding: '2px', fontSize: 20, cursor: 'pointer' }} />
 						</Button>
 					</Stack>
 
 					<Divider sx={{ backgroundColor: '#B8BDBDB2 ', height: '2px', }} />
 
-					<Typography fontSize={14} fontWeight={800}>
+					<Typography color={colorsKarbono.secundary} fontSize={14} fontWeight={800}>
 						Registro Médico
 					</Typography>
-					<Stack direction={'row'} justifyContent={'space-between'} spacing={2}>
+					<Stack direction={'row'} justifyContent={'space-between'} spacing={2} alignItems={'center'}>
 						<Stack>
 							{(editarCampos?.editRegistro)
 								? <CustomTextField
@@ -117,30 +125,32 @@ const MiCuentaComponent: React.FC<MiCuentaComponentProps> = () => {
 									id='Registro Médico'
 									label={'Registro Médico'}
 								/>
-								: <Typography fontSize={16} fontWeight={500}>
+								: <Typography color={'#696969'} fontSize={16} fontWeight={400}>
 									{user?.registro_medico}
 								</Typography>}
 						</Stack>
 
 						<Button
 							sx={sx}
+							size='large'
+							style={{ borderRadius: '10px' }}
 							onClick={
-
 								() => {
 									(editarCampos?.editRegistro) && updateMe(),
 										setEditarCampos({ ...editarCampos, editRegistro: !editarCampos?.editRegistro })
 								}
 							}>
 							{editarCampos?.editRegistro ? 'Guardar' : 'Editar'}
+							<IoCreateOutline style={{ padding: '2px', fontSize: 20, cursor: 'pointer' }} />
 						</Button>
 					</Stack>
 
 					<Divider sx={{ backgroundColor: '#B8BDBDB2 ', height: '2px', }} />
 
-					<Typography fontSize={14} fontWeight={800}>
+					<Typography color={colorsKarbono.secundary} fontSize={14} fontWeight={800}>
 						Teléfono
 					</Typography>
-					<Stack direction={'row'} justifyContent={'space-between'} spacing={2}>
+					<Stack direction={'row'} justifyContent={'space-between'} spacing={2} alignItems={'center'}>
 						<Stack>
 							{(editarCampos?.editPhone)
 								? <CustomTextField
@@ -149,28 +159,31 @@ const MiCuentaComponent: React.FC<MiCuentaComponentProps> = () => {
 									id='Teléfono'
 									label={'Teléfono'}
 								/>
-								: <Typography fontSize={16} fontWeight={500}>
+								: <Typography color={'#696969'} fontSize={16} fontWeight={400}>
 									{user?.telefono}
 								</Typography>}
 						</Stack>
 
 						<Button
 							sx={sx}
+							size='large'
+							style={{ borderRadius: '10px' }}
 							onClick={
 								() => {
 									(editarCampos?.editPhone) && updateMe(), setEditarCampos({ ...editarCampos, editPhone: !editarCampos?.editPhone })
 								}
 							}>
 							{editarCampos?.editPhone ? 'Guardar' : 'Editar'}
+							<IoCreateOutline style={{ padding: '2px', fontSize: 20, cursor: 'pointer' }} />
 						</Button>
 					</Stack>
 
 					<Divider sx={{ backgroundColor: '#B8BDBDB2 ', height: '2px', }} />
 
-					<Typography fontSize={14} fontWeight={800}>
+					<Typography color={colorsKarbono.secundary} fontSize={14} fontWeight={800}>
 						Entidad de Salud
 					</Typography>
-					<Stack direction={'row'} justifyContent={'space-between'} spacing={2}>
+					<Stack direction={'row'} justifyContent={'space-between'} spacing={2} alignItems={'center'}>
 						<Stack>
 							{(editarCampos?.editEntidad)
 								? <CustomTextField
@@ -179,19 +192,22 @@ const MiCuentaComponent: React.FC<MiCuentaComponentProps> = () => {
 									id='Entidad de Salud'
 									label={'Entidad de Salud'}
 								/>
-								: <Typography fontSize={16} fontWeight={500}>
+								: <Typography color={'#696969'} fontSize={16} fontWeight={400}>
 									{user?.entidad_de_salud}
 								</Typography>}
 						</Stack>
 
 						<Button
 							sx={sx}
+							size='large'
+							style={{ borderRadius: '10px' }}
 							onClick={
 								() => {
 									(editarCampos?.editEntidad) && updateMe(), setEditarCampos({ ...editarCampos, editEntidad: !editarCampos?.editEntidad })
 								}
 							}>
 							{editarCampos?.editEntidad ? 'Guardar' : 'Editar'}
+							<IoCreateOutline style={{ padding: '2px', fontSize: 20, cursor: 'pointer' }} />
 						</Button>
 					</Stack>
 

@@ -36,9 +36,9 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
         <>
             <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} paddingRight={'20px'} >
                 {/* <Grid item display='block' sx={{ marginTop: '30px', marginBottom: '15px', width: '40%', paddingLeft:'0' }}> */}
-                <Stack width='100%' direction={'row'} justifyContent={'space-between'} overflow={'scroll'} spacing={2}>
+                <Stack  width='100%' direction={'row'} overflow={'scroll'} justifyContent={{xs:'start',md:'center'}} spacing={4}>
 
-                    <Stack direction={'column'} minWidth={'250px'} maxWidth={'300px'}>
+                    <Stack direction={'column'} width={'300px'}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingBottom: '15px' }}>Macronutrientes</Typography>
                         {/* <Box sx={{ justifyContent: 'start' }} >
                             <ul style={{}}>
@@ -48,43 +48,43 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                             </ul>
                         </Box> */}
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[0]}</Typography>
+                            <Typography width='300px' >{Macronutrientes[0]}</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[1]}</Typography>
+                            <Typography width='300px'>{Macronutrientes[1]}</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[2]} [ {reporte?.aminoacidos} ] :</Typography>
+                            <Typography width='300px'>{Macronutrientes[2]} [ {reporte?.aminoacidos} ] :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[3]}</Typography>
+                            <Typography width='300px'>{Macronutrientes[3]}</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[4]}</Typography>
+                            <Typography width='300px'>{Macronutrientes[4]}</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[5]}</Typography>
+                            <Typography width='300px'>{Macronutrientes[5]}</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[6]}</Typography>
+                            <Typography width='300px'>{Macronutrientes[6]}</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[7]}</Typography>
+                            <Typography width='300px'>{Macronutrientes[7]}</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[8]} [ {reporte?.lipidos} ] :</Typography>
+                            <Typography width='300px'>{Macronutrientes[8]} [ {reporte?.lipidos} ] :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[9]}</Typography>
+                            <Typography width='300px'>{Macronutrientes[9]}</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[10]}</Typography>
+                            <Typography width='300px'>{Macronutrientes[10]}</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[11]} :</Typography>
+                            <Typography width='300px'>{Macronutrientes[11]} :</Typography>
                         </Box>
                         <Box sx={{ justifyContent: 'start' }} >
-                            <Typography>{Macronutrientes[12]} :</Typography>
+                            <Typography width='300px'>{Macronutrientes[12]} :</Typography>
                         </Box>
                         {/* <Box sx={{ justifyContent: 'start' }}  >
                             <Typography>{Macronutrientes[14]} :</Typography>
@@ -92,7 +92,7 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                     </Stack>
                     {/* </Grid>
                 <Grid item display={'flex'} sx={{ marginTop: '30px', marginBottom: '30px', width: '60%' }}> */}
-                    <Stack direction={'column'} minWidth={'150px'}>
+                    <Stack direction={'column'} minWidth={'150px'} >
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', paddingLeft: '10px', textAlign: 'left', width: '6w0%' }}>Requerimiento</Typography>
                         <Stack direction={'column'} alignItems={'center'} paddingTop='15px'>
 
@@ -367,7 +367,7 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                                     {getDipeptiven(reporte!).conPurga.toFixed(2)}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
-{/* 
+                            {/* 
                             {(loadingSave)
                                 ? <Typography>
                                     {getAgua(reporte!).conPurga.toFixed(2)}

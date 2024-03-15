@@ -34,7 +34,13 @@ const TarjetaConf: React.FC<TarjetaConfProps> = () => {
               }}
             >
               <Typography variant='h5' sx={{ color: '#372FC6', paddingBottom: '20px' }}>Configuración</Typography>
-              <Typography variant='body1' sx={{ paddingBottom: '30px' }}>Este módulo te permite editar tus datos de creación de cuenta, y administrar tu equipo.</Typography>
+              
+              <Typography variant='body1' sx={{ paddingBottom: '30px' }}>
+              {getMeRol()[0] === RolUsersKeysEnum.prescriptor
+              ?'Este módulo te permite editar los datos de tú pérfil. '
+              :'Este módulo te permite editar tus datos de creación de cuenta, y administrar tu equipo.'}
+               
+                </Typography>
 
               {/* <Button sx={{ backgroundColor: '#372FC6', color: '#fff', padding: '10px 40px', borderRadius: '10px', ':hover': { backgroundColor: '#372FC6', color: '#e8e8e2' } }}>
                 Ingresar

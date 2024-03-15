@@ -7,6 +7,7 @@ import NextLink from 'next/link';
 import { AuthRegisterForm } from '../components/AuthRegisterForm';
 import { useRouter } from 'next/router';
 
+import Image from 'next/image'
 
 export interface RegisterViewProps { }
 
@@ -21,14 +22,26 @@ const RegisterView: React.FC<RegisterViewProps> = () => {
 
 	} = React.useContext(GlobalContext);
 
+	const router = useRouter()
 
 	return (
-		<>
+		<Stack height={'100%'} justifyContent={{ xs: 'space-between', md: 'none' }}>
+
+			<Box display={{ xs: 'flex', md: 'none' }}>
+				<Button onClick={() => router.push(mainRoutes.home)}>
+					<Image
+						src='/assets/1.png'
+						width={120}
+						height={30}
+						alt=''
+						style={{ marginTop: '5px', alignItems: 'center', }}
+					/>
+				</Button>
+			</Box>
 			<Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
 
 				<Typography sx={{ fontSize: { xs: '24px', sm: '30px' } }} fontWeight={600}>
-					Empieza tu prueba
-					gratuita ahora
+					Registro
 				</Typography>
 
 				<Stack direction="row" spacing={0.5}>
@@ -55,8 +68,7 @@ const RegisterView: React.FC<RegisterViewProps> = () => {
 			}
 
 			<AuthRegisterForm />
-
-		</>
+		</Stack>
 	)
 };
 

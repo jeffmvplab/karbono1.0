@@ -6,10 +6,10 @@ export interface IPrescriptions {
 
     createdAt: Date | string,
     updatedAt: Date | string,
-    estado: 'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION' | 'CANCELADA'
+    estado: 'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION' | 'CANCELADA'|''
 
     user_id?: string,
-    user?: any,
+    user?:string|any,
     no_orden: number,
     tipo_prescripcion: string,
     fecha: string,
@@ -57,9 +57,9 @@ export interface IPrescriptions {
     vit_C: string,
     acido_folico: string,
     observaciones?: IComment[],
-    preparador?: string,
-    controlador_de_calidad?: string,
-
+    preparador?: any,
+    controlador_de_calidad?: any,
+    por_clonacion?:boolean,
 }
 
 

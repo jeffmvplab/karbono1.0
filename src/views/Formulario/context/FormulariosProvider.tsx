@@ -942,9 +942,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	}
 
 	const setPrescriptions = async () => {
-
 		// getMaxNumPresc();
-
 		setLoadingSave(false);
 		console.log('Loading Save & Update Pres...:', prescriptionsData)
 
@@ -1061,9 +1059,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (newnumber) {
 			const copyPrescription: IPrescriptions = {
 				...prescription!,
+				// _id: '',
 				createdAt: new Date().toISOString(),
 				updatedAt: new Date().toISOString(),
-				no_orden: newnumber + 1
+				no_orden: newnumber + 1,
+				por_clonacion: true,
+				estado: 'PENDIENTE'
 			}
 			console.log('Copiando Prescripcion...:', copyPrescription)
 

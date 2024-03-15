@@ -67,14 +67,14 @@ const ReportesParametros: React.FC<ReportesParametrosProps> = ({ reporte, loadin
             <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} paddingRight={'20px'} spacing={4}>
 
                 <Grid item display='block' xs={12} sm={6}>
-                    <Stack width={{ xs: '100%' }} direction={'row'} justifyContent={'space-between'} overflow={'scroll'}>
+                    <Stack width={{ xs: '100%' }} direction={'row'} overflow={'scroll'} justifyContent={{ xs: 'start', md: 'center' }} spacing={4}>
 
-                        <Stack direction={'column'} minWidth={'350px'}>
-                            <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left',paddingLeft: '20px', }}>Parámetros Nutricionales</Typography>
+                        <Stack direction={'column'} display={'block'} width={'350px'}>
+                            <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingLeft: '20px', }}>Parámetros Nutricionales</Typography>
                             <Box sx={{ justifyContent: 'start' }} >
-                                <ul style={{}}>
+                                <ul>
                                     {ParametrosNutricionales.map(lista => {
-                                        return <li style={{ listStyleType: 'none' }} key={lista}><Typography>{lista}</Typography></li>
+                                        return <li style={{ listStyleType: 'none' }} key={lista}><Typography width='350px'>{lista}</Typography></li>
                                     })}
                                 </ul>
                             </Box>
@@ -143,7 +143,7 @@ const ReportesParametros: React.FC<ReportesParametrosProps> = ({ reporte, loadin
                                     ? <Typography>
                                         {getRelacionCalNoProteicasAminoacidos(reporte!).volumen.toFixed(2)}
                                     </Typography>
-                                    : <Skeleton animation="wave" height={30} width="40%" />}                            
+                                    : <Skeleton animation="wave" height={30} width="40%" />}
                             </Stack>
                         </Stack>
                     </Stack>
@@ -151,14 +151,14 @@ const ReportesParametros: React.FC<ReportesParametrosProps> = ({ reporte, loadin
                 </Grid>
 
                 <Grid item display='block' xs={12} sm={6}>
-                    <Stack width={{ xs: '100%' }} direction={'row'} justifyContent={'space-between'} overflow={'scroll'}>
+                    <Stack width={{ xs: '100%' }} direction={'row'} overflow={'scroll'}>
 
-                        <Stack direction={'column'} minWidth={'350px'}>
-                            <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left',paddingLeft: '20px', }}>Parámetros Farmacéuticos</Typography>
+                        <Stack direction={'column'} width={'350px'}>
+                            <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingLeft: '20px', }}>Parámetros Farmacéuticos</Typography>
                             <Box sx={{ justifyContent: 'start' }} >
                                 <ul style={{}}>
                                     {ParametrosFarmaceuticos.map(lista => {
-                                        return <li style={{ listStyleType: 'none' }} key={lista}><Typography>{lista}</Typography></li>
+                                        return <li style={{ listStyleType: 'none' }} key={lista}><Typography width='350px'>{lista}</Typography></li>
                                     })}
                                 </ul>
                             </Box>
@@ -272,11 +272,11 @@ const ReportesParametros: React.FC<ReportesParametrosProps> = ({ reporte, loadin
                                             {alertFactorDePrecipitacion(reporte!).value.toFixed(2)}
                                         </Typography> */}
                                         <Typography color={alertFactorDePrecipitacion(reporte!).alert === 'REVISAR' ? 'red' : 'green'}>
-                                            {alertFactorDePrecipitacion(reporte!).alert?alertFactorDePrecipitacion(reporte!).alert:'-'}
+                                            {alertFactorDePrecipitacion(reporte!).alert ? alertFactorDePrecipitacion(reporte!).alert : '-'}
                                         </Typography>
                                     </Stack>
                                     : <Skeleton animation="wave" height={30} width="40%" />}
-                            
+
                                 {(loadingSave)
                                     ? <Stack direction={'row'} paddingLeft={'80px'} spacing={2}>
                                         <Typography color={alertRelacion_Calcio_Fosfato(reporte!) === 'INSEGURA' ? 'red' : 'green'}>

@@ -22,7 +22,7 @@ import BarReporteNPT from './components/BarReporteNPT/BarReporteNPT';
 import BarReporteQF from './components/BarReporteQF/BarReporteQF';
 import BarReporteQF_Calidad from './components/BarReporteQF_Calidad/BarReporteQF_Calidad';
 import { RolUsersKeysEnum } from '@/utilities/enums/rol_user_keys.enum';
-import { convertirFecha } from '@/utilities/get_String_from_Date_Esp';
+import { formatDateTime} from '@/utilities/get_String_from_Date_Esp';
 import { useRouter } from 'next/router';
 
 
@@ -313,7 +313,7 @@ export const ContainerComments: React.FC<ContainerCommentsProps> = ({ user, rol,
 			}}>
 
 			<Typography color={'black'} sx={{ fontWeight: 500, fontSize: '14px', letterSpacing: '3%', lineHeight: '20px' }}>
-				{user?.nombre_apellidos!}-{rol}-{convertirFecha(date)}
+				{user?.nombre_apellidos!}-{rol}-{formatDateTime(date)}
 			</Typography>
 
 			<Typography color={' #656474'} sx={{ fontWeight: 500, fontSize: '14px', letterSpacing: '3%', lineHeight: '20px' }}>
