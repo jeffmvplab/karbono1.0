@@ -72,7 +72,7 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 
 										onClickEndAdornament={() => { searchName ? getPrescriptionsByName(searchName) : getAll() }}
 										id='Numero-de-orden'
-										label='Buscar por nombre'
+										label='Nombre'
 										type='text'
 										value={searchName}
 										endAdornament={<Search style={{ color: 'black', paddingLeft: '5px', scale: '1.5' }} />}
@@ -84,7 +84,7 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 										onChange={handleSearchId}
 										onClickEndAdornament={() => { searchId ? getPrescriptionsById(searchId) : getAll() }}
 										id='Numero-de-orden'
-										label='Búsqueda por número de identificación'
+										label='Identificación'
 										type='text'
 										value={searchId}
 										endAdornament={<Search style={{ color: 'black', paddingLeft: '5px', scale: '1.5' }} />}
@@ -97,7 +97,7 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 										onChange={handleSearchNumber}
 										onClickEndAdornament={() => { searchNumber ? getPrescriptionsByNumber(searchNumber) : getAll() }}
 										id='Numero-de-orden'
-										label='Búsqueda por número de orden'
+										label='# de orden'
 										type='text'
 										value={searchNumber}
 										endAdornament={<Search style={{ color: 'black', paddingLeft: '5px', scale: '1.5' }} />}
