@@ -6,7 +6,7 @@ export interface IPrescriptions {
 
     createdAt: Date | string,
     updatedAt: Date | string,
-    estado: 'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION' | 'CANCELADA'|''
+    estado: 'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION' | 'CANCELADA'|undefined
 
     user_id?: string,
     user?:string|any,
