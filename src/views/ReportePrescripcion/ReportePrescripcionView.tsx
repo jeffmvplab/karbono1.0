@@ -22,7 +22,7 @@ import BarReporteNPT from './components/BarReporteNPT/BarReporteNPT';
 import BarReporteQF from './components/BarReporteQF/BarReporteQF';
 import BarReporteQF_Calidad from './components/BarReporteQF_Calidad/BarReporteQF_Calidad';
 import { RolUsersKeysEnum } from '@/utilities/enums/rol_user_keys.enum';
-import { formatDateTime} from '@/utilities/get_String_from_Date_Esp';
+import { formatDateTime } from '@/utilities/get_String_from_Date_Esp';
 import { useRouter } from 'next/router';
 
 
@@ -44,25 +44,24 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 		getPrescriptionsByNumber();
 		const rol = getMeRol()[0];
 		setRol(rol)
-		// console.log('REPORTE')
 	}, [router.pathname])
 
 
 	const [isNew, setIsNew] = useState<boolean>(false);
 	const [newObs, setnewObs] = useState<string>();
 
-	// console.log('ROLLLL:', getMeRol()[0], 'ESTADO :', reporte?.estado)
+ console.log('ROLLLL:', getMeRol(), 'ESTADO :', reporte?.estado)
 	// 
 	return (
 		<>
-			{(rol !== '')
+			{(loadingSave)
 				&& <>
 					<Card sx={{ display: { xs: 'none', md: 'flex' }, position: 'fixed', width: '100%', bottom: '40px', left: '0px' }} >
 						{(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
 							? <BarReporteNPT />
-							: (getMeRol()[0] === RolUsersKeysEnum.preparador)
-								? reporte?.estado === 'CALIDAD' ? <BarReporteQF /> : <BarReporteQF_Calidad />
-								: reporte?.estado === 'CALIDAD' ? <BarReporteQF /> : <BarReporteQF_Calidad />
+							: (getMeRol()[0] === RolUsersKeysEnum.calidad)
+								? reporte?.estado === 'SOLICITADA' ? <BarReporteQF /> : <BarReporteQF_Calidad />
+								: <BarReporteQF_Calidad />
 						}
 					</Card>
 
@@ -278,7 +277,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 								{(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
 									? <BarReporteNPT />
-									: (getMeRol()[0] === RolUsersKeysEnum.preparador)
+									: (getMeRol()[0] === RolUsersKeysEnum.calidad)
 										? <BarReporteQF />
 										: <BarReporteQF_Calidad />
 								}

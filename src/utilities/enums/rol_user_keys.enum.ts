@@ -3,7 +3,7 @@ export enum RolUsersKeysEnum {
 
     administrador = 'Administrador',
     prescriptor = 'Prescriptor',
-    calidad = 'Control de calidad',
+    calidad = 'Control de Calidad',
     preparador = 'Preparador NPT',
 
 }
