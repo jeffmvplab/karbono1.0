@@ -653,7 +653,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 										<ContainerText titleWeigth="700" titleSize="20px" title="PRESCRIPTOR" color={colorsKarbono.primary} value={reporte?.user?.nombre_apellidos ? reporte?.user?.nombre_apellidos : '-'} />
 									</Grid>
 									<Grid item xs={6}>
-										<ContainerText titleWeigth="700" titleSize="20px" title="PREPARÓ" color={colorsKarbono.primary} value={`${reporte?.preparador ? 'reporte?.preparador' : '-'}`} />
+										<ContainerText titleWeigth="700" titleSize="20px" title="PREPARÓ" color={colorsKarbono.primary} value={reporte?.preparador.nombre_apellidos ? reporte?.preparador!.nombre_apellidos: '-'} />
 									</Grid>
 								</Grid>
 							</Stack>
@@ -663,7 +663,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 
 								<Grid item xs={8}>
 									<Box width={'100%'} paddingY={1}>
-										<ContainerText titleWeigth="700" titleSize="20px" title="Responsable del Control de Calidad" color={colorsKarbono.primary} value={`${reporte?.controlador_de_calidad ? 'reporte?.controlador_de_calidad' : '-'}`} />
+										<ContainerText titleWeigth="700" titleSize="20px" title="Responsable del Control de Calidad" color={colorsKarbono.primary} value={reporte?.controlador_de_calidad!.nombre_apellidos ? reporte?.controlador_de_calidad!.nombre_apellidos : '-'} />
 									</Box>
 								</Grid>
 							</Grid>

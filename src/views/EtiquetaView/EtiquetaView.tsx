@@ -388,10 +388,10 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 							<Stack direction={'row'}>
 								<Grid container spacing={10}>
 									<Grid item xs={6}>
-										<ContainerText isUpper title="REVISA:" color={colorsKarbono.primary} value={reporte?.controlador_de_calidad ? `${reporte?.controlador_de_calidad!}` : '-'} />
+										<ContainerText isUpper title="REVISA:" color={colorsKarbono.primary} value={reporte?.controlador_de_calidad.nombre_apellidos ? `${reporte?.controlador_de_calidad!.nombre_apellidos}` : '-'} />
 									</Grid>
 									<Grid item xs={6}>
-										<ContainerText isUpper title="PREPARA:" color={colorsKarbono.primary} value={reporte?.preparador ? `${reporte?.preparador!}` : '-'} />
+										<ContainerText isUpper title="PREPARA:" color={colorsKarbono.primary} value={reporte?.preparador.nombre_apellidos ? `${reporte?.preparador!.nombre_apellidos}` : '-'} />
 									</Grid>
 								</Grid>
 							</Stack>
