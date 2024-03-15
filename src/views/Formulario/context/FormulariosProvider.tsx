@@ -1059,12 +1059,13 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (newnumber) {
 			const copyPrescription: IPrescriptions = {
 				...prescription!,
-				// _id: '',
+				_id:undefined,
 				createdAt: new Date().toISOString(),
 				updatedAt: new Date().toISOString(),
 				no_orden: newnumber + 1,
 				por_clonacion: true,
-				estado: 'PENDIENTE'
+				estado: 'PENDIENTE',
+				observaciones: []
 			}
 			console.log('Copiando Prescripcion...:', copyPrescription)
 
