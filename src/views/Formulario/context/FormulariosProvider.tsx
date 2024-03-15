@@ -874,7 +874,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [createdAt, setCreatedAt] = React.useState<Date | string | null>('');
 	const [updatedAt, setUpdatedAt] = React.useState<Date | string | null>('');
 
-	const [estado, setEstado] = React.useState<'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION'>('SOLICITADA');
+	const [estado, setEstado] = React.useState<'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION'>();
 
 	////////////////////////////////////////////////////////////////////
 	///////////////////////////////INTEGRACION DE APIS//////////////////
@@ -886,7 +886,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		createdAt: (createdAt === '') ? new Date().toISOString() : createdAt!,
 		updatedAt: new Date().toISOString(),
 
-		estado: estado,
+		estado: undefined,
 
 		tipo_prescripcion: tipoPrescripcion || '0',
 		fecha: fechaCreacion || '0',
@@ -1059,7 +1059,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (newnumber) {
 			const copyPrescription: IPrescriptions = {
 				...prescription!,
-				_id:undefined,
+				_id: undefined,
 				createdAt: new Date().toISOString(),
 				updatedAt: new Date().toISOString(),
 				no_orden: newnumber + 1,
