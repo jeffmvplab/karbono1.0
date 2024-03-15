@@ -16,16 +16,20 @@ import { convertirFecha } from '@/utilities/get_String_from_Date_Esp';
 import { PrescripcionContext } from '@/views/PrescripcionView/context/PrescripcionContext';
 import { PDFModal } from '@/components/PDFModal';
 import { IoPrintOutline } from "react-icons/io5";
+import { ReportesContext } from '@/views/ReportePrescripcion/context/ReportesContext';
+import { IComment } from '@/domain/models/observaciones.model';
+import { StatePrescriptionKeysEnum } from '@/utilities/enums/state_prescription_keys.enum';
 
 export interface TableGestionPrescripcionesProps { }
 
 const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = () => {
 
 	const { getAll, reportes, loadingGet, loadingApi, goEdit, goReporte } = useContext(PrescripcionContext);
-	const {loadingSave, messageAPI, setMessageAPI} = useContext(FormulariosContext);
+	const { loadingSave, messageAPI, setMessageAPI } = useContext(FormulariosContext);
+	// const { saveComments } = useContext(ReportesContext)
 
 	const [page, setPage] = useState<number>();
-	
+
 	const handlePageChange = (params: any) => {
 		setPage(params)
 		console.log('Params:', params)
@@ -168,7 +172,18 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>
-				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goReporte(params.row.no_orden) }} />
+				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }}
+				 onClick={
+					() => {
+						// const newComment: IComment = {
+						// 	prescriptionId: params.row._id!,
+						// 	// comentario: newObs!,
+						// 	estado: StatePrescriptionKeysEnum.calidad,
+						// }
+						// saveComments(newComment)
+						goReporte(params.row.no_orden), console.log('OJITO')
+					}
+				} />
 				< IoPrintOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpen() }} />
 			</Stack>)
 		},
@@ -215,7 +230,7 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 								// '& .MuiDataGrid-row:hover': { backgroundColor: 'rgb(0,0,0,60%)' },
 								fontFamily: typographyKarbono.outfit
 							}}
-							rows={reportes ? reportes: []}
+							rows={reportes ? reportes : []}
 							columns={columns}
 							initialState={{ pagination: { paginationModel: { pageSize: 15 } }, }}
 							localeText={localeTextDataGrid}

@@ -20,7 +20,6 @@ const BarReporteQF_Calidad = () => {
 
     return (
 
-
             <Stack direction={'column'}   width={'100%'}>
 
                 <Typography
