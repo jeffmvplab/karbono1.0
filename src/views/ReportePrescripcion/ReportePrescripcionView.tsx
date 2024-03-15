@@ -60,7 +60,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 						{(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
 							? <BarReporteNPT />
 							: (getMeRol()[0] === RolUsersKeysEnum.calidad)
-								? reporte?.estado === 'SOLICITADA' ? <BarReporteQF /> : <BarReporteQF_Calidad />
+								? (reporte?.estado === 'SOLICITADA'||reporte?.estado === 'CALIDAD') ? <BarReporteQF /> : <BarReporteQF_Calidad />
 								: <BarReporteQF_Calidad />
 						}
 					</Card>

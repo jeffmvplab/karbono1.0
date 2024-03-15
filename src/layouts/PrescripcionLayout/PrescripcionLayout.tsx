@@ -11,6 +11,7 @@ import Head from 'next/head';
 import ConexionStatusModal from '@/components/ConexionStatusModal/ConexionStatusModal';
 import { FormulariosProvider } from '@/views/Formulario/context/FormulariosProvider';
 import { MainDrawer } from '../components/MainDrawer';
+import { ReportesProvider } from '@/views/ReportePrescripcion/context/ReportesProvider';
 
 
 
@@ -37,21 +38,23 @@ const PrescripcionLayout: React.FC<PrescripcionLayoutInterface> = ({ children })
       <GlobalProvider>
         <FormulariosProvider>
           <PrescripcionProvider>
-            <ConexionStatusModal />
-            <Box sx={{ display: 'flex' }}>
-              {/*Navbar draweWidth */}
-              <NavbarP drawerWidth={draweWidth} />
-              <MainDrawer/>
-              {/*Sidebar draweWidth */}
-              {/* <Sidebar /> */}
-              <Box
-                component='main'
-                sx={{ flexGrow: 1, padding: '3' }}
-              >
-                {/*Toolbar*/}
-                {children}
+            {/* <ReportesProvider> */}
+              <ConexionStatusModal />
+              <Box sx={{ display: 'flex' }}>
+                {/*Navbar draweWidth */}
+                <NavbarP drawerWidth={draweWidth} />
+                <MainDrawer />
+                {/*Sidebar draweWidth */}
+                {/* <Sidebar /> */}
+                <Box
+                  component='main'
+                  sx={{ flexGrow: 1, padding: '3' }}
+                >
+                  {/*Toolbar*/}
+                  {children}
+                </Box>
               </Box>
-            </Box>
+            {/* </ReportesProvider> */}
           </PrescripcionProvider>
         </FormulariosProvider>
       </GlobalProvider>
