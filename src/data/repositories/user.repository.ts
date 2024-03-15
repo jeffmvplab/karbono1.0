@@ -13,7 +13,7 @@ export interface IUserRepository {
         nombre_apellidos: string,
         primer_nombre: string,
         primer_apellido: string,
-        registro_medico:string|null,
+        registro_medico:string|null|undefined,
         entidad_de_salud: string[],
         central_de_mezclas: string,
         phone: string,
