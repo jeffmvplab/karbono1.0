@@ -102,7 +102,7 @@ const FormView: React.FC<FormViewProps> = () => {
 		//&&
 		<Stack
 			direction={'column'}
-			marginBottom={{ xs: 25, sm: 10 }} >
+			marginBottom={{ xs: 25, sm: 20 }} >
 
 			<FormSavedModal />
 			<FormCancelModal />
@@ -113,17 +113,22 @@ const FormView: React.FC<FormViewProps> = () => {
 
 			<Grid container >
 
-				<Grid item xs={12} sm={8} md={9} style={{ paddingRight: '20px' }} >
+				<Grid item xs={12} sm={8} md={9} style={{ paddingRight: '20px' }}  >
 
-					<Stack direction={'column'} spacing={2}>
+					<Stack direction={'column'} height={'100%'} spacing={1.5}>
 						{(!loadingSave)
 							? <Skeleton
 								variant="rectangular"
-								sx={{ marginX: '10px', paddingRight: '20px', borderRadius: '10px', maxHeight: { xs: '90vh', sm: '80vh', md: '60vh', xl: '90vh' }, }}
-								width='100%' height={700} />
+								sx={{
+									marginX: '10px',
+									paddingRight: '20px',
+									borderRadius: '10px',
+									maxHeight: { xs: '90vh', sm: '100%' },
+								}}
+								width='100%' height='100%' />
 							: <>
 								{
-									<Card elevation={10} sx={{ borderRadius: 4 }}>
+									<Card elevation={5} sx={{ borderRadius: 4 }}>
 										<Box
 											sx={{
 												bgcolor: 'white',
@@ -155,11 +160,11 @@ const FormView: React.FC<FormViewProps> = () => {
 														}}
 														fullWidth
 
-														helperText={
-															(numOrder.length >= 3 && numOrder.length <= 5)
-																? ''
-																: 'El número de orden debe ser mayor que 3 y menor que 5'
-														}
+													// helperText={
+													// 	(numOrder.length >= 3 && numOrder.length <= 5)
+													// 		? ''
+													// 		: 'El número de orden debe ser mayor que 3 y menor que 5'
+													// }
 													/>
 
 													{/* </CustomToolTip> */}
@@ -219,8 +224,7 @@ const FormView: React.FC<FormViewProps> = () => {
 							</>
 						}
 						{(loadingSave) && <>
-							<Card elevation={10} sx={{ borderRadius: 4 }} >
-
+							<Card elevation={5} sx={{ borderRadius: 4 }} >
 								<Box
 									paddingX={{ xs: '20px', md: '10px' }}
 									marginTop={'10px'}
@@ -232,13 +236,14 @@ const FormView: React.FC<FormViewProps> = () => {
 										</Alert>}
 
 									<Stack
+									
 										paddingX={1}
 										direction={'row'}
 										paddingY={4}
-										width={{ xs: '100%', md: '70%' }}
-										justifyContent={'space-between'}
+										width={{ xs: '100%', md: '100%' }}
+										// justifyContent={'space-between'}
 										overflow={'scroll'}
-										spacing={1}
+										spacing={2}
 									>
 
 										<CustomButtonTab
@@ -299,42 +304,44 @@ const FormView: React.FC<FormViewProps> = () => {
 				</Grid>
 
 				<Grid item sm={4} md={3}>
-					<Box display={{ xs: 'none', sm: 'block' }}>
-						{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-						{(!loadingSave)
-							? <Skeleton
-								variant="rectangular"
-								sx={{
+					<Stack direction={'column'} maxHeight={'1080px'}>
 
-									overflow: 'auto',
-									borderRadius: '10px',
-									height: { xs: '35.5vh', sm: '30vh', md: '30vh', xl: '30vh' },
-								}} />
-							: <ParametrosFarmaceuticos />}
+						<Box display={{ xs: 'none', sm: 'block' }}>
+							{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+							{(!loadingSave)
+								? <Skeleton
+									variant="rectangular"
+									sx={{
 
-						{(!loadingSave)
-							? <Skeleton
-								variant="rectangular"
-								sx={{
-									overflow: 'auto',
-									borderRadius: '10px',
-									height: { xs: '35.5vh', sm: '30vh', md: '30vh', xl: '30vh' },
-									marginTop: '20px',
-									marginBottom: '20px'
-								}} />
-							: <ParametrosNutricionales />}
-						{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-					</Box>
+										overflow: 'auto',
+										borderRadius: '10px',
+										height: { xs: '35.5vh', sm: '100%' },
+									}} />
+								: <ParametrosFarmaceuticos />}
 
+							{(!loadingSave)
+								? <Skeleton
+									variant="rectangular"
+									sx={{
+										overflow: 'auto',
+										borderRadius: '10px',
+										height: { xs: '35.5vh', sm: '100%'  },
+										marginTop: '20px',
+										marginBottom: '20px'
+									}} />
+								: <ParametrosNutricionales />}
+							{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+						</Box>
+					</Stack>
 				</Grid>
 
 				<Box
 					display={{ xs: 'flex', md: 'flex' }}
 					zIndex={99} bottom={0} left={0}
-					position={{ xs: 'fixed'}}
-					bgcolor={{xs:'white',md:'transparent'}}
+					position={{ xs: 'fixed' }}
+					bgcolor={{ xs: 'white', md: 'transparent' }}
 					width={'100%'}
-					height={(selectTab === 3) ? {xs:'210px', md: '100px' }: {xs:'180px', md: '100px' }}>
+					height={(selectTab === 3) ? { xs: '210px', md: '100px' } : { xs: '180px', md: '100px' }}>
 
 					<Stack
 						zIndex={100}
@@ -359,11 +366,11 @@ const FormView: React.FC<FormViewProps> = () => {
 										? () => handleOpenModalFormCancel()
 										: () => setSelectTab(selectTab - 1)
 								}
-								sx={{ height: { xs: 30, md: 40 } }}
-								width={127}
+								sx={{ height: { xs: 30, md: 40 },width: { xs: 100, md: 160 }, }}
+								// width={127}
 								text={(selectTab === 0) ? 'Cancelar' : 'Anterior'}
 								textColor={'white'}
-								color={(selectTab === 0) ? 'red' : colorsKarbono.secundary}
+								color={(selectTab === 0) ? '#D03939' : colorsKarbono.secundary}
 								startIcon={(selectTab === 0) ? <CloseIcon sx={{ color: 'white' }} /> : <ChevronLeftIcon sx={{ color: 'white' }} />}
 							/>
 
@@ -372,9 +379,9 @@ const FormView: React.FC<FormViewProps> = () => {
 									<CustomButton
 										// disabled={!valOKAlert}
 										onClick={() => { }}
-										width={127}
+										// width={127}
 										text={'Eliminar'}
-										sx={{ borderRadius: '10px', height: { xs: 30, md: 40 } }}
+										sx={{ borderRadius: '10px',width: { xs: 100, md: 160 }, height: { xs: 30, md: 40 } }}
 										color={'#D03939'}
 										textColor='white'
 										startIcon={<CloseIcon sx={{ color: 'white' }} />}
@@ -390,9 +397,9 @@ const FormView: React.FC<FormViewProps> = () => {
 									<CustomButton
 										// disabled={!valOKAlert}
 										onClick={() => { }}
-										width={127}
+										// width={127}
 										text={'Eliminar'}
-										sx={{ borderRadius: '10px', height: { xs: 30, md: 40 } }}
+										sx={{ borderRadius: '10px',width: { xs: 100, md: 160 }, height: { xs: 30, md: 40 } }}
 										color={'#D03939'}
 										textColor='white'
 										startIcon={<CloseIcon sx={{ color: 'white' }} />}

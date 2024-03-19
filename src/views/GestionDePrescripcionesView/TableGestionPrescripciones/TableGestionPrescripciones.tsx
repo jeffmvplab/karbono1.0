@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Alert, Box, Button, Skeleton, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Card, Skeleton, Stack, Typography } from '@mui/material';
 import { colorsKarbono } from '@/themes/colors';
 import { IPrescriptions } from '@/domain/models/prescriptions.model';
 
@@ -64,7 +64,7 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 			flex: 1,
 			minWidth: 250,
 			renderCell: (params: GridRenderCellParams) => (
-				<Button sx={{ fontFamily: typographyKarbono.outfit, fontSize: 12 }} variant='text'
+				<Button sx={{ color: 'black', fontFamily: typographyKarbono.outfit, fontSize: 12 }} variant='text'
 				>
 					<Typography onClick={() => { goReporte(params.row.no_orden) }} >{params.value}</Typography>
 				</Button>
@@ -77,7 +77,7 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 			headerClassName: 'table-color--header',
 			flex: 1,
 			minWidth: 100,
-			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+			renderCell: (params: GridRenderCellParams) => <>{params.value}</>
 		},
 		{
 			field: "nombre_paciente",
@@ -173,17 +173,17 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>
 				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }}
-				 onClick={
-					() => {
-						// const newComment: IComment = {
-						// 	prescriptionId: params.row._id!,
-						// 	// comentario: newObs!,
-						// 	estado: StatePrescriptionKeysEnum.calidad,
-						// }
-						// saveComments(newComment)
-						goReporte(params.row.no_orden), console.log('OJITO')
-					}
-				} />
+					onClick={
+						() => {
+							// const newComment: IComment = {
+							// 	prescriptionId: params.row._id!,
+							// 	// comentario: newObs!,
+							// 	estado: StatePrescriptionKeysEnum.calidad,
+							// }
+							// saveComments(newComment)
+							goReporte(params.row.no_orden), console.log('OJITO')
+						}
+					} />
 				< IoPrintOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpen() }} />
 			</Stack>)
 		},
@@ -220,29 +220,29 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 
 						}
 
-						{/* <div style={{ overflowX: 'auto' }}> */}
-						<DataGrid
-							// style={{ width: "100%"}}
-							sx={{
-								width: "100%",
-								borderRadius: '12px',
-								// '&:hover, &.Mui-hovered': { backgroundColor: 'rgb(0, 0,0,40%)' },
-								// '& .MuiDataGrid-row:hover': { backgroundColor: 'rgb(0,0,0,60%)' },
-								fontFamily: typographyKarbono.outfit
-							}}
-							rows={reportes ? reportes : []}
-							columns={columns}
-							initialState={{ pagination: { paginationModel: { pageSize: 15 } }, }}
-							localeText={localeTextDataGrid}
-							// disableColumnSelector
-							// cledisableRowSelectionOnClick
-							autoHeight
-							//  pageSizeOptions={[10,30,60]}
-							getRowId={(row: IPrescriptions) => row._id!}
-							onPaginationModelChange={(e) => { handlePageChange(e.page) }}
+						<Card elevation={2} style={{ overflowX: 'auto', borderRadius: '15px', }}>
+							<DataGrid
+								style={{ width: "100%" }}
+								sx={{
+									borderRadius: '12px',
+									'& .MuiDataGrid-row': {
+										paddingX: '15px', // Cambia "your_color_here" por el color deseado
+									},
 
-						/>
-						{/* </div> */}
+								}}
+								rows={reportes ? reportes : []}
+								columns={columns}
+								initialState={{ pagination: { paginationModel: { pageSize: 15 } }, }}
+								localeText={localeTextDataGrid}
+								// disableColumnSelector
+								// cledisableRowSelectionOnClick
+								autoHeight
+								//  pageSizeOptions={[10,30,60]}
+								getRowId={(row: IPrescriptions) => row._id!}
+								onPaginationModelChange={(e) => { handlePageChange(e.page) }}
+
+							/>
+						</Card>
 					</Stack>
 
 

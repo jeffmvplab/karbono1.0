@@ -19,10 +19,8 @@ export const correccionPurga = (prescription: IPrescriptions) => {
     const volTotalNPT: number = prescription?.volumen;
     const purga: number = prescription?.overfill;
     const correccion: number = ((volTotalNPT + purga) / volTotalNPT)?((volTotalNPT + purga) / volTotalNPT):1
-
 //   console.log('Overfill:', correccion)
     return correccion;
-
 }
 
 export const getSodio = (prescription: IPrescriptions) => {
@@ -43,8 +41,6 @@ export const getSodio = (prescription: IPrescriptions) => {
         params.conPurga = params.volumen * correccionPurga(prescription);
         params.requerimiento = sodio * 2 / peso;
     }
-
-
     return params;
 }
 
@@ -373,12 +369,10 @@ export const getLipidos = (prescription: IPrescriptions) => {
     const peso: number = prescription?.peso!;
     const tipo_paciente: string = prescription?.tipo_paciente!;
 
-
     const vitaLipid: number = parseFloat(prescription?.req_vit_liposolubles!);
 
     const vit_lipo = prescription?.soluvit_vitalip !== '0'
         ? parseFloat(prescription?.soluvit_vitalip!) : 0;
-
 
     if (tipo_lipidos === 'Smoflipid 20%') {
 
@@ -419,7 +413,6 @@ export const getLipidos = (prescription: IPrescriptions) => {
         }
 
     }
-
     return params;
 }
 

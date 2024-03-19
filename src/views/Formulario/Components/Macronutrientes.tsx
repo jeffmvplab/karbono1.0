@@ -133,7 +133,7 @@ const Macronutrientes = () => {
                 </Box> */}
 
                 <Box display='flex' sx={{ marginTop: '20px' }}>
-                    <Grid container spacing={2}>
+                    <Grid container>
 
                         <LightTooltip
                             title='Requerimiento recomendado de carbohidratos en mg/kg/min es:
@@ -192,7 +192,7 @@ const Macronutrientes = () => {
                 </Box>
 
                 <Box display='flex' sx={{ marginTop: '20px' }}>
-                    <Grid container spacing={2}>
+                    <Grid container>
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                             <CustomTextField
@@ -254,7 +254,7 @@ const Macronutrientes = () => {
                 </Box>
 
                 <Box display='flex' sx={{ marginTop: '20px', }}>
-                    <Grid container spacing={2}>
+                    <Grid container>
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                             <CustomTextField
@@ -310,7 +310,7 @@ const Macronutrientes = () => {
                 </Box>
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
-                    <Grid item container spacing={2}>
+                    <Grid item container>
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                             <CustomTextField

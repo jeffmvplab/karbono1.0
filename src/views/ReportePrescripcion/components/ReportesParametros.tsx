@@ -15,10 +15,7 @@ export interface ReportesParametrosProps {
 const ReportesParametros: React.FC<ReportesParametrosProps> = ({ reporte, loadingSave }) => {
 
     const [ParametrosNutricionales, setParametrosNutricionales] = useState([
-        // 'Volument total (ml):',
-        // 'Velocidad de infusión (ml/hr):',
-        // 'Osmolaridad (mOsm/lt)',
-        // 'Vía de administración:',
+       
         'Calorías Totales:',
         'Calorías Totales/kg/día:',
         'Gramos totales de Nitrógeno:',
@@ -29,29 +26,14 @@ const ReportesParametros: React.FC<ReportesParametrosProps> = ({ reporte, loadin
         'Calorías No Protéicas/kg:',
         'Relación Cal No Protéicas/g N:',
         'Relación: Cal No Protéicas/g Aminoacidos:',
-        // 'Concentración de CHO-S (%):',
-        // 'Concentración de Proteína (%):',
-        // 'Concentración de Lípidos (%):',
-        // 'Concentración de Sodio(mEq/L)::',
-        // 'Concentración de Potasio (mEq/L)::',
-        // 'Concentración de Magnesio (mEq/L)::'
+      
     ]);
 
     const [ParametrosFarmaceuticos, setParametrosFarmaceuticos] = useState([
-        // 'Volument total (ml):',
-        // 'Velocidad de infusión (ml/hr):',
+
         'Osmolaridad (mOsm/lt)',
         'Vía de administración:',
-        // 'Calorías Totales:',
-        // 'Calorías Totales/kg/día:',
-        // 'Gramos totales de Nitrógeno:',
-        // 'Calorías Totales Protéicas:',
-        // 'Calorías Totales Protéicas/kg (kcal/kg)',
-        // 'Calorías No Protéicas CHO-S:',
-        // 'Calorías No Protéicas LÍPIDOS:',
-        // 'Calorías No Protéicas/kg:',
-        // 'Relación Cal No Protéicas/g N:',
-        // 'Relación: Cal No Protéicas/g Aminoacidos',
+       
         'Concentración de CHO-S (%):',
         'Concentración de Proteína (%):',
         'Concentración de Lípidos (%):',
@@ -67,14 +49,14 @@ const ReportesParametros: React.FC<ReportesParametrosProps> = ({ reporte, loadin
             <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} paddingRight={'20px'} spacing={4}>
 
                 <Grid item display='block' xs={12} sm={6}>
-                    <Stack width={{ xs: '100%' }} direction={'row'} overflow={'scroll'} justifyContent={{ xs: 'start', md: 'center' }} spacing={4}>
+                    <Stack width={{ xs: '100%' }} direction={'row'} overflow={'scroll'} justifyContent={{xs:'start',lg:'center'}} spacing={1}>
 
                         <Stack direction={'column'} display={'block'} width={'350px'}>
                             <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingLeft: '20px', }}>Parámetros Nutricionales</Typography>
                             <Box sx={{ justifyContent: 'start' }} >
                                 <ul>
                                     {ParametrosNutricionales.map(lista => {
-                                        return <li style={{ listStyleType: 'none' }} key={lista}><Typography width='350px'>{lista}</Typography></li>
+                                        return <li style={{ listStyleType: 'none' }} key={lista}><Typography  width='350px'>{lista}</Typography></li>
                                     })}
                                 </ul>
                             </Box>
@@ -153,7 +135,7 @@ const ReportesParametros: React.FC<ReportesParametrosProps> = ({ reporte, loadin
                 <Grid item display='block' xs={12} sm={6}>
                     <Stack width={{ xs: '100%' }} direction={'row'} overflow={'scroll'}>
 
-                        <Stack direction={'column'} width={'350px'}>
+                        <Stack direction={'column'} width={'270px'}>
                             <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingLeft: '20px', }}>Parámetros Farmacéuticos</Typography>
                             <Box sx={{ justifyContent: 'start' }} >
                                 <ul style={{}}>

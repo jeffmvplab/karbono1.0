@@ -76,8 +76,8 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 							width='100%'
 							padding={'20px'}>
 
-							<Typography sx={{ fontWeight: 700, fontSize: { xs: '20px', md: '32px' } }}>Reporte prescripción</Typography>
-							<Typography sx={{ fontWeight: 700, fontSize: { xs: '20px', md: '32px' } }}>Orden: {reporte?.no_orden}</Typography>
+							<Typography sx={{ fontWeight: 700, fontSize: { xs: '20px', md: '25px' } }}>Reporte prescripción</Typography>
+							<Typography sx={{ fontWeight: 700, fontSize: { xs: '20px', md: '25px' } }}>Orden: {reporte?.no_orden}</Typography>
 
 						</Stack>
 
@@ -95,8 +95,8 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 									top: '80px', // Desplazamiento desde el borde superior
 									bottom: '50px', // Desplazamiento desde el borde inferior
 								},
-							}}
-						>
+							}}>
+								
 							{/* Contenido del Drawer */}
 							<Stack direction="column" sx={{ width: '70vw', padding: '10px' }}>
 								{/* Botón de cerrar Drawer */}
@@ -180,18 +180,16 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 						<Grid container sx={{ marginTop: '30px', marginBottom: { xs: '0px', md: '30px' } }} paddingBottom={'100px'} spacing={{ xs: 0, md: 2 }}>
 
-							<Grid item xs={12} lg={10} paddingX='15px'>
+							<Grid item xs={12} md={9} lg={10} paddingX='15px'>
 								<PDFPrescriptionComponent reporte={reporte} loading={loadingSave} />
 							</Grid>
 
-							<Grid item xs={12} lg={2} display={{ xs: 'none', md: 'block' }} paddingBottom={{ xs: '150px', md: '0' }}>
+							<Grid item xs={12} md={3} lg={2} display={{ xs: 'none', md: 'block' }} paddingBottom={{ xs: '150px', md: '0' }}>
 								<Card>
 									<Stack paddingX='15px' direction={'column'} minHeight={'50vh'} height={'100%'} overflow={'scroll'} alignItems={'center'}>
 										<Typography color={'#372FC6'} sx={{ fontWeight: 600, fontSize: '20px' }}>Observaciones y Cambios.</Typography>
 
 										<Stack width={'100%'} direction={'column'} minHeight={200} justifyContent={'end'}>
-
-
 											<Stack direction={'row'} justifyContent={'flex-end'} paddingY={2}>
 												<CustomButton
 													// disabled={!valOKAlert}

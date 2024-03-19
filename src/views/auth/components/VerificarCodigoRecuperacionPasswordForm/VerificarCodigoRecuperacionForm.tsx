@@ -128,7 +128,7 @@ const VerificarCodigoRecuperacionForm: React.FC<VerificarCodigoRecuperacionFormP
 					<Grid item xs={12} display='flex' justifyContent='center' paddingY={2}>
 
 						<CustomButton
-							fontSize={'20px'}
+							fontSize={'14px'}
 							onClick={() => { verificarCodigoRecoveryPassword() }}
 							disabled={(errorEmail || errorPassword)}
 							textColorHover={(!errorEmail || !errorPassword) ? 'white' : null}

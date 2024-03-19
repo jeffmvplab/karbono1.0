@@ -74,6 +74,8 @@ const marks2 = [
 
 
 const servicios = [
+    { value: 'DOMICILIARIA', label: 'DOMICILIARIA', },
+    { value: 'UNIDAD NEONATAL', label: 'UNIDAD NEONATAL', },
     { value: 'GINECOBSTETRICIA', label: 'GINECOBSTETRICIA', },
     { value: 'HOSPITALIZACIÓN', label: 'HOSPITALIZACIÓN', },
     { value: 'LACTANTES', label: 'LACTANTES', },
@@ -116,15 +118,16 @@ const InformacionPaciente = () => {
 
     return (
 
-        <Stack direction={'column'}
-            height={'100%'}
-            paddingBottom={{ xs: '80px' }}
+        <Stack
+            direction={'column'}
+
+            // paddingBottom={{ xs: '80px' }}
             padding={1}
             overflow={'scroll'}>
 
             <Grid container direction='column' >
 
-                <Box display='flex'>
+                <Box display='flex' paddingX={1.5}>
                     <CustomTextField
                         select
                         onChange={handleIps}
@@ -151,7 +154,7 @@ const InformacionPaciente = () => {
 
                 <Box display='flex' sx={{ marginTop: '20px', }}>
 
-                    <Grid container spacing={2}>
+                    <Grid container >
 
                         <LightTooltip
                             title='Registra el número de identificación sin espacios, puntos ni comas'
@@ -224,7 +227,7 @@ const InformacionPaciente = () => {
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px', }} >
 
-                    <Grid container spacing={2}>
+                    <Grid container >
 
                         <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                             <CustomTextField
@@ -276,7 +279,7 @@ const InformacionPaciente = () => {
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
 
-                    <Grid container spacing={2}>
+                    <Grid container >
 
                         <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
 
@@ -347,13 +350,11 @@ const InformacionPaciente = () => {
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px', }} >
 
-                    <Grid container spacing={2}>
-
-
+                    <Grid container >
 
                         <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                             <Box sx={{ justifyContent: 'left' }}>
-                                <Typography style={{ marginLeft: '15px' }}>
+                                <Typography style={{ marginLeft: '15px', color: '#C4C4C4' }}>
                                     Tiempo de infusión (h) *
                                 </Typography>
 
@@ -379,7 +380,7 @@ const InformacionPaciente = () => {
                         </Grid>
                         <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                             <Box sx={{ justifyContent: 'left' }}>
-                                <Typography style={{ marginLeft: '15px' }}>
+                                <Typography style={{ marginLeft: '15px', color: '#C4C4C4' }}>
                                     Overfill*
                                 </Typography>
 
@@ -405,7 +406,7 @@ const InformacionPaciente = () => {
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px', }} >
 
-                    <Grid container spacing={2}>
+                    <Grid container>
                         <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }}>
 
                             <CustomTextField
@@ -481,7 +482,7 @@ const InformacionPaciente = () => {
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
 
-                    <Grid container spacing={2}>
+                    <Grid container>
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }} >
                             <CustomTextField
                                 onChange={handleDiagnostico}

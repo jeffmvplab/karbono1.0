@@ -156,7 +156,7 @@ const Micronutrientes = () => {
             <Grid container>
 
                 <Box display='flex' sx={{ width: '100%', }}>
-                    <Grid container spacing={2}>
+                    <Grid container>
 
                         <LightTooltip
                             title='Requerimiento recomendado de sodio en g/kg/día es:
@@ -266,7 +266,7 @@ const Micronutrientes = () => {
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
 
-                    <Grid container spacing={2}>
+                    <Grid container>
                         <LightTooltip
                             title='Requerimiento recomendado de fósforo en mmol/kg/día en pacientes neonatales o pediátricos es:
                                     Neonatos: 1 - 2 
@@ -327,7 +327,7 @@ const Micronutrientes = () => {
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
 
-                    <Grid container spacing={2}>
+                    <Grid container>
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                             <CustomTextField
@@ -385,7 +385,7 @@ const Micronutrientes = () => {
                 </Box>
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
-                    <Grid container spacing={2}>
+                    <Grid container>
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                             <CustomTextField
@@ -447,7 +447,7 @@ const Micronutrientes = () => {
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
 
-                    <Grid container spacing={2}>
+                    <Grid container>
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
@@ -538,7 +538,7 @@ const Micronutrientes = () => {
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
 
-                    <Grid container spacing={2}>
+                    <Grid container>
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 
@@ -610,7 +610,7 @@ const Micronutrientes = () => {
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px' }}>
 
-                    <Grid container spacing={2}>
+                    <Grid container>
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
                             <CustomTextField
@@ -674,7 +674,7 @@ const Micronutrientes = () => {
                 </Box>
 
                 <Box display='flex' sx={{ width: '100%', marginTop: '20px', marginBottom: { xs: '50px', sm: '0px' } }}>
-                    <Grid container spacing={2}>
+                    <Grid container>
 
                         <Grid item xs={12} sm={6} md={6} style={{ padding: '10px' }}>
 

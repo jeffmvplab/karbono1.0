@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Alert, Avatar, Box, Button, CircularProgress, Modal, Skeleton, Stack, Typography } from '@mui/material';
+import { Alert, Avatar, Box, Button, Card, CircularProgress, Modal, Skeleton, Stack, Typography } from '@mui/material';
 import { colorsKarbono } from '@/themes/colors';
 import { IPrescriptions } from '@/domain/models/prescriptions.model';
 
@@ -17,9 +17,9 @@ export interface TableAuditoriaProps { }
 
 const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 
-	const { getAll, reportes, loadingGet, loadingApi, goEdit, goReporte,goActions } = useContext(PrescripcionContext);
+	const { getAll, reportes, loadingGet, loadingApi, goEdit, goReporte, goActions } = useContext(PrescripcionContext);
 
-	const {loadingSave, messageAPI, setMessageAPI } = useContext(FormulariosContext);
+	const { loadingSave, messageAPI, setMessageAPI } = useContext(FormulariosContext);
 
 	const [page, setPage] = useState<number>();
 	const pag: number = 15;
@@ -29,13 +29,13 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 		console.log('Params:', params)
 	}
 
-	
+
 	useEffect(() => {
 		getAll();
 	}, [])
 
 	useEffect(() => {
-		if (loadingSave) {		
+		if (loadingSave) {
 			setMessageAPI('')
 			getAll()
 		}
@@ -53,7 +53,7 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 			flex: 1,
 			minWidth: 250,
 			renderCell: (params: GridRenderCellParams) => (
-				<Button sx={{ fontFamily: typographyKarbono.outfit, fontSize: 12 }} variant='text'
+				<Button sx={{ color: 'black', fontFamily: typographyKarbono.outfit, fontSize: 12 }} variant='text'
 				>
 					<Typography onClick={() => { goReporte(params.row.no_orden) }} >{params.value}</Typography>
 				</Button>
@@ -66,7 +66,7 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 			headerClassName: 'table-color--header',
 			flex: 1,
 			minWidth: 100,
-			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+			renderCell: (params: GridRenderCellParams) => <>{params.value}</>
 		},
 		{
 			field: "nombre_paciente",
@@ -162,16 +162,15 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>
-				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goActions(params.row.no_orden)}} />
+				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goActions(params.row.no_orden) }} />
 			</Stack>)
 		},
 	];
 	// 
-
 	return (
 		(!loadingGet || !loadingApi)
 			? <Skeleton variant="rectangular" sx={{ marginX: '15px', borderRadius: '5px' }} width='100%' height={700} />
-			: <>				
+			: <>
 				<Box
 					sx={{
 
@@ -197,14 +196,15 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 
 						}
 
-						<div style={{ overflowX: 'auto' }}>
+						<Card elevation={2} style={{ overflowX: 'auto', borderRadius: '15px', }}>
 							<DataGrid
 								style={{ width: "100%" }}
 								sx={{
 									borderRadius: '12px',
-									// '&:hover, &.Mui-hovered': { backgroundColor: 'rgb(0, 0,0,40%)' },
-									// '& .MuiDataGrid-row:hover': { backgroundColor: 'rgb(0,0,0,60%)' },
-									fontFamily: typographyKarbono.outfit
+									'& .MuiDataGrid-row': {
+										paddingX: '15px', // Cambia "your_color_here" por el color deseado
+									},
+
 								}}
 								rows={reportes ? reportes : []}
 								columns={columns}
@@ -218,7 +218,7 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 								onPaginationModelChange={(e) => { handlePageChange(e.page) }}
 
 							/>
-						</div>
+						</Card>
 					</Stack>
 
 
