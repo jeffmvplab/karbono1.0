@@ -224,6 +224,7 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 						<Box width={10}></Box>
 						<CustomButton
 							fontSize={'14px'}
+							onClick={() => { login() }}
 							disabled={(errorEmail || errorPassword)}
 							textColorHover={(!errorEmail || !errorPassword) ? 'white' : null}
 							textColor={'white'}
