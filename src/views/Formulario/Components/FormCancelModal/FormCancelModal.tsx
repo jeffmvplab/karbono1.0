@@ -31,7 +31,7 @@ const FormCancelModal: React.FC<FormCancelModalProps> = () => {
 		transform: 'translate(-50%, -50%)',
 		width: '380px',
 		bgcolor: 'background.paper',
-		border: '2px solid #000',
+		// border: '2px solid #000',
 		boxShadow: 24,
 		p: 4,
 		minHeight: '200px', // Agregar altura máxima y desplazamiento vertical
@@ -67,14 +67,16 @@ const FormCancelModal: React.FC<FormCancelModalProps> = () => {
 							onClick={() => router.push(mainRoutes.home)}
 							height={40}
 							sx={{ borderRadius: '10px' }}
-							color={'#2B8E12'}
-							textColor='white'
-							text={'Salir'}
+							color={'transparent'}
+							variant='outlined'
+							borderColor={colorsKarbono.greyLabel}
+							textColor={colorsKarbono.greyLabel}
+							text={'Si,salir'}
 							width={130}
 							endIcon={
 								(loadingSave)
 									? <></>
-									: <CircularProgress sx={{ color: 'white' }} variant='indeterminate' size='30px' />} />
+									: <CircularProgress sx={{ color: colorsKarbono.greyLabel }} variant='indeterminate' size='30px' />} />
 
 						<CustomButton
 							onClick={() => { handleCloseModalFormCancel() }}

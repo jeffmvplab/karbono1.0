@@ -36,7 +36,7 @@ const TarjetaConf: React.FC<TarjetaConfProps> = () => {
               <Typography variant='h5' sx={{ color: '#372FC6', paddingBottom: '20px' }}>Configuración</Typography>
               
               <Typography variant='body1' sx={{ paddingBottom: '30px' }}>
-              {getMeRol()[0] === RolUsersKeysEnum.prescriptor
+              {Array.isArray(getMeRol())&&getMeRol()[0] === RolUsersKeysEnum.prescriptor
               ?'Este módulo te permite editar los datos de tú pérfil. '
               :'Este módulo te permite editar tus datos de creación de cuenta, y administrar tu equipo.'}
                

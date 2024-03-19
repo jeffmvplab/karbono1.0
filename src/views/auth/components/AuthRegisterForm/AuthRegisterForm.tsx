@@ -352,7 +352,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 								</Button>
 								<Box width={10}></Box>
 								<CustomButton
-									fontSize={'20px'}
+									fontSize={'14px'}
 									onClick={() => {
 
 										query === 'invitación'

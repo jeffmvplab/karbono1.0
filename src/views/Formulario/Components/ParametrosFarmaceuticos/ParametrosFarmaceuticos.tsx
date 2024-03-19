@@ -19,7 +19,7 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 
 	return (
 		<Card
-			elevation={5}
+		elevation={5}
 			sx={{
 				borderRadius: isMovil ? 0 : null,
 				borderTopLeftRadius: (isMovil) ? null : borderRadius,
@@ -30,7 +30,7 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 			}}>
 			<Box
 				// borderRadius={'10px'}
-				sx={{ overflow: 'auto', height: { xs: '35.5vh', sm: '30vh', md: '26vh', xl: '35vh' } }}
+				sx={{ overflow: 'auto', height: { xs: '35.5vh', sm: '100%' } }}
 				paddingX={{ xs: '0px', sm: '5px' }}
 				margin='5px'
 				marginTop={'10px'}

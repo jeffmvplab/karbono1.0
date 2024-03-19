@@ -19,7 +19,7 @@ const ReportesSubtotales: React.FC<ReportesSubtotalesProps> = ({ reporte, loadin
         <>
             <Grid container display={'flex'} width={'100%'} paddingTop={'20px'} paddingRight={'20px'}>
                 {/* <Grid item display='block' sx={{ marginTop: '30px', marginBottom: '15px', width: '40%', paddingLeft:'0' }}> */}
-                <Stack width='100%' direction={'row'}  overflow={'scroll'} justifyContent={{xs:'start',md:'center'}} spacing={4}>
+                <Stack width='100%' direction={'row'}  overflow={'scroll'} justifyContent={{xs:'start',lg:'center'}} spacing={4}>
 
                     <Stack direction={'column'} minWidth={{xs:'80px',md:'300px'}}>
                         {/* <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: '20px', textAlign: 'left', paddingBottom: '10px' }}></Typography> */}

@@ -66,8 +66,8 @@ export const lightThemes = createTheme({
             styleOverrides: {
 
                 root: {
-                    color:colorsKarbono.primary,
-                    ':hover':colorsKarbono.secundary,
+                    color: colorsKarbono.greyLabel,
+                    ':hover': colorsKarbono.secundary,
                 }
             }
         },
@@ -90,9 +90,14 @@ export const lightThemes = createTheme({
 
                 root: {
                     backgroundColor: '#fff',
-                    ':hover': '#000'
-
-                }
+                    ':hover': '#000',
+                    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: colorsKarbono.primary, // Cambiar a color rojo cuando está seleccionado
+                    },
+                    '& .MuiFormLabel-root.Mui-focused': {
+                        color: colorsKarbono.primary, // Cambiar a color rojo cuando está seleccionado
+                    }
+                },
             }
         },
 
@@ -112,11 +117,17 @@ export const lightThemes = createTheme({
             styleOverrides: {
                 root: {
                     fontFamily: "Outfit,sans-serif",
-                    ':hover': '#2FC5C6'
+                    ':hover': '#2FC5C6',
                 }
             }
         },
-
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    boxShadow: "0px 3px 5px  rgba(214, 210, 172, 0.5)" // Cambia el color de la sombra aquí
+                }
+            }
+        }
         // MuiDataGrid: {
         //     defaultProps: {},
         //     styleOverrides: {
