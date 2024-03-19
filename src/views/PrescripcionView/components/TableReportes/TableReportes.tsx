@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Alert, Box, Button, Skeleton, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Card, Skeleton, Stack, Typography } from '@mui/material';
 import { colorsKarbono } from '@/themes/colors';
 import { PrescripcionContext } from '../../context/PrescripcionContext';
 import { IPrescriptions } from '@/domain/models/prescriptions.model';
 
 import { typographyKarbono } from '@/themes/typography';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRenderCellParams, GridToolbar } from '@mui/x-data-grid';
 import { getColorForState } from '@/utilities/getColorByState';
 import { localeTextDataGrid } from '@/utilities/constants/loacaleTextGrid';
 
@@ -78,9 +78,11 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			flex: 1,
 			minWidth: 250,
 			renderCell: (params: GridRenderCellParams) => (
-				<Button sx={{ fontFamily: typographyKarbono.outfit, fontSize: 12, textTransform: 'none' }} variant='text'
+				<Button sx={{ color: 'black', fontFamily: typographyKarbono.outfit, fontSize: 14, textTransform: 'none' }} variant='text'
 					onClick={() => { goReporte(params.row.no_orden) }}>
-					<Typography textTransform='capitalize' >{params.value}</Typography>
+					{/* <Typography textTransform='none' > */}
+					{params.value}
+					{/* </Typography> */}
 				</Button>
 			)
 		},
@@ -91,8 +93,8 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Identificación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 100,
-			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+			minWidth: 80,
+			renderCell: (params: GridRenderCellParams) => <>{params.value}</>
 		},
 
 		{
@@ -102,7 +104,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerClassName: 'table-color--header',
 			flex: 1,
 			minWidth: 80,
-			renderCell: (params: GridRenderCellParams) => <>{params.value}.</>
+			renderCell: (params: GridRenderCellParams) => <>{params.value}</>
 		},
 
 
@@ -111,8 +113,8 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Fecha de creación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 100,
-			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}.</>
+			minWidth: 80,
+			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}</>
 		},
 
 		{
@@ -121,7 +123,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerClassName: 'table-color--header',
 			flex: 1,
 			minWidth: 80,
-			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}.</>
+			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}</>
 		},
 
 		// {
@@ -138,12 +140,12 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Estado",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 80,
+			minWidth: 200,
 			renderCell: (params: GridRenderCellParams) => <>{
-				<Typography color={getColorForState(params.value)}>
+				<Typography textTransform={'inherit'} color={getColorForState(params.value)}>
 					{params.value}
 				</Typography>
-			}.</>
+			}</>
 		},
 
 		{
@@ -170,8 +172,8 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			? <Skeleton variant="rectangular" sx={{ marginX: '15px', borderRadius: '5px' }} width='100%' height={700} />
 			: <>
 				<PDFModal open={open} handleClose={handleClose} selectReporte={selectReporte} loadingApi={loadingApi} />
-				<CopyPresciptionModal openCopy={openCopy} handleCloseCopy={handleCloseCopy} selectReporte={selectReporte} loadingApi={loadingApi} onClick={()=>copyPrescriptions(selectReporte)} loadingSave={loadingSave}  />
-				<DeleteModal openDelete={openDelete} handleCloseDelete={handleCloseDelete} selectReporte={selectReporte} loadingApi={loadingApi} onClick={()=> borrarPrescriptions(selectReporte) } loadingSave={loadingSave} />
+				<CopyPresciptionModal openCopy={openCopy} handleCloseCopy={handleCloseCopy} selectReporte={selectReporte} loadingApi={loadingApi} onClick={() => copyPrescriptions(selectReporte)} loadingSave={loadingSave} />
+				<DeleteModal openDelete={openDelete} handleCloseDelete={handleCloseDelete} selectReporte={selectReporte} loadingApi={loadingApi} onClick={() => borrarPrescriptions(selectReporte)} loadingSave={loadingSave} />
 
 				<Box
 					sx={{
@@ -198,14 +200,14 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 
 						}
 
-						<div style={{ overflowX: 'auto' }}>
+						<Card elevation={2} style={{ overflowX: 'auto',scrollbarWidth:'thin', scrollbarGutter: 'small', borderRadius: '15px', }}>
 							<DataGrid
 								style={{ width: "100%" }}
 								sx={{
 									borderRadius: '12px',
-									// '&:hover, &.Mui-hovered': { backgroundColor: 'rgb(0, 0,0,40%)' },
-									// '& .MuiDataGrid-row:hover': { backgroundColor: 'rgb(0,0,0,60%)' },
-									fontFamily: typographyKarbono.outfit
+									'& .MuiDataGrid-row': {
+										paddingX: '15px', // Cambia "your_color_here" por el color deseado
+									},
 								}}
 								rows={reportes ? reportes : []}
 								columns={columns}
@@ -219,10 +221,8 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 								onPaginationModelChange={(e) => { handlePageChange(e.page) }}
 
 							/>
-						</div>
+						</Card>
 					</Stack>
-
-
 				</Box>
 			</>
 	);

@@ -14,7 +14,7 @@ const ParametrosNutricionales: React.FC<ParametrosNutricionalesProps> = ({ isMov
 
 	const borderRadius: number = 10;
 	const { prescriptionSave, loadingSave } = useContext(FormulariosContext)
-	
+
 	return (
 
 		<Card
@@ -26,11 +26,11 @@ const ParametrosNutricionales: React.FC<ParametrosNutricionalesProps> = ({ isMov
 				borderBottomLeftRadius: borderRadius,
 				borderBottomRightRadius: borderRadius,
 				marginBottom: '20px',
-				marginX:'10px'
+				// marginX:'10px'
 			}}>
 			<Box
 				// borderRadius={'10px'}
-				sx={{ overflow: 'auto', height: { xs: '32.5vh', sm: '30vh', md: '26vh', xl: '35vh' } }}
+				sx={{ overflow: 'auto', height: { xs: '32.5vh', sm: '100%' } }}
 				paddingX={{ xs: '0px', sm: '5px' }}
 				margin='5px'
 				marginTop={'20px'}

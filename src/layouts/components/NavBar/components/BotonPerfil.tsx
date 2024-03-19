@@ -4,7 +4,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
 import { GlobalContext } from '@/context/GlobalContext';
-import { Avatar, Box, Stack, Typography } from '@mui/material';
+import { Avatar, Stack } from '@mui/material';
 import { typographyKarbono } from '@/themes/typography';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import PersonIcon from '@mui/icons-material/Person';
@@ -28,19 +28,30 @@ export default function FadeMenu() {
     setAnchorEl(null);
   };
 
-  const router=useRouter();
+  const router = useRouter();
 
   return (
     <Stack direction={'column'} >
       <Button
-        style={{ color: '#fff', backgroundColor: '#2fc5c6', marginTop: '5px', padding: '10px', borderRadius: '10px', fontFamily: typographyKarbono.outfit }}
+        style={{
+          color: '#fff',
+          backgroundColor: '#2fc5c6',
+          marginTop: '5px', padding: '10px',
+          borderRadius: '10px',
+          fontFamily: typographyKarbono.outfit,
+          height: '47px',
+          width: '57px'
+        }}
         id="fade-button"
         aria-controls={open ? 'fade-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
-      > <Avatar sx={{color:'white', background:'black'}}>
+      > <Avatar sx={{
+        color: 'white', background: 'black', height: '23px',
+        width: '23px'
+      }}>
           < PersonIcon />
         </Avatar>
       </Button>
@@ -60,7 +71,7 @@ export default function FadeMenu() {
           minWidth={'125px'}
           direction={'column'}>
           <MenuItem sx={{ fontFamily: typographyKarbono.outfit }} onClick={handleClose} >Perfil</MenuItem>
-          <MenuItem sx={{ fontFamily: typographyKarbono.outfit }} onClick={()=>{handleClose(), router.push(mainRoutes.mi_cuenta)}}>Mi cuenta</MenuItem>
+          <MenuItem sx={{ fontFamily: typographyKarbono.outfit }} onClick={() => { handleClose(), router.push(mainRoutes.mi_cuenta) }}>Mi cuenta</MenuItem>
           <MenuItem sx={{ fontFamily: typographyKarbono.outfit }} onClick={() => { logout(); handleClose }}>Cerrar Sesión</MenuItem>
         </Stack>
       </Menu>

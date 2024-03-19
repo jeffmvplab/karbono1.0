@@ -48,7 +48,7 @@ const RecuperarPasswordForm: React.FC<RecuperarPasswordFormProps> = () => {
 					<Grid item xs={12} display='flex' justifyContent='center' paddingY={2}>
 						
 						<CustomButton
-							fontSize={'20px'}
+							fontSize={'14px'}
 							onClick={() => { recuperarPassword() }}
 							disabled={(errorEmail || errorPassword)}
 							textColorHover={(!errorEmail || !errorPassword) ? 'white' : null}

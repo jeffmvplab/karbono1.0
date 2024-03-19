@@ -1,3 +1,4 @@
+import { colorsKarbono } from '@/themes/colors';
 import { Stack, Typography } from '@mui/material';
 import React from 'react';
 
@@ -35,7 +36,7 @@ const TextParamsString: React.FC<TextParamsStringProps> = ({
 			style={{
 				fontSize:'14px',
 				fontWeight: 500,
-				color: (seguridad==='SEGURA'||seguridad==='ADECUADA') ?'#66D84A':'#FF2525' ,
+				color: (seguridad==='SEGURA'||seguridad==='ADECUADA') ?colorsKarbono.greenAlert:colorsKarbono.redAlet ,
 			}}>
 		   {seguridad}
 			</Typography>}
