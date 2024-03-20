@@ -15,4 +15,6 @@ export const mainRoutes = {
     plan_produccion: '/plan_produccion',
     reportePrescripcion: '/reporte',
     ayuda: '/ayuda',
+    pdf: '/pdfprint',
+    archivo_plano: '/archivo_plano',
 }

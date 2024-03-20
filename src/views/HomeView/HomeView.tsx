@@ -11,6 +11,7 @@ import TarjetaInf from './components/TarjetaInf';
 import TarjetaAyudas from './components/TarjetaAyudas';
 import TarjetaConf from './components/TarjetaConf';
 import TarjetaPar from './components/TarjetaPar';
+import TarjetaArchivoPlano from './components/TarjetaArchivoPlano';
 // import { LocalStorageProtocol } from "@/protocols/cache/local_cache";
 
 
@@ -66,7 +67,9 @@ const HomeView: React.FC<HomeViewProps> = () => {
 							<TarjetaPar />
 						}
 						<TarjetaInf />
-
+						{Array.isArray(getMeRol()) && getMeRol()[0] !== RolUsersKeysEnum.prescriptor
+							&& <TarjetaArchivoPlano />
+						}
 						<TarjetaAyudas />
 					</Grid>
 				</Stack >}

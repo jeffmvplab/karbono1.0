@@ -4,7 +4,7 @@ import { colorsKarbono } from "@/themes/colors";
 import BarEtiqueta from "../ReportePrescripcion/components/BarEtiqueta/BaEtiqueta";
 import { useContext, useEffect, useState } from "react";
 import { ReportesContext } from "../ReportePrescripcion/context/ReportesContext";
-import { convertirFecha, convertirFechaLote } from "@/utilities/get_String_from_Date_Esp";
+import { convertirFecha, convertirFechaLote, formatDateTime, formatOnlyTime } from "@/utilities/get_String_from_Date_Esp";
 import { correccionPurga, getAgua, getAminoacidos, getCalTotales, getCalTotalesKgDia, getCalcio, getCaloriasNoProteicasCHOS, getCaloriasNoProteicasKg, getCaloriasNoProteicasLIPIDOS, getCaloriasTotalesProteicas, getCaloriasTotalesProteicasKg, getConcentracionDeCHOS, getConcentracionDeLipidos, getDextrosa, getDipeptiven, getFosforo, getGramosTotalesNitro, getLipidos, getMagnesio, getOligoelementos, getOmegaven, getOsmolaridad, getPotacio, getRelacionCalNoProteicasAminoacidos, getRelacionCalNoProteicasN, getSodio, getSoluv_Vit, getVelinfusion, getVitHidroSolubles, getVitLiposSolubles, getVit_C, getVolTotal, peso_teorico, tipo_bolsa } from "../ReportePrescripcion/data/functionsParams";
 import { alertFactorDePrecipitacion } from "../ReportePrescripcion/data/alertParams";
 import { ContainerText } from "./components/ContainerText";
@@ -77,12 +77,12 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 					{//////////////Fecha-Version-etc///////////////////////////////////////////////
 					}
 					<Stack paddingTop={3} direction={'row'} justifyContent={'end'} spacing={3}>
-						<Typography>
+						{/* <Typography>
 							{`Versión 4,Fecha de aprobación:${convertirFecha(reporte?.updatedAt)}`}
 						</Typography>
 						<Typography>
 							Plantilla OyM-5605
-						</Typography>
+						</Typography> */}
 					</Stack>
 
 					{/////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,15 +107,15 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 								</Stack>
 							</Grid>
 
-							<Grid item xs={4}>
+							<Grid item xs={3}>
 
 							</Grid>
-							<Grid item xs={2}>
+							<Grid item xs={3}>
 								<Stack
 									height={'100%'}
 									direction={'column'}
 									justifyContent={'end'}>
-									<ContainerText title="Fecha" value={convertirFecha(new Date())} />
+									<ContainerText title="Fecha" value={`${convertirFecha(new Date())} ${formatOnlyTime(new Date())}`} />
 								</Stack>
 							</Grid>
 
