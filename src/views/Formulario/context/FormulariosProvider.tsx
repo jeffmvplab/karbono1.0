@@ -243,7 +243,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setSoluvid_Vitalipid(repor?.soluvit_vitalip)
 		setVitaminasC(repor?.vit_C);
 		setAcidoFolico(repor?.acido_folico);
-
+		setEstado(repor?.estado!);
 	}
 
 	const cancelForm = (route: string) => {
@@ -874,7 +874,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [createdAt, setCreatedAt] = React.useState<Date | string | null>('');
 	const [updatedAt, setUpdatedAt] = React.useState<Date | string | null>('');
 
-	const [estado, setEstado] = React.useState<'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION'>();
+	const [estado,setEstado] = React.useState<'PENDIENTE FINALIZAR' | 'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION' | 'CANCELADA' | undefined>();
 
 	////////////////////////////////////////////////////////////////////
 	///////////////////////////////INTEGRACION DE APIS//////////////////
@@ -1364,6 +1364,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			vitaminasHidrosolubles, errorVitaminasHidrosolubles, messageErrorVitaminasHidrosolubles, handleVitaminasHidrosolubles,
 			reqVitHidrosolubles, errorReqVitHidrosolubles, messageErrorReqVitHidrosolubles, handleReqVitHidrosolubles,
 			vitaminasLiposolubles, errorVitaminasLiposolubles, messageErrorVitaminasLiposolubles, handleVitaminasLiposolubles,
+
+			estado,
 
 			soluvid_Vitalipid,
 			handleSoluvid_Vitalipid,

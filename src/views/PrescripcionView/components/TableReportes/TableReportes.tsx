@@ -25,7 +25,7 @@ export interface TableReportesProps { }
 
 const TableReportes: React.FC<TableReportesProps> = () => {
 
-	const { getAll, reportes, loadingGet, loadingApi, goEdit, goReporte } = useContext(PrescripcionContext);
+	const { getAll, reportes, loadingGet, loadingApi, goEdit,goPrint, goReporte } = useContext(PrescripcionContext);
 	const { copyPrescriptions, loadingSave, messageAPI, setMessageAPI, borrarPrescriptions } = useContext(FormulariosContext);
 
 	const [page, setPage] = useState<number>();
@@ -159,7 +159,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			(<Stack direction={'row'} spacing={1}>
 				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goReporte(params.row.no_orden) }} />
 				<IoCreateOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goEdit(params.row.no_orden) }} />
-				< IoPrintOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpen() }} />
+				< IoPrintOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => {goPrint(params.row.no_orden), handleOpen() }} />
 				< IoCopyOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpenCopy() }} />
 				<IoTrashOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpenDelete() }} />
 			</Stack>)
@@ -171,7 +171,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 		(!loadingGet || !loadingApi)
 			? <Skeleton variant="rectangular" sx={{ marginX: '15px', borderRadius: '5px' }} width='100%' height={700} />
 			: <>
-				<PDFModal open={open} handleClose={handleClose} selectReporte={selectReporte} loadingApi={loadingApi} />
+				{/* <PDFModal open={open} handleClose={handleClose} selectReporte={selectReporte} loadingApi={loadingApi} /> */}
 				<CopyPresciptionModal openCopy={openCopy} handleCloseCopy={handleCloseCopy} selectReporte={selectReporte} loadingApi={loadingApi} onClick={() => copyPrescriptions(selectReporte)} loadingSave={loadingSave} />
 				<DeleteModal openDelete={openDelete} handleCloseDelete={handleCloseDelete} selectReporte={selectReporte} loadingApi={loadingApi} onClick={() => borrarPrescriptions(selectReporte)} loadingSave={loadingSave} />
 

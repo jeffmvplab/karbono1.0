@@ -87,6 +87,8 @@ interface ContextProps {
     vitaminasC: string, errorVitaminasC: boolean, messageErrorVitaminasC: string, handleVitaminasC: (event: React.ChangeEvent<HTMLInputElement>) => void,
     acidoFolico: string, errorAcidoFolico: boolean, messageErrorAcidoFolico: string, handleAcidoFolico: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
+    estado:'PENDIENTE FINALIZAR' |'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION' | 'CANCELADA'|undefined
+    
     newComment: IComment, setNewComment: React.Dispatch<React.SetStateAction<IComment>>,
     saveComments: (comment:IComment) => Promise<void>,
 

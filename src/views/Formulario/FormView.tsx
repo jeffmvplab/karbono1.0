@@ -58,8 +58,7 @@ const FormView: React.FC<FormViewProps> = () => {
 		handleOpenModalFormSaved, getMaxNumPresc, validateTipoPrecripcion, errorTipoPrescripcion,
 		handleOpenModalFormCancel, setSelectTab, selectTab, maxNumOrder, saveBorrador,
 		handleTipoPrescripcion, tipoPrescripcion,
-
-		tabsErrors
+		tabsErrors, estado
 	} = useContext(FormulariosContext)
 
 
@@ -236,7 +235,7 @@ const FormView: React.FC<FormViewProps> = () => {
 										</Alert>}
 
 									<Stack
-									
+
 										paddingX={1}
 										direction={'row'}
 										paddingY={4}
@@ -325,7 +324,7 @@ const FormView: React.FC<FormViewProps> = () => {
 									sx={{
 										overflow: 'auto',
 										borderRadius: '10px',
-										height: { xs: '35.5vh', sm: '100%'  },
+										height: { xs: '35.5vh', sm: '100%' },
 										marginTop: '20px',
 										marginBottom: '20px'
 									}} />
@@ -366,7 +365,7 @@ const FormView: React.FC<FormViewProps> = () => {
 										? () => handleOpenModalFormCancel()
 										: () => setSelectTab(selectTab - 1)
 								}
-								sx={{ height: { xs: 30, md: 40 },width: { xs: 100, md: 160 }, }}
+								sx={{ height: { xs: 30, md: 40 }, width: { xs: 100, md: 160 }, }}
 								// width={127}
 								text={(selectTab === 0) ? 'Cancelar' : 'Anterior'}
 								textColor={'white'}
@@ -381,7 +380,7 @@ const FormView: React.FC<FormViewProps> = () => {
 										onClick={() => { }}
 										// width={127}
 										text={'Eliminar'}
-										sx={{ borderRadius: '10px',width: { xs: 100, md: 160 }, height: { xs: 30, md: 40 } }}
+										sx={{ borderRadius: '10px', width: { xs: 100, md: 160 }, height: { xs: 30, md: 40 } }}
 										color={'#D03939'}
 										textColor='white'
 										startIcon={<CloseIcon sx={{ color: 'white' }} />}
@@ -399,7 +398,7 @@ const FormView: React.FC<FormViewProps> = () => {
 										onClick={() => { }}
 										// width={127}
 										text={'Eliminar'}
-										sx={{ borderRadius: '10px',width: { xs: 100, md: 160 }, height: { xs: 30, md: 40 } }}
+										sx={{ borderRadius: '10px', width: { xs: 100, md: 160 }, height: { xs: 30, md: 40 } }}
 										color={'#D03939'}
 										textColor='white'
 										startIcon={<CloseIcon sx={{ color: 'white' }} />}
@@ -408,8 +407,9 @@ const FormView: React.FC<FormViewProps> = () => {
 							}
 
 
-							{(selectTab === 3)
-								&& <CustomButton
+							{(estado === undefined || estado === 'PENDIENTE FINALIZAR')
+								&& (selectTab === 3)
+								 && <CustomButton
 									// disabled={!valOKAlert}
 									onClick={() => saveBorrador()}
 									text={'Guardar borrador'}

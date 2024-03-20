@@ -5,7 +5,7 @@ import { colorsKarbono } from "@/themes/colors";
 import BarEtiqueta from "../ReportePrescripcion/components/BarEtiqueta/BaEtiqueta";
 import { useContext, useEffect, useState } from "react";
 import { ReportesContext } from "../ReportePrescripcion/context/ReportesContext";
-import { convertirFecha, convertirFechaLote } from "@/utilities/get_String_from_Date_Esp";
+import { convertirFecha, convertirFechaLote, formatOnlyTime } from "@/utilities/get_String_from_Date_Esp";
 import { getAgua, getSodio, getPotacio, getMagnesio, getVitLiposSolubles, getVitHidroSolubles, getVit_C, getCalcio, peso_teorico, tipo_bolsa, getAminoacidos, getDipeptiven, getFosforo, getLipidos, getOmegaven, getSoluv_Vit, getOligoelementos, getDextrosa } from "../ReportePrescripcion/data/functionsParams";
 
 
@@ -86,7 +86,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 								</Stack>
 							</Grid>
 
-							<Grid item xs={4}>
+							<Grid item xs={3}>
 
 							</Grid>
 
@@ -100,12 +100,12 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 							</Grid>
 
 
-							<Grid item xs={2}>
+							<Grid item xs={3}>
 								<Stack
 									height={'100%'}
 									direction={'column'}
 									justifyContent={'end'}>
-									<ContainerText title="Fecha" value={convertirFecha(new Date())} />
+									<ContainerText title="Fecha" value={`${convertirFecha(new Date())} ${formatOnlyTime(new Date())}`} />
 								</Stack>
 							</Grid>
 
@@ -357,7 +357,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 											<Stack width={'100%'} direction={'row'} spacing={3} justifyContent={'space-between'} alignItems={'center'}>
 
 												<Typography width={'250px'} fontSize='14px' textAlign={"start"} paddingY={2}>
-													Sin Lípido, Con vitaminas (Multi 12K1,Cernevit,Soluvit+Vitalipid)
+													Sin Lípido, Con vitaminas (Multi 12K1,Cernevit,Soluvit)
 												</Typography>
 
 												<Stack
@@ -462,7 +462,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 										<ContainerText isUpper title="BOLSA EVA" value={`${tipo_bolsa(reporte?.volumen!)}`} />
 									</Box>
 									<Box width={'100%'} paddingY={1}>
-										<ContainerText isUpper title="DISPOCITIVO ADICIONAL" value={reporte?.filtro ? 'Filtro' : '-'} />
+										<ContainerText isUpper title="DISPOSITIVO ADICIONAL" value={reporte?.filtro ? 'Filtro' : '-'} />
 									</Box>
 								</Grid>
 								{///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -653,7 +653,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 										<ContainerText titleWeigth="700" titleSize="20px" title="PRESCRIPTOR" color={colorsKarbono.primary} value={reporte?.user?.nombre_apellidos ? reporte?.user?.nombre_apellidos : '-'} />
 									</Grid>
 									<Grid item xs={6}>
-										<ContainerText titleWeigth="700" titleSize="20px" title="PREPARÓ" color={colorsKarbono.primary} value={reporte?.preparador.nombre_apellidos ? reporte?.preparador!.nombre_apellidos: '-'} />
+										<ContainerText titleWeigth="700" titleSize="20px" title="PREPARÓ" color={colorsKarbono.primary} value={reporte?.preparador.nombre_apellidos ? reporte?.preparador!.nombre_apellidos : '-'} />
 									</Grid>
 								</Grid>
 							</Stack>
