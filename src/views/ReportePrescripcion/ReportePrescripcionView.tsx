@@ -26,7 +26,6 @@ import { formatDateTime } from '@/utilities/get_String_from_Date_Esp';
 import { useRouter } from 'next/router';
 
 
-
 export interface ReportePrescripcionViewProps { }
 
 const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
@@ -50,7 +49,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 	const [isNew, setIsNew] = useState<boolean>(false);
 	const [newObs, setnewObs] = useState<string>();
 
- console.log('ROLLLL:', getMeRol(), 'ESTADO :', reporte?.estado)
+	console.log('ROLLLL:', getMeRol(), 'ESTADO :', reporte?.estado)
 	// 
 	return (
 		<>
@@ -60,7 +59,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 						{(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
 							? <BarReporteNPT />
 							: (getMeRol()[0] === RolUsersKeysEnum.calidad)
-								? (reporte?.estado === 'SOLICITADA'||reporte?.estado === 'CALIDAD') ? <BarReporteQF /> : <BarReporteQF_Calidad />
+								? (reporte?.estado === 'SOLICITADA' || reporte?.estado === 'CALIDAD') ? <BarReporteQF /> : <BarReporteQF_Calidad />
 								: <BarReporteQF_Calidad />
 						}
 					</Card>
@@ -96,7 +95,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 									bottom: '50px', // Desplazamiento desde el borde inferior
 								},
 							}}>
-								
+
 							{/* Contenido del Drawer */}
 							<Stack direction="column" sx={{ width: '70vw', padding: '10px' }}>
 								{/* Botón de cerrar Drawer */}
@@ -186,50 +185,10 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 							<Grid item xs={12} md={3} lg={2} display={{ xs: 'none', md: 'block' }} paddingBottom={{ xs: '150px', md: '0' }}>
 								<Card>
-									<Stack paddingX='15px' direction={'column'} minHeight={'50vh'} height={'100%'} overflow={'scroll'} alignItems={'center'}>
+									<Stack paddingX='15px' direction={'column'} height={'100%'} overflow={'scroll'} alignItems={'center'}>
 										<Typography color={'#372FC6'} sx={{ fontWeight: 600, fontSize: '20px' }}>Observaciones y Cambios.</Typography>
 
-										<Stack width={'100%'} direction={'column'} minHeight={200} justifyContent={'end'}>
-											<Stack direction={'row'} justifyContent={'flex-end'} paddingY={2}>
-												<CustomButton
-													// disabled={!valOKAlert}
-													onClick={
-														(!isNew)
-															? () => { setIsNew(true) }
-															: () => {
-																const newComment: IComment = {
-																	prescriptionId: reporte?._id!,
-																	comentario: newObs!,
-																	// estado:' ',
-																	// estado: StatePrescriptionKeysEnum.pendiente,
-																}
-																saveComments(newComment)
-																setIsNew(false)
-															}
-													}
-													width={220}
-													height={50}
-													text={(isNew) ? 'Guardar' : 'Crear Observacion'}
-													sx={{ borderRadius: '10px' }}
-													color={colorsKarbono.primary}
-													textColor='white'
-													endIcon={(!isNew) ? <SendIcon sx={{ color: 'white' }} /> : <></>}
-												/>
-											</Stack>
-
-											{isNew
-												&& <Stack direction={'row'} padding={4} >
-													<CustomTextField
-														onChange={(e) => setnewObs(e.target.value)}
-														id='Observacion'
-														label='Agrega una observación o comentario.'
-														type='text'
-														value={newObs}
-													// defaulValue={numIden!}
-													// helperText={messageErrorNumIden}
-													/>
-												</Stack>
-											}
+										<Stack width={'100%'} direction={'column'} minHeight={200} justifyContent={'center'}>
 
 											<Stack direction={'row'} padding={1} >
 
@@ -243,23 +202,54 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 																date={formatearFechaEsp(item.fecha!.toString())}
 																content={item.comentario}
 															/>
-															// <CustomTextField
-															// 	key={index}
-															// 	// onChange={handleNumIden}
-															// 	id='Observacion'
-															// 	label='Observaciones'
-															// 	type='text'
-															// 	value={item}
-															// // defaulValue={numIden!}
-															// // helperText={messageErrorNumIden}
-															// />
 														)
 													})
 													}
 												</Stack>
 											</Stack>
+
 										</Stack>
 
+										<Stack direction={'row'} justifyContent={'flex-end'} paddingY={2}>
+											<CustomButton
+												// disabled={!valOKAlert}
+												onClick={
+													(!isNew)
+														? () => { setIsNew(true) }
+														: () => {
+															const newComment: IComment = {
+																prescriptionId: reporte?._id!,
+																comentario: newObs!,
+																// estado:' ',
+																// estado: StatePrescriptionKeysEnum.pendiente,
+															}
+															saveComments(newComment)
+															setIsNew(false)
+														}
+												}
+												width={'100%'}
+												height={50}
+												text={(isNew) ? 'Guardar' : 'Crear Observacion'}
+												sx={{ borderRadius: '10px' }}
+												color={colorsKarbono.primary}
+												textColor='white'
+												endIcon={(!isNew) ? <SendIcon sx={{ color: 'white' }} /> : <></>}
+											/>
+										</Stack>
+
+										{isNew
+											&& <Stack direction={'row'} padding={4} >
+												<CustomTextField
+													onChange={(e) => setnewObs(e.target.value)}
+													id='Observacion'
+													label='Agrega una observación o comentario.'
+													type='text'
+													value={newObs}
+												// defaulValue={numIden!}
+												// helperText={messageErrorNumIden}
+												/>
+											</Stack>
+										}
 									</Stack>
 								</Card>
 							</Grid>

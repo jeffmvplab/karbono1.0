@@ -168,6 +168,13 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		router.push(mainRoutes.reportePrescripcion)
 	}
 
+	const goPrint = (orden: number) => {
+
+		const prescripcion = { number: orden, }
+		localStorageProtocol.set(StorageKeysEnum.prescripcionOrden, prescripcion);
+		router.push(mainRoutes.pdf)
+	}
+
 	const goActions = (orden: number) => {
 
 		const prescripcion = { number: orden, }
@@ -485,6 +492,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			getAll,
 			reportes,
 			goEdit,
+			goPrint,
 			goReporte,
 			goAddNew,
 

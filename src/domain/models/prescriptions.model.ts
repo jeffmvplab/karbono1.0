@@ -6,10 +6,10 @@ export interface IPrescriptions {
 
     createdAt: Date | string,
     updatedAt: Date | string,
-    estado: 'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION' | 'CANCELADA'|undefined
+    estado: 'PENDIENTE FINALIZAR' | 'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION' | 'CANCELADA' | undefined
 
     user_id?: string,
-    user?:string|any,
+    user?: string | any,
     no_orden: number,
     tipo_prescripcion: string,
     fecha: string,
@@ -59,7 +59,7 @@ export interface IPrescriptions {
     observaciones?: IComment[],
     preparador?: any,
     controlador_de_calidad?: any,
-    por_clonacion?:boolean,
+    por_clonacion?: boolean,
 }
 
 

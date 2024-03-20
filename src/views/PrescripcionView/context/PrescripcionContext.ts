@@ -13,6 +13,7 @@ interface ContextProps {
     getAll: (limit?: number) => Promise<any>,
     reportes: IPrescriptions[],
     goEdit: (orden: number) => void,
+    goPrint: (orden: number) => void,
     goReporte: (orden: number) => void,
     goAddNew: (route: string) => void,
 

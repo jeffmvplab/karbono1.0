@@ -71,7 +71,7 @@ const BarReporteQF_Calidad = () => {
                             }
                             sx={{ borderRadius: '10px' }}
                         />
-
+{/* 
                         <CustomButton text={'Archivo plano'}
                             // onClick={handleOpenModalDescargar}
                             onClick={() => {
@@ -88,7 +88,7 @@ const BarReporteQF_Calidad = () => {
                                 <Image width={25} height={25} src={'/assets/archivo_plano.png'} alt={''} ></Image>
                             }
                             sx={{ borderRadius: '10px' }}
-                        />
+                        /> */}
 
                         <CustomButton text={'Descargar'}
                             // onClick={handleOpenModalDescargar}
