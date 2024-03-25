@@ -15,6 +15,8 @@ export interface IPrescriptionsRepository {
     getPrescripcionsById(id: string): Promise<any>;
     getPrescripcionsByDate(date: string): Promise<any>;
     getPrescripcionsByIps(ips: string): Promise<any>;
+    getPrescripcionsProd(ips: string | undefined, fecha: any | null | undefined): Promise<any>;
+    getPlainFile(prescriptionsId: string[]): Promise<any>;
     getPrescripcionsAll(limit: number): Promise<any>;
     updatePrescripcions(prescriptions: IPrescriptions, number: string): Promise<any>;
     getMaxNumberPres(): Promise<any>;
@@ -170,6 +172,45 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
         });
         return axiosRequest;
     }
+
+    async getPrescripcionsProd(ips: string | undefined, fecha: any | null | undefined): Promise<any> {
+
+        if (ips === undefined && fecha === undefined) {
+            const axiosRequest = await this.axiosHttpClient.request({
+                url: ApiUrlsEnum.getPrescriptionsProd,
+                method: 'post',
+                body: {}
+            });
+            return axiosRequest;
+        } else {
+
+            const axiosRequest = await this.axiosHttpClient.request({
+                url: ApiUrlsEnum.getPrescriptionsProd,
+                method: 'post',
+                body: {
+                    "fecha": fecha,
+                    "entidad_de_salud": ips
+                },
+            });
+            return axiosRequest;
+        }
+
+    }
+
+    async getPlainFile(prescriptionsId: string[]): Promise<any> {
+
+        console.log('LLLLLL:', [prescriptionsId]);
+
+        const axiosRequest = await this.axiosHttpClient.request({
+            url: ApiUrlsEnum.getPlainFile,
+            method: 'post',
+            body: {
+                "prescriptionsId":prescriptionsId
+            },
+        });
+        return axiosRequest;
+    }
+
 
     async deletePrescriptions(no: number): Promise<any> {
 

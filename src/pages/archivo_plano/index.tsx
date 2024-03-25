@@ -13,6 +13,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { ReportesContext } from '@/views/ReportePrescripcion/context/ReportesContext'
 import PDFView from '@/views/PDFView/PDFView'
 import { ArchivoPlanoView } from '@/views/ArchivoPlanoView'
+import PrescripcionLayout from '@/layouts/PrescripcionLayout/PrescripcionLayout'
 
 
 
@@ -20,20 +21,17 @@ const ArchivoPlanoPages: NextPageWithLayout = () => {
 
 
   return (
-    <ReportesProvider>
+
       <ArchivoPlanoView />
-    </ReportesProvider>
 
   )
 }
 ArchivoPlanoPages.getLayout = function getLayout(page: ReactElement) {
 
   return (
-    //  <PDFLayout>
-    <MainLayout>
-      {page}
-    </MainLayout>
-    //  </PDFLayout>
+    <PrescripcionLayout>
+    {page}
+  </PrescripcionLayout>
   )
 }
 

@@ -107,11 +107,15 @@ interface ContextProps {
     handleOpenModalFormSavedBorrador: () => void,
     handleCloseModalFormSavedBorrador: () => void,
 
+    openModalFormSavedRespon: boolean,
+    handleOpenModalFormSavedRespon: () => void,
+    handleCloseModalFormSavedRespon: () => void,
+
     openModalFormCancel: boolean,
     handleOpenModalFormCancel: () => void,
     handleCloseModalFormCancel: () => void,
 
-    savePrescription: () => void,
+    savePrescription: () => Promise<boolean | undefined>,
     cancelForm: (route: string) => void,
 
     saveBorrador: () => Promise<void>,

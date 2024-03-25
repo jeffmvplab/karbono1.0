@@ -1,5 +1,5 @@
 
-import { UserUseCases } from "@/domain/usecases";
+
 import { LocalStorageProtocol } from "@/protocols/cache/local_cache";
 import { mainRoutes } from "@/routes/routes";
 import { StorageKeysEnum } from "@/utilities/enums";
@@ -12,11 +12,11 @@ import { IPrescriptions } from "@/domain/models/prescriptions.model";
 import { GlobalContext } from "@/context/GlobalContext";
 import { ILogs } from "@/domain/models/logs.model";
 import { Dayjs } from "dayjs";
+import fs from 'fs';
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
 };
-
 
 export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
@@ -37,7 +37,6 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		const resp = await prescriptionsUseCase.prescripcionsAll(limit!)
 		console.log('Resp:', resp.body)
 
-
 		if (resp.statusCode === 200) {
 			setReportes(Array.isArray(resp.body) ? resp.body.reverse() : []);
 			setGetOk(true);
@@ -56,7 +55,6 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		setLoadingGet(true);
 		//  return resp.body;
 	}
-
 
 	const [logs, setLogs] = useState<ILogs[]>();
 
@@ -130,7 +128,6 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			prescripcionID!, preparador!, controlador_de_calidad!
 		);
 		console.log('PrescripcionsByLab Resp:', resp.body)
-
 
 		if (resp.statusCode === 200) {
 			setReportes(resp.body);
@@ -218,6 +215,12 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		// const prescripcion = event.target.value;
 	};
 
+	const [searchInst, setSearchInst] = React.useState('');
+	const handleSearchInst = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchInst(event.target.value);
+		// const prescripcion = event.target.value;
+	};
+
 	const [searchFecha, setSearchFecha] = React.useState<Dayjs | null | string>();
 
 	const [selectedFilter, setSelectedFilter] = React.useState('a');
@@ -230,7 +233,9 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		setSearchNumber('');
 		setSearchId('');
 		setSearchName('');
+		setSearchInst('');
 		setSearchFecha(null);
+		getPrescriptionsProd('', '');
 		getAll();
 	}
 
@@ -377,6 +382,122 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		setLoadingApi(true);
 	}
 
+
+	const getPrescriptionsProd = async (entidad?: string, fecha?: any) => {
+
+		setLoadingApi(false);
+
+		const resp = await prescriptionsUseCase.getPrescripcionsProd(entidad, fecha);
+		let repoPresc: IPrescriptions[] = []
+
+		if (resp.body.prescripciones.length > 0) {
+			repoPresc = resp.body.prescripciones
+		} else {
+			if (resp.body.prescripciones === '') {
+				repoPresc = [];
+			} else {
+				repoPresc[0] = resp.body.prescripciones
+			}
+		}
+
+		console.log('RESP by PRODUC:', repoPresc)
+
+		if (resp.statusCode === 201) {
+
+			setReportes(Array.isArray(repoPresc) ? repoPresc.reverse() : repoPresc);
+			setErrorSearch(false)
+			setMessageAPI('')
+			if (resp.body.length === 0) {
+				setMessageAPI('No se encontró ninguna prescripción')
+				setErrorSearch(true)
+			}
+
+			setApiOk(false)
+
+		} else if (resp.body.statusCode === 400) {
+			setMessageAPI(resp.body.message)
+			setApiOk(false)
+			setErrorSearch(true)
+		} else if (resp.body.statusCode === 404) {
+			setMessageAPI(resp.body.message)
+			setApiOk(false)
+			setErrorSearch(true)
+		} else if (resp.body.statusCode === 401 || resp.body.statusCode === 500) {
+			setMessageAPI(resp.body.message)
+			setApiOk(false)
+			setErrorSearch(true)
+		} else if (resp.body.statusCode === 408) {
+			handleOffline();
+		} else {
+			setMessageAPI(resp.body.message)
+			setApiOk(false)
+			setErrorSearch(true)
+		}
+		setLoadingApi(true);
+	}
+
+
+	const [arrayPrescId, setArrayPrescId] = useState<string[]>([]);
+
+	const getPlainFile = async (prescriptionsId?: any[]) => {
+
+		setLoadingApi(false);
+
+		console.log('ARRAY PRESC:', arrayPrescId);
+
+		const resp = await prescriptionsUseCase.getPlainFile(arrayPrescId!);
+
+		console.log('RESP by Plain File:', resp)
+
+		if (resp.statusCode === 201) {
+
+			// const processedData = processDataToText(resp.body);
+
+			// Crear un Blob con los datos
+			const blob = new Blob([resp.body], { type: 'text/plain' });
+
+			// Crear una URL para el Blob
+			const url = window.URL.createObjectURL(blob);
+
+			// Crear un enlace para descargar el archivo
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = 'Archivo Plano.txt';
+			document.body.appendChild(a);
+			a.click();
+
+			// Limpiar la URL del Blob
+			window.URL.revokeObjectURL(url);
+			// setReportes(Array.isArray(repoPresc) ? repoPresc.reverse() : repoPresc);
+			getPrescriptionsProd()
+			setErrorSearch(false)
+			setApiOk(false)
+
+		} else if (resp.statusCode === 400) {
+			setMessageAPI(resp.message)
+			setApiOk(false)
+			setErrorSearch(true)
+		} else if (resp.statusCode === 404) {
+			setMessageAPI(resp.message)
+			setApiOk(false)
+			setErrorSearch(true)
+		} else if (resp.statusCode === 401) {
+			setMessageAPI(resp.body.message)
+			setApiOk(false)
+			setErrorSearch(true)
+		} else if (resp.statusCode === 500) {
+			setMessageAPI('No se ha podido descargar el archivo plano. Status:500');
+		} else if (resp.statusCode === 408) {
+			handleOffline();
+		} else {
+			setMessageAPI(resp.body.message)
+			setApiOk(false)
+			setErrorSearch(true)
+		}
+		setLoadingApi(true);
+	}
+
+
 	const getPrescriptionsById = async (id: string) => {
 		setLoadingApi(false);
 
@@ -488,7 +609,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 			loadingGet,
 			getOK,
-			messageAPI,
+			messageAPI, setMessageAPI,
 			getAll,
 			reportes,
 			goEdit,
@@ -512,6 +633,9 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			searchId,
 			handleSearchId,
 
+			searchInst,
+			handleSearchInst,
+
 			searchNumber,
 			handleSearchNumber,
 			handleFiltrosBorrar,
@@ -528,6 +652,9 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			prescSearch,
 			getPrescriptionsByName,
 			getPrescriptionsById,
+			getPrescriptionsProd,
+			getPlainFile,
+			arrayPrescId, setArrayPrescId,
 			getPrescriptionsByDate,
 			getPrescriptionsByNumber,
 
