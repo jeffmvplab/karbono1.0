@@ -12,6 +12,8 @@ export enum ApiUrlsEnum {
     getPrescriptionsByName = 'prescriptions/name',
     getPrescriptionsById = 'prescriptions/no_identificacion',
     getPrescriptionsByIps = 'prescriptions/ips',
+    getPrescriptionsProd = 'prescriptions/produccion',
+    getPlainFile = 'prescriptions/get_plain_file',
     getPrescriptionsByDate = 'prescriptions/by_date',
     getPrescriptionsByLab = 'prescriptions/by_lab',
     setQuimicos = 'prescriptions/set_quimicos',

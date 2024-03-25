@@ -20,6 +20,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { FormSavedBorradorModal } from './Components/FormSavedBorradorModal';
 import CustomTextField from './Components/CustomTextField';
+import FormSaveRespoModal from './Components/FormSaveResponModal/FormSaveRespModal';
 
 export interface FormViewProps { }
 
@@ -58,12 +59,13 @@ const FormView: React.FC<FormViewProps> = () => {
 		handleOpenModalFormSaved, getMaxNumPresc, validateTipoPrecripcion, errorTipoPrescripcion,
 		handleOpenModalFormCancel, setSelectTab, selectTab, maxNumOrder, saveBorrador,
 		handleTipoPrescripcion, tipoPrescripcion,
-		tabsErrors, estado
+		tabsErrors, estado, messageAPI,setMessageAPI
 	} = useContext(FormulariosContext)
 
 
 
 	useEffect(() => {
+		setMessageAPI('');
 		fechaActual();
 		getPrescriptionsByNumber()
 		getMaxNumPresc()
@@ -104,6 +106,7 @@ const FormView: React.FC<FormViewProps> = () => {
 			marginBottom={{ xs: 25, sm: 20 }} >
 
 			<FormSavedModal />
+			<FormSaveRespoModal/>
 			<FormCancelModal />
 			<FormSavedBorradorModal />
 			<Typography variant='h5' padding={1} style={{ fontWeight: 700, }}>
@@ -231,8 +234,10 @@ const FormView: React.FC<FormViewProps> = () => {
 
 									{(tabsErrors.info || tabsErrors.macro || tabsErrors.micro)
 										&& <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)', borderRadius: '10px' }}>
-											<Typography sx={{ color: 'white' }}>Hay campos obligatorios vacíos en la prescripción</Typography>
-										</Alert>}
+											{messageAPI
+												? <Typography sx={{ color: 'white' }}>{messageAPI.toString()}</Typography>
+												: <Typography sx={{ color: 'white' }}>Hay campos obligatorios vacíos en la prescripción</Typography>
+											}										</Alert>}
 
 									<Stack
 
@@ -409,7 +414,7 @@ const FormView: React.FC<FormViewProps> = () => {
 
 							{(estado === undefined || estado === 'PENDIENTE FINALIZAR')
 								&& (selectTab === 3)
-								 && <CustomButton
+								&& <CustomButton
 									// disabled={!valOKAlert}
 									onClick={() => saveBorrador()}
 									text={'Guardar borrador'}

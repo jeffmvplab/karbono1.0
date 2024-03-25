@@ -1,5 +1,5 @@
 import { Modal, Avatar, Button, Stack, Box, Typography } from '@mui/material';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FormulariosContext } from '../../context/FormulariosContext';
 import CloseIcon from '@mui/icons-material/Close';
 import Image from 'next/image';
@@ -17,7 +17,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 
 	const {
 		saveOK, loadingSave, messageAPI,
-		openModalFormSaved,
+		openModalFormSaved, setMessageAPI,
 		handleCloseModalFormSaved, valOKAlert, savePrescription, validateCampos
 	} = useContext(FormulariosContext)
 
@@ -28,10 +28,12 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 
 	const [saveStatus, setSaveStatus] = useState<boolean>(false)
 
-	const saveAndNav = () => {
-		savePrescription(),
-			router.push(mainRoutes.reportePrescripcion)
+	const saveAndNav = async () => {
+		setMessageAPI('');
+		await savePrescription();
+		// router.push(mainRoutes.reportePrescripcion)
 	}
+
 
 	console.log('MODAL:', saveOK, valOKAlert)
 
@@ -149,7 +151,8 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 															? validateCampos()
 																? saveAndNav()
 																// ? handleCloseModalFormSaved()
-																: saveAndNav()
+																:
+																saveAndNav()
 															: handleCloseModalFormSaved()
 
 													handleCloseModalFormSaved()

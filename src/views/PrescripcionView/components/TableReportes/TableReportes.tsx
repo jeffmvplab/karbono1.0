@@ -217,7 +217,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 								// cledisableRowSelectionOnClick
 								autoHeight
 								//  pageSizeOptions={[10,30,60]}
-								getRowId={(row: IPrescriptions) => row._id!}
+								getRowId={(row: IPrescriptions) => (row._id)?row._id:1}
 								onPaginationModelChange={(e) => { handlePageChange(e.page) }}
 
 							/>

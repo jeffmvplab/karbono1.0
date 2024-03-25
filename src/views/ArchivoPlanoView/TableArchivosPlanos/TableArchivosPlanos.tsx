@@ -1,47 +1,64 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Alert, Avatar, Box, Button, Card, CircularProgress, Modal, Skeleton, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Card, Skeleton, Stack, Typography } from '@mui/material';
 import { colorsKarbono } from '@/themes/colors';
 import { IPrescriptions } from '@/domain/models/prescriptions.model';
 
 import { typographyKarbono } from '@/themes/typography';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRenderCellParams, } from '@mui/x-data-grid';
 import { getColorForState } from '@/utilities/getColorByState';
 import { localeTextDataGrid } from '@/utilities/constants/loacaleTextGrid';
+
+
 import { IoEyeOutline } from "react-icons/io5";
+
 import { FormulariosContext } from '@/views/Formulario/context/FormulariosContext';
 import { convertirFecha } from '@/utilities/get_String_from_Date_Esp';
 import { PrescripcionContext } from '@/views/PrescripcionView/context/PrescripcionContext';
-import { getNameByObject } from '@/utilities/getnameByObject';
+import { IoPrintOutline } from "react-icons/io5";
+import { CustomButton } from '@/components/CustomButton';
+import Image from 'next/image';
 
-export interface TableAuditoriaProps { }
+export interface TableArchivosPlanosProps { }
 
-const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
+const TableArchivosPlanos: React.FC<TableArchivosPlanosProps> = () => {
 
-	const { getAll, reportes, loadingGet, loadingApi, goEdit, goReporte, goActions } = useContext(PrescripcionContext);
-
-	const { loadingSave, messageAPI, setMessageAPI } = useContext(FormulariosContext);
+	const {
+		getPrescriptionsProd,
+		reportes,
+		loadingApi,
+		goReporte, messageAPI, setMessageAPI,
+		getPlainFile, arrayPrescId, setArrayPrescId
+	} = useContext(PrescripcionContext);
+	// const { saveComments } = useContext(ReportesContext)
 
 	const [page, setPage] = useState<number>();
-	const pag: number = 15;
 
 	const handlePageChange = (params: any) => {
 		setPage(params)
-		console.log('Params:', params)
+		// console.log('Params:', params)
 	}
 
+	const [open, setOpen] = React.useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+
+	const [selectReporte, setASelectReporte] = React.useState<IPrescriptions | undefined>();
 
 	useEffect(() => {
-		getAll();
+		getPrescriptionsProd();
 	}, [])
 
 	useEffect(() => {
-		if (loadingSave) {
+		if (loadingApi) {
 			setMessageAPI('')
-			getAll()
+			getPrescriptionsProd()
 		}
-	}, [loadingSave])
+	}, [])
 
-
+	const handleSelectionModelChange = (selectionModel: any[]) => {
+		console.log('PLPL:', selectionModel)
+		setArrayPrescId(selectionModel);
+	};
 
 	const columns: GridColDef[] = [
 
@@ -53,8 +70,7 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 			flex: 1,
 			minWidth: 250,
 			renderCell: (params: GridRenderCellParams) => (
-				<Button sx={{ color: 'black', fontFamily: typographyKarbono.outfit, fontSize: 12 }} variant='text'
-				>
+				<Button sx={{ color: 'black', fontFamily: typographyKarbono.outfit, fontSize: 12 }} variant='text'>
 					<Typography onClick={() => { goReporte(params.row.no_orden) }} >{params.value}</Typography>
 				</Button>
 			)
@@ -152,7 +168,6 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 			renderCell: (params: GridRenderCellParams) => <>{params.value?.nombre_apellidos}</>
 		},
 
-
 		{
 			field: "acciones",
 			headerName: "Acciones",
@@ -162,15 +177,31 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>
-				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goActions(params.row.no_orden) }} />
+				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }}
+					onClick={
+						() => {
+							// const newComment: IComment = {
+							// 	prescriptionId: params.row._id!,
+							// 	// comentario: newObs!,
+							// 	estado: StatePrescriptionKeysEnum.calidad,
+							// }
+							// saveComments(newComment)
+							goReporte(params.row.no_orden), console.log('OJITO')
+						}
+					} />
+				< IoPrintOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpen() }} />
 			</Stack>)
 		},
 	];
 	// 
+
+	console.log('REPORTE:', reportes);
+
 	return (
-		(!loadingGet || !loadingApi)
+		(!loadingApi)
 			? <Skeleton variant="rectangular" sx={{ marginX: '15px', borderRadius: '5px' }} width='100%' height={700} />
 			: <>
+				{/* <PDFModal open={open} handleClose={handleClose} selectReporte={selectReporte} loadingApi={loadingApi} /> */}
 				<Box
 					sx={{
 
@@ -186,9 +217,10 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 						// 	color: '#1a3e72',
 						// 	fontWeight: '600',
 						//   },
-					}}
-				>
+					}}>
+
 					<Stack direction={'column'}>
+
 						{(messageAPI)
 							&& <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)', borderRadius: '10px' }}>
 								{messageAPI}
@@ -202,29 +234,43 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 								sx={{
 									borderRadius: '12px',
 									'& .MuiDataGrid-row': {
-										paddingX: '15px', // Cambia "your_color_here" por el color deseado
+										paddingX: '0px', // Cambia "your_color_here" por el color deseado
 									},
-
 								}}
+								checkboxSelection
+								onRowSelectionModelChange={handleSelectionModelChange}
 								rows={reportes ? reportes : []}
 								columns={columns}
 								initialState={{ pagination: { paginationModel: { pageSize: 15 } }, }}
 								localeText={localeTextDataGrid}
-								// disableColumnSelector
-								// cledisableRowSelectionOnClick
 								autoHeight
-								//  pageSizeOptions={[10,30,60]}
-								getRowId={(row: IPrescriptions) => (row._id)?row._id:1}
+								getRowId={(row: IPrescriptions) => (row._id) ? row._id : 1}
 								onPaginationModelChange={(e) => { handlePageChange(e.page) }}
-
 							/>
 						</Card>
-					</Stack>
 
+						<Stack direction={'row'} width={'100%'} justifyContent={'end'}>
+							<CustomButton text={'Archivo plano'}
+								// onClick={handleOpenModalDescargar}
+								onClick={() => getPlainFile()}
+								width='200px'
+								height='44px'
+								// variant='outlined'
+								color={'black'}
+								fontSize={'16px'}
+								textColor={'white'}
+								borderColor={colorsKarbono.secundary}
+								startIcon={
+									<Image width={25} height={25} src={'/assets/archivo_plano.png'} alt={''} ></Image>
+								}
+								sx={{ borderRadius: '10px', marginY: '40px' }}
+							/>
+						</Stack>
+					</Stack>
 
 				</Box>
 			</>
 	);
 };
 
-export default TableAuditoria;
+export default TableArchivosPlanos;

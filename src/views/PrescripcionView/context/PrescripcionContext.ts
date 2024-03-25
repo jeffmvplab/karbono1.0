@@ -10,6 +10,7 @@ interface ContextProps {
     loadingGet: boolean,
     getOK: boolean,
     messageAPI: string,
+    setMessageAPI: React.Dispatch<React.SetStateAction<string>>,
     getAll: (limit?: number) => Promise<any>,
     reportes: IPrescriptions[],
     goEdit: (orden: number) => void,
@@ -22,7 +23,7 @@ interface ContextProps {
     handleCloseModalSearch: () => void,
 
     openActionsDrawer: boolean, setOpenActionsDrawer: React.Dispatch<React.SetStateAction<boolean>>,
-    goActions:(orden: number) => void,
+    goActions: (orden: number) => void,
 
     search: string,
     handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -34,7 +35,10 @@ interface ContextProps {
     handleSearchNumber: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
     searchFecha: any,
-    setSearchFecha: React.Dispatch<React.SetStateAction<string | Dayjs | null|undefined>>,
+    setSearchFecha: React.Dispatch<React.SetStateAction<string | Dayjs | null | undefined>>,
+
+    searchInst: string,
+    handleSearchInst: (event: React.ChangeEvent<HTMLInputElement>) => void,
 
     searchId: string,
     handleSearchId: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -51,10 +55,13 @@ interface ContextProps {
 
     getPrescriptionsByName: (name: string) => Promise<void>
     getPrescriptionsById: (id: string) => Promise<void>
+    getPrescriptionsProd: (entidad?: string, fecha?: any) => Promise<void>
+    getPlainFile: (prescriptionsId?: string[]) => Promise<void>
+    arrayPrescId: string[], setArrayPrescId: React.Dispatch<React.SetStateAction<string[]>>,
     getPrescriptionsByDate: (date: string) => Promise<void>
     getPrescriptionsByNumber: (number: string) => Promise<void>
     getLogsByNumber: () => Promise<void>,
-    logs:ILogs[] | undefined
+    logs: ILogs[] | undefined
 }
 
 export const PrescripcionContext = createContext({} as ContextProps)

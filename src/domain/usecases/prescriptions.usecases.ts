@@ -13,6 +13,8 @@ export interface IPrescriptionsUseCase {
     prescripcionsById(id: string): Promise<any>;
     getPrescripcionsByDate(date: string): Promise<any>;
     prescripcionsByIps(ips: string): Promise<any>;
+    getPrescripcionsProd(ips: string|undefined, fecha: any|null|undefined): Promise<any>;
+    getPlainFile(prescription: string[]): Promise<any>;
     prescripcionsAll(limit: number): Promise<any>;
     updatePrescripcions(prescriptions: IPrescriptions, number: string): Promise<any>;
     getMaxNumberPres(): Promise<any>;
@@ -66,6 +68,15 @@ export class PrescriptionsUseCases implements IPrescriptionsUseCase {
     };
     prescripcionsByIps(ips: string): Promise<any> {
         return this.prescriptionsRepository.getPrescripcionsByIps(ips);
+    }
+
+    getPlainFile(prescriptionsId: string[]): Promise<any>{
+        return this.prescriptionsRepository.getPlainFile(prescriptionsId);
+    }
+
+
+    getPrescripcionsProd(ips: string|undefined, fecha: any|null|undefined): Promise<any>{
+        return this.prescriptionsRepository.getPrescripcionsProd(ips,fecha);
     }
 
     createComments(comment: IComment): Promise<any> {

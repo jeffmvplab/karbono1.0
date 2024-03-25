@@ -13,6 +13,7 @@ import { GlobalContext } from "@/context/GlobalContext";
 import { IErrorsTab } from "@/domain/models/taps_errors";
 import { IComment, deleteComment } from "@/domain/models/observaciones.model";
 import { obtenerOverfillPorLabel } from "@/views/ReportePrescripcion/data/instituciones";
+import { mainRoutes } from "@/routes/routes";
 
 type Props = {
 	children: JSX.Element | JSX.Element[]
@@ -110,7 +111,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageAPI, setMessageAPI] = React.useState<string | undefined>('');
 
 	const savePrescription = () => {
-		setPrescriptions();
+
+		const saveOK = setPrescriptions();
 		handleOpenModalFormSaved();
 
 		const prescripcion = {
@@ -122,6 +124,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		localStorageProtocol.set(StorageKeysEnum.prescripcionOrden, prescripcion);
 		getPrescriptions();
 		//
+
+		return saveOK;
 	}
 
 	const [prescriptionCharge, setprescriptionCharge] = useState<IPrescriptions>();
@@ -874,7 +878,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [createdAt, setCreatedAt] = React.useState<Date | string | null>('');
 	const [updatedAt, setUpdatedAt] = React.useState<Date | string | null>('');
 
-	const [estado,setEstado] = React.useState<'PENDIENTE FINALIZAR' | 'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION' | 'CANCELADA' | undefined>();
+	const [estado, setEstado] = React.useState<'PENDIENTE FINALIZAR' | 'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION' | 'CANCELADA' | undefined>();
 
 	////////////////////////////////////////////////////////////////////
 	///////////////////////////////INTEGRACION DE APIS//////////////////
@@ -956,29 +960,39 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (numPresc) { resp = await prescriptionsUseCase.updatePrescripcions(prescriptionsData, numPresc); console.log('UPDATE') }
 		else { resp = await prescriptionsUseCase.savePrescripcions(prescriptionsData); }
 
-		console.log('Resp:', resp)
+		console.log('Resp Save Presc:', resp)
 
 		setLoadingSave(true);
 
 		if (resp.statusCode === 201) {
 			setSaveOk(true);
+			handleOpenModalFormSavedRespon()
+			// router.push(mainRoutes.reportePrescripcion)
+			return true;
 		} else if (resp.statusCode === 200) {
-			setMessageAPI(resp.body.message)
 			setSaveOk(true);
-		} else if (resp.statusCode === 400) {
+			handleOpenModalFormSavedRespon()
+			// router.push(mainRoutes.reportePrescripcion)
+			return true;
+		} else if (resp.body.statusCode === 400) {
 			setMessageAPI(resp.body.message)
 			setSaveOk(false)
-		} else if (resp.statusCode === 403) {
+			return false;
+		} else if (resp.body.statusCode === 403) {
 			setMessageAPI(resp.body.message)
 			setSaveOk(false)
-		} else if (resp.statusCode === 404) {
+			return false;
+		} else if (resp.body.statusCode === 404) {
 			setSaveOk(false)
-		} else if (resp.statusCode === 401 && resp.statusCode === 500) {
+			return false;
+		} else if (resp.body.statusCode === 401 && resp.statusCode === 500) {
 			setSaveOk(false)
-		} else if (resp.statusCode === 408) {
+			return false;
+		} else if (resp.body.statusCode === 408) {
 			handleOffline();
 		} else {
 			setSaveOk(false)
+			return false;
 		}
 	}
 
@@ -1064,7 +1078,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 				updatedAt: new Date().toISOString(),
 				no_orden: newnumber + 1,
 				por_clonacion: true,
-				estado: 'PENDIENTE',
+				estado: 'PENDIENTE FINALIZAR',
 				observaciones: []
 			}
 			console.log('Copiando Prescripcion...:', copyPrescription)
@@ -1137,6 +1151,11 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [openModalFormSaved, setOpenModalFormSaved] = useState(false);
 	const handleOpenModalFormSaved = () => { setOpenModalFormSaved(true) };
 	const handleCloseModalFormSaved = () => setOpenModalFormSaved(false);
+
+	
+	const [openModalFormSavedRespon, setOpenModalFormSavedRespon] = useState(false);
+	const handleOpenModalFormSavedRespon = () => { setOpenModalFormSavedRespon(true) };
+	const handleCloseModalFormSavedRespon = () => setOpenModalFormSavedRespon(false);
 
 	const [openModalFormSavedBorrador, setOpenModalFormSavedBorrador] = useState(false);
 	const handleOpenModalFormSavedBorrador = () => { setOpenModalFormSavedBorrador(true) };
@@ -1387,6 +1406,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			openModalFormSavedBorrador,
 			handleOpenModalFormSavedBorrador,
 			handleCloseModalFormSavedBorrador,
+
+			openModalFormSavedRespon,
+			handleOpenModalFormSavedRespon,
+			handleCloseModalFormSavedRespon,
 
 			getPrescriptions,
 			copyPrescriptions,
