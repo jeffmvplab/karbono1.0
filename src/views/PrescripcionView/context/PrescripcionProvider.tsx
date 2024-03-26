@@ -237,6 +237,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		setSearchFecha(null);
 		getPrescriptionsProd('', '');
 		getAll();
+		setMessageAPI('');
 	}
 
 	/////////////////////////////////Integración de Busquedas///////////////////////////////////////////////
@@ -389,8 +390,9 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 		const resp = await prescriptionsUseCase.getPrescripcionsProd(entidad, fecha);
 		let repoPresc: IPrescriptions[] = []
+		console.log('RESP by PRODUC:', resp)
 
-		if (resp.body.prescripciones.length > 0) {
+		if (resp.body.prescripciones?.length > 0) {
 			repoPresc = resp.body.prescripciones
 		} else {
 			if (resp.body.prescripciones === '') {
@@ -400,7 +402,6 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			}
 		}
 
-		console.log('RESP by PRODUC:', repoPresc)
 
 		if (resp.statusCode === 201) {
 
