@@ -27,7 +27,8 @@ const TableArchivosPlanos: React.FC<TableArchivosPlanosProps> = () => {
 		reportes,
 		loadingApi,
 		goReporte, messageAPI, setMessageAPI,
-		getPlainFile, arrayPrescId, setArrayPrescId
+		getPlainFile, arrayPrescId, setArrayPrescId,
+		searchFecha, searchInst
 	} = useContext(PrescripcionContext);
 	// const { saveComments } = useContext(ReportesContext)
 
@@ -45,6 +46,7 @@ const TableArchivosPlanos: React.FC<TableArchivosPlanosProps> = () => {
 	const [selectReporte, setASelectReporte] = React.useState<IPrescriptions | undefined>();
 
 	useEffect(() => {
+		console.log('SEARCH:', searchFecha, searchInst);
 		getPrescriptionsProd();
 	}, [])
 
@@ -194,8 +196,6 @@ const TableArchivosPlanos: React.FC<TableArchivosPlanosProps> = () => {
 		},
 	];
 	// 
-
-	console.log('REPORTE:', reportes);
 
 	return (
 		(!loadingApi)

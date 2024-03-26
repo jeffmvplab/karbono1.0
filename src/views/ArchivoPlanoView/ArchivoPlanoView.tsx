@@ -27,6 +27,8 @@ const ArchivoPlanoView: React.FC<ArchivoPlanoViewProps> = () => {
 		getPrescriptionsProd, handleFiltrosBorrar
 	} = useContext(PrescripcionContext)
 
+
+
 	return (
 
 		<>
@@ -55,7 +57,7 @@ const ArchivoPlanoView: React.FC<ArchivoPlanoViewProps> = () => {
 										select
 										InputProps={{
 											endAdornment:
-												<Button onClick={() => { searchInst ? getPrescriptionsProd(searchInst,searchFecha) :  getPrescriptionsProd('','') }}
+												<Button onClick={() => { searchInst ? getPrescriptionsProd(searchInst,searchFecha) :  getPrescriptionsProd() }}
 													sx={{ background: 'transparent', height: '30px' }}>
 													<Search style={{ color: 'black', paddingLeft: '5px', scale: '1.5' }} />
 												</Button>,
@@ -97,7 +99,7 @@ const ArchivoPlanoView: React.FC<ArchivoPlanoViewProps> = () => {
 											label="Fecha"
 											views={['day', 'month', 'year',]}
 											onChange={(e) => setSearchFecha(e)}
-											onAccept={() => { searchFecha ? getPrescriptionsProd(searchInst,searchFecha) :  getPrescriptionsProd('','') }}
+											onAccept={() => { searchFecha ? getPrescriptionsProd(searchInst,searchFecha) :  getPrescriptionsProd() }}
 											value={searchFecha}
 										/>
 
