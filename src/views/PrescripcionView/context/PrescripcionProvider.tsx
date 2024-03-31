@@ -235,8 +235,11 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		setSearchName('');
 		setSearchInst('');
 		setSearchFecha(null);
-		getPrescriptionsProd('', '');
-		getAll();
+
+		router.pathname === mainRoutes.archivo_plano
+			? getPrescriptionsProd()
+			: getAll();
+
 		setMessageAPI('');
 	}
 
@@ -358,7 +361,6 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 				setMessageAPI('No se encontró ninguna prescripción')
 				setErrorSearch(true)
 			}
-
 			setApiOk(false)
 
 		} else if (resp.statusCode === 400) {
@@ -598,7 +600,6 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			case 'd': (!isNaN(parseInt(search)))
 				? await getPrescriptionsByNumber(search)
 				: await getPrescriptionsByName(search)
-				break;
 				break;
 		}
 	}

@@ -58,7 +58,7 @@ const TableArchivosPlanos: React.FC<TableArchivosPlanosProps> = () => {
 	}, [])
 
 	const handleSelectionModelChange = (selectionModel: any[]) => {
-		console.log('PLPL:', selectionModel)
+		// console.log('PLPL:', selectionModel)
 		setArrayPrescId(selectionModel);
 	};
 

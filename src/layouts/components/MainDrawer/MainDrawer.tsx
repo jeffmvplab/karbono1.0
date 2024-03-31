@@ -175,7 +175,8 @@ const MainDrawer: React.FC<MainDrawerProps> = () => {
 						wIcon={20}
 						hIcon={20}
 						isActive={mainRoutes.reportePrescripcion === route.pathname}
-						rourte={mainRoutes.reportePrescripcion} />
+						rourte={''} 
+						/>
 
 					<Divider />
 					<ButtonsMainDrawer
@@ -209,7 +210,7 @@ const MainDrawer: React.FC<MainDrawerProps> = () => {
 						wIcon={20}
 						hIcon={20}
 						isActive={mainRoutes.ayuda === route.pathname}
-						rourte={mainRoutes.ayuda} />
+						rourte={''} />
 				</Stack>
 				{/* Otro contenido del Drawer */}
 			</Stack>
