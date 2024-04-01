@@ -25,7 +25,7 @@ export interface TableReportesProps { }
 
 const TableReportes: React.FC<TableReportesProps> = () => {
 
-	const { getAll, reportes, loadingGet, loadingApi, goEdit,goPrint, goReporte } = useContext(PrescripcionContext);
+	const { getAll, reportes, loadingGet, loadingApi, goEdit, goPrint, goReporte } = useContext(PrescripcionContext);
 	const { copyPrescriptions, loadingSave, messageAPI, setMessageAPI, borrarPrescriptions } = useContext(FormulariosContext);
 
 	const [page, setPage] = useState<number>();
@@ -159,7 +159,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			(<Stack direction={'row'} spacing={1}>
 				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goReporte(params.row.no_orden) }} />
 				<IoCreateOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goEdit(params.row.no_orden) }} />
-				< IoPrintOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => {goPrint(params.row.no_orden), handleOpen() }} />
+				< IoPrintOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goPrint(params.row.no_orden), handleOpen() }} />
 				< IoCopyOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpenCopy() }} />
 				<IoTrashOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpenDelete() }} />
 			</Stack>)
@@ -194,13 +194,12 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 				>
 					<Stack direction={'column'}>
 						{(messageAPI)
-							&& <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)', borderRadius: '10px' }}>
+						 && <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)', borderRadius: '10px' }}>
 								{messageAPI}
 							</Alert>
-
 						}
 
-						<Card elevation={2} style={{ overflowX: 'auto',scrollbarWidth:'thin', scrollbarGutter: 'small', borderRadius: '15px', }}>
+						<Card elevation={2} style={{ overflowX: 'auto', scrollbarWidth: 'thin', scrollbarGutter: 'small', borderRadius: '15px', }}>
 							<DataGrid
 								style={{ width: "100%" }}
 								sx={{
@@ -217,7 +216,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 								// cledisableRowSelectionOnClick
 								autoHeight
 								//  pageSizeOptions={[10,30,60]}
-								getRowId={(row: IPrescriptions) => (row._id)?row._id:1}
+								getRowId={(row: IPrescriptions) => (row._id) ? row._id : 1}
 								onPaginationModelChange={(e) => { handlePageChange(e.page) }}
 
 							/>
