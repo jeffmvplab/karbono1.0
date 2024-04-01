@@ -58,7 +58,7 @@ const TableArchivosPlanos: React.FC<TableArchivosPlanosProps> = () => {
 	}, [])
 
 	const handleSelectionModelChange = (selectionModel: any[]) => {
-		console.log('PLPL:', selectionModel)
+		// console.log('PLPL:', selectionModel)
 		setArrayPrescId(selectionModel);
 	};
 
@@ -128,22 +128,22 @@ const TableArchivosPlanos: React.FC<TableArchivosPlanosProps> = () => {
 
 
 		{
-			field: "createdAt",
-			headerName: "Fecha de creación",
+			field: "archivo_plano",
+			headerName: "Fecha",
 			headerClassName: 'table-color--header',
 			flex: 1,
 			minWidth: 120,
-			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}</>
+			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value.createdAt)}</>
 		},
 
-		{
-			field: "updatedAt",
-			headerName: "Fecha de modificación",
-			headerClassName: 'table-color--header',
-			flex: 1,
-			minWidth: 140,
-			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}</>
-		},
+		// {
+		// 	field: "updatedAt",
+		// 	headerName: "Fecha de modificación",
+		// 	headerClassName: 'table-color--header',
+		// 	flex: 1,
+		// 	minWidth: 140,
+		// 	renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}</>
+		// },
 
 		{
 			field: "user",

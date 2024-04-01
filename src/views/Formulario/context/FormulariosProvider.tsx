@@ -890,7 +890,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		createdAt: (createdAt === '') ? new Date().toISOString() : createdAt!,
 		updatedAt: new Date().toISOString(),
 
-		estado: undefined,
+		estado: estado ? estado : undefined,
 
 		tipo_prescripcion: tipoPrescripcion || '0',
 		fecha: fechaCreacion || '0',
@@ -1003,14 +1003,26 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		console.log('Loading...:', prescriptionsData)
 		const newnumber = await getMaxNumPresc();
 
-		const copyPrescription: IPrescriptions = {
-			...prescriptionsData,
-			no_orden: newnumber + 1
+		let resp;
+
+
+		if (!prescriptionsData.estado) {
+
+			const copyPrescription: IPrescriptions = {
+				...prescriptionsData,
+				no_orden: newnumber + 1
+			}
+			resp = await prescriptionsUseCase.savePrescripcions(copyPrescription);
+			console.log('Resp Create:', resp)
+		} else {
+
+			const copyPrescription: IPrescriptions = {
+				...prescriptionsData,
+			}
+			resp = await prescriptionsUseCase.updatePrescripcions(copyPrescription, prescriptionsData.no_orden.toString());
+			console.log('Resp Update:', resp)
 		}
 
-		let resp = await prescriptionsUseCase.savePrescripcions(copyPrescription);
-
-		console.log('Resp:', resp)
 
 		setLoadingSave(true);
 
@@ -1152,7 +1164,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const handleOpenModalFormSaved = () => { setOpenModalFormSaved(true) };
 	const handleCloseModalFormSaved = () => setOpenModalFormSaved(false);
 
-	
+
 	const [openModalFormSavedRespon, setOpenModalFormSavedRespon] = useState(false);
 	const handleOpenModalFormSavedRespon = () => { setOpenModalFormSavedRespon(true) };
 	const handleCloseModalFormSavedRespon = () => setOpenModalFormSavedRespon(false);

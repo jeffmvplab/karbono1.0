@@ -138,7 +138,7 @@ const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ rep
 
                     <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center', justifyContent: 'center' }}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Teléfono:</Typography>
-                        <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{'-'}</Typography>
+                        <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.user.telefono}</Typography>
                     </Stack>
                 </Stack>
 
