@@ -49,7 +49,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 	const [isNew, setIsNew] = useState<boolean>(false);
 	const [newObs, setnewObs] = useState<string>();
 
-	console.log('ROLLLL:', getMeRol(), 'ESTADO :', reporte?.estado)
+	console.log('ROLLLL:', reporte?.observaciones![0])
 	// 
 	return (
 		<>
@@ -300,7 +300,7 @@ export const ContainerComments: React.FC<ContainerCommentsProps> = ({ user, rol,
 			}}>
 
 			<Typography color={'black'} sx={{ fontWeight: 500, fontSize: '14px', letterSpacing: '3%', lineHeight: '20px' }}>
-				{user?.nombre_apellidos!}-{rol}-{formatDateTime(date)}
+				{user!}-{rol}-{date}
 			</Typography>
 
 			<Typography color={' #656474'} sx={{ fontWeight: 500, fontSize: '14px', letterSpacing: '3%', lineHeight: '20px' }}>
