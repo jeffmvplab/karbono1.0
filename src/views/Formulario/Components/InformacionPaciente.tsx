@@ -418,7 +418,7 @@ const InformacionPaciente = () => {
                                 id='filtro'
                                 label='Filtro'
                                 type='text'
-                                select={true}
+                                select
                             >
                                 {si_no.map((option) => (
                                     <MenuItem sx={{ backgroundColor: 'white' }} key={option.value} value={option.value}>

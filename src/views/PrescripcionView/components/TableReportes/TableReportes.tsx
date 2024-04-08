@@ -19,6 +19,8 @@ import { convertirFecha } from '@/utilities/get_String_from_Date_Esp';
 import { PDFModal } from '@/components/PDFModal';
 import { CopyPresciptionModal } from '@/components/CopyPresciptionModal';
 import { DeleteModal } from '@/components/DeleteModal';
+import { StorageKeysEnum } from '@/utilities/enums';
+import { StatePrescriptionKeysEnum } from '@/utilities/enums/state_prescription_keys.enum';
 
 
 export interface TableReportesProps { }
@@ -158,10 +160,26 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>
 				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goReporte(params.row.no_orden) }} />
-				<IoCreateOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goEdit(params.row.no_orden) }} />
+				<IoCreateOutline style={{
+					color:
+						(params.row.estado !== StatePrescriptionKeysEnum.produccion
+							&& params.row.estado !== StatePrescriptionKeysEnum.calidad
+						) ? 'black' : 'gray', fontSize: 24, cursor: 'pointer'
+				}}
+					onClick={() => {
+						(params.row.estado !== StatePrescriptionKeysEnum.produccion && params.row.estado !== StatePrescriptionKeysEnum.calidad) && goEdit(params.row.no_orden)
+					}} />
 				< IoPrintOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goPrint(params.row.no_orden), handleOpen() }} />
 				< IoCopyOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpenCopy() }} />
-				<IoTrashOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpenDelete() }} />
+				<IoTrashOutline style={{
+					color: (params.row.estado !== StatePrescriptionKeysEnum.produccion
+						&& params.row.estado !== StatePrescriptionKeysEnum.calidad
+					) ? 'black' : 'gray', fontSize: 24, cursor: 'pointer'
+				}}
+					onClick={() => {
+						setASelectReporte(params.row),
+						(params.row.estado !== StatePrescriptionKeysEnum.produccion && params.row.estado !== StatePrescriptionKeysEnum.calidad) && handleOpenDelete()
+					}} />
 			</Stack>)
 		},
 	];
@@ -194,7 +212,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 				>
 					<Stack direction={'column'}>
 						{(messageAPI)
-						 && <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)', borderRadius: '10px' }}>
+							&& <Alert severity="error" sx={{ mb: 3, bgcolor: 'rgba(221,50,50,60%)', borderRadius: '10px' }}>
 								{messageAPI}
 							</Alert>
 						}

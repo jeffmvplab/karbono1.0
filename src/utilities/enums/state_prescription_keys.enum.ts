@@ -6,6 +6,7 @@ export enum StatePrescriptionKeysEnum {
     finalizada = 'FINALIZADA',
     solicitada = 'SOLICITADA',
     calidad = 'CALIDAD',
-    produccion = 'PRODUCCION'
-
+    produccion = 'PRODUCCION',
+    rechazada = 'RECHAZADA',
+    recibida = 'RECIBIDA'
 }
