@@ -38,6 +38,7 @@ const BarEtiqueta: React.FC<BarEtiquetaProps> = ({
             direction={'row'}
             spacing={3}
             justifyContent={'space-between'}
+            zIndex={999}
         >
 
             <CustomButton text={'Descargar'}

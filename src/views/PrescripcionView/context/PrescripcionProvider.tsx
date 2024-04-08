@@ -439,7 +439,6 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		setLoadingApi(true);
 	}
 
-
 	const [arrayPrescId, setArrayPrescId] = useState<string[]>([]);
 
 	const getPlainFile = async (prescriptionsId?: any[]) => {

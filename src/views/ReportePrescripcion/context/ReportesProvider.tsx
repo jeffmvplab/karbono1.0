@@ -32,6 +32,10 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 	const handleOpenModalVerificar = () => { setOpenModalVerificar(true) };
 	const handleCloseModalVerificar = () => setOpenModalVerificar(false);
 
+	const [openModalRechazar, setOpenModalRechazar] = useState(false);
+	const handleOpenModalRechazar = () => { setOpenModalRechazar(true) };
+	const handleCloseModalRechazar = () => setOpenModalRechazar(false);
+
 	const [openModalCancelVerificar, setOpenModalCancelVerificar] = useState(false);
 	const handleOpenModalCancelVerificar = () => { setOpenModalCancelVerificar(true) };
 	const handleCloseModalCancelVerificar = () => setOpenModalCancelVerificar(false);
@@ -134,6 +138,10 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 			openModalOrdenar,
 			handleOpenModalOrdenar,
 			handleCloseModalOrdenar,
+
+			openModalRechazar,
+			handleOpenModalRechazar,
+			handleCloseModalRechazar,
 
 			openModalVerificar,
 			handleOpenModalVerificar,

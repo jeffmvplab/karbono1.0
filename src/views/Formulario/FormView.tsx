@@ -282,7 +282,7 @@ const FormView: React.FC<FormViewProps> = () => {
 										>Micronutrientes
 										</CustomButtonTab>
 
-										<CustomButtonTab
+										{/* <CustomButtonTab
 											onClick={() => setSelectTab(3)}
 											sx={{
 												minWidth: '150px',
@@ -290,14 +290,14 @@ const FormView: React.FC<FormViewProps> = () => {
 												color: (selectTab === 3) ? 'white' : '#B8BDBDB2 '
 											}}
 										>Observaciones
-										</CustomButtonTab>
+										</CustomButtonTab> */}
 
 									</Stack>
 
 									{(selectTab === 0) && <InformacionPaciente />}
 									{(selectTab === 1) && <Macronutrientes />}
 									{(selectTab === 2) && <Micronutrientes />}
-									{(selectTab === 3) && <Observaciones />}
+									{/* {(selectTab === 3) && <Observaciones />} */}
 
 								</Box>
 
