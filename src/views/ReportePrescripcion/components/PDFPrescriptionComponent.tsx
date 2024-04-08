@@ -23,7 +23,7 @@ const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ rep
                 maxWidth={'1500px'}
                 minWidth={{ xs: print ? '1000px' : '100%', md: '100%' }}
                 overflow={'scroll'}
-                spacing={5} >
+            >
 
                 <Stack>
                     <Card>
@@ -128,7 +128,7 @@ const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ rep
 
                     <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center', justifyContent: 'center' }}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Prescriptor:</Typography>
-                        <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.user.nombre_apellidos}</Typography>
+                        <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.user?.nombre_apellidos!}</Typography>
                     </Stack>
 
                     <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -138,7 +138,7 @@ const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ rep
 
                     <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center', justifyContent: 'center' }}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Teléfono:</Typography>
-                        <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.user.telefono}</Typography>
+                        <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.user?.telefono!}</Typography>
                     </Stack>
                 </Stack>
 

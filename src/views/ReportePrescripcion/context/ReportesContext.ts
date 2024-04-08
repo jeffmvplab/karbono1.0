@@ -4,7 +4,7 @@ import { createContext, Dispatch, SetStateAction } from "react";
 
 
 interface ContextProps {
-    print: boolean,setPrint: React.Dispatch<React.SetStateAction<boolean>>,
+    print: boolean, setPrint: React.Dispatch<React.SetStateAction<boolean>>,
 
     getPrescriptionsByNumber: () => void,
     loadingSave: boolean,
@@ -18,6 +18,10 @@ interface ContextProps {
     openModalOrdenar: boolean,
     handleOpenModalOrdenar: () => void,
     handleCloseModalOrdenar: () => void,
+
+    openModalRechazar: boolean,
+    handleOpenModalRechazar: () => void,
+    handleCloseModalRechazar: () => void,
 
     openModalVerificar: boolean,
     handleOpenModalVerificar: () => void,

@@ -24,6 +24,7 @@ import BarReporteQF_Calidad from './components/BarReporteQF_Calidad/BarReporteQF
 import { RolUsersKeysEnum } from '@/utilities/enums/rol_user_keys.enum';
 import { formatDateTime } from '@/utilities/get_String_from_Date_Esp';
 import { useRouter } from 'next/router';
+import { RechazarModal } from './components/Modals/RechazarModal';
 
 
 export interface ReportePrescripcionViewProps { }
@@ -55,7 +56,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 		<>
 			{(loadingSave)
 				&& <>
-					<Card sx={{ display: { xs: 'none', md: 'flex' }, position: 'fixed', width: '100%', bottom: '40px', left: '0px' }} >
+					<Card sx={{ display: { xs: 'none', md: 'flex' }, position: 'fixed', width: '100%', bottom: '40px', left: '0px',  zIndex:999 }} >
 						{(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
 							? <BarReporteNPT />
 							: (getMeRol()[0] === RolUsersKeysEnum.calidad)
@@ -64,6 +65,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 						}
 					</Card>
 
+					<RechazarModal />
 					<VerificarModal />
 					<CancelVerificarModal />
 
@@ -179,11 +181,11 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 						<Grid container sx={{ marginTop: '30px', marginBottom: { xs: '0px', md: '30px' } }} paddingBottom={'100px'} spacing={{ xs: 0, md: 2 }}>
 
-							<Grid item xs={12} md={9} lg={10} paddingX='15px'>
+							<Grid item xs={12} md={8} lg={9} paddingX='15px'>
 								<PDFPrescriptionComponent reporte={reporte} loading={loadingSave} />
 							</Grid>
 
-							<Grid item xs={12} md={3} lg={2} display={{ xs: 'none', md: 'block' }} paddingBottom={{ xs: '150px', md: '0' }}>
+							<Grid item xs={12} md={4} lg={3} display={{ xs: 'none', md: 'block' }} paddingBottom={{ xs: '150px', md: '0' }}>
 								<Card>
 									<Stack paddingX='15px' direction={'column'} height={'100%'} overflow={'scroll'} alignItems={'center'}>
 										<Typography color={'#372FC6'} sx={{ fontWeight: 600, fontSize: '20px' }}>Observaciones y Cambios.</Typography>
@@ -259,6 +261,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 							<Stack
 								overflow={'scroll'}
 								direction={'column'}
+								zIndex={99}
 								display={{ xs: 'flex', md: 'none' }}
 								paddingBottom={{ xs: '150px', md: '0' }}>
 
