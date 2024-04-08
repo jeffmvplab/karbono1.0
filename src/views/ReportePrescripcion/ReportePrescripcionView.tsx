@@ -56,7 +56,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 		<>
 			{(loadingSave)
 				&& <>
-					<Card sx={{ display: { xs: 'none', md: 'flex' }, position: 'fixed', width: '100%', bottom: '40px', left: '0px',  zIndex:999 }} >
+					<Card sx={{ display: { xs: 'none', md: 'flex' }, position: 'fixed', width: '100%', bottom: '40px', left: '0px', zIndex: 999 }} >
 						{(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
 							? <BarReporteNPT />
 							: (getMeRol()[0] === RolUsersKeysEnum.calidad)
@@ -181,11 +181,11 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 						<Grid container sx={{ marginTop: '30px', marginBottom: { xs: '0px', md: '30px' } }} paddingBottom={'100px'} spacing={{ xs: 0, md: 2 }}>
 
-							<Grid item xs={12} md={8} lg={9} paddingX='15px'>
+							<Grid item xs={12} md={12} lg={9.5} paddingX='15px'>
 								<PDFPrescriptionComponent reporte={reporte} loading={loadingSave} />
 							</Grid>
 
-							<Grid item xs={12} md={4} lg={3} display={{ xs: 'none', md: 'block' }} paddingBottom={{ xs: '150px', md: '0' }}>
+							<Grid item xs={12} md={12} lg={2.5} display={{ xs: 'none', md: 'block' }} paddingBottom={{ xs: '150px', md: '0' }}>
 								<Card>
 									<Stack paddingX='15px' direction={'column'} height={'100%'} overflow={'scroll'} alignItems={'center'}>
 										<Typography color={'#372FC6'} sx={{ fontWeight: 600, fontSize: '20px' }}>Observaciones y Cambios.</Typography>
@@ -212,6 +212,19 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 										</Stack>
 
+										{isNew
+											&& <Stack direction={'row'} padding={4} >
+												<CustomTextField
+													onChange={(e) => setnewObs(e.target.value)}
+													id='Observacion'
+													label='Agrega una observación o comentario.'
+													type='text'
+													value={newObs}
+												// defaulValue={numIden!}
+												// helperText={messageErrorNumIden}
+												/>
+											</Stack>
+										}
 										<Stack direction={'row'} justifyContent={'flex-end'} paddingY={2}>
 											<CustomButton
 												// disabled={!valOKAlert}
@@ -231,7 +244,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 												}
 												width={'100%'}
 												height={50}
-												text={(isNew) ? 'Guardar' : 'Crear Observacion'}
+												text={(isNew) ? 'Guardar' : 'Crear'}
 												sx={{ borderRadius: '10px' }}
 												color={colorsKarbono.primary}
 												textColor='white'
@@ -239,19 +252,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 											/>
 										</Stack>
 
-										{isNew
-											&& <Stack direction={'row'} padding={4} >
-												<CustomTextField
-													onChange={(e) => setnewObs(e.target.value)}
-													id='Observacion'
-													label='Agrega una observación o comentario.'
-													type='text'
-													value={newObs}
-												// defaulValue={numIden!}
-												// helperText={messageErrorNumIden}
-												/>
-											</Stack>
-										}
+
 									</Stack>
 								</Card>
 							</Grid>
