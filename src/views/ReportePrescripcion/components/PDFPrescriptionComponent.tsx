@@ -23,7 +23,7 @@ const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ rep
                 maxWidth={'1500px'}
                 minWidth={{ xs: print ? '1000px' : '100%', md: '100%' }}
                 overflow={'scroll'}
-                spacing={5} >
+            >
 
                 <Stack>
                     <Card>

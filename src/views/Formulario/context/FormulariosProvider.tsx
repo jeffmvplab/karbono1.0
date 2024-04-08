@@ -1085,7 +1085,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			const copyPrescription: IPrescriptions = {
 				...prescription!,
 				_id: undefined,
-				nombre_paciente:`Copia de ${prescription?.nombre_paciente}`,
+				nombre_paciente: prescription?.nombre_paciente.split(' ')[0] === 'Copia'
+					? prescription?.nombre_paciente
+					: `Copia de ${prescription?.nombre_paciente}`,
 				createdAt: new Date().toISOString(),
 				updatedAt: new Date().toISOString(),
 				no_orden: newnumber + 1,
@@ -1101,7 +1103,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 			if (resp.statusCode === 201) {
 				setSaveOk(true);
-			
+
 			} else if (resp.statusCode === 200) {
 				setMessageAPI(resp.body.message)
 				setSaveOk(true);
