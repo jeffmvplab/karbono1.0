@@ -21,6 +21,7 @@ export interface CustomTextFieldProps {
     onClick?: React.MouseEventHandler<HTMLDivElement> | undefined
     onKeyPress?: React.KeyboardEventHandler<HTMLDivElement> | undefined,
     onClickEndAdornament?: React.MouseEventHandler<HTMLButtonElement> | undefined
+    whitIcon?: boolean
 }
 
 const CustomTextField: React.FC<CustomTextFieldProps> = ({
@@ -41,7 +42,8 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
     helperText = '',
     borderRadius = '12px',
     onClickEndAdornament,
-    component
+    component,
+    whitIcon=false
 }) => {
     return (
 
@@ -71,8 +73,12 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
             // }}
             InputProps={{
                 endAdornment:
-                    // <Button onClick={onClickEndAdornament} sx={{ background: 'transparent', height: '30px' }}>
-                    <InputAdornment position="start">{endAdornament}</InputAdornment>
+                    whitIcon
+                        ? <Button onClick={onClickEndAdornament} sx={{ background: 'transparent', height: '30px' }}>
+                            <InputAdornment position="start">{endAdornament}</InputAdornment>
+                        </Button>
+                        // <Button onClick={onClickEndAdornament} sx={{ background: 'transparent', height: '30px' }}>
+                        : <InputAdornment position="start">{endAdornament}</InputAdornment>
                 // </Button>,
             }}
             sx={{
@@ -84,10 +90,9 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
                     borderRadius: borderRadius,
                 },
 
-            }}
-        >
+            }}>
             {children}
-        </TextField>
+        </TextField >
 
     )
 }
