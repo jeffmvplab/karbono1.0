@@ -10,7 +10,17 @@ export interface ILogs {
        cambios: any[]
 
 }
+// export interface ILogs {
 
+//        _id: string,
+//        usuario: any,
+//        prescription: number,
+//        rol:any[],
+//        comentario: string,
+//        fecha: string,
+//        cambios: any[]
+
+// }
 export interface Aportes {
        a_sodio: number,
        a_potacio: number,

@@ -69,7 +69,7 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 								<Stack margin={'5px'} direction={'column'} >
 									<CustomTextField
 										onChange={handleSearchName}
-
+										whitIcon={true}
 										onClickEndAdornament={() => { searchName ? getPrescriptionsByName(searchName) : getAll() }}
 										id='Numero-de-orden'
 										label='Nombre'
@@ -82,6 +82,7 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 								<Stack margin={'5px'} direction={'column'} >
 									<CustomTextField
 										onChange={handleSearchId}
+										whitIcon={true}
 										onClickEndAdornament={() => { searchId ? getPrescriptionsById(searchId) : getAll() }}
 										id='Numero-de-orden'
 										label='Identificación'
@@ -95,6 +96,7 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 								<Stack margin={'5px'} direction={'column'} >
 									<CustomTextField
 										onChange={handleSearchNumber}
+										whitIcon={true}
 										onClickEndAdornament={() => { searchNumber ? getPrescriptionsByNumber(searchNumber) : getAll() }}
 										id='Numero-de-orden'
 										label='# de orden'
