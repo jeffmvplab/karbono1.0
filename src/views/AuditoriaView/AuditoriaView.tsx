@@ -56,7 +56,7 @@ const AuditoriaView: React.FC<PrescripcionViewProps> = () => {
 						<Stack direction={{ xs: 'column', md: 'row' }} justifyContent={'space-between'} spacing={4}>
 
 							<Stack margin={'5px'} direction={'column'} >
-								<CustomButton text={'Nueva prescripción'}
+								{/* <CustomButton text={'Nueva prescripción'}
 									onClick={() => { goAddNew(mainRoutes.form) }}
 									width='240px'
 									height='44px'
@@ -67,7 +67,7 @@ const AuditoriaView: React.FC<PrescripcionViewProps> = () => {
 									borderColor={'transparent'}
 									endIcon={<AddCircleOutlineIcon style={{ color: 'white', paddingLeft: '5px', scale: '1.5' }} />}
 									sx={{ borderRadius: '10px' }}
-								/>
+								/> */}
 							</Stack>
 
 							<Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
