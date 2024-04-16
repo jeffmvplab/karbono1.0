@@ -70,7 +70,8 @@ const BarReporteNPT = () => {
 
                 <CustomButton text={'Descargar'}
                     // onClick={handleOpenModalDescargar}
-                    onClick={async () => {await setPrint(true), convertirAPDF('reporte_view', reporte?.nombre_paciente!) }}
+                    // onClick={async () => {await setPrint(true), convertirAPDF('reporte_view', reporte?.nombre_paciente!) }}
+                    onClick={() => router.push(mainRoutes.pdf)}
                     width='160px'
                     height='44px'
                     variant='outlined'

@@ -43,7 +43,9 @@ const BarEtiqueta: React.FC<BarEtiquetaProps> = ({
 
             <CustomButton text={'Descargar'}
                 // onClick={handleOpenModalDescargar}
-                onClick={() => convertirAPDF(idDescargar!, title!)}
+                // /pdfprint
+                onClick={() => router.push(mainRoutes.pdf)}
+                // onClick={() => convertirAPDF(idDescargar!, title!)}
                 width='160px'
                 height='44px'
                 variant='outlined'
