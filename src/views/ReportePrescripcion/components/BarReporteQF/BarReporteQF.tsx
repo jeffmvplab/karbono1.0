@@ -10,6 +10,8 @@ import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 
 import CloseIcon from '@mui/icons-material/Close';
+import router from "next/router";
+import { mainRoutes } from "@/routes/routes";
 
 const BarReporteQF = () => {
 
@@ -32,7 +34,8 @@ const BarReporteQF = () => {
 
             <CustomButton text={'Descargar'}
                 // onClick={handleOpenModalDescargar}
-                onClick={() => convertirAPDF('reporte_view', reporte?.nombre_paciente!)}
+                // onClick={() => convertirAPDF('reporte_view', reporte?.nombre_paciente!)}
+                onClick={() => router.push(mainRoutes.pdf)}
                 width='160px'
                 height='44px'
                 variant='outlined'
