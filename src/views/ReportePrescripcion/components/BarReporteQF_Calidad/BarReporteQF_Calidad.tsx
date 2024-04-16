@@ -92,7 +92,8 @@ const BarReporteQF_Calidad = () => {
 
                         <CustomButton text={'Descargar'}
                             // onClick={handleOpenModalDescargar}
-                            onClick={() => convertirAPDF('reporte_view', reporte?.nombre_paciente!)}
+                            // onClick={() => convertirAPDF('reporte_view', reporte?.nombre_paciente!)}
+                            onClick={() => router.push(mainRoutes.pdf)}
                             width='160px'
                             height='44px'
                             variant='outlined'
