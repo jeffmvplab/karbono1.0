@@ -30,12 +30,12 @@ const TarjetaAyudas = () => {
           </Button>*/}
             <Stack width={'100%'} direction={'row'} justifyContent={'space-between'} alignItems={'end'}>
               <ButtonCardsHome
-                route={mainRoutes.home}
+                route={' https://purelife.cloud/preguntas-frecuentes/'}
                 text='Ingresar'
                 color={'#90AFB0'}
                 id='ayudas'
               />
-              <Typography variant='body1'> *Proximamente</Typography>
+              {/* <Typography variant='body1'> *Proximamente</Typography> */}
             </Stack>
 
 

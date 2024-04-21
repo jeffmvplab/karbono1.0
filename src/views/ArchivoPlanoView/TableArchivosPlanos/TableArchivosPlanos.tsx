@@ -133,7 +133,7 @@ const TableArchivosPlanos: React.FC<TableArchivosPlanosProps> = () => {
 			headerClassName: 'table-color--header',
 			flex: 1,
 			minWidth: 120,
-			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value.createdAt)}</>
+			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value?.createdAt)}</>
 		},
 
 		// {
