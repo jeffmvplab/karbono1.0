@@ -15,7 +15,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { IoPrintOutline } from "react-icons/io5";
 import { IoTrashOutline } from "react-icons/io5";
 import { FormulariosContext } from '@/views/Formulario/context/FormulariosContext';
-import { convertirFecha } from '@/utilities/get_String_from_Date_Esp';
+import { convertirFecha, formatDateTime } from '@/utilities/get_String_from_Date_Esp';
 import { PDFModal } from '@/components/PDFModal';
 import { CopyPresciptionModal } from '@/components/CopyPresciptionModal';
 import { DeleteModal } from '@/components/DeleteModal';
@@ -115,8 +115,8 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Fecha de creación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 80,
-			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}</>
+			minWidth: 200,
+			renderCell: (params: GridRenderCellParams) => <>{formatDateTime(params.value)}</>
 		},
 
 		{
@@ -124,8 +124,8 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Fecha de modificación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 80,
-			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}</>
+			minWidth:200,
+			renderCell: (params: GridRenderCellParams) => <>{formatDateTime(params.value)}</>
 		},
 
 		// {
