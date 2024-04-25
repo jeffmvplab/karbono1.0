@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { ReactNode } from "react";
 import { Box, } from "@mui/material";
 import Head from "next/head";
@@ -37,11 +37,13 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
           sx={{ paddingTop:{xs:"5px",sm:"20px",md:"10px",lg:"10px",xl:"10px",},}}>
         </Box> */}
         <NavbarP />
-        <MainDrawer/>
-        
+        <Suspense>
+          <MainDrawer />
+        </Suspense>
+
         <Box
           sx={{
-           marginTop:{xs:'60px',md:'130px'},
+            marginTop: { xs: '60px', md: '130px' },
             padding: { xs: (router.asPath === mainRoutes.form) ? '0px' : '10px', sm: '0px' },
             paddingX: { xs: '0px', sm: '20px' },
           }}>
