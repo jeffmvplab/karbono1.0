@@ -144,14 +144,14 @@ const ReportesMicronutrientes: React.FC<ReportesMicronutrientesProps> = ({ repor
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getCalcio(reporte!).requerimiento.toFixed(2)}    {reporte?.calcio==='Gluconato de Calcio'?'(mEq/kg/día)':'(mg/kg/día)'}
+                                    {getCalcio(reporte!).requerimiento.toFixed(2)}    {reporte?.calcio==='Gluconato de Calcio'?'(mg/kg/día)':'(mEq/kg/día)'}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
 
                             {(loadingSave)
                                 ? <Typography>
-                                    {getMagnesio(reporte!).requerimiento.toFixed(2)}    {reporte?.calcio==='Sulfato de Magnesio'?'(mEq/kg/día)':'(mg/kg/día)'}
+                                    {getMagnesio(reporte!).requerimiento.toFixed(2)}    {reporte?.magnesio==='Sulfato de Magnesio'?'(mg/kg/día)':'(mEq/kg/día)'}
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
 
