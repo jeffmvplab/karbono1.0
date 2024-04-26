@@ -124,7 +124,7 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			headerName: "Fecha de modificación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth:200,
+			minWidth: 200,
 			renderCell: (params: GridRenderCellParams) => <>{formatDateTime(params.value)}</>
 		},
 
@@ -159,26 +159,28 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>
-				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goReporte(params.row.no_orden) }} />
-				<IoCreateOutline style={{
-					color:
-						(params.row.estado !== StatePrescriptionKeysEnum.produccion
-							&& params.row.estado !== StatePrescriptionKeysEnum.calidad
-						) ? 'black' : 'gray', fontSize: 24, cursor: 'pointer'
-				}}
+				<IoEyeOutline id='Pre_btn_VerReporte' style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goReporte(params.row.no_orden) }} />
+				<IoCreateOutline
+					id='Pre_btn_Editar'
+					style={{
+						color:
+							(params.row.estado !== StatePrescriptionKeysEnum.produccion
+								&& params.row.estado !== StatePrescriptionKeysEnum.calidad
+							) ? 'black' : 'gray', fontSize: 24, cursor: 'pointer'
+					}}
 					onClick={() => {
 						(params.row.estado !== StatePrescriptionKeysEnum.produccion && params.row.estado !== StatePrescriptionKeysEnum.calidad) && goEdit(params.row.no_orden)
 					}} />
-				< IoPrintOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goPrint(params.row.no_orden), handleOpen() }} />
-				< IoCopyOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpenCopy() }} />
-				<IoTrashOutline style={{
+				< IoPrintOutline id='Pre_btn_ImprimirPrescripcion' style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goPrint(params.row.no_orden), handleOpen() }} />
+				< IoCopyOutline id='Pre_btn_Duplicar' style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpenCopy() }} />
+				<IoTrashOutline id='Pre_btn_Eliminar' style={{
 					color: (params.row.estado !== StatePrescriptionKeysEnum.produccion
 						&& params.row.estado !== StatePrescriptionKeysEnum.calidad
 					) ? 'black' : 'gray', fontSize: 24, cursor: 'pointer'
 				}}
 					onClick={() => {
 						setASelectReporte(params.row),
-						(params.row.estado !== StatePrescriptionKeysEnum.produccion && params.row.estado !== StatePrescriptionKeysEnum.calidad) && handleOpenDelete()
+							(params.row.estado !== StatePrescriptionKeysEnum.produccion && params.row.estado !== StatePrescriptionKeysEnum.calidad) && handleOpenDelete()
 					}} />
 			</Stack>)
 		},

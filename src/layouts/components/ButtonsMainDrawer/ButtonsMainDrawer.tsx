@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Link from "next/link";
 
 export interface ButtonsMainDrawerProps {
+	id?:string,
 	icon: any,
 	title: string,
 	rourte: string,
@@ -16,11 +17,11 @@ export interface ButtonsMainDrawerProps {
 }
 
 
-const ButtonsMainDrawer: React.FC<ButtonsMainDrawerProps> = ({ icon, title, rourte, isActive, wIcon = 30, hIcon = 30 }) => {
+const ButtonsMainDrawer: React.FC<ButtonsMainDrawerProps> = ({ id,icon, title, rourte, isActive, wIcon = 30, hIcon = 30 }) => {
 
 	return (
 
-		<Link href={`${rourte}`} style={{ textDecorationLine: 'none' }}>
+		<Link id={id} href={`${rourte}`} style={{ textDecorationLine: 'none' }}>
 			<Stack direction={'row'} alignItems={'center'} paddingX={'20px'} justifyContent={'space-between'}>
 
 				<Stack direction={'row'} alignItems={'center'} spacing={1}>

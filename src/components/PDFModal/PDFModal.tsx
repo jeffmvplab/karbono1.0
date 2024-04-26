@@ -56,7 +56,7 @@ const PDFModal: React.FC<PDFModalProps> = ({
 								width: '50px',
 								height: '50px'
 							}}>
-							<Button onClick={handleClose}>
+							<Button id="Pre_btn_PopupImprimir" onClick={handleClose}>
 								< IoPrintOutline style={{ color: 'black', fontSize: 24 }} onClick={() => { convertirAPDF('reporte_view', selectReporte!.nombre_paciente) }} />
 							</Button>
 						</Avatar>

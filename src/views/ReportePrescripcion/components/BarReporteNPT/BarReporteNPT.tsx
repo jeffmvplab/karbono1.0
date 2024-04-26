@@ -38,7 +38,9 @@ const BarReporteNPT = () => {
 
             <Stack direction={'row'} spacing={3}>
 
-                <CustomButton text={'Enviar'}
+                <CustomButton 
+                id="Pre_btn_EnviarPrescripcion"
+                text={'Enviar'}
                     // onClick={handleOpenModalDescargar}
                     onClick={() => {
                         const newComment: IComment = {
@@ -71,6 +73,7 @@ const BarReporteNPT = () => {
                 <CustomButton text={'Descargar'}
                     // onClick={handleOpenModalDescargar}
                     // onClick={async () => {await setPrint(true), convertirAPDF('reporte_view', reporte?.nombre_paciente!) }}
+                    id="Pre_btn_DescargarPrescripcion"
                     onClick={() => router.push(mainRoutes.pdf)}
                     width='160px'
                     height='44px'
@@ -89,6 +92,7 @@ const BarReporteNPT = () => {
 
                 <CustomButton text={'Salir'}
                     // onClick={handleOpenModalDescargar}
+                    id="Pre_btn_SalirPrescripcion"
                     onClick={() => router.push(mainRoutes.prescripcion)}
                     width='160px'
                     height='44px'
