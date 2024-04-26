@@ -49,7 +49,7 @@ const TarjetaConf: React.FC<TarjetaConfProps> = () => {
                 route={mainRoutes.mi_cuenta}
                 text=' Ingresar'
                 color={colorsKarbono.secundary}
-                id='configuracion'
+                id='Pre_Configuracion'
               />
             </Box>
             <Hidden smDown>

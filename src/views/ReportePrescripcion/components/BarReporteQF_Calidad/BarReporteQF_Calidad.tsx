@@ -14,64 +14,64 @@ import { mainRoutes } from "@/routes/routes";
 const BarReporteQF_Calidad = () => {
 
 
-    const { reporte} = useContext(ReportesContext)
+    const { reporte } = useContext(ReportesContext)
 
     const router = useRouter();
 
     return (
 
-            <Stack direction={'column'}   width={'100%'}>
+        <Stack direction={'column'} width={'100%'}>
 
-                <Typography
-                    sx={{ color: colorsKarbono.secundary, fontWeight: 700, fontSize: { xs: '16px', md: '16px' }, paddingX: '40px' }}>
-                    Generar archivos:
-                </Typography>
+            <Typography
+                sx={{ color: colorsKarbono.secundary, fontWeight: 700, fontSize: { xs: '16px', md: '16px' }, paddingX: '40px' }}>
+                Generar archivos:
+            </Typography>
 
-                <Stack
-              
-                    paddingX={'40px'}
-                    overflow={'scroll'}
-                    bgcolor={'white'}
-                    height={{ xs: '60px', md: '80px' }}
-                    alignItems={'center'}
-                    direction={'row'}
-                    spacing={3}
-                    justifyContent={'space-between'}
-                >
+            <Stack
 
-                    <Stack  direction={'row'} spacing={2}>
-                        <CustomButton text={'Etiqueta'}
-                            // onClick={handleOpenModalDescargar}
-                            onClick={() =>router.push(mainRoutes.etiqueta)}
-                            width='160px'
-                            height='44px'
-                            // variant='outlined'
-                            color={colorsKarbono.secundary}
-                            fontSize={'16px'}
-                            textColor={'white'}
-                            borderColor={colorsKarbono.secundary}
-                            startIcon={
-                                <Image width={25} height={25} src={'/assets/Etiqueta.png'} alt={''} ></Image>
-                            }
-                            sx={{ borderRadius: '10px' }}
-                        />
+                paddingX={'40px'}
+                overflow={'scroll'}
+                bgcolor={'white'}
+                height={{ xs: '60px', md: '80px' }}
+                alignItems={'center'}
+                direction={'row'}
+                spacing={3}
+                justifyContent={'space-between'}
+            >
 
-                        <CustomButton text={'Plan de producción'}
-                            // onClick={handleOpenModalDescargar}
-                            onClick={() =>router.push(mainRoutes.plan_produccion)}
-                            width='240px'
-                            height='44px'
-                            // variant='outlined'
-                            color={colorsKarbono.primary}
-                            fontSize={'16px'}
-                            textColor={'white'}
-                            borderColor={colorsKarbono.secundary}
-                            startIcon={
-                                <Image width={25} height={25} src={'/assets/verificar.png'} alt={''} ></Image>
-                            }
-                            sx={{ borderRadius: '10px' }}
-                        />
-{/* 
+                <Stack direction={'row'} spacing={2}>
+                    <CustomButton text={'Etiqueta'}
+                        // onClick={handleOpenModalDescargar}
+                        onClick={() => router.push(mainRoutes.etiqueta)}
+                        width='160px'
+                        height='44px'
+                        // variant='outlined'
+                        color={colorsKarbono.secundary}
+                        fontSize={'16px'}
+                        textColor={'white'}
+                        borderColor={colorsKarbono.secundary}
+                        startIcon={
+                            <Image width={25} height={25} src={'/assets/Etiqueta.png'} alt={''} ></Image>
+                        }
+                        sx={{ borderRadius: '10px' }}
+                    />
+
+                    <CustomButton text={'Plan de producción'}
+                        // onClick={handleOpenModalDescargar}
+                        onClick={() => router.push(mainRoutes.plan_produccion)}
+                        width='240px'
+                        height='44px'
+                        // variant='outlined'
+                        color={colorsKarbono.primary}
+                        fontSize={'16px'}
+                        textColor={'white'}
+                        borderColor={colorsKarbono.secundary}
+                        startIcon={
+                            <Image width={25} height={25} src={'/assets/verificar.png'} alt={''} ></Image>
+                        }
+                        sx={{ borderRadius: '10px' }}
+                    />
+                    {/* 
                         <CustomButton text={'Archivo plano'}
                             // onClick={handleOpenModalDescargar}
                             onClick={() => {
@@ -90,43 +90,45 @@ const BarReporteQF_Calidad = () => {
                             sx={{ borderRadius: '10px' }}
                         /> */}
 
-                        <CustomButton text={'Descargar'}
-                            // onClick={handleOpenModalDescargar}
-                            // onClick={() => convertirAPDF('reporte_view', reporte?.nombre_paciente!)}
-                            onClick={() => router.push(mainRoutes.pdf)}
-                            width='160px'
-                            height='44px'
-                            variant='outlined'
-                            color='secundary'
-                            fontSize={'16px'}
-                            textColor={colorsKarbono.primary}
-                            colorHover="white"
-                            borderColor={'grey'}
-                            startIcon={
-                                <GetAppOutlinedIcon
-                                    style={{ color: colorsKarbono.primary, paddingLeft: '5px', scale: '1.5' }} />
-                            }
-                            sx={{ borderRadius: '10px' }}
-                        />
-                    </Stack>
-
-                    <CustomButton text={'Salir'}
+                    <CustomButton text={'Descargar'}
                         // onClick={handleOpenModalDescargar}
-                        onClick={() => { router.push(mainRoutes.prescripcion) }}
+                        // onClick={() => convertirAPDF('reporte_view', reporte?.nombre_paciente!)}
+                        id="Pre_btn_DescargarPrescripcion"
+                        onClick={() => router.push(mainRoutes.pdf)}
                         width='160px'
                         height='44px'
-                        // variant='outlined'
-                        color='#D03939'
+                        variant='outlined'
+                        color='secundary'
                         fontSize={'16px'}
-                        textColor={'white'}
-                        borderColor={colorsKarbono.secundary}
+                        textColor={colorsKarbono.primary}
+                        colorHover="white"
+                        borderColor={'grey'}
                         startIcon={
-                            <LogoutRoundedIcon sx={{ color: 'white', width: '30px', height: '30px', }} />
+                            <GetAppOutlinedIcon
+                                style={{ color: colorsKarbono.primary, paddingLeft: '5px', scale: '1.5' }} />
                         }
-                        sx={{ borderRadius: '10px'}}
+                        sx={{ borderRadius: '10px' }}
                     />
                 </Stack>
+
+                <CustomButton text={'Salir'}
+                    // onClick={handleOpenModalDescargar}
+                    id="Pre_btn_SalirPrescripcion"
+                    onClick={() => { router.push(mainRoutes.prescripcion) }}
+                    width='160px'
+                    height='44px'
+                    // variant='outlined'
+                    color='#D03939'
+                    fontSize={'16px'}
+                    textColor={'white'}
+                    borderColor={colorsKarbono.secundary}
+                    startIcon={
+                        <LogoutRoundedIcon sx={{ color: 'white', width: '30px', height: '30px', }} />
+                    }
+                    sx={{ borderRadius: '10px' }}
+                />
             </Stack>
+        </Stack>
     )
 }
 

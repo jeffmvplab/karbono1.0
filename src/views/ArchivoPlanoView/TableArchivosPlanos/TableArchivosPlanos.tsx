@@ -252,6 +252,7 @@ const TableArchivosPlanos: React.FC<TableArchivosPlanosProps> = () => {
 						<Stack direction={'row'} width={'100%'} justifyContent={'end'}>
 							<CustomButton text={'Archivo plano'}
 								// onClick={handleOpenModalDescargar}
+								id='QF_btn_ImprimirArchivoPlano'
 								onClick={() => getPlainFile()}
 								width='200px'
 								height='44px'

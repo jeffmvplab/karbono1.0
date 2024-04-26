@@ -162,7 +162,7 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>
-				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goActions(params.row.no_orden) }} />
+				<IoEyeOutline id='QF_btn_verAuditoria' style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goActions(params.row.no_orden) }} />
 			</Stack>)
 		},
 	];
@@ -214,7 +214,7 @@ const TableAuditoria: React.FC<TableAuditoriaProps> = () => {
 								// cledisableRowSelectionOnClick
 								autoHeight
 								//  pageSizeOptions={[10,30,60]}
-								getRowId={(row: IPrescriptions) => (row._id)?row._id:1}
+								getRowId={(row: IPrescriptions) => (row._id) ? row._id : 1}
 								onPaginationModelChange={(e) => { handlePageChange(e.page) }}
 
 							/>

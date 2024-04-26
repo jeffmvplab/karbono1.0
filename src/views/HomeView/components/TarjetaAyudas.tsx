@@ -33,7 +33,7 @@ const TarjetaAyudas = () => {
                 route={' https://purelife.cloud/preguntas-frecuentes/'}
                 text='Ingresar'
                 color={'#90AFB0'}
-                id='ayudas'
+                id='Pre_Ayudas'
               />
               {/* <Typography variant='body1'> *Proximamente</Typography> */}
             </Stack>
