@@ -16,7 +16,7 @@ import { mainRoutes } from "@/routes/routes";
 const BarReporteQF = () => {
 
 
-    const { reporte, saveComments,handleOpenModalRechazar, handleOpenModalVerificar, handleOpenModalCancelVerificar } = useContext(ReportesContext)
+    const { reporte, saveComments, handleOpenModalRechazar, handleOpenModalVerificar, handleOpenModalCancelVerificar } = useContext(ReportesContext)
 
     return (
 
@@ -35,6 +35,7 @@ const BarReporteQF = () => {
             <CustomButton text={'Descargar'}
                 // onClick={handleOpenModalDescargar}
                 // onClick={() => convertirAPDF('reporte_view', reporte?.nombre_paciente!)}
+                id="Pre_btn_DescargarPrescripcion"
                 onClick={() => router.push(mainRoutes.pdf)}
                 width='160px'
                 height='44px'
@@ -94,13 +95,14 @@ const BarReporteQF = () => {
                 textColor={'white'}
                 borderColor={colorsKarbono.secundary}
                 startIcon={
-                    <CloseIcon sx={{color:'white',width:'30px',height:'30px'}}/>
+                    <CloseIcon sx={{ color: 'white', width: '30px', height: '30px' }} />
                 }
                 sx={{ borderRadius: '10px' }}
             />
 
             <CustomButton text={'Salir'}
                 // onClick={handleOpenModalDescargar}
+                id="Pre_btn_SalirPrescripcion"
                 onClick={() => { handleOpenModalCancelVerificar() }}
                 width='160px'
                 height='44px'

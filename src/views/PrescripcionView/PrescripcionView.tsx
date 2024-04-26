@@ -50,7 +50,9 @@ const PrescripcionView: React.FC<PrescripcionViewProps> = () => {
 						<Stack direction={{ xs: 'column', md: 'row' }} justifyContent={'space-between'} spacing={4}>
 
 							<Stack margin={'5px'} direction={'column'} >
-								<CustomButton text={'Nueva prescripción'}
+								<CustomButton
+									id=' Pre_btn_NuevaPrescripción'
+									text={'Nueva prescripción'}
 									onClick={() => { goAddNew(mainRoutes.form) }}
 									width='240px'
 									height='44px'

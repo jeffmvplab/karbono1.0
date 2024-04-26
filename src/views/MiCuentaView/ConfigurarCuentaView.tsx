@@ -74,6 +74,7 @@ const ConfigurarCuentaView: React.FC<ConfigurarCuentaViewProps> = () => {
 							</Typography>
 
 							<Button
+								id='Pre_btn_Micuenta'
 								onClick={() => setSelectPerfil('mi_cuenta')}
 								sx={
 									{
@@ -108,7 +109,7 @@ const ConfigurarCuentaView: React.FC<ConfigurarCuentaViewProps> = () => {
 
 					<Stack direction={'column'} display={{ xs: 'flex', md: 'none' }} >
 
-						<Stack top={'2px'} direction={'row'} width={'100%'} justifyContent={{xs:'start',md:'center'}} spacing={2}>
+						<Stack top={'2px'} direction={'row'} width={'100%'} justifyContent={{ xs: 'start', md: 'center' }} spacing={2}>
 							<Button
 								onClick={() => setSelectPerfil('mi_cuenta')}
 								sx={{

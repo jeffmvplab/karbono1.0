@@ -41,7 +41,7 @@ const TarjetaInf = () => {
               route={mainRoutes.home}
               text=' Ingresar'
               color={colorsKarbono.primary}
-              id='informes'
+              id='Pre_Informes'
             />
             <Typography variant='body1'> *Proximamente</Typography>
           </Stack>

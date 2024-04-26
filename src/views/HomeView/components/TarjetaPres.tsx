@@ -47,7 +47,7 @@ const TarjetaPres: React.FC<TarjetaPresProps> = () => {
                 : mainRoutes.login}
               text=' Ingresar'
               color={colorsKarbono.primary}
-              id='prescripcion'
+              id='Pre_Prescripcion'
             />
 
           </Box>

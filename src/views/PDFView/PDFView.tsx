@@ -39,7 +39,7 @@ const PDFView: React.FC<PDFViewProps> = () => {
 						width: '50px',
 						height: '50px'
 					}}>
-					<Button onClick={() => { convertirAPDF('reporte_view', reporte!.nombre_paciente) }}>
+					<Button id="Pre_btn_PopupImprimir" onClick={() => { convertirAPDF('reporte_view', reporte!.nombre_paciente) }}>
 						< IoDownloadOutline style={{ color: 'black', fontSize: 24 }} onClick={() => { convertirAPDF('reporte_view', reporte!.nombre_paciente) }} />
 					</Button>
 				</Avatar>
