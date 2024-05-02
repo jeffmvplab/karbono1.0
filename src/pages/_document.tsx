@@ -1,6 +1,5 @@
 
 import { Html, Head, Main, NextScript } from 'next/document'
-import Script from 'next/script'
 
 export const GA_TRACKING_ID = 'G-3YC6MN9379'
 
@@ -24,6 +23,8 @@ export default function Document() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;500;600;700;800&display=swap" rel="stylesheet" />
+        {/* <link rel="shortcut icon" href="/icono.ico" /> */}
+
         {/* 
                 {fontLink('Thin')}
                 {fontLink('Light')}

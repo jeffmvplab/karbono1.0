@@ -28,7 +28,7 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
         <Head>
           <title>Karbono</title>
           <meta name="description" content="Karbono" />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/logo-mobile.png" />
         </Head>
 
         <MainLayoutScripts />
@@ -37,9 +37,9 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
           sx={{ paddingTop:{xs:"5px",sm:"20px",md:"10px",lg:"10px",xl:"10px",},}}>
         </Box> */}
         <NavbarP />
-        <Suspense>
+        {/* <Suspense> */}
           <MainDrawer />
-        </Suspense>
+        {/* </Suspense> */}
 
         <Box
           sx={{
