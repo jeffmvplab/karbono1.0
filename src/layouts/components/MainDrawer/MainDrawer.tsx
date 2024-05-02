@@ -21,8 +21,9 @@ const MainDrawer: React.FC<MainDrawerProps> = () => {
 
 	return (
 		<>
-			{Array.isArray(getMeRol)
-				&& <Drawer
+			{/* {Array.isArray(getMeRol)
+				&&  */}
+				<Drawer
 					anchor="left"
 					open={openMainDrawer}
 					onClose={() => setOpenMainDrawer(false)}
@@ -221,7 +222,8 @@ const MainDrawer: React.FC<MainDrawerProps> = () => {
 						</Stack>
 						{/* Otro contenido del Drawer */}
 					</Stack>
-				</Drawer >}
+				</Drawer >
+				{/* } */}
 		</>
 
 	);

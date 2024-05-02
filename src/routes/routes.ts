@@ -3,6 +3,8 @@ export const mainRoutes = {
     home: '/',
     auth: '/auth',
     login: '/auth/login',
+    loginCliente: '/auth/login?user=clientes',
+    loginEmpleados:'/auth/login?user=empleados',
     register: '/auth/register',
     recuperar_password: '/auth/recuperar_password',
     verificar_codigo_recuperacion: '/auth/verificar_codigo_recuperacion',
