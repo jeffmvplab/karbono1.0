@@ -4,7 +4,7 @@ import { LocalStorageProtocol } from "@/protocols/cache/local_cache";
 import { mainRoutes } from "@/routes/routes";
 import { CookiesKeysEnum, StorageKeysEnum } from "@/utilities/enums";
 import { useRouter } from "next/router";
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { FC } from "react";
 import { GlobalContext } from "./GlobalContext";
 
@@ -257,7 +257,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 	const [isAuth, setIsAuth] = React.useState(false);
 
-	const authStatus = () => {
+	const authStatus = (rol?: string) => {
 
 		const myToken = Cookies.get(CookiesKeysEnum.token)
 		// console.log('MyToken:',myToken)
@@ -272,9 +272,11 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			console.log('IsAuth:', isAuth)
 		} else {
 			setIsAuth(false);
-			Cookies.remove(CookiesKeysEnum.token)
-			 router.push(mainRoutes.login);
-			console.log('IsAuth:', isAuth)		
+			Cookies.remove(CookiesKeysEnum.token),
+				console.log('KKKKAAAKKKA:', rol);
+			if (rol === 'Administrador') { router.push(mainRoutes.loginEmpleados) }
+			else { router.push(mainRoutes.loginCliente) };
+			console.log('IsAuth:', isAuth)
 		}
 
 	}
@@ -284,11 +286,11 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
 			setIsAuth(true)
 			const rol: string[] = localStorageProtocol.get(StorageKeysEnum.user).rol;
-			// console.log('ROL:', rol);
+			console.log('ROL:', rol);
 			return rol;
 		} else {
 			setIsAuth(false);
-			// console.log('ROL:', []);
+			console.log('ROL:', []);
 			return [];
 		}
 	}
@@ -419,11 +421,11 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	const handleModalInvOpen = () => {
 		setModalInvOpen(true);
 	};
-	
+
 	const invitarUsuarios = async () => {
 
 		setLoadingApi(true);
-		console.log('Invitando...:', userInv?.roles!,  userInv?.email!, userInv?.nombre_apellidos!)
+		console.log('Invitando...:', userInv?.roles!, userInv?.email!, userInv?.nombre_apellidos!)
 
 		const resp = await useruseCase.invitarUsuarios(userInv?.roles!, userInv?.email!, userInv?.nombre_apellidos!)
 
@@ -433,11 +435,11 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 			console.log('RES_API:', resp)
 			handleModalInvOpen()
-		} else if (resp.statusCode === 400||resp.statusCode ===401||resp.statusCode ===500) {
+		} else if (resp.statusCode === 400 || resp.statusCode === 401 || resp.statusCode === 500) {
 			console.log('Error :', resp.message)
 			setErrorApi(resp.message);
 			handleModalInvOpen();
-		}  else if (resp.statusCode === 408) {
+		} else if (resp.statusCode === 408) {
 
 			handleOffline();
 		}
@@ -451,7 +453,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		setLoadingApi(true);
 		const userInv = localStorageProtocol.get(StorageKeysEnum.userInv)
 
-		console.log('ROL...:',userInv.roles)
+		console.log('ROL...:', userInv.roles)
 		console.log('Register by Inv...:',
 			userInv._id,
 			email,
@@ -461,7 +463,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			registroMedico!,
 			name!,
 			apellido!,
-			userInv.roles[0]===RolUsersKeysEnum.prescriptor?[entidadDeSalud]:[centralDeMezclas],
+			userInv.roles[0] === RolUsersKeysEnum.prescriptor ? [entidadDeSalud] : [centralDeMezclas],
 			politica_de_privacidad,)
 
 		const resp = await useruseCase.registerByInvitation(
@@ -470,7 +472,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 			nameYApellidos,
 			phone!,
 			password,
-			(userInv.roles[0]===RolUsersKeysEnum.prescriptor)?registroMedico!:undefined,
+			(userInv.roles[0] === RolUsersKeysEnum.prescriptor) ? registroMedico! : undefined,
 			name!,
 			apellido!,
 			[entidadDeSalud],
@@ -723,7 +725,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	}
 
 	const updateMe = async () => {
-		
+
 		setLoadingAuth(true);
 		console.log('Upadate Me...', user)
 		const resp = await useruseCase.upadateMe(user!)
@@ -752,10 +754,12 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	}
 	/////////////////////////////LOGOUT//////////////////////////////////////////////
 	const logout = async () => {
+
+		const rol = getMeRol()[0];
 		localStorageProtocol.delete(StorageKeysEnum.user);
 		Cookies.remove(CookiesKeysEnum.token)
 		Cookies.remove(CookiesKeysEnum.userName)
-		authStatus();
+		authStatus(rol);
 	}
 	///////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////
