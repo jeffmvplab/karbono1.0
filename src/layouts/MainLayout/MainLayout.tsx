@@ -12,6 +12,7 @@ import { GoogleAnalyticsScript } from "@/scripts/GoogleAnalyticsScript";
 import ConexionStatusModal from "@/components/ConexionStatusModal/ConexionStatusModal";
 import NavbarP from "../components/NavBar/NavBarP";
 import { MainDrawer } from "../components/MainDrawer";
+import MatomoScript from "@/scripts/MatomoScript/Matomo";
 
 export interface MainLayoutInterface {
   children: ReactNode;
@@ -33,12 +34,13 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
 
         <MainLayoutScripts />
         <ConexionStatusModal />
+
         {/* <Box
           sx={{ paddingTop:{xs:"5px",sm:"20px",md:"10px",lg:"10px",xl:"10px",},}}>
         </Box> */}
         <NavbarP />
         {/* <Suspense> */}
-          <MainDrawer />
+        <MainDrawer />
         {/* </Suspense> */}
 
         <Box
@@ -65,6 +67,7 @@ const MainLayoutScripts = () => {
       {/* <SmartLookScript /> */}
       {/* <CustomScript name="smartlook"/> */}
       <TagManagerScript />
+      <MatomoScript />
       <GoogleAnalyticsScript />
     </>
   )
