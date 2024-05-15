@@ -228,7 +228,11 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 										<Stack direction={'row'} justifyContent={'flex-end'} paddingY={2}>
 											<CustomButton
 												// disabled={!valOKAlert}
-												id='Pre_btn_CrearPrescripcion'
+									
+												id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+													? 'Pre_btn_CrearObservacion'
+													: 'QF_btn_CrearObservacion'
+												}
 												onClick={
 													(!isNew)
 														? () => { setIsNew(true) }

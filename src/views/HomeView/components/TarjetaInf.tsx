@@ -41,7 +41,11 @@ const TarjetaInf = () => {
               route={mainRoutes.home}
               text=' Ingresar'
               color={colorsKarbono.primary}
-              id='Pre_Informes'
+              id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+                ? 'Pre_Informes'
+                : 'QF_Informes'
+              }
+        
             />
             <Typography variant='body1'> *Proximamente</Typography>
           </Stack>

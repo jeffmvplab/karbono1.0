@@ -172,7 +172,9 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>
-				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }}
+				<IoEyeOutline
+				id='QF_btn_verRegistros'
+				style={{ color: 'black', fontSize: 24, cursor: 'pointer' }}
 					onClick={
 						() => {
 							// const newComment: IComment = {

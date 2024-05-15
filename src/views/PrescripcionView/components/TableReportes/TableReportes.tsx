@@ -21,6 +21,8 @@ import { CopyPresciptionModal } from '@/components/CopyPresciptionModal';
 import { DeleteModal } from '@/components/DeleteModal';
 import { StorageKeysEnum } from '@/utilities/enums';
 import { StatePrescriptionKeysEnum } from '@/utilities/enums/state_prescription_keys.enum';
+import { RolUsersKeysEnum } from '@/utilities/enums/rol_user_keys.enum';
+import { GlobalContext } from '@/context/GlobalContext';
 
 
 export interface TableReportesProps { }
@@ -29,7 +31,8 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 
 	const { getAll, reportes, loadingGet, loadingApi, goEdit, goPrint, goReporte } = useContext(PrescripcionContext);
 	const { copyPrescriptions, loadingSave, messageAPI, setMessageAPI, borrarPrescriptions } = useContext(FormulariosContext);
-
+	const { getMeRol, getMe } = useContext(GlobalContext);
+	
 	const [page, setPage] = useState<number>();
 	const pag: number = 15;
 
@@ -159,7 +162,11 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>
-				<IoEyeOutline id='Pre_btn_VerReporte' style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goReporte(params.row.no_orden) }} />
+				<IoEyeOutline id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+					? 'Pre_btn_VerReporte'
+					: 'QF_btn_VerReporte'
+				}
+					style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goReporte(params.row.no_orden) }} />
 				<IoCreateOutline
 					id='Pre_btn_Editar'
 					style={{
@@ -171,7 +178,10 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 					onClick={() => {
 						(params.row.estado !== StatePrescriptionKeysEnum.produccion && params.row.estado !== StatePrescriptionKeysEnum.calidad) && goEdit(params.row.no_orden)
 					}} />
-				< IoPrintOutline id='Pre_btn_ImprimirPrescripcion' style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goPrint(params.row.no_orden), handleOpen() }} />
+				< IoPrintOutline id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+					? 'Pre_btn_ImprimirPrescripcion'
+					: 'QF_btn_ImprimirPrescripcion'
+				} style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goPrint(params.row.no_orden), handleOpen() }} />
 				< IoCopyOutline id='Pre_btn_Duplicar' style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpenCopy() }} />
 				<IoTrashOutline id='Pre_btn_Eliminar' style={{
 					color: (params.row.estado !== StatePrescriptionKeysEnum.produccion

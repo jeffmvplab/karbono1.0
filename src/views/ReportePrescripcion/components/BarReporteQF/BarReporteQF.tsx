@@ -63,6 +63,7 @@ const BarReporteQF = () => {
                     // }
                     // saveComments(newComment)
                 }}
+                id={'QF__btn_VerificarRegistro'}
                 width='160px'
                 height='44px'
                 // variant='outlined'
@@ -78,6 +79,7 @@ const BarReporteQF = () => {
 
             <CustomButton text={'Rechazar'}
                 // onClick={handleOpenModalDescargar}
+                id={'QF__btn_RechazarRegistro'}
                 onClick={() => {
                     handleOpenModalRechazar()
                     // const newComment: IComment = {

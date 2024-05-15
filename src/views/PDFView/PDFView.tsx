@@ -7,6 +7,8 @@ import { ReportesContext } from "../ReportePrescripcion/context/ReportesContext"
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { mainRoutes } from "@/routes/routes";
+import { GlobalContext } from "@/context/GlobalContext";
+import { RolUsersKeysEnum } from "@/utilities/enums/rol_user_keys.enum";
 
 
 
@@ -15,6 +17,7 @@ export interface PDFViewProps { }
 const PDFView: React.FC<PDFViewProps> = () => {
 
 	const { getPrescriptionsByNumber, loadingSave, reporte } = useContext(ReportesContext);
+	const { getMeRol, getMe } = useContext(GlobalContext);
 	const router = useRouter();
 
 	useEffect(() => {
@@ -39,8 +42,12 @@ const PDFView: React.FC<PDFViewProps> = () => {
 						width: '50px',
 						height: '50px'
 					}}>
-					<Button id="Pre_btn_PopupImprimir" onClick={() => { convertirAPDF('reporte_view', reporte!.nombre_paciente) }}>
-						< IoDownloadOutline style={{ color: 'black', fontSize: 24 }}/>
+					<Button id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+						? 'Pre_btn_PopupImprimir'
+						: 'QF_btn_PopupImprimir'
+					}
+						onClick={() => { convertirAPDF('reporte_view', reporte!.nombre_paciente) }}>
+						< IoDownloadOutline style={{ color: 'black', fontSize: 24 }} />
 					</Button>
 				</Avatar>
 

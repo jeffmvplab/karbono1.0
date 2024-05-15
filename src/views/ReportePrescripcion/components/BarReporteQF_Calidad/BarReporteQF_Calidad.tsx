@@ -9,12 +9,13 @@ import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { useRouter } from "next/router";
 import { mainRoutes } from "@/routes/routes";
+import { GlobalContext } from "@/context/GlobalContext";
+import { RolUsersKeysEnum } from "@/utilities/enums/rol_user_keys.enum";
 
 
 const BarReporteQF_Calidad = () => {
 
-
-    const { reporte } = useContext(ReportesContext)
+    const { getMeRol } = useContext(GlobalContext);
 
     const router = useRouter();
 
@@ -42,6 +43,7 @@ const BarReporteQF_Calidad = () => {
                 <Stack direction={'row'} spacing={2}>
                     <CustomButton text={'Etiqueta'}
                         // onClick={handleOpenModalDescargar}
+                        id={'QF_btn_Etiqueta'}
                         onClick={() => router.push(mainRoutes.etiqueta)}
                         width='160px'
                         height='44px'
@@ -58,6 +60,7 @@ const BarReporteQF_Calidad = () => {
 
                     <CustomButton text={'Plan de producción'}
                         // onClick={handleOpenModalDescargar}
+                        id='QF_btn_PlanProduccion'
                         onClick={() => router.push(mainRoutes.plan_produccion)}
                         width='240px'
                         height='44px'
@@ -93,7 +96,11 @@ const BarReporteQF_Calidad = () => {
                     <CustomButton text={'Descargar'}
                         // onClick={handleOpenModalDescargar}
                         // onClick={() => convertirAPDF('reporte_view', reporte?.nombre_paciente!)}
-                        id="Pre_btn_DescargarPrescripcion"
+                        id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+                            ? 'Pre_btn_DescargarPrescripcion'
+                            : 'QF_btn_EtiquetaDescargar'
+                        }
+           
                         onClick={() => router.push(mainRoutes.pdf)}
                         width='160px'
                         height='44px'
@@ -113,7 +120,10 @@ const BarReporteQF_Calidad = () => {
 
                 <CustomButton text={'Salir'}
                     // onClick={handleOpenModalDescargar}
-                    id="Pre_btn_SalirPrescripcion"
+                    id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+                        ? 'Pre_btn_SalirPrescripcion'
+                        : 'QF_btn_EtiquetaSalir'
+                    }
                     onClick={() => { router.push(mainRoutes.prescripcion) }}
                     width='160px'
                     height='44px'
