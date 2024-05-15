@@ -179,7 +179,9 @@ const TableArchivosPlanos: React.FC<TableArchivosPlanosProps> = () => {
 
 			renderCell: (params: GridRenderCellParams) =>
 			(<Stack direction={'row'} spacing={1}>
-				<IoEyeOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }}
+				<IoEyeOutline
+				id='QF_btn_VerArchivo'
+				style={{ color: 'black', fontSize: 24, cursor: 'pointer' }}
 					onClick={
 						() => {
 							// const newComment: IComment = {
@@ -191,7 +193,7 @@ const TableArchivosPlanos: React.FC<TableArchivosPlanosProps> = () => {
 							goReporte(params.row.no_orden), console.log('OJITO')
 						}
 					} />
-				< IoPrintOutline style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpen() }} />
+				< IoPrintOutline id='QF_btn_ImprimirArchivo' style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpen() }} />
 			</Stack>)
 		},
 	];
@@ -252,7 +254,7 @@ const TableArchivosPlanos: React.FC<TableArchivosPlanosProps> = () => {
 						<Stack direction={'row'} width={'100%'} justifyContent={'end'}>
 							<CustomButton text={'Archivo plano'}
 								// onClick={handleOpenModalDescargar}
-								id='QF_btn_ImprimirArchivoPlano'
+								id='QF_btn_ArchivoDescargar'
 								onClick={() => getPlainFile()}
 								width='200px'
 								height='44px'

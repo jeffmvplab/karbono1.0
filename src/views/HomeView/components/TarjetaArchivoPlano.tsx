@@ -40,7 +40,8 @@ const TarjetaArchivoPlano = () => {
               route={mainRoutes.archivo_plano}
               text=' Ingresar'
               color={'black'}
-              id='informes'
+             
+              id='QF_ArchivosPlanos'
             />
             {/* <Typography variant='body1'> *Proximamente</Typography> */}
           </Stack>
@@ -48,7 +49,7 @@ const TarjetaArchivoPlano = () => {
 
         <Hidden smDown >
           <Box sx={{ justifyContent: 'center', display: 'flex', paddingRight: '20px', alignItems: 'center', width: '20%' }}>
-            <IoDocumentTextOutline style={{fontSize:'80px'}} />
+            <IoDocumentTextOutline style={{ fontSize: '80px' }} />
             {/* <Image
               src='/assets/decargar.png'
               width={80}
