@@ -74,7 +74,10 @@ const ConfigurarCuentaView: React.FC<ConfigurarCuentaViewProps> = () => {
 							</Typography>
 
 							<Button
-								id='Pre_btn_Micuenta'
+								id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+									? 'Pre_btn_Micuenta'
+									: 'QF_btn_Micuenta'
+								}
 								onClick={() => setSelectPerfil('mi_cuenta')}
 								sx={
 									{

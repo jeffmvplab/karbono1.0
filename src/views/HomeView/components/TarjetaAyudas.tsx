@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Image from 'next/image'
 
 import { Box, Breadcrumbs, Grid, Button, Hidden, Typography, Stack } from '@mui/material'
 import { ButtonCardsHome } from './ButtonCardsHome';
-import { colorsKarbono } from '@/themes/colors';
-import { mainRoutes } from '@/routes/routes';
-
+import { GlobalContext } from '@/context/GlobalContext';
+import { RolUsersKeysEnum } from '@/utilities/enums/rol_user_keys.enum';
 
 
 const TarjetaAyudas = () => {
+  const {  getMeRol } = useContext(GlobalContext);
+  
   return (
 
     <>
@@ -33,7 +34,11 @@ const TarjetaAyudas = () => {
                 route={' https://purelife.cloud/preguntas-frecuentes/'}
                 text='Ingresar'
                 color={'#90AFB0'}
-                id='Pre_Ayudas'
+                id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+                  ? 'Pre_Ayudas'
+                  : 'QF_Ayudas'
+                }
+
               />
               {/* <Typography variant='body1'> *Proximamente</Typography> */}
             </Stack>

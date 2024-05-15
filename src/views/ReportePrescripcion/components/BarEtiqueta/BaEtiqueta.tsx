@@ -1,16 +1,15 @@
 import { CustomButton } from "@/components/CustomButton";
-import { IComment } from "@/domain/models/observaciones.model";
 import { mainRoutes } from "@/routes/routes";
 import { colorsKarbono } from "@/themes/colors";
-import { StatePrescriptionKeysEnum } from "@/utilities/enums/state_prescription_keys.enum";
-import { convertirAPDF } from "@/utilities/view_pdf_convert";
-import { Card, Stack, Typography } from "@mui/material";
+import {  Stack} from "@mui/material";
 import { useRouter } from "next/router";
-import { useContext } from "react";
-import { ReportesContext } from "../../context/ReportesContext";
-import Image from 'next/image'
+
+
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import { RolUsersKeysEnum } from "@/utilities/enums/rol_user_keys.enum";
+import { GlobalContext } from "@/context/GlobalContext";
+import { useContext } from "react";
 
 
 export interface BarEtiquetaProps {
@@ -24,7 +23,8 @@ const BarEtiqueta: React.FC<BarEtiquetaProps> = ({
     title, }) => {
 
     const router = useRouter();
-
+    const { getMeRol } = useContext(GlobalContext);
+    
     return (
 
 
@@ -44,7 +44,11 @@ const BarEtiqueta: React.FC<BarEtiquetaProps> = ({
             <CustomButton text={'Descargar'}
                 // onClick={handleOpenModalDescargar}
                 // /pdfprint
-                id="Pre_btn_DescargarPrescripcion"
+                id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+                    ? 'Pre_btn_DescargarPrescripcion'
+                    : 'QF_btn_PlanDescargar'
+                }
+         
                 onClick={() => router.push(mainRoutes.pdf)}
                 // onClick={() => convertirAPDF(idDescargar!, title!)}
                 width='160px'
@@ -65,7 +69,10 @@ const BarEtiqueta: React.FC<BarEtiquetaProps> = ({
 
             <CustomButton text={'Salir'}
                 // onClick={handleOpenModalDescargar}
-                id="Pre_btn_SalirPrescripcion"
+                id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+                    ? 'Pre_btn_SalirPrescripcion'
+                    : 'QF_btn_PlanSalir'
+                }
                 onClick={() => router.push(mainRoutes.reportePrescripcion)}
                 width='160px'
                 height='44px'

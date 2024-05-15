@@ -34,9 +34,9 @@ const TarjetaPres: React.FC<TarjetaPresProps> = () => {
           >
             <Typography variant='h5' sx={{ color: '#2FC5C6', paddingBottom: '20px' }}>Prescripción</Typography>
             <Typography variant='body1' sx={{ paddingBottom: '30px' }}>
-              {Array.isArray(getMeRol())&&getMeRol()[0] === RolUsersKeysEnum.prescriptor
-              ?'Este módulo te permite crear, editar y consultar datos de prescripciones médicas de manera fácil y rápida'
-              :'Este módulo te permite consultar las prescripciones solicitadas por las IPS, y generar la etiqueta y PP.'}
+              {Array.isArray(getMeRol()) && getMeRol()[0] === RolUsersKeysEnum.prescriptor
+                ? 'Este módulo te permite crear, editar y consultar datos de prescripciones médicas de manera fácil y rápida'
+                : 'Este módulo te permite consultar las prescripciones solicitadas por las IPS, y generar la etiqueta y PP.'}
             </Typography>
 
             <ButtonCardsHome
@@ -47,7 +47,10 @@ const TarjetaPres: React.FC<TarjetaPresProps> = () => {
                 : mainRoutes.login}
               text=' Ingresar'
               color={colorsKarbono.primary}
-              id='Pre_Prescripcion'
+              id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+                ? 'Pre_Prescripcion'
+                : 'QF_Prescripcion'
+              }
             />
 
           </Box>
@@ -74,5 +77,6 @@ const TarjetaPres: React.FC<TarjetaPresProps> = () => {
 }
 
 export default TarjetaPres
+
 
 
