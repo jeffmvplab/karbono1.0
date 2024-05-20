@@ -65,7 +65,9 @@ const AceptarInvitacionView: React.FC<AceptarInvitacionViewProps> = () => {
 						</Button>
 						<Box width={10}></Box>
 						<CustomButton
-							onClick={() => { console.log('Token:', invToken), aceptarInvitacion(invToken) }}
+							onClick={() => {
+								//  console.log('Token:', invToken),
+								  aceptarInvitacion(invToken) }}
 							fontSize={'14px'}
 							textColor={'white'}
 							sx={{

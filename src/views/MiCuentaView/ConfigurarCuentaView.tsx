@@ -57,7 +57,7 @@ const ConfigurarCuentaView: React.FC<ConfigurarCuentaViewProps> = () => {
 	const [isClient, setIsClient] = useState(false)
 
 	useEffect(() => {
-		console.log('ROL:', getMeRol()[0])
+		// console.log('ROL:', getMeRol()[0])
 		getMe();
 		setIsClient(true)
 	}, [])

@@ -32,7 +32,7 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 
 	const handlePageChange = (params: any) => {
 		setPage(params)
-		console.log('Params:', params)
+		// console.log('Params:', params)
 	}
 
 	const [open, setOpen] = React.useState(false);

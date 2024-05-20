@@ -39,7 +39,7 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 	// 	setQueryRol(loguinRol!)
 	// }, [router.pathname])
 
-	console.log('Query Rol:', loguinRol);
+	// console.log('Query Rol:', loguinRol);
 
 	return (
 

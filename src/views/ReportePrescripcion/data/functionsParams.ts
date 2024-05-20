@@ -609,7 +609,7 @@ export const getVolTotal = (prescription: IPrescriptions) => {
     let volTotal: number = 0;
 
 
-    console.log('SSSS:', vitaminas)
+    // console.log('SSSS:', vitaminas)
 
     volTotal = volAgua
         + getDextrosa(prescription!).volumen + getLipidos(prescription!).volumen
@@ -634,7 +634,7 @@ export const getVolTotalConPurga = (prescription: IPrescriptions) => {
     let volTotal: number = 0;
 
 
-    console.log('SSSS:', vitaminas)
+    // console.log('SSSS:', vitaminas)
 
     volTotal = volAgua
         + getDextrosa(prescription!).conPurga + getLipidos(prescription!).conPurga

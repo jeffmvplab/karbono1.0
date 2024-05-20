@@ -33,9 +33,9 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 	const getAll = async (limit?: number) => {
 
 		setLoadingGet(false);
-		console.log('Loading...')
+		// console.log('Loading...')
 		const resp = await prescriptionsUseCase.prescripcionsAll(limit!)
-		console.log('Resp:', resp.body)
+		// console.log('Resp:', resp.body)
 
 		if (resp.statusCode === 200) {
 			setReportes(Array.isArray(resp.body) ? resp.body.reverse() : []);
@@ -62,16 +62,16 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 		const storagePredsc = localStorageProtocol.get(StorageKeysEnum.prescripcionOrden)
 
-		console.log('Preds:', storagePredsc);
+		// console.log('Preds:', storagePredsc);
 		setLoadingGet(false);
-		console.log('Loading...')
+		// console.log('Loading...')
 		// const resp = await prescriptionsUseCase.prescripcionsByNumber(storagePredsc.number);
 		const resp = await prescriptionsUseCase?.getLogs(storagePredsc.number);
 
 		setLoadingGet(true);
 		if (resp.statusCode === 200) {
 
-			console.log('Logs:', resp)
+			// console.log('Logs:', resp)
 			setLogs(resp.body)
 
 		} else if (resp.statusCode === 400) {
@@ -92,9 +92,9 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 	const getPrescripcionsByLab = async () => {
 
 		setLoadingGet(false);
-		console.log('Loading PrescripcionsByLab...')
+		// console.log('Loading PrescripcionsByLab...')
 		const resp = await prescriptionsUseCase.getPrescripcionsByLab()
-		console.log('PrescripcionsByLab Resp:', resp.body)
+		// console.log('PrescripcionsByLab Resp:', resp.body)
 
 
 		if (resp.statusCode === 200) {
@@ -123,11 +123,11 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 	const setQuimicos = async () => {
 
 		setLoadingGet(false);
-		console.log('Loading PrescripcionsByLab...')
+		// console.log('Loading PrescripcionsByLab...')
 		const resp = await prescriptionsUseCase.setQuimicos(
 			prescripcionID!, preparador!, controlador_de_calidad!
 		);
-		console.log('PrescripcionsByLab Resp:', resp.body)
+		// console.log('PrescripcionsByLab Resp:', resp.body)
 
 		if (resp.statusCode === 200) {
 			setReportes(resp.body);
@@ -226,7 +226,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 	const [selectedFilter, setSelectedFilter] = React.useState('a');
 	const handleChangeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSelectedFilter(event.target.value);
-		console.log('Filter:', event.target.value)
+		// console.log('Filter:', event.target.value)
 	};
 
 	const handleFiltrosBorrar = () => {
@@ -261,7 +261,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			repoPresc[0] = resp.body
 		}
 
-		console.log('RESP by Num:', repoPresc)
+		// console.log('RESP by Num:', repoPresc)
 		if (resp.statusCode === 200) {
 			setReportes(repoPresc);
 			setErrorSearch(false)
@@ -300,7 +300,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 		if (resp.body.length > 0) {
 			repoPresc = resp.body
-			console.log('RESP by Name:', resp.body)
+			// console.log('RESP by Name:', resp.body)
 		} else {
 			repoPresc = []
 		}
@@ -350,7 +350,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			repoPresc[0] = resp.body
 		}
 
-		console.log('RESP by Ips:', repoPresc)
+		// console.log('RESP by Ips:', repoPresc)
 
 		if (resp.statusCode === 201) {
 
@@ -392,7 +392,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 		const resp = await prescriptionsUseCase.getPrescripcionsProd(entidad, fecha);
 		let repoPresc: IPrescriptions[] = []
-		console.log('RESP by PRODUC:', resp)
+		// console.log('RESP by PRODUC:', resp)
 
 		if (resp.body.prescripciones?.length > 0) {
 			repoPresc = resp.body.prescripciones
@@ -445,11 +445,11 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 
 		setLoadingApi(false);
 
-		console.log('ARRAY PRESC:', arrayPrescId);
+		// console.log('ARRAY PRESC:', arrayPrescId);
 
 		const resp = await prescriptionsUseCase.getPlainFile(arrayPrescId!);
 
-		console.log('RESP by Plain File:', resp)
+		// console.log('RESP by Plain File:', resp)
 
 		if (resp.statusCode === 201) {
 
@@ -512,7 +512,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		} else {
 			repoPresc[0] = resp.body
 		}
-		console.log('RESP by Id:', repoPresc)
+		// console.log('RESP by Id:', repoPresc)
 
 		if (resp.statusCode === 201) {
 			setReportes(repoPresc);
@@ -552,7 +552,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		} else {
 			repoPresc = resp.body
 		}
-		console.log('RESP by Date:', repoPresc)
+		// console.log('RESP by Date:', repoPresc)
 
 		if (resp.statusCode === 201) {
 			setReportes(repoPresc);
