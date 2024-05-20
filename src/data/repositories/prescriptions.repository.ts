@@ -199,7 +199,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
 
     async getPlainFile(prescriptionsId: string[]): Promise<any> {
 
-        console.log('LLLLLL:', [prescriptionsId]);
+        // console.log('LLLLLL:', [prescriptionsId]);
 
         const axiosRequest = await this.axiosHttpClient.request({
             url: ApiUrlsEnum.getPlainFile,

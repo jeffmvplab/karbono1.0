@@ -50,7 +50,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 	const [isNew, setIsNew] = useState<boolean>(false);
 	const [newObs, setnewObs] = useState<string>();
 
-	console.log('ROLLLL:', reporte?.observaciones![0])
+	// console.log('ROLLLL:', reporte?.observaciones![0])
 	// 
 	return (
 		<>

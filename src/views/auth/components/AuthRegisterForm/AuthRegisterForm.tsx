@@ -58,8 +58,8 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 	useEffect(() => {
 		if (localStorageProtocol.get(StorageKeysEnum.userInv)) {
 			const userInv = localStorageProtocol.get(StorageKeysEnum.userInv)
-			console.log('USER INV:', userInv)
-			console.log('QUERY:', query)
+			// console.log('USER INV:', userInv)
+			// console.log('QUERY:', query)
 			setEmail(userInv.email);
 			setNameYApellidos(userInv.nombre_apellidos);
 			// setRol(userInv.rol);
@@ -67,7 +67,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 		}
 	}, [])
 	//////////////////////////////////////////////////////////////
-	console.log('REGISTER PAGE:', 'ROL:', userInv?.roles)
+	// console.log('REGISTER PAGE:', 'ROL:', userInv?.roles)
 
 	return (
 		<>
