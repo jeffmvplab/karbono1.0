@@ -54,10 +54,10 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 
 		const storagePredsc = localStorageProtocol.get(StorageKeysEnum.prescripcionOrden)
 
-		console.log('Preds:', storagePredsc);
+		// console.log('Preds:', storagePredsc);
 
 		setLoadingSave(false);
-		console.log('Loading...')
+		// console.log('Loading...')
 		// const resp = await prescriptionsUseCase.prescripcionsByNumber(storagePredsc.number);
 		const resp = await prescriptionsUseCase?.prescripcionsByNumber(storagePredsc.number);
 
@@ -67,7 +67,7 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 			setSaveOk(true);
 
 			const repoPresc: IPrescriptions = resp.body
-			console.log('Reporte:', repoPresc)
+			// console.log('Reporte:', repoPresc)
 			setReporte(repoPresc);
 
 		} else if (resp.statusCode === 400) {
@@ -93,9 +93,9 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 	const saveComments = async (comment: IComment) => {
 
 		setLoadingSave(false);
-		console.log('Loading Commenst...:', comment)
+		// console.log('Loading Commenst...:', comment)
 		let resp = await prescriptionsUseCase.createComments(comment);
-		console.log('Resp:', resp)
+		// console.log('Resp:', resp)
 		setLoadingSave(true);
 
 		if (resp.statusCode === 201) {

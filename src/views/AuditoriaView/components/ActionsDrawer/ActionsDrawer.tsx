@@ -20,7 +20,7 @@ const ActionsDrawer: React.FC<ActionsDrawerProps> = () => {
 	useEffect(() => {
 		if (openActionsDrawer) {
 			getLogsByNumber();
-			console.log('MMMM')
+			// console.log('MMMM')
 		}
 	}, [openActionsDrawer])
 

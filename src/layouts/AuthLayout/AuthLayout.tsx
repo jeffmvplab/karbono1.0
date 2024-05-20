@@ -44,7 +44,9 @@ const AuthLayout: React.FC<AuthLayoutInterface> = ({ children }) => {
           <Grid display={{ xs: 'none', md: 'flex' }} item xs={12} sm={6} md={8} xl={9}>
             <Stack>
               <Button
-                onClick={() => { router.push(mainRoutes.home); console.log('Click') }}
+                onClick={() => { router.push(mainRoutes.home); 
+                  // console.log('Click')
+                 }}
               >
                 <Image
                   src='/assets/1.png'

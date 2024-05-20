@@ -17,7 +17,7 @@ const MainDrawer: React.FC<MainDrawerProps> = () => {
 	// return focus to the button when we transitioned from !open -> open
 	const route = useRouter();
 
-	console.log('VVV:', route.pathname)
+	// console.log('VVV:', route.pathname)
 
 	return (
 		<>

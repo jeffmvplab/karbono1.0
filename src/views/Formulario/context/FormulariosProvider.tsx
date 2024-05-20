@@ -175,7 +175,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		const resp = await prescriptionsUseCase.getMaxNumberPres();
 
 
-		console.log('No Max Pres:', resp)
+		// console.log('No Max Pres:', resp)
 		if (resp.statusCode === 200) {
 			setmaxNumOrder(parseInt(resp.body))
 		} else if (resp.statusCode === 400) {
@@ -293,7 +293,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const fechaActual = () => {
 		const fecha: string = formatoFecha(new Date())
 		setFechaCreacion(fecha);
-		console.log('FECHA CREACION:', fecha)
+		// console.log('FECHA CREACION:', fecha)
 	}
 
 	////////////////////INFORMACIÓN DEL PACIENTE////////////////////////////////////
@@ -305,7 +305,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const handleIps = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setIps(event.target.value);
 		// const ips = event.target.value;
-		console.log(' ips-overfill:', obtenerOverfillPorLabel(event.target.value))
+		// console.log(' ips-overfill:', obtenerOverfillPorLabel(event.target.value))
 		setOverfill(obtenerOverfillPorLabel(event.target.value) as number)
 	};
 
@@ -336,7 +336,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorNamePaciente, setMessageErrorNamePaciente] = React.useState('');
 
 	const validateNombrePaciente = (name: string) => {
-		console.log('SDF:', name)
+		// console.log('SDF:', name)
 		if (name !== '') {
 			setErrorNamePaciente(false);
 			setMessageErrorNamePaciente('')
@@ -502,7 +502,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [messageErrorOverfill, setMessageErrorOverfill] = React.useState('');
 
 	const handleOverfill = (event: Event, newValue: number | number[]) => {
-		console.log('Overfil:', newValue)
+		// console.log('Overfil:', newValue)
 		setOverfill(newValue as number);
 		// getPrescriptions();
 	};
@@ -586,7 +586,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const validateTipoPrecripcion = (tipoPrescripcion: string) => {
 		if (tipoPrescripcion !== '') {
-			console.log('TP', tipoPrescripcion)
+			// console.log('TP', tipoPrescripcion)
 			setErrorTipoPrescripcion(false);
 			setMessageErrorTipoPrescripcion('')
 			return false;
@@ -706,7 +706,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const handleOmegaven = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setOmegaven(event.target.value);
-		console.log('PP:', event.target.value)
+		// console.log('PP:', event.target.value)
 	};
 
 	const [dipeptiven, setDipeptiven] = React.useState('0');
@@ -947,19 +947,19 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const setPrescriptions = async () => {
 		// getMaxNumPresc();
 		setLoadingSave(false);
-		console.log('Loading Save & Update Pres...:', prescriptionsData)
+		// console.log('Loading Save & Update Pres...:', prescriptionsData)
 
 		const numPresc = (localStorageProtocol.get(StorageKeysEnum.prescripcionOrden))
 			? localStorageProtocol.get(StorageKeysEnum.prescripcionOrden).number
 			: null
 
-		console.log('NUMBER:', numPresc)
+		// console.log('NUMBER:', numPresc)
 
 		let resp: any = '';
 		if (numPresc) { resp = await prescriptionsUseCase.updatePrescripcions(prescriptionsData, numPresc); console.log('UPDATE') }
 		else { resp = await prescriptionsUseCase.savePrescripcions(prescriptionsData); }
 
-		console.log('Resp Save Presc:', resp)
+		// console.log('Resp Save Presc:', resp)
 
 		setLoadingSave(true);
 
@@ -999,7 +999,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const saveBorrador = async () => {
 
 		setLoadingSave(false);
-		console.log('Loading...:', prescriptionsData)
+		// console.log('Loading...:', prescriptionsData)
 		const newnumber = await getMaxNumPresc();
 
 		let resp;
@@ -1012,14 +1012,14 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 				no_orden: newnumber + 1
 			}
 			resp = await prescriptionsUseCase.savePrescripcions(copyPrescription);
-			console.log('Resp Create:', resp)
+			// console.log('Resp Create:', resp)
 		} else {
 
 			const copyPrescription: IPrescriptions = {
 				...prescriptionsData,
 			}
 			resp = await prescriptionsUseCase.updatePrescripcions(copyPrescription, prescriptionsData.no_orden.toString());
-			console.log('Resp Update:', resp)
+			// console.log('Resp Update:', resp)
 		}
 
 
@@ -1050,9 +1050,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const saveComments = async (comment: IComment) => {
 
 		setLoadingSave(false);
-		console.log('Loading Commenst...:', comment)
+		// console.log('Loading Commenst...:', comment)
 		let resp = await prescriptionsUseCase.createComments(comment);
-		console.log('Resp:', resp)
+		// console.log('Resp:', resp)
 		setLoadingSave(true);
 
 		if (resp.statusCode === 201) {
@@ -1095,11 +1095,11 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 				estado: 'PENDIENTE FINALIZAR',
 				observaciones: []
 			}
-			console.log('Copiando Prescripcion...:', copyPrescription)
+			// console.log('Copiando Prescripcion...:', copyPrescription)
 
 			const resp = await prescriptionsUseCase.savePrescripcions(copyPrescription);
 
-			console.log('Copiado:', resp)
+			// console.log('Copiado:', resp)
 
 			if (resp.statusCode === 201) {
 				setSaveOk(true);
@@ -1129,7 +1129,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const borrarPrescriptions = async (prescription: IPrescriptions | undefined) => {
 
 		setLoadingSave(false);
-		console.log('Borrando Prescripcion...')
+		// console.log('Borrando Prescripcion...')
 
 		const deletedComment: IComment = {
 			prescriptionId: prescription?._id!,
@@ -1138,7 +1138,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// const resp = await prescriptionsUseCase.deletePrescriptions(prescription?.no_orden!);
 		const resp = await prescriptionsUseCase.createComments(deletedComment);
 
-		console.log('Borrada:', resp)
+		// console.log('Borrada:', resp)
 
 		if (resp.statusCode === 201) {
 			setSaveOk(true);
@@ -1220,15 +1220,15 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const valTabsErrors1 = () => {
 
-		console.log('WWWWWW:',
-			validateNumIdent(numIden)
-			, validateNombrePaciente(namePaciente)
-			, validateTipoPaciente(tipoPaciente)
-			, validateTipoPrecripcion(tipoPrescripcion)
-			, validatePeso(pesoKg)
-			, validateVolumen(volumen)
-			, validateTiempoInfucion(tiempoDeInfucion)
-			, validateViaAdmin(viaAdmin))
+		// console.log('WWWWWW:',
+		// 	validateNumIdent(numIden)
+		// 	, validateNombrePaciente(namePaciente)
+		// 	, validateTipoPaciente(tipoPaciente)
+		// 	, validateTipoPrecripcion(tipoPrescripcion)
+		// 	, validatePeso(pesoKg)
+		// 	, validateVolumen(volumen)
+		// 	, validateTiempoInfucion(tiempoDeInfucion)
+		// 	, validateViaAdmin(viaAdmin))
 
 		if (
 			validateNumIdent(numIden)
@@ -1241,11 +1241,11 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			|| validateViaAdmin(viaAdmin)
 		) {
 			setTabErrors({ ...tabsErrors, info: true })
-			console.log('VAL TRUE:', true)
+			// console.log('VAL TRUE:', true)
 			return true
 		} else {
 			setTabErrors({ ...tabsErrors, info: false })
-			console.log('VAL FALSE:', false)
+			// console.log('VAL FALSE:', false)
 			return false
 		}
 	}
