@@ -360,7 +360,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 				apellido,
 				undefined,
 				[entidadDeSalud],
-				'Corpaul',
+				centralDeMezclas,
 				phone,
 				email,
 				password,
