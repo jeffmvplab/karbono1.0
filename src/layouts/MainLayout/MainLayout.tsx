@@ -14,23 +14,30 @@ import NavbarP from "../components/NavBar/NavBarP";
 import { MainDrawer } from "../components/MainDrawer";
 import MatomoScript from "@/scripts/MatomoScript/Matomo";
 import PWAInstallPrompt from "@/pwa/PWAInstallPromt";
+import { Metadata } from "next";
 
 export interface MainLayoutInterface {
   children: ReactNode;
 }
 
-const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
 
+
+const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
   const router = useRouter();
+
+
 
   return (
     <GlobalProvider>
       <>
 
         <Head>
-          <title>Karbono</title>
+          <title>Pure Life</title>
           <meta name="description" content="Pure Life" />
           <link rel="icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo-mobile.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo-mobile.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/assets/logo-mobile.png" />
         </Head>
 
         <MainLayoutScripts />
@@ -40,7 +47,7 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
           sx={{ paddingTop:{xs:"5px",sm:"20px",md:"10px",lg:"10px",xl:"10px",},}}>
         </Box> */}
         <NavbarP />
-        <PWAInstallPrompt />
+
         {/* <Suspense> */}
         <MainDrawer />
         {/* </Suspense> */}
