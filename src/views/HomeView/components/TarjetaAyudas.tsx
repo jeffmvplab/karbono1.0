@@ -9,8 +9,8 @@ import { RolUsersKeysEnum } from '@/utilities/enums/rol_user_keys.enum';
 
 
 const TarjetaAyudas = () => {
-  const {  getMeRol } = useContext(GlobalContext);
-  
+  const { getMeRol } = useContext(GlobalContext);
+
   return (
 
     <>
@@ -34,7 +34,8 @@ const TarjetaAyudas = () => {
                 route={' https://purelife.cloud/preguntas-frecuentes/'}
                 text='Ingresar'
                 color={'#90AFB0'}
-                id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+                id={Array.isArray(getMeRol())
+                  && (getMeRol()[0] === RolUsersKeysEnum.prescriptor)
                   ? 'Pre_Ayudas'
                   : 'QF_Ayudas'
                 }
