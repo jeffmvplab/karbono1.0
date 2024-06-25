@@ -40,7 +40,7 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
           sx={{ paddingTop:{xs:"5px",sm:"20px",md:"10px",lg:"10px",xl:"10px",},}}>
         </Box> */}
         <NavbarP />
-        <PWAInstallPrompt />
+     
         {/* <Suspense> */}
         <MainDrawer />
         {/* </Suspense> */}
