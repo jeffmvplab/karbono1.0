@@ -8,12 +8,12 @@
     "ámbito": "/",
     "url_inicio": "/",
     "íconos": [{
-            "origen": "/favicon.ico",
+            "origen": "/assets/logo-mobile.png",
             "tipo": "image/png",
             "tamaños": "192x192"
         },
         {
-            "origen": "/favicon.ico",
+            "origen": "/assets/logo-mobile.png",
             "tipo": "image/png",
             "tamaños": "256x256"
         }
