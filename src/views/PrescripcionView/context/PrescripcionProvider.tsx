@@ -464,7 +464,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 			// Crear un enlace para descargar el archivo
 			const a = document.createElement('a');
 			a.href = url;
-			a.download = 'Archivo Plano.txt';
+			a.download = 'ArchivoParaSap.txt';
 			document.body.appendChild(a);
 			a.click();
 

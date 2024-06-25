@@ -49,7 +49,8 @@ const TarjetaConf: React.FC<TarjetaConfProps> = () => {
               route={mainRoutes.mi_cuenta}
               text=' Ingresar'
               color={colorsKarbono.secundary}
-              id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+              id={Array.isArray(getMeRol())
+                && (getMeRol()[0] === RolUsersKeysEnum.prescriptor)
                 ? 'Pre_Prescripcion'
                 : 'QF_Configuracion'
               }

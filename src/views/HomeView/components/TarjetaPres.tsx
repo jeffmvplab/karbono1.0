@@ -47,7 +47,8 @@ const TarjetaPres: React.FC<TarjetaPresProps> = () => {
                 : mainRoutes.login}
               text=' Ingresar'
               color={colorsKarbono.primary}
-              id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+              id={Array.isArray(getMeRol())
+                && (getMeRol()[0] === RolUsersKeysEnum.prescriptor)
                 ? 'Pre_Prescripcion'
                 : 'QF_Prescripcion'
               }

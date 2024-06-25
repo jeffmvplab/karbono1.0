@@ -1,0 +1,21 @@
+{
+    "nombre": "Pure Life",
+    "nombre_corto": "",
+    "color_tema": "#2fc5c6",
+    "color_fondo": "#ffffff",
+    "pantalla": "navegador",
+    "orientación": "cualquiera",
+    "ámbito": "/",
+    "url_inicio": "/",
+    "íconos": [{
+            "origen": "/favicon.ico",
+            "tipo": "image/png",
+            "tamaños": "192x192"
+        },
+        {
+            "origen": "/favicon.ico",
+            "tipo": "image/png",
+            "tamaños": "256x256"
+        }
+    ]
+}

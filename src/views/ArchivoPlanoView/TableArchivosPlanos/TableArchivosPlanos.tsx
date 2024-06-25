@@ -190,7 +190,7 @@ const TableArchivosPlanos: React.FC<TableArchivosPlanosProps> = () => {
 							// 	estado: StatePrescriptionKeysEnum.calidad,
 							// }
 							// saveComments(newComment)
-							goReporte(params.row.no_orden), console.log('OJITO')
+							goReporte(params.row.no_orden)
 						}
 					} />
 				< IoPrintOutline id='QF_btn_ImprimirArchivo' style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpen() }} />

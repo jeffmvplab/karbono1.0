@@ -26,7 +26,7 @@ const TarjetaInf = () => {
         >
           <Typography variant='h5' sx={{ color: '#2FC5C6', paddingBottom: '20px' }}>Informes</Typography>
           <Typography variant='body1' sx={{ paddingBottom: '30px' }}>
-            {Array.isArray(getMeRol())&&getMeRol()[0] === RolUsersKeysEnum.prescriptor
+            {Array.isArray(getMeRol()) && getMeRol()[0] === RolUsersKeysEnum.prescriptor
               ? 'Este módulo te proporciona acceso a métricas  y estadísticas de interés sobre tus prescripciones solicitadas'
               : 'Este módulo te proporciona acceso a métricas  y estadísticas de interés sobre tus pacientes y clientes.'}
           </Typography>
@@ -41,16 +41,17 @@ const TarjetaInf = () => {
               route={mainRoutes.home}
               text=' Ingresar'
               color={colorsKarbono.primary}
-              id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+              id={Array.isArray(getMeRol())
+                && (getMeRol()[0] === RolUsersKeysEnum.prescriptor)
                 ? 'Pre_Informes'
                 : 'QF_Informes'
               }
-        
+
             />
             <Typography variant='body1'> *Proximamente</Typography>
           </Stack>
         </Box>
-        
+
         <Hidden smDown >
           <Box sx={{ justifyContent: 'center', display: 'flex', paddingRight: '20px', alignItems: 'center', width: '20%' }}>
             <Image

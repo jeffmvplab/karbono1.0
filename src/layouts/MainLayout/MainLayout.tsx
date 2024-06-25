@@ -13,6 +13,7 @@ import ConexionStatusModal from "@/components/ConexionStatusModal/ConexionStatus
 import NavbarP from "../components/NavBar/NavBarP";
 import { MainDrawer } from "../components/MainDrawer";
 import MatomoScript from "@/scripts/MatomoScript/Matomo";
+import PWAInstallPrompt from "@/pwa/PWAInstallPromt";
 
 export interface MainLayoutInterface {
   children: ReactNode;
@@ -28,8 +29,8 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
 
         <Head>
           <title>Karbono</title>
-          <meta name="description" content="Karbono" />
-          <link rel="icon" href="/logo-mobile.png" />
+          <meta name="description" content="Pure Life" />
+          <link rel="icon" href="/favicon.ico" />
         </Head>
 
         <MainLayoutScripts />
@@ -39,6 +40,7 @@ const MainLayout: React.FC<MainLayoutInterface> = ({ children }) => {
           sx={{ paddingTop:{xs:"5px",sm:"20px",md:"10px",lg:"10px",xl:"10px",},}}>
         </Box> */}
         <NavbarP />
+        <PWAInstallPrompt />
         {/* <Suspense> */}
         <MainDrawer />
         {/* </Suspense> */}
