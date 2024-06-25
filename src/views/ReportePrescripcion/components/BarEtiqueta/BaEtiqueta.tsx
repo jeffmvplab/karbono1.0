@@ -10,6 +10,7 @@ import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { RolUsersKeysEnum } from "@/utilities/enums/rol_user_keys.enum";
 import { GlobalContext } from "@/context/GlobalContext";
 import { useContext } from "react";
+import { convertirAPDF } from "@/utilities/view_pdf_convert";
 
 
 export interface BarEtiquetaProps {
@@ -49,8 +50,8 @@ const BarEtiqueta: React.FC<BarEtiquetaProps> = ({
                     : 'QF_btn_PlanDescargar'
                 }
          
-                onClick={() => router.push(mainRoutes.pdf)}
-                // onClick={() => convertirAPDF(idDescargar!, title!)}
+                // onClick={() => router.push(mainRoutes.pdf)}
+                onClick={() => convertirAPDF(idDescargar!, title!)}
                 width='160px'
                 height='44px'
                 variant='outlined'
