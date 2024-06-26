@@ -26,9 +26,12 @@ const AuthLayout: React.FC<AuthLayoutInterface> = ({ children }) => {
     <GlobalProvider>
       <>
         <Head>
-          <title>Karbono</title>
-          <meta name="description" content="Infostore" />
+          <title>Pure Life</title>
+          <meta name="description" content="Pure Life" />
           <link rel="icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo-mobile.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo-mobile.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/assets/logo-mobile.png" />
 
         </Head>
 

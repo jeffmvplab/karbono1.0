@@ -79,7 +79,7 @@ const withPWA = require("@ducanh2912/next-pwa").default({
     dest: "public",
     fallbacks: {
         //image: "/static/images/fallback.png",
-        document: "/offline", // si desea volver a una página personalizada en lugar de /_offline
+        document: "/", // si desea volver a una página personalizada en lugar de /_offline
         // font: '/static/font/fallback.woff2',
         // audio: ...,
         // video: ...,
