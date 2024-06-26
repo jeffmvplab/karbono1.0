@@ -15,25 +15,27 @@ const ReportePrescripcionLayout: React.FC<ReportePrescripcionLayoutInterface> = 
   return (
     <>
       <Head>
-        <title>Karbono</title>
-        <meta name="description" content="Karbono" />
+        <title>Pure Life</title>
+        <meta name="description" content="Pure Life" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo-mobile.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo-mobile.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/logo-mobile.png" />
       </Head>
-
       <ConexionStatusModal />
-      <MainDrawer/>
+      <MainDrawer />
       {/* <GlobalProvider>
         <PrescripcionProvider> */}
-          <Box sx={{ display: 'flex', width:'100%' }}>
-            {/*Navbar draweWidth */}
-            {/* <NabvarReportePrescripcion /> */}
-            {/*Sidebar draweWidth */}
-            <Box component='main' sx={{ flexGrow: 1, padding: '3' }}>
-              {/*Toolbar*/}
-              {children}
-            </Box>
-          </Box>
-        {/* </PrescripcionProvider>
+      <Box sx={{ display: 'flex', width: '100%' }}>
+        {/*Navbar draweWidth */}
+        {/* <NabvarReportePrescripcion /> */}
+        {/*Sidebar draweWidth */}
+        <Box component='main' sx={{ flexGrow: 1, padding: '3' }}>
+          {/*Toolbar*/}
+          {children}
+        </Box>
+      </Box>
+      {/* </PrescripcionProvider>
 
       </GlobalProvider> */}
     </>

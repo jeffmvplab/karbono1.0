@@ -29,9 +29,12 @@ const PrescripcionLayout: React.FC<PrescripcionLayoutInterface> = ({ children })
     <>
 
       <Head>
-        <title>Karbono</title>
-        <meta name="description" content="Infostore" />
+        <title>Pure Life</title>
+        <meta name="description" content="Pure Life" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo-mobile.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo-mobile.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/logo-mobile.png" />
 
       </Head>
 
@@ -39,21 +42,21 @@ const PrescripcionLayout: React.FC<PrescripcionLayoutInterface> = ({ children })
         <FormulariosProvider>
           <PrescripcionProvider>
             {/* <ReportesProvider> */}
-              <ConexionStatusModal />
-              <Box sx={{ display: 'flex' }}>
-                {/*Navbar draweWidth */}
-                <NavbarP drawerWidth={draweWidth} />
-                <MainDrawer />
-                {/*Sidebar draweWidth */}
-                {/* <Sidebar /> */}
-                <Box
-                  component='main'
-                  sx={{ flexGrow: 1, padding: '3' }}
-                >
-                  {/*Toolbar*/}
-                  {children}
-                </Box>
+            <ConexionStatusModal />
+            <Box sx={{ display: 'flex' }}>
+              {/*Navbar draweWidth */}
+              <NavbarP drawerWidth={draweWidth} />
+              <MainDrawer />
+              {/*Sidebar draweWidth */}
+              {/* <Sidebar /> */}
+              <Box
+                component='main'
+                sx={{ flexGrow: 1, padding: '3' }}
+              >
+                {/*Toolbar*/}
+                {children}
               </Box>
+            </Box>
             {/* </ReportesProvider> */}
           </PrescripcionProvider>
         </FormulariosProvider>
