@@ -107,7 +107,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 
 						<Stack sx={{
 							position: 'absolute' as 'absolute',
-							top: '35%',
+							top: errorApi ? '45%' : '35%',
 							left: '50%',
 							transform: 'translate(-50%, -50%)',
 						}}
@@ -277,6 +277,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 												<Stack direction={{ xs: 'column', md: 'row' }} alignItems={'center'}>
 
 													<Button
+														disabled={loadingApi}
 														onClick={() => invitarUsuarios()}
 														sx={{ borderRadius: '8px', width: '150px', height: { xs: '40px', md: '50px' }, color: 'white' }}
 														variant='contained'
