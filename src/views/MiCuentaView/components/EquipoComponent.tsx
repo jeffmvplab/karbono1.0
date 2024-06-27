@@ -274,8 +274,9 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 											</Grid>
 
 											<Grid textAlign={'center'} item xs={12} sm={12} md={12} lg={2} sx={{ paddingTop: '15px' }}>
+												
 												<Stack direction={{ xs: 'column', md: 'row' }} alignItems={'center'}>
-
+													
 													<Button
 														disabled={loadingApi}
 														onClick={() => invitarUsuarios()}
@@ -293,6 +294,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 														}}>
 														<ExpandLessIcon />
 													</IconButton>
+
 												</Stack>
 
 											</Grid>

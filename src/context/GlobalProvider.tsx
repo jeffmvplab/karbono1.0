@@ -273,7 +273,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		} else {
 			setIsAuth(false);
 			Cookies.remove(CookiesKeysEnum.token);
-				// console.log('KKKKAAAKKKA:', rol);
+			// console.log('KKKKAAAKKKA:', rol);
 			if (rol === 'Administrador') { router.push(mainRoutes.loginEmpleados) }
 			else { router.push(mainRoutes.loginCliente) };
 			// console.log('IsAuth:', isAuth)
@@ -426,18 +426,19 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	const invitarUsuarios = async () => {
 
 		setLoadingApi(true);
-		// console.log('Invitando...:', userInv?.roles!, userInv?.email!, userInv?.nombre_apellidos!)
+		console.log('Invitando...:', userInv?.roles!, userInv?.email!, userInv?.nombre_apellidos!)
 
 		const resp = await useruseCase.invitarUsuarios(userInv?.roles!, userInv?.email!, userInv?.nombre_apellidos!)
 
-		// console.log('RespApi:', resp)
+		console.log('RespApi:', resp)
 
 		if (resp.statusCode === undefined || !resp.message) {
 
-			// console.log('RES_API:', resp)
+			console.log('RES_API:', resp)
 			handleModalInvOpen()
+			setErrorApi('');
 		} else if (resp.statusCode === 400 || resp.statusCode === 401 || resp.statusCode === 500) {
-			// console.log('Error :', resp.message)
+			console.log('Error :', resp.message)
 			setErrorApi(resp.message);
 			handleModalInvOpen();
 		} else if (resp.statusCode === 408) {
@@ -515,7 +516,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		if (resp.statusCode === undefined) {
 			handleOpenModalRecoveryPass(),
 				// console.log('RES_API:', resp)
-			setErrorAuth('');
+				setErrorAuth('');
 		} else if (resp.statusCode === 408) {
 			handleOffline();
 		}
