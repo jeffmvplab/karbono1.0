@@ -46,31 +46,31 @@ const ParametrosNutricionales: React.FC<ParametrosNutricionalesProps> = ({ isMov
 				<Box padding={1}>
 					<TextParamsNumb
 						title={'Calorías totales:'}
-						value={getCalTotales(prescriptionSave!).conPurga.toFixed(2)}
+						value={getCalTotales(prescriptionSave!).volumen.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Calorías totales/kg/día:'}
-						value={getCalTotalesKgDia(prescriptionSave!).conPurga.toFixed(2)}
+						value={getCalTotalesKgDia(prescriptionSave!).volumen.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Gramos totales de Nitrógeno:'}
-						value={getGramosTotalesNitro(prescriptionSave!).conPurga.toFixed(2)}
+						value={getGramosTotalesNitro(prescriptionSave!).volumen.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Calorías totales Protéicas:'}
-						value={getCaloriasTotalesProteicas(prescriptionSave!).conPurga.toFixed(2)}
+						value={getCaloriasTotalesProteicas(prescriptionSave!).volumen.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Calorías totales Protéicas/kg (kcal/kg):'}
-						value={getCaloriasTotalesProteicasKg(prescriptionSave!).conPurga.toFixed(2)}
+						value={getCaloriasTotalesProteicasKg(prescriptionSave!).volumen.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Calorías totales No Protéicas CHO’S:'}
-						value={getCaloriasNoProteicasCHOS(prescriptionSave!).conPurga.toFixed(2)}
+						value={getCaloriasNoProteicasCHOS(prescriptionSave!).volumen.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Calorías totales No Protéicas Lípidos:'}
-						value={getCaloriasNoProteicasLIPIDOS(prescriptionSave!).conPurga.toFixed(2)}
+						value={getCaloriasNoProteicasLIPIDOS(prescriptionSave!).volumen.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Relación: Cal No Protéicas Protéicas/g Nitrogeno:'}
