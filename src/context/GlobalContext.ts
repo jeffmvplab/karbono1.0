@@ -120,6 +120,7 @@ interface ContextProps {
     getMe: () => Promise<void>,
     updateMe: () => Promise<void>,
     getMeRol: () => string[],
+    getMeUser: () => any,
 
     modalInvOpen: boolean,
     handleModalInvClose: () => void,
