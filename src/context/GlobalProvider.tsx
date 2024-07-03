@@ -11,6 +11,7 @@ import { GlobalContext } from "./GlobalContext";
 import Cookies from "js-cookie";
 import { IUserEquipo } from "@/domain/models/equipo_user.model";
 import { RolUsersKeysEnum } from "@/utilities/enums/rol_user_keys.enum";
+import { IUser } from "@/domain/models";
 
 type Props = {
 	children: JSX.Element,
@@ -295,53 +296,67 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		}
 	}
 
-	/////////////////////////////LOGIN//////////////////////////////////////////////
-	const useruseCase = new UserUseCases();
-	const [loadingAuth, setLoadingAuth] = React.useState(false);
-	const [authOK, setAuthOk] = React.useState(true);
-	const [errorAuth, setErrorAuth] = React.useState('');
+	const getMeUser= () => {
+
+		if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
+			setIsAuth(true)
+			const user: IUser = localStorageProtocol.get(StorageKeysEnum.user);
+		// console.log('User:', user);
+		return user;
+		} else {
+			setIsAuth(false);
+		// console.log('ROL:', []);
+		return '';
+		}
+	}
+
+		/////////////////////////////LOGIN//////////////////////////////////////////////
+		const useruseCase = new UserUseCases();
+		const [loadingAuth, setLoadingAuth] = React.useState(false);
+		const [authOK, setAuthOk] = React.useState(true);
+		const [errorAuth, setErrorAuth] = React.useState('');
 
 	const login = async () => {
-		setLoadingAuth(true);
+			setLoadingAuth(true);
 		// console.log('Loading...')
 		const resp = await useruseCase.login(email, password, [entidadDeSalud], centralDeMezclas)
 		// console.log('RespAuth:', resp)
 
 		if (resp.statusCode === 201) {
 			localStorageProtocol.set(StorageKeysEnum.user, resp.body);
-			Cookies.set(CookiesKeysEnum.token, resp.body.token, { sameSite: 'Strict' })
-			Cookies.set(CookiesKeysEnum.userName, resp.body.nombre_apellidos, { sameSite: 'Strict' })
+		Cookies.set(CookiesKeysEnum.token, resp.body.token, {sameSite: 'Strict' })
+		Cookies.set(CookiesKeysEnum.userName, resp.body.nombre_apellidos, {sameSite: 'Strict' })
 		}
 
 		setLoadingAuth(false);
 
 		if (resp.statusCode === 201) {
 			setErrorAuth('');
-			setAuthOk(true)
-			authStatus();
-			router.push(mainRoutes.home);
+		setAuthOk(true)
+		authStatus();
+		router.push(mainRoutes.home);
 			// console.log('RES_API:', resp)
 
 		} else if (resp.body.statusCode === 400) {
 			// console.log('Error Loguin:', resp.body.message)
 			setErrorAuth(resp.body.message);
-			setAuthOk(false)
+		setAuthOk(false)
 		} else if (resp.body.statusCode === 401) {
 			// console.log('Error Loguin:', resp.body.message)
 			setErrorAuth(resp.body.message);
-			setAuthOk(false)
+		setAuthOk(false)
 		} else if (resp.statusCode === 408) {
 
 			handleOffline();
 		}
 	}
 
-	/////////////////////////////LOGIN//////////////////////////////////////////////
-	const [captcha, setCaptcha] = useState('');
+		/////////////////////////////LOGIN//////////////////////////////////////////////
+		const [captcha, setCaptcha] = useState('');
 
 	const register = async (rol?: string) => {
 
-		setLoadingAuth(true);
+			setLoadingAuth(true);
 		// console.log('Register...')
 
 
@@ -377,22 +392,22 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 		if (resp.body !== undefined) {
 			setAuthOk(false);
-			// console.log('RES_API:', resp)
+		// console.log('RES_API:', resp)
 
-			if (resp.body === undefined) {
-				localStorageProtocol.set(StorageKeysEnum.user, resp);
-				Cookies.set(CookiesKeysEnum.token, resp.token, { sameSite: 'Strict' })
-				Cookies.set(CookiesKeysEnum.userName, resp.body.nombre_apellidos, { sameSite: 'Strict' })
+		if (resp.body === undefined) {
+			localStorageProtocol.set(StorageKeysEnum.user, resp);
+		Cookies.set(CookiesKeysEnum.token, resp.token, {sameSite: 'Strict' })
+		Cookies.set(CookiesKeysEnum.userName, resp.body.nombre_apellidos, {sameSite: 'Strict' })
 
-				router.push(mainRoutes.login);
+		router.push(mainRoutes.login);
 			}
 
-			localStorageProtocol.delete(StorageKeysEnum.userInv);
+		localStorageProtocol.delete(StorageKeysEnum.userInv);
 
-			if (resp.body.statusCode === 400) {
-				// console.log('Error Register:', resp.body.message[0])
-				setErrorAuth(resp.body.message);
-				setAuthOk(false)
+		if (resp.body.statusCode === 400) {
+			// console.log('Error Register:', resp.body.message[0])
+			setErrorAuth(resp.body.message);
+		setAuthOk(false)
 			}
 
 		} else if (resp.statusCode === 408) {
@@ -400,32 +415,32 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		}
 		else {
 			setErrorAuth('');
-			setAuthOk(true)
-			authStatus();
-			router.push(mainRoutes.home);
+		setAuthOk(true)
+		authStatus();
+		router.push(mainRoutes.home);
 		}
 
 		setLoadingAuth(false);
 	}
 
-	const [loadingApi, setLoadingApi] = useState(false);
-	const [errorApi, setErrorApi] = useState('');
-	const [userInv, setUserInv] = useState<IUserEquipo | undefined>();
+		const [loadingApi, setLoadingApi] = useState(false);
+		const [errorApi, setErrorApi] = useState('');
+		const [userInv, setUserInv] = useState<IUserEquipo | undefined>();
 
 
-	const [modalInvOpen, setModalInvOpen] = useState(false);
+		const [modalInvOpen, setModalInvOpen] = useState(false);
 
 	const handleModalInvClose = () => {
-		setModalInvOpen(false);
+			setModalInvOpen(false);
 	};
 
 	const handleModalInvOpen = () => {
-		setModalInvOpen(true);
+			setModalInvOpen(true);
 	};
 
 	const invitarUsuarios = async () => {
 
-		setLoadingApi(true);
+			setLoadingApi(true);
 		console.log('Invitando...:', userInv?.roles!, userInv?.email!, userInv?.nombre_apellidos!)
 
 		const resp = await useruseCase.invitarUsuarios(userInv?.roles!, userInv?.email!, userInv?.nombre_apellidos!)
@@ -436,11 +451,11 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 			console.log('RES_API:', resp)
 			handleModalInvOpen()
-			setErrorApi('');
+		setErrorApi('');
 		} else if (resp.statusCode === 400 || resp.statusCode === 401 || resp.statusCode === 500) {
 			console.log('Error :', resp.message)
 			setErrorApi(resp.message);
-			handleModalInvOpen();
+		handleModalInvOpen();
 		} else if (resp.statusCode === 408) {
 
 			handleOffline();
@@ -452,7 +467,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 	const registerByInvitation = async () => {
 
-		setLoadingApi(true);
+			setLoadingApi(true);
 		const userInv = localStorageProtocol.get(StorageKeysEnum.userInv)
 
 		// console.log('ROL...:', userInv.roles)
@@ -469,16 +484,16 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		// 	politica_de_privacidad,)
 
 		const resp = await useruseCase.registerByInvitation(
-			userInv._id,
-			email,
-			nameYApellidos,
-			phone!,
-			password,
-			(userInv.roles[0] === RolUsersKeysEnum.prescriptor) ? registroMedico! : undefined,
-			name!,
-			apellido!,
-			[entidadDeSalud],
-			politica_de_privacidad,
+		userInv._id,
+		email,
+		nameYApellidos,
+		phone!,
+		password,
+		(userInv.roles[0] === RolUsersKeysEnum.prescriptor) ? registroMedico! : undefined,
+		name!,
+		apellido!,
+		[entidadDeSalud],
+		politica_de_privacidad,
 		)
 		// console.log('RespApi:', resp)
 
@@ -500,14 +515,14 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		setLoadingApi(false);
 	}
 
-	const [openModalRecoveryPass, setOpenModalRecoveryPass] = useState(false);
-	const handleOpenModalRecoveryPass = () => { setOpenModalRecoveryPass(true) };
+		const [openModalRecoveryPass, setOpenModalRecoveryPass] = useState(false);
+	const handleOpenModalRecoveryPass = () => {setOpenModalRecoveryPass(true)};
 	const handleCloseModalRecoveryPass = () => setOpenModalRecoveryPass(false);
 
 
 	const recuperarPassword = async () => {
 
-		setLoadingAuth(true);
+			setLoadingAuth(true);
 		// console.log('Recovery Pass...')
 		const resp = await useruseCase.recuperarPassword(email);
 		// Procede con el registro
@@ -515,26 +530,26 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 		if (resp.statusCode === undefined) {
 			handleOpenModalRecoveryPass(),
-				// console.log('RES_API:', resp)
-				setErrorAuth('');
+			// console.log('RES_API:', resp)
+			setErrorAuth('');
 		} else if (resp.statusCode === 408) {
 			handleOffline();
 		}
 		else {
 			setErrorAuth('404');
-			// router.push(mainRoutes.home);
-			handleOpenModalRecoveryPass()
+		// router.push(mainRoutes.home);
+		handleOpenModalRecoveryPass()
 		}
 		setLoadingAuth(false);
 	}
 
-	const [openModalVerifyPass, setOpenModalVerifyPass] = useState(false);
-	const handleOpenModalVerifyPass = () => { setOpenModalVerifyPass(true) };
+		const [openModalVerifyPass, setOpenModalVerifyPass] = useState(false);
+	const handleOpenModalVerifyPass = () => {setOpenModalVerifyPass(true)};
 	const handleCloseModalVerifyPass = () => setOpenModalVerifyPass(false);
 
 	const verificarCodigoRecoveryPassword = async () => {
 
-		setLoadingAuth(true);
+			setLoadingAuth(true);
 		// console.log('Verificar Pass...')
 		const resp = await useruseCase.verificarCodigoRecuperacion(email, codigoVerificacion, password);
 		// Procede con el registro
@@ -542,7 +557,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 		if (resp.statusCode === 201) {
 			Cookies.set(CookiesKeysEnum.token, resp.body.token, { sameSite: 'Strict' })
-			Cookies.set(CookiesKeysEnum.userName, resp.body.userName, { sameSite: 'Strict' })
+			Cookies.set(CookiesKeysEnum.userName, resp.body.userName, {sameSite: 'Strict' })
 
 		}
 
@@ -550,22 +565,22 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 		if (resp.statusCode === undefined) {
 			setErrorAuth('');
-			setAuthOk(true);
-			handleOpenModalVerifyPass();
+		setAuthOk(true);
+		handleOpenModalVerifyPass();
 			// console.log('RES_API:', resp)
 
 		} else if (resp.statusCode === 400) {
 			// console.log('Error Verificacion:', resp.message)
 			setErrorAuth(resp.message);
-			setAuthOk(false)
+		setAuthOk(false)
 		} else if (resp.statusCode === 401) {
 			// console.log('Error Verificacion:', resp.message)
 			setErrorAuth(resp.message);
-			setAuthOk(false)
+		setAuthOk(false)
 		} else if (resp.statusCode === 404) {
 			// console.log('Error Verificacion:', resp.message)
 			setErrorAuth(resp.message);
-			setAuthOk(false)
+		setAuthOk(false)
 		} else if (resp.statusCode === 408) {
 
 			handleOffline();
@@ -593,45 +608,45 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	//   };
 
 	const [userInvitado, setuserInvitado] = React.useState('');
-	const [erroruserInvitado, setErroruserInvitado] = React.useState(false);
-	const [messageErroruserInvitado, setMessageErroruserInvitado] = React.useState('');
+		const [erroruserInvitado, setErroruserInvitado] = React.useState(false);
+		const [messageErroruserInvitado, setMessageErroruserInvitado] = React.useState('');
 
 
 	const aceptarInvitacion = async (token: string) => {
-		setLoadingAuth(true);
+			setLoadingAuth(true);
 		// console.log('Aceptar Invitacion...')
 		const resp = await useruseCase.aceptarInvitacion(token)
 		// console.log('RespAuth:', resp)
 
 		if (resp && resp.statusCode === undefined) {
 			setErrorAuth('');
-			setAuthOk(true)
+		setAuthOk(true)
 
-			await setUserInv({
-				central_mezcla: resp.central_de_mezclas,
-				email: resp.email,
-				primer_nombre: '',
-				primer_apellido: '',
-				nombre_apellidos: resp.nombre_apellidos,
-				roles: resp.roles[0]
+		await setUserInv({
+			central_mezcla: resp.central_de_mezclas,
+		email: resp.email,
+		primer_nombre: '',
+		primer_apellido: '',
+		nombre_apellidos: resp.nombre_apellidos,
+		roles: resp.roles[0]
 			});
 
-			localStorageProtocol.set(StorageKeysEnum.userInv, resp)
+		localStorageProtocol.set(StorageKeysEnum.userInv, resp)
 
-			router.push({
-				pathname: mainRoutes.register,
-				query: { query: 'invitación' }
+		router.push({
+			pathname: mainRoutes.register,
+		query: {query: 'invitación' }
 			});
 			// console.log('RES_API:', resp)
 
 		} else if (resp.statusCode === 400) {
 			// console.log('Error Loguin:', resp.message)
 			setErrorAuth(resp.message);
-			setAuthOk(false)
+		setAuthOk(false)
 		} else if (resp.statusCode === 401) {
 			// console.log('Error Loguin:', resp.message)
 			setErrorAuth(resp.message);
-			setAuthOk(false)
+		setAuthOk(false)
 		} else if (resp.statusCode === 408) {
 
 			handleOffline();
@@ -639,28 +654,28 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		setLoadingAuth(false);
 	}
 
-	const [userEquipo, setUserEquipo] = useState<IUserEquipo[] | undefined>();
+		const [userEquipo, setUserEquipo] = useState<IUserEquipo[] | undefined>();
 
 	const getMeEquipo = async () => {
-		setLoadingAuth(true);
+			setLoadingAuth(true);
 		// console.log('Get Grup...')
 		const resp = await useruseCase.getMeGrup()
 		// console.log('RespAuth:', resp)
 
 		if (resp) {
 			setErrorAuth('');
-			setAuthOk(true)
-			setUserEquipo(resp);
+		setAuthOk(true)
+		setUserEquipo(resp);
 			// console.log('RES_API:', resp)
 
 		} else if (resp.statusCode === 400) {
 			// console.log('Error Loguin:', resp.message)
 			setErrorAuth(resp.message);
-			setAuthOk(false)
+		setAuthOk(false)
 		} else if (resp.statusCode === 401) {
 			// console.log('Error Loguin:', resp.message)
 			setErrorAuth(resp.message);
-			setAuthOk(false)
+		setAuthOk(false)
 		} else if (resp.statusCode === 408) {
 
 			handleOffline();
@@ -669,7 +684,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 	}
 
 	const updateMeEquipo = async (email: string, roles: string, group_admin: string) => {
-		setLoadingAuth(true);
+			setLoadingAuth(true);
 
 		// console.log('Update Grup...:', email, roles, group_admin)
 		const resp = await useruseCase.upadateMeGrup(email, roles, group_admin)
@@ -677,18 +692,18 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 		if (resp) {
 			setErrorAuth('');
-			setAuthOk(true)
-			setUserEquipo(resp);
+		setAuthOk(true)
+		setUserEquipo(resp);
 			// console.log('RES_API:', resp)
 
 		} else if (resp.statusCode === 400) {
 			// console.log('Error Loguin:', resp.message)
 			setErrorAuth(resp.message);
-			setAuthOk(false)
+		setAuthOk(false)
 		} else if (resp.statusCode === 401) {
 			// console.log('Error Loguin:', resp.message)
 			setErrorAuth(resp.message);
-			setAuthOk(false)
+		setAuthOk(false)
 		} else if (resp.statusCode === 408) {
 
 			handleOffline();
@@ -696,191 +711,192 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		setLoadingAuth(false);
 	}
 
-	const [user, setUser] = useState<IUserEquipo>();
+		const [user, setUser] = useState<IUserEquipo>();
 
 	const getMe = async () => {
-		setLoadingAuth(true);
-		// console.log('Get Me...')
-		const resp = await useruseCase.getMe()
-		// console.log('RespAuth:', resp)
+				setLoadingAuth(true);
+			// console.log('Get Me...')
+			const resp = await useruseCase.getMe()
+			// console.log('RespAuth:', resp)
 
-		if (resp) {
-			setErrorAuth('');
+			if (resp) {
+				setErrorAuth('');
 			setAuthOk(true)
 			setUser(resp);
 			// console.log('RES_API:', resp)
 
 		} else if (resp.statusCode === 400) {
-			// console.log('Error Loguin:', resp.message)
-			setErrorAuth(resp.message);
+				// console.log('Error Loguin:', resp.message)
+				setErrorAuth(resp.message);
 			setAuthOk(false)
 		} else if (resp.statusCode === 401) {
-			// console.log('Error Loguin:', resp.message)
-			setErrorAuth(resp.message);
+				// console.log('Error Loguin:', resp.message)
+				setErrorAuth(resp.message);
 			setAuthOk(false)
 		} else if (resp.statusCode === 408) {
 
-			handleOffline();
+				handleOffline();
 		}
 
-		setLoadingAuth(false);
+			setLoadingAuth(false);
 	}
 
 	const updateMe = async () => {
 
-		setLoadingAuth(true);
-		// console.log('Upadate Me...', user)
-		const resp = await useruseCase.upadateMe(user!)
-		// console.log('RespAuth:', resp)
+				setLoadingAuth(true);
+			// console.log('Upadate Me...', user)
+			const resp = await useruseCase.upadateMe(user!)
+			// console.log('RespAuth:', resp)
 
-		if (resp) {
-			setErrorAuth('');
+			if (resp) {
+				setErrorAuth('');
 			setAuthOk(true)
 			setUser(resp);
 			// console.log('RES_API:', resp)
 
 		} else if (resp.statusCode === 400) {
-			// console.log('Error Loguin:', resp.message)
-			setErrorAuth(resp.message);
+				// console.log('Error Loguin:', resp.message)
+				setErrorAuth(resp.message);
 			setAuthOk(false)
 		} else if (resp.statusCode === 401) {
-			// console.log('Error Loguin:', resp.message)
-			setErrorAuth(resp.message);
+				// console.log('Error Loguin:', resp.message)
+				setErrorAuth(resp.message);
 			setAuthOk(false)
 		} else if (resp.statusCode === 408) {
 
-			handleOffline();
+				handleOffline();
 		}
-		getMe();
-		setLoadingAuth(false);
+			getMe();
+			setLoadingAuth(false);
 	}
 	/////////////////////////////LOGOUT//////////////////////////////////////////////
 	const logout = async () => {
 
 		const rol = getMeRol()[0];
-		localStorageProtocol.delete(StorageKeysEnum.user);
-		Cookies.remove(CookiesKeysEnum.token)
-		Cookies.remove(CookiesKeysEnum.userName)
-		authStatus(rol);
+			localStorageProtocol.delete(StorageKeysEnum.user);
+			Cookies.remove(CookiesKeysEnum.token)
+			Cookies.remove(CookiesKeysEnum.userName)
+			authStatus(rol);
 	}
-	///////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////
-	return (
+			///////////////////////////////////////////////////////////////////////////////////
+			///////////////////////////////////////////////////////////////////////////////////
+			return (
 
-		<GlobalContext.Provider value={{
+			<GlobalContext.Provider value={{
 
-			isOnline,
-			handleOnline,
-			handleOffline,
+				isOnline,
+				handleOnline,
+				handleOffline,
 
-			openMainDrawer, setOpenMainDrawer,
+				openMainDrawer, setOpenMainDrawer,
 
-			authOK,
-			isAuth,
-			authStatus,
-			getMeRol,
+				authOK,
+				isAuth,
+				authStatus,
+				getMeRol,
+				getMeUser,
 
-			login,
-			register,
-			registerByInvitation,
-			errorAuth,
+				login,
+				register,
+				registerByInvitation,
+				errorAuth,
 
-			logout,
-			loadingAuth,
+				logout,
+				loadingAuth,
 
-			captcha, setCaptcha,
+				captcha, setCaptcha,
 
-			tipoCliente, handleTipo,
+				tipoCliente, handleTipo,
 
-			name,
-			errorName,
-			messageErrorName,
-			handleName,
+				name,
+				errorName,
+				messageErrorName,
+				handleName,
 
-			apellido,
-			errorApellido,
-			messageErrorApellido,
-			handleApellido,
+				apellido,
+				errorApellido,
+				messageErrorApellido,
+				handleApellido,
 
-			nameYApellidos, setNameYApellidos,
-			errorNameYApellidos,
-			messageErrorNameYApellidos,
-			handleNameYApellidos,
+				nameYApellidos, setNameYApellidos,
+				errorNameYApellidos,
+				messageErrorNameYApellidos,
+				handleNameYApellidos,
 
-			politica_de_privacidad, handlePolitica,
+				politica_de_privacidad, handlePolitica,
 
-			registroMedico,
-			errorRegistroMedico,
-			messageErrorRegistroMedico,
-			handleRegistroMedico,
+				registroMedico,
+				errorRegistroMedico,
+				messageErrorRegistroMedico,
+				handleRegistroMedico,
 
-			entidadDeSalud,
-			errorEntidadDeSalud,
-			messageErrorEntidadDeSalud,
-			handleEntidadDeSalud,
+				entidadDeSalud,
+				errorEntidadDeSalud,
+				messageErrorEntidadDeSalud,
+				handleEntidadDeSalud,
 
-			centralDeMezclas,
-			errorCentralDeMezclas,
-			messageErrorCentralDeMezclas,
-			handleCentralDeMezclas,
+				centralDeMezclas,
+				errorCentralDeMezclas,
+				messageErrorCentralDeMezclas,
+				handleCentralDeMezclas,
 
-			rol, setRol,
-			errorRol,
-			messageErrorRol,
-			handleRol,
+				rol, setRol,
+				errorRol,
+				messageErrorRol,
+				handleRol,
 
-			phone,
-			errorPhone,
-			messageErrorPhone,
-			handlePhone,
+				phone,
+				errorPhone,
+				messageErrorPhone,
+				handlePhone,
 
-			email, setEmail,
-			errorEmail,
-			messageErrorEmail,
-			handleEmail,
+				email, setEmail,
+				errorEmail,
+				messageErrorEmail,
+				handleEmail,
 
-			password,
-			errorPassword,
-			messageErrorPassword,
-			handlePassword,
+				password,
+				errorPassword,
+				messageErrorPassword,
+				handlePassword,
 
-			passwordConfirm,
-			errorPasswordConfirm,
-			messageErrorPasswordConfirm,
-			handlePasswordConfirm,
+				passwordConfirm,
+				errorPasswordConfirm,
+				messageErrorPasswordConfirm,
+				handlePasswordConfirm,
 
-			codigoVerificacion,
-			errorCodigoVerificacion,
-			messageErrorCodigoVerificacion,
-			handleCodigoVerificacion,
+				codigoVerificacion,
+				errorCodigoVerificacion,
+				messageErrorCodigoVerificacion,
+				handleCodigoVerificacion,
 
-			recuperarPassword, verificarCodigoRecoveryPassword,
-			openModalRecoveryPass,
-			handleOpenModalRecoveryPass,
-			handleCloseModalRecoveryPass,
+				recuperarPassword, verificarCodigoRecoveryPassword,
+				openModalRecoveryPass,
+				handleOpenModalRecoveryPass,
+				handleCloseModalRecoveryPass,
 
-			openModalVerifyPass,
-			handleOpenModalVerifyPass,
-			handleCloseModalVerifyPass,
+				openModalVerifyPass,
+				handleOpenModalVerifyPass,
+				handleCloseModalVerifyPass,
 
-			userInvitado, setuserInvitado,
-			erroruserInvitado, setErroruserInvitado,
-			messageErroruserInvitado, setMessageErroruserInvitado,
-			aceptarInvitacion,
+				userInvitado, setuserInvitado,
+				erroruserInvitado, setErroruserInvitado,
+				messageErroruserInvitado, setMessageErroruserInvitado,
+				aceptarInvitacion,
 
-			loadingApi, setLoadingApi,
-			errorApi, setErrorApi,
-			user, setUser,
-			userEquipo, setUserEquipo,
-			userInv, setUserInv,
-			invitarUsuarios,
+				loadingApi, setLoadingApi,
+				errorApi, setErrorApi,
+				user, setUser,
+				userEquipo, setUserEquipo,
+				userInv, setUserInv,
+				invitarUsuarios,
 
-			modalInvOpen,
-			handleModalInvClose,
-			handleModalInvOpen,
+				modalInvOpen,
+				handleModalInvClose,
+				handleModalInvOpen,
 
-			getMeEquipo, getMe, updateMe, updateMeEquipo
-		}}>{children}
-		</GlobalContext.Provider>
-	)
+				getMeEquipo, getMe, updateMe, updateMeEquipo
+			}}>{children}
+			</GlobalContext.Provider>
+			)
 };

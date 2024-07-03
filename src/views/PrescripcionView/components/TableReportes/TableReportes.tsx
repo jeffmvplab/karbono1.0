@@ -31,8 +31,8 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 
 	const { getAll, reportes, loadingGet, loadingApi, goEdit, goPrint, goReporte } = useContext(PrescripcionContext);
 	const { copyPrescriptions, loadingSave, messageAPI, setMessageAPI, borrarPrescriptions } = useContext(FormulariosContext);
-	const { getMeRol, getMe } = useContext(GlobalContext);
-	
+	const { getMeRol, getMeUser } = useContext(GlobalContext);
+
 	const [page, setPage] = useState<number>();
 	const pag: number = 15;
 
@@ -131,6 +131,15 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 			renderCell: (params: GridRenderCellParams) => <>{formatDateTime(params.value)}</>
 		},
 
+		{
+			field: "user",
+			headerName: "Prescriptor",
+			headerClassName: 'table-color--header',
+			flex: 1,
+			minWidth: 80,
+			renderCell: (params: GridRenderCellParams) => <>{params.value?.nombre_apellidos}</>
+		},
+
 		// {
 		// 	field: "user",
 		// 	headerName: "Usuario",
@@ -167,30 +176,50 @@ const TableReportes: React.FC<TableReportesProps> = () => {
 					: 'QF_btn_VerReporte'
 				}
 					style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goReporte(params.row.no_orden) }} />
+
 				<IoCreateOutline
 					id='Pre_btn_Editar'
 					style={{
 						color:
 							(params.row.estado !== StatePrescriptionKeysEnum.produccion
 								&& params.row.estado !== StatePrescriptionKeysEnum.calidad
-							) ? 'black' : 'gray', fontSize: 24, cursor: 'pointer'
+							)
+								? getMeUser().nombre_apellidos === params.row.user.nombre_apellidos
+									? 'black'
+									: 'gray'
+								: 'gray',
+						fontSize: 24, cursor: 'pointer'
 					}}
 					onClick={() => {
-						(params.row.estado !== StatePrescriptionKeysEnum.produccion && params.row.estado !== StatePrescriptionKeysEnum.calidad) && goEdit(params.row.no_orden)
+						(params.row.estado !== StatePrescriptionKeysEnum.produccion
+							&& params.row.estado !== StatePrescriptionKeysEnum.calidad &&  getMeUser().nombre_apellidos === params.row.user.nombre_apellidos)
+							&& goEdit(params.row.no_orden)
 					}} />
+
 				< IoPrintOutline id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
 					? 'Pre_btn_ImprimirPrescripcion'
 					: 'QF_btn_ImprimirPrescripcion'
 				} style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { goPrint(params.row.no_orden), handleOpen() }} />
+
 				< IoCopyOutline id='Pre_btn_Duplicar' style={{ color: 'black', fontSize: 24, cursor: 'pointer' }} onClick={() => { setASelectReporte(params.row), handleOpenCopy() }} />
+
 				<IoTrashOutline id='Pre_btn_Eliminar' style={{
-					color: (params.row.estado !== StatePrescriptionKeysEnum.produccion
+					color: (
+						params.row.estado !== StatePrescriptionKeysEnum.produccion
 						&& params.row.estado !== StatePrescriptionKeysEnum.calidad
-					) ? 'black' : 'gray', fontSize: 24, cursor: 'pointer'
+					)
+						?  getMeUser().nombre_apellidos === params.row.user.nombre_apellidos
+							? 'black'
+							: 'gray'
+						: 'gray',
+					fontSize: 24,
+					cursor: 'pointer'
 				}}
 					onClick={() => {
 						setASelectReporte(params.row),
-							(params.row.estado !== StatePrescriptionKeysEnum.produccion && params.row.estado !== StatePrescriptionKeysEnum.calidad) && handleOpenDelete()
+							(params.row.estado !== StatePrescriptionKeysEnum.produccion
+								&& params.row.estado !== StatePrescriptionKeysEnum.calidad
+								&&  getMeUser().nombre_apellidos === params.row.user.nombre_apellidos) && handleOpenDelete()
 					}} />
 			</Stack>)
 		},
