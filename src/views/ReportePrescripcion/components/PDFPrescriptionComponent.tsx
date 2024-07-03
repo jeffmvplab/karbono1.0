@@ -74,7 +74,7 @@ const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ rep
                             <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
 
                             <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
-                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Edad(años):</Typography>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{`Edad(${reporte?.tipo_edad})`}:</Typography>
                                 <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.edad}</Typography>
                             </Stack>
                             <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
