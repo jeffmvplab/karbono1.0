@@ -35,7 +35,7 @@ export const PrescripcionProvider: FC<Props> = ({ children }) => {
 		setLoadingGet(false);
 		// console.log('Loading...')
 		const resp = await prescriptionsUseCase.prescripcionsAll(limit!)
-		// console.log('Resp:', resp.body)
+	   console.log('Resp:', resp.body)
 
 		if (resp.statusCode === 200) {
 			setReportes(Array.isArray(resp.body) ? resp.body.reverse() : []);

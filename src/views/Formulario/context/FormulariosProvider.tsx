@@ -24,7 +24,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const router = useRouter();
 	let matches: boolean = useMediaQuery('(min-width:768px)')
 
-	const { handleOffline } = useContext(GlobalContext)
+	const { handleOffline, getMeUser } = useContext(GlobalContext)
 
 	const [stateAcordion1, setStateAcordion1] = useState(false);
 	const handleAcordion1 = () => {
@@ -1093,13 +1093,13 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 				no_orden: newnumber + 1,
 				por_clonacion: true,
 				estado: 'PENDIENTE FINALIZAR',
-				observaciones: []
+				observaciones: [],
 			}
-			// console.log('Copiando Prescripcion...:', copyPrescription)
+			 console.log('Copiando Prescripcion...:', copyPrescription)
 
 			const resp = await prescriptionsUseCase.savePrescripcions(copyPrescription);
 
-			// console.log('Copiado:', resp)
+			 console.log('Copiado:', resp)
 
 			if (resp.statusCode === 201) {
 				setSaveOk(true);

@@ -3,11 +3,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { colorsKarbono } from '@/themes/colors';
 import Image from 'next/image'
 import ClearIcon from '@mui/icons-material/Clear';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CloseIcon from '@mui/icons-material/CloseOutlined';
 import { GlobalContext } from '@/context/GlobalContext';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { CustomButton } from '@/components/CustomButton';
-import { error } from 'console';
 import { userInvNull } from '@/domain/models/equipo_user.model';
 
 export interface EquipoComonentProps { }
@@ -274,9 +274,9 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 											</Grid>
 
 											<Grid textAlign={'center'} item xs={12} sm={12} md={12} lg={2} sx={{ paddingTop: '15px' }}>
-												
+
 												<Stack direction={{ xs: 'column', md: 'row' }} alignItems={'center'}>
-													
+
 													<Button
 														disabled={loadingApi}
 														onClick={() => invitarUsuarios()}
@@ -347,7 +347,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 										Rol en el equipo
 									</Typography>
 
-									<Stack direction={'row'} spacing={3}>
+									<Stack direction={'row'} spacing={3} alignItems={'center'}>
 										<Typography fontSize={14} fontWeight={500}>
 											{user.roles}
 										</Typography>
@@ -358,12 +358,17 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 												aria-controls={openIndex === index ? 'long-menu' : undefined}
 												aria-expanded={openIndex === index ? 'true' : undefined}
 												aria-haspopup="true"
-												onClick={(event) => handleClick(event, index)}
+												// onClick={(event) => handleClick(event, index)}
+												onClick={async () => {
+													await updateMeEquipo(user?.email!, 'Quitar del equipo', ' ');
+													getMeEquipo()
+												}}
 											>
-												<ExpandMoreIcon />
+												<CloseIcon />
+												{/* <ExpandMoreIcon /> */}
 											</IconButton>
 
-											<Menu
+											{/* <Menu
 												id="long-menu"
 												MenuListProps={{
 													'aria-labelledby': `long-button-${index}`,
@@ -399,7 +404,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 														{option}
 													</MenuItem>
 												))}
-											</Menu>
+											</Menu> */}
 										</div>
 									</Stack>
 								</Stack>
