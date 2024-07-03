@@ -74,16 +74,16 @@ const ParametrosNutricionales: React.FC<ParametrosNutricionalesProps> = ({ isMov
 					/>
 					<TextParamsNumb
 						title={'Relación: Cal No Protéicas Protéicas/g Nitrogeno:'}
-						value={getRelacionCalNoProteicasN(prescriptionSave!).conPurga.toFixed(2)}
+						value={getRelacionCalNoProteicasN(prescriptionSave!).volumen.toFixed(2)}
 					/>
 					<TextParamsNumb
 						title={'Calorías No Protéicas/kg:'}
-						value={getCaloriasNoProteicasKg(prescriptionSave!).conPurga.toFixed(2)}
+						value={getCaloriasNoProteicasKg(prescriptionSave!).volumen.toFixed(2)}
 					/>
 
 					<TextParamsNumb
 						title={'Relación: Cal No Protéicas Protéicas/g Aminoacidos:'}
-						value={getRelacionCalNoProteicasAminoacidos(prescriptionSave!).conPurga.toFixed(2)}
+						value={getRelacionCalNoProteicasAminoacidos(prescriptionSave!).volumen.toFixed(2)}
 					/>
 				</Box>
 			</Box>
