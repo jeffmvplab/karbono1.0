@@ -17,7 +17,6 @@ type Props = {
 	children: JSX.Element,
 };
 
-
 export const GlobalProvider: FC<Props> = ({ children }) => {
 
 	const router = useRouter();
