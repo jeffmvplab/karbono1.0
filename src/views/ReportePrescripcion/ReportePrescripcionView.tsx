@@ -32,7 +32,8 @@ export interface ReportePrescripcionViewProps { }
 const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 	const { getPrescriptionsByNumber, loadingSave, reporte, saveComments, print } = useContext(ReportesContext)
-	const { getMeRol } = useContext(GlobalContext)
+	const { getMeRol, getMe, getMeUser } = useContext(GlobalContext)
+
 
 	const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -45,6 +46,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 		const rol = getMeRol()[0];
 		setRol(rol)
 	}, [router.pathname])
+
 
 
 	const [isNew, setIsNew] = useState<boolean>(false);
@@ -228,7 +230,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 										<Stack direction={'row'} justifyContent={'flex-end'} paddingY={2}>
 											<CustomButton
 												// disabled={!valOKAlert}
-									
+
 												id={(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
 													? 'Pre_btn_CrearObservacion'
 													: 'QF_btn_CrearObservacion'
@@ -273,7 +275,7 @@ const ReportePrescripcionView: React.FC<ReportePrescripcionViewProps> = () => {
 
 
 								{(getMeRol()[0] === RolUsersKeysEnum.prescriptor)
-									? <BarReporteNPT />
+									? <BarReporteNPT/>
 									: (getMeRol()[0] === RolUsersKeysEnum.calidad)
 										? <BarReporteQF />
 										: <BarReporteQF_Calidad />
