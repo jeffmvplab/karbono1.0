@@ -352,7 +352,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 											{user.roles}
 										</Typography>
 										<div>
-											<IconButton
+											{/* <IconButton
 												aria-label="more"
 												id={`long-button-${index}`}
 												aria-controls={openIndex === index ? 'long-menu' : undefined}
@@ -366,7 +366,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 											>
 												<CloseIcon />
 												{/* <ExpandMoreIcon /> */}
-											</IconButton>
+											{/* </IconButton> */}
 
 											{/* <Menu
 												id="long-menu"
