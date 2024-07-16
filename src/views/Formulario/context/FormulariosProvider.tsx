@@ -877,7 +877,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const [createdAt, setCreatedAt] = React.useState<Date | string | null>('');
 	const [updatedAt, setUpdatedAt] = React.useState<Date | string | null>('');
 
-	const [estado, setEstado] = React.useState<'PENDIENTE FINALIZAR' | 'PENDIENTE' | 'FINALIZAR' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION' | 'CANCELADA' | undefined>();
+	const [estado, setEstado] = React.useState<'PENDIENTE FINALIZAR' | 'PENDIENTE' | 'FINALIZADA' | 'SOLICITADA' | 'CALIDAD' | 'PRODUCCION' | 'CANCELADA' | undefined>();
 
 	////////////////////////////////////////////////////////////////////
 	///////////////////////////////INTEGRACION DE APIS//////////////////
@@ -1004,7 +1004,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 		let resp;
 
-
 		if (!prescriptionsData.estado) {
 
 			const copyPrescription: IPrescriptions = {
@@ -1021,7 +1020,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			resp = await prescriptionsUseCase.updatePrescripcions(copyPrescription, prescriptionsData.no_orden.toString());
 			// console.log('Resp Update:', resp)
 		}
-
 
 		setLoadingSave(true);
 
@@ -1103,7 +1101,6 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 			if (resp.statusCode === 201) {
 				setSaveOk(true);
-
 			} else if (resp.statusCode === 200) {
 				setMessageAPI(resp.body.message)
 				setSaveOk(true);

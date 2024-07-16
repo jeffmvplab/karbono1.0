@@ -11,14 +11,27 @@ import { ReportesContext } from "../../context/ReportesContext";
 import Image from 'next/image'
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import { GlobalContext } from "@/context/GlobalContext";
 
 
 
-const BarReporteNPT = () => {
+export interface BarReporteNPTProps {
+    user?: string;
+}
+
+const BarReporteNPT: React.FC<BarReporteNPTProps> = ({ user }) => {
 
     const router = useRouter();
 
-    const { reporte, saveComments, setPrint } = useContext(ReportesContext)
+    const { reporte, saveComments, setPrint } = useContext(ReportesContext);
+    const { getMeUser } = useContext(GlobalContext);
+
+    const me = getMeUser().nombre_apellidos;
+
+    const disable = (reporte?.user.nombre_apellidos !== me
+        || (reporte?.estado !== 'FINALIZADA')
+    )
+    console.log('GET ME:', me, reporte?.user.nombre_apellidos, reporte?.estado, 'Disable:', disable)
 
     useEffect(() => {
         setPrint(false);
@@ -38,9 +51,10 @@ const BarReporteNPT = () => {
 
             <Stack direction={'row'} spacing={3}>
 
-                <CustomButton 
-                id="Pre_btn_EnviarPrescripcion"
-                text={'Enviar'}
+                <CustomButton
+                    disabled={disable}
+                    id="Pre_btn_EnviarPrescripcion"
+                    text={'Enviar'}
                     // onClick={handleOpenModalDescargar}
                     onClick={() => {
                         const newComment: IComment = {
@@ -53,7 +67,9 @@ const BarReporteNPT = () => {
                     width='160px'
                     height='44px'
                     // variant='outlined'
-                    color={colorsKarbono.secundary}
+                    color={disable
+                        ? 'grey'
+                        : colorsKarbono.secundary}
                     fontSize={'16px'}
                     textColor={'white'}
                     borderColor={colorsKarbono.secundary}
