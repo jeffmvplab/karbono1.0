@@ -351,7 +351,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 										<Typography fontSize={14} fontWeight={500}>
 											{user.roles}
 										</Typography>
-										<div>
+										{/* <div> */}
 											{/* <IconButton
 												aria-label="more"
 												id={`long-button-${index}`}
@@ -405,7 +405,7 @@ const EquipoComonent: React.FC<EquipoComonentProps> = () => {
 													</MenuItem>
 												))}
 											</Menu> */}
-										</div>
+										{/* </div> */}
 									</Stack>
 								</Stack>
 
