@@ -67,7 +67,7 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 			setSaveOk(true);
 
 			const repoPresc: IPrescriptions = resp.body
-			// console.log('Reporte:', repoPresc)
+			// console.log('Reporte DDD:', repoPresc)
 			setReporte(repoPresc);
 
 		} else if (resp.statusCode === 400) {

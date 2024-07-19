@@ -17,6 +17,9 @@ export interface PDFPrescriptionComponentProps {
 
 const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ reporte, loading, print = false }) => {
 
+
+    // console.log('REPORTE XXX:',reporte);
+
     return (
         <>
             {<Stack id='reporte_view' direction={'column'}
@@ -133,7 +136,7 @@ const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ rep
 
                     <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center', justifyContent: 'center' }}>
                         <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Registro Médico:</Typography>
-                        <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.no_identificacion}</Typography>
+                        <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.user?.registro_medico}</Typography>
                     </Stack>
 
                     <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center', justifyContent: 'center' }}>
