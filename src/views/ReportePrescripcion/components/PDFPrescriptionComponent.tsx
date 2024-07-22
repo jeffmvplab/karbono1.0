@@ -8,6 +8,7 @@ import ReportesMicronutrientes from './ReportesMicronutrientes'
 import ReportesParametros from './ReportesParametros'
 import ReportesSubtotales from './ReportesSubtotales'
 import { alertVelInfucion } from '../data/alertParams'
+import { formatearFechaEsp } from '@/utilities/get_String_from_Date'
 
 export interface PDFPrescriptionComponentProps {
     reporte: IPrescriptions | undefined
@@ -107,6 +108,50 @@ const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ rep
                             {/* </Grid> */}
                         </Stack>
                     </Card>
+
+
+                    <Card>
+                        <Stack id='reporte_view' direction={'row'} width={'100%'} overflow={'scroll'} justifyContent={'space-between'} paddingX={'5px'}>
+                            {/* <Grid container paddingBottom={5}> */}
+
+                            <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Vía de Administración: </Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.via_administracion}</Typography>
+                            </Stack>
+                            <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
+
+                            <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>⁠Tipo de Paciente: </Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.tipo_paciente}</Typography>
+                            </Stack>
+                            <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
+
+                            <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>⁠Fecha de creación: </Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{formatearFechaEsp(reporte?.createdAt.toString()!)}</Typography>
+                            </Stack>
+                            <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
+                            <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Filtro (si o no):</Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.filtro ? 'Si' : 'No'}</Typography>
+                            </Stack>
+                            <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
+
+                            <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Cama:</Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.cama}</Typography>
+                            </Stack>
+                            <Divider orientation='vertical' style={{ height: '30px', paddingLeft: '5px' }} />
+
+                            <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>
+                                <Typography sx={{ color: '#372FC6', fontWeight: 600, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>Ubicación:</Typography>
+                                <Typography sx={{ color: 'black', fontWeight: 400, fontSize: { xs: '12px', md: '16px' }, textAlign: 'center', fontFamily: typographyKarbono.outfit }}>{reporte?.ubicacion}</Typography>
+                            </Stack>
+
+                            {/* </Grid> */}
+                        </Stack>
+                    </Card>
+
                 </Stack>
 
                 <Stack width={'100%'} paddingBottom={{ xs: '0', md: '50px' }} spacing={5} >
