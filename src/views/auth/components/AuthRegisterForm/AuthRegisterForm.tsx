@@ -12,6 +12,7 @@ import { StorageKeysEnum } from '@/utilities/enums';
 import { LocalStorageProtocol } from '@/protocols/cache/local_cache';
 import { useRouter } from 'next/router';
 import { RolUsersKeysEnum } from '@/utilities/enums/rol_user_keys.enum';
+import { mainRoutes } from '@/routes/routes';
 
 export interface AuthRegisterFormProps { }
 
@@ -332,6 +333,7 @@ const AuthRegisterForm: React.FC<AuthRegisterFormProps> = () => {
 
 								<Button
 									variant='outlined'
+									onClick={() => router.push(`${mainRoutes.home}`)}
 
 									sx={{
 										width: '200px',

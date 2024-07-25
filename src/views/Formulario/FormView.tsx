@@ -21,11 +21,13 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { FormSavedBorradorModal } from './Components/FormSavedBorradorModal';
 import CustomTextField from './Components/CustomTextField';
 import FormSaveRespoModal from './Components/FormSaveResponModal/FormSaveRespModal';
+import { GlobalContext } from '@/context/GlobalContext';
 
 export interface FormViewProps { }
 
 
 const FormView: React.FC<FormViewProps> = () => {
+
 
 	// const localStorageProtocol = new LocalStorageProtocol();
 
@@ -59,9 +61,8 @@ const FormView: React.FC<FormViewProps> = () => {
 		handleOpenModalFormSaved, getMaxNumPresc, validateTipoPrecripcion, errorTipoPrescripcion,
 		handleOpenModalFormCancel, setSelectTab, selectTab, maxNumOrder, saveBorrador,
 		handleTipoPrescripcion, tipoPrescripcion,
-		tabsErrors, estado, messageAPI,setMessageAPI
+		tabsErrors, estado, messageAPI, setMessageAPI
 	} = useContext(FormulariosContext)
-
 
 
 	useEffect(() => {
@@ -106,7 +107,7 @@ const FormView: React.FC<FormViewProps> = () => {
 			marginBottom={{ xs: 25, sm: 20 }} >
 
 			<FormSavedModal />
-			<FormSaveRespoModal/>
+			<FormSaveRespoModal />
 			<FormCancelModal />
 			<FormSavedBorradorModal />
 			<Typography variant='h5' padding={1} style={{ fontWeight: 700, }}>

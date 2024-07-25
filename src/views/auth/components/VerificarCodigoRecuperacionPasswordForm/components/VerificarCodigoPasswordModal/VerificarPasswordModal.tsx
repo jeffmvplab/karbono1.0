@@ -8,19 +8,28 @@ import { colorsKarbono } from '@/themes/colors';
 import { CustomButton } from '@/components/CustomButton';
 import { useRouter } from 'next/router';
 import { mainRoutes } from '@/routes/routes';
+import { CookiesKeysEnum } from '@/utilities/enums';
+import Cookies from "js-cookie";
 
 export interface VerificarPasswordModalProps { }
 
 const VerificarPasswordModal: React.FC<VerificarPasswordModalProps> = () => {
 
 
-	const { 
+	const {
 		openModalVerifyPass,
-		handleCloseModalVerifyPass, 
+		handleCloseModalVerifyPass,
 		errorAuth,
 	} = useContext(GlobalContext)
 	// const validacionOK:boolean = true;
-
+	const getTypeUser = () => {
+		const rol = Cookies.get(CookiesKeysEnum.userRol) || null
+		if (rol === 'Prescriptor') {
+			return 'clientes'
+		} else {
+			return 'usuarios'
+		}
+	}
 	const router = useRouter();
 	return (
 
@@ -98,7 +107,7 @@ const VerificarPasswordModal: React.FC<VerificarPasswordModalProps> = () => {
 
 									() => {
 										(errorAuth === '')
-											? router.push(mainRoutes.login)
+											? router.push(`${mainRoutes.login}?user=${getTypeUser()}`)
 											: router.push(mainRoutes.recuperar_password),
 											handleCloseModalVerifyPass()
 									}
