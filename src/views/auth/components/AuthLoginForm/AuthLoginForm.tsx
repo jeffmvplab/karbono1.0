@@ -21,7 +21,7 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 	const {
 		login, loadingAuth,
 		email, errorEmail, handleEmail, userInv,
-		password, errorPassword, handlePassword,
+		password, errorPassword, handlePassword, getMeUser,
 		entidadDeSalud, handleEntidadDeSalud, centralDeMezclas, handleCentralDeMezclas
 	} = React.useContext(GlobalContext)
 
@@ -30,16 +30,18 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 
 	const [seePassword, setSeePassword] = useState(false);
 
-	const [queryRol, setQueryRol] = useState();
+	// const [queryRol, setQueryRol] = useState();
 	const router = useRouter();
 	const { user } = router.query;
 	const loguinRol = user;
+
+
 
 	// useEffect(() => {
 	// 	setQueryRol(loguinRol!)
 	// }, [router.pathname])
 
-	// console.log('Query Rol:', loguinRol);
+
 
 	return (
 
@@ -201,6 +203,7 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 				<Grid container padding='10px' justifyContent='center'>
 					<Grid item xs={12} display='flex' justifyContent='center' paddingY={2}>
 						<Button
+							onClick={() => router.push(`${mainRoutes.home}`)}
 							variant='outlined'
 
 							sx={{

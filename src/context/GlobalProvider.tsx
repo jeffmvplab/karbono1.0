@@ -552,17 +552,17 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 		// console.log('Verificar Pass...')
 		const resp = await useruseCase.verificarCodigoRecuperacion(email, codigoVerificacion, password);
 		// Procede con el registro
-		// console.log('Verificar Pass:', resp)
+		console.log('Verificar Pass:', resp)
 
 		if (resp.statusCode === 201) {
-			Cookies.set(CookiesKeysEnum.token, resp.body.token, { sameSite: 'Strict' })
-			Cookies.set(CookiesKeysEnum.userName, resp.body.userName, {sameSite: 'Strict' })
-
-		}
+			// Cookies.set(CookiesKeysEnum.token, resp.body.token, { sameSite: 'Strict' })
+			// Cookies.set(CookiesKeysEnum.userName, resp.body.userName, {sameSite: 'Strict' })
+			Cookies.set(CookiesKeysEnum.userRol, resp.body.rol[0], {sameSite: 'Strict' })
+		// }
 
 		setLoadingAuth(false);
 
-		if (resp.statusCode === undefined) {
+		// if (resp.statusCode === undefined) {
 			setErrorAuth('');
 		setAuthOk(true);
 		handleOpenModalVerifyPass();
@@ -570,15 +570,15 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
 
 		} else if (resp.statusCode === 400) {
 			// console.log('Error Verificacion:', resp.message)
-			setErrorAuth(resp.message);
+			setErrorAuth(resp.body.message);
 		setAuthOk(false)
 		} else if (resp.statusCode === 401) {
 			// console.log('Error Verificacion:', resp.message)
-			setErrorAuth(resp.message);
+			setErrorAuth(resp.body.message);
 		setAuthOk(false)
 		} else if (resp.statusCode === 404) {
 			// console.log('Error Verificacion:', resp.message)
-			setErrorAuth(resp.message);
+			setErrorAuth(resp.body.message);
 		setAuthOk(false)
 		} else if (resp.statusCode === 408) {
 

@@ -298,7 +298,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	////////////////////INFORMACIÓN DEL PACIENTE////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////
-	const [ips, setIps] = React.useState('');
+	const [ips, setIps] = React.useState(getMeUser().entidad_de_salud ? getMeUser().entidad_de_salud[0][0] :null);
 	const [errorIps, setErrorIps] = React.useState(false);
 	const [messageErrorIps, setMessageErrorIps] = React.useState('');
 
@@ -1093,11 +1093,11 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 				estado: 'PENDIENTE FINALIZAR',
 				observaciones: [],
 			}
-			 console.log('Copiando Prescripcion...:', copyPrescription)
+			console.log('Copiando Prescripcion...:', copyPrescription)
 
 			const resp = await prescriptionsUseCase.savePrescripcions(copyPrescription);
 
-			 console.log('Copiado:', resp)
+			console.log('Copiado:', resp)
 
 			if (resp.statusCode === 201) {
 				setSaveOk(true);

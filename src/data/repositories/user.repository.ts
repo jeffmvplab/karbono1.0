@@ -13,7 +13,7 @@ export interface IUserRepository {
         nombre_apellidos: string,
         primer_nombre: string,
         primer_apellido: string,
-        registro_medico:string|null|undefined,
+        registro_medico: string | null | undefined,
         entidad_de_salud: string[],
         central_de_mezclas: string,
         phone: string,
@@ -25,7 +25,7 @@ export interface IUserRepository {
         roles: string,
         // central_de_mezclas: string,
         email: string,
-        nombre_apellidos:string
+        nombre_apellidos: string
     ): Promise<any>;
 
     aceptarInvitacion(token: string): Promise<any>;
@@ -36,7 +36,7 @@ export interface IUserRepository {
         nombre_apellidos: string,
         telefono: string,
         password: string,
-        registro_medico: string|null|undefined,
+        registro_medico: string | null | undefined,
         primer_nombre: string,
         primer_apellido: string,
         entidad_de_salud: [string],
@@ -149,17 +149,17 @@ export class UserRepository implements IUserRepository {
         roles: string,
         // central_de_mezclas: string,
         email: string,
-        nombre_apellidos:string
+        nombre_apellidos: string
     ): Promise<any> {
 
         const axiosRequest = await this.axiosHttpClient.request({
             url: ApiUrlsEnum.invitarUsuarios,
             method: 'post',
             body: {
-                "nombre_apellidos":nombre_apellidos,
+                "nombre_apellidos": nombre_apellidos,
                 "email": email,
                 // "central_de_mezclas": central_de_mezclas,
-                "roles":[roles],
+                "roles": [roles],
             },
         });
 
@@ -202,8 +202,8 @@ export class UserRepository implements IUserRepository {
                 "password": password
             },
         });
-
-        return axiosRequest.body;
+        console.log('Verificar Pass:', axiosRequest)
+        return axiosRequest;
     }
 
 
@@ -213,7 +213,7 @@ export class UserRepository implements IUserRepository {
         nombre_apellidos: string,
         telefono: string,
         password: string,
-        registro_medico: string|null|undefined,
+        registro_medico: string | null | undefined,
         primer_nombre: string,
         primer_apellido: string,
         entidad_de_salud: [string],
@@ -268,7 +268,7 @@ export class UserRepository implements IUserRepository {
             url: ApiUrlsEnum.getMe,
             method: 'patch',
             body: {
-                "nombre_apellidos":user.nombre_apellidos,
+                "nombre_apellidos": user.nombre_apellidos,
                 "email": user.email,
                 "telefono": user.phone,
                 // "password": user.password,
