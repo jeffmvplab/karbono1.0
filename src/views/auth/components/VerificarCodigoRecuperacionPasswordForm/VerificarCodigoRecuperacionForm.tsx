@@ -129,12 +129,12 @@ const VerificarCodigoRecuperacionForm: React.FC<VerificarCodigoRecuperacionFormP
 
 						<CustomButton
 							fontSize={'14px'}
-							onClick={() => { verificarCodigoRecoveryPassword() }}
-							disabled={(errorEmail || errorPassword)}
-							textColorHover={(!errorEmail || !errorPassword) ? 'white' : null}
+							onClick={() => {(!(errorEmail || errorPassword || errorPasswordConfirm )&&codigoVerificacion)&& verificarCodigoRecoveryPassword() }}
+							disabled={(errorEmail || errorPassword || errorPasswordConfirm )}
+							textColorHover={(!errorEmail || !errorPassword || !errorPasswordConfirm) ? 'white' : null}
 							textColor={'white'}
-							colorHover={(!errorEmail || !errorPassword) ? colorsKarbono.primary : ''}
-							colorActive={(!errorEmail || !errorPassword) ? colorsKarbono.primary : ''}
+							colorHover={(!errorEmail || !errorPassword || !errorPasswordConfirm) ? colorsKarbono.primary : ''}
+							colorActive={(!errorEmail || !errorPassword || !errorPasswordConfirm) ? colorsKarbono.primary : ''}
 							sx={{
 								width: '250px',
 								height: '50px',
