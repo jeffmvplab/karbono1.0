@@ -171,7 +171,7 @@ const Macronutrientes = () => {
                                 onChange={handleDextrosa}
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
-                                // disabled={true}
+                                disabled={tipoPrescripcion === 'Por requerimientos'}
                                 value={convertComaAPunto(dextrosa)}
                                 id='dextrosa'
                                 label={'Dextrosa*'}
@@ -291,8 +291,8 @@ const Macronutrientes = () => {
                                     value={convertComaAPunto(requerimientoLipidos)}
                                     id='requerimiento-lipidos'
                                     label={(tipoPrescripcion === 'Por requerimientos')
-                                    ? 'Requerimiento Lípidos*'
-                                    : 'Volumen Lípidos*'}
+                                        ? 'Requerimiento Lípidos*'
+                                        : 'Volumen Lípidos*'}
                                     endAdornament={
                                         <Typography
                                             textTransform={'lowercase'}>

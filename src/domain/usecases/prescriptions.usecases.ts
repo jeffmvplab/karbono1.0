@@ -13,7 +13,7 @@ export interface IPrescriptionsUseCase {
     prescripcionsById(id: string): Promise<any>;
     getPrescripcionsByDate(date: string): Promise<any>;
     prescripcionsByIps(ips: string): Promise<any>;
-    getPrescripcionsProd(ips: string|undefined, fecha: any|null|undefined): Promise<any>;
+    getPrescripcionsProd(ips: string | undefined, fecha: any | null | undefined): Promise<any>;
     getPlainFile(prescription: string[]): Promise<any>;
     prescripcionsAll(limit: number): Promise<any>;
     updatePrescripcions(prescriptions: IPrescriptions, number: string): Promise<any>;
@@ -23,7 +23,8 @@ export interface IPrescriptionsUseCase {
     getPrescripcionsByLab(): Promise<any>;
     setQuimicos(prescriptionId: string, preparador: string, controlador_de_calidad: string): Promise<any>;
 
-    getLogs(number: string): Promise<any>
+    getLogs(number: string): Promise<any>;
+    sendPDF(file: File, no_orden: string, nombre_paciente: string): Promise<any>;
 }
 
 
@@ -70,13 +71,13 @@ export class PrescriptionsUseCases implements IPrescriptionsUseCase {
         return this.prescriptionsRepository.getPrescripcionsByIps(ips);
     }
 
-    getPlainFile(prescriptionsId: string[]): Promise<any>{
+    getPlainFile(prescriptionsId: string[]): Promise<any> {
         return this.prescriptionsRepository.getPlainFile(prescriptionsId);
     }
 
 
-    getPrescripcionsProd(ips: string|undefined, fecha: any|null|undefined): Promise<any>{
-        return this.prescriptionsRepository.getPrescripcionsProd(ips,fecha);
+    getPrescripcionsProd(ips: string | undefined, fecha: any | null | undefined): Promise<any> {
+        return this.prescriptionsRepository.getPrescripcionsProd(ips, fecha);
     }
 
     createComments(comment: IComment): Promise<any> {
@@ -94,6 +95,10 @@ export class PrescriptionsUseCases implements IPrescriptionsUseCase {
     getLogs(number: string): Promise<any> {
         return this.prescriptionsRepository.getLogs(number);
 
+    }
+
+    sendPDF(file: File, no_orden: string, nombre_paciente: string): Promise<any> {
+        return this.prescriptionsRepository.sendPDF(file, no_orden, nombre_paciente);
     }
 }
 

@@ -5,7 +5,7 @@ export enum ApiUrlsEnum {
     forgotPassword = 'auth/forgotPassword',
     verifyCodeAndUpdatePassword = 'auth/verifyCodeAndUpdatePassword',
     savePrescriptions = 'prescriptions',
-    saveComments= 'prescriptions/comment',
+    saveComments = 'prescriptions/comment',
     deletePrescriptions = 'prescriptions',
     getAllPrescriptions = 'prescriptions/all',
     getPrescriptionsByNumber = 'prescriptions/no_orden',
@@ -18,6 +18,7 @@ export enum ApiUrlsEnum {
     getPrescriptionsByLab = 'prescriptions/by_lab',
     setQuimicos = 'prescriptions/set_quimicos',
     getMaxNumPresc = 'prescriptions/me_max',
+    sendPDF = 'prescriptions/upload_and_send',
 
     getUserByRol = 'auth/byRol',
 
@@ -26,10 +27,10 @@ export enum ApiUrlsEnum {
 
     getMeGroup = 'auth/my-group',
     updateMeGroup = 'auth/my-group',
-    
+
     invitarUsuarios = 'auth/inviteUser',
     aceptarInvitacion = 'auth/acceptInvitation',
     registerByInvitation = 'auth/registerByInvitation',
 
-    getLogs='prescriptions-logs'
+    getLogs = 'prescriptions-logs'
 }
