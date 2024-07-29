@@ -5,6 +5,7 @@ import CustomTextField from './CustomTextField'
 import { FormulariosContext } from '../context/FormulariosContext';
 import { LightTooltip } from '../style/styleToolTips';
 import { convertComaAPunto } from '@/views/ReportePrescripcion/data/comaTopoint';
+import { getDextrosa } from '@/views/ReportePrescripcion/data/functionsParams';
 
 const aminoAdultos = [
     { value: 'Aminoven 15% SE', label: 'Aminoven 15% SE' },
@@ -46,12 +47,25 @@ const Macronutrientes = () => {
         requerimientoLipidos, handleRequerimientoLipidos,
         omegaven, handleOmegaven,
         dipeptiven, handleDipeptiven,
-        getPrescriptions
+        getPrescriptions, pesoKg, tiempoDeInfucion
     } = useContext(FormulariosContext)
 
     useEffect(() => {
         setStateAcordion2(matches);
     }, [matches])
+
+
+    const getDextrosaByFlujo = (flujo: string) => {
+        console.log('DDDD:', parseFloat(flujo), parseFloat(pesoKg))
+
+        const result = (parseFloat(flujo) * ((tiempoDeInfucion * 60) / 1000)).toFixed(2).toString()
+
+        if (flujo !== '') {
+            return result;
+        } else {
+            return 0.00
+        }
+    }
 
     return (
 
@@ -148,7 +162,11 @@ const Macronutrientes = () => {
                                     onChange={handleFlujoMetabolico}
                                     onClick={getPrescriptions}
                                     onKeyPress={getPrescriptions}
-                                    value={convertComaAPunto(flujoMetabolico)}
+                                    disabled={tipoPrescripcion !== 'Por requerimientos'}
+                                    value={
+                                        tipoPrescripcion !== 'Por requerimientos'
+                                            ? '-'
+                                            : convertComaAPunto(flujoMetabolico)}
                                     id='flujo-metabolico'
                                     label={'Flujo metabólico*'}
                                     endAdornament={
@@ -172,7 +190,11 @@ const Macronutrientes = () => {
                                 onClick={getPrescriptions}
                                 onKeyPress={getPrescriptions}
                                 disabled={tipoPrescripcion === 'Por requerimientos'}
-                                value={convertComaAPunto(dextrosa)}
+                                value={
+                                    tipoPrescripcion === 'Por requerimientos'
+                                        ? getDextrosaByFlujo(flujoMetabolico)
+                                        : convertComaAPunto(dextrosa)
+                                }
                                 id='dextrosa'
                                 label={'Dextrosa*'}
                                 endAdornament={
