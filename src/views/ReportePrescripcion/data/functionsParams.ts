@@ -257,11 +257,12 @@ export const getDextrosa = (prescription: IPrescriptions) => {
         // params.requerimiento = dextrosa
         params.requerimiento = (flujoMetabolico * ((tiempoInfusion * 60) / 1000))
         params.volumen = flujoMetabolico * peso * tiempoInfusion * 0.12;
+
         params.conPurga = params.volumen * correccionPurga(prescription);
     } else {
-        params.requerimiento = dextrosa / (peso * tiempoInfusion * 0.12);
-        // params.volumen = dextrosa
-        params.volumen = ((dextrosa*100*peso)/50)
+        params.requerimiento = (dextrosa / (peso * tiempoInfusion * 0.12) * ((tiempoInfusion * 60) / 1000))
+        params.volumen = dextrosa
+        // params.volumen = ((dextrosa*100*peso)/50)
         params.conPurga = params.volumen * correccionPurga(prescription);
     }
     // console.log('Flujo Metabolico Vol:', params.volumen,'Flujo Metabolico Req:',params.requerimiento)
