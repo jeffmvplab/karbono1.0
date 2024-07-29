@@ -113,9 +113,10 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                             {(loadingSave)
                                 ? <Typography>
                                     {
-                                        (reporte?.tipo_prescripcion === 'Por requerimientos')
-                                            ? getDextrosa(reporte!).requerimiento.toFixed(2)
-                                            : getDextrosa(reporte!).requerimiento.toFixed(2)
+                                        // (reporte?.tipo_prescripcion === 'Por requerimientos')
+                                        //     ? getDextrosa(reporte!).requerimiento.toFixed(2)
+                                        //     :
+                                            getDextrosa(reporte!).requerimiento.toFixed(2)
                                     } (g/kg/dia)
                                     {/* {getDextrosa(reporte!).requerimiento.toFixed(2)} */}
                                 </Typography>
@@ -209,10 +210,10 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                             {(loadingSave)
                                 ? <Typography>
                                     {
-                                        (reporte?.tipo_prescripcion === 'Por requerimientos')
-                                            ? getDextrosa(reporte!).volumen.toFixed(2)
-                                            : getDextrosa(reporte!).volumen.toFixed(2)
-
+                                        // (reporte?.tipo_prescripcion === 'Por requerimientos')
+                                        //     ? getDextrosa(reporte!).volumen.toFixed(2)
+                                        //     : 
+                                        getDextrosa(reporte!).volumen.toFixed(2)
                                     }
                                 </Typography>
                                 : <Skeleton animation="wave" height={30} width="40%" />}
