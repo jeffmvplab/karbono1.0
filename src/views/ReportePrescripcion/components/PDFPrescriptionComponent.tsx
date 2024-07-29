@@ -23,9 +23,11 @@ const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ rep
 
     return (
         <>
-            {<Stack id='reporte_view' direction={'column'}
-                maxWidth={'1500px'}
-                minWidth={{ xs: print ? '1000px' : '100%', md: '100%' }}
+            {<Stack
+              
+                id='reporte_view' direction={'column'}
+                // maxWidth={'1500px'}
+                // minWidth={{ xs: print ? '1000px' : '100%', md: '100%' }}
                 overflow={'scroll'}
             >
 

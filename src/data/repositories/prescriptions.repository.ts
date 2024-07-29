@@ -23,7 +23,8 @@ export interface IPrescriptionsRepository {
     createComments(comment: IComment): Promise<any>;
     getPrescripcionsByLab(): Promise<any>;
     setQuimicos(prescriptionId: string, preparador: string, controlador_de_calidad: string): Promise<any>;
-    getLogs(number: string): Promise<any>
+    getLogs(number: string): Promise<any>;
+    sendPDF(file: File, no_orden: string, nombre_paciente: string): Promise<any>;
 }
 
 export class PrescriptionsRepository implements IPrescriptionsRepository {
@@ -205,7 +206,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
             url: ApiUrlsEnum.getPlainFile,
             method: 'post',
             body: {
-                "prescriptionsId":prescriptionsId
+                "prescriptionsId": prescriptionsId
             },
         });
         return axiosRequest;
@@ -239,6 +240,24 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
         const axiosRequest = await this.axiosHttpClient.request({
             url: `${ApiUrlsEnum.getLogs}/${number}`,
             method: 'get',
+        });
+        return axiosRequest;
+    }
+    /////////////////////////////////SET PDF////////////////////////////////////////////////
+    async sendPDF(file: File, no_orden: string, nombre_paciente: string): Promise<any> {
+
+        const formData = new FormData();
+
+        // console.log('DATOS:',no_orden,nombre_paciente)
+
+        formData.append("no_orden", no_orden);
+        formData.append("nombre_paciente", nombre_paciente);
+        formData.append("file", file);
+
+        const axiosRequest = await this.axiosHttpClient.multipartFile({
+            url: ApiUrlsEnum.sendPDF,
+            method: 'post',
+            formData: formData,
         });
         return axiosRequest;
     }

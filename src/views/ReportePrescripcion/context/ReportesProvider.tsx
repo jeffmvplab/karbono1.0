@@ -53,9 +53,7 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 	const getPrescriptionsByNumber = async () => {
 
 		const storagePredsc = localStorageProtocol.get(StorageKeysEnum.prescripcionOrden)
-
 		// console.log('Preds:', storagePredsc);
-
 		setLoadingSave(false);
 		// console.log('Loading...')
 		// const resp = await prescriptionsUseCase.prescripcionsByNumber(storagePredsc.number);

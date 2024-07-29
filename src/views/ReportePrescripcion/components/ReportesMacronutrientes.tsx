@@ -114,7 +114,7 @@ const ReportesMacronutrientes: React.FC<ReportesMacronutrientesProps> = ({ repor
                                 ? <Typography>
                                     {
                                         (reporte?.tipo_prescripcion !== 'Por requerimientos')
-                                            ? '-'
+                                            ? getDextrosa(reporte!).volumen.toFixed(2)
                                             : getDextrosa(reporte!).requerimiento.toFixed(2)
                                     } (g/kg/dia)
                                     {/* {getDextrosa(reporte!).requerimiento.toFixed(2)} */}

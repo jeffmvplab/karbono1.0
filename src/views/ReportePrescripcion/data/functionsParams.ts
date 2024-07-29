@@ -18,8 +18,8 @@ export const correccionPurga = (prescription: IPrescriptions) => {
 
     const volTotalNPT: number = prescription?.volumen;
     const purga: number = prescription?.overfill;
-    const correccion: number = ((volTotalNPT + purga) / volTotalNPT)?((volTotalNPT + purga) / volTotalNPT):1
-//   console.log('Overfill:', correccion)
+    const correccion: number = ((volTotalNPT + purga) / volTotalNPT) ? ((volTotalNPT + purga) / volTotalNPT) : 1
+    //   console.log('Overfill:', correccion)
     return correccion;
 }
 
@@ -254,12 +254,14 @@ export const getDextrosa = (prescription: IPrescriptions) => {
     const tiempoInfusion: number = prescription?.tiempo_infusion!;
 
     if (tp === tipoPrescripcion) {
-        params.requerimiento = dextrosa
+        // params.requerimiento = dextrosa
+        params.requerimiento = (flujoMetabolico * ((tiempoInfusion * 60) / 1000))
         params.volumen = flujoMetabolico * peso * tiempoInfusion * 0.12;
         params.conPurga = params.volumen * correccionPurga(prescription);
     } else {
         params.requerimiento = dextrosa / (peso * tiempoInfusion * 0.12);
-        params.volumen = dextrosa
+        // params.volumen = dextrosa
+        params.volumen = ((dextrosa*100*peso)/50)
         params.conPurga = params.volumen * correccionPurga(prescription);
     }
     // console.log('Flujo Metabolico Vol:', params.volumen,'Flujo Metabolico Req:',params.requerimiento)
