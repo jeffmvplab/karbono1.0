@@ -1,4 +1,4 @@
-import {CookiesKeysEnum, urlBackend } from '@/utilities/enums';
+import { CookiesKeysEnum, urlBackend } from '@/utilities/enums';
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 import { HttpClient, HttpRequest, HttpResponse, UploadFileParams } from './http_utilities'
 import Cookies from 'js-cookie'
@@ -37,7 +37,7 @@ export class AxiosHttpClient implements HttpClient {
     }
     // console.log('STATUSS:',axiosResponse)
     if (axiosResponse === undefined) {
-      
+
       return {
         statusCode: 408,
         body: []
@@ -82,5 +82,44 @@ export class AxiosHttpClient implements HttpClient {
       body: axiosResponse.data,
     }
   }
+
+
+
+  async multipartFile(params: UploadFileParams): Promise<HttpResponse> {
+
+    let axiosResponse: AxiosResponse
+
+    try {
+      axiosResponse = await this.axiosInstance.request({
+        baseURL: urlBackend,
+
+        // baseURL:urlBackend,
+        url: params.url,
+        method: params.method,
+        data: params.formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${Cookies.get(CookiesKeysEnum.token)}`,
+        },
+      })
+    } catch (error: any) {
+      axiosResponse = error.response
+    }
+
+    if (axiosResponse === undefined) {
+
+      return {
+        statusCode: 408,
+        body: []
+      }
+    } else {
+      return {
+        statusCode: axiosResponse.status,
+        body: axiosResponse.data
+      }
+    }
+
+  }
+
 
 }
