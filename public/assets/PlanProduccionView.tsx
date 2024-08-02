@@ -1,12 +1,12 @@
 import { Box, Divider, Grid, Stack, TextField, Typography, styled } from "@mui/material";
 import Image from 'next/image'
-import { ContainerText } from "./components/ActionsDrawer";
+import { ContainerText } from "../../src/views/PlanProduccionView/components/ActionsDrawer";
 import { colorsKarbono } from "@/themes/colors";
-import BarEtiqueta from "../ReportePrescripcion/components/BarEtiqueta/BaEtiqueta";
+import BarEtiqueta from "../../src/views/ReportePrescripcion/components/BarEtiqueta/BaEtiqueta";
 import { useContext, useEffect, useState } from "react";
-import { ReportesContext } from "../ReportePrescripcion/context/ReportesContext";
+import { ReportesContext } from "../../src/views/ReportePrescripcion/context/ReportesContext";
 import { convertirFecha, convertirFechaLote, formatOnlyTime } from "@/utilities/get_String_from_Date_Esp";
-import { getAgua, getSodio, getPotacio, getMagnesio, getVitLiposSolubles, getVitHidroSolubles, getVit_C, getCalcio, peso_teorico, tipo_bolsa, getAminoacidos, getDipeptiven, getFosforo, getLipidos, getOmegaven, getSoluv_Vit, getOligoelementos, getDextrosa } from "../ReportePrescripcion/data/functionsParams";
+import { getAgua, getSodio, getPotacio, getMagnesio, getVitLiposSolubles, getVitHidroSolubles, getVit_C, getCalcio, peso_teorico, tipo_bolsa, getAminoacidos, getDipeptiven, getFosforo, getLipidos, getOmegaven, getSoluv_Vit, getOligoelementos, getDextrosa } from "../../src/views/ReportePrescripcion/data/functionsParams";
 
 
 export interface PlanProduccionViewProps { }
@@ -58,7 +58,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 				>
 					{//////////////Fecha-Version-etc///////////////////////////////////////////////
 					}
-					<Stack paddingTop={3} direction={'row'} justifyContent={'end'} spacing={3}>
+					<Stack paddingTop={1} direction={'row'} justifyContent={'end'} spacing={3}>
 						<Typography width={'25%'} fontSize='18px' color={colorsKarbono.primary} fontWeight={700} textAlign={"center"} paddingY={2}>
 							PLAN DE PRODUCCIÓN DE NUTRICIÓN PARENTERAL
 						</Typography>
@@ -77,11 +77,11 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 									direction={'column'}
 									justifyContent={'center'}>
 									<Image
-										src='/assets/1.png'
+										src='/assets/Logo Fomenthum.png'
 										width={240}
-										height={50}
+										height={100}
 										alt=''
-										style={{ marginTop: '5px', alignItems: 'center', }}
+										style={{ marginTop: '0px', alignItems: 'center', }}
 									/>
 								</Stack>
 							</Grid>
@@ -720,7 +720,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 						// paddingY={2}
 						width={'100%'}
 						height={'20px'}
-						style={{ transform: 'rotate(-90deg)', position: 'relative', right: '-605px', top: '-580px' }}
+						style={{ transform: 'rotate(-90deg)', position: 'relative', right: '-605px', top: '-650px' }}
 					>
 						Conservar en cadena de frio y protegidos de la luz
 					</Typography>

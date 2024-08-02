@@ -1,1 +1,1 @@
-export { default as EtiquetaView } from './PlanProduccionView';
+export { default as EtiquetaView } from '../../../public/assets/PlanProduccionView';
