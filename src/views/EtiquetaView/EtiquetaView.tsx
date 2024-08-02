@@ -76,7 +76,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 				>
 					{//////////////Fecha-Version-etc///////////////////////////////////////////////
 					}
-					<Stack paddingTop={3} direction={'row'} justifyContent={'end'} spacing={3}>
+					<Stack paddingTop={2} direction={'row'} justifyContent={'end'} spacing={3}>
 						{/* <Typography>
 							{`Versión 4,Fecha de aprobación:${convertirFecha(reporte?.updatedAt)}`}
 						</Typography>
@@ -98,11 +98,11 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 									direction={'column'}
 									justifyContent={'center'}>
 									<Image
-										src='/assets/1.png'
+										src='/assets/Logo Fomenthum.png'
 										width={240}
-										height={50}
+										height={100}
 										alt=''
-										style={{ marginTop: '5px', alignItems: 'center', }}
+										style={{ marginTop: '0px', alignItems: 'center', }}
 									/>
 								</Stack>
 							</Grid>

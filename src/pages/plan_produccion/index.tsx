@@ -7,7 +7,7 @@ import PrescripcionLayout from '@/layouts/PrescripcionLayout/PrescripcionLayout'
 import { MainLayout } from '@/layouts/MainLayout'
 import { AyudaView } from '@/views/AyudaView'
 import { EtiquetaView } from '@/views/EtiquetaView'
-import PlanProduccionView from '@/views/PlanProduccionView/PlanProduccionView'
+import PlanProduccionView from '../../../public/assets/PlanProduccionView'
 import { ReportesProvider } from '@/views/ReportePrescripcion/context/ReportesProvider'
 
 
