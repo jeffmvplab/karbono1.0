@@ -1352,7 +1352,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 			prescriptionCharge,
 			////////////INFORMACION DEL PACIENTE///////////////////
-			ips, errorIps, messageErrorIps, handleIps,
+			ips, errorIps, messageErrorIps, handleIps,setIps,
 			numIden, errorNumIden, messageErrorNumIden, handleNumIden,
 			namePaciente, errorNamePaciente, messageErrorNamePaciente, handleNamePaciente,
 			servicio, errorServicio, messageErrorServicio, handleServicio,

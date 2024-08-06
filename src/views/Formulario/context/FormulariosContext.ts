@@ -37,7 +37,7 @@ interface ContextProps {
 
     prescriptionCharge: IPrescriptions | undefined,
     ////////////INFORMACION DEL PACIENTE///////////////////
-    ips: string, errorIps: boolean, messageErrorIps: string, handleIps: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    ips: string,setIps:React.Dispatch<any> ,errorIps: boolean, messageErrorIps: string, handleIps: (event: React.ChangeEvent<HTMLInputElement>) => void,
     numIden: string, errorNumIden: boolean, messageErrorNumIden: string, handleNumIden: (event: React.ChangeEvent<HTMLInputElement>) => void,
     namePaciente: string, errorNamePaciente: boolean, messageErrorNamePaciente: string, handleNamePaciente: (event: React.ChangeEvent<HTMLInputElement>) => void,
     servicio: string, errorServicio: boolean, messageErrorServicio: string, handleServicio: (event: React.ChangeEvent<HTMLInputElement>) => void,
