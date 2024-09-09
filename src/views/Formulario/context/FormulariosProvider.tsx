@@ -905,7 +905,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		volumen: parseFloat(volumen) || 0,
 		purga: parseFloat(purga) || 0,
 		tiempo_infusion: tiempoDeInfucion || 0,
-		overfill: overfill || 0,
+		// overfill: overfill || 0,
+		overfill: overfill === 0 ? obtenerOverfillPorLabel(ips)! : overfill,
 		filtro: (filtro === 'Si') ? true : false,
 		equipo_fotosensible: (eqFotosencible === 'Si') ? true : false,
 		tipo_paciente: tipoPaciente || '',
@@ -1352,7 +1353,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 			prescriptionCharge,
 			////////////INFORMACION DEL PACIENTE///////////////////
-			ips, errorIps, messageErrorIps, handleIps,
+			ips, errorIps, messageErrorIps, handleIps,setIps,
 			numIden, errorNumIden, messageErrorNumIden, handleNumIden,
 			namePaciente, errorNamePaciente, messageErrorNamePaciente, handleNamePaciente,
 			servicio, errorServicio, messageErrorServicio, handleServicio,

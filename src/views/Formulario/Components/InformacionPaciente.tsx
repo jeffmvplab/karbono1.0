@@ -93,7 +93,7 @@ const servicios = [
 const InformacionPaciente = () => {
 
     const {
-        ips, handleIps,
+        ips, handleIps, setIps,
         numIden, handleNumIden, errorNumIden, messageErrorNumIden,
         namePaciente, handleNamePaciente, errorNamePaciente, messageErrorNamePaciente,
         servicio, handleServicio, errorServicio, messageErrorServicio,
@@ -114,15 +114,18 @@ const InformacionPaciente = () => {
         overfill, handleOverfill, errorOverfill, setOverfill,
     } = useContext(FormulariosContext)
 
-    // const { getMeUser } = React.useContext(GlobalContext)
+    const { getMeUser } = React.useContext(GlobalContext)
 
     const [loding, setLoading] = useState(false)
 
     useEffect(() => {
         setLoading(true)
+        setIps(getMeUser().entidad_de_salud[0] ? getMeUser().entidad_de_salud[0] : ips)
+        // console.log('IPS:', getMeUser().entidad_de_salud[0]);
     }, [])
 
     /////////////////////////////////////////////////////////////////////
+
 
     return (
         <>
@@ -140,6 +143,7 @@ const InformacionPaciente = () => {
                             <CustomTextField
                                 select={!ips}
                                 disabled={!!ips}
+                                // select
                                 onChange={handleIps}
                                 id='ips'
                                 label='Ips'
@@ -397,7 +401,6 @@ const InformacionPaciente = () => {
                                         <Typography style={{ marginLeft: '15px', color: '#C4C4C4' }}>
                                             Overfill*
                                         </Typography>
-
                                         <Slider
                                             value={overfill === 0 ? obtenerOverfillPorLabel(ips)! : overfill}
                                             onChange={handleOverfill}
