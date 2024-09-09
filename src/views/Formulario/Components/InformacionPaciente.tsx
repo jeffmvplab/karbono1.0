@@ -401,7 +401,6 @@ const InformacionPaciente = () => {
                                         <Typography style={{ marginLeft: '15px', color: '#C4C4C4' }}>
                                             Overfill*
                                         </Typography>
-
                                         <Slider
                                             value={overfill === 0 ? obtenerOverfillPorLabel(ips)! : overfill}
                                             onChange={handleOverfill}
