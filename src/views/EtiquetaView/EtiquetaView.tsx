@@ -263,25 +263,25 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 											</Typography>
 										</Stack>
 
-										<ContainerText isUpper title="OMEGAVEN 10%" value={`${getOmegaven(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.lipidos!}`} value={`${getLipidos(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper title="GLUTAMINA DIPEPTIDO 20%" value={`${getDipeptiven(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.aminoacidos!}`} value={`${getAminoacidos(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper title="DEXTROSA 50%" value={`${getDextrosa(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper title="AGUA ESTERIL" value={`${getAgua(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.fosfato!}`} value={`${getFosforo(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.elementos_traza!}`} value={`${getOligoelementos(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper title="CLORURO DE SODIO 2 MEQ/ML" value={`${getSodio(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper title="CLORURO DE POTACIO 2 MEQ/ML" value={`${getPotacio(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.magnesio!}`} value={`${getMagnesio(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper title="SOLUVIT_VITALIPID" value={`${getSoluv_Vit(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper title={(reporte?.tipo_paciente === 'Adulto')
+										{getOmegaven(reporte!).conPurga !== 0 && <ContainerText isUpper title="OMEGAVEN 10%" value={`${getOmegaven(reporte!).conPurga.toFixed(2)}`} />}
+										{getLipidos(reporte!).conPurga !== 0 && <ContainerText isUpper transform="uppercase" title={`${reporte?.lipidos!}`} value={`${getLipidos(reporte!).conPurga.toFixed(2)}`} />}
+										{getDipeptiven(reporte!).conPurga !== 0 && <ContainerText isUpper title="GLUTAMINA DIPEPTIDO 20%" value={`${getDipeptiven(reporte!).conPurga.toFixed(2)}`} />}
+										{getAminoacidos(reporte!).conPurga !== 0 && <ContainerText isUpper transform="uppercase" title={`${reporte?.aminoacidos!}`} value={`${getAminoacidos(reporte!).conPurga.toFixed(2)}`} />}
+										{getDextrosa(reporte!).conPurga !== 0 && <ContainerText isUpper title="DEXTROSA 50%" value={`${getDextrosa(reporte!).conPurga.toFixed(2)}`} />}
+										{getAgua(reporte!).conPurga !== 0 && <ContainerText isUpper title="AGUA ESTERIL" value={`${getAgua(reporte!).conPurga.toFixed(2)}`} />}
+										{getFosforo(reporte!).conPurga !== 0 && <ContainerText isUpper transform="uppercase" title={`${reporte?.fosfato!}`} value={`${getFosforo(reporte!).conPurga.toFixed(2)}`} />}
+										{getOligoelementos(reporte!).conPurga !== 0 && <ContainerText isUpper transform="uppercase" title={`${reporte?.elementos_traza!}`} value={`${getOligoelementos(reporte!).conPurga.toFixed(2)}`} />}
+										{getSodio(reporte!).conPurga !== 0 && <ContainerText isUpper title="CLORURO DE SODIO 2 MEQ/ML" value={`${getSodio(reporte!).conPurga.toFixed(2)}`} />}
+										{getPotacio(reporte!).conPurga !== 0 && <ContainerText isUpper title="CLORURO DE POTACIO 2 MEQ/ML" value={`${getPotacio(reporte!).conPurga.toFixed(2)}`} />}
+										{getMagnesio(reporte!).conPurga !== 0 && <ContainerText isUpper transform="uppercase" title={`${reporte?.magnesio!}`} value={`${getMagnesio(reporte!).conPurga.toFixed(2)}`} />}
+										{getSoluv_Vit(reporte!).conPurga !== 0 && <ContainerText isUpper title="SOLUVIT_VITALIPID" value={`${getSoluv_Vit(reporte!).conPurga.toFixed(2)}`} />}
+										{getVitLiposSolubles(reporte!).conPurga !== 0 && <ContainerText isUpper title={(reporte?.tipo_paciente === 'Adulto')
 											? 'VITALIPID ADULT'
-											: 'VITALIPID INFANT'} value={`${getVitLiposSolubles(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.vit_hidrosolubles!}`} value={`${getVitHidroSolubles(reporte!).conPurga.toFixed(2)}`} />
-										<ContainerText isUpper title="VITAMINA C" value={`${getVit_C(reporte!).conPurga}`} />
-										<ContainerText isUpper title="ACIDO FOLICO" value={`${reporte?.acido_folico}`} />
-										<ContainerText isUpper transform="uppercase" title={`${reporte?.calcio!}`} value={`${getCalcio(reporte!).conPurga.toFixed(2)}`} />
+											: 'VITALIPID INFANT'} value={`${getVitLiposSolubles(reporte!).conPurga.toFixed(2)}`} />}
+										{getVitHidroSolubles(reporte!).conPurga !== 0 && <ContainerText isUpper transform="uppercase" title={`${reporte?.vit_hidrosolubles!}`} value={`${getVitHidroSolubles(reporte!).conPurga.toFixed(2)}`} />}
+										{getVit_C(reporte!).conPurga !== 0 && <ContainerText isUpper title="VITAMINA C" value={`${getVit_C(reporte!).conPurga}`} />}
+										{reporte?.acido_folico !== '0' && <ContainerText isUpper title="ACIDO FOLICO" value={`${reporte?.acido_folico}`} />}
+										{getCalcio(reporte!).conPurga !== 0 && <ContainerText isUpper transform="uppercase" title={`${reporte?.calcio!}`} value={`${getCalcio(reporte!).conPurga.toFixed(2)}`} />}
 
 									</Stack>
 								</Box>
@@ -317,7 +317,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = () => {
 										<ContainerText isUpper title="Relación: Cal No Protéicas/g AA" value={`${getRelacionCalNoProteicasAminoacidos(reporte!).volumen.toFixed(2)}`} />
 										<ContainerText isUpper title="Concentración de CHO`S (%)" value={`${getConcentracionDeCHOS(reporte!).volumen.toFixed(2)}`} />
 										<ContainerText isUpper title="Concentración de Lípidos (%)" value={`${getConcentracionDeLipidos(reporte!).volumen.toFixed(2)}`} />
-										<ContainerText isUpper title="Subtotal" value={`${(getVolTotal(reporte!) - getAgua(reporte!).volumen).toFixed(2)}`} />
+										<ContainerText isUpper title="Subtotal" value={`${(getVolTotal(reporte!) - getAgua(reporte!).conPurga).toFixed(2)}`} />
 										<ContainerText isUpper title="VOLUMEN TOTAL (mL)" value={`${getVolTotal(reporte!).toFixed(2)}`} />
 
 										<Divider sx={{ paddingY: 1 }} />
