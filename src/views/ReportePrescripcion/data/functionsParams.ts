@@ -586,8 +586,9 @@ export const getAgua = (prescription: IPrescriptions) => {
         + getMagnesio(prescription!).volumen + getCalcio(prescription!).volumen
         + getOligoelementos(prescription).volumen + vitaminas
         + getVit_C(prescription!).volumen + parseFloat(prescription?.acido_folico!)
-    );
 
+    );
+ 
     params.conPurga = params.volumen * correccionPurga(prescription);
     // }
 
@@ -995,7 +996,7 @@ export const peso_teorico = (prescription: IPrescriptions) => {
 
 
     const tipo_paciente: string = prescription?.tipo_paciente!;
-    const volAgua: number = getAgua(prescription!).volumen;
+    const volAgua: number = getAgua(prescription!).conPurga;
     const vit_hidrosoluble: string = prescription?.vit_hidrosolubles!;
     const aminoacidos: string = prescription?.aminoacidos
     const lipidos: string = prescription?.lipidos
@@ -1003,18 +1004,18 @@ export const peso_teorico = (prescription: IPrescriptions) => {
     const magnesio: string = prescription?.magnesio
 
     const aminovenSE: number = (aminoacidos === 'Aminoven 15% SE')
-        ? getAminoacidos(prescription!).volumen : 0;
+        ? getAminoacidos(prescription!).conPurga : 0;
     const travasol: number = (aminoacidos === 'TravasolPlus 15% SE')
-        ? getAminoacidos(prescription!).volumen : 0;
+        ? getAminoacidos(prescription!).conPurga : 0;
     const aminoPlasmalCE: number = (aminoacidos === 'Aminoplasmal 10% CE')
-        ? getAminoacidos(prescription!).volumen : 0;
+        ? getAminoacidos(prescription!).conPurga : 0;
     const aminoPlasmalSE: number = (aminoacidos === 'Aminoplasmal 10% SE')
-        ? getAminoacidos(prescription!).volumen : 0;
+        ? getAminoacidos(prescription!).conPurga : 0;
 
     const aminovenInfantils: number = (aminoacidos === 'Aminoven Inft 10% SE')
-        ? getAminoacidos(prescription!).volumen : 0;
+        ? getAminoacidos(prescription!).conPurga : 0;
     const primene: number = (aminoacidos === 'Primene 10% SE')
-        ? getAminoacidos(prescription!).volumen : 0;
+        ? getAminoacidos(prescription!).conPurga : 0;
 
     const cernevit: number = (vit_hidrosoluble === 'Cernevit')
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
@@ -1042,30 +1043,30 @@ export const peso_teorico = (prescription: IPrescriptions) => {
         ? parseFloat(prescription?.req_vit_hidrosolubles!) : 0;
     ////////////////////////////////////////////////////////////////////////////////
     const smoflipid: number = (lipidos === 'Smoflipid 20%')
-        ? getLipidos(prescription).volumen : 0;
+        ? getLipidos(prescription).conPurga : 0;
     const lipofundin: number = (lipidos === 'Lipoplus 20%')
-        ? getLipidos(prescription).volumen : 0;
+        ? getLipidos(prescription).conPurga : 0;
 
     const clinoleic: number = (lipidos === 'Clinoleic 20%')
-        ? getLipidos(prescription).volumen : 0;
+        ? getLipidos(prescription).conPurga : 0;
 
     const lipoplus: number = (lipidos === 'Lipoplus 20%')
-        ? getLipidos(prescription).volumen : 0;
+        ? getLipidos(prescription).conPurga : 0;
 
     const calcio_elemental: number = (calcio === 'Calcio Elemental')
-        ? getCalcio(prescription!).volumen : 0;
+        ? getCalcio(prescription!).conPurga : 0;
 
     const gluconato_calcio: number = (calcio === 'Gluconato de Calcio')
-        ? getCalcio(prescription!).volumen : 0;
+        ? getCalcio(prescription!).conPurga : 0;
 
     const magnesio_elemental: number = (magnesio === 'Magnesio Elemental')
-        ? getMagnesio(prescription!).volumen : 0;
+        ? getMagnesio(prescription!).conPurga : 0;
 
     const sulfato_magnesio: number = (magnesio === 'Sulfato de Magnesio')
-        ? getMagnesio(prescription!).volumen : 0;
+        ? getMagnesio(prescription!).conPurga : 0;
 
     const peso_teorico = (
-        ((getDextrosa(prescription!).volumen * 1.185)
+        ((getDextrosa(prescription!).conPurga * 1.185)
             // + (getAminoacidos(prescription!).volumen * 1505)
             + (aminovenSE * 1.048)
             + (travasol * 1.05)
@@ -1077,16 +1078,17 @@ export const peso_teorico = (prescription: IPrescriptions) => {
             + (smoflipid * 0.988)
             + (lipofundin * 0.98)
             + (lipoplus * 0.98)
-            + (getOmegaven(prescription!).volumen * 0.996)
-            + (getDipeptiven(prescription!).volumen * 1.069)
-            + (getSodio(prescription!).volumen * 1.075)
-            + (getPotacio(prescription!).volumen * 1.09)
-            + (getFosfatoPotacio(prescription!).volumen * 1.32)
-            + (getFosfatoSodio(prescription!).volumen * 1.147)
+            + (getOmegaven(prescription!).conPurga * 0.996)
+            + (getDipeptiven(prescription!).conPurga * 1.069)
+            + (getSodio(prescription!).conPurga * 1.075)
+            + (getPotacio(prescription!).conPurga * 1.09)
+            + (getFosfatoPotacio(prescription!).conPurga * 1.32)
+            + (getFosfatoSodio(prescription!).conPurga * 1.147)
             + (calcio_elemental * 1.05)
             + (gluconato_calcio * 1.05)
-            + (magnesio_elemental * 1.21)
-            + (sulfato_magnesio * 1.21)
+            + (getMagnesio(prescription!).conPurga * 1.088)
+            // + (magnesio_elemental * 1.21)
+            // + (sulfato_magnesio * 1.21)
             + (volOligoNulanza * 1.099)
             + (volOligoSensitrace * 1)
             + (cernevit * 1)
@@ -1095,7 +1097,7 @@ export const peso_teorico = (prescription: IPrescriptions) => {
             + (vitaLipidAd * 1)
             + (soluvit * 1)
             + (soluvit_vit * 1.015)
-            + (getVit_C(prescription!).volumen * 1)
+            + (getVit_C(prescription!).conPurga * 1)
             + (parseFloat(prescription?.acido_folico!) * 1)
             + (volAgua * 1))
     )
