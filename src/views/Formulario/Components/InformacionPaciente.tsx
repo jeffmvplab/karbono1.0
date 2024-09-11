@@ -193,7 +193,7 @@ const InformacionPaciente = () => {
                                 </LightTooltip>
 
                                 <LightTooltip
-                                    title='Es importante registrar el nombre completo del paciente'
+                                    title='Asegúrese de poner apellidos y luego el nombre'
                                     placement="top"
                                     arrow
                                 >
