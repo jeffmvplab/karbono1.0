@@ -200,8 +200,8 @@ const InformacionPaciente = () => {
                                     <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                         <CustomTextField
                                             onChange={handleNamePaciente}
-                                            id='nombre-del-paciente'
-                                            label='Nombre del Paciente*'
+                                            id='nombre-y apellidos'
+                                            label='Apellidos y Nombres*'
                                             type='text'
                                             value={namePaciente}
                                             defaulValue={namePaciente}
