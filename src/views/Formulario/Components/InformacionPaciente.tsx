@@ -193,15 +193,15 @@ const InformacionPaciente = () => {
                                 </LightTooltip>
 
                                 <LightTooltip
-                                    title='Es importante registrar el nombre completo del paciente'
+                                    title='Asegúrese de poner apellidos y luego el nombre'
                                     placement="top"
                                     arrow
                                 >
                                     <Grid item xs={12} sm={6} md={4} style={{ padding: '10px' }} >
                                         <CustomTextField
                                             onChange={handleNamePaciente}
-                                            id='nombre-del-paciente'
-                                            label='Nombre del Paciente*'
+                                            id='nombre-y apellidos'
+                                            label='Apellidos y Nombres*'
                                             type='text'
                                             value={namePaciente}
                                             defaulValue={namePaciente}
