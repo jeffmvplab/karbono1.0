@@ -28,12 +28,12 @@ const PDFPrescriptionComponent: React.FC<PDFPrescriptionComponentProps> = ({ rep
                 id='reporte_view' direction={'column'}
                 // maxWidth={'1500px'}
                 // minWidth={{ xs: print ? '1000px' : '100%', md: '100%' }}
-                overflow={'scroll'}
+                // overflow={'scroll'}
             >
 
                 <Stack>
                     <Card>
-                        <Stack id='reporte_view' direction={'row'} width={'100%'} overflow={'scroll'} justifyContent={'space-between'} paddingX={'5px'}>
+                        <Stack id='reporte_view' direction={'row'} width={'100%'} height={'100%'} overflow={'scroll'} justifyContent={'space-between'} paddingX={'5px'}>
                             {/* <Grid container paddingBottom={5}> */}
 
                             <Stack direction={'row'} display={'flex'} sx={{ alignItems: 'center' }}>

@@ -24,12 +24,16 @@ export const convertirAPDF = async (idView: string, titlePdf: string, no_orden?:
     // Crea un PDF en formato A4, que puede manejar múltiples páginas si es necesario
     const pdf = new jsPDF({
       unit: 'mm',
-      format: 'a4',
+      // format: 'a4',
+      format: idView === 'reporte_view' ? [210, 295] : [210, 350],
       orientation: 'portrait',
+      compress: true
     });
 
     const imgWidth = 210; // A4 width in mm
-    const pageHeight = 295; // A4 height in mm
+    // const pageHeight = 295; // A4 height in mm
+    const pageHeight = idView === 'reporte_view' ? 295 : 350; // A4 height in mm
+
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
     let heightLeft = imgHeight;
 
@@ -52,7 +56,7 @@ export const convertirAPDF = async (idView: string, titlePdf: string, no_orden?:
       const pdfBlob = pdf.output('blob');
       const file = new File([pdfBlob], `${titlePdf}.pdf`, { type: 'application/pdf' });
 
-      const resp = await prescriptionsUseCase.sendPDF(file,no_orden?.toString()!, titlePdf );
+      const resp = await prescriptionsUseCase.sendPDF(file, no_orden?.toString()!, titlePdf);
       console.log('Respuesta de sendPDF:', resp);
     }
   }
