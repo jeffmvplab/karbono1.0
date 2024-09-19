@@ -299,7 +299,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	////////////////////INFORMACIÓN DEL PACIENTE////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////
 	const [ips, setIps] = React.useState<string>(
-		getMeUser().entidad_de_salud[0]
+		Array.isArray(getMeUser().entidad_de_salud)
 			? Array.isArray(getMeUser().entidad_de_salud[0])
 				? getMeUser().entidad_de_salud[0][0]
 				: getMeUser().entidad_de_salud[0]
@@ -889,7 +889,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const prescriptionsData: IPrescriptions = {
 
-		
+
 		no_orden: parseFloat(numOrder) || maxNumOrder! + 1,
 
 		createdAt: (createdAt === '') ? new Date().toISOString() : createdAt!,
@@ -966,7 +966,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (numPresc) { resp = await prescriptionsUseCase.updatePrescripcions(prescriptionsData, numPresc); console.log('UPDATE') }
 		else { resp = await prescriptionsUseCase.savePrescripcions(prescriptionsData); }
 
-		// console.log('Resp Save Presc:', resp)
+		 console.log('Resp Save Presc:', resp)
 
 		setLoadingSave(true);
 
