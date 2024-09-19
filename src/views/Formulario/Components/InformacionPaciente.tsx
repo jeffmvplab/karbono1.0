@@ -116,12 +116,12 @@ const InformacionPaciente = () => {
 
     const { getMeUser } = React.useContext(GlobalContext)
 
-    const [loding, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         setLoading(true)
         setIps(getMeUser().entidad_de_salud[0] ? getMeUser().entidad_de_salud[0] : ips)
-        // console.log('IPS:', getMeUser().entidad_de_salud[0]);
+        console.log('IPS:', ips);
     }, [])
 
     /////////////////////////////////////////////////////////////////////
@@ -129,7 +129,7 @@ const InformacionPaciente = () => {
 
     return (
         <>
-            {loding
+            {loading
                 && <Stack
                     direction={'column'}
 
