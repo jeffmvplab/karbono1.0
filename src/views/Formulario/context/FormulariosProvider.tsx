@@ -298,7 +298,12 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	////////////////////INFORMACIÓN DEL PACIENTE////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////
-	const [ips, setIps] = React.useState(getMeUser().entidad_de_salud ? getMeUser().entidad_de_salud[0] :'');
+	const [ips, setIps] = React.useState<string>(
+		getMeUser().entidad_de_salud[0]
+			? Array.isArray(getMeUser().entidad_de_salud[0])
+				? getMeUser().entidad_de_salud[0][0]
+				: getMeUser().entidad_de_salud[0]
+			: '');
 	const [errorIps, setErrorIps] = React.useState(false);
 	const [messageErrorIps, setMessageErrorIps] = React.useState('');
 
@@ -884,6 +889,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const prescriptionsData: IPrescriptions = {
 
+		
 		no_orden: parseFloat(numOrder) || maxNumOrder! + 1,
 
 		createdAt: (createdAt === '') ? new Date().toISOString() : createdAt!,
@@ -1353,7 +1359,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 			prescriptionCharge,
 			////////////INFORMACION DEL PACIENTE///////////////////
-			ips, errorIps, messageErrorIps, handleIps,setIps,
+			ips, errorIps, messageErrorIps, handleIps, setIps,
 			numIden, errorNumIden, messageErrorNumIden, handleNumIden,
 			namePaciente, errorNamePaciente, messageErrorNamePaciente, handleNamePaciente,
 			servicio, errorServicio, messageErrorServicio, handleServicio,
