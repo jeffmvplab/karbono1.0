@@ -889,6 +889,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const prescriptionsData: IPrescriptions = {
 
+		
 		no_orden: parseFloat(numOrder) || maxNumOrder! + 1,
 
 		createdAt: (createdAt === '') ? new Date().toISOString() : createdAt!,
@@ -898,11 +899,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 		tipo_prescripcion: tipoPrescripcion || '0',
 		fecha: fechaCreacion || '0',
-		ips: getMeUser().entidad_de_salud[0]
-			? Array.isArray(getMeUser().entidad_de_salud[0])
-				? getMeUser().entidad_de_salud[0][0]
-				: getMeUser().entidad_de_salud[0]
-			: ips,
+		ips: ips || '',
 		no_identificacion: numIden || '0',
 		nombre_paciente: namePaciente || '',
 		servicio: servicio || '',
