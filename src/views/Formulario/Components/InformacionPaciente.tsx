@@ -120,8 +120,13 @@ const InformacionPaciente = () => {
 
     useEffect(() => {
         setLoading(true)
-        setIps(getMeUser().entidad_de_salud[0] ? getMeUser().entidad_de_salud[0] : ips)
-        // console.log('IPS:',getMeUser().entidad_de_salud[0]);
+        setIps(
+            getMeUser().entidad_de_salud[0]
+                ? Array.isArray(getMeUser().entidad_de_salud[0])
+                    ? getMeUser().entidad_de_salud[0][0]
+                    : getMeUser().entidad_de_salud[0]
+                : ips)
+        console.log('IPS:', ips);
     }, [])
 
     /////////////////////////////////////////////////////////////////////
