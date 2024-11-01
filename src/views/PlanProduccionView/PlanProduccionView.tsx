@@ -678,7 +678,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
 									justifyContent={'normal'}>
 
 									<Typography fontWeight={700} width={'100px'}>
-										INTERVENCIÓN FARMACÉUTICA CORPAUL:
+										INTERVENCIÓN FARMACÉUTICA:
 									</Typography>
 									{/* 
 									<Stack
