@@ -42,10 +42,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
             method: 'post',
             body: JSON.stringify(prescriptions)
         });
-
         return axiosRequest;
-
-
     }
     /////////////////////////////////Get Prescripcion By Number////////////////////////////////////////////////
     async updatePrescripcions(prescriptions: IPrescriptions, number: string): Promise<any> {
@@ -76,6 +73,7 @@ export class PrescriptionsRepository implements IPrescriptionsRepository {
             method: 'get',
             // body: {},
         });
+        console.log("PRESCRIPCION:",axiosRequest)
         return axiosRequest;
     }
 

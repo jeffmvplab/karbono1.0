@@ -34,15 +34,9 @@ const AuthLoginForm: React.FC<AuthLoginFormProps> = () => {
 	const router = useRouter();
 	const { user } = router.query;
 	const loguinRol = user;
-
-
-
 	// useEffect(() => {
 	// 	setQueryRol(loguinRol!)
 	// }, [router.pathname])
-
-
-
 	return (
 
 		<Stack direction='column' alignItems='center'>

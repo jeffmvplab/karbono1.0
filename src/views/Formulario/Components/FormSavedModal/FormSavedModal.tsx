@@ -41,7 +41,7 @@ const FormSavedModal: React.FC<FormSavedModalProps> = () => {
 
 		<Modal
 			open={openModalFormSaved}
-			onClose={handleCloseModalFormSaved}
+			onClose={handleCloseModalForm}
 			aria-labelledby="modal-modal-title"
 			aria-describedby="modal-modal-description"
 			sx={{

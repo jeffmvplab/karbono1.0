@@ -60,6 +60,7 @@ interface ContextProps {
     flujoMetabolico: string, errorFlujoMetabolico: boolean, messageErrorFlujoMetabolico: string, handleFlujoMetabolico: (event: React.ChangeEvent<HTMLInputElement>) => void,
     aminoacidos: string, errorAminoacidos: boolean, messageErrorAminoacidos: string, handleAminoacidos: (event: React.ChangeEvent<HTMLInputElement>) => void,
     dextrosa: string, errorDextrosa: boolean, messageErrorDextrosa: string, handleDextrosa: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    tipoDextrosa: string,  handleTipoDextrosa: (event: React.ChangeEvent<HTMLInputElement>) => void,
     requerimientoAminoacidos: string, errorRequerimientoAminoacidos: boolean, messageErrorRequerimientoAminoacidos: string, handleRequerimientoAminoacidos: (event: React.ChangeEvent<HTMLInputElement>) => void,
     lipidos: string, errorLipidos: boolean, messageErrorLipidos: string, handleLipidos: (event: React.ChangeEvent<HTMLInputElement>) => void,
     requerimientoLipidos: string, errorRequerimientoLipidos: boolean, messageErrorRequerimientoLipidos: string, handleRequerimientoLipidos: (event: React.ChangeEvent<HTMLInputElement>) => void,

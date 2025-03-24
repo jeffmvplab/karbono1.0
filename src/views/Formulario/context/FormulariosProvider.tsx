@@ -142,10 +142,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			const repoPresc: IPrescriptions = resp.body
 
 			setprescriptionCharge(repoPresc);
-
+			console.log('Reporte:',repoPresc)
 			if (resp.statusCode === 200) {
 				setSaveOk(true);
-				// console.log('Reporte:', resp)
+				//console.log('Reporte:', resp)
 				// setReporte(repoPresc);
 				// localStorageProtocol.set(StorageKeysEnum.reporte,repoPresc);
 				(repoPresc._id || repoPresc.nombre_paciente)
@@ -223,6 +223,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setDiagnostico(repor?.diagnostico);
 		setTipoPrescripcion(repor?.tipo_prescripcion);
 		setFlujoMetabolico(repor?.flujo_metabolico);
+		setTipoDextrosa(repor?.req_dextrosa!);
 		setDextrosa(repor?.dextrosa!);
 		setAminoacidos(repor?.aminoacidos);
 		setRequerimientoAminoacidos(repor?.req_aminoacidos);
@@ -552,6 +553,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
+
 	const [viaAdmin, setViaAdmin] = React.useState('');
 	const [errorViaAdmin, setErrorViaAdmin] = React.useState(false);
 	const [messageErrorViaAdmin, setMessageErrorViaAdmin] = React.useState('');
@@ -630,6 +632,13 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const handleFlujoMetabolico = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setFlujoMetabolico(event.target.value);
 		validateFlujoMetabolico(event.target.value);
+		// getPrescriptions();
+	};
+
+	const [tipoDextrosa, setTipoDextrosa] = React.useState('Baxter');
+	const handleTipoDextrosa = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setTipoDextrosa(event.target.value);
+		console.log("TipoDextrosa:",event.target.value)
 		// getPrescriptions();
 	};
 
@@ -920,8 +929,9 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		diagnostico: diagnostico || '',
 		flujo_metabolico: (flujoMetabolico === '') ? '0' : flujoMetabolico,
 		aminoacidos: aminoacidos || '0',
+		tipoDextrosa:tipoDextrosa||"Baxter",
 		dextrosa: (dextrosa === '') ? '0' : dextrosa,
-		req_dextrosa: '0',
+		req_dextrosa:tipoDextrosa||"Baxter",
 		req_aminoacidos: (requerimientoAminoacidos === '') ? '0' : requerimientoAminoacidos,
 		lipidos: lipidos || '',
 		req_lipidos: (requerimientoLipidos === '') ? '0' : requerimientoLipidos,
@@ -1306,7 +1316,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		namePaciente, servicio, ubicacion, cama, pesoKg, tipoEdad,
 		edad, volumen, purga, tiempoDeInfucion, overfill, filtro,
 		eqFotosencible, tipoPaciente, viaAdmin, diagnostico,
-		flujoMetabolico, aminoacidos, dextrosa, requerimientoAminoacidos,
+		flujoMetabolico, aminoacidos,tipoDextrosa, dextrosa, requerimientoAminoacidos,
 		lipidos, requerimientoLipidos, omegaven, dipeptiven, sodioTotal,
 		potacioTotal, fosfato, requerimientoFosfato, calcio, reqCalcio,
 		magnesio, reqMagnesio, elementosTraza, reqTraza, vitaminasHidrosolubles,
@@ -1381,6 +1391,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			tipoPrescripcion, errorTipoPrescripcion, messageErrorTipoPrescripcion, handleTipoPrescripcion,
 			flujoMetabolico, errorFlujoMetabolico, messageErrorFlujoMetabolico, handleFlujoMetabolico,
 			aminoacidos, errorAminoacidos, messageErrorAminoacidos, handleAminoacidos,
+			tipoDextrosa,handleTipoDextrosa,
 			dextrosa, errorDextrosa, messageErrorDextrosa, handleDextrosa,
 			requerimientoAminoacidos, errorRequerimientoAminoacidos, messageErrorRequerimientoAminoacidos, handleRequerimientoAminoacidos,
 			lipidos, errorLipidos, messageErrorLipidos, handleLipidos,

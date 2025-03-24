@@ -33,6 +33,7 @@ export interface IPrescriptions {
     diagnostico: string,
     flujo_metabolico: string,
     aminoacidos: string,
+    tipoDextrosa?:string,
     dextrosa?: string,
     req_dextrosa?: string,
     req_aminoacidos: string,
@@ -58,6 +59,7 @@ export interface IPrescriptions {
     acido_folico: string,
     observaciones?: IComment[],
     preparador?: any,
+    preparadores?:any[],
     controlador_de_calidad?: any,
     por_clonacion?: boolean,
 }

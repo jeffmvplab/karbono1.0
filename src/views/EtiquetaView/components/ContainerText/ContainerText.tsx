@@ -22,7 +22,7 @@ const ContainerText: React.FC<ContainerTextProps> = ({ title, value, transform, 
 			<Typography
 				style={{
 					color: color,
-					fontSize: isUpper ? 14 : valueSize,
+					fontSize: isUpper ?24: 24,
 					fontWeight: isUpper ? 'bold' : 'normal',
 					textTransform: transform
 				}}>
@@ -40,7 +40,7 @@ const ContainerText: React.FC<ContainerTextProps> = ({ title, value, transform, 
 					fontSize: titleSize,
 					fontWeight: isUpper ? 'bold' : 'normal',
 				}}>
-				<Typography minWidth={'70px'} minHeight={'20px'} fontSize={isUpper ? 14 : valueSize} textAlign={"center"} paddingX={1}>
+				<Typography minWidth={'70px'} minHeight={'20px'} fontSize={isUpper ? 24 : 24} textAlign={"center"} paddingX={1}>
 					{value
 						? value === undefined
 							? '-'
