@@ -168,49 +168,86 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
           }
           <Stack paddingTop={1} direction={"row"} justifyContent={"end"}>
             <Grid container spacing={2}>
-              <Grid item xs={3}>
+              <Grid item xs={5}>
                 {/*  */}
                 <Stack
                   height={"100%"}
                   direction={"column"}
                   justifyContent={"center"}
                 >
-                  <Image
+                  <Typography
+                    style={{
+                      color: colorsKarbono.primary,
+                      fontSize: 30,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Corporación deFomento Asistencial del Hospital Universitario
+                    San Vicente de Paúl
+                  </Typography>
+                  {/* <Image
                     src="/assets/Logo Fomenthum.png"
                     width={240}
                     height={100}
                     alt=""
                     style={{ marginTop: "0px", alignItems: "center" }}
-                  />
+                  /> */}
                 </Stack>
               </Grid>
 
-              <Grid item xs={3}></Grid>
+              {/* <Grid item xs={4}></Grid> */}
               <Grid item xs={3}>
                 <Stack
                   height={"100%"}
                   direction={"column"}
-                  justifyContent={"end"}
+                  justifyContent={"space-between"}
                 >
+                  <Stack direction={"row"} spacing={10}>
+                    <Typography
+                      style={{
+                        // color: color,
+                        fontSize: 20,
+                        fontWeight: "normal",
+                      }}
+                    >
+                      Versión 2.
+                    </Typography>
+
+                    <Typography
+                      style={{
+                        // color: color,
+                        fontSize: 20,
+                        fontWeight: "normal",
+                      }}
+                    >
+                     NA-FO-0078
+                    </Typography>
+                  </Stack>
+
                   <ContainerText
+                    titleSize="20px"
+                    valueSize="20px"
                     title="Fecha"
-                    value={`${convertirFecha(
+                    value={`${convertirFecha(reporte?.fecha)} ${formatOnlyTime(
                       reporte?.fecha
-                    )} ${formatOnlyTime(reporte?.fecha)}`}
+                    )}`}
                   />
                 </Stack>
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid item xs={4}>
                 <Stack direction={"column"} spacing={2}>
                   <ContainerText
-                    titleSize="24px"
+                    titleSize="20px"
+                    valueSize="20px"
                     title="Lote"
                     value={`NPT${convertirFechaLote(reporte?.fecha)}-${
                       reporte?.no_identificacion
                     }`}
                   />
                   <ContainerText
+                    titleSize="20px"
+                    valueSize="20px"
                     title="Número ID"
                     value={reporte?.no_identificacion!}
                   />
@@ -688,7 +725,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
                 borderColor: "#EDF1F1",
                 borderWidth: 3,
                 borderStyle: "solid",
-                paddingX:1,
+                paddingX: 1,
                 width: "100%",
               }}
             >
