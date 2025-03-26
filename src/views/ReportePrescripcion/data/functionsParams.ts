@@ -760,11 +760,21 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
 
   // let osmolaridad: number = 0;
 
-  console.log('TIPO DEXTROSA:',prescription?.tipoDextrosa,prescription?.flujo_metabolico)
+  const tipoDextrosa =
+    prescription?.tipoDextrosa !== undefined
+      ? prescription?.tipoDextrosa
+      : prescription?.req_dextrosa;
+
+  console.log(
+    "TIPO DEXTROSA:",
+    prescription?.tipoDextrosa,
+    prescription?.req_dextrosa,
+    tipoDextrosa
+  );
 
   params.volumen =
     (getDextrosa(prescription!).volumen *
-      (prescription?.tipoDextrosa! === "Baxter" ? 2523 : 2780) +
+      (tipoDextrosa === "Baxter" ? 2523 : 2780) +
       // + (getAminoacidos(prescription!).volumen * 1505)
       smoflipid * 290 +
       clinoleic * 270 +
@@ -828,7 +838,8 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
   // // }
 
   params.conPurga =
-    (getDextrosa(prescription!).conPurga * (prescription?.tipoDextrosa! === "Baxter" ? 2523 : 2780)  +
+    (getDextrosa(prescription!).conPurga *
+      (prescription?.tipoDextrosa! === "Baxter" ? 2523 : 2780) +
       getAminoacidos(prescription!).conPurga * 1505 +
       getLipidos(prescription!).conPurga * 290 +
       getOmegaven(prescription!).conPurga * 273 +
