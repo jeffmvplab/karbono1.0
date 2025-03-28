@@ -263,6 +263,7 @@ export class UserRepository implements IUserRepository {
     }
 
     async upadateMe(user: any): Promise<any> {
+        console.log("USERRR UPDATE:", user);
 
         const axiosRequest = await this.axiosHttpClient.request({
             url: ApiUrlsEnum.getMe,
@@ -270,7 +271,7 @@ export class UserRepository implements IUserRepository {
             body: {
                 "nombre_apellidos": user.nombre_apellidos,
                 "email": user.email,
-                "telefono": user.phone,
+                "telefono": user.telefono,
                 // "password": user.password,
                 "roles": user.roles,
                 "registro_medico": user.registro_medico,
