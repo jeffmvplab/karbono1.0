@@ -152,7 +152,44 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
                 </Stack>
               </Grid>
 
-              <Grid item xs={1}></Grid>
+              <Grid item xs={4}>
+                <Stack
+                  height={"100%"}
+                  direction={"column"}
+                  justifyContent={"space-between"}
+                >
+                  <Stack direction={"row"} spacing={10}>
+                    <Typography
+                      style={{
+                        // color: color,
+                        fontSize: 20,
+                        fontWeight: "normal",
+                      }}
+                    >
+                      Versión 2.
+                    </Typography>
+
+                    <Typography
+                      style={{
+                        // color: color,
+                        fontSize: 20,
+                        fontWeight: "normal",
+                      }}
+                    >
+                     NA-FO-0078
+                    </Typography>
+                  </Stack>
+
+                  <ContainerText
+                    titleSize="20px"
+                    valueSize="20px"
+                    title="Fecha"
+                    value={`${convertirFecha(reporte?.fecha)} ${formatOnlyTime(
+                      reporte?.fecha
+                    )}`}
+                  />
+                </Stack>
+              </Grid>
 
               <Grid item xs={3}>
                 <Stack
@@ -169,7 +206,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
                 </Stack>
               </Grid>
 
-              <Grid item xs={3}>
+              {/* <Grid item xs={3}>
                 <Stack
                   height={"100%"}
                   direction={"column"}
@@ -182,7 +219,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
                     )} ${formatOnlyTime(reporte?.fecha)}`}
                   />
                 </Stack>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Stack>
           {
