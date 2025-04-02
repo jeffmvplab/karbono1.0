@@ -125,7 +125,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
         id="etiqueta_view"
         sx={{
           width: "1400px",
-          height: `${isPdfMode ? "2100px" : "2200px"}`,
+          height: `${isPdfMode ? "2120px" : "2220px"}`,
           paddingX: "10px",
           // marginX:'50px',
           backgroundColor: "#ccc",
