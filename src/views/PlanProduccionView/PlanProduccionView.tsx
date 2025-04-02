@@ -125,24 +125,34 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
           }
           <Stack paddingTop={1} direction={"row"} justifyContent={"end"}>
             <Grid container spacing={2}>
-              <Grid item xs={3}>
+            <Grid item xs={5}>
                 {/*  */}
                 <Stack
                   height={"100%"}
                   direction={"column"}
                   justifyContent={"center"}
                 >
-                  <Image
+                  <Typography
+                    style={{
+                      color: colorsKarbono.primary,
+                      fontSize: 30,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Corporación deFomento Asistencial del Hospital Universitario
+                    San Vicente de Paúl
+                  </Typography>
+                  {/* <Image
                     src="/assets/Logo Fomenthum.png"
                     width={240}
                     height={100}
                     alt=""
                     style={{ marginTop: "0px", alignItems: "center" }}
-                  />
+                  /> */}
                 </Stack>
               </Grid>
 
-              <Grid item xs={3}></Grid>
+              <Grid item xs={1}></Grid>
 
               <Grid item xs={3}>
                 <Stack

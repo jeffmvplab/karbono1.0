@@ -57,7 +57,7 @@ export const ReportesProvider: FC<Props> = ({ children }) => {
 		setLoadingSave(false);
 		// console.log('Loading...')
 		// const resp = await prescriptionsUseCase.prescripcionsByNumber(storagePredsc.number);
-		const resp = await prescriptionsUseCase?.prescripcionsByNumber(storagePredsc.number);
+		const resp = await prescriptionsUseCase?.prescripcionsByNumber(storagePredsc?.number!);
 	    console.log('Reporte DDD:',resp)
 
 		setLoadingSave(true);
