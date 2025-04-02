@@ -139,7 +139,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    Corporación deFomento Asistencial del Hospital Universitario
+                    Corporación de Fomento Asistencial del Hospital Universitario
                     San Vicente de Paúl
                   </Typography>
                   {/* <Image
