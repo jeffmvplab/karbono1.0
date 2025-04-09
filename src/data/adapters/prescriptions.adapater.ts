@@ -12,6 +12,7 @@ export const prescriptionsAdapter = (prescriptions: any): IPrescriptions => ({
 
   dextrosa: prescriptions.dextrosa,
   req_dextrosa: prescriptions.req_dextrosa,
+  tipo_dextrosa: prescriptions.tipo_dextrosa,
 
   tipo_prescripcion: prescriptions.tipo_prescripcion,
   fecha: prescriptions.fecha,

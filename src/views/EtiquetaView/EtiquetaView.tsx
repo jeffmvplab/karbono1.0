@@ -804,9 +804,9 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
                       title="REVISA:"
                       color={colorsKarbono.primary}
                       value={
-                        reporte?.controlador_de_calidad.nombre_apellidos
+                        reporte?.controlador_de_calidad?.nombre_apellidos!
                           ? `${
-                              reporte?.controlador_de_calidad!.nombre_apellidos
+                              reporte?.controlador_de_calidad?.nombre_apellidos!
                             }`
                           : "-"
                       }

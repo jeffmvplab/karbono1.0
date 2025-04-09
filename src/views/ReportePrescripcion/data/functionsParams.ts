@@ -761,13 +761,13 @@ export const getOsmolaridad = (prescription: IPrescriptions) => {
   // let osmolaridad: number = 0;
 
   const tipoDextrosa =
-    prescription?.tipoDextrosa !== undefined
-      ? prescription?.tipoDextrosa
+    prescription?.tipo_dextrosa !== undefined
+      ? prescription?.tipo_dextrosa
       : prescription?.req_dextrosa;
 
   console.log(
     "TIPO DEXTROSA:",
-    prescription?.tipoDextrosa,
+    prescription?.tipo_dextrosa,
     prescription?.req_dextrosa,
     tipoDextrosa
   );

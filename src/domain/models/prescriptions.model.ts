@@ -36,6 +36,7 @@ export interface IPrescriptions {
     tipoDextrosa?:string,
     dextrosa?: string,
     req_dextrosa?: string,
+    tipo_dextrosa?: string,
     req_aminoacidos: string,
     lipidos: string,
     req_lipidos: string,

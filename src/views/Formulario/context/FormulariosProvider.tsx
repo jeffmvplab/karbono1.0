@@ -223,7 +223,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setDiagnostico(repor?.diagnostico);
 		setTipoPrescripcion(repor?.tipo_prescripcion);
 		setFlujoMetabolico(repor?.flujo_metabolico);
-		setTipoDextrosa(repor?.req_dextrosa!);
+		setTipoDextrosa(repor?.tipo_dextrosa!);
 		setDextrosa(repor?.dextrosa!);
 		setAminoacidos(repor?.aminoacidos);
 		setRequerimientoAminoacidos(repor?.req_aminoacidos);
@@ -931,7 +931,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		aminoacidos: aminoacidos || '0',
 		tipoDextrosa:tipoDextrosa||"Baxter",
 		dextrosa: (dextrosa === '') ? '0' : dextrosa,
-		req_dextrosa:tipoDextrosa||"Baxter",
+		tipo_dextrosa:tipoDextrosa||"Baxter",
+		// req_dextrosa:tipoDextrosa||"Baxter",
 		req_aminoacidos: (requerimientoAminoacidos === '') ? '0' : requerimientoAminoacidos,
 		lipidos: lipidos || '',
 		req_lipidos: (requerimientoLipidos === '') ? '0' : requerimientoLipidos,

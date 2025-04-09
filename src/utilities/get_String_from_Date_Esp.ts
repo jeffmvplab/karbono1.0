@@ -1,22 +1,16 @@
 
 export function convertirFecha(fecha: string | Date | undefined): string {
-  if (!fecha) {
-    return ""; // Devuelve una cadena vacía si la fecha es undefined
-  }
+  if (!fecha) return "";
 
-  if (typeof fecha === "string") {
-    fecha = new Date(fecha); // Convierte la cadena en un objeto Date
-  }
+  if (typeof fecha === "string") fecha = new Date(fecha);
 
   if (fecha instanceof Date && !isNaN(fecha.getTime())) {
-    const año = fecha.getFullYear().toString().padStart(4, "0");
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, "0");
-    const dia = fecha.getDate().toString().padStart(2, "0");
-    // return `${dia}/${mes}/${año}`;
+    const año = fecha.getUTCFullYear().toString().padStart(4, "0");
+    const mes = (fecha.getUTCMonth() + 1).toString().padStart(2, "0");
+    const dia = fecha.getUTCDate().toString().padStart(2, "0");
     return `${dia}/${mes}/${año}`;
-
   } else {
-    return "Fecha inválida"; // Devuelve un mensaje de error si la fecha no es válida
+    return "Fecha inválida";
   }
 }
 
@@ -51,51 +45,34 @@ export function formatDateTime(dateTime: string | Date | undefined): string {
 
 
 export function formatOnlyTime(dateTime: string | Date | undefined): string {
-  if (!dateTime) {
-    return ''; // Devuelve una cadena vacía si no se proporciona ninguna fecha
-  }
+  if (!dateTime) return "";
 
-  // Convierte el dateTime a un objeto Date
   const date = new Date(dateTime);
 
-  // Obtiene el día, mes y año
-  const day = date.getDate();
-  const month = date.toLocaleString('es-ES', { month: 'long' }); // Obtiene el nombre del mes en español
-  const year = date.getFullYear();
+  if (isNaN(date.getTime())) return "Fecha inválida";
 
-  // Obtiene la hora y los minutos
-  let hour = date.getHours();
-  const minutes = date.getMinutes();
+  let hour = date.getUTCHours(); // Usar hora UTC
+  const minutes = date.getUTCMinutes(); // Usar minutos UTC
 
-  // Define si es AM o PM
-  const ampm = hour >= 12 ? 'pm' : 'am';
+  const ampm = hour >= 12 ? "pm" : "am";
   hour %= 12;
-  hour = hour || 12; // Si hour es 0, cambia a 12 para el formato de 12 horas
+  hour = hour || 12; // Si hour es 0, cambia a 12
 
-  // Formatea la fecha y la hora en el formato deseado
-  const formattedDateTime = `${hour}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
-
-  return formattedDateTime; // Devuelve la fecha y la hora formateadas
+  const formattedTime = `${hour}:${minutes < 10 ? "0" : ""}${minutes} ${ampm}`;
+  return formattedTime;
 }
 
-
 export function convertirFechaLote(fecha: string | Date | undefined): string {
-  if (!fecha) {
-    return ""; // Devuelve una cadena vacía si la fecha es undefined
-  }
+  if (!fecha) return "";
 
-  if (typeof fecha === "string") {
-    fecha = new Date(fecha); // Convierte la cadena en un objeto Date
-  }
+  if (typeof fecha === "string") fecha = new Date(fecha);
 
   if (fecha instanceof Date && !isNaN(fecha.getTime())) {
-    const año = fecha.getFullYear().toString().slice(2); // Obtener solo los últimos dos dígitos del año
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, "0");
-    const dia = fecha.getDate().toString().padStart(2, "0");
-    // return `${dia}/${mes}/${año}`;
+    const año = fecha.getUTCFullYear().toString().slice(2);
+    const mes = (fecha.getUTCMonth() + 1).toString().padStart(2, "0");
+    const dia = fecha.getUTCDate().toString().padStart(2, "0");
     return `${dia}${mes}${año}`;
-
   } else {
-    return "Fecha inválida"; // Devuelve un mensaje de error si la fecha no es válida
+    return "Fecha inválida";
   }
 }

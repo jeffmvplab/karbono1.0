@@ -1271,8 +1271,8 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
                       title="Responsable del Control de Calidad"
                       color={colorsKarbono.primary}
                       value={
-                        reporte?.controlador_de_calidad!.nombre_apellidos
-                          ? reporte?.controlador_de_calidad!.nombre_apellidos
+                        reporte?.controlador_de_calidad?.nombre_apellidos!
+                          ? reporte?.controlador_de_calidad?.nombre_apellidos!
                           : "-"
                       }
                     />
