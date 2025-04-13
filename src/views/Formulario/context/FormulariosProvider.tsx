@@ -907,7 +907,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		estado: estado ? estado : undefined,
 
 		tipo_prescripcion: tipoPrescripcion || '0',
-		fecha: fechaCreacion || '0',
+		// fecha:null,
 		ips: ips || '',
 		no_identificacion: numIden || '0',
 		nombre_paciente: namePaciente || '',
@@ -965,7 +965,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	const setPrescriptions = async () => {
 		// getMaxNumPresc();
 		setLoadingSave(false);
-		// console.log('Loading Save & Update Pres...:', prescriptionsData)
+		 console.log('Loading Save & Update Pres...:', prescriptionsData)
 
 		const numPresc = (localStorageProtocol.get(StorageKeysEnum.prescripcionOrden))
 			? localStorageProtocol.get(StorageKeysEnum.prescripcionOrden).number
@@ -995,7 +995,11 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			setMessageAPI(resp.body.message)
 			setSaveOk(false)
 			return false;
-		} else if (resp.body.statusCode === 403) {
+		} else if (resp.body.statusCode === 500) {
+			setMessageAPI(resp.body.message)
+			setSaveOk(false)
+			return false; 
+		}else if (resp.body.statusCode === 403) {
 			setMessageAPI(resp.body.message)
 			setSaveOk(false)
 			return false;

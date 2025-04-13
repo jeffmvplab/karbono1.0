@@ -12,7 +12,7 @@ export interface IPrescriptions {
     user?: string | any,
     no_orden: number,
     tipo_prescripcion: string,
-    fecha: string,
+    fecha?: string,
     ips: string,
     no_identificacion: string,
     nombre_paciente: string,
