@@ -75,7 +75,7 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 					/> */}
 					<TextParamsNumb
 						title={'Osmolaridad: '}
-						value={getOsmolaridad(prescriptionSave!).volumen.toFixed(2)}
+						value={getOsmolaridad(prescriptionSave!).volumen.toFixed(0)}
 					/>
 					<TextParamsString
 						title={'Relación calcio/fosfato: '}
@@ -87,11 +87,12 @@ const ParametrosFarmaceuticos: React.FC<ParametrosFarmaceuticosProps> = ({ isMov
 						title={'Factor de precipitación: '}
 						value={(alertFactorDePrecipitacion(prescriptionSave!).value !== 0)
 							? alertFactorDePrecipitacion(prescriptionSave!).value.toFixed(2)
-							: '-'
+							: '0'
 						}
 						seguridad={
 							(alertFactorDePrecipitacion(prescriptionSave!).value !== 0)
-								? alertFactorDePrecipitacion(prescriptionSave!).alert
+								?
+								 alertFactorDePrecipitacion(prescriptionSave!).alert
 								: ''
 						}
 					/>

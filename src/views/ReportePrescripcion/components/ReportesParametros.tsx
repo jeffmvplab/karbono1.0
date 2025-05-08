@@ -165,7 +165,7 @@ const ReportesParametros: React.FC<ReportesParametrosProps> = ({ reporte, loadin
 
                                 {(loadingSave)
                                     ? <Typography>
-                                        {getOsmolaridad(reporte!).volumen.toFixed(2)}
+                                        {getOsmolaridad(reporte!).volumen.toFixed(0)}
                                     </Typography>
                                     : <Skeleton animation="wave" height={30} width="40%" />}
 

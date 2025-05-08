@@ -2,10 +2,14 @@ import { Aportes, aportesNew } from "@/domain/models/logs.model";
 import { IPrescriptions } from "@/domain/models/prescriptions.model";
 
 export interface IParamFunc {
-  requerimiento: any;
-  volumen: any;
-  conPurga?: any;
+  requerimiento: number;
+  volumen: number;
+  conPurga: number;
 }
+
+export const esPositivo = (n: number | undefined) =>
+  typeof n === "number" && n > 0;
+
 export interface IParamNumeric {
   requerimiento: number;
   volumen: number;
@@ -412,6 +416,21 @@ export const getLipidos = (prescription: IPrescriptions) => {
       params.conPurga = params.volumen * correccionPurga(prescription);
     }
   }
+  console.log("SMOFLIPID:", params);
+
+  if (
+    isNaN(params.conPurga) ||
+    isNaN(params.requerimiento) ||
+    isNaN(params.volumen) ||
+    !esPositivo(params.conPurga) ||
+    !esPositivo(params.requerimiento) ||
+    !esPositivo(params.volumen)
+  ) {
+    params.requerimiento = 0;
+    params.volumen = 0;
+    params.conPurga = 0;
+  }
+
   return params;
 };
 
