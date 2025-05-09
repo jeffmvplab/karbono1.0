@@ -424,14 +424,14 @@ export const concCalcioMexcla = (prescription: IPrescriptions) => {
 export const concMaxCalcioSegura = (prescription: IPrescriptions) => {
   const prote = getConcentracionDeProteinas(prescription).volumen;
 
-  if (prote > 0.5 && prote <= 1.25) {
-    return 40;
+  if (prote >= 1 && prote < 1.25) {
+    return 20;
   }
-  if (prote > 1.25 && prote < 2.5) {
-    return 70;
+  if (prote >= 1.25 && prote < 2.5) {
+    return 35;
   }
   if (prote >= 2.5) {
-    return 112;
+    return 56;
   }
 
   return 0; // valor por defecto si no entra en ningún rango
@@ -469,7 +469,7 @@ export const concFosfatoMexcla = (prescription: IPrescriptions) => {
 export const concMaxFosfatoSegura = (prescription: IPrescriptions) => {
   const prote = getConcentracionDeProteinas(prescription).volumen;
 
-  if (prote > 0.5 && prote <= 1.25) {
+  if (prote > 0.5 && prote < 1.25) {
     return 25;
   }
   if (prote > 1.25 && prote < 2.5) {

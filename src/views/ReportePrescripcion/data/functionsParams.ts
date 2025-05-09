@@ -416,7 +416,7 @@ export const getLipidos = (prescription: IPrescriptions) => {
       params.conPurga = params.volumen * correccionPurga(prescription);
     }
   }
-  console.log("SMOFLIPID:", params);
+  // console.log("SMOFLIPID:", params);
 
   if (
     isNaN(params.conPurga) ||
