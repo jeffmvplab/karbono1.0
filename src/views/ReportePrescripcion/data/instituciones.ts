@@ -44,7 +44,7 @@ export const instituciones = [
   { value: "33", label: "PROMEDAN", overfill: 0 },
   { value: "34", label: "SALUD-TREC", overfill: 0 },
   { value: "35", label: "SERVIUCIS-RIONEGRO", overfill: 30 },
-  { value: "36", label: "SERVIUCIS-TREC", overfill: 30 },
+  { value: "36", label: "SERVIUCIS-APARTADÓ", overfill: 30 },
   { value: "37", label: "SURA", overfill: 0 },
   { value: "38", label: "SURA RIONEGRO", overfill: 0 },
   { value: "39", label: "UNIVERSIDAD CES", overfill: 0 },
