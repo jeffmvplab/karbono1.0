@@ -101,7 +101,7 @@ export const convertirAPDF = async (idView: string, titlePdf: string, no_orden?:
     const pdfBlob = pdf.output('blob');
     const file = new File([pdfBlob], `${titlePdf}.pdf`, { type: 'application/pdf' });
 
-    const resp = await prescriptionsUseCase.sendPDF(file, no_orden?.toString()!, titlePdf);
-    console.log('Respuesta de sendPDF:', resp);
+    // const resp = await prescriptionsUseCase.sendPDF(file, no_orden?.toString()!, titlePdf);
+    // console.log('Respuesta de sendPDF:', resp);
   }
 };
