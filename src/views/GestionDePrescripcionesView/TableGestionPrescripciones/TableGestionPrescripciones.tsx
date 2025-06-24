@@ -12,7 +12,7 @@ import { localeTextDataGrid } from '@/utilities/constants/loacaleTextGrid';
 import { IoEyeOutline } from "react-icons/io5";
 
 import { FormulariosContext } from '@/views/Formulario/context/FormulariosContext';
-import { convertirFecha } from '@/utilities/get_String_from_Date_Esp';
+import { convertirFecha, formatDateTime, formatOnlyTime } from '@/utilities/get_String_from_Date_Esp';
 import { PrescripcionContext } from '@/views/PrescripcionView/context/PrescripcionContext';
 import { PDFModal } from '@/components/PDFModal';
 import { IoPrintOutline } from "react-icons/io5";
@@ -106,27 +106,22 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 				</Typography>
 			}.</>
 		},
+		// {
 
-
-
-		{
-
-			field: "tipo_prescripcion",
-			headerName: "Tipo de prescripción",
-			headerClassName: 'table-color--header',
-			flex: 1,
-			minWidth: 150,
-			renderCell: (params: GridRenderCellParams) => <>{params.value}</>
-		},
-
-
+		// 	field: "tipo_prescripcion",
+		// 	headerName: "Tipo de prescripción",
+		// 	headerClassName: 'table-color--header',
+		// 	flex: 1,
+		// 	minWidth: 150,
+		// 	renderCell: (params: GridRenderCellParams) => <>{params.value}</>
+		// },
 		{
 			field: "createdAt",
 			headerName: "Fecha de creación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 120,
-			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}</>
+			minWidth: 150,
+			renderCell: (params: GridRenderCellParams) => <>{`${convertirFecha(params.value)} ${formatOnlyTime(params.value)}`}</>
 		},
 
 		{
@@ -134,8 +129,8 @@ const TableGestionPrescripciones: React.FC<TableGestionPrescripcionesProps> = ()
 			headerName: "Fecha de modificación",
 			headerClassName: 'table-color--header',
 			flex: 1,
-			minWidth: 140,
-			renderCell: (params: GridRenderCellParams) => <>{convertirFecha(params.value)}</>
+			minWidth: 150,
+			renderCell: (params: GridRenderCellParams) => <>{`${convertirFecha(params.value)} ${formatOnlyTime(params.value)}`}</>
 		},
 
 		{

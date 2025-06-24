@@ -745,7 +745,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
                     <ContainerText
                       isUpper
                       title="Osmolaridad (mOsm/L)"
-                      value={`${getOsmolaridad(reporte!).volumen.toFixed(2)}`}
+                      value={`${getOsmolaridad(reporte!).volumen.toFixed(0)}`}
                     />
                   </Box>
                   <Box width={"100%"} paddingY={1}>
