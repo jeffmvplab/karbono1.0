@@ -1,4 +1,3 @@
-
 export function convertirFecha(fecha: string | Date | undefined): string {
   if (!fecha) return "";
 
@@ -51,8 +50,8 @@ export function formatOnlyTime(dateTime: string | Date | undefined): string {
 
   if (isNaN(date.getTime())) return "Fecha inválida";
 
-  let hour = date.getUTCHours(); // Usar hora UTC
-  const minutes = date.getUTCMinutes(); // Usar minutos UTC
+  let hour = date.getHours(); // Usar hora local
+  const minutes = date.getMinutes(); // Usar minutos locales
 
   const ampm = hour >= 12 ? "pm" : "am";
   hour %= 12;
