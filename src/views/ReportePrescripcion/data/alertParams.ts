@@ -174,11 +174,11 @@ export const alertFactorDePrecipitacion = (prescription: IPrescriptions) => {
     factor =
       ((calcio * 0.465 + fosfato_de_potasio * 2.6) * 100) /
       (volTotalNPT - (calcio + fosfato_de_potasio));
-    } else {
-        factor;
-    }
-    // }
-    console.log('Factor Precipitacion:',factor)
+  } else {
+    factor;
+  }
+  // }
+  console.log("Factor Precipitacion:", factor);
 
   const resp: IAlarm = { value: 0, alert: "" };
   resp.value = factor;
@@ -302,6 +302,28 @@ export const alarmConcDeLipidos = (prescription: IPrescriptions) => {
     resp.alert = "SEGURA";
   } else {
     resp.alert = "REVISAR";
+  }
+
+  return resp;
+};
+
+export const alarmRelacionAminos_Lipidos = (prescription: IPrescriptions) => {
+  const tp: string = prescription?.tipo_prescripcion!;
+
+  let lipidos: number = 0;
+  let aminoacidos: number = 0;
+
+  lipidos = getLipidos(prescription!).requerimiento;
+  aminoacidos = getAminoacidos(prescription!).requerimiento;
+  const resp: IAlarm = { value: 0, alert: "" };
+
+    resp.value = lipidos - aminoacidos;
+
+
+  if (lipidos - aminoacidos >= 0.5) {
+    resp.alert = "REVISAR";
+  } else {
+    resp.alert = "SEGURA";
   }
 
   return resp;

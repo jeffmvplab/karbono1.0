@@ -55,6 +55,7 @@ export function formatOnlyTime(dateTime: string | Date | undefined): string {
 
   const ampm = hour >= 12 ? "pm" : "am";
   hour %= 12;
+  
   hour = hour || 12; // Si hour es 0, cambia a 12
 
   const formattedTime = `${hour}:${minutes < 10 ? "0" : ""}${minutes} ${ampm}`;
