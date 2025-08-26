@@ -1069,24 +1069,40 @@ export const getConcentracionDeLipidos = (prescription: IPrescriptions) => {
   return params;
 };
 
-export const tipo_bolsa = (volTotal: number) => {
-  if (volTotal >= 0 && 150 >= volTotal) {
-    return "FREKA x 150 mL";
-  } else if (volTotal >= 150 && 250 >= volTotal) {
-    return "FREKA x 250 mL";
-  } else if (volTotal >= 250 && 500 >= volTotal) {
-    return "FREKA x 500 mL";
-  } else if (volTotal >= 500 && 1000 >= volTotal) {
-    return "FREKA x 1000 mL";
-  } else if (volTotal >= 1000 && 1800 >= volTotal) {
-    return "FREKA x 2000 mL";
-  } else if (volTotal >= 1800 && 2800 >= volTotal) {
-    return "FREKA x 3000 mL";
-  } else if (volTotal >= 2800 && 5000 >= volTotal) {
-    return "PISA x 3000 mL";
-  } else {
-    return "-";
+export const esAutomatizado = (prescription: IPrescriptions): boolean => {
+  const dextrosaVol = getDextrosa(prescription).volumen;
+  const overfill = prescription?.overfill ?? 0;
+  const contenidoDextrosa = dextrosaVol + overfill;
+  console.log("AUTOMATICO_MANUAL",contenidoDextrosa,dextrosaVol,overfill )
+  return contenidoDextrosa > 25;
+};
+
+export const tipo_bolsa = (prescription: IPrescriptions): string => {
+  // Determinar tipo de preparación según contenido dextrosa + overfill
+  const dextrosaVol = getDextrosa(prescription).volumen;
+  const overfill = prescription?.overfill ?? 0;
+  const contenidoDextrosa = dextrosaVol + overfill;
+  const volTotal = prescription?.volumen + overfill;
+
+  // Si es manual (menos o igual a 25 ml dextrosa + overfill)
+  if (contenidoDextrosa <= 25) {
+    if (volTotal <= 150) return "FREKA x 150 mL";
+    if (volTotal > 150 && volTotal <= 250) return "FREKA x 250 mL";
+    if (volTotal > 250 && volTotal <= 500) return "FREKA x 500 mL";
+    if (volTotal > 500 && volTotal <= 1000) return "FREKA x 1000 mL";
+    if (volTotal > 1000 && volTotal <= 1800) return "FREKA x 2000 mL";
+    if (volTotal > 1800 && volTotal <= 2800) return "FREKA x 3000 mL";
+    if (volTotal > 2800) return "PISA x 3000 mL";
+  } 
+  // Si es automatizada (más de 25 ml dextrosa + overfill)
+  else {
+    if (volTotal <= 250) return "BAXA x 250 mL";
+    if (volTotal > 250 && volTotal <= 500) return "BAXA x 500 mL";
+    if (volTotal > 500 && volTotal <= 1000) return "BAXA x 1000 mL";
+    if (volTotal > 1000 && volTotal <= 2000) return "BAXA x 2000 mL";
+    if (volTotal > 2000) return "BAXA x 3000 mL";
   }
+  return "-";
 };
 
 export const peso_teorico = (prescription: IPrescriptions) => {
@@ -1229,3 +1245,6 @@ export const peso_teorico = (prescription: IPrescriptions) => {
 
   return peso_teorico;
 };
+
+
+

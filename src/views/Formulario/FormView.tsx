@@ -22,6 +22,7 @@ import { FormSavedBorradorModal } from './Components/FormSavedBorradorModal';
 import CustomTextField from './Components/CustomTextField';
 import FormSaveRespoModal from './Components/FormSaveResponModal/FormSaveRespModal';
 import { GlobalContext } from '@/context/GlobalContext';
+import PDFUploadButton from './Components/PDFUploadButton';
 
 export interface FormViewProps { }
 
@@ -110,9 +111,12 @@ const FormView: React.FC<FormViewProps> = () => {
 			<FormSaveRespoModal />
 			<FormCancelModal />
 			<FormSavedBorradorModal />
-			<Typography variant='h5' padding={1} style={{ fontWeight: 700, }}>
-				Nueva Orden
-			</Typography>
+			<Stack direction="row" justifyContent="space-between" alignItems="center" padding={1}>
+				<Typography variant='h5' style={{ fontWeight: 700 }}>
+					Nueva Orden
+				</Typography>
+				<PDFUploadButton />
+			</Stack>
 
 			<Grid container >
 
