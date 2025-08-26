@@ -16,10 +16,9 @@ import {
   Alert,
   Chip
 } from '@mui/material';
-import { Upload, FileText, CheckCircle, AlertCircle } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
-import { AIPDFExtractor } from '@/utilities/aiPdfExtractor';
 import { ExtractedPrescriptionData, PrescriptionSummary } from '@/utilities/pdfExtractor';
+import { AIPDFExtractor } from '@/utilities/aiPdfExtractorNew';
 
 interface PDFPrescriptionUploaderProps {
   onPrescriptionSelect: (prescription: ExtractedPrescriptionData) => void;
@@ -116,7 +115,7 @@ export const PDFPrescriptionUploader: React.FC<PDFPrescriptionUploaderProps> = (
     <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
       <DialogTitle>
         <Box display="flex" alignItems="center" gap={1}>
-          <FileText size={24} />
+          {/* <FileText size={24} /> */}
           Cargar Prescripciones desde PDF
         </Box>
       </DialogTitle>
@@ -138,7 +137,7 @@ export const PDFPrescriptionUploader: React.FC<PDFPrescriptionUploaderProps> = (
             }}
           >
             <input {...getInputProps()} />
-            <Upload size={48} style={{ marginBottom: 16, opacity: 0.5 }} />
+            {/* <Upload size={48} style={{ marginBottom: 16, opacity: 0.5 }} /> */}
             <Typography variant="h6" gutterBottom>
               {isDragActive ? 'Suelta el archivo aquí' : 'Arrastra y suelta un PDF aquí'}
             </Typography>
@@ -241,7 +240,6 @@ export const PDFPrescriptionUploader: React.FC<PDFPrescriptionUploaderProps> = (
             onClick={handleSelectPrescription}
             variant="contained"
             disabled={!selectedPrescription}
-            startIcon={<CheckCircle size={20} />}
           >
             Cargar Prescripción Seleccionada
           </Button>

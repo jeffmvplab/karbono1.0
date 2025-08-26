@@ -115,7 +115,7 @@ const FormView: React.FC<FormViewProps> = () => {
 				<Typography variant='h5' style={{ fontWeight: 700 }}>
 					Nueva Orden
 				</Typography>
-				<PDFUploadButton />
+				{/* <PDFUploadButton />  Oculto por desarrollo incompleto de la funcionalidad IA PDF */}
 			</Stack>
 
 			<Grid container >
