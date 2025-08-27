@@ -76,9 +76,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
                         ? <Button onClick={onClickEndAdornament} sx={{ background: 'transparent', height: '30px' }}>
                             <InputAdornment position="start">{endAdornament}</InputAdornment>
                         </Button>
-                        // <Button onClick={onClickEndAdornament} sx={{ background: 'transparent', height: '30px' }}>
                         : <InputAdornment position="start">{endAdornament}</InputAdornment>
-                // </Button>,
             }}
             sx={{
                 // borderRadius: '15px',

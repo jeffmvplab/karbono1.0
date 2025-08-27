@@ -209,55 +209,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 		setNumOrder(repor?.no_orden?.toString() || '');
 
-<<<<<<< HEAD
-		setPrescripcion(repor?.tipo_prescripcion || '');
-		setIps(repor?.ips || '');
-		setNumIden(repor?.no_identificacion || '');
-		setNamePaciente(repor?.nombre_paciente || '');
-		setServicio(repor?.servicio || '');
-		setUbicacion(repor?.ubicacion || '');
-		setCama(repor?.cama || '');
-		setPesoKg(repor?.peso?.toString() || '');
-		setEdad(repor?.edad?.toString() || '');
-		setTipoEdad(repor?.tipo_edad || '');
-		setVolumen(repor?.volumen?.toString() || '');
-		setPurga(repor?.purga?.toString() || '');
-		setTiempoDeInfucion(repor?.tiempo_infusion || 0);
-		setOverfill(repor?.overfill || 0);
-		setFiltro((repor?.filtro) ? 'Si' : 'No');
-		setEqFotosencible((repor?.equipo_fotosensible) ? 'si' : 'no');
-		setTipoPaciente(repor?.tipo_paciente || '');
-		setViaAdmin(repor?.via_administracion || '');
-		setDiagnostico(repor?.diagnostico || '');
-		setTipoPrescripcion(repor?.tipo_prescripcion || '');
-		setFlujoMetabolico(repor?.flujo_metabolico || '');
-		setTipoDextrosa(repor?.tipo_dextrosa || 'Baxter');
-		setDextrosa(repor?.dextrosa || '');
-		setAminoacidos(repor?.aminoacidos || '');
-		setRequerimientoAminoacidos(repor?.req_aminoacidos || '0');
-		setLipidos(repor?.lipidos || '');
-		setRequerimientoLipidos(repor?.req_lipidos || '0');
-		setOmegaven(repor?.omegaven || '0');
-		setDipeptiven(repor?.dipeptiven || '0');
-		setSodioTotal(repor?.sodio_total || '0');
-		setPotacioTotal(repor?.potasio_total || '0');
-		setFosfato(repor?.fosfato || '');
-		setRequerimientoFosfato(repor?.req_fosfato || '0');
-		setCalcio(repor?.calcio || '');
-		setReqCalcio(repor?.req_calcio || '0');
-		setMagnesio(repor?.magnesio || '');
-		setReqMagnesio(repor?.req_magnesio || '0');
-		setElementosTraza(repor?.elementos_traza || '');
-		setReqTraza(repor?.req_elementos_traza || '0');
-		setVitaminasHidrosolubles(repor?.vit_hidrosolubles || '');
-		setReqVitHidrosolubles(repor?.req_vit_hidrosolubles || '0');
-		setVitaminasLiposolubles(repor?.req_vit_liposolubles || '0');
-		setSoluvid_Vitalipid(repor?.soluvit_vitalip || '0');
-		setVitaminasC(repor?.vit_C || '0');
-		setAcidoFolico(repor?.acido_folico || '0');
-		setEstado(repor?.estado || undefined);
-=======
-		setPrescripcion(repor?.tipo_prescripcion);
+		setPrescripcion(repor?.tipo_prescripcion ?? '');
 		setIps(repor?.ips ?? '');
 		setNumIden(repor?.no_identificacion ?? '');
 		setNamePaciente(repor?.nombre_paciente ?? '');
@@ -276,34 +228,33 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setTipoPaciente(repor?.tipo_paciente ?? '');
 		setViaAdmin(repor?.via_administracion ?? '');
 		setDiagnostico(repor?.diagnostico ?? '');
-		setTipoPrescripcion(repor?.tipo_prescripcion);
-		setFlujoMetabolico(repor?.flujo_metabolico);
-		setTipoDextrosa(repor?.tipo_dextrosa!);
-		setDextrosa(repor?.dextrosa!);
-		setAminoacidos(repor?.aminoacidos);
-		setRequerimientoAminoacidos(repor?.req_aminoacidos);
-		setLipidos(repor?.lipidos);
-		setRequerimientoLipidos(repor?.req_lipidos);
-		setOmegaven(repor?.omegaven);
-		setDipeptiven(repor?.dipeptiven);
-		setSodioTotal(repor?.sodio_total);
-		setPotacioTotal(repor?.potasio_total);
-		setFosfato(repor?.fosfato);
-		setRequerimientoFosfato(repor?.req_fosfato);
-		setCalcio(repor?.calcio);
-		setReqCalcio(repor?.req_calcio);
-		setMagnesio(repor?.magnesio);
-		setReqMagnesio(repor?.req_magnesio);
-		setElementosTraza(repor?.elementos_traza);
-		setReqTraza(repor?.req_elementos_traza);
-		setVitaminasHidrosolubles(repor?.vit_hidrosolubles);
-		setReqVitHidrosolubles(repor?.req_vit_hidrosolubles);
-		setVitaminasLiposolubles(repor?.req_vit_liposolubles);
-		setSoluvid_Vitalipid(repor?.soluvit_vitalip)
-		setVitaminasC(repor?.vit_C);
-		setAcidoFolico(repor?.acido_folico);
-		setEstado(repor?.estado!);
->>>>>>> 83838a1f71cb97ab9b73303b79f59f4ad11a4d69
+		setTipoPrescripcion(repor?.tipo_prescripcion ?? '');
+		setFlujoMetabolico(repor?.flujo_metabolico ?? '');
+		setTipoDextrosa(repor?.tipo_dextrosa ?? 'Baxter');
+		setDextrosa(repor?.dextrosa ?? '');
+		setAminoacidos(repor?.aminoacidos ?? '');
+		setRequerimientoAminoacidos(repor?.req_aminoacidos ?? '0');
+		setLipidos(repor?.lipidos ?? '');
+		setRequerimientoLipidos(repor?.req_lipidos ?? '0');
+		setOmegaven(repor?.omegaven ?? '0');
+		setDipeptiven(repor?.dipeptiven ?? '0');
+		setSodioTotal(repor?.sodio_total ?? '0');
+		setPotacioTotal(repor?.potasio_total ?? '0');
+		setFosfato(repor?.fosfato ?? '');
+		setRequerimientoFosfato(repor?.req_fosfato ?? '0');
+		setCalcio(repor?.calcio ?? '');
+		setReqCalcio(repor?.req_calcio ?? '0');
+		setMagnesio(repor?.magnesio ?? '');
+		setReqMagnesio(repor?.req_magnesio ?? '0');
+		setElementosTraza(repor?.elementos_traza ?? '');
+		setReqTraza(repor?.req_elementos_traza ?? '0');
+		setVitaminasHidrosolubles(repor?.vit_hidrosolubles ?? '');
+		setReqVitHidrosolubles(repor?.req_vit_hidrosolubles ?? '0');
+		setVitaminasLiposolubles(repor?.req_vit_liposolubles ?? '0');
+		setSoluvid_Vitalipid(repor?.soluvit_vitalip ?? '0');
+		setVitaminasC(repor?.vit_C ?? '0');
+		setAcidoFolico(repor?.acido_folico ?? '0');
+		setEstado(repor?.estado ?? undefined);
 	}
 
 	const cancelForm = (route: string) => {
