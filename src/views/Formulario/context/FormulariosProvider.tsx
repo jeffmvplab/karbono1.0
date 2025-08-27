@@ -197,57 +197,57 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	const initState = (repor: IPrescriptions) => {
 
-		setCreatedAt(repor?.createdAt);
-		setUpdatedAt(repor?.updatedAt);
+		setCreatedAt(repor?.createdAt || '');
+		setUpdatedAt(repor?.updatedAt || '');
 
-		setNumOrder(repor?.no_orden.toString());
+		setNumOrder(repor?.no_orden?.toString() || '');
 
-		setPrescripcion(repor?.tipo_prescripcion);
-		setIps(repor?.ips);
-		setNumIden(repor?.no_identificacion);
-		setNamePaciente(repor?.nombre_paciente);
-		setServicio(repor?.servicio);
-		setUbicacion(repor?.ubicacion);
-		setCama(repor?.cama);
-		setPesoKg(repor?.peso.toString());
-		setEdad(repor?.edad.toString());
-		setTipoEdad(repor?.tipo_edad);
-		setVolumen(repor?.volumen.toString());
-		setPurga(repor?.purga.toString());
-		setTiempoDeInfucion(repor?.tiempo_infusion);
-		setOverfill(repor?.overfill);
+		setPrescripcion(repor?.tipo_prescripcion || '');
+		setIps(repor?.ips || '');
+		setNumIden(repor?.no_identificacion || '');
+		setNamePaciente(repor?.nombre_paciente || '');
+		setServicio(repor?.servicio || '');
+		setUbicacion(repor?.ubicacion || '');
+		setCama(repor?.cama || '');
+		setPesoKg(repor?.peso?.toString() || '');
+		setEdad(repor?.edad?.toString() || '');
+		setTipoEdad(repor?.tipo_edad || '');
+		setVolumen(repor?.volumen?.toString() || '');
+		setPurga(repor?.purga?.toString() || '');
+		setTiempoDeInfucion(repor?.tiempo_infusion || 0);
+		setOverfill(repor?.overfill || 0);
 		setFiltro((repor?.filtro) ? 'Si' : 'No');
 		setEqFotosencible((repor?.equipo_fotosensible) ? 'si' : 'no');
-		setTipoPaciente(repor?.tipo_paciente);
-		setViaAdmin(repor?.via_administracion);
-		setDiagnostico(repor?.diagnostico);
-		setTipoPrescripcion(repor?.tipo_prescripcion);
-		setFlujoMetabolico(repor?.flujo_metabolico);
-		setTipoDextrosa(repor?.tipo_dextrosa!);
-		setDextrosa(repor?.dextrosa!);
-		setAminoacidos(repor?.aminoacidos);
-		setRequerimientoAminoacidos(repor?.req_aminoacidos);
-		setLipidos(repor?.lipidos);
-		setRequerimientoLipidos(repor?.req_lipidos);
-		setOmegaven(repor?.omegaven);
-		setDipeptiven(repor?.dipeptiven);
-		setSodioTotal(repor?.sodio_total);
-		setPotacioTotal(repor?.potasio_total);
-		setFosfato(repor?.fosfato);
-		setRequerimientoFosfato(repor?.req_fosfato);
-		setCalcio(repor?.calcio);
-		setReqCalcio(repor?.req_calcio);
-		setMagnesio(repor?.magnesio);
-		setReqMagnesio(repor?.req_magnesio);
-		setElementosTraza(repor?.elementos_traza);
-		setReqTraza(repor?.req_elementos_traza);
-		setVitaminasHidrosolubles(repor?.vit_hidrosolubles);
-		setReqVitHidrosolubles(repor?.req_vit_hidrosolubles);
-		setVitaminasLiposolubles(repor?.req_vit_liposolubles);
-		setSoluvid_Vitalipid(repor?.soluvit_vitalip)
-		setVitaminasC(repor?.vit_C);
-		setAcidoFolico(repor?.acido_folico);
-		setEstado(repor?.estado!);
+		setTipoPaciente(repor?.tipo_paciente || '');
+		setViaAdmin(repor?.via_administracion || '');
+		setDiagnostico(repor?.diagnostico || '');
+		setTipoPrescripcion(repor?.tipo_prescripcion || '');
+		setFlujoMetabolico(repor?.flujo_metabolico || '');
+		setTipoDextrosa(repor?.tipo_dextrosa || 'Baxter');
+		setDextrosa(repor?.dextrosa || '');
+		setAminoacidos(repor?.aminoacidos || '');
+		setRequerimientoAminoacidos(repor?.req_aminoacidos || '0');
+		setLipidos(repor?.lipidos || '');
+		setRequerimientoLipidos(repor?.req_lipidos || '0');
+		setOmegaven(repor?.omegaven || '0');
+		setDipeptiven(repor?.dipeptiven || '0');
+		setSodioTotal(repor?.sodio_total || '0');
+		setPotacioTotal(repor?.potasio_total || '0');
+		setFosfato(repor?.fosfato || '');
+		setRequerimientoFosfato(repor?.req_fosfato || '0');
+		setCalcio(repor?.calcio || '');
+		setReqCalcio(repor?.req_calcio || '0');
+		setMagnesio(repor?.magnesio || '');
+		setReqMagnesio(repor?.req_magnesio || '0');
+		setElementosTraza(repor?.elementos_traza || '');
+		setReqTraza(repor?.req_elementos_traza || '0');
+		setVitaminasHidrosolubles(repor?.vit_hidrosolubles || '');
+		setReqVitHidrosolubles(repor?.req_vit_hidrosolubles || '0');
+		setVitaminasLiposolubles(repor?.req_vit_liposolubles || '0');
+		setSoluvid_Vitalipid(repor?.soluvit_vitalip || '0');
+		setVitaminasC(repor?.vit_C || '0');
+		setAcidoFolico(repor?.acido_folico || '0');
+		setEstado(repor?.estado || undefined);
 	}
 
 	const cancelForm = (route: string) => {
@@ -299,12 +299,13 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	////////////////////INFORMACIÓN DEL PACIENTE////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////
-	const [ips, setIps] = React.useState<string>(
-		Array.isArray(getMeUser().entidad_de_salud)
-			? Array.isArray(getMeUser().entidad_de_salud[0])
-				? getMeUser().entidad_de_salud[0][0]
-				: getMeUser().entidad_de_salud[0]
-			: '');
+	const [ips, setIps] = React.useState<string>(() => {
+		const userEntidad = getMeUser()?.entidad_de_salud;
+		if (Array.isArray(userEntidad)) {
+			return Array.isArray(userEntidad[0]) ? userEntidad[0][0] || '' : userEntidad[0] || '';
+		}
+		return userEntidad || '';
+	});
 	const [errorIps, setErrorIps] = React.useState(false);
 	const [messageErrorIps, setMessageErrorIps] = React.useState('');
 

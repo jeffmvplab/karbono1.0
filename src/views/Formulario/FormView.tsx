@@ -180,7 +180,6 @@ const FormView: React.FC<FormViewProps> = () => {
 														onClick={getPrescriptions}
 														onKeyPress={getPrescriptions}
 														value={tipoPrescripcion}
-														defaulValue={tipoPrescripcion}
 														id='tipo-prescripción*'
 														label='Tipo Prescripción*'
 														select={true}

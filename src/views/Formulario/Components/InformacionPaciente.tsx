@@ -120,14 +120,21 @@ const InformacionPaciente = () => {
 
     useEffect(() => {
         setLoading(true)
-        setIps(
-            Array.isArray(getMeUser().entidad_de_salud)
-                ? Array.isArray(getMeUser().entidad_de_salud[0])
-                    ? getMeUser().entidad_de_salud[0][0]
-                    : getMeUser().entidad_de_salud[0]
-                : ips)
+        const user = getMeUser();
+        if (user && user.entidad_de_salud) {
+            const entidadSalud = user.entidad_de_salud;
+            if (Array.isArray(entidadSalud)) {
+                if (Array.isArray(entidadSalud[0])) {
+                    setIps(entidadSalud[0][0] || '');
+                } else {
+                    setIps(entidadSalud[0] || '');
+                }
+            } else {
+                setIps(entidadSalud || '');
+            }
+        }
         console.log('IPS:', ips);
-    }, [])
+    }, [getMeUser, setIps, ips])
 
     /////////////////////////////////////////////////////////////////////
 

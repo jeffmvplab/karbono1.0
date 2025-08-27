@@ -301,9 +301,10 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
   };
 
   const getMeRol = () => {
-    if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
+    const userData = localStorageProtocol.get(StorageKeysEnum.user);
+    if (userData !== null) {
       setIsAuth(true);
-      const rol: string[] = localStorageProtocol.get(StorageKeysEnum.user).rol;
+      const rol: string[] = userData.rol || [];
       // console.log('ROL:', rol);
       return rol;
     } else {
@@ -314,15 +315,21 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
   };
 
   const getMeUser = () => {
-    if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
+    const userData = localStorageProtocol.get(StorageKeysEnum.user);
+    if (userData !== null) {
       setIsAuth(true);
-      const user: IUser = localStorageProtocol.get(StorageKeysEnum.user);
+      const user: IUser = userData;
       // console.log('User:', user);
       return user;
     } else {
       setIsAuth(false);
       // console.log('ROL:', []);
-      return "";
+      return {
+        entidad_de_salud: [''],
+        rol: [],
+        nombre_apellidos: '',
+        email: ''
+      } as IUser;
     }
   };
 
