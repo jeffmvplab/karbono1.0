@@ -300,7 +300,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  const getMeRol = () => {
+  const getMeRol = React.useCallback(() => {
     const userData = localStorageProtocol.get(StorageKeysEnum.user);
     if (userData !== null) {
       setIsAuth(true);
@@ -312,9 +312,9 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
       // console.log('ROL:', []);
       return [];
     }
-  };
+  }, []);
 
-  const getMeUser = () => {
+  const getMeUser = React.useCallback(() => {
     const userData = localStorageProtocol.get(StorageKeysEnum.user);
     if (userData !== null) {
       setIsAuth(true);
@@ -331,7 +331,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
         email: ''
       } as IUser;
     }
-  };
+  }, []);
 
   /////////////////////////////LOGIN//////////////////////////////////////////////
   const useruseCase = new UserUseCases();

@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { colorsKarbono } from "@/themes/colors";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { ReportesContext } from "../ReportePrescripcion/context/ReportesContext";
 import {
   convertirFecha,
@@ -21,6 +21,7 @@ import {
 
 import {
   correccionPurga,
+  esAutomatizado,
   getAgua,
   getAminoacidos,
   getCalTotales,
@@ -77,11 +78,49 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
 
   const reporte = reporteProp || reporteFromContext; // Usar la prop si existe, de lo contrario el contexto
 
+  // --- Fragmento para código y código de barras dinámico ---
+  const [patCode, setPatCode] = useState<string>("");
+  const barcodeRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    // Simulación: buscar el archivo .pat que coincide con el nombre del paciente
+    // En producción, esto debería leer el contenido del archivo .pat y extraer el código
+    if (reporte?.nombre_paciente) {
+      // Ejemplo: buscar entre los archivos .pat en public
+      const patFiles = ["CCF4D8-00000012.pat"]; // Aquí deberías obtener la lista real
+      // Simulación: usar el primero
+      const code = patFiles[0].replace(".pat", "");
+      setPatCode(code);
+    }
+  }, [reporte?.nombre_paciente]);
+
+  useEffect(() => {
+    if (patCode && barcodeRef.current && typeof window !== "undefined") {
+      (async () => {
+        try {
+          const mod = await import("jsbarcode");
+          const JsBarcode = mod.default || mod;
+          JsBarcode(barcodeRef.current, patCode, {
+            format: "CODE128",
+            width: 2,
+            height: 40,
+            displayValue: false,
+          });
+        } catch (err) {
+          // Si no está instalado, lo mostramos en consola y seguimos sin bloquear la UI
+          // La dependencia debe instalarse con `yarn add jsbarcode`
+          // Esto evita que la app rompa si falta el paquete.
+          // eslint-disable-next-line no-console
+          console.error("jsbarcode load failed:", err);
+        }
+      })();
+    }
+  }, [patCode, barcodeRef.current]);
   useEffect(() => {
     if (!reporteProp) {
       getPrescriptionsByNumber(); // Solo ejecutar si no se pasa reporte como prop
     }
-  }, []);
+  }, [reporteProp]);
 
   console.log("REPORT", reporteFromContext, reporteProp);
 
@@ -182,8 +221,8 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
                       fontWeight: "bold",
                     }}
                   >
-                    Corporación de Fomento Asistencial del Hospital Universitario
-                    San Vicente de Paúl
+                    Corporación de Fomento Asistencial del Hospital
+                    Universitario San Vicente de Paúl
                   </Typography>
                   {/* <Image
                     src="/assets/Logo Fomenthum.png"
@@ -220,7 +259,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
                         fontWeight: "normal",
                       }}
                     >
-                     NA-FO-0078
+                      NA-FO-0078
                     </Typography>
                   </Stack>
 
@@ -706,13 +745,27 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
                       <ContainerText
                         isUpper
                         title="TIPO DE BOLSA"
-                        value={tipo_bolsa(reporte?.volumen!)}
+                        value={tipo_bolsa(reporte!)}
                       />
                     </Box>
                   </Stack>
                 </Box>
               </Grid>
             </Grid>
+          </Stack>
+          {
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          }
+          <Stack paddingTop={0} direction={"row"} paddingY={0}>
+            <Typography
+              fontSize="24px"
+              fontWeight={700}
+              textAlign={"start"}
+              paddingY={2}
+            >
+              {/* Mostrar el nombre del archivo .pat como código */}
+              {esAutomatizado(reporte!) ? "CCF4D8-00000012" : ""}
+            </Typography>
           </Stack>
           {
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -805,9 +858,8 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
                       color={colorsKarbono.primary}
                       value={
                         reporte?.controlador_de_calidad?.nombre_apellidos!
-                          ? `${
-                              reporte?.controlador_de_calidad?.nombre_apellidos!
-                            }`
+                          ? `${reporte?.controlador_de_calidad
+                              ?.nombre_apellidos!}`
                           : "-"
                       }
                     />
@@ -855,6 +907,22 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
                     direction={"column"}
                     justifyContent={"end"}
                   >
+                    <Stack
+                      paddingBottom={4}
+                      width={"100%"}
+                      direction={"row"}
+                      justifyContent={"space-between"}
+                    >
+                      {esAutomatizado(reporte!) ? (
+                        <canvas
+                          ref={barcodeRef}
+                          style={{ width: 350, height: 40 }}
+                        />
+                      ) : (
+                        <></>
+                      )}
+                    </Stack>
+
                     <Stack
                       width={"100%"}
                       direction={"row"}

@@ -3,7 +3,7 @@ import { GlobalContext } from "@/context/GlobalContext";
 import { mainRoutes } from "@/routes/routes";
 import { Stack, Typography, Drawer, IconButton, Box, Button, Divider } from "@mui/material";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import Image from 'next/image'
 import { ButtonsMainDrawer } from "../ButtonsMainDrawer";
 import { RolUsersKeysEnum } from "@/utilities/enums/rol_user_keys.enum";
@@ -13,9 +13,18 @@ export interface MainDrawerProps { }
 const MainDrawer: React.FC<MainDrawerProps> = () => {
 
 	const { openMainDrawer, setOpenMainDrawer, getMeRol } = useContext(GlobalContext);
+	const [userRole, setUserRole] = useState<string>('');
 
 	// return focus to the button when we transitioned from !open -> open
 	const route = useRouter();
+
+	// Obtener el rol una vez al montar el componente
+	useEffect(() => {
+		const role = getMeRol();
+		if (Array.isArray(role) && role.length > 0) {
+			setUserRole(role[0]);
+		}
+	}, [getMeRol]);
 
 	// console.log('VVV:', route.pathname)
 
@@ -104,8 +113,7 @@ const MainDrawer: React.FC<MainDrawerProps> = () => {
 
 						<ButtonsMainDrawer
 							id={
-								Array.isArray(getMeRol())
-									&& (getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+								userRole === RolUsersKeysEnum.prescriptor
 									? 'Pre_navbar_Prescripciones'
 									: 'QF_navbar_Prescripciones'
 							}
@@ -118,8 +126,7 @@ const MainDrawer: React.FC<MainDrawerProps> = () => {
 									<path d="M13.9619 9.40259C13.9619 9.21414 13.8089 9.0614 13.62 9.0614H9.85303C9.66434 9.0614 9.51117 9.21414 9.51117 9.40259C9.51117 9.59092 9.66434 9.74379 9.85303 9.74379H13.62C13.8089 9.74379 13.9619 9.59105 13.9619 9.40259Z" fill={mainRoutes.prescripcion === route.pathname ? "#2FC5C6" : "#656474"} />
 								</svg>
 							}
-							title={Array.isArray(getMeRol())
-								&& getMeRol()[0] === RolUsersKeysEnum.prescriptor
+							title={userRole === RolUsersKeysEnum.prescriptor
 								? "Prescripciones"
 								: 'Gestión de Prescripciones'
 							}
@@ -127,21 +134,17 @@ const MainDrawer: React.FC<MainDrawerProps> = () => {
 							hIcon={28}
 							isActive={(mainRoutes.prescripcion === route.pathname || mainRoutes.gestion === route.pathname)}
 							rourte={
-								Array.isArray(getMeRol())
-									&& getMeRol()[0] === RolUsersKeysEnum.prescriptor
+								userRole === RolUsersKeysEnum.prescriptor
 									? mainRoutes.prescripcion
 									: mainRoutes.gestion
 							} />
 						<Divider />
 
 						{
-							Array.isArray(getMeRol())
-							&&
-							getMeRol()[0] !== RolUsersKeysEnum.prescriptor
+							userRole !== RolUsersKeysEnum.prescriptor
 							&& <>
 								<ButtonsMainDrawer
-									id={(Array.isArray(getMeRol())
-										&& getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+									id={userRole === RolUsersKeysEnum.prescriptor
 										? 'Pre_navbar_ArchivosPlanos'
 										: 'QF_navbar_Archivos'
 									}
@@ -180,8 +183,7 @@ const MainDrawer: React.FC<MainDrawerProps> = () => {
 
 						{/* <Divider /> */}
 						<ButtonsMainDrawer
-							id={(Array.isArray(getMeRol())
-								&& getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+							id={userRole === RolUsersKeysEnum.prescriptor
 								? 'Pre_navbar_Informes'
 								: 'QF_navbar_Informes'
 							}
@@ -206,8 +208,7 @@ const MainDrawer: React.FC<MainDrawerProps> = () => {
 
 						<Divider />
 						<ButtonsMainDrawer
-							id={Array.isArray(getMeRol())
-								&& (getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+							id={userRole === RolUsersKeysEnum.prescriptor
 								? 'Pre_navbar_Configuracion'
 								: 'QF_navbar_Configuracion'
 							}
@@ -225,8 +226,7 @@ const MainDrawer: React.FC<MainDrawerProps> = () => {
 
 						<Divider />
 						<ButtonsMainDrawer
-							id={Array.isArray(getMeRol())
-								&& (getMeRol()[0] === RolUsersKeysEnum.prescriptor)
+							id={userRole === RolUsersKeysEnum.prescriptor
 								? 'Pre_navbar_Ayuda'
 								: 'QF_navbar_Ayuda'
 							}
