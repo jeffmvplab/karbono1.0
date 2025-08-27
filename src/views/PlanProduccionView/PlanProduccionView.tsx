@@ -839,7 +839,7 @@ const PlanProduccionView: React.FC<PlanProduccionViewProps> = () => {
                     <ContainerText
                       isUpper
                       title="BOLSA EVA"
-                      value={`${tipo_bolsa(reporte?.volumen!)}`}
+                      value={`${tipo_bolsa(reporte!)}`}
                     />
                   </Box>
                   <Box width={"100%"} paddingY={1}>

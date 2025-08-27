@@ -706,7 +706,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
                       <ContainerText
                         isUpper
                         title="TIPO DE BOLSA"
-                        value={tipo_bolsa(reporte?.volumen!)}
+                        value={tipo_bolsa(reporte!)}
                       />
                     </Box>
                   </Stack>
