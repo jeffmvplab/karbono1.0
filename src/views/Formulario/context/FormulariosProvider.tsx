@@ -25,6 +25,13 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	let matches: boolean = useMediaQuery('(min-width:768px)')
 
 	const { handleOffline, getMeUser } = useContext(GlobalContext)
+	const [userData, setUserData] = useState<any>(null);
+
+	// Obtener datos del usuario una vez al montar el componente
+	useEffect(() => {
+		const user = getMeUser();
+		setUserData(user);
+	}, [getMeUser]);
 
 	const [stateAcordion1, setStateAcordion1] = useState(false);
 	const handleAcordion1 = () => {
@@ -56,8 +63,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// console.log('CHANGE:',isMovil)
 	}
 
-	const getMovilHeight = () => {
-
+	const getMovilHeight = React.useCallback(() => {
 		if (stateAcordion1 && stateAcordion2 && stateAcordion3) { return '3270px' }
 		if (!stateAcordion1 && stateAcordion2 && stateAcordion3) { return '2120px' }
 		if (stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '2500px' }
@@ -66,7 +72,8 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		if (stateAcordion1 && !stateAcordion2 && !stateAcordion3) { return '1325px' }
 		if (!stateAcordion1 && stateAcordion2 && !stateAcordion3) { return '920px' }
 		if (!stateAcordion1 && !stateAcordion2 && stateAcordion3) { return '1360px' }
-	}
+		return '150px'; // valor por defecto
+	}, [stateAcordion1, stateAcordion2, stateAcordion3]);
 	/////////////////////HANDLE MENUS/////////////////
 	const [open1, setOpen1] = React.useState<boolean>();
 	const [open2, setOpen2] = React.useState<boolean>();
@@ -203,24 +210,24 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setNumOrder(repor?.no_orden.toString());
 
 		setPrescripcion(repor?.tipo_prescripcion);
-		setIps(repor?.ips);
-		setNumIden(repor?.no_identificacion);
-		setNamePaciente(repor?.nombre_paciente);
-		setServicio(repor?.servicio);
-		setUbicacion(repor?.ubicacion);
-		setCama(repor?.cama);
-		setPesoKg(repor?.peso.toString());
-		setEdad(repor?.edad.toString());
-		setTipoEdad(repor?.tipo_edad);
-		setVolumen(repor?.volumen.toString());
-		setPurga(repor?.purga.toString());
-		setTiempoDeInfucion(repor?.tiempo_infusion);
-		setOverfill(repor?.overfill);
+		setIps(repor?.ips ?? '');
+		setNumIden(repor?.no_identificacion ?? '');
+		setNamePaciente(repor?.nombre_paciente ?? '');
+		setServicio(repor?.servicio ?? '');
+		setUbicacion(repor?.ubicacion ?? '');
+		setCama(repor?.cama ?? '');
+		setPesoKg((repor?.peso !== undefined && !isNaN(repor.peso)) ? repor.peso.toString() : '');
+		setEdad((repor?.edad !== undefined && !isNaN(repor.edad)) ? repor.edad.toString() : '');
+		setTipoEdad(repor?.tipo_edad ?? '');
+		setVolumen((repor?.volumen !== undefined && !isNaN(repor.volumen)) ? repor.volumen.toString() : '');
+		setPurga((repor?.purga !== undefined && !isNaN(repor.purga)) ? repor.purga.toString() : '');
+		setTiempoDeInfucion(repor?.tiempo_infusion ?? '');
+		setOverfill(repor?.overfill ?? '');
 		setFiltro((repor?.filtro) ? 'Si' : 'No');
 		setEqFotosencible((repor?.equipo_fotosensible) ? 'si' : 'no');
-		setTipoPaciente(repor?.tipo_paciente);
-		setViaAdmin(repor?.via_administracion);
-		setDiagnostico(repor?.diagnostico);
+		setTipoPaciente(repor?.tipo_paciente ?? '');
+		setViaAdmin(repor?.via_administracion ?? '');
+		setDiagnostico(repor?.diagnostico ?? '');
 		setTipoPrescripcion(repor?.tipo_prescripcion);
 		setFlujoMetabolico(repor?.flujo_metabolico);
 		setTipoDextrosa(repor?.tipo_dextrosa!);
@@ -300,10 +307,10 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	////////////////////INFORMACIÓN DEL PACIENTE////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////
 	const [ips, setIps] = React.useState<string>(
-		Array.isArray(getMeUser().entidad_de_salud)
-			? Array.isArray(getMeUser().entidad_de_salud[0])
-				? getMeUser().entidad_de_salud[0][0]
-				: getMeUser().entidad_de_salud[0]
+		userData && Array.isArray(userData.entidad_de_salud)
+			? Array.isArray(userData.entidad_de_salud[0])
+				? userData.entidad_de_salud[0][0]
+				: userData.entidad_de_salud[0]
 			: '');
 	const [errorIps, setErrorIps] = React.useState(false);
 	const [messageErrorIps, setMessageErrorIps] = React.useState('');
@@ -888,6 +895,86 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
+	// Función para llenar el formulario con datos extraídos del PDF
+	const fillFormWithExtractedData = (data: any) => {
+		try {
+			// Información del paciente
+			if (data.nombrePaciente) handleNamePaciente({ target: { value: data.nombrePaciente } } as any);
+			if (data.numIdentificacion) handleNumIden({ target: { value: data.numIdentificacion } } as any);
+			if (data.ips) setIps(data.ips);
+			if (data.servicio) handleServicio({ target: { value: data.servicio } } as any);
+			if (data.ubicacion) handleUbicacion({ target: { value: data.ubicacion } } as any);
+			if (data.cama) handleCama({ target: { value: data.cama } } as any);
+			if (data.peso) {
+				const peso = parseFloat(data.peso);
+				if (!isNaN(peso)) handlePesoKg({ target: { value: data.peso } } as any);
+			}
+			if (data.edad) {
+				const edad = parseFloat(data.edad);
+				if (!isNaN(edad)) handleEdad({ target: { value: data.edad } } as any);
+			}
+			if (data.tipoEdad) handleTipoEdad({ target: { value: data.tipoEdad } } as any);
+			if (data.volumen) {
+				const volumen = parseFloat(data.volumen);
+				if (!isNaN(volumen)) handleVolumen({ target: { value: data.volumen } } as any);
+			}
+			if (data.tiempoInfusion) {
+				const tiempo = parseFloat(data.tiempoInfusion);
+				if (!isNaN(tiempo)) handleTiempoDeInfucion({} as any, tiempo);
+			}
+			if (data.overfill) {
+				const overfill = parseFloat(data.overfill);
+				if (!isNaN(overfill)) handleOverfill({} as any, overfill);
+			}
+			if (data.filtro) handleFiltro({ target: { value: data.filtro } } as any);
+			if (data.equipoFotosensible) handleEqFotosencible({ target: { value: data.equipoFotosensible } } as any);
+			if (data.tipoPaciente) handleTipoPaciente({ target: { value: data.tipoPaciente } } as any);
+			if (data.viaAdministracion) handleViaAdmin({ target: { value: data.viaAdministracion } } as any);
+			if (data.diagnostico) handleDiagnostico({ target: { value: data.diagnostico } } as any);
+			
+			// Macronutrientes
+			if (data.aminoacidos) handleAminoacidos({ target: { value: data.aminoacidos } } as any);
+			if (data.requerimientoAminoacidos) handleRequerimientoAminoacidos({ target: { value: data.requerimientoAminoacidos } } as any);
+			if (data.lipidos) handleLipidos({ target: { value: data.lipidos } } as any);
+			if (data.requerimientoLipidos) handleRequerimientoLipidos({ target: { value: data.requerimientoLipidos } } as any);
+			if (data.dextrosa) handleTipoDextrosa({ target: { value: data.dextrosa } } as any);
+			if (data.omegaven) handleOmegaven({ target: { value: data.omegaven } } as any);
+			if (data.dipeptiven) handleDipeptiven({ target: { value: data.dipeptiven } } as any);
+			
+			// Micronutrientes
+			if (data.sodioTotal) {
+				const sodio = parseFloat(data.sodioTotal);
+				if (!isNaN(sodio)) handleSodioTotal({ target: { value: data.sodioTotal } } as any);
+			}
+			if (data.potasioTotal) {
+				const potasio = parseFloat(data.potasioTotal);
+				if (!isNaN(potasio)) handlePotacioTotal({ target: { value: data.potasioTotal } } as any);
+			}
+			if (data.calcio) {
+				const calcio = parseFloat(data.calcio);
+				if (!isNaN(calcio)) handleCalcio({ target: { value: data.calcio } } as any);
+			}
+			if (data.magnesio) {
+				const magnesio = parseFloat(data.magnesio);
+				if (!isNaN(magnesio)) handleMagnesio({ target: { value: data.magnesio } } as any);
+			}
+			if (data.fosfato) handleFosfato({ target: { value: data.fosfato } } as any);
+			if (data.requerimientoFosfato) handleRequerimientoFosfato({ target: { value: data.requerimientoFosfato } } as any);
+			if (data.elementosTraza) handleElementosTraza({ target: { value: data.elementosTraza } } as any);
+			if (data.requerimientoElementosTraza) handleReqTraza({ target: { value: data.requerimientoElementosTraza } } as any);
+			if (data.vitaminasHidrosolubles) handleVitaminasHidrosolubles({ target: { value: data.vitaminasHidrosolubles } } as any);
+			if (data.requerimientoVitaminasHidrosolubles) handleReqVitHidrosolubles({ target: { value: data.requerimientoVitaminasHidrosolubles } } as any);
+			if (data.vitaminasLiposolubles) handleVitaminasLiposolubles({ target: { value: data.vitaminasLiposolubles } } as any);
+			if (data.requerimientoVitaminasLiposolubles) handleSoluvid_Vitalipid({ target: { value: data.requerimientoVitaminasLiposolubles } } as any);
+			if (data.vitaminasC) handleVitaminasC({ target: { value: data.vitaminasC } } as any);
+			if (data.acidoFolico) handleAcidoFolico({ target: { value: data.acidoFolico } } as any);
+			
+		} catch (error) {
+			console.error('Error al llenar formulario con datos extraídos:', error);
+			throw new Error(`Error al aplicar datos al formulario: ${(error as Error).message}`);
+		}
+	};
+
 	const [createdAt, setCreatedAt] = React.useState<Date | string | null>('');
 	const [updatedAt, setUpdatedAt] = React.useState<Date | string | null>('');
 
@@ -1454,8 +1541,18 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 			selectTab, setSelectTab,
 			tabsErrors, setTabErrors,
 			validateTipoPrecripcion,
-			valTabsErrors1, valTabsErrors2
+			valTabsErrors1, valTabsErrors2,
+			fillFormWithExtractedData
 		}}>{children}
 		</FormulariosContext.Provider>
 	)
+};
+
+// Hook personalizado para usar el contexto
+export const useFormulariosContext = () => {
+	const context = useContext(FormulariosContext);
+	if (!context) {
+		throw new Error('useFormulariosContext debe ser usado dentro de FormulariosProvider');
+	}
+	return context;
 };

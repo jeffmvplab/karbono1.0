@@ -130,6 +130,7 @@ interface ContextProps {
     tabsErrors: IErrorsTab, setTabErrors: React.Dispatch<React.SetStateAction<IErrorsTab>>
     valTabsErrors1: () => boolean | undefined, valTabsErrors2: () => boolean | undefined,
     validateTipoPrecripcion: (tipoPrescripcion: string) => boolean,
+    fillFormWithExtractedData: (data: any) => void,
 
 
 }

@@ -300,7 +300,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  const getMeRol = () => {
+  const getMeRol = React.useCallback(() => {
     if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
       setIsAuth(true);
       const rol: string[] = localStorageProtocol.get(StorageKeysEnum.user).rol;
@@ -311,9 +311,9 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
       // console.log('ROL:', []);
       return [];
     }
-  };
+  }, []);
 
-  const getMeUser = () => {
+  const getMeUser = React.useCallback(() => {
     if (localStorageProtocol.get(StorageKeysEnum.user) !== null) {
       setIsAuth(true);
       const user: IUser = localStorageProtocol.get(StorageKeysEnum.user);
@@ -324,7 +324,7 @@ export const GlobalProvider: FC<Props> = ({ children }) => {
       // console.log('ROL:', []);
       return "";
     }
-  };
+  }, []);
 
   /////////////////////////////LOGIN//////////////////////////////////////////////
   const useruseCase = new UserUseCases();

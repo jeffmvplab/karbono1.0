@@ -57,8 +57,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
             error={error}
             label={label}
             type={type}
-            value={value!}
-            defaultValue={defaulValue}
+            value={value !== undefined && value !== null && !isNaN(value) ? value : ''}
             variant='outlined'
             color='secondary'
             fullWidth
