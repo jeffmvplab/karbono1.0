@@ -306,13 +306,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 
 	////////////////////INFORMACIÓN DEL PACIENTE////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////
-	const [ips, setIps] = React.useState<string>(() => {
-		const userEntidad = getMeUser()?.entidad_de_salud;
-		if (Array.isArray(userEntidad)) {
-			return Array.isArray(userEntidad[0]) ? userEntidad[0][0] || '' : userEntidad[0] || '';
-		}
-		return userEntidad || '';
-	});
+	const [ips, setIps] = React.useState<string>('');
 	const [errorIps, setErrorIps] = React.useState(false);
 	const [messageErrorIps, setMessageErrorIps] = React.useState('');
 
@@ -436,7 +430,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		setEdad(event.target.value);
 	};
 
-	const [tipoEdad, setTipoEdad] = React.useState('');
+	const [tipoEdad, setTipoEdad] = React.useState('años');
 	const [errorTipoEdad, setErrorTipoEdad] = React.useState(false);
 	const [messageErrorTipoEdad, setMessageErrorTipoEdad] = React.useState('');
 
@@ -521,7 +515,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [filtro, setFiltro] = React.useState('');
+	const [filtro, setFiltro] = React.useState('No');
 	const [errorFiltro, setErrorFiltro] = React.useState(false);
 	const [messageErrorFiltro, setMessageErrorFiltro] = React.useState('');
 
@@ -530,7 +524,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [eqFotosencible, setEqFotosencible] = React.useState('');
+	const [eqFotosencible, setEqFotosencible] = React.useState('no');
 	const [errorEqFotosencible, setErrorEqFotosencible] = React.useState(false);
 	const [messageErrorEqFotosencible, setMessageErrorEqFotosencible] = React.useState('');
 
@@ -539,7 +533,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 		// getPrescriptions();
 	};
 
-	const [tipoPaciente, setTipoPaciente] = React.useState('');
+	const [tipoPaciente, setTipoPaciente] = React.useState('Adulto');
 	const [errorTipoPaciente, setErrorTipoPaciente] = React.useState(false);
 	const [messageErrorTipoPaciente, setMessageErrorTipoPaciente] = React.useState('');
 
@@ -562,7 +556,7 @@ export const FormulariosProvider: FC<Props> = ({ children }) => {
 	};
 
 
-	const [viaAdmin, setViaAdmin] = React.useState('');
+	const [viaAdmin, setViaAdmin] = React.useState('Central');
 	const [errorViaAdmin, setErrorViaAdmin] = React.useState(false);
 	const [messageErrorViaAdmin, setMessageErrorViaAdmin] = React.useState('');
 
