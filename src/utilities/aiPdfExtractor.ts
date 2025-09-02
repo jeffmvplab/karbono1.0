@@ -1,44 +1,3 @@
-  /**
-   * Genera el prompt para la extracción de prescripciones médicas desde imagen
-   */
-  private createExtractionPrompt(): string {
-    // Puedes personalizar el prompt aquí según lo que necesite la IA
-    return 'Extrae todas las prescripciones médicas presentes en la imagen. Devuelve los datos estructurados en formato JSON.';
-  }
-
-  /**
-   * Simula la llamada a la API de IA (placeholder)
-   */
-  private async callAIAPI(image: string, prompt: string): Promise<any> {
-    // Aquí deberías implementar la llamada real a la API de IA
-    // Por ahora retorna un objeto simulado
-    return {};
-  }
-
-  /**
-   * Simula el parseo de la respuesta de la IA (placeholder)
-   */
-  private parseAIResponse(response: any): ExtractedPrescriptionData[] {
-    // Aquí deberías implementar el parseo real de la respuesta
-    // Por ahora retorna un array vacío
-    return [];
-  }
-
-  /**
-   * Elimina duplicados en las prescripciones extraídas (placeholder)
-   */
-  private deduplicatePrescriptions(prescriptions: ExtractedPrescriptionData[]): ExtractedPrescriptionData[] {
-    // Aquí deberías implementar la deduplicación real
-    // Por ahora retorna el array tal cual
-    return prescriptions;
-  }
-  /**
-   * Genera el prompt para la extracción de prescripciones médicas desde imagen
-   */
-  private createExtractionPrompt(): string {
-    // Puedes personalizar el prompt aquí según lo que necesite la IA
-    return 'Extrae todas las prescripciones médicas presentes en la imagen. Devuelve los datos estructurados en formato JSON.';
-  }
 // Servicio de extracción de PDF usando IA
 import { ExtractedPrescriptionData, MultiplePrescriptionsData, PrescriptionSummary } from './pdfExtractor';
 
@@ -140,6 +99,41 @@ export class AIPDFExtractor {
   }
 
   /**
+   * Genera el prompt para la extracción de prescripciones médicas desde imagen
+   */
+  private createExtractionPrompt(): string {
+    // Puedes personalizar el prompt aquí según lo que necesite la IA
+    return 'Extrae todas las prescripciones médicas presentes en la imagen. Devuelve los datos estructurados en formato JSON.';
+  }
+
+  /**
+   * Simula la llamada a la API de IA (placeholder)
+   */
+  private async callAIAPI(image: string, prompt: string): Promise<any> {
+    // Aquí deberías implementar la llamada real a la API de IA
+    // Por ahora retorna un objeto simulado
+    return {};
+  }
+
+  /**
+   * Simula el parseo de la respuesta de la IA (placeholder)
+   */
+  private parseAIResponse(response: any): ExtractedPrescriptionData[] {
+    // Aquí deberías implementar el parseo real de la respuesta
+    // Por ahora retorna un array vacío
+    return [];
+  }
+
+  /**
+   * Elimina duplicados en las prescripciones extraídas (placeholder)
+   */
+  private deduplicatePrescriptions(prescriptions: ExtractedPrescriptionData[]): ExtractedPrescriptionData[] {
+    // Aquí deberías implementar la deduplicación real
+    // Por ahora retorna el array tal cual
+    return prescriptions;
+  }
+
+  /**
    * Procesa una imagen con IA para extraer datos estructurados
    */
   private async processImageWithAI(imageBase64: string): Promise<ExtractedPrescriptionData[]> {
@@ -180,7 +174,6 @@ export class AIPDFExtractor {
     }
   }
 
-
   private async processWithOpenAI(image: string, prompt: string): Promise<ExtractedPrescriptionData[]> {
     // Implementar llamada a OpenAI GPT-4V
     return [];
@@ -202,7 +195,7 @@ export class AIPDFExtractor {
     return results.flat();
   }
 
-  private createSummaries(prescriptions: ExtractedPrescriptionData[]) {
+  private createSummaries(prescriptions: ExtractedPrescriptionData[]): PrescriptionSummary[] {
     return prescriptions.map((prescription, index) => ({
       id: `ai-prescription-${index + 1}`,
       nombrePaciente: prescription.nombrePaciente || '',
