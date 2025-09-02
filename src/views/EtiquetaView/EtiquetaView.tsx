@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import { colorsKarbono } from "@/themes/colors";
 import { useContext, useEffect, useState, useRef } from "react";
+import { useRouter } from "next/router";
 import { ReportesContext } from "../ReportePrescripcion/context/ReportesContext";
 import {
   convertirFecha,
@@ -76,7 +77,21 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
     reporte: reporteFromContext,
   } = useContext(ReportesContext);
 
+  const router = useRouter();
   const reporte = reporteProp || reporteFromContext; // Usar la prop si existe, de lo contrario el contexto
+
+  // Obtener el parámetro 'automatico' de la URL
+  const { automatico } = router.query;
+  
+  // Determinar si debe usar modo automático basado en el parámetro URL
+  // Si automatico=false (manual), siempre es false
+  // Si automatico=true (automático), usar la función esAutomatizado
+  // Si no hay parámetro, usar la función esAutomatizado por defecto
+  const esModoAutomatico = automatico === 'false' 
+    ? false 
+    : automatico === 'true' 
+      ? (reporte ? esAutomatizado(reporte) : false)
+      : (reporte ? esAutomatizado(reporte) : false);
 
   // --- Fragmento para código y código de barras dinámico ---
   const [patCode, setPatCode] = useState<string>("");
@@ -164,7 +179,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
         id="etiqueta_view"
         sx={{
           width: "1400px",
-          height: `${isPdfMode ? "2120px" : "2220px"}`,
+          height: `${isPdfMode ? "2250px" : "2320px"}`,
           paddingX: "10px",
           // marginX:'50px',
           backgroundColor: "#ccc",
@@ -249,7 +264,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
                         fontWeight: "normal",
                       }}
                     >
-                      Versión 2.
+                      {esModoAutomatico ? "Versión 2." : "Versión 6."}
                     </Typography>
 
                     <Typography
@@ -259,7 +274,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
                         fontWeight: "normal",
                       }}
                     >
-                      NA-FO-0078
+                     { esModoAutomatico ? "NA-FO-0078" : "NA-FO-0049"}
                     </Typography>
                   </Stack>
 
@@ -764,7 +779,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
               paddingY={2}
             >
               {/* Mostrar el nombre del archivo .pat como código */}
-              {esAutomatizado(reporte!) ? "CCF4D8-00000012" : ""}
+              {esModoAutomatico ? "CCF4D8-00000012" : ""}
             </Typography>
           </Stack>
           {
@@ -913,7 +928,7 @@ const EtiquetaView: React.FC<EtiquetaViewProps> = ({
                       direction={"row"}
                       justifyContent={"space-between"}
                     >
-                      {esAutomatizado(reporte!) ? (
+                      {esModoAutomatico ? (
                         <canvas
                           ref={barcodeRef}
                           style={{ width: 350, height: 40 }}

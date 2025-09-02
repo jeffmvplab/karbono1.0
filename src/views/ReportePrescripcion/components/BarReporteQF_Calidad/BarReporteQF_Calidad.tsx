@@ -11,13 +11,18 @@ import { useRouter } from "next/router";
 import { mainRoutes } from "@/routes/routes";
 import { GlobalContext } from "@/context/GlobalContext";
 import { RolUsersKeysEnum } from "@/utilities/enums/rol_user_keys.enum";
+import { esAutomatizado } from "../../data/functionsParams";
 
 
 const BarReporteQF_Calidad = () => {
 
     const { getMeRol } = useContext(GlobalContext);
+    const { reporte } = useContext(ReportesContext);
 
     const router = useRouter();
+
+    // Determinar si debe ser automático basado en la lógica de negocio
+    const esEtiquetaAutomatica = reporte ? esAutomatizado(reporte) : false;
 
     return (
 
@@ -41,17 +46,32 @@ const BarReporteQF_Calidad = () => {
             >
 
                 <Stack direction={'row'} spacing={2}>
-                    <CustomButton text={'Etiqueta'}
-                        // onClick={handleOpenModalDescargar}
-                        id={'QF_btn_Etiqueta'}
-                        onClick={() => router.push(mainRoutes.etiqueta)}
-                        width='160px'
+                    {/* Botón Etiqueta Automática */}
+                    <CustomButton text={'Etiqueta Automática'}
+                        id={'QF_btn_EtiquetaAutomatica'}
+                        onClick={() => router.push(`${mainRoutes.etiqueta}?automatico=true`)}
+                        width='180px'
                         height='44px'
-                        // variant='outlined'
-                        color={colorsKarbono.secundary}
-                        fontSize={'16px'}
+                        color={colorsKarbono.primary}
+                        fontSize={'14px'}
                         textColor={'white'}
-                        borderColor={colorsKarbono.secundary}
+                        borderColor={colorsKarbono.primary}
+                        startIcon={
+                            <Image width={25} height={25} src={'/assets/Etiqueta.png'} alt={''} ></Image>
+                        }
+                        sx={{ borderRadius: '10px' }}
+                    />
+
+                    {/* Botón Etiqueta Manual */}
+                    <CustomButton text={'Etiqueta Manual'}
+                        id={'QF_btn_EtiquetaManual'}
+                        onClick={() => router.push(`${mainRoutes.etiqueta}?automatico=false`)}
+                        width='170px'
+                        height='44px'
+                        color={'#5C7CFA'}
+                        fontSize={'14px'}
+                        textColor={'white'}
+                        borderColor={'#5C7CFA'}
                         startIcon={
                             <Image width={25} height={25} src={'/assets/Etiqueta.png'} alt={''} ></Image>
                         }
