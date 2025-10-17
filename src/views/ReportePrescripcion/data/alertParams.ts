@@ -317,9 +317,9 @@ export const alarmRelacionAminos_Lipidos = (prescription: IPrescriptions) => {
   aminoacidos = getAminoacidos(prescription!).requerimiento;
   const resp: IAlarm = { value: 0, alert: "" };
 
-    resp.value = lipidos - aminoacidos;
+  resp.value = lipidos - aminoacidos;
 
-
+  
   if (lipidos - aminoacidos >= 0.5) {
     resp.alert = "REVISAR";
   } else {
@@ -373,22 +373,35 @@ export const alarmConcPotasio = (prescription: IPrescriptions) => {
 
   let potacio: number = 0;
   let aporte_potasio_del_fosfato: number = 0;
-
-  // if (tp === tipoPrescripcion) {
-  //     potacio = parseFloat(prescription?.potasio_total);
-  //     fosfato_de_potasio = parseFloat(prescription?.req_fosfato);
-  // } else {
-  potacio = getPotacio(prescription!).volumen;
-  aporte_potasio_del_fosfato = getAportesFosfato(prescription!).a_potacio;
-  // }
-
+  let fosfato_de_potasio: number = 0;
+  let potacioVol: number = 0;
   const volTotalNPT: number = prescription?.volumen;
 
-  // let potacioVol: number = (potacio * 2 + fosfato_de_potasio * 3.8) / (volTotalNPT / 1000);
-  let potacioVol: number =
-    (potacio * 2 + aporte_potasio_del_fosfato! * prescription?.peso!) /
-    (volTotalNPT / 1000);
+  // if (tp === tipoPrescripcion) {
+    potacio = getPotacio(prescription!).volumen;
+    fosfato_de_potasio = getFosfatoPotacio(prescription!).volumen;
+    potacioVol =
+      (potacio * 2 + fosfato_de_potasio * 3.8) / (volTotalNPT / 1000);
+  // } else {
+    // potacio = getPotacio(prescription!).volumen;
+    // aporte_potasio_del_fosfato = getAportesFosfato(prescription!).a_potacio;
+    // potacioVol =
+    //   (potacio * 2 + aporte_potasio_del_fosfato! * prescription?.peso!) /
+    //   (volTotalNPT / 1000);
+  // }
+  //
+  //
   // let potacioVol: number = (potacio * 2 + fosfato_de_potasio * prescription?.peso!) / (volTotalNPT / 1000);
+  console.log(
+    "VOL_NPT:",
+    volTotalNPT,
+    "POTACIO:",
+    potacio,
+    "APORTE:",
+    aporte_potasio_del_fosfato,
+    "PESO:",
+    prescription?.peso!
+  );
 
   const resp: IAlarm = { value: 0, alert: "" };
   resp.value = potacioVol;
